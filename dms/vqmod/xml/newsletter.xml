@@ -1,0 +1,75 @@
+<modification>
+	<id>Newsletter</id>
+	<version>OC 2</version>
+	<vqmver>2.5.0</vqmver>
+	<file name="admin/model/customer/customer.php">
+		<operation>
+			<search position="replace" index="1"><![CDATA[
+				return $query->rows;
+			]]></search>
+			<add><![CDATA[
+				if ($this->config->get('newsletter_status') && !empty($data['filter_newsletter']) && isset($data['start']) && $data['start'] == 0) {
+					$query1 = $this->db->query("SELECT * FROM " . DB_PREFIX . "newsletter");
+					
+					return array_merge($query1->rows, $query->rows);
+				} else {
+					return $query->rows;
+				}
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/controller/common/column_left.php">
+		<operation>
+			<search position="before"><![CDATA[
+				if ($this->user->hasPermission('access', 'extension/event')) {
+			]]></search>
+			<add><![CDATA[
+				if ($this->user->hasPermission('access', 'extension/newsletter')) {
+					$extension[] = array(
+						'name'	   => $this->language->get('text_newsletter'),
+						'href'     => $this->url->link('extension/newsletter', 'token=' . $this->session->data['token'], true),
+						'children' => array()		
+					);
+				}
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/language/*/common/column_left.php">
+		<operation>
+			<search position="after" index="1"><![CDATA[
+				$_
+			]]></search>
+			<add><![CDATA[
+				$_['text_newsletter']                   = 'Newsletter Subscribers';
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/controller/marketing/contact.php">
+		<operation>
+			<search position="before"><![CDATA[
+				$mail->setHtml($message);
+			]]></search>
+			<add><![CDATA[
+				if ($this->config->get('newsletter_status') && $this->request->post['to'] == 'newsletter') {
+					if (!isset($message1)) {
+						$message1 = $message;
+					}
+					
+					$message = str_replace('{unsubscribe_link}', HTTP_CATALOG . 'index.php?route=module/newsletter/unsubscribe&id=' . md5('newsletter' . $email), $message1);
+				}
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/model/account/customer.php">
+		<operation error="skip">
+			<search position="after"><![CDATA[
+				public function addCustomer($data) {
+			]]></search>
+			<add><![CDATA[
+				if ($this->config->get('newsletter_status') && !empty($data['email'])) {
+					$this->db->query("DELETE FROM " . DB_PREFIX . "newsletter WHERE email = '" . $this->db->escape($data['email']) . "'");
+				}
+			]]></add>
+		</operation>
+	</file>
+</modification>

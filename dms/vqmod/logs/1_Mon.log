@@ -1,0 +1,15 @@
+---------- Date: 2017-01-16 02:42:29 ~ IP : 123.125.71.83 ----------
+REQUEST URI : /index.php?route=product/compare
+MOD DETAILS:
+   modFile   : /data/www/default/vqmod/xml/option_to_product_oc2302.xml
+   id        : Option To Product
+   version   : 4.4
+   vqmver    : 2.6.1
+   author    : Raul Marosan
+
+File Name    : catalog/view/theme/*/template/product/compare.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <?php if (!$products[$product['product_id']]['special']) { ?>
+
+----------------------------------------------------------------------
+
+

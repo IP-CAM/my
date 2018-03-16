@@ -1,0 +1,30 @@
+---------- Date: 2017-11-09 12:18:47 ~ IP : 127.0.0.1 ----------
+REQUEST URI : /index.php?route=product/category&path=20
+MOD DETAILS:
+   modFile   : D:\web\local\dms\vqmod/xml/option_to_product_oc2302.xml
+   id        : Option To Product
+   version   : 4.4
+   vqmver    : 2.6.1
+   author    : Raul Marosan
+
+File Name    : catalog/view/theme/*/template/product/category.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): class="img-responsive" /></a>
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-11-09 12:38:52 ~ IP : 127.0.0.1 ----------
+REQUEST URI : /index.php?route=product/product&product_id=54
+MOD DETAILS:
+   modFile   : D:\web\local\dms\vqmod/xml/option_to_product_oc2302.xml
+   id        : Option To Product
+   version   : 4.4
+   vqmver    : 2.6.1
+   author    : Raul Marosan
+
+File Name    : catalog/view/theme/*/template/product/product.tpl(3)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <?php echo $stock; ?></li>
+
+----------------------------------------------------------------------
+
+
