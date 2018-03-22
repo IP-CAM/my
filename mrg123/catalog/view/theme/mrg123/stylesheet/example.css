@@ -1,0 +1,11 @@
+/* rebuild */
+body{background-color:#fbf9fe;}
+.header{padding:2em 0;text-indent:2em;}
+.header .title a{color: #3cc51f;font-size: 34px;font-weight: 400;}
+.header .title .title_2{font-size:14px;font-weight:400;color: #888;}
+.power{text-align:center;padding-left:15px;color:#888;font-size:12px;margin:10px 0;}
+
+/* override */
+#bottom_nav{position:fixed;}
+#search_show {margin-top:0;display:none;}
+.weui_article * {max-widht:100%;box-sizing:border-box;word-wrap:break-word;}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <id>vqmod for mrg123</id>
+    <version>1.0</version>
+    <vqmver required="true">2.6.0</vqmver>
+    <author>mrg123.com</author>
+
+    <file name="catalog/controller/startup/seo_url.php">
+        <operation>
+		<search position="before"><![CDATA[} elseif ($key == 'path') {]]></search>
+        <add><![CDATA[				} elseif ($data['route'] == 'common/home') {
+					$url .= '/';					
+					unset($data[$key]);]]></add>
+        </operation>
+    </file>
+
+</modification>

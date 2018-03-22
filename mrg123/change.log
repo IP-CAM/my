@@ -1,0 +1,33 @@
+blog 增/删/改记录
+为了方便二期发开将修改过的代码提取到vqmod而做的记录,因为svn的分支我还不会用
+
+add
+admin/controller/catalog/infocategory.php
+admin/language/en-gb/catalog/infocategory.php
+admin/model/catalog/infocategory.php
+admin/view/template/catalog/infocategory_form.tpl
+admin/view/template/catalog/infocategory_list.tpl
+
+catalog/view/theme/mrg123
+
+add plug seo_url
+admin/controller/extension/module/super_seo.php
+admin/language/en-gb/extension/module/super_seo.php
+admin/model/design/super_seo.php
+admin/view/extension/module/super_seo.tpl
+vqmod/xml/mrg123.xml
+
+
+modified
+admin/controller/common/column_left.php
+admin/language/en-gb/common/column_left.php
+
+admin/controller/catalog/information.php
+admin/language/en-gb/catalog/information.php
+admin/model/catalog/information.php
+admin/view/template/catalog/information_form.tpl
+
+catalog/controller/common/home.php
+catalog/model/catalog/information.php
+
+catalog/language/en-gb/common/footer.php
