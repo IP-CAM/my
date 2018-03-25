@@ -21,13 +21,13 @@
 			<div class="weui_media_bd">
 				<h4 class="weui_media_title"><?php echo $information['title']; ?></h4>
 				<p class="weui_media_desc">
-				<?php echo $information['summary']; ?>
+				
 				</p>
 			</div>
 		</a>
 	<?php } ?>
 	</div>
-	<a class="weui_panel_ft" href="">查看更多</a>
+	<a class="weui_panel_ft" href="">就这样end</a>
 	</div>
 	<?php } ?>
 

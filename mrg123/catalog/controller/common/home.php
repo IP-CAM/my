@@ -17,9 +17,9 @@ class ControllerCommonHome extends Controller {
 		$order = 'ASC';
 		$filter_data = array(
 			'sort' => $sort,
-			'order'=> $order,
-			'start' =>0,
-			'limit' => 1000
+			'order'=> $order
+			//'start' =>0,
+			//'limit' => 1000
 		);
 		$results = $this->model_catalog_information->getLatestInformations($filter_data);
 		foreach($results as $result) {
