@@ -1,0 +1,194 @@
+    {extend name='common/base'}
+    
+    {block name='css'}
+    <link href="__PUBLIC__/{$css_path}/daterangepicker.css" rel="stylesheet">
+    {/block}
+    
+    {block name="breadcrumb"}
+    <li>{:lang('nav_order')}</li>
+    <li class="active">{$meta_title|default=''}</li>
+    {/block}
+    
+    {block name='body'}
+    <section class="content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <div class="row">
+                            <form action="{:url('seller/order/cancel')}">
+                            <div class="page-header-top">
+                                <a href="{:url('seller/order/cancel')}" class="btn btn-flat bg-olive btn-sm"><i class="fa fa-feed"></i>{:lang('all')}</a>
+    
+                                <div class="btn-group btn btn-flat">
+                                    <button type="button" class="btn btn-primary etbtn">
+                                        {if condition="$cancel_status"}
+                                        {:lang('cancel_status_'.$cancel_status)}
+                                        <input type="hidden" value="{$cancel_status}" name="cancel_status" />
+                                        {else /}
+                                        {:lang('cancel_status')}
+                                        {/if}
+                                    </button>
+                                    <button type="button" class="btn btn-primary etbtn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        <span class="caret"></span>
+                                        <span class="sr-only"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        {foreach $arr_cancel_status as $value}
+                                        <li><a href="{:url('seller/order/cancel',array_merge($cancel_status_url,['cancel_status'=>$value]))}">{:lang('cancel_status_'.$value)}</a></li>
+                                        {/foreach}
+                                        <li class="divider"></li>
+                                        <li><a href="{:url('seller/order/cancel',$cancel_status_url)}">{:lang('cancel_status')}</a></li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="btn-group btn btn-flat" style="padding-left: 0;">
+                                    <button type="button" class="btn btn-primary etbtn">
+                                        {if condition="$platform_type"}
+                                        {$platform_type}
+                                        <input type="hidden" value="{$platform_type}" name="platform_type" />
+                                        {else /}
+                                        {:lang('all_platform')}
+                                        {/if}
+                                    </button>
+                                    <button type="button" class="btn btn-primary etbtn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        <span class="caret"></span>
+                                        <span class="sr-only"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        
+                                        {foreach $arr_platform as $value}
+                                        <li><a href="{:url('seller/order/cancel',array_merge($platform_type_url,['platform_type'=>$value]))}">{$value}</a></li>
+                                        {/foreach}
+                                        <li class="divider"></li>
+                                        <li><a href="{:url('seller/order/cancel',$platform_type_url)}">{:lang('all_platform')}</a></li>
+                                    </ul>
+                                </div>
+    
+                                
+                                
+                                <div class="time" style="width: 220px; position: relative;display: inline-block;vertical-align: middle; margin-right: 6px">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        
+                                        <input type="text" class="form-control pull-left" id="reservation" name="time" placeholder="{:lang('choose_cancel_time')}" value="{$time}" style="padding: 4px 12px; height: 30px">
+                                    </div>
+                                </div>
+                                
+                                <div style="position: relative;display: inline-block;vertical-align: middle; margin-right: 6px">
+                                    <div class="input-group input-group-sm" style="width:270px">
+                                        <input type="text" placeholder="{:lang('seller_order_search_tips')}" class="form-control" value="{$search_name}" name="search_name">
+                                        <div class="input-group-btn">
+                                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <table id="demo-foo-addrow" class="table table-bordered table-striped" data-page-size="10">
+                            <thead>
+                            <tr>
+                                <th>{:lang('order_sn')}</th>
+                                <th width="330">{:lang('cancel_status')}</th>
+                                <th>{:lang('cancel_in_reason')}</th>
+                                <th>{:lang('consignee')}</th>
+                                <th>{:lang('order_total_money')}</th>
+                                <th>{:lang('pay_type')}</th>
+                                <th>{:lang('pay_source')}</th>
+                                <th>{:lang('order_cancel_time')}</th>
+                                <th class="text-center">{:lang('opreration')}</th>
+                            </tr>
+                            </thead>
+                            
+                            {notempty name="$list"}
+                            <tbody>
+                            {foreach $list as $v}
+                            <tr>
+                                <td>{$v.order_sn}</td>
+                                <td>
+                                    {eq name="$v['cancel_status']" value="WAIT_PROCESS"}
+                                    <span class="text-red">{:lang('cancel_status_'.$v.cancel_status)}</span>
+                                    {else /}
+                                    {:lang('cancel_status_'.$v.cancel_status)}
+                                    {/eq}
+                                    
+                                </td>
+                                <td>{$v.cancel_reason}</td>
+                                <td>
+                                    <span data-original-title="{$v.country} {$v.province} {$v.city} {$v.district} {$v.address}" data-toggle="tooltip" data-placement='top'>{$v.consignee} &nbsp;&nbsp; {$v.mobile}</span>
+                                </td>
+                                
+                                <td>{$v.symbol}{$v.order_amount}</td>
+                                
+                                <td>
+                                    {if condition="$v['pay_name']!=''"}
+                                    {:lang($v.pay_name)}
+                                    {/if}
+                                
+                                </td>
+                                <td>
+                                    {$v.platform_type}
+                                </td>
+                                <td>{$v.cancel_time}</td>
+                                <td class="actions">
+    
+                                    <a class="tooltip-link ajax-get f18" data-original-title="{:lang('action')}" data-toggle="tooltip" data-placement='top' data-width="700" data-height="700" data-showbar="1" data-title="{$v.consignee} - {$v.order_sn}" data-skin="skin-blue" href="{:url('cancel_info',array('order_sn'=>$v.order_sn))}"><i class="fa fa-edit"></i></a>
+                                    <a class="tooltip-link ajax-get f18" data-original-title="{:lang('View')}" data-toggle="tooltip" data-placement='top' data-width="900" data-height="700" data-showbar="1" data-title="{$v.consignee} - {$v.order_sn}" data-skin="skin-blue" href="{:url('info',array('order_sn'=>$v.order_sn))}"><i class="fa fa-eye"></i></a>
+                                    
+                                </td>
+                            </tr>
+                            {/foreach}
+    
+                            <tfoot>
+                            <tr>
+                                <td colspan="9">
+                                    <div class="text-right pagination" >
+                                        {$list->appends(input())->render()}
+                                    </div>
+                                    <span>&nbsp;{:lang('total')}&nbsp;&nbsp;{$total}</span>
+                                </td>
+                            </tr>
+                            </tbody>
+                            </tfoot>
+                            {else /}
+                            <tbody>
+                            <tr>
+                                <td colspan="9" class="text-center">
+                                    {:lang('empty')}
+                                </td>
+                            </tr>
+                            </tbody>
+                            {/notempty}
+                            
+                            
+                            
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {/block}
+    
+    {block name='js'}
+    <script src="__PUBLIC__/{$js_path}/moment.min.js"></script>
+    <script src="__PUBLIC__/{$js_path}/daterangepicker.js"></script>
+    
+   
+    
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //Date range picker
+            $('#reservation').daterangepicker({
+                autoUpdateInput: false
+            });
+
+            
+        });
+    </script>
+    {/block}

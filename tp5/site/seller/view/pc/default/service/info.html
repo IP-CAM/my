@@ -1,0 +1,100 @@
+{extend name='public/layout'}
+
+{block name='body'}
+
+
+<div id="toolTipLayer" style="position: absolute; z-index: 9999; display: none; visibility: visible; left: 95px; top: 573px;"></div>
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+    <div class="fixed-bar">
+        <div class="item-title"><a class="back" href="{:url('service/index')}" title="微信公众号配置"><i class="fa fa-arrow-circle-o-left"></i></a>
+            <div class="subject">
+                <h3>退换货详情</h3>
+                <h5>用户提交退换货详情</h5>
+            </div>
+        </div>
+    </div>
+    <form class="form-horizontal" method="post" id="return_form"  name="return_form" action="/index.php/Admin/Order/return_info.html">
+        <div class="ncap-form-default">
+            <dl class="row">
+                <dt class="tit">
+                    <label>订单编号</label>
+                </dt>
+                <dd class="opt">
+                    <a href="/index.php/Admin/order/detail/order_id/1463.html">201701201517572720</a>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="cate_id">用户</label>
+                </dt>
+                <dd class="opt">
+                    hello                    </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label>申请日期</label>
+                </dt>
+                <dd class="opt">
+                    2017-01-22 15:14                    </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label >商品名称</label>
+                </dt>
+                <dd class="opt">
+                    <a href="/index.php/Home/Goods/goodsInfo/id/1.html" target="_blank">Apple iPhone 6s Plus 16G 玫瑰金 移动联通电信4G手机</a>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label>退换货</label>
+                </dt>
+                <dd class="opt">
+                    <select  name="type"  class="form-control">
+                        <option value="0" selected="selected">退货</option>
+                        <option value="1" >换货</option>
+                    </select>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label>退货描述</label>
+                </dt>
+                <dd class="opt">
+                    燃放点是否仍然                    </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label>用户上传照片</label>
+                </dt>
+                <dd class="opt">
+                    <a target="_blank" href="public/upload/return_goods/2017/01-22/58845bc63d816.png"><img src="public/upload/return_goods/2017/01-22/58845bc63d816.png" width="85" height="85" /></a>&nbsp;&nbsp;&nbsp;
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label>修改状态</label>
+                </dt>
+                <dd class="opt">
+                    <select name="status">
+                        <option value="-1" >审核不通过</option>
+                        <option value="1" >审核通过</option>
+                    </select>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label>处理备注</label>
+                </dt>
+                <dd class="opt">
+                    <textarea name="remark" id="remark" style="width:300px; height:120px;"  placeholder="退货描述" class="tarea" id="subject_desc"></textarea>
+                </dd>
+            </dl>
+            <input type="hidden" name="id" value="29">
+            <div class="bot"><a href="JavaScript:;" onClick="document.return_form.submit()" class="ncap-btn-big ncap-btn-green" id="submitBtn">确认提交</a></div>
+        </div>
+    </form>
+</div>
+{/block}

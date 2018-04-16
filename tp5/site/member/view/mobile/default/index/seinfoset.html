@@ -1,0 +1,20 @@
+{extend name='public/base'}
+{block name='css'}
+<style type="text/css">
+    body{background-color:#f0f0f0;}.m-account,.m-bind{line-height:45px;padding-left:10px;color:#666;background-color:#fff;border-bottom:2px solid #f0f0f0;font-size:14px;}.m-bind{border:0;position:relative;}.m-bind #j-goBind{color:#000;font-weight:bold;position:absolute;right:10px;}.m-bind #j-goBind:hover{color:#000;}.m-bind #j-goBind img{width:6px;}.u-content{float:right;padding-right:21px;color:#333;width:70%;text-align:right;}.u-ubOrPno{color:#333;display:inline-block;width:100%;}.u-ubOrPno:hover{color:#333;}
+</style>
+{/block}
+{block name='body'}
+<div class="g-bd">
+    <div class="m-account">
+        <span class="u-title">账号</span>
+        <span class="u-content">{$data.username}</span>
+    </div>
+    <div class="m-bind">
+        <span class="u-title">我的手机号</span>
+        <span class="u-content">
+{$data.mobile}
+</span>
+    </div>
+</div>
+{/block}

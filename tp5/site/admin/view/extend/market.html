@@ -1,0 +1,167 @@
+    {extend name="public/poupbase"/}
+
+    <!-- CONTENT -->
+
+    {block name="body"}
+        <div id="content" class="noscroll" style="margin:0px 10px 5px 8px;">
+            <div class="bloc" style="margin:10px 0px 0px;">
+                <div class="content" style="min-height:520px;">
+
+                    <dl class="gzzt clearfix mtb10">
+                        <dd>
+                            <div class="boxr">
+                                <a class="btn-refresh" href="javascript:location.reload();">{:lang('Refresh')}</a>
+                                <a class="btn-back" href="javascript:parent.layer.close(parent.layer.getFrameIndex(window.name));">{:lang('Close_win')}</a>
+                            </div>
+                        </dd>
+        
+                        <dd>
+                            <div class="boxl fl">
+                                <span>{:lang('Count_all')}：<b>{$_total}</b></span>
+                                <span class="green">
+                                    {:lang('Install_all')}：<b>{$_installed}</b>
+                                </span>
+                                <span class="red">
+                                    {:lang('Waitup')}：<b>{$_waitup}</b>
+                                </span>
+                            </div>
+                        </dd>
+                    </dl>
+
+                    {notempty name="list"}
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th class="center" width="30"><input class="check-all" type="checkbox"></th>
+                                <th class="left" style="width:35px;"><a href="{:getUrlbyOrder('id')}">ID</a></th>
+                                <th class="left"><a href="{:getUrlbyOrder()}">{:lang('Field')}</a></th>
+                                <th class="left"><a href="{:getUrlbyOrder('title')}">{:lang('Title')}</a></th>
+                                <th class="left"><a href="{:getUrlbyOrder('type')}">{:lang('Data_type')}</a></th>
+                                <th class="left"><a href="{:getUrlbyOrder('group')}">{:lang('Field_defina')}</a></th>
+                                <th class="left">{:lang('Remark')}</th>
+                                <th class="center"><a href="{:getUrlbyOrder('type')}">{:lang('Default_value')}</a></th>
+                                <th class="center" style="width:70px;"><a href="{:getUrlbyOrder('status')}">{:lang('Is_show')}</a></th>
+                                <th class="center" style="width:50px;"><a href="{:getUrlbyOrder('status')}">{:lang('Is_must')}</a></th>
+                                <th class="center" style="width:50px;"><a href="{:getUrlbyOrder('status')}">{:lang('Status')}</a></th>
+                                <th class="center"><a href="{:getUrlbyOrder('sort')}">{:lang('Sort')}</a></th>
+                                <th class="actions">{:lang('Actions')}</th>
+                            </tr>
+                            </thead>
+                            <tbody class="needdragsort">
+                            {volist name="list" id="vo"}
+                                <tr>
+                                    <td class="center"><input class="ids" type="checkbox" value="{$vo['id']}" name="ids[]"></td>
+                                    <td class="left">{$vo['id']}</td>
+                                    <td class="left">
+                                        <a class="tooltip-link editfield" title="{:lang('Edit_this_record')}" href="{:url('edit',array('ids'=>$vo['id']))}" data-title="{:lang('Edit')}">
+                                            {$vo['name']}
+                                        </a>
+                                    </td>
+                                    <td class="left">{$vo['title']}</td>
+                                    <td class="left">{$vo['type']}</td>
+                                    <td class="left">{$vo['field']}</td>
+                                    <td class="left">{notempty name="vo.remark">{:msubstr($vo['remark'], 0, 12)}{/notempty}</td>
+                                    <td class="center">{$vo['value']}</td>
+                                    <td class="center">
+                                        {switch name="vo.is_show"}
+                                            {case value="1"}<span class="green">{:lang('Show_1')}</span>{/case}
+                                            {case value="2"}<span class="blue">{:lang('Show_2')}</span>{/case}
+                                            {case value="2"}<span class="red">{:lang('Show_3')}</span>{/case}
+                                            {default /}{:lang('Show_0')}
+                                        {/switch}
+                                    </td>
+                                    <td class="center">
+                                        {if condition="$vo['is_must'] eq 1"}
+                                            <a href="{:url('disable',array('field'=>'is_must','ids'=>$vo['id']))}" class="ajax-able tooltip-link" data-doing="{:lang('Disable')}" title="{:lang('Disable')}">
+                                                <img src="__PUBLIC__/admin/images/enabled.png" title="{:lang('Enable')}" class="tooltip-link" alt="{:lang('Enable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png" />
+                                            </a>
+                                        {else /}
+                                            <a href="{:url('enable',array('field'=>'is_must','ids'=>$vo['id']))}" class="ajax-able tooltip-link" data-doing="{:lang('Enable')}" title="{:lang('Enable')}">
+                                                <img src="__PUBLIC__/admin/images/disabled.png" title="{:lang('Disable')}" class="tooltip-link" alt="{:lang('Disable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png" />
+                                            </a>
+                                        {/if}
+                                    </td>
+
+                                    <td class="center">
+                                        {if condition="$vo['status'] eq 1"}
+                                            <a href="{:url('disable',array('ids'=>$vo['id']))}" class="ajax-able tooltip-link" data-doing="{:lang('Disable')}" title="{:lang('Disable')}">
+                                                <img src="__PUBLIC__/admin/images/enabled.png" title="{:lang('Enable')}" class="tooltip-link" alt="{:lang('Enable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png" />
+                                            </a>
+                                            {else /}
+                                            <a href="{:url('enable',array('ids'=>$vo['id']))}" class="ajax-able tooltip-link" data-doing="{:lang('Enable')}" title="{:lang('Enable')}">
+                                                <img src="__PUBLIC__/admin/images/disabled.png" title="{:lang('Disable')}" class="tooltip-link" alt="{:lang('Disable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png" />
+                                            </a>
+                                        {/if}
+                                    </td>
+                                    <td class="center"><input name="sorts[{$vo['id']}]" type="text" value="{$vo.sort}" maxlength="5" class="center sorts"/></td>
+                                    <td class="actions">
+                                        <a class="tooltip-link editfield" title="{:lang('Edit_this_record')}" href="{:url('edit',array('ids'=>$vo['id']))}" data-title="{:lang('Edit_field')}">
+                                            <img src="__PUBLIC__/admin/images/edit.png" alt="{:lang('Edit')}" />
+                                        </a>
+                                        <a class="tooltip-link ajax-get confirm" title="{:lang('Delete_this_field')}" data-layer="{:lang('Want_delete')}" href="{:url('delete',array('ids'=>$vo['id']))}" data-title="{:lang('Delete')}">
+                                            <img src="__PUBLIC__/admin/images/uninstall.png" alt="{:lang('Delete')}" />
+                                        </a>
+                                    </td>
+                                </tr>
+                            {/volist}
+                            </tbody>
+                        </table>
+                        <div class="pagination-wrapper">
+                            <div class="results-part"><span>{$_total}</span></div>
+                            <div class="links-part">{$page}</div>
+                        </div>
+
+                        {else/}
+                        <div class="alert alert-warning">{:lang('No_record')}</div>
+                    {/notempty}
+
+                </div>
+            </div>
+        </div>
+    {/block}
+
+    {block name="js"}
+        <!--<script type="text/javascript" src="__PUBLIC__/admin/js/autosize.js"></script>-->
+        <script>
+            $(function(){
+                $(".editfield").attr({
+                    'data-width':$('.addfield:first').attr('data-width'),
+                    'data-height':$('.addfield:first').attr('data-height'),
+                    'data-showbar':$('.addfield:first').attr('data-showbar')
+                });
+
+                $(".addfield").attr({
+                    'data-width':$('.addfield:first').attr('data-width'),
+                    'data-height':$('.addfield:first').attr('data-height'),
+                    'data-showbar':$('.addfield:first').attr('data-showbar')
+                });
+
+                $(".addfield,.editfield").click(function(){
+                    var that = $(this);
+                    var url = that.attr('href');
+                    var msg = that.attr('data-layer');
+                    var target = that.attr('href');
+                    var title = that.attr('data-title')?that.attr('data-title') : that.attr('title');
+                    var boxw = that.attr('data-width')? that.attr('data-width') +'px': ($(window).width() * 0.75) +'px';
+                    var boxh = that.attr('data-height')? that.attr('data-height') +'px': ($(window).height() * 0.85) +'px';
+                    boxw = boxw.indexOf('%') != -1 ?boxw.replace('px',''):boxw;
+                    boxh = boxh.indexOf('%') != -1?boxh.replace('px',''):boxh;
+
+                    parent.layer.open({
+                        type: 2,
+                        title: [
+                            title,
+                            "border:none; background:#333;font-size: 15px;font-weight:bold;color:#fff;"
+                        ],
+                        skin: 'layui-layer-rim',
+                        shadeClose: false,
+                        shade: [0.5, '#000'],
+                        area: [boxw, boxh],
+                        content: url + "?wname=" + window.name
+                    });
+
+                    return false;
+                })
+            })
+        </script>
+    {/block}

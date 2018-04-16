@@ -1,0 +1,194 @@
+    {extend name="public/base"/}
+
+    {block name="body"}
+    <div id="content">
+        <div class="breadcrumbs">
+            {:lang('General')} : &nbsp;&nbsp; {:lang('Application')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+        </div>
+
+    <div class="bloc">
+        <div class="title">
+            <div class="tabs" id="navs">
+                {include file="public/navs" /}
+            </div>
+
+            {include file="public/lang" /}
+        </div>
+
+        <div class="content">
+                
+                <dl class="gzzt clearfix mtb10">
+                <dd>
+                   <div class="boxr">
+                       {include file="public/button" /}
+                   </div>
+                </dd>
+
+                <dd>
+                    <div class="boxl fl">
+                        <span>{:lang('Count_all')}：<b>{$_total}</b></span>
+                        <span class="green">{:lang('Install_all')}：<b>{$_enable}</b></span>
+                    </div>
+                </dd>
+                    <dd style="float: right !important;">
+                        <div class="boxl">
+                            <span>
+                                <a href="javascript:location.reload();" class="refresh tooltip-link" title="{:lang('Refresh')}">
+                                    <em>{:lang('Refresh')}</em>
+                                </a>
+                            </span>
+                            <span>
+                                <a href="javascript:void(0);" class="ajax-get setting tooltip-link colum" title="{:lang('Showlum')}" data-title="{:lang('Showlum')}">
+                                    <em>{:lang('Showlum')}</em>
+                                </a>
+                            </span>
+                        </div>
+                    </dd>
+            </dl>
+
+            {notempty name="list"}
+            <table class="table">
+            <thead>
+                <tr>
+        			<th class="center" width="10">&nbsp;</th>
+                    <th class="left" colspan="2" style="width:90px;">
+                        {:lang('Icon')}&nbsp;&nbsp;{:lang('Tag')}
+                    </th>
+                    <th class="left">{:lang('Name')}</th>
+                    <th class="left">{:lang('Description')}</th>
+                    <th class="center">{:lang('Author')}</th>
+                    <th class="center" style="width:80px;">{:lang('Curr Version')}</th>
+                    <th class="center" style="width:80px;">{:lang('Lastver')}</th>
+                    <th class="center" style="width:60px;">{:lang('Status')}</th>
+                    <th class="center">{:lang('Sort')}</th>
+                    <th class="actions" style="width:80px;">{:lang('Actions')}</th>
+                </tr>
+            </thead>
+                    
+                    <tbody>
+            {volist name="list" id="vo"}
+            <tr>
+        		<td class="center">&nbsp;</td>
+                <td class="left" width="36px">
+                    <img src="{$vo.image}" alt="{:lang('Icon')}" style="height:18px;margin-top:1px;" />
+                </td>
+                <td class="left">{$vo.name}</td>
+                <td class="left">
+                    {$vo.title}
+                    {notempty name="vo.depends"}
+                        <a class="tooltip-icon" title="{:lang('depends')} <br />{$vo.depends}"></a>
+                    {/notempty}
+				</td>
+                <td class="left slh tooltip-link" style="max-width: 260px; line-height: 1.7;" title="{$vo.description}">{$vo.description}</td>
+                <td class="center">
+                    <a target="_blank" href="{$vo.website|default='http://www.runtuer.com'}">
+                        {$vo.author}
+                    </a>
+                </td>
+                <td class="center">
+                    {notempty name="vo.insver"}
+                        <b title="{:lang('Install_ver_err',['insver' => $vo.insver,'appver' => $vo.version])}" class="red tooltip-link">{$vo.version}</b>
+                    {else /}
+                        {$vo.version}
+                    {/notempty}
+                </td>
+                <td class="center lastver" data-ver="{$vo.version}" {notempty name="vo.upgrade"}data-update="{$vo.upgrade}"{/notempty}>
+                    <a class="tooltip-link red ajax-get" data-showbar="1" data-width="480" data-height="320" data-layer="{:lang('Upgrade_m_to', array('cnname'=>$vo.title, 'enname'=>$vo.name, 'lastver'=>''))}" title="{:lang('Upgrade_m', array('cnname'=>$vo.title, 'enname'=>$vo.name))}" href="{:url('upgradeto',array('name'=>$vo.name, 'ver'=>'version', 'url'=>'upgradetourl', 'istrue'=>1))}" data-upgrade=""></a>
+                </td>
+                <td class="center">
+                	{if condition="$vo.status eq 1"}
+                        {if condition="$vo.allow_uninstall eq 1"}
+                            <a href="{:url('disable',array('name'=>$vo.name))}" class="ajax-able" data-doing="{:lang('Disable')}">
+                                <img src="__PUBLIC__/admin/images/enabled.png" title="{:lang('Enable')}" class="tooltip-link" alt="{:lang('Enable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png" />
+                            </a>
+                        {else /}
+                            <img src="__PUBLIC__/admin/images/enabled.png" title="{:lang('Not_allow_Ena_Dis')}" class="tooltip-link" alt="{:lang('Not_allow_Ena_Dis')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png" />
+                        {/if}
+                    {else /}
+                        {if condition="$vo.uninstall eq 1"}
+                            <a href="{:url('enable',array('name'=>$vo.name))}" class="ajax-able" data-doing="{:lang('Enable')}">
+                                <img src="__PUBLIC__/admin/images/disabled.png" title="{:lang('Disable')}" class="tooltip-link" alt="{:lang('Disable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png" />
+                            </a>
+                        {else /}
+                        <img src="__PUBLIC__/admin/images/notinstall.png" title="{:lang('Notinstall')}" class="tooltip-link" alt="{:lang('Notinstall')}" height="16px" />
+                        {/if}
+                    {/if}
+                </td>
+                <td class="center">
+                    {notempty name="vo.id"}
+                    <input name="sorts[{$vo.id}]" type="text" size="1" value="{$vo.sort}" class="center sorts">
+                    {/notempty}
+                </td>
+                <td class="actions">
+                    {notempty name="vo.uninstall"}
+                        {if condition="$vo.allow_uninstall eq 1"}
+                        <a class="tooltip-link ajax-get confirm warning btn_submit red" title="{:lang('Uninstall', array('name'=>''))}" href="{:url('uninstall', array('name'=>$vo['name']))}" data-layer="{:lang('Uninstall', array('name'=>$vo.title))}<br /> {:lang('Uninstallapp')}" data-title="{:lang('Uninstall', array('name'=>''))} ：{$vo.title}">
+                            {:lang('Uninstall', array('name'=>''))}
+                        </a>
+                        {/if}
+                    {else /}
+                        <a class="tooltip-link ajax-get confirm btn_submit" title="{:lang('Install')}" href="{:url('install', array('name'=>$vo['name']))}" data-layer="{:lang('Install')} ：{$vo.title}({$vo.name}) ?" data-title="{:lang('Install')} ：{$vo.title}" data-wait="3">
+                            {:lang('Install')}
+                        </a>
+                    {/notempty}
+                </td>
+            </tr>
+            {/volist}
+            </tbody>
+            </table>
+            <div class="pagination-wrapper">
+
+            </div>
+            {else /}
+               <div class="alert alert-warning">{:lang('No_record')}</div>
+            {/notempty}
+        </div>
+
+    </div>
+    </div>
+    <script>
+        $(function(){
+            $('.lastver').each(function(){
+                var that = $(this);
+                var url = that.attr('data-update');
+                var oldver = that.attr('data-ver');
+                var upgrade = that.find('a').attr('data-upgrade');
+                var layer_title = that.find('a').attr('data-layer');
+                var href = that.find('a').attr('href');
+                if(url != undefined){
+                    $.ajax({
+                        type:"get",
+                        async:true,
+                        url:url,/*url写异域的请求地址*/
+                        data:{'tempPara': Math.random()},
+                        dataType:"jsonp",/*加上datatype*/
+                        cache: false,
+                        time:3000,
+                        success:function(data){
+                            if(data.status == 1){
+                                if(oldver == data.ver){
+                                    that.html(data.ver);
+                                }else{
+                                    that.find('a').attr({
+                                        'href': href.replace('upgradetourl', data.upgrade).replace('version', data.ver),
+                                        'data-layer': layer_title + data.ver,
+                                        'data-upgrade':data.upgrade,
+                                        'data-title':layer_title + data.ver,
+                                    });
+                                    that.find('a').html(data.ver);
+                                }
+                            }else{
+                                that.html('{:lang("Ver_err")}');
+                            }
+                        },
+                        error:function(){
+                            that.html('{:lang("Ver_err")}');
+                        }
+                    });
+                }else{
+                    that.empty();
+                }
+            })
+        })
+    </script>
+    {/block}

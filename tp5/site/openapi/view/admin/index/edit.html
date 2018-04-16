@@ -1,0 +1,93 @@
+    {extend name="admin@public/poupbase"/}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+        <div id="content" style="margin:0px 10px 5px 8px;">
+            <div class="bloc" style="margin:10px 0px 0px;">
+                <div class="content">
+                    <form id="myform" method="post" style="margin-top:5px;" class="">
+                        <fieldset>
+                            <legend>{$meta_title|default=''}</legend>
+                            
+                            <div class="row">
+                                <label for="devname" class="w160">{:lang('Devname')}: <span class="required">*</span></label>
+                                <input id="devname" type="text" value="{$data.name}" name="name" class="input" placeholder="Shopcmf" />
+                            </div>
+                            
+                            <div class="row">
+                                <label for="company" class="w160">{:lang('Devcompany')}: </label>
+                                <input id="company" type="text" value="{$data.company}" name="company" class="input" style="width: 280px;" placeholder="{:lang('Runtuer Co.Ltd')}" />
+                            </div>
+                            
+                            <div class="row">
+                                <label for="dkey" class="w160">Key: </label>
+                                <input id="dkey" type="text" value="{$data.dkey|default=generate_prefix(12)}" name="dkey" placeholder="{:generate_prefix(12)}" style="width:150px;" />
+                                
+                                <input class="button white randfix" value="{:lang('Recreate')}" id="redkey" type="button" url="{:url('admin/index/randfix',array('len' => 12))}" data-for="dkey"/>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="secret" class="w160">Secret: </label>
+                                <input id="secret" type="text" value="{$data.secret|default=generate_prefix(32)}" name="secret" style="width:280px;" placeholder="{:generate_prefix(32)}" />
+                                <input class="button white randfix" value="{:lang('Recreate')}" id="resecret" type="button" url="{:url('admin/index/randfix',array('len' => 32))}" data-for="secret" />
+                            </div>
+                            
+                            <div class="row">
+                                <label for="domain" class="w160">{:lang('Devdomain')}:
+                                    <span class="required">*</span>
+                                </label>
+                                <textarea id="domain" name="domain" placeholder="www.runtuer.com" style="width: 260px; height: 40px;">{$data.domain}</textarea>
+                                <a class="tooltip-icon" title="{:lang('Devdomain tip')}"></a>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="remark" class="w160">{:lang('Remark')}: </label>
+                                <input id="remark" type="text" value="{$data.remark}" name="remark" style="width:360px;" placeholder="{:lang('Remark')}" />
+                            </div>
+    
+                            <div class="row">
+                                <label for="status" class="w160">{:lang('Status')}: <span class="required">*</span></label>
+                                <div class="slideBox">
+                                    {eq name="ACTION_NAME" value="edit"}
+                                    <input id="status" value="1" type="checkbox" name="status" {eq name="data['status']" value="1"}checked{/eq} />
+                                    {else /}
+                                    <input id="status" value="1" type="checkbox" name="status" checked />
+                                    {/eq}
+                                    <label for="status"></label>
+                                </div>
+                                <div style="float:left; margin-left:10px; line-height:24px;">
+                                    <a class="tooltip-icon" title="{:lang('Status_tip')}"></a>
+                                </div>
+                            </div>
+                            
+                            <div class="clear"></div>
+                            <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                                {eq name="ACTION_NAME" value="edit"}
+                                    <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('savedata')}">
+                                    <input type="hidden" name="id" value="{$data.id}" />
+                                {else /}
+                                    <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}">
+                                {/eq}
+                                <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {/block}
+    
+    {block name="js"}
+    <script>
+        $(function () {
+            $('.randfix').click(function () {
+                var that = $(this);
+                var url  = that.attr('url');
+                var btn  = that.attr('data-for');
+                $.get(url).success(function(data){
+                    $('#' + btn).val(data);
+                });
+            })
+        })
+    </script>
+    {/block}

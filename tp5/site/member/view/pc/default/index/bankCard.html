@@ -1,0 +1,78 @@
+{extend name="common/base" /}
+
+{block name="title"}
+<title>ETshop-首页</title>
+{/block}
+
+{block name="css"}
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/crossbbcg/pc/default/css/member.css" />
+{/block}
+
+{block name="body"}
+<!--面包屑-->
+<div class="ly-path">
+	<ul class="clearfix">
+		<li class="home">
+			<a href="/index.php/crossbbcg/index/index.html" title="前往主页">首页</a>
+			<span>&gt;&nbsp;</span>
+		</li>
+		<li>
+			<a href="/index.php/crossbbcg/index/index.html" title="">会员中心</a>
+			<span>&gt;&nbsp;</span>
+		</li>
+		<li>
+			<h1>身份认证</h1>
+		</li>
+	</ul>
+</div>
+<div class="ly-main member-main clearfix">
+	{include file="index/left_menu"}
+	<div class="member-right">
+		<div class="member-content certificate">
+			<div class="title member-title member-max-title">
+				<div class="t">身份认证</div>
+			</div>
+			<div class="body pb15 mh600 ">
+				<br />
+				<br />
+
+				<table class="item-table public-table">
+					<colgroup>
+						<col width="10%">
+						<col>
+
+					</colgroup>
+
+					<tbody>
+						<tr>
+							<td class="text-right">开户银行:</td>
+							<td>建设银行</td>
+						</tr>
+						<tr>
+							<td class="text-right">银行卡号:</td>
+							<td>45085***********4584</td>
+						</tr>
+						<tr>
+							<td class="text-right">持卡人:</td>
+							<td>流川枫</td>
+						</tr>
+
+					</tbody>
+				</table>
+				<div class="btn-box">
+					<a href="{:url('member/bankCardEdit')}" class="btn-submit">去修改</a>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{/block}
+
+<!--此板块为页面单独js加载-->
+{block name="footer_js"}
+<script type="text/javascript">
+	//需要加载的js文件
+	Private_Script = ['fenxiao'];
+</script>
+{/block}

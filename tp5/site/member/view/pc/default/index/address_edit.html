@@ -1,0 +1,149 @@
+    {extend name="common/poupbase" /}
+    
+    {block name="title"}
+    <title>ETshop-{:lang('Address_edit')}</title>
+    {/block}
+    
+    {block name="css"}
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/member.css" />
+    {/block}
+    
+    {block name="body"}
+    <div class="member-content">
+        <form class="address-form" action="" method="get" >
+            <input name="id" value="{$data.id}" type="hidden">
+            <div class="form-inline">
+                <div class="input-label"><em>*</em>{:lang('consignee')}</div>
+                <div class="input-line error-triggered">
+                    <input type="text" readonly="readonly"  value="{$data.consignee}" id="consignee" class="input-text real-name" data-regex="^[A-Za-z0-9\u4e00-\u9fa5]{2,25}$" data-empty="{:lang('consignee_must_tips')}" data-error="{:lang('consignee_must_tips')}" required="">
+                    <span class="address-hint">{:lang('pleace input realname')}</span>
+                    <span class="input-error"></span>
+                </div>
+            </div>
+            <div class="form-inline">
+                <div class="input-label"><em>*</em>{:lang('receive_address')}</div>
+                <div class="input-line" id="select_box">
+                    <select name="country" id="country" data-province="{:lang('pleace choose province')}" data-city="{:lang('pleace choose city')}" data-province_url="{:url('ajax_get_province')}" data-city_url="{:url('ajax_get_city')}" data-area_url="{:lang('ajax_get_district')}"   data-area="{:lang('pleace choose area')}" class="chosen-select"  data-not="{:lang('country')}" required="" style="display:none;">
+                        <option value="0">{:lang('pleace choose country or area')}</option>
+                        {volist name="country" id="p"}
+                        <option  value="{$p.id}" {eq name="$p.id" value="$data.country" }selected{/eq}>{$p.name}</option>
+                        {/volist}
+                    </select>
+                    <select name="province" data-url="{:url('ajax_get_city')}" id="province" required>
+                        <option value="0">{:lang('pleace choose province')}</option>
+                        {volist name="province" id="p"}
+                        <option {eq name="$p.id" value="$data.province" }selected{/eq} value="{$p.id}">{$p.name}</option>
+                        {/volist}
+                    </select>
+                    <select name="city" id="city" required>
+                        <option value="0">{:lang('pleace choose city')}</option>
+                        {volist name="city" id="p"}
+                        <option {eq name="$p.id" value="$data.city" }selected{/eq} value="{$p.id}">{$p.name}</option>
+                        {/volist}
+                    </select>
+                    <select name="district" id="district" required>
+                        <option value="0">{:lang('pleace choose district')}</option>
+                        {volist name="district" id="p"}
+                        <option {eq name="$p.id" value="$data.district" }selected{/eq} value="{$p.id}">{$p.name}</option>
+                        {/volist}
+                    </select>
+                    <span class="input-error"></span>
+                </div>
+                
+            </div>
+            <div class="form-inline">
+                <div class="input-label"><em>*</em>{:lang('detail_address')}</div>
+                <div class="input-line error-triggered">
+                    <input type="text" name="address" id="address" class="input-text" data-empty="{:lang('pleace input detail address')}"
+                           data-error="{:lang('detail_address_must')}" data-regex="^.{5,120}$" required="" value="{$data.address}">
+                    <span class="input-error"></span>
+                </div>
+            </div>
+            <div class="form-inline">
+                <div class="input-label">{:lang('postcode')}</div>
+                <div class="input-line error-triggered">
+                    <input type="text" name="zipcode" id="zipcode" class="input-text" data-regex="^\d{6}$"
+                           data-empty="{:lang('pleace input postcode')}" data-error="{:lang('postcode format error')}" required="" value="{$data.zipcode}">
+                    <span class="input-error"></span>
+                </div>
+            </div>
+            <div class="form-inline">
+                <div class="input-label"><em>*</em>{:lang('telephone')}</div>
+                <div class="input-line error-triggered">
+                    <input type="text" name="mobile" id="mobile" class="input-text"
+                           data-regex="^0?(13|14|15|17|18)[0-9]{9}$" data-empty="{:lang('pleace input mobile')}" data-error="{:lang('mobile format error')}" required=""
+                           value="{$data.mobile}">
+                    <span class="input-error"></span>
+                </div>
+            </div>
+            <div class="form-inline">
+                <div class="input-label">{:lang('email_commonly')}</div>
+                <div class="input-line error-triggered">
+                    <input type="text" name="email" id="email" class="input-text"
+                           data-regex="\w+((-w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+"
+                           data-empty="{:lang('pleace input email')}" data-error="{:lang('email format error')}" required="" value="{$data.email}">
+                    <span class="input-error"></span>
+                </div>
+            </div>
+            <div class="form-inline">
+                <div class="input-label"><em>*</em>{:lang('IDcard')}</div>
+                <div class="input-line">
+                    <input type="text" readonly="readonly" id="identity" class="input-text" placeholder="{:lang('pleace input IDcard')}"
+                           data-regex="(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)" data-empty="{:lang('pleace input IDcard')}"
+                           data-error="{:lang('IDcard format error')}" required="" value="{$data.identity}">
+                    <i class="iconfont icon-help identity-helper" id="show_tips"></i>
+                    <div class="help-pop" style="display: none;">
+                        {:lang('IDcard_tips')}
+                    </div>
+                    <span class="input-error"></span>
+                </div>
+            </div>
+            <div class="form-inline">
+                <div class="input-label"><em>*</em>{:lang('identity card true')}</div>
+                <div style="float: left;padding-top: 7px">
+                    <ul class="images-upload clearfix">
+                        <li class="img-thumbnail action-upload">
+                            {if condition="substr($data.verso_img,0,4) == 'http'"}
+                            <img src="{$data.front_img}" alt="">
+                            {elseif condition="!empty($data.verso_img)"}
+                            <img src="__UPLOADS__/{$data.front_img}" alt="">
+                            {/if}
+                        </li>
+                    </ul>
+                </div>
+                <div class="input-label"><em>*</em>{:lang('identity card false')}</div>
+                <div style="float: left;padding-top: 7px">
+                    <ul class="images-upload clearfix">
+                        <li class="img-thumbnail action-upload">
+                            {if condition="substr($data.verso_img,0,4) == 'http'"}
+                            <img src="{$data.verso_img}" alt="">
+                            {elseif condition="!empty($data.verso_img)"}
+                            <img src="__UPLOADS__/{$data.verso_img}" alt="">
+                            {/if}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="form-inline">
+            
+            </div>
+            <!--<div class="form-inline">
+                <div class="input-label">&nbsp;</div>
+                <div class="input-line">
+                    <input type="checkbox" class="ui-input" id="is-default" checked=""> 设为默认
+                </div>
+            </div>-->
+            <div class="btn-box">
+                <a href="javascript:void (0);" style="margin-left: 143px;" id="address_submit">{:lang('save')}</a>
+            </div>
+        </form>
+    </div>
+    {/block}
+    
+    <!--此板块为页面单独js加载-->
+    {block name="footer_js"}
+    <script type="text/javascript">
+        //需要加载的js文件
+        Private_Script = ['account'];
+    </script>
+    {/block}

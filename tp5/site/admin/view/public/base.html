@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit" />
+    <title>{$meta_title|default=''} | {:lang('cmfname')}</title>
+	<meta name="keywords" content=" " />
+	<meta name="description" content=" " />
+    <meta name="generator" content="">
+    
+	<link href="__ROOT__/favicon.ico" type="image/x-icon" rel="shortcut icon">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/css/style.css" />
+    {:get_res('css');}
+    <link rel="stylesheet" type="text/css" href="__CSS__/jquery-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="__CSS__/jquery-ui-timepicker-addon.min.css" />
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <![endif]-->
+    <!--[if gte IE 9]><!-->
+    <script type="text/javascript" src="__JS__/jquery-2.1.4.min.js"></script>
+    <!--<![endif]-->
+    
+	<script type="text/javascript" src="__JS__/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="__JS__/jquery-ui-timepicker-addon.min.js"></script>
+    <script type="text/javascript" src="__JS__/jquery-ui-i18n.min.js"></script>
+    <!-- tooltip files -->
+    <script type="text/javascript" src="__JS__/jquery.tipTip.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/css/tipTip.css" />
+    <link rel="stylesheet" type="text/css" href="__CSS__/div.css" />
+    <script type="text/javascript">/*<![CDATA[*/var cookiePath = "__ROOT__/";/*]]>*/</script>
+	<script type="text/javascript" src="__PUBLIC__/admin/js/main.js"></script>
+    <script type="text/javascript" src="__ROOT__/static/layer-v3.0.3/layer.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/admin/js/commonv3.0.3.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <!--search select input-->
+    <script type="text/javascript" src="__ROOT__/static/chosen/chosen.jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="__ROOT__/static/chosen/chosen.min.css" />
+    
+    {:get_res('js');}
+    
+    {block name="style"}{/block}
+</head>
+<body>
+
+    <?php
+        //获取选择参数
+        $inputarr = is_array(input('param.')) ?  input('param.') : array();
+    ?>
+    <div id="alert_win" class="bg"></div>
+    <div style="top:50%;display:block" class="zeng_msgbox_layer_wrap" id="msg">
+        <span style="z-index:10000" class="zeng_msgbox_layer">
+            <span class="gtl_ico_clear"></span>
+            <div class="bd-loding"></div>{:lang('Page_loding')}
+            <span class="gtl_end"></span>
+        </span>
+    </div>
+    
+    <script>
+	function showInit(){
+		var c = setTimeout("alert_win.style.display='none',msg.style.display='none'",500);
+		$(".breadcrumbs").append("<sapn id='jnkc'>Loading......</sapn>");
+		setInterval("jnkc.innerHTML=new Date().toLocaleString();",1000);
+	}
+
+	addLoadEvent(showInit);
+
+	/*window.onunload = function(){
+		clearInterval(c);
+	}*/
+	</script>
+
+    <!-- HEADER --> 
+    <div id="top">
+    <div id="head">
+        <div class="left">
+            <a class="header-title" href="{:url('admin/index/index')}" title="{:lang('Cmfname')}">
+                <i class="fa fa-cloud white"></i>{:lang('Cmfname')}
+            </a>
+        </div>
+        
+        <div class="right">
+            
+            <div id="dd" class="wrapper-dropdown">
+            <img height="24px" src="__PUBLIC__/admin/images/accounts/no_image.png" alt="avatar" /><span>{:lang('Adminhi')}, {:session('admin_auth')['username']}</span>
+            <ul class="dropdown">
+            	<li>
+                    <a href="{:url('admin/index/index')}">
+                        <i class="icon-home"></i>{:lang('Index')}
+                    </a>
+                </li>
+                <li>
+                    <a href="{:url('admin/index/dashboard')}">
+                        <i class="icon-dashboard"></i>{:lang('dashboard')}
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{:url('admin/config/index')}">
+                        <i class="icon-settings"></i>{:lang('siteconfig')}</a>
+                </li>
+
+                <li>
+                    <a href="{:url('admin/index/myinfo')}" class="ajax-get" data-width="450" data-height="270">
+                        <i class="icon-account"></i>{:lang('myaccount')}
+                    </a>
+                </li>
+            </ul>
+            </div>
+    
+            <div class="left headicon">
+                <a href="{:url('index/index/index', ['__theme__'=> 'pc', '__skin__' => 'default'])}" target="_blank" class="tooltip-link" title="{:lang('Pc terminal')}">
+                    <i class="fa fa-television white"></i>
+                </a>
+        
+                <a href="{:url('index/index/index', ['__theme__'=> 'mobile', '__skin__' => 'default'])}" target="_blank" class="tooltip-link" title="{:lang('Mobile terminal')}">
+                    <i class="fa fa-mobile white"></i>
+                </a>
+        
+                </a>
+                <a href="{:url('seller/index/index')}" target="_blank" class="tooltip-link" title="{:lang('Seller terminal')}">
+                    <i class="fa fa-user-md white"></i>
+                </a>
+            </div>
+            
+            <div class="cache f24">
+                <a class="tooltip-link ajax-clear" title="{:lang('clearcache')}" href="{:url('admin/index/clearcache')}">
+                    <i class="fa fa-refresh white"></i>
+                </a>
+            </div>
+            
+            <div class="tnavs">
+                <a class="tooltip-link ajax-get" title="{:lang('Navs')}" href="{:url('admin/index/navs')}" data-title="{:lang('Navs')}" data-height="630" data-width="860">
+                    <i class="fa fa-th-large white"></i>
+                </a>
+            </div>
+            
+            <!--<div class="indexhome">
+                <a class="tooltip-link" title="{:lang('Homeindex')}" href="__ROOT__/" target="_blank">
+                    <img src="__PUBLIC__/admin/images/icons/home.png" alt="{:lang('Homeindex')}" />
+                </a>
+            </div>-->
+    
+            <div class="help">
+                <a class="tooltip-link" title="{:lang('Helpcenter')}" target="_blank" href="//help.runtuer.com">
+                    <i class="fa fa-question-circle white"></i>
+                </a>
+            </div>
+            
+            <div class="logout">
+                <a class="tooltip-link ajax-get confirm" title="{:lang('logout')}" href="{:url('admin/passport/logout')}" data-layer="{:lang('confirmlogout')}" data-title="{:lang('logout')}" data-postion="1" >
+                    <i class="fa fa-power-off white"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    </div>
+
+    <!-- SIDEBAR -->
+    <div id="sidebar" class="noscroll">
+        <div id="top-line">            
+            <a href="javascript:void(0);" id="menuopen">{:lang('Open')} <label>&#9660;</label></a>
+            <a href="javascript:void(0);" id="menuclose">{:lang('Close')} <label>&#9650;</label></a>
+            <a href="javascript:void(0);" id="menucollapse" data-direction="ltr">&#9664;</a>
+        </div>
+
+        
+        {$__MENU__}
+        
+    </div>
+                
+    <!-- CONTENT --> 
+    {block name="body"}{/block}
+
+    {block name="js"}{/block}
+    <!--<script type="text/javascript" src="//runtuer.com/liceson/check"></script>-->
+</body>
+</html>

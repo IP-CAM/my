@@ -1,0 +1,521 @@
+    {extend name="common/base" /}
+    
+    {block name="title"}
+    <title>{:lang('Order_detail')}</title>
+    {/block}
+    
+    {block name="css"}
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/member.css" />
+    {/block}
+    
+    {block name="body"}
+    <!--面包屑-->
+    <div class="ly-path">
+        <ul class="clearfix">
+            <li class="home">
+                <a href="{:url('crossbbcg/index/index')}" title="{:lang('go_min')}">{:lang('Home')}</a>
+                <span>&gt;&nbsp;</span>
+            </li>
+            <li>
+                <a href="{:url('member/index/index')}" title="{:lang('Member')}">{:lang('Member')}</a>
+                <span>&gt;&nbsp;</span>
+            </li>
+            <li>
+                <h1>{:lang('Order_detail')}</h1>
+            </li>
+        </ul>
+    </div>
+    <div class="ly-main member-main clearfix">
+        {include file="index/left_menu"}
+        <div class="member-right">
+            <div class="member-content">
+                <div class="title member-title member-max-title">
+                    <div class="t">{:lang('Order_detail')}</div>
+                    <div class="right" style="display:none;">
+                        <!-- 取消订单-->
+                        {if condition="$order_status == 'WAIT_SELLER_SEND_GOODS'||$order_status =='WAIT_BUYER_PAY'"}
+                        
+                            {if condition="$data['status'] =='WAIT_SELLER_SEND_GOODS'"}
+                            {if condition="$data['cancel_status'] != 'NO_APPLY'"}
+                        <p style="margin-right:20px;">{:lang('cancel_status_'.$data['cancel_status'])}</p>
+                            {else /}
+                        <a href="javascript:void(0)" class="cancel-order btn btn-bai" data-order_id="{$data['order_id']}">{:lang('cancel_order_status')}</a>
+                            {/if}
+                        {else /}
+                        <a href="javascript:void(0)" class="cancel-order btn btn-bai" data-order_id="{$data['order_id']}">{:lang('cancel_order_status')}</a>
+                            {/if}
+                        
+                        {/if}
+                        <!--去付款-->
+                        {eq name="$order_status" value="WAIT_BUYER_PAY"}
+                        <a href="{:url('crossbbcg/carts/paycenter','order_sn='.$order_sn)}" class="btn btn-cut">{:lang('go_pay')}</a>
+                        {/eq}
+    
+                        <!--确认收货  -->
+                        {if condition="$order_status == 'WAIT_BUYER_CONFIRM_GOODS'"}
+                        <a href="javascript:void(0)" target="_blank" class="btn btn-blue finish-order" data-order_id="{$data['order_id']}">{:lang('confirm_order')}</a>
+                        {/if}
+                        
+                        <!-- 完成的订单评价 -->
+                        {eq name="order_status" value="TRADE_FINISHED"}
+                        {eq name="data['is_evaluate']" value="0"}
+                        <a href="{:url('member/comment/add','order_sn='.$data['order_sn'])}" class="btn btn-bai">{:lang('comment_order')}</a>
+                        {/eq}
+                        {/eq}
+                        
+                    </div>
+                </div>
+                <div class="body pb15 mh600 aftersales aftersales-detail">
+                    <div class="aftersales-steps-box" style="border: 0;">
+                        <div class="steps steps-five">
+                            <table width="100%">
+                                <tbody>
+                                    {if condition="!$trade_closed"}
+                                    <tr>
+                                        <td class="step-item step-1 {if condition='$step1'}active{/if}"><span><q class="icon">●</q><i>1</i>{:lang('order_create')}</span>
+                                            <div class="stepdiv">1</div>
+                                        </td>
+                                        <td class="step-item step-2 {if condition='$step2'}active{/if}">
+                                            <span><q class="icon">●</q><i>2</i>{:lang('wait_for_pay')}</span>
+                                            <div class="stepdiv">2</div>
+                                        </td>
+                                        <td class="step-item step-3 {if condition='$step3'}active{/if}"><span><q class="icon">●</q><i>3</i>{:lang('pay_for_success')}</span>
+                                            <div class="stepdiv">3</div>
+                                        </td>
+                                        <td class="step-item step-4 {if condition='$step4'}active{/if}"><span><q class="icon">●</q><i>3</i>{:lang('confirm_order')}</span>
+                                            <div class="stepdiv">4</div>
+                                        </td>
+                                        <td class="step-item step-5 last {if condition='$step5'}active{/if}"><span><q class="icon">●</q><i>3</i>{:lang('trade_finished')}</span>
+                                            <div class="stepdiv">5</div>
+                                        </td>
+                                    </tr>
+                                    {else /}
+                                    <tr>
+                                        <td class="step-item step-1"><span><q class="icon">●</q><i>1</i>{:lang('trade_closed')}</span>
+                                            <div class="stepdiv">1</div>
+                                        </td>
+                                    </tr>
+                                    {/if}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!--订单信息-->
+                    <div class="orderdtl-box">
+                        
+                        <!--订单状态 等待买家付款-->
+                        {if condition="$order_status =='WAIT_BUYER_PAY'"}
+                        <div class="order-state">
+                            <div class="order-state-info">
+                                {:lang('now_order_status')}： {:lang('order_wait_buyer_pay')}
+                            </div>
+                            <div class="style-item-2 pl36">
+                                <div class="s">{:lang('should_pay')}
+                                    <span class="red">
+                                        {$data['symbol']}{$data['order_amount']}
+                                        
+                                    </span>
+                                    
+                                    ，
+                                    {:lang('surplus')}
+                                    
+                                    
+                                    <span id="hour_show" class="red"></span>
+                                    <span id="minute_show" class="red"></span>
+                                    <span id="second_show" class="red"></span>
+    
+                                    {:lang('should_pay_more')}
+                                    
+                                </div>
+                                <div class="btn-box">
+                                    <a class="btn" href="{:url('crossbbcg/carts/paycenter','order_sn='.$order_sn)}">{:lang('pay_now')}</a>
+                                    <a href="javascript:void(0);" class="cancel-order" data-order_id="{$data['order_id']}">{:lang('order_cancel')}</a>
+                                </div>
+                            </div>
+                        </div>
+                        {/if}
+    
+                        <!--订单状态 待确认收货-->
+                        {if condition="$order_status =='WAIT_BUYER_CONFIRM_GOODS'"}
+                    		<div class="order-state">
+                    			<div class="order-state-info">
+                                    {:lang('now_order_status')}：{:lang('order_wait_confirm')}
+                    			</div>
+                                <ul>
+                                    {if condition="$traces['code']"}
+                                    <li> <span>{:lang('shipping_company')}：</span>
+                                        <em>&nbsp;{$data.shipping_name}</em></li>
+                
+                                    <li> <span>{:lang('shipping_odd')}：</span>
+                                        <em>&nbsp;{$data.shipping_no}</em>
+                                    </li>
+                
+                                    <li> <span>{:lang('shipping_tracking')}：</span>
+                                        <em>
+                                            {if condition="$traces['code']"}
+                                            {foreach $traces['data'] as $arr}
+                                            <div class="item">{$arr['time']} {$arr['station']}</div>
+                                            {/foreach}
+                                            {else /}
+                                            <div class="item">{$traces['msg']}</div>
+                                            {/if}
+                                        </em>
+                                    </li>
+                                    {else /}
+                                    <li class="style-item-1">{:lang('traces_fail')}</li>
+                                    {/if}
+                                </ul>
+                    		</div>
+                        {/if}
+    
+                        <!--订单状态 完成订单-->
+                        {if condition="$order_status =='TRADE_FINISHED'"}
+                        <div class="order-state">
+                            <div class="order-state-info">
+                                {:lang('now_order_status')}：{:lang('order_complete')}
+                                {eq name="data['is_evaluate']" value="0"}
+                                <a href="{:url('member/comment/add','order_sn='.$data['order_sn'])}" class="btn">{:lang('comment_order')}</a>
+                                {/eq}
+                                
+                            </div>
+                            <ul>
+                                {if condition="$traces['code']"}
+                                <li> <span>{:lang('shipping_company')}：</span>
+                                    <em>&nbsp;{$data.shipping_name}</em></li>
+            
+                                <li> <span>{:lang('shipping_odd')}：</span>
+                                    <em>&nbsp;{$data.shipping_no}</em>
+                                </li>
+                                <!--物流信息-->
+                                <li> <span>{:lang('shipping_tracking')}：</span>
+                                    <em>
+                                        {if condition="$traces['code']"}
+                                        {foreach $traces['data'] as $arr}
+                                        <div class="item">{$arr['time']} {$arr['station']}</div>
+                                        {/foreach}
+                                        {else /}
+                                        <div class="item">{$traces['msg']}</div>
+                                        {/if}
+                                    </em>
+                                </li>
+                                {else /}
+                                <li class="style-item-1">{:lang('traces_fail')}</li>
+                                {/if}
+                            </ul>
+                        </div>
+                        {/if}
+    
+                        <!--订单状态 取消订单-->
+                        {if condition="$order_status == 'TRADE_CLOSED'||$order_status =='TRADE_CLOSED_BY_SYSTEM'"}
+                        <div class="order-state">
+                            <div class="order-state-info">
+                                {:lang('now_order_status')}：{:lang('cancel_over')}
+                            </div>
+                            <div class="style-item-2 pl36">
+                                <div class="s">{:lang('cancel_reason')}：
+                                    {notempty name="$data.cancel_reason"}
+                                    {$data.cancel_reason}
+                                    {else /}
+                                    {:lang('cancel_reason_system')}
+                                    {/notempty}
+                                    
+                                </div>
+                                <div class="btn-box">
+                                    {:lang('cancel_reason_info')}
+                                </div>
+                            </div>
+                        </div>
+                        {/if}
+    
+                        
+    
+                        
+                        <!--取消订单状态-->
+                        {if condition="$data['status'] =='WAIT_SELLER_SEND_GOODS'"}
+                        {if condition="$data['cancel_status'] == 'WAIT_PROCESS'"}
+    
+                        <div class="order-state">
+                            <div class="order-state-info">
+                                {:lang('now_order_status')}：{:lang('wait_check')}
+                            </div>
+                            <div class="style-item-1">
+                                {:lang('wait_check_info')}
+                                
+                            </div>
+                        </div>
+                        {else /}
+                        <!--订单状态 等待卖家发货-->
+                        
+                        <div class="order-state">
+                            <div class="order-state-info">
+                                {:lang('now_order_status')}：{:lang('pending_output')}
+                            </div>
+                            <div class="style-item-1">
+                                {:lang('pending_output_info')}
+                                <br />
+                                {:lang('wait_send_goods')}
+                            </div>
+                        </div>
+                        
+                        {/if}
+                        {/if}
+                        
+                    		
+                        <!--订单详情-->
+                    		<div class="order-detail-item">
+                    			<div class="hd"><span>{:lang('order_information')}</span></div>
+                    			<div class="bd">
+                    				<ul>
+                    					<li>
+                                            <span>{:lang('consignee')}：</span>
+                                            <em>
+                                                {$data.consignee} {$data.tel}
+                                                {$data.country} {$data.province} {$data.city} {$data.district} {$data.address}
+                                            </em>
+                                        </li>
+                    					<li> <span>{:lang('buyer_postscript')}：</span>	<em>{$data.postscript} &nbsp;</em></li>
+                    					<li> <span>{:lang('order_sn')}：</span>	<em>{$data.order_sn}</em></li>
+                    					<li> <span>{:lang('real_pay')}：</span>	<em class="red">{$data.symbol}{$data.order_amount}</em></li>
+                    					<li> <span>{:lang('trading_time')}：</span>	<em>{$data.create_time}</em></li>
+                    				</ul>
+                    			</div>
+                    		</div>
+                    	</div>
+                    
+                    
+                    
+                    <!--商品信息-->
+                    <div class="orderdtl-box">
+                        <div class="member-sub-title clearfix"><span>
+                        {:lang('good_information')}</span></div>
+                        <div class="orderdtl-bd">
+                            <!--商品信息-->
+                            <table class="order-table">
+                                <tbody>
+                                    <tr>
+                                        <td class="center order-summary" colspan="2"> {:lang('good_information')} </td>
+                                        <td class="center order-summary">{:lang('buy_num')} </td>
+                                        <td class="center order-summary">{:lang('good_price')}</td>
+                                        <td class="center order-summary">{:lang('after_sale_info')}</td>
+                                        <td class="center order-summary">{:lang('good_total')}</td>
+                                    </tr>
+                                    
+                                    {php}$total =0;{/php}
+                                    {foreach $goods as $key=> $arr}
+                                    <tr>
+                                        <td class="item-image">
+                                            <!--商品主图-->
+                                            {if condition="substr($arr['sku_thumb'],0,4)=='http'"}
+                                            <img src="{$arr['sku_thumb']}" width="58" height="58">
+                                            {else /}
+                                            <img src="{:resizeImage($arr['sku_thumb'],'small',true)}" width="58" height="58">
+                                            {/if}
+                                        </td>
+                                        <td class="item-name">
+                                            <a target="_blank" href="{:url('crossbbcg/goods/index','item_id='.$arr['goods_id'])}">{$arr.goods_name}</a>
+                                            {if condition="$arr['sku_array']"}
+                                            <br/><span style="color:#9e9e9e">{$arr['sku_array']}</span>
+                                            {/if}
+                                        </td>
+                                        <td class="item-amount"> {$arr.sku_number} </td>
+    
+                                        <td class="item-price"> {$data.symbol}{$arr.sku_price} </td>
+                                        <td class="item-amount">
+                                            
+                                            <!--收货前可以申请售后 -->
+                                            {eq name="$data['status']" value="WAIT_BUYER_CONFIRM_GOODS"}
+    
+                                            <!--判断商品的售后状态-->
+                                            {if condition="$arr['afterservice']['status'] !== null"}
+                                            {if condition="$arr['afterservice']['status'] === 1"}
+                                            <a href="{:url('member/index/aftersalesDetail','after_sn='.$arr['afterservice']['after_sn'])}" style="color:#09c">{:lang('after_sale_success')}</a>
+                                            {else /}
+                                            <a href="{:url('member/index/aftersalesDetail','after_sn='.$arr['afterservice']['after_sn'])}" style="color:#09c">{:lang('after_sale_pending')}</a>
+                                            {/if}
+                                            {else /}
+    
+                                            <a href="{:url('member/index/aftersalesApply',['order_sn'=>$data['order_sn'],'rec_id'=>$arr['rec_id']])}" style="color:#09c">{:lang('after_sale')}</a>
+    
+                                            {/if}
+                                            {/eq}
+                                            
+                                            <!-- 取消订单中 -->
+                                            {if condition="$data['status'] =='WAIT_SELLER_SEND_GOODS'"}
+                                            {if condition="$data['cancel_status'] != 'NO_APPLY'"}
+                                            {:lang('cancel_status_'.$data['cancel_status'])}
+                                            {/if}
+                                            {/if}
+                                        </td>
+                                        {if condition="$key==0"}
+                                        <td class="std" rowspan="{:count($goods)}"> {$data.symbol}
+                                            {$data.goods_amount}
+                                        </td>
+                                        {/if}
+                                    </tr>
+                                    {/foreach}
+                                
+    
+                                </tbody>
+                            </table>
+                            <!--商品信息-->
+                        </div>
+                        <div class="orderdtl-bd">
+                            <!--商品信息-->
+                            <div class="orderdtl-box">
+                                <div class="orderdtl-box-right">
+                                    <div class="row w"><span class="col-1  text-right">{:lang('good_total')}</span> <em class="col-2">{$data.symbol}{$data.goods_amount}</em></div>
+    
+                                    <div class="row w"><span class="col-1  text-right">{:lang('tax')}</span> <em class="col-2">{$data.symbol}{$data.order_tax}</em></div>
+                                    
+                                    <div class="row w"><span class="col-1  text-right">{:lang('shipping_fee')}</span> <em class="col-2">{$data.symbol}{$data.shipping_fee}</em></div>
+                                    <div class="row w"><span class="col-1  text-right">{:lang('discount')}</span> <em class="col-2">-{$data.symbol}{$data.discount}</em></div>
+                                    <div class="row w"><span class="col-1  text-right">{:lang('real_pay')}</span> <em class="col-2 price">{$data.symbol}{$data.order_amount}</em></div>
+                                    <div class="offset-1">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--商品信息-->
+                        </div>
+                    </div>
+                    
+    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="js_language">
+        <span id="js_return_address">{:lang('js_return_address')}</span>
+    </div>
+    <!-- 物流信息-->
+    <script type="text/html" id="wuliu_content">
+        <div class="status-box" id="status_list">
+            <ul id="J_listtext2" class="status-list">
+                {if condition="$traces['code']"}
+                {foreach $traces['data'] as $arr}
+                <li><span class="date">{$arr['time']}</span><span class="text">{$arr['station']}</span></li>
+                {/foreach}
+                {else /}
+                <li><span class="text">{$traces['msg']}</span></li>
+                {/if}
+            </ul>
+        </div>
+    </script>
+    
+    <!-- 取消订单-->
+    <script type="text/html" id="cancel-html">
+        <div style="padding:20px;">
+            <p style="margin-bottom:10px;">{:lang('choose_cancel_reason')}</p>
+            <select name="cancel_reason" style="width:120px;" id="cancel_reason">
+                <option value="0">{:lang('choose_cancel_option')}</option>
+                {foreach $arr_cancel_reason as $key => $value}
+                <option value="{$value}">{$value}</option>
+                {/foreach}
+            </select>
+        </div>
+
+    </script>
+    {/block}
+
+    
+    <!--此板块为页面单独js加载-->
+    {block name="footer_js"}
+    <script type="text/javascript">
+        // 弹窗取消订单
+        function open_cancel(order_id){
+            layer.open({
+                'skin': 'layer-ext-blue',
+                area: ['400px', '280px'],
+                scrollbar: false,
+                title: "{:lang('cancel_order_title')}",
+                maxmin: false,
+                type: 1,
+                anim: 0,
+                shade: [0.3, '#333333'],
+                content: $('#cancel-html').html(),
+                btn: ["{:lang('yes')}", "{:lang('no')}"],
+                yes: function(index,item){
+                    var reason = $('#cancel_reason').val();
+                    if(reason == 0){
+                        layer.msg("{:lang('choose_cancel_reason')}", {skin:'layer-ext-blue',icon:0, time: 2000 ,shade: 0.3}, function(){});
+                    }else{
+                        var request_data = {
+                            order_id: order_id,
+                            reason : reason
+                        };
+                        $.ajax({
+                            type: 'post',
+                            url: "{:url('member/index/cancelorder')}",
+                            data: request_data,
+                            dataType: 'json',
+                            success: function (data) {
+                                if(data.code){
+                                    layer.msg(data.msg, {skin:'layer-ext-blue',icon:0, time: 2000 ,shade: 0.3}, function(){
+                                        layer.close(index);
+                                        window.location.reload();
+                                    });
+
+                                }else{
+                                    layer.msg(data.msg, {skin:'layer-ext-blue',icon:0, time: 2000 ,shade: 0.3}, function(){});
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
+
+        function finish_order(order_id){
+            var request_data = {
+                order_id: order_id
+            };
+            $.ajax({
+                type: 'post',
+                url: "{:url('member/index/finishorder')}",
+                data: request_data,
+                dataType: 'json',
+                success: function (data) {
+                    if(data.code){
+                        layer.msg(data.msg, {skin:'layer-ext-blue',icon:0, time: 2000 ,shade: 0.3}, function(){
+                            layer.close();
+                            window.location.reload();
+                        });
+
+                    }else{
+                        layer.msg(data.msg, {skin:'layer-ext-blue',icon:0, time: 2000 ,shade: 0.3}, function(){});
+                    }
+                }
+            });
+        }
+
+        <!--剩余关闭时间-->
+        {php}
+        $surplus = $expire_time - (time()-strtotime($data['create_time']));
+        {/php}
+
+        var intDiff = parseInt({$surplus});//倒计时总秒数量
+        function timer(intDiff){
+            window.setInterval(function(){
+                var day=0,
+                    hour=0,
+                    minute=0,
+                    second=0;//时间默认值
+                if(intDiff > 0){
+                    day = Math.floor(intDiff / (60 * 60 * 24));
+                    hour = Math.floor(intDiff / (60 * 60));
+                    minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
+                    second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+                }
+                if (minute <= 9) minute = '0' + minute;
+                if (second <= 9) second = '0' + second;
+                
+                $('#hour_show').html('<s id="h"></s>'+hour+" {:lang('hour')}");
+                $('#minute_show').html('<s></s>'+minute+" {:lang('minute')}");
+                $('#second_show').html('<s></s>'+second+" {:lang('second')}");
+                intDiff--;
+            }, 1000);
+        }
+        
+        //需要加载的js文件
+        Private_Script = ['orderDetail','member'];
+    </script>
+    {/block}

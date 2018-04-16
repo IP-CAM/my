@@ -1,0 +1,198 @@
+{extend name="common/base" /} {block name="title"}
+<title>{:lang('cancel_order_detail')}</title>
+{/block} {block name="css"}
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/member.css" /> {/block}
+{block name="body"}
+<!--面包屑-->
+<div class="ly-path">
+    <ul class="clearfix">
+        <li class="home">
+            <a href="{:url('crossbbcg/index/index')}" title="{:lang('go_min')}">{:lang('Home')}</a>
+            <span>&gt;&nbsp;</span>
+        </li>
+        <li>
+            <a href="{:url('member/index/index')}" title="{:lang('Member')}">{:lang('Member')}</a>
+            <span>&gt;&nbsp;</span>
+        </li>
+        <li>
+            <h1>{:lang('cancel_order_detail')}</h1>
+        </li>
+    </ul>
+</div>
+<div class="ly-main member-main clearfix">
+	{include file="index/left_menu"}
+	<div class="member-right">
+
+		<div class="member-content">
+			<div class="title member-title member-max-title">
+				<div class="t">{:lang('cancel_order_detail')}</div>
+			</div>
+			<div class="body pb15 mh600">
+				<div class="aftersales-steps-box" style="margin-bottom: 20px;">
+					<div class="steps steps-five">
+						<table width="100%">
+							<tbody>
+
+								<tr>
+									<td class="step-item step-1 {if condition='$step1'}active{/if}"><span><q class="icon">●</q><i>1</i>{:lang('cancel_step_1')}</span>
+										<div class="stepdiv">1</div>
+									</td>
+                                    {if condition="!$step4"}
+									<td class="step-item step-2 {if condition='$step2'}active{/if}">
+										<span><q class="icon">●</q><i>2</i>{:lang('cancel_step_2')}</span>
+										<div class="stepdiv">2</div>
+									</td>
+									<td class="step-item step-3 last {if condition='$step3'}active{/if}"><span><q class="icon">●</q><i>3</i>{:lang('cancel_step_3')}</span>
+										<div class="stepdiv">3</div>
+									</td>
+									{else /}
+                                    <td class="step-item step-4 last {if condition='$step4'}active{/if}"><span><q class="icon">●</q><i>2</i>{:lang('cancel_step_4')}</span>
+                                        <div class="stepdiv">2</div>
+                                    </td>
+                                    {/if}
+                                    
+								</tr>
+                            
+                            
+							</tbody>
+						</table>
+					</div>
+				</div>
+                
+                
+				<div class="member-sub-title clearfix"><span>{:lang('cancel_record')}</span></div>
+				<div class="cancel-order-top">
+					<dl>
+						<dt>
+								<td class="order-summary">
+									<span class="order-status ">{:lang('order_sn')}：{$data.order_sn}  </span>&#12288;&#12288;
+									<span class="order-number">
+                                        {:lang('cancel_schedule')}：
+                                        
+                                        {eq name="$data.cancel_status" value="WAIT_PROCESS"}
+                                            {:lang('cancel_step_1')}
+                                        {/eq}
+                                        {eq name="$data.cancel_status" value="REFUND_PROCESS"}
+                                            {:lang('cancel_step_2')}
+                                        {/eq}
+                                        {eq name="$data.cancel_status" value="SUCCESS"}
+                                            {:lang('cancel_step_3')}
+                                        {/eq}
+                                        {eq name="$data.cancel_status" value="FAILS"}
+                                            {:lang('cancel_step_4')}
+                                        {/eq}
+                                    </span>&#12288;&#12288;
+									<span class="exchange-time">
+                                        {:lang('pay_amount')}：
+                                        <i class="red">{$data.symbol}{$data.order_amount}</i>
+                                    </span>
+								</td>
+						</dt>
+						<dd>
+							<td class="item-shouhou">
+                                {eq name="$data.cancel_status" value="WAIT_PROCESS"}
+                                {:lang('cancel_step_1_info')}
+                                {/eq}
+                                {eq name="$data.cancel_status" value="REFUND_PROCESS"}
+                                {:lang('cancel_step_2_info')}
+                                {/eq}
+                                {eq name="$data.cancel_status" value="SUCCESS"}
+                                {:lang('cancel_step_3_info')}
+                                {/eq}
+                                {eq name="$data.cancel_status" value="FAILS"}
+                                {:lang('cancel_step_4_info')}
+                                {/eq}
+							</td>
+
+						</dd>
+					</dl>
+				</div>
+				<div class="member-sub-title clearfix"><span>{:lang('cancel_status_schedule')}</span></div>
+				<div class="cancel-order-style1">
+					<table class="order-table">
+						<tbody>
+							<tr>
+								<td class="order-summary">
+                                    {:lang('cancel_time')}
+								</td>
+								<td class="order-summary">
+                                    {:lang('cancel_remark')}
+								</td>
+								<td class="order-summary">
+                                    {:lang('cancel_man')}
+								</td>
+							</tr>
+                            
+                            {foreach $history as $key => $arr}
+							<tr>
+								<td>
+                                    {$arr['create_time']}
+								</td>
+								<td>
+                                    {$arr['remark']}
+								</td>
+								<td>
+                                    {if condition="$arr['role']!=''"}
+									{:lang($arr['role'])}
+                                    {/if}
+								</td>
+							</tr>
+                            {/foreach}
+                        
+						</tbody>
+					</table>
+				</div>
+				<div class="member-sub-title clearfix"><span>{:lang('cancel_info')}</span></div>
+				<div class="cancel-order-style2">
+					<table class="order-table">
+						<tbody>
+							<tr>
+								<td width="120" class="text-center b-r-1">
+                                    {:lang('order_sn')}
+								</td>
+								<td class="pl20">
+									{$data.order_sn}
+								</td>
+
+							</tr>
+							<tr>
+								<td width="120" class="text-center b-r-1">
+                                    {:lang('pay_amount')}
+								</td>
+								<td class="pl20">
+									{$data.order_amount}
+								</td>
+
+							</tr>
+							<tr>
+								<td width="120" class="text-center b-r-1">
+                                    {:lang('cancel_user_reason')}
+								</td>
+								<td class="pl20">
+									{$data.cancel_reason}
+								</td>
+
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="member-sub-title clearfix"><span>{:lang('cancel_description')}</span></div>
+				<div class="cancel-order-style3">
+                    {:lang('cancel_description1')} <br/>
+                    {:lang('cancel_description2')} <br/>
+                    {:lang('cancel_description3')} <br/>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+{/block}
+<!--此板块为页面单独js加载-->
+{block name="footer_js"}
+<script type="text/javascript">
+	//需要加载的js文件
+	Private_Script = ['member'];
+</script>
+{/block}

@@ -1,0 +1,163 @@
+    {extend name="admin@public/base"/}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content">
+        <div class="breadcrumbs">
+            {:lang('Ordersys')} : &nbsp;&nbsp; {:lang('Service')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+        </div>
+        
+        <div class="bloc">
+            <div class="title">
+                <div class="tabs" id="">
+                    {include file="admin@public/navs" /}
+                </div>
+                
+                {include file="admin@public/lang" /}
+            </div>
+            <div class="content">
+                
+                <dl class="gzzt clearfix mtb10">
+                    <dd>
+                        <div class="boxr">
+                            {include file="admin@public/button" /}
+                        </div>
+                    </dd>
+                    
+                    <dd>
+                        <div class="boxr">
+                            <select id="rtype" style="height:25px; width:80px; margin-right:4px;">
+                                <option value="4" url="{:url('', ['rtype'=>'4'])}" {eq name="rtype" value="4" }selected{
+                                /eq}>{:lang('Allorders')}</option>
+                                {volist name='option' id='op'}
+                                <option value="{$key}" url="{:url('', ['rtype'=>$key])}" {eq name="rtype" value="$key"
+                                        }selected{
+                                /eq}>{$op}</option>
+                                {/volist}
+                            </select>
+                            <script>
+                                $(function () {
+                                    $("#rtype").change(function () {
+                                        var gotu_url = $(this).find('option:selected').attr('url');
+                                        eval("self.location='" + gotu_url + "'")
+                                    })
+                                })
+                            </script>
+                        </div>
+                    </dd>
+                    
+                    <form style="margin-top:0;" class="search-form">
+                        <dd>
+                            <div class="boxr ovh">
+                                <style>
+                                    .w120 {
+                                        width: 120px !important;
+                                    }
+                                    
+                                    .layui-layer-tips .layui-layer-content {
+                                        padding: 2px 8px !important;
+                                        line-height: 18px !important;
+                                    }
+                                </style>
+                                
+                                <label for="start" style="margin:10px 10px 0 0; width:156px;">
+                                    <input type="text" id="start" value="{:input('start_time')}" name="start_time"
+                                           placeholder="{:lang('Begin_time')}" class="w130 input_img"/>
+                                </label>
+                                <label style="width:10px;line-height:32px; margin-right:2px;">~</label>
+                                <label for="end" style="margin:10px 10px 0 0; width:150px;">
+                                    <input type="text" id="end" value="{:input('end_time')}" name="end_time"
+                                           placeholder="{:lang('End_time')}" class="w130 input_img"/>
+                                </label>
+                            </div>
+                        <dd>
+                        
+                        <dd>
+                            <div class="boxr ovh">
+                                <label for="name" style="margin:10px 10px 0 0; width:200px;">
+                                    <input id="name" type="text" class="searchinput" name="name" value="{:input('name')}"
+                                           placeholder="{:lang('Search_tip')}" style="width:170px;"/>
+                                </label>
+                                <input type="button" name="search" id="sch-search" class="button white"
+                                       value="{:lang('Search')}" url="{:url('',input(''))}"/>
+                            </div>
+                        <dd>
+                    </form>
+                </dl>
+                
+                {notempty name="list"}
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="center" width="30"><input class="check-all" type="checkbox"></th>
+                        <th class="left">{:lang('Refund ID')}</th>
+                        <th class="left">{:lang('Order_sn')}</th>
+                        <th class="left">{:lang('Nickname')}</th>
+                        <th class="left">{:lang('Orderprice')}</th>
+                        <th class="left">{:lang('Rtype')}</th>
+                        <th class="left">{:lang('Status')}</th>
+                        <th class="left">{:lang('Createtime')}</th>
+                        <th class="actions">{:lang('Actions')}</th>
+                    </tr>
+                    </thead>
+                    
+                    <tbody>
+                    {volist name="list" id="vo"}
+                    <tr>
+                        <td class="center" width="30"><input class="ids" type="checkbox" value="{$vo['id']}" name="ids[]">
+                        </td>
+                        <td class="left">{$vo['id']}</td>
+                        <td class="left">{$vo['order_sn']}</td>
+                        <td class="left">
+                            <a href="#">{$vo['nickname']}</a>
+                        </td>
+                        <td class="left">{$vo['orderprice']}
+                        </td>
+                        <td class="left upper-case">
+                            {switch name='vo.rtype'}
+                            {case value='0'}<span>{:lang('Refund_Not_Return')}</span>{/case}
+                            {case value='1'}<span>{:lang('Refund_And_Return')}</span>{/case}
+                            {case value='2'}<span>{:lang('Only_Exchange')}</span>{/case}
+                            {/switch}
+                        </td>
+                        <td class="left upper-case">
+                            {switch name='vo.status'}
+                            {case value='0'}<span>{:lang('Applying')}</span>{/case}
+                            {case value='1'}<span>{:lang('Waitting_Seller_Send')}</span>{/case}
+                            {case value='2'}<span>{:lang('Waitting_Consumer_Send')}</span>{/case}
+                            {case value='3'}<span>{:lang('Waitting_Seller_Confirm')}</span>{/case}
+                            {case value='4'}<span>{:lang('Waitting_Consumer_Confirm')}</span>{/case}
+                            {case value='5'}<span>{:lang('Finish')}</span>{/case}
+                            {case value='-1'}<span>{:lang('Reject')}</span>{/case}
+                            {case value='-2'}<span>{:lang('Consumer Cancel')}</span>{/case}
+                            {/switch}
+                        </td>
+                        <td class="left">{:time_format($vo.createtime,'Y-m-d H:i:s')}</td>
+                        <td class="actions">
+                            <a class="tooltip-link ajax-get edit" title="{:lang('Edit_this_record')}"
+                               href="{:url('view',array('order_sn'=>$vo['order_sn']))}" data-title="{:lang('Edit')}">
+                                <img src="__PUBLIC__/admin/images/edit.png" alt="{:lang('Edit')}"/></a>
+                            <a class="tooltip-link ajax-get confirm" data-layer="{:lang('Reject')}"
+                               title="{:lang('Reject')}" href="{:url('reject',array('ids'=>$vo['id']))}"
+                               data-title="{:lang('Reject')}">
+                                <img src="__PUBLIC__/admin/images/uninstall.png" alt="{:lang('Delete')}"/>
+                            </a>
+                        </td>
+                    </tr>
+                    {/volist}
+                    </tbody>
+                </table>
+                <div class="pagination-wrapper">
+                    <div class="results-part"><span>{$_total}</span></div>
+                    <div class="links-part">{$list->render()}</div>
+                </div>
+                {else/}
+                <div class="alert alert-warning">{:lang('No_record')}</div>
+                {/notempty}
+            
+            </div>
+        </div>
+    </div>
+    
+    {include file="admin@public/time_for_search" /}
+    {/block}

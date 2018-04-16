@@ -1,0 +1,158 @@
+	{extend name="admin@public/base"/}
+                
+    <!-- CONTENT --> 
+    {block name="body"}
+    <div id="content">
+        <div class="breadcrumbs">
+            {:lang('Ordersys')} : &nbsp;&nbsp; {:lang('Order')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+    	</div>
+
+        <div class="bloc">
+            <div class="title">
+                <div class="tabs" id="">
+                    {include file="admin@public/navs" /}
+                </div>
+                
+                {include file="admin@public/lang" /}
+            </div>
+            <div class="content">
+                
+                <dl class="gzzt clearfix mtb10">
+                    <dd>
+                        <div class="boxr">
+                            {include file="admin@public/button" /}
+                            <select id="option" style="height:25px; width:80px; margin-right:4px;">
+                                {volist name="option" id="op"}
+                                <option value="{$key}" url="{:url('', ['status'=>$key])}" {eq name="key" value="$status"}selected{/eq}>
+                                {$op}
+                                </option>
+                                {/volist}
+                            </select>
+                            
+                            <script>
+                                $(function () {
+                                    $("#option").change(function () {
+                                        var gotu_url = $(this).find('option:selected').attr('url');
+                                        eval("self.location='" + gotu_url + "'")
+                                    })
+                                })
+                            </script>
+                        </div>
+                    </dd>
+
+                    <form style="margin-top:0;" class="search-form">
+                        <dd>
+                            <div class="boxr ovh">
+                                <label for="start" style="margin:10px 10px 0 0; width:156px;">
+                                    <input type="text" id="start" value="{:input('start_time')}" name="start_time" placeholder="{:lang('Begin_time')}" class="w130 input_img"/>
+                                </label>
+                                <label style="width:10px;line-height:32px; margin-right:2px;">~</label>
+                                <label for="end" style="margin:10px 10px 0 0; width:150px;">
+                                    <input type="text" id="end" value="{:input('end_time')}" name="end_time" placeholder="{:lang('End_time')}" class="w130 input_img"/>
+                                </label>
+                            </div>
+                        <dd>
+
+                        <dd>
+                            <div class="boxr ovh">
+                                <label for="name" style="margin:10px 10px 0 0; width:150px;">
+                                    <input type="text" class="searchinput" name="name" id="name" value="{:input('name')}" placeholder="{:lang('Order_sn_tip')}" style="width:120px;"/>
+                                </label>
+                                <input type="button" name="search" id="sch-search" class="button white" value="{:lang('Search')}" url="{:url('',input(''))}"/>
+                            </div>
+                        <dd>
+                    </form>
+
+                </dl>
+                
+                {notempty name="list"}
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="center" width="30"><input class="check-all" type="checkbox"/></th>
+                        <th class="left"><a href="{:getUrlbyOrder('order_sn')}">{:lang('Order_sn')}</a></th>
+                        <th class="left"><a href="{:getUrlbyOrder('nickname')}">{:lang('Nickname')}</a></th>
+                        <th class="left"><a href="{:getUrlbyOrder('referer')}">{:lang('Referer')}</a></th>
+                        <th class="left"><a href="{:getUrlbyOrder('rec_money')}">{:lang('Money')}</a></th>
+                        <th class="left"><a href="{:getUrlbyOrder('rec_account')}">{:lang('Recharge Account')}</a></th>
+                        <th class="left"><a href="{:getUrlbyOrder('pay_type')}">{:lang('Payment_type')}</a></th>
+                        <th class="left"><a href="{:getUrlbyOrder('status')}">{:lang('Status')}</a></th>
+                        <th class="left"><a href="{:getUrlbyOrder('trade_no')}">{:lang('Trade_no')}</a></th>
+                        <th class="left"><a href="{:getUrlbyOrder('time')}">{:lang('Operate_time')}</a></th>
+                        <th class="left"><a href="{:getUrlbyOrder('rec_ip')}">{:lang('IP Address')}</a></th>
+                        <th class="actions">{:lang('Actions')}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {volist name="list" id="vo"}
+                    <tr>
+                        <td class="center"><input class="ids" type="checkbox" value="{$vo.order_id}" name="ids[]"></td>
+                        <td class="left">{$vo.rec_sn}</td>
+                        <td class="left">{$vo.uid}</td>
+                        <td class="left">{$vo.referer}</td>
+                        <td class="left">
+                            {$vo.rec_money}
+                        </td>
+                        <td class="left">
+                            {$vo.rec_account}
+                        </td>
+                        <td class="left"></td>
+                        <td class="left">
+                            {switch name='vo.status'}
+                            {case value='1'}{:lang('Applying')}{/case}
+                            {case value='2'}{:lang('Recharging')}{/case}
+                            {case value='3'}{:lang('Recharge Finish')}{/case}
+                            {case value='4'}<span class="red">{:lang('Invilid')}</span>{/case}
+                            {default/}
+                            {/switch}
+                        </td>
+                        <td class="left">{$vo.trade_no}</td>
+                        <td class="left">
+                            {switch name='vo.status'}
+                            {case value='1'}{:time_format($vo.create_time,'Y-m-d H:i:s')}{/case}
+                            {case value='2'}{:time_format($vo.finish_time,'Y-m-d H:i:s')}{/case}
+                            {default/}{:time_format($vo.create_time,'Y-m-d H:i:s')}
+                            {/switch}
+                            </td>
+                        <td class="left">{:long2ip($vo.rec_ip)}</td>
+                        <td class="actions">
+                            <a class="tooltip-link ajax-get" title="{:lang('View_this_order')}" href="{:url('view',array('ordersn'=>$vo.rec_sn))}" data-title="{:lang('View')}" data-width="640" data-height="530" data-showbar="1">
+                                <img src="__PUBLIC__/admin/images/search.png" alt="{:lang('View_this_order')}" />
+                            </a>
+                        </td>
+                    </tr>
+                    {/volist}
+                    </tbody>
+                </table>
+                <div class="pagination-wrapper">
+                    <div class="results-part"><span>{$list->total()}</span></div>
+                    <div class="links-part">{$list->render()}</div>
+                </div>
+                {else/}
+                   <div class="alert alert-warning">{:lang('No_record')}</div>
+                {/notempty}
+            
+            </div>
+        </div>
+    </div>
+
+
+    {/block}
+    {block name="js"}}
+    <script>
+        $(function () {
+            $(".tip").each(function (index, element) {
+                var tip_text = $(this).attr("data-tip");
+                var tip_color = $(this).attr("data-color");
+                if (tip_text) {
+                    layer.tips(tip_text, this, {
+                        tips: [1, tip_color],
+                        tipsMore: true,
+                        time: 0,
+                        //closeBtn: 2,
+                    });
+                }
+            });
+        })
+    </script>
+    {/block}

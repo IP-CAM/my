@@ -1,0 +1,52 @@
+    {extend name="common/base" /}
+    
+    {block name="title"}
+    <title>ETshop</title>
+    {/block}
+    
+    {block name="css"}
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/index.css" />
+    {/block}
+    
+    {block name="body"}
+    
+    {include file="index/flash"}
+    <!--广告组-->
+    <div class="ly-ad-group">
+        <ul class="clearfix">
+            {foreach :widget('Ad/get_ad',array('id'=>4,'limit'=>5)) as $v}
+            <li>
+                <a title="{$v.ad_info}" href="{$v.ad_link}"><img width="232" height="144" class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__UPLOADS__/{$v.ad_thumb}" alt="{$v.ad_info}" /></a>
+            </li>
+            {/foreach}
+        </ul>
+    </div>
+    
+    <!--国家馆-->
+    {:widget('crossbbcg/column/national_pavilion')}
+    
+    <!--最新商品-->
+    {include file="index/new_goods"}
+    <!--最新商品END-->
+    
+    <!--品牌-->
+    {include file="index/brand_list"}
+    <!--品牌END-->
+    
+    {include file="index/goods_list"}
+    <!--楼层定位-->
+    <div class="dingwei" id="dingwei">
+        <ul class="clearfix"></ul>
+    </div>
+    
+    {:widget('crossbbcg/common/toolbar')}
+    
+    {/block}
+    
+    <!--此板块为页面单独js加载-->
+    {block name="footer_js"}
+    <script type="text/javascript">
+        //需要加载的js文件
+        Private_Script = ['index', 'carouFredSel'];
+    </script>
+    {/block}

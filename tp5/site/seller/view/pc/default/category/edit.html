@@ -1,0 +1,63 @@
+{extend name='common/poupbase'}
+{block name='body'}
+<section class="content" style="padding: 0">
+    <div class="row" style="border: 0;margin: 0">
+            <div class="box" style="border: 0">
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form class="form-horizontal">
+                    <div class="box-body" style="padding: 20px">
+                        <div class="form-group">
+                            <label for="pid" class="col-sm-3 control-label" style="text-align: right;width: 114px">{:lang('parent_category')}</label>
+                            <select name="pid" id="pid" class="form-control" style="width: 345px;display: inline-block">
+                                <option value="0">{:lang('as_parent_category')}</option>
+                                {foreach $category as $v}
+                                <option value="{$v.id}" {eq name="$data['pid']" value="$v.id"}selected{/eq}>{$v.name}</option>
+                                {/foreach}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-3 control-label" style="text-align: right;width: 114px">{:lang('category_name')}</label>
+                                <input type="text" name="name" class="form-control" style="width: 345px;display: inline-block" id="name" value="{$data.name}">
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label" style="text-align: right;width: 114px">{:lang('sort')}</label>
+                                <input type="text" name="sort" class="form-control" style="width: 345px;display: inline-block"  id="sort" value="{$data.sort}">
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-3 control-label" style="text-align: right;width: 114px">{:lang('is_nav')}</label>
+                            <div class="btn-group">
+                                <input type="radio" name="is_nav" id="is_nav1" {eq name="$data.is_nav" value="1"}checked {/eq} class="hide" value="1">
+                                <button type="button" data-id="is_nav1" class="btn {eq name="$data.is_nav" value="1"}btn-info{else /}btn-default{/eq} col-sm-6 radio" >ON</button>
+                                <input type="radio" {eq name="$data.is_nav" value="0"}checked{/eq} name="is_nav" id="is_nav2" class="hide" value="0">
+                                <button type="button" data-id="is_nav2" class="btn {eq name="$data.is_nav" value="0"}btn-info{else /}btn-default{/eq} col-sm-6 radio">OFF</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        {eq name='action_name' value='edit'}
+                        <input type="hidden" name="id" value="{$data.id}">
+                        {/eq}
+                        <input type="submit" name="submit" value="{:lang('save')}" url="{:url('seller/category/savedata')}" class="btn btn-info">
+                    </div>
+                    <!-- /.box-footer -->
+                </form>
+            </div>
+    </div>
+</section>
+{/block}
+
+{block name='js'}
+<script>
+    $(function () {
+        $('.radio').click(function () {
+            $(this).removeClass('btn-default').addClass('btn-info');
+            $('#'+$(this).data('id')).attr('checked',true);
+
+            $('#'+$(this).data('id')).siblings("input[type='radio']").attr('checked',false).removeClass('btn-info').addClass('btn-default');
+            $(this).siblings('button').removeClass('btn-info').addClass('btn-default');
+        })
+    })
+</script>
+{/block}

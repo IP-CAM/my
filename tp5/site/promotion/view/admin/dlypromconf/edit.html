@@ -1,0 +1,154 @@
+    {extend name="admin@public/poupbase"/}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+        <style>
+            .mlr_10{ margin-left:10px !important; margin-right:5px !important;}
+            .content_attr{ border:1px solid #CCC; padding:5px; background:#FFC; overflow:hidden;}}
+        </style>
+        <div id="content" style="margin:0px 10px 5px 8px;">
+            <div class="bloc" style="margin:10px 0px 0px;">
+                <div class="content">
+                    <form id="myform" method="post" style="margin-top:5px;" class="">
+                        <fieldset>
+                            <legend>{$meta_title|default=''}</legend>
+                            <div class="thumb_box" style="right:40px;">
+                                <div class="thumb">
+                                    <div class="upimg_tip">{:lang('Coupons_icon')}</div>
+                                    <div class="upimg_cancel" title="{:lang('Cancel')}">x</div>
+                                    <img src="{notempty name='data.icon'}{$data.icon}{else /}__PUBLIC__/admin/images/upload-pic.gif{/notempty}" id="preview" class="upload" width="110" height="100" no-image="__PUBLIC__/admin/images/upload-pic.gif" title="{:lang('Upload img and file')}" url="{:url('img',array('m' => CONTROLLER_NAME,'input' => 'icon','thumb' => 'preview'))}" data-upload="__UPLOADS__" />
+                                    <input type="hidden" name="icon" id="icon" value="{$data.icon}" />
+                                </div>
+                            </div>
+                            <div style="float:left; width:350px; padding-right:15px; border-right:1px dashed #000;">
+                                <div class="row">
+                                    <label for="start_time" class="w100">{:lang('Coupons_rule_time_start')}:</label>
+                                    {eq name="ACTION_NAME" value="edit"}
+                                        <input id="start_time" value="{$data.start_time|time_format}" type="text" name="start_time" class="w120l datainput" />
+                                    {else /}
+                                        <input id="start_time" value="{:time_format()}" type="text" name="start_time" class="w120l datainput" />
+                                    {/eq}
+                                </div>
+                                
+                                <div class="row">
+                                    <label for="end_time" class="w100">{:lang('Coupons_rule_time_end')}:</label>
+                                    {eq name="ACTION_NAME" value="edit"}
+                                        <input id="end_time" value='{eq name="data.end_time" value="9"}9{else /}{$data.end_time|time_format}{/eq}' type="text" name="end_time" class="w120l datainput" />
+                                    {else /}
+                                        <input id="end_time" value="{:time_format()}" type="text" name="end_time" class="w120l datainput" />
+                                    {/eq}
+                                </div>
+                                
+                                <div class="row">
+                                    <div style="float:left;">
+                                        <label for="name" class="w100">{:lang('Coupons_rule_title')}: <span class="required">*</span></label>
+                                        <input  id="name" type="text" value="{$data.name}" name="name" style="width:210px;" placeholder="{:lang('Coupons_rule_title_tip')}" />
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <label for="descript" class="w100">{:lang('Coupons_rule_description')}: </label>
+                                    <textarea id="descript" name="descript" style="width:200px; height:30px; resize:none;">{$data.descript}</textarea>
+                                </div>
+                                
+                                <div class="row">
+                                    <div style="float:left">
+                                        <label class="w100 blue">{:lang('Coupons_rule')}: </label>
+                                        <div style="float:left">
+                                            &nbsp;&nbsp;
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div style="float:left">
+                                        <label for="limits" class="w100">{:lang('Order_for_full')}: </label>
+                                        <input type="text" id="limits" name="limits" value="{$data.limits}" maxlength="8" placeholder="100" style="width:50px;"  />
+                                        {:lang('Used_for_yuan')}
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div style="float:left">
+                                        <label for="integral" class="w100">{:lang('Personal_integration')}: </label>
+                                        <input type="text" id="integral" name="integral" value="{$data.integral}" maxlength="8"  placeholder="100" style="width:50px;"  />
+                                        {:lang('Used_for_integration')}
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div style="float:left">
+                                        <label for="value" class="w100">{:lang('Leaflet_amount')}: </label>
+                                        <input type="text" id="value" name="value" value="{$data.value}" placeholder="10.00" maxlength="8" style="width:60px;"  />
+                                        {:lang('Yuan')}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div style="float:left; width:210px; padding-top:100px;">
+                                <div class="row">
+                                    <label for="langid" class="w80">{:lang('Global_coupons')}:</label>
+                                    <div class="slideBox">
+                                        {eq name="ACTION_NAME" value="edit"}
+                                            <input id="langid" value="0" type="checkbox" name="langid"  {eq name="data['langid']" value="0"}checked{/eq} />
+                                        {else /}
+                                            <input id="langid" value="0" type="checkbox" name="langid" />
+                                        {/eq}
+                                        <label for="langid"></label>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <label for="status" class="w80">{:lang('Status')}:</label>
+                                    <div class="slideBox">
+                                        {eq name="ACTION_NAME" value="edit"}
+                                            <input id="status" value="1" type="checkbox" name="status"  {eq name="data['status']" value="1"}checked{/eq} />
+                                        {else /}
+                                            <input id="status" value="1" type="checkbox" name="status" checked />
+                                        {/eq}
+                                        <label for="status"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="clear"></div>
+                            
+                            <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                                {eq name="ACTION_NAME" value="edit"}
+                                    <input name="submit" value="{:lang('Update')}" type="submit" url="{:url()}" />
+                                    <input name="id" type="hidden"  value="{$data.id}" />
+                                {else /}
+                                    <input name="submit" value="{:lang('Create')}" type="submit" url="{:url()}" />
+                                {/eq}
+                                <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {/block}
+    
+    {block name="js"}
+        <script>
+            $(function(){
+                $("#start_time").datetimepicker({
+                    dateFormat: "{:config('kernel.timeformat')}",
+                    minDate: new Date(),
+                    onSelect:function(dateText,inst){
+                        $.datepicker.regional[ "{:config('kernel.localdate')}" ];
+                        $("#end_time").datepicker("option","minDate",dateText);
+                    }
+                });
+                
+                $("#end_time").datetimepicker({
+                    dateFormat: "{:config('kernel.timeformat')}",
+                    minDate: 30,
+                    onSelect:function(dateText,inst){
+                        $.datepicker.regional[ "{:config('kernel.localdate')}" ];
+                        $("#start_time").datepicker("option","maxDate",dateText);
+                    }
+                });
+            })
+        </script>
+    {/block}

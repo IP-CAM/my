@@ -1,0 +1,137 @@
+{extend name="store/base" /} 
+{block name="body"}
+<div class="steps">
+			<table width="100%">
+				<tbody>
+
+					<tr>
+						<td class="step-item step-1 active"><span><q class="icon">●</q><i>1</i>账号信息</span>
+							<div class="stepdiv">1</div>
+						</td>
+						<td class="step-item step-2 active">
+							<span><q class="icon">●</q><i>2</i>验证身份</span>
+							<div class="stepdiv">2</div>
+						</td>
+						<td class="step-item step-3 "><span><q class="icon">●</q><i>3</i>设置新密码</span>
+							<div class="stepdiv">3</div>
+						</td>
+						
+					</tr>
+				</tbody>
+			</table>
+		</div>
+<div class="shop-login-box yahei">
+	<div class="form-body">
+		<div class="title">
+			<div class="t">找回密码</div>
+		</div>
+		<div class="content">
+			<div class="seletc-type">
+				<ul>
+					<li><label><input type="radio" checked="" name="type" id="phone" value="phone" />手机找回</label></li>
+					<li><label><input type="radio" name="type" id="phone" value="email" />邮箱找回</label></li>
+				</ul>
+			</div>
+			<form action="" id="pwd_form">
+				<ul>
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em> 验 证 手 机： </label>
+						<span class="form-act">
+                         135****6033
+                        </span>
+
+					</li>
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em> 验证码： </label>
+						<span class="form-act">
+                            <input placeholder="用户名" datatype="*"  class="input-ln" type="text"  value="" />
+                        </span>
+
+					</li>
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em> 手机验证码： </label>
+						<span class="form-act">
+                            <input placeholder="请输入手机验证码" datatype="*"  class="input-ln" type="text"  value="" />
+                            <a data-url="请求地址" id="get_code">发送验证码</a>
+                        </span>
+
+					</li>
+					<li class="form-row last">
+						<label for="" class="form-label">&nbsp;</label> 
+						<span class="form-act">
+                        	<button type="submit"  class="btn btn-import" rel="_request"> 下一步 </button>
+						</span>
+					</li>
+
+				</ul>
+			</form>
+			<form action="" id="pwd_email_form" style="display: none;">
+				<ul>
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em> 验 证 邮箱： </label>
+						<span class="form-act">
+                        haitaoloveyu@qq.com
+                        </span>
+
+					</li>
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em> 验证码： </label>
+						<span class="form-act">
+                            <input placeholder="用户名" datatype="*"  class="input-ln" type="text"  value="" />
+                        </span>
+
+					</li>
+					
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em> 邮箱验证码： </label>
+						<span class="form-act">
+                            <input placeholder="请输入手机验证码" datatype="*"  class="input-ln" type="text"  value="" />
+                            <a data-url="请求地址" class="get_code" id="get_email_code">发送验证码</a>
+                        </span>
+
+					</li>
+
+					
+					<li class="form-row last">
+						<label for="" class="form-label">&nbsp;</label> 
+						<span class="form-act">
+                        	<button type="submit"  class="btn btn-import" rel="_request"> 下一步 </button>
+						</span>
+					</li>
+
+				</ul>
+			</form>
+		</div>
+	</div>
+</div>
+
+{/block} {block name="footer_js"}
+
+<script type="text/javascript">
+	$('[name=type]').change(function(){
+		if($(this).val()=='phone'){
+			$('#pwd_email_form').hide();
+			$('#pwd_form').show()
+		}else{
+			$('#pwd_email_form').show();
+			$('#pwd_form').hide()
+		}
+	})
+	$("#pwd_form").Validform({
+		tiptype: 3,
+		showAllError: true
+	});
+	$("#pwd_email_form").Validform({
+		tiptype: 3,
+		showAllError: true
+	});
+
+	
+</script>
+{/block}

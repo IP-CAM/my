@@ -1,0 +1,23 @@
+<div class="specific_info">
+	<dl class="">
+		<dt>
+			<div class="price-box">
+				<em class="price-em">
+					{:lang('Price')}{:lang('Colon')}<span class="price">{$data['sale_price']}</span>
+				</em>
+                {if condition="$data['price_rate'] > 0"}
+				<em class="zhe">
+                    {$data['price_rate']}
+                </em>
+                {else /}
+        <em class="zhe" style="display:none;"></em>
+                {/if}
+        
+				<em class="mkprice-em">{:lang('Market_Price')}{:lang('Colon')}<span class="mk-price">{$data['market_price']}</span></em>
+			</div>
+			
+			
+		</dt>
+		
+	</dl>
+</div>

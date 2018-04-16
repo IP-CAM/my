@@ -1,0 +1,33 @@
+{notempty name="$arr_category"}
+<div class="left-cat associated-cat">
+    <div class="ly-title cat1-title">{$arr_category['title']}</div>
+    {notempty name="$arr_category['children']"}
+    <ul class="ly-wrap">
+        <li class="cat1 cat-all  last">
+            <dl>
+                <dd class="cat2-box">
+                    {foreach $arr_category['children'] as $key => $arr2}
+                    <div class="cat2<?php if(in_array($arr2['id'],$cids))echo ' cat2-all';?><?php if($key == count($arr_category['children'])-1) echo ' last' ?>">
+                        <div class="cat2-title">
+                            <a href="{:url('crossbbcg/search/index','cat_id='.$arr2['id'])}" class="<?php if($arr2['id']==$now_cat_id)echo 'act';?>">{$arr2['title']}</a>
+                            
+                            {notempty name="$arr2['children']"}
+                            <span class="show"></span>
+                            {/notempty}
+                        </div>
+                            {notempty name="$arr2['children']"}
+                            <div class="cat3-box ">
+                            {foreach $arr2['children'] as $arr3}
+                                <a href="{:url('crossbbcg/search/index','cat_id='.$arr3['id'])}" class="<?php if($arr3['id']==$now_cat_id)echo 'act';?>">{$arr3['title']}</a>
+                            {/foreach}
+                            </div>
+                            {/notempty}
+                    </div>
+                    {/foreach}
+                </dd>
+            </dl>
+        </li>
+    </ul>
+    {/notempty}
+</div>
+{/notempty}

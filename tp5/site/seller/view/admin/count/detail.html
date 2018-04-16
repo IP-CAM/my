@@ -1,0 +1,136 @@
+    {extend name="admin@public/base" /}
+
+    {block name="style"}
+    <style>
+        .w120{ width:120px !important; }
+        .layui-layer-tips .layui-layer-content{ padding:2px 8px !important;line-height: 18px !important;}
+    </style>
+    {/block}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content">
+        <div class="breadcrumbs">
+            {:lang('Seller')} : &nbsp;&nbsp; {:lang('Settlement')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+        </div>
+        
+        <div class="bloc">
+            <div class="title">
+                <div class="tabs" id="navs">
+                    {include file="admin@public/navs" /}
+                </div>
+                
+                {include file="admin@public/lang" /}
+            </div>
+            <div class="content">
+                
+                <dl class="gzzt clearfix mtb10">
+                    <dd>
+                        <div class="boxr">
+                            {include file="admin@public/button" /}
+                        </div>
+                    </dd>
+                    
+                    <form style="margin-top:0;" class="search-form">
+                        <dd>
+                            <div class="boxr ovh">
+                                <select name="status" id="status" class="w120">
+                                    <option value="all" url="{:url('',array_merge($inputarr,array('status'=>'all')))}" {eq name="status" value="all" }selected{/eq}>{:lang('select_status')}</option>
+                                    <option value="1" url="{:url('',array_merge($inputarr,array('status'=>'1')))}" {eq name="status" value="1" }selected{/eq}>{:lang('Applying')}</option>
+                                    <option value="2" url="{:url('',array_merge($inputarr,array('status'=>'2')))}" {eq name="status" value="2" }selected{/eq}>{:lang('is_settlement')}</option>
+                                </select>
+                            </div>
+                        </dd>
+                        
+                        <dd>
+                            <div class="boxr ovh">
+                                <label for="search" style="margin:10px 10px 0 0; width:146px;">
+                                    <input type="text" id="start" value="{:input('get.start_time')}" name="start_time" placeholder="{:lang('Begin_time')}" class="w130 input_img" />
+                                </label>
+                                <label style="width:10px;line-height:32px; margin-right:2px;">~</label>
+                                <label for="search" style="margin:10px 10px 0 0; width:156px;">
+                                    <input type="text" id="end" value="{:input('get.end_time')}" name="end_time" placeholder="{:lang('End_time')}" class="w130 input_img" />
+                                </label>
+                            </div>
+                        <dd>
+                        <script>
+                            $(function () {
+                                $("#status").change(function () {
+                                    var gotu_url = $(this).find('option:selected').attr('url');
+                                    eval("self.location='" + gotu_url + "'")
+                                })
+                            })
+                        </script>
+                        <dd>
+                            <div class="boxr ovh">
+                                <label for="search" style="margin:10px 10px 0 0; width:180px;">
+                                    <input type="text" class="searchinput" name="name" value="{:input('name')}" placeholder="{:lang('sellerName')}" style="width:150px;"/>
+                                </label>
+                                <input type="button" name="search" id="sch-search" class="button white" value="{:lang('Search')}" url="{:url('', input('name'))}"/>
+                            </div>
+                        <dd>
+                    </form><dd style="float: right !important;">
+                    <div class="boxl">
+                        <span>
+                            <a href="javascript:location.reload();" class="refresh tooltip-link" title="{:lang('Refresh')}">
+                                <em>{:lang('Refresh')}</em>
+                            </a>
+                        </span>
+                        <span>
+                            <a href="javascript:void(0);" class="ajax-get setting tooltip-link colum" title="{:lang('Showlum')}" data-title="{:lang('Showlum')}">
+                                <em>{:lang('Showlum')}</em>
+                            </a>
+                        </span>
+                    </div>
+                </dd>
+                </dl>
+                
+                {notempty name="list"}
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="center" width="30"><input class="check-all" type="checkbox"></th>
+                        <th class="left" ><a href="{:getUrlbyOrder('id')}">{:lang('order_sn')}</a></th>
+                        <th class="left" >{:lang('Seller_name')}</th>
+                        <th class="left">{:lang('finish_time')}</th>
+                        <th class="left" >{:lang('pay_time')}</th>
+                        <th class="left" >{:lang('pay_money')}</th>
+                        <th class="left">{:lang('order_money')}</th>
+                        <th class="left" >{:lang('freight')}</th>
+                        <th class="left">{:lang('bonus')}</th>
+                    </tr>
+                    </thead>
+                    
+                    <tbody>
+                        {volist name="list" id="vo"}
+                            <tr>
+                                <td class="center">
+                                    <input class="ids" type="checkbox" value="{$vo['order_id']}" name="ids[]">
+                                </td>
+                                <td class="left">{$vo['order_sn']}</td>
+                                <td class="left">{:getSellerName($vo.seller_id)['seller_name']}</td>
+                                <td class="left">{:time_format($vo['confirm_time'],'Y-m-d H:i:s')}</td>
+                                <td class="left">{:time_format($vo['pay_time'],'Y-m-d H:i:s')}</td>
+                                <td class="left">{$vo['money_paid']}</td>
+                                <td class="left">{$vo['goods_amount']}</td>
+                                <td class="left">{$vo['shipping_fee']}</td>
+                                <td class="left">{$vo['bonus']}</td>
+                            </tr>
+                        {/volist}
+                        </tbody>
+                </table>
+                <div class="pagination-wrapper">
+                    <div class="results-part"><span>{$_total}</span></div>
+                    <div class="links-part">{$list->render()}</div>
+                </div>
+                
+                {else/}
+                <div class="alert alert-warning">{:lang('No_record')}</div>
+                {/notempty}
+            </div>
+        </div>
+    </div>
+
+    {include file="admin@public/time_for_search" /}
+    
+    {/block}

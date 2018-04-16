@@ -1,0 +1,88 @@
+    {extend name='common/base'}
+
+    {block name="breadcrumb"}
+    <li>{:lang('sGoods')}</li>
+    <li class="active">{$meta_title|default=''}</li>
+    {/block}
+    
+    {block name='body'}
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box" style="border-top: 0">
+                    <div class="box-header with-border">
+                        <div class="row">
+                            <div class="page-header-top">
+                
+                                {:getSellerButton()}
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="box-body">
+                        <div class="table-responsive">
+                            <table id="demo-foo-addrow" class="table m-t-30 table-hover contact-list" data-page-size="10">
+                                <thead>
+                                <tr>
+                                    <th style="width: 25px;">
+                                        <input type="checkbox" class="check-all">
+                                    </th>
+                                    <th>ID</th>
+                                    <th>{:lang('category_name')}</th>
+                                    <th>{:lang('sort')}</th>
+                                    <th>{:lang('create_time')}</th>
+                                    <th>{:lang('is_nav')}</th>
+                                    <th class="center">{:lang('opreration')}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {foreach $list as $vo}
+                                <tr>
+                                    
+                                    <td>
+                                        <input class="ids" type="checkbox" value="{$vo.id}" name="ids[]">
+                                    </td>
+                                    <td>{$vo.id}</td>
+                                    <td><a data-title="{:lang('edit_category')}"
+                                           href="{:url('/seller/category/edit',array('id'=>$vo['id']))}"
+                                           class="tooltip-link ajax-get" data-showbar="1" data-width="500"
+                                           data-height="350">{$vo['name']}</a></td>
+                                    <td>{$vo['sort']}</td>
+                                    <td>{$vo['create_time']}</td>
+                                    <td>
+                                        {eq name='$vo.is_nav' value='1'}
+                                        <i class="fa  fa-check"></i>
+                                        {else /}
+                                        <i class="fa  fa-close"></i>
+                                        {/eq}
+                                    </td>
+                                    <td  class="center">
+                                        {empty name="$vo['son']"}
+                                        <a title="{:lang('bind_goods')}"  class="tooltip-link f18 ajax-get" data-showbar="1"
+                                           data-title="{:lang('bind_goods')}" data-width="1000" data-height="875"
+                                           href="{:url('/seller/category/bind',array('id'=>$vo['id']))}"><i
+                                            class="fa fa-plus-square"></i></a>
+                                        {/empty}
+                                        <a class="tooltip-link f18 ajax-get confirm" title="{:lang('del')}"
+                                            data-title="{:lang('del')}"
+                                           data-layer="{:lang('confirm_del_this_category')}"
+                                           href="{:url('/seller/category/del',array('id'=>$vo['id']))}"><i
+                                            class="fa fa-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                {/foreach}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {/block}
+    {block name='js'}
+    <script>
+    
+    </script>
+    {/block}

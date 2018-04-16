@@ -1,0 +1,162 @@
+{extend name='public/base'}
+
+{block name='css'}
+<link rel="stylesheet" href="__PUBLIC__/{$css_path}/order_list.css">
+{/block}
+{block name='body'}
+<header class="g-hd m-topnav-space" id="g-hd">
+    <div class="m-topnav-wrap">
+        <div class=" m-topnav" id="topbar-box">
+            <div class="m-topnavbar">
+                <span class="tit" id="toptitle">我的订单</span>
+                <div class="btns">
+                    <a href="{:url('crossbbcg/index/index')}" title="回首页" class="u-topbaridx"></a>
+                    {empty name="user"}
+                    <a href="{:url('member/passport/index')}" class="u-topbarlogin">登录</a>
+                    {else /}
+                    <a href="{:url('member/index/index')}" id="j-gousrcenter" title="个人中心" class="u-topbaruser usr"></a>
+                    {/empty}
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="g-bd">
+    <div id="orders">
+        <div class="m-table m-orderstab">
+            <ul class="tr">
+                <li class="td f-tac tab {eq name='$order_status' value='all'}tab-cur{/eq}">
+                    <span>
+                        <a href="{:url('member/index/orderlist')}">全部</a>
+                    </span>
+                </li>
+                <li class="td f-tac tab {eq name='$order_status' value='wait_buyer_pay'}tab-cur{/eq}">
+                    <span class="ordertype">
+                        <a href="{:url('member/index/orderlist',array('order_status'=>'wait_buyer_pay'))}">待付款</a>
+                         {gt name='$count_wait' value='0'}
+                            <span class="ordercount">{$count_wait}</span>
+                         {/gt}
+                    </span>
+                </li>
+                <li class="td f-tac tab {eq name='$order_status' value='wait_seller_send_goods'}tab-cur{/eq}">
+                    <span class="ordertype">
+                        <a href="{:url('member/index/orderlist',array('order_status'=>'wait_seller_send_goods'))}">待发货</a>
+                        {gt name='$count_send' value='0'}
+                            <span class="ordercount">{$count_send}</span>
+                         {/gt}
+                    </span>
+                </li>
+                <li class="td f-tac tab {eq name='$order_status' value='wait_buyer_confirm_goods'}tab-cur{/eq}">
+                    <span class="ordertype">
+                        <a href="{:url('member/index/orderlist',array('order_status'=>'wait_buyer_confirm_goods'))}">待收货</a>
+                        {gt name='$count_confirm' value='0'}
+                            <span class="ordercount">{$count_confirm}</span>
+                         {/gt}
+                    </span>
+                </li>
+            </ul>
+        </div>
+        {notempty name="order_list"}
+        <div class="m-orderbox">
+            <!--Regular list-->
+            {foreach $order_list as $key => $arr}
+            <div class="m-orderitem">
+                <ul class="m-goodslist">
+                    {notempty name="arr['goods']"}
+                    {php} $count_goods = count($arr['goods']); {/php}
+                    {foreach $arr['goods'] as $key2 => $arr2}
+                    <li>
+                        <!--Regular list-->
+                        <!--Regular if9-->
+                        <div class="m-orderhd">
+                            <!--Regular if10-->
+                            <span class="ordertype">
+                                {switch name="$arr['status']"}
+                                    {case value="WAIT_BUYER_PAY"}等待付款{/case}
+                                    {case value="WAIT_SELLER_SEND_GOODS"}待发货{/case}
+                                    {case value="WAIT_BUYER_CONFIRM_GOODS"}待收货{/case}
+                                    {case value="TRADE_FINISHED"}已完成{/case}
+                                    {case value="TRADE_CLOSED"}已关闭{/case}
+                                    {case value="TRADE_CLOSED_BY_SYSTEM"}已关闭{/case}
+                                {/switch}
+                            </span>
+                        
+                            <span class="ordertime">{$arr['create_time']}</span>
+                        </div>
+                    
+                        <section class="">
+                            <div class="goodsdetail f-cb">
+                                <div class="gimg u-tagbox f-fl">
+                                    <a href="{:url('member/index/orderdetail',array('order_sn'=>$arr['order_sn']))}">
+                                        <!--商品主图-->
+                                        {if condition="substr($arr2['sku_thumb'],0,4)=='http'"}
+                                        <img src="{$arr2['sku_thumb']}" width="60" height="60">
+                                        {else /}
+                                        <img src="{:resizeImage($arr2['sku_thumb'],'small',true)}" width="60" height="60">
+                                        {/if}
+                                    </a>
+                                    <!--Regular if11-->
+                                </div>
+                                <div class="ginfo1 f-fl">
+                                    <!--Regular if12-->
+                                    <div class="gtitle">
+                                        <a href="{:url('member/index/orderdetail',array('order_sn'=>$arr['order_sn']))}">{$arr2['goods_name']}
+                                        </a>
+                                    </div>
+                                    {if condition="$arr2['sku_array']"}
+                                    <div class="gsku">
+                                        <a href="{:url('member/index/orderdetail',array('order_sn'=>$arr['order_sn']))}">{$arr2['sku_array']}
+                                        </a>
+                                    </div>
+                                    {/if}
+                                </div>
+                                <div class="ginfo2 f-fr">
+                                    <div class="gprinum">
+                                        <div class="gprice">
+                                            {$arr['symbol']}{$arr2['sku_price']}
+                                        </div>
+                                        <div class="gnum">X {$arr2['sku_number']}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <!--Regular if14-->
+                    </li>
+                    {/foreach}
+                    {/notempty}
+                </ul>
+                <div class="f-tar m-orderinfo">
+                    <span>共<span class="count">{$count_goods}</span>件</span>
+                    <span class="amount">
+						{:lang('real_pay')}：{$arr.symbol}{$arr.order_amount}
+					</span>
+                </div>
+                <div class="m-btnbox f-cb">
+                    {eq name="$arr['status']" value="WAIT_BUYER_PAY"}
+                    <a href="{:url('crossbbcg/carts/paycenter',array('order_sn'=>$arr.order_sn))}"  class="u-btn m-orderbtn">{:lang('pay_order')}</a>
+                    {/eq}
+                    <!--取消订单 -->
+                    {if condition="$arr['status'] == 'WAIT_BUYER_PAY'||$arr['status'] == 'WAIT_SELLER_SEND_GOODS'"}
+                    {if condition="$arr['cancel_status']=='NO_APPLY'"}
+                    <a class="u-btn1 m-orderbtn" data-order_id="{$arr['order_id']}" href="javascript:void(0)">{:lang('cancel_order_status')}</a>
+                    {/if}
+                    {/if}
+                    <!--确认收货 -->
+                    {if condition="$arr['status'] == 'WAIT_BUYER_CONFIRM_GOODS'"}
+                    <a class="u-btn1 m-orderbtn" data-order_id="{$arr['order_id']}" href="javascript:void(0)">{:lang('confirm_order')}</a>
+                    {/if}
+                </div>
+            </div>
+            {/foreach}
+        </div>
+        {else /}
+        <!--Regular if6-->
+        <div class="m-emptyorder f-tac">
+            <div><span class="u-emtorder">&nbsp;</span></div>
+            <div class="f-tac emttip">啊哦，您还没有相关订单～</div>
+        </div>
+        {/notempty}
+        <!--Regular if7-->
+    </div>
+</div>
+{/block}

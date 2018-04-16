@@ -1,0 +1,449 @@
+    {extend name="admin@public/base" /}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content">
+        <div class="breadcrumbs">
+            {:lang('Crossbbcg')} : &nbsp;&nbsp; {:lang('Bbcggoodsys')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+        </div>
+        
+        <div class="bloc">
+            <div class="title">
+                <div class="tabs" id="navs">
+                    {include file="admin@public/navs" /}
+                </div>
+                
+                {include file="admin@public/lang" /}
+            </div>
+            <div class="content">
+                
+                <dl class="gzzt clearfix mtb10">
+                    <dd>
+                        <div class="boxr">
+                            {include file="admin@public/button" /}
+                        </div>
+                    </dd>
+                    
+                    <form style="margin-top:0;" class="search-form" id="search-form">
+                        <dd>
+                            <div class="boxr lh46">
+                                <select name="pid" id="categories" style="height:26px; margin-right:0px; width: 150px;" class="go_search">
+                                    <option value="0" url="{$catlist_url}">{:lang('All_Cateogries')}</option>
+                                    {volist name="catlist" id="co"}
+                                    <option value="{$co.id}" url="{:url('index',array_merge($without_page,array('cat_id'=>$co['id'])))}" {if condition="input('cat_id')==$co['id']" }selected{/if}>{$co.char} {$co.title} {notempty name="co.name"}({$co.name}){/notempty}</option>
+                                    {/volist}
+                                </select>
+                            </div>
+                        </dd>
+                        
+                        {notempty name="arr_brands"}
+                        <dd>
+                            <div class="boxr lh46">
+                                <select id="brand" style="height:26px; width:90px; margin-right:0px;" name="brand" class="go_search">
+                                    <option value="0" url="{$brand_url}">{:lang('All_Brand')}</option>
+                                    {foreach $arr_brands as $key=>$arr}
+                                    <option value="{$arr['id']}" url="{:url('index',array_merge($without_page,array('brand_id'=>$arr['id'])))}" {if condition="input('brand_id')==$arr['id']" }selected{/if}>
+                                    {$arr['name']}
+                                    </option>
+                                    {/foreach}
+                                </select>
+                                <script>
+                                    $(function () {
+                                        $('.go_search').change(function () {
+                                            var gotu_url = $(this).find('option:selected').attr('url');
+                                            eval("self.location='" + gotu_url + "'");
+                                        });
+                                        $('#goods-search').click(function () {
+                                            var url = $(this).attr('url'),
+                                                search = $('#search').val(),
+                                                min_price = $('#min_price').val(),
+                                                max_price = $('#max_price').val();
+    
+                                            if ($.trim(search) != '') {
+                                                if (url.indexOf('?') > 0) {
+                                                    url += '&name=' + search;
+                                                } else {
+                                                    url += '?name=' + search;
+                                                }
+                                            }
+                                            if ($.trim(min_price) != '') {
+                                                if (url.indexOf('?') > 0) {
+                                                    url += '&min_price=' + min_price;
+                                                } else {
+                                                    url += '?min_price=' + min_price;
+                                                }
+                                            }
+                                            if ($.trim(max_price) != '') {
+                                                if (url.indexOf('?') > 0) {
+                                                    url += '&max_price=' + max_price;
+                                                } else {
+                                                    url += '?max_price=' + max_price;
+                                                }
+                                            }
+                                            self.location = url;
+                                        });
+                                    });
+                                </script>
+                            </div>
+                        </dd>
+                        {/notempty}
+                        
+                        <dd class="search_hide">
+                            <div class="boxr lh46">
+                                <input type="number" name="min_price" value="{:input('min_price')}" placeholder="{:lang('bottom_price')}" style="width:70px; margin-right: 0px;" form="search-form" id="min_price"/>-
+                                <input type="number" name="max_price" value="{:input('max_price')}" placeholder="{:lang('high_price')}" style="width:70px; margin-right: 0px;" form="search-form" id="max_price"/>
+                            </div>
+                        </dd>
+                        
+                        <!-- 多列显示 未完成-->
+                        <dd>
+                            <div class="boxr ovh">
+                                <label for="search" style="margin:10px 10px 0 0; width:190px;">
+                                    <input id="search" type="text" class="searchinput" name="name" value="{:input('name')}" style="width:160px;" placeholder="{:lang('Goods_Search_Placeholder')}"/>
+                                </label>
+                                
+                                <input type="button" id="goods-search" class="button white" value="{:lang('Search')}" url="{$search_url}"/>
+                                
+                            </div>
+                        </dd>
+                    </form>
+                    
+                    <dd style="float: right !important;">
+                        <div class="boxl">
+                            <span>
+                                <a href="javascript:location.reload();" class="refresh tooltip-link" title="{:lang('Refresh')}">
+                                    <em>{:lang('Refresh')}</em>
+                                </a>
+                            </span>
+                            <span>
+                                <a href="{:url('editColumn')}" class="ajax-get setting tooltip-link colum" title="{:lang('Showlum')}" data-title="{:lang('Showlum')}" data-width="300">
+                                    <em>{:lang('Showlum')}</em>
+                                </a>
+                            </span>
+                        </div>
+                    </dd>
+                </dl>
+                
+                <div class="alert alert-info">
+                    <span>{:lang('Count_Select')}：<b>{$search_total}</b></span> &nbsp;
+                    <a href="{:Url('index',array_merge($without_page,array('status'=>'pending')))}">{:lang('Good_Pending')}：{$good_pending_total}</a>
+                    <a href="{:Url('index',array_merge($without_page,array('status'=>'enabled')))}">{:lang('Good_Up')}：{$good_up_total}</a>
+                    &nbsp;
+                    <a href="{:Url('index',array_merge($without_page,array('status'=>'disabled')))}">{:lang('Good_Down')}：{$good_down_total}</a>
+                    &nbsp;
+                    <a href="{:Url('index',array_merge($without_page,array('status'=>'pending_review')))}">{:lang('Good_Wait')}：{$good_wait_total}</a>
+                    &nbsp;
+                    <a href="{:Url('index',array_merge($without_page,array('status'=>'pending_modify')))}">{:lang('Good_Modify')}：{$good_modify_total}</a>
+                    
+                    <div class="fr">
+                        <a href="{:Url('index',array_merge($without_page,array('quantity'=>$low_stock_quantity)))}" class="red">{:lang('Low_Stock')}:{$low_stock}</a>
+                    </div>
+                
+                </div>
+                
+                {notempty name="list"}
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="center" width="30"><input class="check-all" type="checkbox"></th>
+                        <th class="left" style="width:40px;">
+                            <a href="{:getUrlbyOrder('id')}">ID</a>
+                        </th>
+                        <th class="left" style="width:50px;">{:lang('Thumb')}</th>
+                        <th class="left" style="padding-left:30px;">
+                            <a href="{:getUrlbyOrder('name')}">{:lang('Goods_name')}</a>
+                        </th>
+                        <th class="left">{:lang('Goods_Category')}</th>
+                        <th class="left" style="width:60px;"><a href="{:getUrlbyOrder('sale_price')}">{:lang('Selling_price')}</a></th>
+                        <th class="left" style="width:60px;"><a href="{:getUrlbyOrder('quantity')}">{:lang('Stock')}</a></th>
+                        <th class="left" style="width:70px;"><a href="{:getUrlbyOrder('status')}">{:lang('Status')}</a>
+                        </th>
+                        <th class="left" style="width:70px;">{:lang('Goods_Store')}</th>
+                        <th class="center" style="width:40px;display:none;"><a href="{:getUrlbyOrder('pc_status')}">{:lang('Pc_on')}</a>
+                        </th>
+                        <th class="center" style="width:40px;display:none;"><a href="{:getUrlbyOrder('wap_status')}">{:lang('Wap_on')}</a>
+                        </th>
+                        <th class="center" style="width:40px;display:none;"><a href="{:getUrlbyOrder('api_status')}">{:lang('Api_on')}</a>
+                        </th>
+                        <th class="center" style="width:40px;display:none;">{:lang('Isrecommend')}</th>
+                        <th class="center" style="width:40px;display:none;">{:lang('New_goods')}</th>
+                        <th class="center" style="width:40px;display:none;">{:lang('Boutique')}</th>
+                        <th class="center" style="width:40px;display:none;">{:lang('Hotting')}</th>
+                        <th class="center" style="width:40px;display:;"><a href="{:getUrlbyOrder('sort')}">{:lang('Sort')}</a></th>
+                        
+                        <th class="actions" style="width:30px;">{:lang('Actions')}</th>
+                    
+                    </tr>
+                    </thead>
+                    
+                    <tbody>
+                    {volist name="list" id="vo"}
+                    <tr>
+                        <td class="center"><input class="ids" type="checkbox" value="{$vo['id']}" name="ids[]"></td>
+                        <td class="left">{$vo['id']}</td>
+                        
+                        <td class="left thumb" style="position:relative;">
+                            {if condition=" empty($vo['thumb']) "}
+                            <img src="__PUBLIC__/admin/images/icons/no-image.png" height="18"/>
+                            {elseif condition="substr($vo['thumb'],0,4)=='http'"}
+                            <img src="{$vo.thumb}" height="18"/>
+                            {else /}
+                            <img src="__UPLOADS__/{$vo.thumb}" height="18"/>
+                            {/if}
+                            <div style="position:absolute;top:20px;left:20px;z-index:999;border:5px solid #eee;display:none;" class="show"></div>
+                        </td>
+                        
+                        <td class="left slh tooltip-link" style="max-width: 60px;" title="{$vo['name']}">
+                            <!--pc端链接的图标-->
+                            
+                            <a href="{:url('crossbbcg/goods/index','item_id='.$vo['id'])}" target="_blank">
+                                <img src="__PUBLIC__/admin/images/skip.png" width="12"/>
+                            </a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            {if $vo['quantity'] > $low_stock_quantity}
+                            <a class="ajax-get edit" title="{:lang('Edit_this_record')}" data-title="{:lang('Edit')}" href="{:url('edit',array('ids'=>$vo['id']))}" data-showbar="1">{$vo['name']}</a>
+                            {else /}
+                            <a class="ajax-get edit red" title="{:lang('Edit_this_record')}" data-title="{:lang('Edit')}" href="{:url('edit',array('ids'=>$vo['id']))}" data-showbar="1">{$vo['name']}</a>
+                            {/if}
+                            
+                        </td>
+                        
+                        <td class="left">
+                            {present name="$arr_category[$vo['cat_id']]"}
+                            {$arr_category[$vo['cat_id']]}
+                            {else /}
+                            {:lang('Null')}
+                            {/present}
+                        </td>
+                        
+                        <td class="left">{$vo['sale_price']}</td>
+                        
+                        <td class="left">
+                            <a class="tooltip-link ajax-get edit" data-title="{$vo['name']}" href="{:url('editSkuQuantity',['ids'=>$vo['id']])}" title="{:lang('Goods_Sku_Quantity_Edit')}">
+                                {if $vo['quantity'] <= $low_stock_quantity}
+                                <h5><span class="red bold"> {$vo['quantity']}</span></h5>
+                                {else /}
+                                {$vo['quantity']}
+                                {/if}
+                            </a>
+                        </td>
+                        
+                        <td class="left">
+                            <select onchange="changeStatus({$vo['id']},this.options[this.options.selectedIndex].value)" class="" style="height:26px;">
+                                {switch name=$vo['status']}
+                                {case value="disabled"}
+                                <option name="vo.status" value="enabled">{:lang('Good_Up')}</option>
+                                <option name="vo.status" value="disabled" selected="selected">{:lang('Good_Down')}</option>
+                                <option name="vo.status" value="pending_review">{:lang('Good_Wait')}</option>
+                                <option name="vo.status" value="pending_modify">{:lang('Good_Modify')}</option>
+                                <option name="vo.status" value="pending">{:lang('Good_Pending')}</option>
+                                {/case}
+                                {case value="enabled"}
+                                <option name="vo.status" value="enabled" selected="selected">{:lang('Good_Up')}</option>
+                                <option name="vo.status" value="disabled">{:lang('Good_Down')}</option>
+                                <option name="vo.status" value="pending_review">{:lang('Good_Wait')}</option>
+                                <option name="vo.status" value="pending_modify">{:lang('Good_Modify')}</option>
+                                <option name="vo.status" value="pending">{:lang('Good_Pending')}</option>
+                                {/case}
+                                {case value="pending_review"}
+                                <option name="vo.status" value="enabled">{:lang('Good_Up')}</option>
+                                <option name="vo.status" value="disabled">{:lang('Good_Down')}</option>
+                                <option name="vo.status" value="pending_review" selected="selected">{:lang('Good_Wait')}
+                                </option>
+                                <option name="vo.status" value="pending_modify">{:lang('Good_Modify')}</option>
+                                <option name="vo.status" value="pending">{:lang('Good_Pending')}</option>
+                                {/case}
+                                {case value="pending_modify"}
+                                <option name="vo.status" value="enabled">{:lang('Good_Up')}</option>
+                                <option name="vo.status" value="disabled">{:lang('Good_Down')}</option>
+                                <option name="vo.status" value="pending_review">{:lang('Good_Wait')}</option>
+                                <option name="vo.status" value="pending_modify" selected="selected">{:lang('Good_Modify')}
+                                </option>
+                                <option name="vo.status" value="pending">{:lang('Good_Pending')}</option>
+                                {/case}
+                                {case value="pending"}
+                                <option name="vo.status" value="enabled">{:lang('Good_Up')}</option>
+                                <option name="vo.status" value="disabled">{:lang('Good_Down')}</option>
+                                <option name="vo.status" value="pending_review">{:lang('Good_Wait')}</option>
+                                <option name="vo.status" value="pending_modify">{:lang('Good_Modify')}</option>
+                                <option name="vo.status" value="pending" selected="selected">{:lang('Good_Pending')}
+                                </option>
+                                {/case}
+                                
+                                {/default}
+                                {/switch}
+                            </select>
+                        </td>
+    
+                        {present name="$arr_store[$vo['seller_id']]"}
+                        <td class="left slh tooltip-link" style="max-width: 150px" title="{$arr_store[$vo['seller_id']]}">
+                            {$arr_store[$vo['seller_id']]}
+                            {else /}
+                        <td class="left">
+                            {:lang('Null')}
+                            {/present}
+                        </td>
+                        
+                        <td class='center' style="display:none;">
+                            {eq name="vo.pc_status" value="1"}
+                            <a href="{:url('disable', ['pk'=>'pc_status','ids'=>$vo['id']])}" class="ajax-able" data-doing="{:lang('Disable')}">
+                                <img src="__PUBLIC__/admin/images/enabled.png" title="{:lang('Enable')}" class="tooltip-link" alt="{:lang('Enable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png"/>
+                            </a>
+                            {else /}
+                            <a href="{:url('enable', ['pk'=>'pc_status','ids'=>$vo['id']])}" class="ajax-able"
+                               data-doing="{:lang('Enable')}">
+                                <img src="__PUBLIC__/admin/images/disabled.png" title="{:lang('Disable')}" class="tooltip-link" alt="{:lang('Disable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png"/>
+                            </a>
+                            {/eq}
+                        </td>
+                        
+                        <td class='center' style="display:none;">
+                            {eq name="vo.wap_status" value="1"}
+                            <a href="{:url('disable', ['pk'=>'wap_status','ids'=>$vo['id']])}" class="ajax-able"
+                               data-doing="{:lang('Disable')}">
+                                <img src="__PUBLIC__/admin/images/enabled.png" title="{:lang('Enable')}" class="tooltip-link" alt="{:lang('Enable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png"/>
+                            </a>
+                            {else /}
+                            <a href="{:url('enable', ['pk'=>'wap_status','ids'=>$vo['id']])}" class="ajax-able"
+                               data-doing="{:lang('Enable')}">
+                                <img src="__PUBLIC__/admin/images/disabled.png" title="{:lang('Disable')}" class="tooltip-link" alt="{:lang('Disable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png"/>
+                            </a>
+                            {/eq}
+                        </td>
+                        
+                        <td class='center' style="display:none;">
+                            {eq name="vo.api_status" value="1"}
+                            <a href="{:url('disable', ['pk'=>'api_status','ids'=>$vo['id']])}" class="ajax-able" data-doing="{:lang('Disable')}">
+                                <img src="__PUBLIC__/admin/images/enabled.png" title="{:lang('Enable')}" class="tooltip-link" alt="{:lang('Enable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png"/>
+                            </a>
+                            {else /}
+                            <a href="{:url('enable', ['pk'=>'api_status','ids'=>$vo['id']])}" class="ajax-able" data-doing="{:lang('Enable')}">
+                                <img src="__PUBLIC__/admin/images/disabled.png" title="{:lang('Disable')}" class="tooltip-link" alt="{:lang('Disable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png"/>
+                            </a>
+                            {/eq}
+                        </td>
+    
+    
+    
+    
+    
+    
+    
+    
+                        <td class='center' style="display:none;">
+                            {eq name="vo.api_status" value="1"}
+                            <a href="{:url('disable', ['pk'=>'api_status','ids'=>$vo['id']])}" class="ajax-able" data-doing="{:lang('Disable')}">
+                                <img src="__PUBLIC__/admin/images/enabled.png" title="{:lang('Enable')}" class="tooltip-link" alt="{:lang('Enable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png"/>
+                            </a>
+                            {else /}
+                            <a href="{:url('enable', ['pk'=>'api_status','ids'=>$vo['id']])}" class="ajax-able" data-doing="{:lang('Enable')}">
+                                <img src="__PUBLIC__/admin/images/disabled.png" title="{:lang('Disable')}" class="tooltip-link" alt="{:lang('Disable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png"/>
+                            </a>
+                            {/eq}
+                        </td>
+                        <td class='center' style="display:none;">
+                            {eq name="vo.api_status" value="1"}
+                            <a href="{:url('disable', ['pk'=>'api_status','ids'=>$vo['id']])}" class="ajax-able" data-doing="{:lang('Disable')}">
+                                <img src="__PUBLIC__/admin/images/enabled.png" title="{:lang('Enable')}" class="tooltip-link" alt="{:lang('Enable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png"/>
+                            </a>
+                            {else /}
+                            <a href="{:url('enable', ['pk'=>'api_status','ids'=>$vo['id']])}" class="ajax-able" data-doing="{:lang('Enable')}">
+                                <img src="__PUBLIC__/admin/images/disabled.png" title="{:lang('Disable')}" class="tooltip-link" alt="{:lang('Disable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png"/>
+                            </a>
+                            {/eq}
+                        </td>
+                        <td class='center' style="display:none;">
+                            {eq name="vo.api_status" value="1"}
+                            <a href="{:url('disable', ['pk'=>'api_status','ids'=>$vo['id']])}" class="ajax-able" data-doing="{:lang('Disable')}">
+                                <img src="__PUBLIC__/admin/images/enabled.png" title="{:lang('Enable')}" class="tooltip-link" alt="{:lang('Enable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png"/>
+                            </a>
+                            {else /}
+                            <a href="{:url('enable', ['pk'=>'api_status','ids'=>$vo['id']])}" class="ajax-able" data-doing="{:lang('Enable')}">
+                                <img src="__PUBLIC__/admin/images/disabled.png" title="{:lang('Disable')}" class="tooltip-link" alt="{:lang('Disable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png"/>
+                            </a>
+                            {/eq}
+                        </td>
+                        <td class='center' style="display:none;">
+                            {eq name="vo.api_status" value="1"}
+                            <a href="{:url('disable', ['pk'=>'api_status','ids'=>$vo['id']])}" class="ajax-able" data-doing="{:lang('Disable')}">
+                                <img src="__PUBLIC__/admin/images/enabled.png" title="{:lang('Enable')}" class="tooltip-link" alt="{:lang('Enable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png"/>
+                            </a>
+                            {else /}
+                            <a href="{:url('enable', ['pk'=>'api_status','ids'=>$vo['id']])}" class="ajax-able" data-doing="{:lang('Enable')}">
+                                <img src="__PUBLIC__/admin/images/disabled.png" title="{:lang('Disable')}" class="tooltip-link" alt="{:lang('Disable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png"/>
+                            </a>
+                            {/eq}
+                        </td>
+    
+                        
+                        <td class="center" style=""><input name="sorts[{$vo.id}]" type="text" value="{$vo.sort}" maxlength="5" class="center sorts" onBlur="changeSort('{$vo.id}',this.value)"></td>
+                        
+                        <td class="actions">
+                            <a class="tooltip-link ajax-get confirm" data-layer="{:lang('Want_delete')}" title="{:lang('Delete_this_record')}" href="{:url('delete',array('ids'=>$vo['id']))}" data-title="{:lang('Delete')}">
+                                <img src="__PUBLIC__/admin/images/delete.png" alt="{:lang('Delete')}"/>
+                            </a>
+                        </td>
+                    </tr>
+                    {/volist}
+                    
+                    </tbody>
+                </table>
+                <div class="pagination-wrapper">
+                    <div class="results-part"><span>{$search_total}</span></div>
+                    <div class="links-part">{$list->appends(input())->render();}</div>
+                </div>
+                
+                {else/}
+                <div class="alert alert-warning">{:lang('No_record')}</div>
+                {/notempty}
+            </div>
+        </div>
+    </div>
+    <script>
+        function changeStatus(id, status) {
+            $.ajax({
+                url: '{:url('changeStatus')}',
+                type: "post",
+                data: {'id': id, 'status': status},
+                dataType: "json",
+                cache: false,
+                time: 3000,
+                success: function (data) {
+                },
+                error: function () {
+                    that.html('{:lang("Ver_err")}');
+                }
+            });
+        }
+        function changeSort(id, sort) {
+    
+            $.ajax({
+                url: '{:url('changeSort')}',
+                type: "post",
+                data: {'id': id, 'sort': sort},
+                dataType: "json",
+                cache: false,
+                time: 3000,
+                success: function (data) {
+    
+                },
+                error: function () {
+                    that.html('{:lang("Ver_err")}');
+                }
+            });
+        }
+    
+        // 图片浏览
+        $('.thumb img').mousemove(function () {
+            if ($(this).attr('src').indexOf('no-image.png') <= 0) {
+                var image = '<img src="' + $(this).attr('src') + '" height="200"/>';
+                $(this).parent().find('.show').html(image);
+                $(this).parent().find('.show').show();
+            }
+        }).mouseleave(function () {
+            $(this).parent().find('.show').hide();
+        });
+    </script>
+    {include file="admin@public/time_for_search" /}
+    
+    {/block}

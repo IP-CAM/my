@@ -1,0 +1,313 @@
+{extend name="admin@public/poupbase" /}
+
+<!-- CONTENT -->
+
+{block name="body"}
+	<div id="content" style="margin:0px 10px 5px 8px;">
+		<div class="bloc" style="margin:10px 0px 0px;">
+			<div class="content">
+                <fieldset>
+                    <form id="myform" method="post" style="margin-top:5px;" class="">
+                    <legend>{$meta_title|default=''}</legend>
+                    <div class="row">
+                        <div style="float:left;">
+                            <label for="pid" class="w100">{:lang('Uplevel')}: </label>
+                            <select name="pid" id="pid" class="sel_w170_m_r_26">
+                                <option value="0">{:lang('Asfirstlevel')}</option>
+                                {$select_categorys}
+                            </select>
+                        </div>
+                        
+                        <div style="float:left;">
+                            <label for="status" class="w100">{:lang('Nav_show')}</label>
+                            <div class="slideBox">
+                                {eq name="ACTION_NAME" value="edit"}
+                                <input id="status" value="1" type="checkbox" name="status"  {eq name="data['status']" value="1"}checked{/eq}/>
+                                {else /}
+                                <input id="status" value="1" type="checkbox" name="status" checked />
+                                {/eq}
+                                <label for="status"></label>
+                            </div>
+                            <div style="float:left; margin:1px 10px;">
+                                <a class="tooltip-icon" title="{:lang('Status_tip')}"></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div style="float:left:">
+                            <label for="models" class="w100">{:lang('Category_module')}: <span class="required">*</span></label>
+                            <div style="float:left; display:inline">
+                                {notempty name="select_model">
+                                <select name="models" id="models" class="sel_w170_m_r_26">
+                                    <option value="" >----{:lang('Please_choose')}----</option>
+                                    {eq name="ACTION_NAME" value="edit"}
+                                    <foreach name="select_model" item="md">
+                                        <option value="{$md}" {eq name="data['models']" value="$md">selected{/eq}>{$md|ucfirst}</option>
+                                    </foreach>
+                                    {else /}
+                                    <foreach name="select_model" item="md">
+                                        <option value="{$md}" {eq name="model_checked" value="$md">selected{/eq}>{$md|ucfirst}</option>
+                                    </foreach>
+                                    {/eq}
+                                    <option value="0" {eq name="data.models" value="0">selected{/eq}>{:lang('Link_url')}</option>
+                                </select>
+                                <else/>
+                                <select name="models" id="models" class="sel_w170_m_r_26" disabled >
+                                    <option value="" >{:lang('No_module')}</option>
+                                </select>
+                                {/notempty}
+                            </div>
+                        </div>
+                        
+                        <div style="float:left:">
+                            <label for="list_row" class="w100">{:lang('List_row')} :</label>
+                            <input id="list_row" type="text" value="{eq name="ACTION_NAME" value="edit"}{$data.list_row}{else /}35{/eq}"  name="list_row" class="input litle"/>
+                            <a class="tooltip-icon" title="{:lang('List_row_tip')}"></a>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div style="float:left;">
+                            <label for="title" class="w100">{:lang('Category_title')}: <span class="required">*</span></label>
+                            <input id="title" type="text" value="{$data.title}" name="title" class="input" style="width:160px;" placeholder="{:lang('Blog')}"  />
+                            <input class="button white" value="{:lang('Show_seo')}" type="button" id="seo" />
+                        </div>
+                        <div style="float:left">
+                            <label for="sort" class="w70">{:lang('Sort')}: </label>
+                            <input type="number" class="input litle" min="0" name="sort" maxlength="5" id="sort" value='{$data.sort|default=0}'>
+                        </div>
+                    
+                    </div>
+                    
+                    <div style="border:2px solid #FFC68C; margin:2px 0;" id="seobox">
+                        <div class="row">
+                            <label for="seo_title" class="w100">Seo Title:</label>
+                            <input id="seo_title" type="text" value="{$data.seo_title}" name="seo_title" style="width:440px;" />
+                        </div>
+                        
+                        <div class="row">
+                            <label for="seo_keywords" class="w100">Seo Keywords:</label>
+                            <input id="seo_keywords" type="text" value="{$data.seo_keywords}" name="seo_keywords" style="width:440px;" />
+                        </div>
+                        
+                        <div class="row">
+                            <label for="seo_description" class="w100">Seo Description:</label>
+                            <textarea name="seo_description" id="seo_description" style="width:440px; height:52px;resize: none;">{$data.seo_description}</textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div style="float:left;">
+                            <label for="name" class="w100">{:lang('Category_name')} : <span class="required">*</span></label>
+                            <input id="name" type="text" value="{$data.name}" name="name" style="width:160px;" class="onlyletter to_" placeholder="blog" />
+                            <a class="tooltip-icon" title="{:lang('Category_name_tip')}"></a>
+                        </div>
+                        
+                        <div style="float:left;">
+                            <label for="urlruleid" class="w100" style="width:95px;">{:lang('Url_rule')}: </label>
+                            <select name="urlruleid" id="urlruleid" class="sel_w170">
+                                <option value="0">{:lang('All_urlrules')}</option>
+                                <volist name="url_rule" id="url">
+                                    <option value="{$url.urlruleid}" {eq name="data.urlruleid" value="$url.urlruleid">selected{/eq}>{$url.listexample}</option>
+                                </volist>
+                            </select>
+                        </div>
+                        <div style="float:left; margin-left:10px;">
+                            <a class="tooltip-icon" title="{:lang('All_urlrules_tip')}"></a>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div style="float:left;" class="bset">
+                            <style>
+                                form .row .w160_r_0{ width: 140px;text-align: center;}
+                            </style>
+                            <label class="w100">{:lang('Category_inner')} : </label>
+                            <input name="isinner" type="checkbox" value="1" id="isinner_1" {eq name="data.isinner" value="1">checked{/eq} />
+                            <label for="isinner_1" class="w160_r_0">{:lang('Isinner')}</label>
+                        
+                        </div>
+                        <div style="float:left;">
+                            <label for="class" class="w100" style="width:148px;">{:lang('Category_class')}: </label>
+                            <input id="class" name="class" type="text" value="{$data.class}" style="width:200px;" placeholder="{:lang('Category_class_name')}" />
+                        
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div style="float:left;">
+                            <label for="groups" class="w100">{:lang('Category_groups')}: </label>
+                            <input id="groups" name="groups" type="text" value="{$data.groups}" style="width:290px;" placeholder="{:lang('Category_groups_name')}" />
+                        
+                        </div>
+                        
+                        <div style="float:left;">
+                            <select id="choose_groups" class="sel_w170">
+                                <option value="" >----{:lang('Choose_groups')}----</option>
+                                <volist name="groups" id="gp">
+                                    <option value="{$gp}">{$gp}</option>
+                                </volist>
+                            </select>
+                        </div>
+                        <div style="float:left; margin-left:10px;">
+                            <a class="tooltip-icon" title="{:lang('Category_groups_tip')}"></a>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <label for="status" class="w100">{:lang('Pc_on')}</label>
+                        <div class="slideBox">
+                            {eq name="ACTION_NAME" value="edit"}
+                            <input id="pc_status" value="1" type="checkbox" name="pc_status"  {eq name="data['pc_status']" value="1">checked{/eq}/>
+                            {else /}
+                            <input id="pc_status" value="1" type="checkbox" name="pc_status" checked />
+                            {/eq}
+                            <label for="pc_status"></label>
+                        </div>
+                        <div style="float:left; margin:1px 10px;">
+                            <a class="tooltip-icon" title="{:lang('Pc_on_tip')}"></a>
+                        </div>
+                        
+                        <label for="phone_status" class="w80">{:lang('Phone_on')}</label>
+                        <div class="slideBox">
+                            {eq name="ACTION_NAME" value="edit"}
+                            <input id="phone_status" value="1" type="checkbox" name="phone_status"  {eq name="data['phone_status']" value="1">checked{/eq}/>
+                            {else /}
+                            <input id="phone_status" value="1" type="checkbox" name="phone_status" checked />
+                            {/eq}
+                            <label for="phone_status"></label>
+                        </div>
+                        <div style="float:left; margin:1px 10px;">
+                            <a class="tooltip-icon" title="{:lang('Phone_on_tip')}"></a>
+                        </div>
+                        
+                        <label for="api_on" class="w80">{:lang('Api_on')}</label>
+                        <div class="slideBox">
+                            {eq name="ACTION_NAME" value="edit"}
+                            <input id="api_status" value="1" type="checkbox" name="api_status"  {eq name="data['api_status']" value="1">checked{/eq}/>
+                            {else /}
+                            <input id="api_status" value="1" type="checkbox" name="api_status" checked />
+                            {/eq}
+                            <label for="api_status"></label>
+                        </div>
+                        <div style="float:left; margin:1px 10px;">
+                            <a class="tooltip-icon" title="{:lang('Api_on_tip')}"></a>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <label for="weixin_status" class="w100">{:lang('Weixin_on')}</label>
+                        <div class="slideBox">
+                            {eq name="ACTION_NAME" value="edit"}
+                            <input id="weixin_status" value="1" type="checkbox" name="weixin_status"  {eq name="data['weixin_status']" value="1">checked{/eq}/>
+                            {else /}
+                            <input id="weixin_status" value="1" type="checkbox" name="weixin_status" checked />
+                            {/eq}
+                            <label for="weixin_status"></label>
+                        </div>
+                        <div style="float:left; margin:1px 10px;">
+                            <a class="tooltip-icon" title="{:lang('Weixin_on_tip')}"></a>
+                        </div>
+                        
+                        <label for="app_status" class="w80">{:lang('App')}</label>
+                        <div class="slideBox">
+                            {eq name="ACTION_NAME" value="edit"}
+                            <input id="app_status" value="1" type="checkbox" name="app_status"  {eq name="data['app_status']" value="1">checked{/eq}/>
+                            {else /}
+                            <input id="app_status" value="1" type="checkbox" name="app_status" checked />
+                            {/eq}
+                            <label for="app_status"></label>
+                        </div>
+                        <div style="float:left; margin:1px 10px;">
+                            <a class="tooltip-icon" title="{:lang('App_tip')}"></a>
+                        </div>
+                        
+                        <label for="allow_publish" class="w80">{:lang('Allow_publish')}</label>
+                        <div class="slideBox">
+                            {eq name="ACTION_NAME" value="edit"}
+                            <input id="allow_publish" value="1" type="checkbox" name="allow_publish"  {eq name="data['allow_publish']" value="1">checked{/eq}/>
+                            {else /}
+                            <input id="allow_publish" value="1" type="checkbox" name="allow_publish" checked />
+                            {/eq}
+                            <label for="allow_publish"></label>
+                        </div>
+                        <div style="float:left; margin:1px 10px;">
+                            <a class="tooltip-icon" title="{:lang('Allow_publish_tip')}"></a>
+                        </div>
+                    
+                    </div>
+                    
+                    <div class="row">
+                        <div style="float:left;" class="bset">
+                            <label class="w100">{:lang('Is_first')} : </label>
+                            <input name="listtype" type="radio" value="1" id="listtype_1" {eq name="data.listtype" value="1">checked{/eq} />
+                            <label for="listtype_1" class="w50l_r_0">{:lang('Yes')}</label>
+                            
+                            <input name="listtype" type="radio" value="0" id="listtype_0" {eq name="data.listtype" value="0">checked{/eq} {eq name="ACTION_NAME" value="add">checked{/eq}/>
+                            <label for="listtype_0" class="w50l_r_0">{:lang('No')}</label>
+                        </div>
+                        
+                        <label for="is_check" class="w80">{:lang('Is_check')}</label>
+                        <div class="slideBox">
+                            {eq name="ACTION_NAME" value="edit"}
+                            <input id="is_check" value="1" type="checkbox" name="is_check"  {eq name="data['is_check']" value="1">checked{/eq}/>
+                            {else /}
+                            <input id="is_check" value="1" type="checkbox" name="is_check" checked />
+                            {/eq}
+                            <label for="is_check"></label>
+                        </div>
+                        <div style="float:left; margin:1px 10px;">
+                            <a class="tooltip-icon" title="{:lang('Is_check_tip')}"></a>
+                        </div>
+                        
+                        <label for="is_reply" class="w80">{:lang('Is_replay')}:</label>
+                        <div class="slideBox">
+                            {eq name="ACTION_NAME" value="edit"}
+                            <input id="is_reply" value="1" type="checkbox" name="is_reply"  {eq name="data['is_reply']" value="1">checked{/eq}/>
+                            {else /}
+                            <input id="is_reply" value="1" type="checkbox" name="is_reply" checked />
+                            {/eq}
+                            <label for="is_reply"></label>
+                        </div>
+                        <div style="float:left; margin:1px 10px;">
+                            <a class="tooltip-icon" title="{:lang('Is_replay_tip')}"></a>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div style="float:left;" id="template_list_box">
+                            <label class="w100">
+                                {notempty name="data.listtype">{:lang('First_tpl')}{else /}{:lang('List_tpl')}{/notempty}: </label>
+                            <select name="template_list" id="template_list" class="sel_w170_m_r_26">
+                                <option value="" >{:lang('Default')}</option>
+                                <option value="1" >template_index.html</option>
+                                <option value="0" >template_index.html</option>
+                                <option value="0" >this_is_template_index.html</option>
+                            </select>
+                        </div>
+                        
+                        <div style="float:left;{notempty name="data.listtype" value="1">display:none;{/notempty}" id="template_show_box">
+                        <label class="w70">{:lang('Detail_tpl')}: </label>
+                        <select name="template_show" id="template_show" class="sel_w170_m_r_26">
+                            <option value="" >{:lang('Default')}</option>
+                            <option value="1" >template_lists.html</option>
+                            <option value="0" >template_lists.html</option>
+                            <option value="0" >this_is_template_lists.html</option>
+                        </select>
+                    </div>
+                    <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                        {eq name="ACTION_NAME" value="edit"}
+                          <input name="submit" value="{:lang('Update')}" type="submit" url="{:url()}" />
+                          <input name="id" type="hidden"  value="{$data.id}" />
+                          {else /}
+                          <input name="submit" value="{:lang('Create')}" type="submit" url="{:url()}" />
+                        {/eq}
+                        <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                    </div>
+                    </form>
+                </fieldset>
+			</div>
+		</div>
+	</div>
+{/block}

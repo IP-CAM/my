@@ -1,0 +1,124 @@
+    {extend name="common/base" /}
+    
+    {block name="title"}
+    <title>ETshop-{:lang('Seinfoset')}</title>
+    {/block}
+    
+    {block name="css"}
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/member.css" />
+    {/block}
+    
+    {block name="body"}
+    <!--面包屑-->
+    <div class="ly-path">
+        <ul class="clearfix">
+            <li class="home">
+                <a href="{:url('crossbbcg/index/index')}" title="{:lang('go_min')}">{:lang('Home')}</a>
+                <span>&gt;&nbsp;</span>
+            </li>
+            <li>
+                <a href="{:url('member/index/index')}" title="">{:lang('Member')}</a>
+                <span>&gt;&nbsp;</span>
+            </li>
+            <li>
+                <h1>{:lang('Seinfoset')}</h1>
+            </li>
+        </ul>
+    </div>
+    <div class="ly-main member-main clearfix">
+        {include file="index/left_menu"}
+        <div class="member-right">
+            <div class="member-content">
+                <div class="title member-title member-max-title">
+                    <div class="t">{:lang('self_info')}</div>
+                
+                </div>
+                <div class="body pb15 mh600 seinfo yahei">
+                    <div class="member-userinfo">
+                        <form action="" id="info_form">
+                            <ul>
+                                <li class="form-row">
+                                    <label class="form-label img-label">{:lang('member_headimg')}：</label>
+                                    <span class="form-act">
+                                        <div class="img-box">
+                                            {if condition="empty($data.headimg)"}
+                                            <img src="__PUBLIC__/{$img_path}/member_tx.png" alt="" width="80" height="80"/>
+                                            {elseif condition="substr($data.headimg,0,4) == 'http'"}
+                                            <img src="{$data.headimg}" alt="" width="80" height="80"/>
+                                            {else /}
+                                            <img src="__UPLOADS__/{$data.headimg}" width="80" height="80" alt=""/>
+                                            {/if}
+                                            <input type="hidden" name="headimg" value="{$data.headimg}"/>
+                                        </div>
+                                        <div class="btn-box">
+                                            <a href="javascript:void(0);" class="btn upload action-upload" data-url="{:url('member/index/ajax_upload')}">{:lang('change_headimg')}</a>
+                                        </div>
+                                    </span>
+                                </li>
+                                <li class="form-row">
+                                    <label class="form-label" for="for_name"><em>*</em>{:lang('nickname')}：</label>
+                                    <span class="form-act">
+                                    <input class="input-ln" type="text" name="nickname" value="{$data.nickname}"
+                                           id="for_name" required="" data-empty="{:lang('pleace input nickname')}" minlength="4" maxlength="20">
+                                    </span>
+                                </li>
+                                <li class="form-row">
+                                    <label for="" class="form-label"><em>*</em>{:lang('sexy')}：</label>
+                                    <span class="form-act">
+                                      <input type="radio" name="sex" id="for_gender_male" {eq name="$data['sex']" value="1" }checked{/eq} value="1">
+                                        <label for="for_gender_male">{:lang('man')}</label>
+                                      <input type="radio" name="sex" id="for_gender_female" {eq name="$data['sex']" value="2" }checked{/eq} value="2">
+                                        <label for="for_gender_female">{:lang('women')}</label>
+                                      <input type="radio" name="sex" id="for_gender_privacy" {eq name="$data['sex']" value="0" }checked{/eq} value="0">
+                                        <label for="for_gender_privacy">{:lang('secret')}</label>
+                                    </span>
+                                </li>
+                                <li class="form-row">
+                                    <label for="" class="form-label">{:lang('birthday')}：</label>
+                                    <span class="form-act">
+                                    <input class="input-ln" name="birthday" value="{$data['extent']['birthday']}" id="dateinfo" type="text" placeholder="{:lang('pleace choose')}" readonly>
+                                    </span>
+                                </li>
+                                <li class="form-row">
+                                    <label for="" class="form-label">{:lang('realname')}：</label>
+                                    <span class="form-act">
+                                      <input class="input-ln" type="text" name="realname" id="" value="{$data['extent']['truename']}" maxlength="25">
+                                      <span class="help-block">{:lang('max length 20 string')}</span>
+                                    </span>
+                                </li>
+                                <!--<li class="form-row">
+                                    <label for="" class="form-label">所在地：</label>
+                                    <span class="form-act">
+                      <div id="area" class="mod-bottom" data-validate="area"><select><option value="">-请选择-</option></select></div>
+                    </span>
+                                </li>
+                                <li class="form-row">
+                                    <label for="" class="form-label">详细地址：</label>
+                                    <span class="form-act">
+                      <input class="input-ln" type="text" name="user[addr]" value="" id="" maxlength="100">
+                    </span>
+                                </li>-->
+                                <li class="form-row last">
+                                    <label for="" class="form-label"></label>
+                                    <span class="form-act">
+                      <button class="btn btn-import" id="info_but" data-url="{:url('seinfoset')}" data-error_empty="{:lang('pleace input nickname')}" rel="_request"><span><span>{:lang('save')}</span></span>
+                                    </button>
+                                    </span>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {/block}
+    
+    <!--此板块为页面单独js加载-->
+    {block name="footer_js"}
+    <!--<script src="/static/jedate/jedate.min.js"></script>-->
+    <script type="text/javascript">
+        //需要加载的js文件
+        Private_Script = ['seinfoset'];
+    </script>
+    {/block}

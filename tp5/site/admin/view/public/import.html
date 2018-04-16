@@ -1,0 +1,39 @@
+    {extend name="admin@public/poupbase"/}
+    
+    <!-- CONTENT -->
+    
+    {block name="body"}
+      <div id="content" style="margin:0px 10px 5px 8px;">
+        <div class="bloc" style="margin:10px 0px 0px;">
+          <div class="content">
+            <form id="myform" method="post" style="margin-top:5px;" class="">
+              <fieldset>
+                <legend>{$meta_title|default=''}</legend>
+                <div class="row">
+                  <label for="name" class="w100">{:lang('Modelid')}: </label>
+                  <input type="text" class="input w140l fu onlyletter" name="name" id="name" value="" placeholder="tablename" />
+                  <a class="tooltip-icon" title="{:lang('Modelid_tip')}"></a>
+                </div>
+                
+                <div class="row">
+                  <label for="title" class="w100">{:lang('Langstr')}: </label>
+                  <input type="text" class="input w140l fu onlyletter" name="title" id="title" value="" placeholder="{:lang('Modelname_tip')}" />
+                  <a class="tooltip-icon" title="{:lang('Langstr')}"></a>
+                </div>
+                
+                <div class="row">
+                  <label for="file" class="w100">{:lang('Modelfile')}: </label>
+                  <input type="file" name="file" value="" class="w140l" accept=".txt,.mod,.sql" />
+                </div>
+                
+                <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                  <input name="submit" value="{:lang('Upload')}" type="submit" url="{:url()}">
+                  <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+    {/block}
+    

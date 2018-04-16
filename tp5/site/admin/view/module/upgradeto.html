@@ -1,0 +1,70 @@
+    {extend name="public/poupbase"/}
+    
+    <!-- CONTENT -->
+    
+    {block name="body"}
+        <div id="content" style="margin:0px 10px 5px 8px;">
+            <div class="bloc">
+                <div class="content">
+                    <div style="display:block;">
+                        <ul id="info" style="padding: 0; margin-left: 5px; height: 210px; overflow-y:auto;">
+                            <li>{:lang('Begin up')}</li>
+                        </ul>
+                    </div>
+    
+                    <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                        <input value="{:lang('Up now')}" type="submit" class="upnow" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    {/block}
+
+    {block name="style"}
+        <style>
+            #info li{list-style: none;}
+        </style>
+    {/block}
+    
+    {block name="js"}
+        <script language="javascript" type="text/javascript">
+            $.ajaxSetup ({ cache: false });
+            function reloads(setup, nnn) {
+                var url =  "{:url('upgrade', array('setup'=>'no', 'num'=>'nnn'))}".replace('no', setup).replace('nnn', nnn);
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: {'url': '{$url}', 'name':'{$app}', 'ver':'{$ver}'},
+                    dataType: 'json',
+                    success: function(msg){
+                        if(msg.setup == '-1'){
+                            $('#info').append('<li>'+msg.msg+'</li>');
+                            //$('.upnow').removeAttr("disabled");
+                            return false;
+                        }else{
+                            $('#info').append('<li>'+msg.msg+'</li>');
+                            $('#info').scrollTop($('#info')[0].scrollHeight);
+                            reloads(msg.setup, msg.n);
+                        }
+                    }
+                });
+            }
+
+            //刷新页面
+            function gonext(){
+                //获取当前窗体索引
+                var topindex = parent.layer.getFrameIndex(window.name);
+                //关闭弹出层
+                parent.layer.close(topindex);
+            }
+
+            $(function(){
+                $('.upnow').click(function () {
+                    //$(this).attr("disabled",true);
+                    $('#info').html('');
+                    $('#info').append('<li>{:lang('Begin up')}</li>');
+                    reloads(0, 0);
+                })
+            })
+        </script>
+    {/block}

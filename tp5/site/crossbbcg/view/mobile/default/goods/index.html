@@ -1,0 +1,1022 @@
+{extend name='public/base'}
+{block name='css'}
+<link rel="stylesheet" href="__PUBLIC__/{$css_path}/goodsdetail.css">
+{/block}
+{block name='body'}
+<div style="width:0;height:0;position:absolute; top:-9999px;">
+    <p>今天在传说中最靠谱的网易考拉海购发现了一件不错的东东!</p>
+    <img src="//haitao.nos.netease.com/iowkq17219_800_800.jpg?imageView&amp;thumbnail=400x0&amp;quality=95&amp;"
+         title="{$data['name']}">
+</div>
+<div id="prdbox">
+    <div id="downloadbox"></div>
+    <div id="j-wechatTopbar"></div>
+    <div class="g-cnt">
+        <header class="m-topnavwrap">
+            <div class="m-sticknav">
+                <div class="navbar">
+                    <ul class="tabbox" id="topnav">
+                        <li data-index="0" class="itm cur">商品</li>
+                        <li data-index="1" class="itm">评价</li>
+                        <li data-index="2" class="itm">推荐</li>
+                        <li data-index="3" class="itm">详情</li>
+                    </ul>
+                    <span class="v-returnicon" id="returnbtn"></span>
+                    <a id="homebtn" href="javascript:;" class="v-homeicon"></a>
+                </div>
+            </div>
+        </header>
+        <div class="j-block" id="infobox">
+            <section>
+                <div id="imgbox">
+                    <div class="n-imgbox">
+                        <div class="n-slideimg">
+                            <ul class="imglist">
+                                {notempty name="$data['thumb']"}
+                                <li class="itm">
+                                    {if condition="substr($data['thumb'],0,4)=='http'"}
+                                    <img class="v-img" src="{$data['thumb']}"/>
+                                    {else /}
+                                    <img class="v-img" src="{:resizeImage($data['thumb'],'middle',true)}"/>
+                                    {/if}
+                                </li>
+                                {/notempty}
+                                {notempty name="$image_list"}
+                                {foreach $image_list as $image}
+                                <li class="itm">
+                                    {if condition="substr($image,0,4)=='http'"}
+                                    <img class="v-img" src="{$image}"/>
+                                    {else /}
+                                    <img class="v-img" src="{:resizeImage($image,'middle',true)}"/>
+                                    {/if}
+                                </li>
+                                {/foreach}
+                                {/notempty}
+                            </ul>
+                            <ul class="imgpagebox">
+                                <li class="dot active"></li>
+                                {notempty name="$image_list"}
+                                {foreach $image_list as $image}
+                                <li class="dot"></li>
+                                {/foreach}
+                                {/notempty}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="pricebox">
+                    <div class="n-price">
+                        <div class="n-price__left">
+                            <span class="curprice"><i class="curnum">{$data['sale_price']}</i></span>
+                            <span class="mrkprice">{$data['market_price']}</span>
+                        </div>
+                    </div>
+                    <div id="J_wb_rebate" style="margin: 10px 10px 0px;"></div>
+                </div>
+                <div class="n-prdinfo">
+                    <h4 class="tit f-els-2">{$data['name']}</h4>
+                    <p class="subtit">
+                        {if condition="$data['sub_title']"} {$data['sub_title']} {/if}</p>
+                    <div class="taginfo">
+                        <img src="{$data.national_flag}" class="v-flagimg"/>
+                        <span class="tagtxt">{$data.country_name}{if condition="$data['brand_name']"} | {$data['brand_name']}{/if}</span>
+                        {eq name="$data['type']" value="direct_mail"}
+                        <span class="tagtxt"><i class="iconfont icon-quanqiu"></i>{:lang('direct_mail')}</span>
+                        {/eq}
+                        {eq name="$data['type']" value="bonded"}
+                        <span class="tagtxt"><i class="iconfont icon-quanqiu"></i>{:lang('bonded')}</span>
+                        {/eq}
+                        {eq name="$data['type']" value="pay_taxes"}
+                        <span class="tagtxt"><i class="iconfont icon-quanqiu"></i>{:lang('pay_taxes')}</span>
+                        {/eq}
+                        {notempty name="$seller['cat_name']"}
+                        <span class="tagtxt">{$seller['cat_name']}</span>
+                        {/notempty}
+                    </div>
+                </div>
+                <div class="u-graybar"></div>
+                <div id="infoblocks">
+                    <ul class="n-activitybox">
+                        
+                        <!--Regular if9-->
+                        
+                        <!--Regular if10-->
+                        
+                        <!--Regular if11-->
+                        
+                        <li class="itm n-distribution">
+                            <div class="name">配&nbsp;&nbsp;送：</div>
+                            <div class="cnt">
+                                <p class="addr f-els-1"><!--Regular if12--><span class="section">至</span> 深圳市龙华新区</p>
+                                <!--Regular if13-->
+                                
+                                <p class="tips f-els-1">
+                                    <!--Regular if47--><!--Regular if48-->
+                                    
+                                    <!--Regular if49-->
+                                    24:00前完成支付，预计10月20日(周五)送达
+                                
+                                </p>
+                                <!--Regular if14-->
+                            
+                            </div>
+                            <div class="v-linkicon"></div>
+                        </li>
+                        
+                        <li class="itm n-expressinfo">
+                            <div class="name">运&nbsp;&nbsp;费：</div>
+                            <div class="cnt expressinfo f-els-1">
+                                <p class="expresstxt">满88元免运费</p>
+                            </div>
+                            <!--Regular if50-->
+                            <div class="v-linkicon"></div>
+                        
+                        </li>
+                        <!--Regular if15-->
+                        
+                        <!--Regular if16-->
+                        <li class="itm n-description">
+                            <div class="name">说&nbsp;&nbsp;明：</div>
+                            <ul class="cnt descwrap f-els-1">
+                                <!--Regular list-->
+                                <li class="txt">商品税费</li>
+                                
+                                <li class="txt">假一赔十</li>
+                                
+                                <li class="txt">7天无忧退货</li>
+                                
+                                <li class="txt">不可使用优惠券</li>
+                                
+                                <li class="txt">自营国内仓发货</li>
+                                
+                                <li class="txt">黑卡会员96折</li>
+                            
+                            </ul>
+                            <div class="v-linkicon"></div>
+                        </li>
+                    
+                    </ul>
+                </div>
+                <div id="combobox">
+                </div>
+            </section>
+            <p class="v-sperate"></p>
+            <section class="j-block">
+                <div id="commentbox">
+                    <!--Regular if5-->
+                    <div class="n-commentbox">
+                        <h4 class="tit">其他小伙伴们说 (1602)
+                            <div class="v-linkicon"></div>
+                        </h4>
+                        <!--Regular if6-->
+                        <div class="listwrap">
+                            <ul class="recommendlist">
+                                <!--Regular list-->
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;">
+                                        <div class="infobox">
+                                            <div class="userinfo">
+                                                <img class="v-headimg"
+                                                     src="https://haitao.nos.netease.com/0f0ba74793214b72ac3ff520c3a31151.jpeg?imageView&amp;thumbnail=60x0&amp;quality=95&amp;type=webp">
+                                                <p class="nickname">茶***</p>
+                                            </div>
+                                            <p class="comment f-els-3">这个款壶太喜欢了当时拍的颜色有点儿艳 因为没有其他选择，没想到收货以后，是我喜欢的那个颜色
+                                                非常大气，已经烧了两次水了非常好用，水开特别快，五六分钟就开了 以前是很少点评的，今天好像有说不完的话，因为它太漂亮啦 质量又好
+                                                是纯不锈钢的</p>
+                                        </div>
+                                        <div class="imgbox">
+                                            <img class="v-img"
+                                                 src="https://haitao.nos.netease.com/201705291924029dcb29e1aa4e4347a6bcf481af81547c.jpeg?imageView&amp;thumbnail=220x0&amp;quality=95&amp;type=webp">
+                                            <div class="v-icon">2张图</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;">
+                                        <div class="infobox">
+                                            <div class="userinfo">
+                                                <img class="v-headimg"
+                                                     src="https://haitao.nos.netease.com/e1d06e9c26214db5bef085e21aad73e0.jpeg?imageView&amp;thumbnail=60x0&amp;quality=95&amp;type=webp">
+                                                <p class="nickname">茉***雪</p>
+                                            </div>
+                                            <p class="comment f-els-3">非常满意，好大的壶，买给父母的，表面还不烫，以防烫到父母的手，非常好的水壶，很满意！</p>
+                                        </div>
+                                        <div class="imgbox">
+                                            <img class="v-img"
+                                                 src="https://haitao.nos.netease.com/20170321101554c942b43734544ec0b29cb14e35e3e78d.jpeg?imageView&amp;thumbnail=220x0&amp;quality=95&amp;type=webp">
+                                            <div class="v-icon">5张图</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;">
+                                        <div class="infobox">
+                                            <div class="userinfo">
+                                                <img class="v-headimg"
+                                                     src="https://haitao.nos.netease.com/5ce5c384924d44209e54921b2da4d34a.jpeg?imageView&amp;thumbnail=60x0&amp;quality=95&amp;type=webp">
+                                                <p class="nickname">雅***苑</p>
+                                            </div>
+                                            <p class="comment f-els-3">
+                                                这个水壶我非常满意，不仅内胆是不秀钢的，盖子也是不秀钢的，以前买的盖都是塑料的老公说不健康，货收到了他也点头说好，我也是看了小伙伴的评价才下单的，我同时也希望小伙伴们多晒图，一般我都看你们的评价和晒图来买东西，因为评价比较真实，可以让我花最短的时间买到更好的东西</p>
+                                        </div>
+                                        <div class="imgbox">
+                                            <img class="v-img"
+                                                 src="https://haitao.nos.netease.com/201701121517270c35fd902f994e188b4db31a8d3fa235.jpeg?imageView&amp;thumbnail=220x0&amp;quality=95&amp;type=webp">
+                                            <div class="v-icon">3张图</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;">
+                                        <div class="infobox">
+                                            <div class="userinfo">
+                                                <img class="v-headimg"
+                                                     src="https://haitao.nos.netease.com/20161214150523b69d208fb1324b99bdac24b01e94117a.jpeg?imageView&amp;thumbnail=60x0&amp;quality=95&amp;type=webp">
+                                                <p class="nickname">瓶***子</p>
+                                            </div>
+                                            <p class="comment f-els-3">包装得很好，层层保护，都让我惊讶了一下
+                                                ！外观时尚靓丽，比原来用的那个不知道好多少，容量也大，实际使用也很便利，有一定的保温效果，很满意！</p>
+                                        </div>
+                                        <div class="imgbox">
+                                            <img class="v-img"
+                                                 src="https://haitao.nos.netease.com/20170210090053b0d712147dfa4b83b9fbe68b1045ec72.jpeg?imageView&amp;thumbnail=220x0&amp;quality=95&amp;type=webp">
+                                            <div class="v-icon">5张图</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;">
+                                        <div class="infobox">
+                                            <div class="userinfo">
+                                                <img class="v-headimg"
+                                                     src="https://haitao.nos.netease.com/20160623085004abd869f51e47447d82dbe82473e26e1e.jpeg?imageView&amp;thumbnail=60x0&amp;quality=95&amp;type=webp">
+                                                <p class="nickname">碧***玉</p>
+                                            </div>
+                                            <p class="comment f-els-3">
+                                                挺大的壶。304不锈钢，和淘宝比较最终还是更相信考拉网的品质。做了第一壶水，没有任何味道。很满意！</p>
+                                        </div>
+                                        <div class="imgbox">
+                                            <img class="v-img"
+                                                 src="https://haitao.nos.netease.com/20170110192007173c5a5f00ed45cc850b9e0a5058c706.jpeg?imageView&amp;thumbnail=220x0&amp;quality=95&amp;type=webp">
+                                            <div class="v-icon">4张图</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;">
+                                        <div class="infobox">
+                                            <div class="userinfo">
+                                                <img class="v-headimg"
+                                                     src="https://haitao.nos.netease.com/e0c99aea485944539cc4422ffe19575f.jpeg?imageView&amp;thumbnail=60x0&amp;quality=95&amp;type=webp">
+                                                <p class="nickname">晨***曦</p>
+                                            </div>
+                                            <p class="comment f-els-3">宝贝绝对的是正品，用起来很方便，烧水快。考拉值得信赖的网站。</p>
+                                        </div>
+                                        <div class="imgbox">
+                                            <img class="v-img"
+                                                 src="https://haitao.nos.netease.com/2016121520402657bfe07e9acf4396b56ab9f8ddd90bbe.jpeg?imageView&amp;thumbnail=220x0&amp;quality=95&amp;type=webp">
+                                            <div class="v-icon">3张图</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;">
+                                        <div class="infobox">
+                                            <div class="userinfo">
+                                                <img class="v-headimg"
+                                                     src="https://haitao.nos.netease.com/2016042920443572dfe7f4b39e4041a5d4fc6ef6da63c9.jpeg?imageView&amp;thumbnail=60x0&amp;quality=95&amp;type=webp">
+                                                <p class="nickname">心***来</p>
+                                            </div>
+                                            <p class="comment f-els-3">发过来光外包装就是三层，包裹非常严实，东西用了也有质感，还有一定保温效果，觉得很赞！</p>
+                                        </div>
+                                        <div class="imgbox">
+                                            <img class="v-img"
+                                                 src="https://haitao.nos.netease.com/201609241307497c2e48a8e7b242bb932b03e5529979ba.jpeg?imageView&amp;thumbnail=220x0&amp;quality=95&amp;type=webp">
+                                            <div class="v-icon">2张图</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                
+                                <li class="seemorebox">
+                                    <a class="v-link seemore" href="javascript:;">
+                                        <div class="cntbox">
+                                            <p class="txtwrap"><span class="alltxt">更多评论</span></p>
+                                            <p class="moretxt">See more</p>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    
+                    </div>
+                </div>
+            </section>
+            <p class="v-sperate"></p>
+            <section class="j-block">
+                {include file='goods/tab/hot_sale'}
+            </section>
+            <p class="v-sperate"></p>
+            <section class="j-block">
+                <div id="qualityreport"></div>
+                <div class="n-goodsdetailbar">
+                    <p class="txt">图文详情</p>
+                    <img class="v-img" src="//haitao.nos.netease.com/8cdd326d-c127-4f53-8183-85fac74233de.jpg"/>
+                </div>
+                <div class="m-detail">
+                    <div id="j-goodsdetail">
+                        <div class="n-goodsdetail">
+                            <div class="desc">
+                                {notempty name="$data['video']"}
+                                <div style="text-align:center;">{$data['video']}</div>
+                                {/notempty}
+                                {$data['description']}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<div id="commentdetail" class="g-commentbox f-dn">
+    <div class="n-commentbar">
+        <span class="v-returnicon"></span>
+        小伙伴们说
+    </div>
+    <div class="m-scrollload" style="min-height: 0px;">
+        <div class="list_container">
+            <!--inlcude-->
+            <!--Regular if356-->
+            
+            <p class="n-comment">
+                <span class="t-ml8">小伙伴评价</span>
+                <span class="v-star v-star-1 v-star-2"></span>
+                <span class="v-star v-star-1 v-star-2"></span>
+                <span class="v-star v-star-1 v-star-2"></span>
+                <span class="v-star v-star-1 v-star-2"></span>
+                <span class="v-star v-star-1 v-star-2"></span>
+                <span class="txt"><i class="num">97.9%</i>&nbsp;好评</span>
+            </p>
+            
+            <ul class="n-wordsbox">
+                <!--Regular list-->
+                <li class="v-btn v-btn-1">全部&nbsp;<span class="num">1592</span></li>
+                
+                <li class="v-btn ">有图&nbsp;<span class="num">185</span></li>
+                
+                <li class="v-btn ">有追评&nbsp;<span class="num">27</span></li>
+                
+                <li class="v-btn ">烧水快&nbsp;<span class="num">70</span></li>
+                
+                <li class="v-btn ">物流快&nbsp;<span class="num">51</span></li>
+                
+                <li class="v-btn ">质量很好&nbsp;<span class="num">49</span></li>
+                
+                <li class="v-btn ">外形漂亮&nbsp;<span class="num">32</span></li>
+                
+                <li class="v-btn ">漂亮精致&nbsp;<span class="num">31</span></li>
+                
+                <li class="v-btn ">商品很好&nbsp;<span class="num">29</span></li>
+                
+                <li class="v-btn ">价格实惠&nbsp;<span class="num">29</span></li>
+            
+            </ul>
+            
+            <!--Regular if361-->
+            <img class="v-downloadimg"
+                 src="https://haitao.nos.netease.com/af2f9af8697548c4a27c3add18b62688.jpg?imageView&amp;thumbnail=750x0&amp;quality=95&amp;type=webp">
+            
+            <!--Regular if362--><!--Regular if363-->
+            
+            <div>
+                <ul class="n-commentlist">
+                    <!--Regular list-->
+                    <!--Regular if364-->
+                    <p class="tips">精彩评价</p>
+                    
+                    <li class="commentbox">
+                        
+                        <div class="userinfo">
+                            <img class="v-img"
+                                 src="https://haitao.nos.netease.com/0f0ba74793214b72ac3ff520c3a31151.jpeg?imageView&amp;thumbnail=70x0&amp;quality=95&amp;type=webp">
+                            <div>
+                                <p class="nickname">茶***</p>
+                                <p class="timetxt">加入网易考拉海购217天</p>
+                            </div>
+                            <span class="date">2017-05-29 19:33:42</span>
+                        </div>
+                        
+                        <p class="commenttxt">这个款壶太喜欢了当时拍的颜色有点儿艳 因为没有其他选择，没想到收货以后，是我喜欢的那个颜色
+                            非常大气，已经烧了两次水了非常好用，水开特别快，五六分钟就开了 以前是很少点评的，今天好像有说不完的话，因为它太漂亮啦 质量又好 是纯不锈钢的</p>
+                        
+                        <!--Regular if365-->
+                        
+                        <!--Regular if366-->
+                        <div class="imagebox">
+                            <ul class="imglist">
+                                <!--Regular list-->
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;"><img class="v-img"
+                                                                               src="https://haitao.nos.netease.com/201705291924029dcb29e1aa4e4347a6bcf481af81547c.jpeg?imageView&amp;thumbnail=240x0&amp;quality=95&amp;type=webp"></a>
+                                </li>
+                                
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;"><img class="v-img"
+                                                                               src="https://haitao.nos.netease.com/20170529192409912be34835a342e48bd6cc35758897a7.jpeg?imageView&amp;thumbnail=240x0&amp;quality=95&amp;type=webp"></a>
+                                </li>
+                            
+                            </ul>
+                        </div>
+                        
+                        <!--Regular if367-->
+                        
+                        <!--Regular if368-->
+                        <p class="v-sperate"></p>
+                    
+                    </li>
+                    
+                    <!--Regular if369--><!--Regular if370-->
+                    
+                    <li class="commentbox">
+                        
+                        <div class="userinfo">
+                            <img class="v-img"
+                                 src="https://haitao.nos.netease.com/e1d06e9c26214db5bef085e21aad73e0.jpeg?imageView&amp;thumbnail=70x0&amp;quality=95&amp;type=webp">
+                            <div>
+                                <p class="nickname">茉***雪</p>
+                                <p class="timetxt">加入网易考拉海购411天</p>
+                            </div>
+                            <span class="date">2017-03-21 10:17:59</span>
+                        </div>
+                        
+                        <p class="commenttxt">非常满意，好大的壶，买给父母的，表面还不烫，以防烫到父母的手，非常好的水壶，很满意！</p>
+                        
+                        <!--Regular if371-->
+                        
+                        <!--Regular if372-->
+                        <div class="imagebox">
+                            <ul class="imglist">
+                                <!--Regular list-->
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;"><img class="v-img"
+                                                                               src="https://haitao.nos.netease.com/20170321101554c942b43734544ec0b29cb14e35e3e78d.jpeg?imageView&amp;thumbnail=240x0&amp;quality=95&amp;type=webp"></a>
+                                </li>
+                                
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;"><img class="v-img"
+                                                                               src="https://haitao.nos.netease.com/20170321101558716f88c3f4e94b6cbbe21dc64e7e6c18.jpeg?imageView&amp;thumbnail=240x0&amp;quality=95&amp;type=webp"></a>
+                                </li>
+                                
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;"><img class="v-img"
+                                                                               src="https://haitao.nos.netease.com/201703211016022a883252c510420c959dea119060f295.jpeg?imageView&amp;thumbnail=240x0&amp;quality=95&amp;type=webp"></a>
+                                </li>
+                                
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;"><img class="v-img"
+                                                                               src="https://haitao.nos.netease.com/201703211016063c96daeb80814f2faea282a28b8c262c.jpeg?imageView&amp;thumbnail=240x0&amp;quality=95&amp;type=webp"></a>
+                                </li>
+                                
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;"><img class="v-img"
+                                                                               src="https://haitao.nos.netease.com/201703211016227b82af4330664ae1a7c194c6b4c4cdfa.jpeg?imageView&amp;thumbnail=240x0&amp;quality=95&amp;type=webp"></a>
+                                </li>
+                            
+                            </ul>
+                        </div>
+                        
+                        <!--Regular if373-->
+                        
+                        <!--Regular if374-->
+                        
+                        <!--Regular if375-->
+                        
+                        <!--Regular if376-->
+                        <p class="addcomment">当天追评</p>
+                        
+                        <p class="commenttxt">已在考拉上买过很多很多产品，考拉值得信赖！</p>
+                        
+                        <!--Regular if377-->
+                        
+                        <!--Regular if378-->
+                        
+                        <!--Regular if379-->
+                        <p class="v-sperate"></p>
+                    
+                    </li>
+                    
+                    <!--Regular if380--><!--Regular if381-->
+                    
+                    <li class="commentbox">
+                        
+                        <div class="userinfo">
+                            <img class="v-img"
+                                 src="https://haitao.nos.netease.com/5ce5c384924d44209e54921b2da4d34a.jpeg?imageView&amp;thumbnail=70x0&amp;quality=95&amp;type=webp">
+                            <div>
+                                <p class="nickname">雅***苑</p>
+                                <p class="timetxt">加入网易考拉海购304天</p>
+                            </div>
+                            <span class="date">2017-01-12 15:26:31</span>
+                        </div>
+                        
+                        <p class="commenttxt">
+                            这个水壶我非常满意，不仅内胆是不秀钢的，盖子也是不秀钢的，以前买的盖都是塑料的老公说不健康，货收到了他也点头说好，我也是看了小伙伴的评价才下单的，我同时也希望小伙伴们多晒图，一般我都看你们的评价和晒图来买东西，因为评价比较真实，可以让我花最短的时间买到更好的东西</p>
+                        
+                        <!--Regular if382-->
+                        
+                        <!--Regular if383-->
+                        <div class="imagebox">
+                            <ul class="imglist">
+                                <!--Regular list-->
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;"><img class="v-img"
+                                                                               src="https://haitao.nos.netease.com/201701121517270c35fd902f994e188b4db31a8d3fa235.jpeg?imageView&amp;thumbnail=240x0&amp;quality=95&amp;type=webp"></a>
+                                </li>
+                                
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;"><img class="v-img"
+                                                                               src="https://haitao.nos.netease.com/20170112151752a837bee60bdf42a0831e357f75ddac18.jpeg?imageView&amp;thumbnail=240x0&amp;quality=95&amp;type=webp"></a>
+                                </li>
+                                
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;"><img class="v-img"
+                                                                               src="https://haitao.nos.netease.com/20170112151801e1c9b4a2f4024cb1b0c6b47d18d31102.jpeg?imageView&amp;thumbnail=240x0&amp;quality=95&amp;type=webp"></a>
+                                </li>
+                            
+                            </ul>
+                        </div>
+                        
+                        <!--Regular if384-->
+                        
+                        <!--Regular if385-->
+                        <p class="v-sperate"></p>
+                    
+                    </li>
+                    
+                    <!--Regular if386--><!--Regular if387-->
+                    
+                    <li class="commentbox">
+                        
+                        <div class="userinfo">
+                            <img class="v-img"
+                                 src="https://haitao.nos.netease.com/20161214150523b69d208fb1324b99bdac24b01e94117a.jpeg?imageView&amp;thumbnail=70x0&amp;quality=95&amp;type=webp">
+                            <div>
+                                <p class="nickname">瓶***子</p>
+                                <p class="timetxt">加入网易考拉海购307天</p>
+                            </div>
+                            <span class="date">2017-02-10 09:08:53</span>
+                        </div>
+                        
+                        <p class="commenttxt">包装得很好，层层保护，都让我惊讶了一下 ！外观时尚靓丽，比原来用的那个不知道好多少，容量也大，实际使用也很便利，有一定的保温效果，很满意！</p>
+                        
+                        <!--Regular if388-->
+                        
+                        <!--Regular if389-->
+                        <div class="imagebox">
+                            <ul class="imglist">
+                                <!--Regular list-->
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;"><img class="v-img"
+                                                                               src="https://haitao.nos.netease.com/20170210090053b0d712147dfa4b83b9fbe68b1045ec72.jpeg?imageView&amp;thumbnail=240x0&amp;quality=95&amp;type=webp"></a>
+                                </li>
+                                
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;"><img class="v-img"
+                                                                               src="https://haitao.nos.netease.com/201702100901175206e6628c5645a781f661f556f3d77f.jpeg?imageView&amp;thumbnail=240x0&amp;quality=95&amp;type=webp"></a>
+                                </li>
+                                
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;"><img class="v-img"
+                                                                               src="https://haitao.nos.netease.com/2017021009030205bd4f8d8cb84eabbab01a6c28e2874e.jpeg?imageView&amp;thumbnail=240x0&amp;quality=95&amp;type=webp"></a>
+                                </li>
+                                
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;"><img class="v-img"
+                                                                               src="https://haitao.nos.netease.com/20170210090313a1a1cecff19240bd82c4ca914a976e92.jpeg?imageView&amp;thumbnail=240x0&amp;quality=95&amp;type=webp"></a>
+                                </li>
+                                
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;"><img class="v-img"
+                                                                               src="https://haitao.nos.netease.com/2017021009032183421c40c6ce41ef9de166fb8be16385.jpeg?imageView&amp;thumbnail=240x0&amp;quality=95&amp;type=webp"></a>
+                                </li>
+                            
+                            </ul>
+                        </div>
+                        
+                        <!--Regular if390-->
+                        
+                        <!--Regular if391-->
+                        <p class="v-sperate"></p>
+                    
+                    </li>
+                    
+                    <!--Regular if392--><!--Regular if393-->
+                    
+                    <li class="commentbox">
+                        
+                        <div class="userinfo">
+                            <img class="v-img"
+                                 src="https://haitao.nos.netease.com/20160623085004abd869f51e47447d82dbe82473e26e1e.jpeg?imageView&amp;thumbnail=70x0&amp;quality=95&amp;type=webp">
+                            <div>
+                                <p class="nickname">碧***玉</p>
+                                <p class="timetxt">加入网易考拉海购712天</p>
+                            </div>
+                            <span class="date">2017-01-10 19:20:51</span>
+                        </div>
+                        
+                        <p class="commenttxt">挺大的壶。304不锈钢，和淘宝比较最终还是更相信考拉网的品质。做了第一壶水，没有任何味道。很满意！</p>
+                        
+                        <!--Regular if394-->
+                        
+                        <!--Regular if395-->
+                        <div class="imagebox">
+                            <ul class="imglist">
+                                <!--Regular list-->
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;"><img class="v-img"
+                                                                               src="https://haitao.nos.netease.com/20170110192007173c5a5f00ed45cc850b9e0a5058c706.jpeg?imageView&amp;thumbnail=240x0&amp;quality=95&amp;type=webp"></a>
+                                </li>
+                                
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;"><img class="v-img"
+                                                                               src="https://haitao.nos.netease.com/2017011019201800ee749a885e4252a19dcaafe77b9b66.jpeg?imageView&amp;thumbnail=240x0&amp;quality=95&amp;type=webp"></a>
+                                </li>
+                                
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;"><img class="v-img"
+                                                                               src="https://haitao.nos.netease.com/2017011019203031b12dd592b846b7b02865f24d44c545.jpeg?imageView&amp;thumbnail=240x0&amp;quality=95&amp;type=webp"></a>
+                                </li>
+                                
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;"><img class="v-img"
+                                                                               src="https://haitao.nos.netease.com/2017011019204496bbacd22c9f4eb3a38e16d290e5f620.jpeg?imageView&amp;thumbnail=240x0&amp;quality=95&amp;type=webp"></a>
+                                </li>
+                            
+                            </ul>
+                        </div>
+                        
+                        <!--Regular if396-->
+                        
+                        <!--Regular if397-->
+                        <p class="v-sperate"></p>
+                    
+                    </li>
+                    
+                    <!--Regular if398--><!--Regular if399-->
+                    
+                    <li class="commentbox">
+                        
+                        <div class="userinfo">
+                            <img class="v-img"
+                                 src="https://haitao.nos.netease.com/e0c99aea485944539cc4422ffe19575f.jpeg?imageView&amp;thumbnail=70x0&amp;quality=95&amp;type=webp">
+                            <div>
+                                <p class="nickname">晨***曦</p>
+                                <p class="timetxt">加入网易考拉海购322天</p>
+                            </div>
+                            <span class="date">2016-12-15 20:41:34</span>
+                        </div>
+                        
+                        <p class="commenttxt">宝贝绝对的是正品，用起来很方便，烧水快。考拉值得信赖的网站。</p>
+                        
+                        <!--Regular if400-->
+                        
+                        <!--Regular if401-->
+                        <div class="imagebox">
+                            <ul class="imglist">
+                                <!--Regular list-->
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;"><img class="v-img"
+                                                                               src="https://haitao.nos.netease.com/2016121520402657bfe07e9acf4396b56ab9f8ddd90bbe.jpeg?imageView&amp;thumbnail=240x0&amp;quality=95&amp;type=webp"></a>
+                                </li>
+                                
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;"><img class="v-img"
+                                                                               src="https://haitao.nos.netease.com/20161215204032a26ce9276ee24a4188bca37ce2b20c64.jpeg?imageView&amp;thumbnail=240x0&amp;quality=95&amp;type=webp"></a>
+                                </li>
+                                
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;"><img class="v-img"
+                                                                               src="https://haitao.nos.netease.com/2016121520403820a1b4788dc14a6caf23d2ea4013911e.jpeg?imageView&amp;thumbnail=240x0&amp;quality=95&amp;type=webp"></a>
+                                </li>
+                            
+                            </ul>
+                        </div>
+                        
+                        <!--Regular if402-->
+                        
+                        <!--Regular if403-->
+                        <p class="v-sperate"></p>
+                    
+                    </li>
+                    
+                    <!--Regular if404--><!--Regular if405-->
+                    
+                    <li class="commentbox">
+                        
+                        <div class="userinfo">
+                            <img class="v-img"
+                                 src="https://haitao.nos.netease.com/2016042920443572dfe7f4b39e4041a5d4fc6ef6da63c9.jpeg?imageView&amp;thumbnail=70x0&amp;quality=95&amp;type=webp">
+                            <div>
+                                <p class="nickname">心***来</p>
+                                <p class="timetxt">加入网易考拉海购535天</p>
+                            </div>
+                            <span class="date">2016-09-24 13:09:29</span>
+                        </div>
+                        
+                        <p class="commenttxt">发过来光外包装就是三层，包裹非常严实，东西用了也有质感，还有一定保温效果，觉得很赞！</p>
+                        
+                        <!--Regular if406-->
+                        
+                        <!--Regular if407-->
+                        <div class="imagebox">
+                            <ul class="imglist">
+                                <!--Regular list-->
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;"><img class="v-img"
+                                                                               src="https://haitao.nos.netease.com/201609241307497c2e48a8e7b242bb932b03e5529979ba.jpeg?imageView&amp;thumbnail=240x0&amp;quality=95&amp;type=webp"></a>
+                                </li>
+                                
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;"><img class="v-img"
+                                                                               src="https://haitao.nos.netease.com/20160924130751756581d3a01b4d60b32dc0ab5e34fc70.jpeg?imageView&amp;thumbnail=240x0&amp;quality=95&amp;type=webp"></a>
+                                </li>
+                            
+                            </ul>
+                        </div>
+                        
+                        <!--Regular if408-->
+                        
+                        <!--Regular if409-->
+                        <p class="v-sperate"></p>
+                    
+                    </li>
+                    
+                    <!--Regular if410--><!--Regular if411-->
+                    
+                    <li class="commentbox">
+                        
+                        <div class="userinfo">
+                            <img class="v-img"
+                                 src="https://haitao.nos.netease.com/e9b1df7fde6a481cb92f5d556e055125.jpeg?imageView&amp;thumbnail=70x0&amp;quality=95&amp;type=webp">
+                            <div>
+                                <p class="nickname">L***R</p>
+                                <p class="timetxt">加入网易考拉海购717天</p>
+                            </div>
+                            <span class="date">2016-07-29 16:19:28</span>
+                        </div>
+                        
+                        <p class="commenttxt">
+                            用着好回购的，质量特别好，容量大，我家不用暖壶或者保温壶，用这个烧水之后直接饮用。保温效果很棒无缝内胆，上盖里面也是不锈钢，倒水的时候不会流的到处都是。没有烧开水自动转保温模式，不过本身保温不错。烧水有按钮，把壶放在座上必须按下按钮才开始烧水。推荐购买。开启上盖有按钮。</p>
+                        
+                        <!--Regular if412-->
+                        
+                        <!--Regular if413-->
+                        <div class="imagebox">
+                            <ul class="imglist">
+                                <!--Regular list-->
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;"><img class="v-img"
+                                                                               src="https://haitao.nos.netease.com/201607291618284face564bb2c4ebeb7f1904b9929c2ef.jpeg?imageView&amp;thumbnail=240x0&amp;quality=95&amp;type=webp"></a>
+                                </li>
+                                
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;"><img class="v-img"
+                                                                               src="https://haitao.nos.netease.com/2016072916184346fe0f134cdd4f1ab35954f76d4f93af.jpeg?imageView&amp;thumbnail=240x0&amp;quality=95&amp;type=webp"></a>
+                                </li>
+                                
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;"><img class="v-img"
+                                                                               src="https://haitao.nos.netease.com/20160729161850bd2e5e98f6b14bcc9345aabe9256d2b0.jpeg?imageView&amp;thumbnail=240x0&amp;quality=95&amp;type=webp"></a>
+                                </li>
+                                
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;"><img class="v-img"
+                                                                               src="https://haitao.nos.netease.com/20160729161901fffe362ee5e94418a087dcc18c6afb0f.jpeg?imageView&amp;thumbnail=240x0&amp;quality=95&amp;type=webp"></a>
+                                </li>
+                                
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;"><img class="v-img"
+                                                                               src="https://haitao.nos.netease.com/20160729161913efd232c6b48c471cbcb373aa2a2b9730.jpeg?imageView&amp;thumbnail=240x0&amp;quality=95&amp;type=webp"></a>
+                                </li>
+                            
+                            </ul>
+                        </div>
+                        
+                        <!--Regular if414-->
+                        
+                        <!--Regular if415-->
+                        <p class="v-sperate"></p>
+                    
+                    </li>
+                    
+                    <!--Regular if416--><!--Regular if417-->
+                    
+                    <li class="commentbox">
+                        
+                        <div class="userinfo">
+                            <img class="v-img"
+                                 src="https://haitao.nos.netease.com/2016040422431048d146fa489b4bd5a721c8e468039102.jpeg?imageView&amp;thumbnail=70x0&amp;quality=95&amp;type=webp">
+                            <div>
+                                <p class="nickname">s***y</p>
+                                <p class="timetxt">加入网易考拉海购676天</p>
+                            </div>
+                            <span class="date">2016-08-22 12:34:12</span>
+                        </div>
+                        
+                        <p class="commenttxt">不错 颜色很高贵低调 耐看耐脏 推荐
+                            主要是看大家评价不错 买的 比淘宝上看的几个靠谱 然后买了 结果到手后使用我是比较满意的 更重要的是 我妈觉得不错 就OK了
+                        </p>
+                        
+                        <!--Regular if418-->
+                        
+                        <!--Regular if419-->
+                        <div class="imagebox">
+                            <ul class="imglist">
+                                <!--Regular list-->
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;"><img class="v-img"
+                                                                               src="https://haitao.nos.netease.com/2016082212313869892c50e3214d8e8da4029071e8435f.jpeg?imageView&amp;thumbnail=240x0&amp;quality=95&amp;type=webp"></a>
+                                </li>
+                                
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;"><img class="v-img"
+                                                                               src="https://haitao.nos.netease.com/20160822123155f4b557631e044b8ca37b39fd25d487a3.jpeg?imageView&amp;thumbnail=240x0&amp;quality=95&amp;type=webp"></a>
+                                </li>
+                                
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;"><img class="v-img"
+                                                                               src="https://haitao.nos.netease.com/201608221232172a243669f65c4ffcb0dba65389b120f7.jpeg?imageView&amp;thumbnail=240x0&amp;quality=95&amp;type=webp"></a>
+                                </li>
+                            
+                            </ul>
+                        </div>
+                        
+                        <!--Regular if420-->
+                        
+                        <!--Regular if421-->
+                        <p class="v-sperate"></p>
+                    
+                    </li>
+                    
+                    <!--Regular if422--><!--Regular if423-->
+                    
+                    <li class="commentbox">
+                        
+                        <div class="userinfo">
+                            <img class="v-img"
+                                 src="https://haitao.nos.netease.com/02688f8d9df44af4927a8ab3c2d6d011.jpeg?imageView&amp;thumbnail=70x0&amp;quality=95&amp;type=webp">
+                            <div>
+                                <p class="nickname">℡***绵</p>
+                                <p class="timetxt">加入网易考拉海购498天</p>
+                            </div>
+                            <span class="date">2016-08-08 10:39:34</span>
+                        </div>
+                        
+                        <p class="commenttxt">非常喜欢 颜色也高大上 是我喜欢的类型噢 一壶正好中号开水瓶一瓶加一杯呢 </p>
+                        
+                        <!--Regular if424-->
+                        
+                        <!--Regular if425-->
+                        <div class="imagebox">
+                            <ul class="imglist">
+                                <!--Regular list-->
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;"><img class="v-img"
+                                                                               src="https://haitao.nos.netease.com/2016080810384628b0686b4999498d91cf5c0ac1c632a6.jpeg?imageView&amp;thumbnail=240x0&amp;quality=95&amp;type=webp"></a>
+                                </li>
+                                
+                                <li class="itm">
+                                    <a class="v-link" href="javascript:;"><img class="v-img"
+                                                                               src="https://haitao.nos.netease.com/201608081038472ae32b4579384d9a817657bd759cd1b7.jpeg?imageView&amp;thumbnail=240x0&amp;quality=95&amp;type=webp"></a>
+                                </li>
+                            
+                            </ul>
+                        </div>
+                        
+                        <!--Regular if426-->
+                        
+                        <!--Regular if427-->
+                        <p class="v-sperate v-sperate-1"></p>
+                    
+                    </li>
+                
+                </ul>
+            </div>
+            
+            <!--Regular if357-->
+        
+        </div>
+        <!--Regular if358-->
+        
+        <!--Regular if428-->
+        <div class="u-loading f-tac">
+            <img src="/res/images/loading.gif">
+        </div>
+        <!--Regular if359-->
+    </div>
+</div>
+<div class="m-sku-mask"></div>
+<article class="m-sku" style="padding-top: 140px;">
+    <div class="topblock">
+        <div class="topbar">
+            <span class="left" id="topbar-left"><i class="back u-icn" id="topbar-back"></i></span>
+            规格选择
+        </div>
+        <!--Regular if30-->
+        <div class="product" style="height: 90px;">
+            <img src="https://haitao.nos.netease.com/e892a2fde01e43619efceb8b9aad118d1508137593384j8tu6mmp14221.jpg?imageView&amp;thumbnail=100x100&amp;quality=85&amp;type=webp" alt="{$data['name']}" class="pic">
+            <div class="txt-wrap">
+                <p class="tit">{$data['name']}</p>
+                <!--Regular if31-->
+                <p class="stat">
+                    <span class="price"><span class="rmb">¥ </span><!--Regular if32-->929</span>
+                    <span class="stock-tip"> (库存充足)</span>
+                </p>
+                
+                <!--Regular if33-->
+                <p class="selected"><!--Regular if34--></p>
+            
+            </div>
+        </div>
+    </div>
+    <div class="sku-scroll">
+        <div class="skuwrap" style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);">
+            <!--Regular list-->
+            <form action="https://m.kaola.com/order/confirm.html?from=detailfp" method="post">
+                <div class="ctr-num">
+                    <span class="opt-name">数量</span>
+                    <div class="optbox">
+						<span class="ctrnum-wrap">
+							<span class="minus " style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><i class="u-icn14 u-icn14-1 "></i></span>
+							<input type="text" name="goods[0].tempBuyAmount" class="qty" autocomplete="off" readonly="readonly">
+							<span class="plus " style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><i class="u-icn14 "></i></span>
+						</span>
+                        <div class="tipwrap">
+                            <p class="tip" id="js_stockTip"></p>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="buynow-only u-info ">
+        <i class="money"></i>
+        <p class="desc">省钱贴士：据海关规定，订单总税额≤50元则免征。本品税费¥110.55，单件直接下单可免税哦！</p>
+    </div>
+</article>
+<article class="m-buybar">
+    <div class="btn-wrap">
+        <!--Regular if39-->
+        <a href="javascript:;" class="collect "><!--Regular if40-->收藏</a>
+        <a href="#" class="cart ">购物车<!--Regular if41--></a>
+        <!--Regular if42--><!--Regular if43--><!--Regular if44--><!--Regular if45-->
+        <a href="#" class="addcart btn">加入购物车</a>
+        <a href="#" class="buynow btn">立即购买</a>
+    </div>
+</article>
+{/block}
+{block  name='js'}
+<script>
+    $(function () {
+        $('#commentbox').click(function () {
+            $('#commentdetail').removeClass('f-dn');
+            $('#infobox').addClass('f-dn');
+        });
+        $('#returnbtn').click(function () {
+            window.history.go(-1);
+        });
+        $('.v-returnicon').click(function () {
+            $('#infobox').removeClass('f-dn');
+            $('#commentdetail').addClass('f-dn');
+        });
+        $('#topnav li').click(function () {
+            var that = $(this);
+            that.siblings().removeClass('cur');
+            that.addClass('cur');
+            $('#infobox section').eq(that.data('index')).scroll();
+        });
+        $('.buynow').click(function () {
+            if (!$(this).hasClass('btn-large')) {
+                $('#prdbox').hide();
+                $('.m-sku').addClass('show');
+                $('.m-sku-mask').addClass('show');
+                $(this).addClass('btn-large');
+            } else {
+            
+            }
+        });
+        $('#topbar-back').click(function () {
+            $('#prdbox').show();
+            $('.m-sku').removeClass('show');
+            $('.m-sku-mask').removeClass('show');
+            $('.buynow').removeClass('btn-large');
+        })
+    })
+</script>
+{/block}

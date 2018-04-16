@@ -1,0 +1,155 @@
+{extend name="common/base" /}
+
+{block name="title"}
+<title>ETshop-{:lang('MyCoupon')}</title>
+{/block}
+
+{block name="css"}
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/member.css" />
+{/block}
+
+{block name="body"}
+<!--面包屑-->
+<div class="ly-path">
+    <ul class="clearfix">
+        <li class="home">
+            <a href="{:url('crossbbcg/index/index')}" title="{:lang('go_min')}">{:lang('Home')}</a>
+            <span>&gt;&nbsp;</span>
+        </li>
+        <li>
+            <a href="{:url('member/index/index')}" title="">{:lang('Member')}</a>
+            <span>&gt;&nbsp;</span>
+        </li>
+        <li>
+            <h1>{:lang('MyCoupon')}</h1>
+        </li>
+    </ul>
+</div>
+<div class="ly-main member-main clearfix">
+	{include file="index/left_menu"}
+	<div class="member-right">
+		<div class="member-content member-coupon">
+			<div class="title member-title member-max-title">
+				<div class="t">我的优惠券</div>
+				<ul class="tabs">
+					<li class="active">
+						<a href="">全部优惠券<em>10</em></a>
+					</li>
+					<li>
+						<a href="">未使用<em>10</em></a>
+					</li>
+					<li>
+						<a href="">已使用<em>10</em></a>
+					</li>
+					<li>
+						<a href="">已过期<em>10</em></a>
+					</li>
+				</ul>
+			</div>
+			<div class="body pb15 mh600">
+
+				<div class="coupon-item  coupon-item-d">
+					<div class="item">
+						<div class="c-type">
+							<div class="c-price">
+								<em>￥</em>100.00</div>
+							<div class="c-limit">【满599可用】</div>
+							<div class="c-time">2016-01-28至2020-12-22</div>
+
+						</div>
+						<div class="c-msg">
+							<div class="c-range">
+								<div class="range-item">
+									<span class="dt">券编号：</span>
+									<span class="txt">BOUE73BA8500001</span>
+								</div>
+								<div class="range-item">
+									<span class="dt">店铺名称：</span>
+									<span class="txt" title="GAP海外官方旗舰店"><a href="http://127.0.0.1/onex/public/index.php/shopcenter.html?shop_id=1">GAP海外官方旗舰店</a></span>
+								</div>
+								<div class="range-item">
+									<span class="dt">平台限制：</span>
+									<span class="txt">手机、电脑端通用</span>
+								</div>
+							</div>
+							<div class="op-btn">
+								<a href="" class="btn">立即使用</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="coupon-item  coupon-item-c">
+					<div class="item">
+						<div class="c-type">
+							<div class="c-price">
+								<em>￥</em>100.00</div>
+							<div class="c-limit">【满599可用】</div>
+							<div class="c-time">2016-01-28至2020-12-22</div>
+
+						</div>
+						<div class="c-msg">
+							<div class="c-range">
+								<div class="range-item">
+									<span class="dt">券编号：</span>
+									<span class="txt">BOUE73BA8500001</span>
+								</div>
+								<div class="range-item">
+									<span class="dt">店铺名称：</span>
+									<span class="txt" title="GAP海外官方旗舰店"><a href="">GAP海外官方旗舰店</a></span>
+								</div>
+								<div class="range-item">
+									<span class="dt">平台限制：</span>
+									<span class="txt">手机、电脑端通用</span>
+								</div>
+							</div>
+							<!--<div class="op-btn">
+								<a href="" class="btn">立即使用</a>
+							</div>-->
+							<div class="iconfont icon-yiguoqi"></div>
+						</div>
+					</div>
+				</div>
+				<div class="coupon-item  coupon-item-b">
+					<div class="item">
+						<div class="c-type">
+							<div class="c-price">
+								<em>￥</em>100.00</div>
+							<div class="c-limit">【满599可用】</div>
+							<div class="c-time">2016-01-28至2020-12-22</div>
+
+						</div>
+						<div class="c-msg">
+							<div class="c-range">
+								<div class="range-item">
+									<span class="dt">券编号：</span>
+									<span class="txt">BOUE73BA8500001</span>
+								</div>
+								<div class="range-item">
+									<span class="dt">店铺名称：</span>
+									<span class="txt" title="GAP海外官方旗舰店"><a href="http://127.0.0.1/onex/public/index.php/shopcenter.html?shop_id=1">GAP海外官方旗舰店</a></span>
+								</div>
+								<div class="range-item">
+									<span class="dt">平台限制：</span>
+									<span class="txt">手机、电脑端通用</span>
+								</div>
+							</div>
+							<!--<div class="op-btn">
+								<a href="" class="btn">立即使用</a>
+							</div>-->
+							<div class="iconfont icon-yishiyong"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{/block}
+
+<!--此板块为页面单独js加载-->
+{block name="footer_js"}
+<script type="text/javascript">
+	//需要加载的js文件
+	//Private_Script = ['memberComment'];
+</script>
+{/block}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    {block name="title"}
+    <title>ETshop1.0</title>
+    {/block}
+    <script type="text/javascript">
+        //模板静态js路径
+        var RequireParam={
+            BaseScriptPath:'/',
+            BaseScript:['jquery','public'],
+            UpdateCartUrl:"{:url('carts/update_num')}"
+        };
+        Private_Script=null
+    </script>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/crossbbcg/pc/default/css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/{$module_path}css/shop.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/layer-v3.0.3/skin/default/layer.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/layer-v3.0.3/skin/blue/style.css"/>
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_kge539i2yfirudi.css"/>
+    {block name="css"}
+    
+    {/block}
+</head>
+<body>
+{include file="store/header" /}
+{block name="body"}
+{/block}
+{:widget('crossbbcg/common/footer')}
+{block name="footer_js"}
+{/block}
+<script type="text/javascript" data-main="__PUBLIC__/crossbbcg/pc/default/js/main" src="/static/js/require.js" ></script>
+
+<div class="js_language">
+    <span id="js_cart_least">{:lang('js_cart_least')}</span>
+    <span id="js_cart_more">{:lang('js_cart_more')}</span>
+    <span id="js_cart_jian">{:lang('js_cart_jian')}</span>
+    <span id="js_add_cart_success">{:lang('js_add_cart_success')}</span>
+    <span id="js_choose_sku">{:lang('js_choose_sku')}</span>
+    <span id="js_ok">{:lang('js_ok')}</span>
+    <span id="js_no">{:lang('js_no')}</span>
+    <span id="js_copy_success">{:lang('js_copy_success')}</span>
+    <span id="js_copy_error">{:lang('js_copy_error')}</span>
+    <span id="js_again_code">{:lang('js_again_code')}</span>
+    <span id="js_code_success">{:lang('js_code_success')}</span>
+</div>
+
+</body>
+</html>

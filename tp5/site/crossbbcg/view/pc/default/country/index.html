@@ -1,0 +1,140 @@
+ {extend name="common/base" /}
+ {block name="title"}
+<title>{$title}</title>
+{/block} {block name="css"}
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/country.css" /> {/block} {block name="body"}
+ {notempty name="$arr_banner"}
+<div class="ly-Allwrap clearfix">
+	<div class="n">
+		<div class="ly-flash">
+			<!--请参考index.js 参数设置 此处为全屏轮播配置项 , 可覆盖默认配置项 data-carouFredSel(必须)  为加载标识  data-type(必须) 轮播类型full 为全屏, 按照国家馆的最新馆排序 -->
+			<div class="slide-full" data-type="full" data-carouFredSel='{
+				auto:{
+					autoplay:true,
+					pauseDuration:5000,
+				},
+				direction:"left",
+				scroll:{
+					item:1,
+					easing:"swing"
+				}
+					}'>
+				<ol class="slide-content clearfix">
+					{foreach $arr_banner as $key => $arr}
+                    <li class="slide-item">
+                        {if condition="substr($arr['banner_image'],0,4)=='http'"}
+                        <a href="{:url('crossbbcg/country/details','item_id='.$arr['id'])}"> <img src="{$arr.banner_image}" alt="{$arr['name']}"> </a>
+                        {else /}
+                        <a href="{:url('crossbbcg/country/details','item_id='.$arr['id'])}"> <img src="__UPLOADS__/{$arr.banner_image}" alt="{$arr['name']}"> </a>
+                        {/if}
+                    </li>
+                    {/foreach}
+                    
+				</ol>
+			</div>
+
+		</div>
+	</div>
+</div>
+ {/notempty}
+ 
+ {notempty name="$arr_np"}
+<div class="country-link w1200">
+	<ul class="clearfix">
+        {foreach $arr_np as $key => $arr}
+		<li>
+			<a href="{:url('crossbbcg/country/details','item_id='.$arr['id'])}">
+                
+                {if condition="empty($arr['thumb']) "}
+                <img src="__PUBLIC__/{$img_path}/no-image.png" alt="{$arr['name']}" />
+                {elseif condition="substr($arr['thumb'],0,4)=='http'"}
+                <img src="{$arr.thumb}" alt="{$arr['name']}" />
+                {else /}
+                <img src="__UPLOADS__/{$arr.thumb}" alt="{$arr['name']}" />
+                {/if}
+                
+				<span>{$arr['name']} <i>&gt;</i></span>
+			</a>
+		</li>
+        {/foreach}
+	</ul>
+</div>
+ 
+<div class="country-nav-w" id="country_nav_box">
+	<div class="country-nav w1200">
+		<div class="n">
+			<ul class="slide-content">
+                {foreach $arr_np as $key => $arr}
+                    {if condition="$key>=8"}{php}break;{/php}{/if}
+                    {if condition="$key==0"}
+				<li class=" slide-item active"><span>{$arr['name']}</span></li>
+                    {else /}
+                <li class=" slide-item"><span>{$arr['name']}</span></li>
+                    {/if}
+                {/foreach}
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="country-nav-right">
+	
+		<div class="go-cart">
+            <i class="iconfont icon-cart"></i><a href="{:url('crossbbcg/carts/index')}" style="color:#fff;">{:lang('shipping_cart')}</a>
+		</div>
+		<ul class="clearfix">
+            {foreach $arr_np as $key => $arr}
+            {if condition="$key>=8"}{php}break;{/php}{/if}
+            {if condition="$key==0"}
+            <li class="active"><span>{$arr['name']}</span></li>
+            {else /}
+            <li class=""><span>{$arr['name']}</span></li>
+            {/if}
+            {/foreach}
+		</ul>
+		<div class="go-top" onclick="goTop()"><i class="iconfont icon-up"></i></div>
+	
+</div>
+<div class="ly-main clearfix">
+    {foreach $arr_goods as $key => $arr}
+    <div class="country_prd">
+        <div class="country-title"><span>{$arr['name']}</span></div>
+        {notempty name="$arr['goods']"}
+        <div class="country_products">
+            <ul>
+                {foreach $arr['goods'] as $key2=> $arr2}
+                <li>
+                    <a class="pic" href="{:url('crossbbcg/goods/index','item_id='.$arr2['id'])}" target="_blank" title="{$arr2['name']}">
+                        {if condition="empty($arr2['thumb']) "}
+                        <img alt="{$arr2['name']}" width="232" height="232" class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__PUBLIC__/admin/images/icons/no-image.png"/>
+                        {elseif condition="substr($arr2['thumb'],0,4)=='http'"}
+                        <img width="232" height="232" class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="{$arr2.thumb}" alt="{$arr2['name']}" />
+                        {else /}
+                        <img data-original="__UPLOADS__/{$arr2.thumb}" alt="{$arr2['name']}" width="232" height="232" class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" />
+                        {/if}
+                    </a>
+                    <div class="txt">
+                        <h3 class="tit"><a class="protitle" target="_blank" href="{:url('crossbbcg/goods/index','item_id='.$arr2['id'])}" title="{$arr2['name']}">{$arr2['name']}</a></h3>
+                        <p class="price">
+                            <strong class="item1">{$arr2['sale_price']}</strong>
+                            <span class="item2">{$arr2['market_price']}</span>
+                            <span class="item3"><a href="{:url('crossbbcg/goods/index','item_id='.$arr2['id'])}" >{:lang('Buy_Now')}</a></span>
+                        </p>
+                    </div>
+                </li>
+                {/foreach}
+            </ul>
+        </div>
+        {/notempty}
+    </div>
+    {/foreach}
+</div>
+
+ {/notempty}
+ {/block}
+<!--此板块为页面单独js加载-->
+{block name="footer_js"}
+<script type="text/javascript">
+	//需要加载的js文件
+	Private_Script = ['country'];
+</script>
+{/block}

@@ -1,0 +1,147 @@
+        {extend name="admin@public/poupbase" /}
+        
+        {block name="style"}
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/crossbbcg/admin/css/style.css" />
+        {/block}
+        <!-- CONTENT -->
+        {block name="body"}
+        <div id="content" style="margin:0px 10px 5px 8px;">
+            <div class="bloc" style="margin:10px 0px 0px;">
+                
+                <form id="myform" method="post" style="margin-top:5px;" class="">
+                    
+                    <div class="content">
+                        
+                        <fieldset style="min-height: 344px">
+                            <legend>{$meta_title|default=''}</legend>
+                                <div class="row">
+                                    <label for="name" class="w120">{:lang('ad_position_name')}:</label>
+                                    <input id="name" type="text" value="{$data.name|default=''}" name="name" class="input" />
+                                </div>
+                            <div class="row">
+                                <label for="width" class="w120">{:lang('ad_position_width')}:</label>
+                                <input id="width" type="text" value="{$data.width|default=''}" name="width" class="input"/>
+                                <span>(px)</span>
+                            </div>
+                            <div class="row">
+                                <label for="height" class="w120">{:lang('ad_position_height')}:</label>
+                                <input id="height" type="text" value="{$data.height|default=''}" name="height" class="input"/>
+                                <span>(px)</span>
+                            </div>
+                            <div class="row">
+                                <label for="description" class="w120">{:lang('ad_position_description')}:</label>
+                                <textarea id="description" name="description">{$data.description}</textarea>
+                            </div>
+                            <div class="row bset ui-buttonset">
+                                <label  class="w120">{:lang('ad_type')}:</label>
+                                <input type="radio" name="ad_type" id="ad_type1" {eq name="$action_name" value="add"}checked{/eq} {eq name="$data.ad_type" value="1"}checked{/eq} value="1" class="ui-helper-hidden-accessible">
+                                <label for="ad_type1" class="w105_r_0 ui-button ui-widget ui-state-default ui-button-text-only ui-corner-left " role="button"><span>{:lang('ad_char')}</span></label>
+                                <input type="radio" name="ad_type" id="ad_type2" value="2" {eq name="$data.ad_type" value="2"}checked{/eq} class="ui-helper-hidden-accessible">
+                                <label for="ad_type2" class="w105_r_0 ui-button ui-widget ui-state-default ui-button-text-only ui-corner-right" role="button"><span>{:lang('ad_goods')}</span></label>
+                            </div>
+                            <div class="row sort_type" {neq name='$data.ad_type' value='2'}style="display: none;"{/neq}>
+                                <label for="sort_type" class="w120">{:lang('sort_type')}:</label>
+                                <select name="sort_type" id="sort_type" style="width: 220px">
+                                    <option value="0" {eq name="$data.sort_type" value="0"}selected{/eq}>{:lang('sort_value')}</option>
+                                    <option value="1" {eq name="$data.sort_type" value="1"}selected{/eq}>{:lang('hot_salt')}</option>
+                                    <option value="2" {eq name="$data.sort_type" value="2"}selected{/eq}>{:lang('sort_discount')}</option>
+                                    <option value="3" {eq name="$data.sort_type" value="3"}selected{/eq}>{:lang('sort_time')}</option>
+                                </select>
+                            </div>
+                            <div class="row bset">
+                                <label class="w120">{:lang('Publishing_Platform')}</label>
+                
+                                {eq name="ACTION_NAME" value="edit"}
+                                <input name="pc_status" type="checkbox" value="1" id="pc_status" {eq name="data.pc_status" value="1"}checked{/eq} />
+                                <label for="pc_status" class="w120_r_0">{:lang('Pc_on')}</label>
+                
+                                <input name="wap_status" type="checkbox" value="1" id="wap_status" {eq name="data.wap_status" value="1"}checked{/eq} />
+                                <label for="wap_status" class="w120_r_0">Wechat/Wap</label>
+                
+                                <input name="api_status" type="checkbox" value="1" id="api_status" {eq name="data.api_status" value="1"}checked{/eq} />
+                                <label for="api_status" class="w120_r_0">{:lang('Api_on')}</label>
+                                {else /}
+                                <input name="pc_status" type="checkbox" value="1" id="pc_status" checked />
+                                <label for="pc_status" class="w120_r_0">{:lang('Pc_on')}</label>
+                
+                                <input name="wap_status" type="checkbox" value="1" id="wap_status" checked/>
+                                <label for="wap_status" class="w120_r_0">{:lang('Wap_on')}</label>
+                
+                                <input name="api_status" type="checkbox" value="1" id="api_status" checked />
+                                <label for="api_status" class="w120_r_0">{:lang('Api_on')}</label>
+                                {/eq}
+                            </div>
+                            <div class="row">
+                                <label for="status" class="w120">{:lang('status')}:</label>
+                                <div class="slideBox">
+                                    {eq name="ACTION_NAME" value="edit"}
+                                    <input id="status" value="1" type="checkbox" name="status" {eq name="data['status']" value="1"}checked{/eq}/>
+                                    {else /}
+                                    <input id="status" value="1" type="checkbox" name="status" checked />
+                                    {/eq}
+                                    <label for="status"></label>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="buttons-wrapper bw-bottom" style="margin:10px 10px 0px; text-align:center;">
+                                {eq name="$action_name" value="edit"}
+                                <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('savedata')}" />
+                                <input name="id" type="hidden"  value="{$data.id}" />
+                                {else /}
+                                <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}" />
+                                {/eq}
+                                <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                            </div>
+                        </fieldset>
+                    </div>
+                </form>
+            </div>
+        </div>
+        {/block}
+        
+        {block name="js"}
+        <script>
+            
+            <!--添加 Chosen 的选择框样式-->
+            var config = {
+                '.chosen-select'           : {},
+                '.chosen-select-deselect'  : { allow_single_deselect: true },
+                '.chosen-select-no-single' : { disable_search_threshold: 10 },
+                '.chosen-select-rtl'       : { rtl: true },
+                '.chosen-select-width'     : { width: '95%' }
+            }
+            for (var selector in config) {
+                $(selector).chosen(config[selector]);
+            }
+        
+            $(function() {
+                $(".bset").buttonset();
+                $("#start_time").datetimepicker({
+                    dateFormat: "yy-mm-dd",
+                    timeFormat: 'HH:mm:ss'
+                });
+                $("#end_time").datetimepicker({
+                    dateFormat: "yy-mm-dd",
+                    timeFormat: 'HH:mm:ss'
+                });
+                $(':input[name="listtype"]').click(function(){
+                    var val = $(this).val();
+                    if(val==0){
+                        $('#template_detail_box').show();
+                        $('#template_lists_box label').text("{:lang('List_tpl')}");
+                    }else{
+                        $('#template_lists_box label').text("{:lang('First_tpl')}");
+                        $('#template_detail_box').hide();
+                    }
+                })
+                $('.ui-button').click(function () {
+                    var _this = $(this);
+                    if ($('#'+_this.attr('for')).val() == 2) {
+                        $('.sort_type').show();
+                    } else {
+                        $('.sort_type').hide();
+                    }
+                })
+            })
+        </script>
+        {/block}

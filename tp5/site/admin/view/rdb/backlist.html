@@ -1,0 +1,128 @@
+    {extend name="public/base"/}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+        <div id="content">
+            <div class="breadcrumbs">
+                {:lang('General')} : &nbsp;&nbsp; {:lang('DbModel')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+            </div>
+            
+            <div class="bloc">
+                <div class="title">
+                    <div class="tabs" id="navs">
+                        {include file="public/navs" /}
+                    </div>
+    
+                    {include file="public/lang" /}
+                </div>
+                <div class="content">
+                
+                <dl class="gzzt clearfix mtb10">
+                        <dd>
+                            <div class="boxr">
+                                {include file="public/button" /}
+                            </div>
+                        </dd>
+                    <dd style="float: right !important;">
+                        <div class="boxl">
+                            <span>
+                                <a href="javascript:location.reload();" class="refresh tooltip-link" title="{:lang('Refresh')}">
+                                    <em>{:lang('Refresh')}</em>
+                                </a>
+                            </span>
+                            <span>
+                                <a href="javascript:void(0);" class="ajax-get setting tooltip-link colum" title="{:lang('Showlum')}" data-title="{:lang('Showlum')}">
+                                    <em>{:lang('Showlum')}</em>
+                                </a>
+                            </span>
+                        </div>
+                    </dd>
+                    </dl>
+                    
+                    {notempty name="list"}
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th class="center" width="30"><input class="check-all" type="checkbox"></th>
+                                <th class="left">{:lang('Backname')}</th>
+                                <th class="center">{:lang('Volume')}</th>
+                                <th class="left">{:lang('Compression')}</th>
+                                <th class="left">{:lang('Size')}</th>
+                                <th class="left">{:lang('Backtime')}</th>
+                                <th class="actions">{:lang('Actions')}</th>
+                            </tr>
+                            </thead>
+                    
+                    <tbody>
+                            <tbody>
+                            {volist name="list" id="data"}
+                                <tr>
+                                    <td class="center"><input class="ids" type="checkbox" name="ids[]" value="{$data.time}"></td>
+                                    <td>
+                                        <a class="db-import tooltip-link" href="{:url('import?time='.$data['time'])}" title="{:lang('Reduction')}">
+                                            {$data.time|date='Ymd-His',###}
+                                        </a>
+                                        <span class="status" style="float:right; color:#00F;"></span>
+                                    </td>
+                                    <td class="center" style="width:100px;">{$data.part}</td>
+                                    <td class="left" style="width:80px;">{$data.compress}</td>
+                                    <td class="left" style="width:100px;">{$data.size|format_bytes}</td>
+                                    <td class="left" style="width:150px;">{$key}</td>
+                                    <td class="actions">
+                                        <a class="db-import tooltip-link" href="{:url('import?time='.$data['time'])}" title="{:lang('Reduction')}">
+                                            <img src="__PUBLIC__/admin/images/reduction.png" alt="{:lang('Reduction')}" />
+                                        </a>&nbsp;&nbsp;&nbsp;
+                                        <a class="tooltip-link ajax-get confirm" title="{:lang('Delete_this_record')}" data-layer="{:lang('Want_delete')}" href="{:url('del?time='.$data['time'])}" data-title="{:lang('Delete')}">
+                                            <img src="__PUBLIC__/admin/images/uninstall.png" alt="{:lang('Delete')}" />
+                                        </a>
+                                    </td>
+                                </tr>
+                            {/volist}
+                            </tbody>
+                            </tbody>
+                        </table>
+                        <div class="pagination-wrapper">
+                        
+                        </div>
+                        
+                    {else /}
+                        <div class="alert alert-warning">{:lang('No_record')}</div>
+                    {/notempty}
+                </div>
+            </div>
+        
+        </div>
+        <script type="text/javascript">
+            $(".db-import").click(function(){
+                var self = this, status = ".";
+                $.get(self.href, success, "json");
+                window.onbeforeunload = function(){ return "{:lang('Doing_repari_db')}" }
+                return false;
+                
+                function success(data){
+                    if(data.code){
+                        if(data.data.gz){
+                            data.msg += status;
+                            if(status.length === 5){
+                                status = ".";
+                            } else {
+                                status += ".";
+                            }
+                        }
+                        $(self).parent().find('.status').text(data.msg);
+                        if(data.data.part){
+                            $.get(self.href,
+                                {"part" : data.data.part, "start" : data.data.start},
+                                success,
+                                "json"
+                            );
+                        }  else {
+                            window.onbeforeunload = function(){ return null; }
+                        }
+                    } else {
+                        updateAlert(data.msg,'alert-error');
+                    }
+                }
+            });
+        </script>
+    {/block}}

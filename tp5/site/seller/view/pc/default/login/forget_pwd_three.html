@@ -1,0 +1,85 @@
+{extend name="login/base" /}
+{block name="body"}
+<div class="steps">
+    <table width="100%">
+        <tbody>
+        
+        <tr>
+            <td class="step-item step-1 active">
+                <span><q class="icon">●</q><i>1</i>{:lang('account_info')}</span>
+                <div class="stepdiv">1</div>
+            </td>
+            <td class="step-item step-2 active">
+                <span><q class="icon">●</q><i>2</i>{:lang('check_userinfo')}</span>
+                <div class="stepdiv">2</div>
+            </td>
+            <td class="step-item step-3 active">
+                <span><q class="icon">●</q><i>3</i>{:lang('set_new_password')}</span>
+                <div class="stepdiv">3</div>
+            </td>
+        
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="shop-login-box yahei">
+    <div class="form-body">
+        <div class="title">
+            <div class="t">{:lang('find_password')}</div>
+        </div>
+        <div class="content">
+            
+            <form action="" id="pwd_form" method="post">
+                <input type="hidden" name="id" value="{$data.id}">
+                <ul>
+                    <li class="form-row">
+                        <label class="form-label">
+                            <em> * </em> {:lang('new_password')}： </label>
+                        <span class="form-act">
+	                           <input type="password" value="" name="userpassword" class="input-ln" datatype="*6-16" nullmsg="{:lang('pleace_set_password')}" errormsg="{:lang('password_range')}" />
+	                        </span>
+                    
+                    </li>
+                    <li class="form-row">
+                        <label class="form-label">
+                            <em> * </em> {:lang('repassword')}： </label>
+                        <span class="form-act">
+                           <input type="password" value=""  tip="test" class="input-ln" datatype="*" recheck="userpassword" nullmsg="{:lang('pleace_input_password_again')}" errormsg="{:lang('password_not_same')}" />
+                        </span>
+                    
+                    </li>
+                    <li class="form-row last">
+                        <label for="" class="form-label">&nbsp;</label>
+                        <span class="form-act">
+                        	<button type="button" class="btn btn-import pwd_btn" rel="_request"> {:lang('next_step')} </button>
+						</span>
+                    </li>
+                
+                </ul>
+            </form>
+        
+        </div>
+    </div>
+</div>
+
+{/block} {block name="footer_js"}
+
+<script type="text/javascript">
+    $("#pwd_form").Validform({
+        tiptype: 3,
+        showAllError: true
+    });
+    $('.pwd_btn').click(function () {
+        var data = $('#pwd_form').serialize();
+        $.post("{:url('')}",data,function (re) {
+            if (re.code == 1) {
+                location.href=re.url;
+            } else {
+                layer.msg(re.msg,{'icon':5,'time':2000});
+                return false;
+            }
+        },'json');
+    })
+
+</script>
+{/block}

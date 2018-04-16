@@ -1,0 +1,63 @@
+{extend name='public/layout'}
+
+{block name='body'}
+<div id="toolTipLayer"
+     style="position: absolute; z-index: 9999; display: none; visibility: visible; left: 95px; top: 573px;"></div>
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+    <div class="fixed-bar">
+        <div class="item-title">
+            <div class="subject">
+                <h3>开发者中心</h3>
+            </div>
+        </div>
+    </div>
+    <form class="form-horizontal" id="handleposition" method="post">
+        <input type="hidden" name="id" value=""/>
+        <div class="ncap-form-default">
+            <dl class="row">
+                <dt class="tit">
+                    <label><em>*</em>连通 Key</label>
+                </dt>
+                <dd class="opt">
+                    <span class="input-txt">13213213223</span>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label><em>*</em>连通 Secret</label>
+                </dt>
+                <dd class="opt">
+                    <span class="input-txt">13213213223</span>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label><em>*</em>模式</label>
+                </dt>
+                <dd class="opt">
+                    <input name="type" type="radio" value="0" checked><label>可以通过接口进行操作（开发者）</label>
+                    <input name="type" type="radio" value="1"><label>禁止通过接口进行操作（编辑）</label>
+                </dd>
+            </dl>
+            <div class="bot"><a onclick="verifyForm();" class="ncap-btn-big ncap-btn-green">确认提交</a></div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $('input[type="radio"]').click(function () {
+        if ($(this).val() == 0 || $(this).val() == 4) {
+            $('.timed').hide();
+        } else {
+            $('.timed').show();
+        }
+    })
+
+    $(document).ready(function () {
+        $('input[type="radio"]:checked').trigger('click');
+    })
+    
+</script>
+
+{/block}

@@ -1,0 +1,178 @@
+    {extend name="admin@public/base" /}
+
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content">
+        <div class="breadcrumbs">
+            {:lang('Fanssys')} : &nbsp;&nbsp; {:lang('Fans')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+        </div>
+
+        <div class="bloc">
+            <div class="title">
+                <div class="tabs" id="navs">
+                    {include file="admin@public/navs" /}
+                </div>
+
+                {include file="admin@public/lang" /}
+            </div>
+            <div class="content">
+                
+                <dl class="gzzt clearfix mtb10">
+                    <dd>
+                        <div class="boxr">
+                            {include file="admin@public/button" /}
+                        </div>
+                    </dd>
+
+                    <form style="margin-top:0;" class="search-form">
+                        <dd>
+                            <div class="boxr ovh">
+                                <label for="start" style="margin:10px 10px 0 0; width:156px;">
+                                        <input type="text" id="start" value="{:input('start_time')}" name="start_time" placeholder="{:lang('Begin_time')}" class="w130 input_img" />
+                                    </label>
+                                    <label style="width:10px;line-height:32px; margin-right:2px;">~</label>
+                                    <label for="end" style="margin:10px 10px 0 0; width:150px;">
+                                        <input type="text" id="end" value="{:input('end_time')}" name="end_time" placeholder="{:lang('End_time')}" class="w130 input_img" />
+                                    </label>
+                            </div>
+                        <dd>
+
+                        <dd>
+                            <div class="boxr ovh">
+                                <label for="search" style="margin:10px 10px 0 0; width:150px;">
+                                    <input type="text" class="searchinput" name="name" value="{:input('name')}" placeholder="{:lang('Search manager tip')}" style="width:120px;"/>
+                                </label>
+                                <input type="button" name="search" id="sch-search" class="button white" value="{:lang('Search')}" url="{:url('', input('name'))}"/>
+                            </div>
+                        <dd>
+
+                    </form>
+
+                    <dd style="float: right !important;">
+                        <div class="boxl">
+                            <span>
+                                <a href="javascript:location.reload();" class="refresh tooltip-link" title="{:lang('Refresh')}">
+                                    <em>{:lang('Refresh')}</em>
+                                </a>
+                            </span>
+                        </div>
+                    </dd>
+                </dl>
+
+                {notempty name="list"}
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="center" width="30"><input class="check-all" type="checkbox"></th>
+                        <th class="left" style="width:30px;">ID</th>
+                        <th class="left"><a href="{:getUrlbyOrder('uid')}">{:lang('User Operate')}</a></th>
+                        <th class="left"><a href="{:getUrlbyOrder('')}">{:lang('Circle')}</a></th>
+                        <th class="left"><a href="{:getUrlbyOrder('')}">{:lang('Title')}</a></th>
+                        <th class="center" style="width:;"><a href="{:getUrlbyOrder('')}">{:lang('Viewcount')}</a></th>
+                        <th class="center" style="width:;"><a href="{:getUrlbyOrder('')}">{:lang('Replycount')}</a></th>
+                        <th class="center" style="width:;"><a href="{:getUrlbyOrder('')}">{:lang('Top')}</a></th>
+                        <th class="center" style="width:;"><a href="{:getUrlbyOrder('')}">{:lang('Boutique')}</a></th>
+                        <th class="center" style="width:;"><a href="{:getUrlbyOrder('')}">{:lang('Silent')}</a></th>
+                        <th class="center" style="width:;"><a href="{:getUrlbyOrder('')}">{:lang('Status')}</a></th>
+                        <th class="actions">{:lang('Actions')}</th>
+                    </tr>
+                    </thead>
+                    
+                    <tbody>
+                    {volist name="list" id="vo"}
+                    <tr>
+                        <td class="center">
+                            <input class="ids" type="checkbox" value="{$vo['id']}" name="ids[]">
+                        </td>
+                        <td class="left">{$vo['id']}</td>
+                        <td class="left">
+                            <a href="{:url('member/admin.index/view',array('ids'=>$vo['uid']))}" class="ajax-get add" title="{:lang('Edit')}" data-showbar="1" data-width="500">
+                                {:get_username($vo['uid'])}
+
+                            </a>
+                        </td>
+                        <td class="left">{$vo['circle']['name']}</td>
+                        <td class="left">
+                            <a href="{:url('edit',array('ids'=>$vo['id']))}" class="ajax-get edit" title="{:lang('Edit')}">
+                                {$vo['title']}
+                            </a>
+                        </td>
+                        <td class="center">{$vo['view_count']}</td>
+                        <td class="center">{$vo['reply_count']}</td>
+
+
+
+                        
+                        <td class="center">
+                            {eq name="vo.is_top" value="1"}
+                            <a href="{:url('disable', ['pk'=>'is_top','ids'=>$vo['id']])}" class="ajax-able" data-doing="{:lang('Not_Allow_publish')}" data-enable-span="{:lang('Yes')}" data-disable-span="{:lang('No')}">
+                                <span class="badge-green">{:lang('Yes')}</span>
+                            </a>
+                            {else /}
+                            <a href="{:url('enable', ['pk'=>'is_top','ids'=>$vo['id']])}" class="ajax-able" data-doing="{:lang('Allow_publish')}" data-enable-span="{:lang('Yes')}" data-disable-span="{:lang('No')}">
+                                <span class="badge-gray">{:lang('No')}</span>
+                            </a>
+                            {/eq}
+                        </td>
+                        <td class="center">
+                            {eq name="vo.is_hot" value="1"}
+                            <a href="{:url('disable', ['pk'=>'is_hot','ids'=>$vo['id']])}" class="ajax-able" data-doing="{:lang('Not_Allow_publish')}" data-enable-span="{:lang('Yes')}" data-disable-span="{:lang('No')}">
+                                <span class="badge-green">{:lang('Yes')}</span>
+                            </a>
+                            {else /}
+                            <a href="{:url('enable', ['pk'=>'is_hot','ids'=>$vo['id']])}" class="ajax-able" data-doing="{:lang('Allow_publish')}" data-enable-span="{:lang('Yes')}" data-disable-span="{:lang('No')}">
+                                <span class="badge-gray">{:lang('No')}</span>
+                            </a>
+                            {/eq}
+                        </td>
+                        <td class="center">
+                            {eq name="vo.is_silent" value="1"}
+                            <a href="{:url('disable', ['pk'=>'is_silent','ids'=>$vo['id']])}" class="ajax-able" data-doing="{:lang('Not_Allow_publish')}" data-enable-span="{:lang('Yes')}" data-disable-span="{:lang('No')}">
+                                <span class="badge-green">{:lang('Yes')}</span>
+                            </a>
+                            {else /}
+                            <a href="{:url('enable', ['pk'=>'is_silent','ids'=>$vo['id']])}" class="ajax-able" data-doing="{:lang('Allow_publish')}" data-enable-span="{:lang('Yes')}" data-disable-span="{:lang('No')}">
+                                <span class="badge-gray">{:lang('No')}</span>
+                            </a>
+                            {/eq}
+                        </td>
+                        <td class="center">
+                            {if condition="$vo['status'] eq 1"}
+                            <a href="{:url('disable',array('ids'=>$vo['id']))}" class="ajax-able" data-doing="{:lang('Disable')}">
+                                <img src="__PUBLIC__/admin/images/enabled.png" title="{:lang('Enable')}" class="tooltip-link" alt="{:lang('Enable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png" />
+                            </a>
+                            {else /}
+                            <a href="{:url('enable',array('ids'=>$vo['id']))}" class="ajax-able" data-doing="{:lang('Enable')}">
+                                <img src="__PUBLIC__/admin/images/disabled.png" title="{:lang('Disable')}" class="tooltip-link" alt="{:lang('Disable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png" />
+                            </a>
+                            {/if}
+                        </td>
+
+                        <td class="actions">
+                            <a class="tooltip-link ajax-get edit" title="{:lang('Edit_this_record')}" data-title="{:lang('Edit')}" href="{:url('edit',array('ids'=>$vo['id']))}"  data-showbar="1">
+                                <img src="__PUBLIC__/admin/images/edit.png" alt="{:lang('Edit')}" />
+                            </a>
+                            <a class="tooltip-link ajax-get confirm edit" title="{:lang('Delete_this_record')}" data-layer="{:lang('Want_delete')}" href="{:url('clear',array('ids'=>$vo['id']))}" data-title="{:lang('Delete')}">
+                                <img src="__PUBLIC__/admin/images/delete.png" alt="{:lang('Delete')}" />
+                            </a>
+                        </td>
+                    </tr>
+                    {/volist}
+                    </tbody>
+                </table>
+                <div class="pagination-wrapper">
+                    <div class="results-part"><span>{$_total}</span></div>
+                    <div class="links-part">{$page}</div>
+                </div>
+
+                {else /}
+                <div class="alert alert-warning">{:lang('No_record')}</div>
+                {/notempty}
+            </div>
+        </div>
+
+    </div>
+
+    {include file="admin@public/time_for_search" /}
+    
+    {/block}

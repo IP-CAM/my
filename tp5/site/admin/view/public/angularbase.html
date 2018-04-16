@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>{$meta_title|default=''} | {:lang('cmfname')}</title>
+	<meta name="keywords" content=" " />
+	<meta name="description" content=" " />
+    <meta name="generator" content="">
+    <!--angular js-->
+    <script src="//cdn.bootcss.com/angular.js/1.5.8/angular.min.js"></script>
+    
+	<link href="__ROOT__/favicon.ico" type="image/x-icon" rel="shortcut icon">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="__CSS__/jquery-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="__CSS__/jquery-ui-timepicker-addon.min.css" />
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <![endif]--><!--[if gte IE 9]><!-->
+    <script type="text/javascript" src="__JS__/jquery-2.1.4.min.js"></script>
+    <!--<![endif]-->
+    
+	<script type="text/javascript" src="__JS__/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="__JS__/jquery-ui-timepicker-addon.min.js"></script>
+    <script type="text/javascript" src="__JS__/jquery-ui-i18n.min.js"></script>
+    <!-- tooltip files -->
+    <script type="text/javascript" src="__JS__/jquery.tipTip.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/css/tipTip.css" />
+    <link rel="stylesheet" type="text/css" href="__CSS__/div.css" />
+    <script type="text/javascript">/*<![CDATA[*/var cookiePath = "__ROOT__/";/*]]>*/</script>
+	<script type="text/javascript" src="__JS__/main.js"></script>
+    <script type="text/javascript" src="__ROOT__/static/layer-v1.9.3/layer.min.js"></script>
+    <script type="text/javascript" src="__JS__/common1.9.3.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" /> 	<!--search select input-->
+    <script type="text/javascript" src="__ROOT__/static/chosen/chosen.jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="__ROOT__/static/chosen/chosen.css" />
+    {block name="style"}{/block}
+</head>
+<body>
+    
+    <div id="alert_win" class="bg"></div>
+    <div style="top:50%;display:block" class="zeng_msgbox_layer_wrap" id="msg">
+        <span style="z-index:10000" class="zeng_msgbox_layer">
+            <span class="gtl_ico_clear"></span>
+            <div class="bd-loding"></div>{:lang('Page_loding')}
+            <span class="gtl_end"></span>
+        </span>
+    </div>
+
+    <script>
+	function showInit(){
+		var c = setTimeout("alert_win.style.display='none',msg.style.display='none'",500);
+		$(".breadcrumbs").append("<sapn id='jnkc'>Loading......</sapn>");
+		setInterval("jnkc.innerHTML=new Date().toLocaleString();",1000);
+	}
+
+	addLoadEvent(showInit);
+
+	/*window.onunload = function(){
+		clearInterval(c);
+	}*/
+	</script>
+
+    <!-- HEADER --> 
+    <div id="top">
+    <div id="head">
+        <div class="left">
+            <a class="header-title" href="{:url('admin/index/index')}" title="{:lang('Cmfname')}">
+            <i class="fa fa-cloud white"></i>{:lang('Cmfname')}
+            </a>
+        </div>
+        <div class="right">
+            
+            <div id="dd" class="wrapper-dropdown">
+            <img height="24px" src="__PUBLIC__/admin/images/accounts/no_image.png" alt="avatar" /><span>{:lang('Adminhi')}, {:get_username(UID)}</span>
+            <ul class="dropdown">
+            	<li>
+                    <a href="{:url('admin/index/index')}">
+                        <i class="icon-home"></i>{:lang('Index')}
+                    </a>
+                </li>
+                <li>
+                    <a href="{:url('admin/index/dashboard')}">
+                        <i class="icon-dashboard"></i>{:lang('dashboard')}
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{:url('admin/config/index')}">
+                        <i class="icon-settings"></i>{:lang('siteconfig')}</a>
+                </li>
+
+                <li>
+                    <a href="{:url('member/admin.index/myinfo')}" class="ajax-get" data-width="450" data-height="270">
+                        <i class="icon-account"></i>{:lang('myaccount')}
+                    </a>
+                </li>
+            </ul>
+            </div>            
+            
+            <div class="cache">
+                <a class="tooltip-link ajax-clear" title="{:lang('clearcache')}" href="{:url('admin/index/clearcache')}">
+                    <img src="__PUBLIC__/admin/images/icons/cache.png" alt="{:lang('clearcache')}" />
+                </a>
+            </div>
+            
+            <div class="tnavs">
+                <a class="tooltip-link ajax-get" title="{:lang('Navs')}" href="{:url('admin/index/navs')}" data-title="{:lang('Navs')}">
+                    <img src="__PUBLIC__/admin/images/icons/navs.png" alt="{:lang('Navs')}" />
+                </a>
+            </div>
+            
+            <div class="indexhome">
+                <a class="tooltip-link" title="{:lang('Homeindex')}" href="__ROOT__/" target="_blank">
+                    <img src="__PUBLIC__/admin/images/icons/home.png" alt="{:lang('Homeindex')}" />
+                </a>
+            </div>
+            
+            <div class="logout">
+                <a class="tooltip-link ajax-get confirm" title="{:lang('logout')}" href="{:url('admin/publics/logout')}" data-layer="{:lang('confirmlogout')}" data-title="{:lang('logout')}" data-postion="1" >
+                    <img src="__PUBLIC__/admin/images/icons/logout-white.png" alt="{:lang('logout')}" />
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    </div>
+
+    <!-- SIDEBAR -->
+    <div id="sidebar" class="noscroll">
+        <div id="top-line">            
+            <a href="javascript:void(0);" id="menuopen">{:lang('Open')} <label>&#9660;</label></a>
+            <a href="javascript:void(0);" id="menuclose">{:lang('Close')} <label>&#9650;</label></a>
+            <a href="javascript:void(0);" id="menucollapse" data-direction="ltr">&#9664;</a>
+        </div>
+
+        
+        {$__MENU__}
+        
+    </div>
+                
+    <!-- CONTENT --> 
+    {block name="body"}{/block}
+</body>
+</html>

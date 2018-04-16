@@ -1,0 +1,99 @@
+	{extend name="admin@public/base"/}
+                
+    <!-- CONTENT --> 
+    {block name="body"}
+    <div id="content">
+        <div class="breadcrumbs">
+            {:lang('General')} : &nbsp;&nbsp; {:lang('Logs')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+    	</div>
+
+        <div class="bloc">
+            <div class="title">
+                <div class="tabs" id="navs">
+                    {include file="admin@public/navs" /}
+                </div>
+    
+                {include file="admin@public/lang" /}
+            </div>
+            <div class="content">
+                
+                <dl class="gzzt clearfix mtb10">
+                <dd>
+                    <div class="boxr">
+                        {include file="public/button" /}
+                    </div>
+                </dd>
+                
+                <form style="margin-top:0;" class="search-form">
+                    <dd>
+                        <div class="boxr ovh">
+                            <label for="name" style="margin:10px 10px 0 0; width:200px;">
+                                <input type="text" id="name" class="searchinput" name="name" id="name" value="{:input('name')}" placeholder="{:lang('Action search tip')}" style="width:170px;"/>
+                            </label>
+                            <input type="button" name="search" id="sch-search" class="button white" value="{:lang('Search')}" url="{:url('', input('name'))}"/>
+                        </div>
+                    <dd>
+                </form>
+            </dl>
+
+            {notempty name="list"}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="center" width="30"><input class="check-all" type="checkbox"></th>
+                        <th class="left" style="width:35px;"><a href="{:getUrlbyOrder('id')}">ID</a></th>
+                        <th class="left" style="width:170px;"><a href="{:getUrlbyOrder('name')}">{:lang('Titleid')}</a></th>
+                        <th class="left" style="width:110px;"><a href="{:getUrlbyOrder('title')}">{:lang('Actionname')}</a></th>
+                        <th class="left">{:lang('Actiondetailed')}</th>
+                        <th class="center"  style="width:60px;"><a href="{:getUrlbyOrder('status')}">{:lang('Status')}</a></th>
+                        <th class="actions">{:lang('Actions')}</th>
+                    </tr>
+                </thead>
+                    
+                    <tbody>
+                {volist name="list" id="vo"}
+                <tr>
+                    <td class="center"><input class="ids" type="checkbox" value="{$vo['id']}" name="ids[]"></td>
+                    <td class="left">{$vo['id']}</td>
+                    <td class="left">
+                    <a class="tooltip-link ajax-get edit" title="{:lang('Edit_this_record')}" href="{:url('edit',array('ids'=>$vo['id']))}" data-title="{:lang('Edit')}">
+                    {$vo['name']}
+                    </a>
+                    </td>
+                    <td class="left">{:lang($vo['title'])}</td>
+                    <td class="left">{$vo['remark']}</td>
+                    <td class="center">
+                        {if condition="$vo['status'] eq 1"}
+                            <a href="{:url('disable',array('ids'=>$vo['id']))}" class="ajax-able" data-doing="{:lang('Disable')}">
+                                <img src="__PUBLIC__/admin/images/enabled.png" title="{:lang('Enable')}" class="tooltip-link" alt="{:lang('Enable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png" />
+                            </a>
+                        {else /}
+                            <a href="{:url('enable',array('ids'=>$vo['id']))}" class="ajax-able" data-doing="{:lang('Enable')}">
+                                <img src="__PUBLIC__/admin/images/disabled.png" title="{:lang('Disable')}" class="tooltip-link" alt="{:lang('Disable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png" />
+                            </a>
+                        {/if}
+                    </td>
+                    <td class="actions">
+                        <a class="tooltip-link ajax-get confirm" title="{:lang('Delete_this_record')}" data-layer="{:lang('Want_delete')}" href="{:url('deleteaction',array('ids'=>$vo['id']))}" data-title="{:lang('Delete')}">
+                            <img src="__PUBLIC__/admin/images/delete.png" alt="{:lang('Delete')}" />
+                        </a>
+                   </td>
+                </tr>
+                {/volist}
+                </tbody>
+            </table>
+            <div class="pagination-wrapper">
+                <div class="results-part"><span>{$_total}</span></div>
+            	<div class="links-part">{$page}</div>
+            </div>
+                
+            {else/}
+               <div class="alert alert-warning">{:lang('No_record')}</div>
+            {/notempty}
+            </div>
+        </div>
+    </div>
+    
+    {include file="admin@public/time_for_search" /}
+    
+    {/block}

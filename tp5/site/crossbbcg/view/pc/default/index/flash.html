@@ -1,0 +1,46 @@
+<div class="ly-Allwrap clearfix">
+	<div class="n">
+		<div class="ly-flash">
+<!--请参考index.js 参数设置 此处为全屏轮播配置项 , 可覆盖默认配置项 data-carouFredSel(必须)  为加载标识  data-type(必须) 轮播类型full 为全屏-->
+			<div class="slide-full" data-type="full" data-carouFredSel='{
+				auto:{
+					autoplay:true,
+					pauseDuration:5000,
+				},
+				direction:"left",
+				scroll:{
+					item:1,
+					easing:"swing"
+				}
+					}'>
+				<div class="prev" id="prev"></div>
+				<div class="next" id="next"></div>
+			    <ol class="slide-content clearfix" >
+                    {foreach :widget('Ad/get_ad',['id'=>1]) as $v}
+                    {empty name='$v.ad_thumb'}
+						<li class="slide-item"  style="background:#6000fa"> <a href="#" > <img  src="__PUBLIC__/crossbbcg/pc/default/ad/f4.jpg"/> </a> </li>
+                    {else /}
+                    <li class="slide-item"  style="background:{$v.background_color}"> <a href="{$v.ad_link}" > <img  src="__UPLOADS__/{$v.ad_thumb}" /> </a> </li>
+                    {/empty}
+					{/foreach}
+			    </ol>
+				<div class="slide-page">
+                    {foreach :widget('Ad/get_ad',['id'=>1]) as $k=>$v}
+                    {eq name='$k' value='0'}
+					<span class="selected">●</span>
+                    {else /}
+                    <span>●</span>
+                    {/eq}
+					{/foreach}
+                </div>
+			</div>
+			<div class="ly-rad">
+                {foreach :widget('Ad/get_ad',['id'=>2,'limit'=>3]) as $v}
+			  <a href="{$v.ad_link}" title=""> <img src="__UPLOADS__/{$v.ad_thumb}" alt="{$v.ad_info}" width="200" height="132"> </a>
+                {/foreach}
+			  <!--<a href="#" title=""> <img src="__PUBLIC__/crossbbcg/pc/default/ad/rad2.jpg" alt="xx"> </a>-->
+			  <!--<a href="#" title=""> <img src="__PUBLIC__/crossbbcg/pc/default/ad/rad3.jpg" alt="xx"> </a>-->
+			</div>
+		</div>
+	</div>
+</div>

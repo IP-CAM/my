@@ -1,0 +1,127 @@
+    {extend name="admin@public/base"/}
+
+    <!-- CONTENT -->
+    {block name="body"}
+    <script src="__PUBLIC__/member/admin/js/echarts.js"></script>
+    <div id="content">
+        <div class="breadcrumbs">
+            {:lang('Member')} : &nbsp;&nbsp; {:lang('Reportmem')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+        </div>
+        <div class="bloc">
+            <div class="title">
+                <div class="tabs" id="navs">
+                    {include file="admin@public/navs" /}
+                </div>
+
+                {include file="admin@public/lang" /}
+            </div>
+            <span class="content">
+                {include file="admin@public/reportheader" /}
+                <ul class="ibox">
+                    <li>
+                        <div class="ibox-title">
+                            <h5>{:lang('today_new_member')}</h5>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="ibox-content">
+                            <h3>{$today}</h3>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="ibox-title">
+                            <h5>{:lang('mouth_new_member')}</h5>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="ibox-content">
+                            <h3>{$mouth}</h3>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="ibox-title">
+                            <h5>{:lang('total_member')}</h5>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="ibox-content">
+                            <h3>{$total}</h3>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="ibox-title">
+                            <h5>{:lang('mouth_active')}</h5>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="ibox-content">
+                            <h3>{$mouthActive}</h3>
+                        </div>
+                    </li>
+                </ul>
+            </span>
+        </div>
+        <div class="bloc">
+            <div id="main" style="height:400px; "></div>
+        </div>
+
+        <script type="text/javascript">
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('main'));
+            var date = [];
+            "{volist name='data' id='vo'}data.push","{/volist}"
+            // 指定图表的配置项和数据
+            var option = {
+                title : {
+                    text: "{:lang('member_chart')}"
+                },
+                tooltip : {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data:["{:lang('today_new_member')}","{:lang('member_recharge')}"]
+                },
+
+                calculable : true,
+                xAxis : [
+                    {
+                        type : 'category',
+                        boundaryGap : false,
+                        data : [
+                            "{volist name='data' id='vo'}","{$key}{/volist}"
+                        ]
+                    }
+                ],
+                yAxis : [
+                    {
+                        type : 'value'
+                    }
+                ],
+                series : [
+                    {
+                        name:"{:lang('today_new_member')}",
+                        type:'line',
+                        smooth:true,
+                        itemStyle: {normal: {areaStyle: {type: 'mint'}}},
+                        data:[
+                            "{volist name='data' id='vo'}","{$vo['reg']}{/volist}"
+                        ]
+                    },
+                    {
+                        name:"{:lang('member_recharge')}",
+                        type:'line',
+                        smooth:true,
+                        itemStyle: {normal: {areaStyle: {type: 'default'}}},
+                        data:[
+                            "{volist name='data' id='vo'}","{$vo['cash']}{/volist}"
+                        ]
+                    }
+                ]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        </script>
+    </div>
+
+
+    {include file="admin@public/time_for_search" /}
+    
+    {/block}

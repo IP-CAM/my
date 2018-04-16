@@ -1,0 +1,59 @@
+    {extend name="admin@public/base" /}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content">
+        <div class="breadcrumbs">
+            {:lang('Systems')} : &nbsp;&nbsp; {:lang('Syswatch')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+        </div>
+        <div class="bloc">
+            <div class="title">
+                <div class="tabs" id="navs">
+                    {include file="admin@public/navs" /}
+                </div>
+            
+            </div>
+            <div class="content">
+                <dl class="gzzt clearfix mtb10">
+                    <dd>
+                        <div class="boxr">
+                            {include file="admin@public/button" /}
+                        </div>
+                    </dd>
+        
+                    <form style="margin-top:0;" class="search-form">
+                        <dd>
+                            <div class="boxr ovh">
+                                <label for="name" style="margin:10px 10px 0 0; width:230px;">
+                                    <input type="text" class="searchinput" name="name" id="name" value="{:input('name')}" placeholder="{:lang('Search_tip')}" style="width:200px;"/>
+                                </label>
+                                <input type="button" name="search" id="sch-search" class="button white" value="{:lang('Search')}" url="{:url('', input('name'))}"/>
+                            </div>
+                        <dd>
+                    </form>
+        
+                    <dd style="float: right !important;">
+                        <div class="boxl">
+                            <span>
+                                <a href="javascript:location.reload();" class="refresh tooltip-link" title="{:lang('Refresh')}">
+                                    <em>{:lang('Refresh')}</em>
+                                </a>
+                            </span>
+                            <span>
+                                <a href="javascript:void(0);" class="ajax-get setting tooltip-link colum" title="{:lang('Showlum')}" data-title="{:lang('Showlum')}">
+                                    <em>{:lang('Showlum')}</em>
+                                </a>
+                            </span>
+                        </div>
+                    </dd>
+                </dl>
+                
+                <div class="alert alert-info">
+                    <button class="close" type="button">&times;</button>
+                    <span class="alert-content">{:lang('Db_tip')}</span>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+    {/block}

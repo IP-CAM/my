@@ -1,0 +1,151 @@
+    {extend name="public/base"/}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content">
+        <div class="breadcrumbs">
+            {:lang('General')} : &nbsp;&nbsp; {:lang('Siteconfig')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+        </div>
+        
+        <div class="bloc">
+            <div class="title">
+                <div class="tabs" id="navs">
+                    {include file="public/navs" /}
+                </div>
+            </div>
+            
+            <div class="content">
+                
+                <dl class="gzzt clearfix mtb10">
+                    
+                    <dd>
+                        <div class="boxr">
+                            {include file="public/button" /}
+                            
+                            <a href="{:url()}" class="add-new">{:lang('Whole')}</a>
+                            <select id="type" style="height:25px; width:60px; margin-right:5px;">
+                                <option value="" url="{:url()}">{:lang('Alltype')}</option>
+                                {volist name="type" id="ty"}
+                                    <option value="{$op}" url="{:url('', array_merge($inputarr, ['type'=>$ty]))}" {eq name="type" value="$ty"}selected{/eq}>* .{$ty}</option>
+                                {/volist}
+                            </select>
+                            
+                            <select id="apps" style="height:27px;margin-right:5px;">
+                                <option url="{:url()}" {if condition="!isset($apps)"}selected{/if}>{:lang('Allmodule')}</option>
+                                {volist name="applist" id="apps"}
+                                <option url="{:url('', array_merge($inputarr, ['apps'=>$apps]))}" {if condition="$apps eq  input('apps')"}selected{/if}>
+                                {$apps}
+                                </option>
+                                {/volist}
+                            </select>
+                            <script>
+                                $(function(){
+                                    $("#type, #apps").change(function(){
+                                        var gotu_url = $(this).find('option:selected').attr('url');
+                                        eval("self.location='"+gotu_url+"'")
+                                    })
+                                })
+                            </script>
+                        </div>
+                    </dd>
+                    
+                    <form style="margin-top:0;" class="search-form">
+                        <dd>
+                            <div class="boxr ovh">
+                                <label for="start" style="margin:10px 10px 0 0; width:156px;">
+                                    <input type="text" id="start" value="{:input('start_time')}" name="start_time"
+                                           placeholder="{:lang('Begin_time')}" class="w130 input_img"/>
+                                </label>
+                                <label style="width:10px;line-height:32px; margin-right:2px;">~</label>
+                                <label for="end" style="margin:10px 10px 0 0; width:150px;">
+                                    <input type="text" id="end" value="{:input('end_time')}" name="end_time"
+                                           placeholder="{:lang('End_time')}" class="w130 input_img"/>
+                                </label>
+                            </div>
+                        <dd>
+                        
+                        <dd>
+                            <div class="boxr ovh">
+                                <label for="name" style="margin:10px 10px 0 0; width:130px;">
+                                    <input type="text" class="searchinput" name="name" id="name"
+                                           value="{:input('name')}" placeholder="{:lang('Search img tip')}"
+                                           style="width:100px;"/>
+                                </label>
+                                <input type="button" name="search" id="sch-search" class="button white"
+                                       value="{:lang('Search')}" url="{:url('', ['name'=> input('name')])}"/>
+                            </div>
+                        <dd>
+                    </form>
+                    <dd style="float: right !important;">
+                        <div class="boxl">
+                            <span>
+                                <a href="javascript:location.reload();" class="refresh tooltip-link" title="{:lang('Refresh')}">
+                                    <em>{:lang('Refresh')}</em>
+                                </a>
+                            </span>
+                            <span>
+                                <a href="javascript:void(0);" class="ajax-get setting tooltip-link colum" title="{:lang('Showlum')}" data-title="{:lang('Showlum')}">
+                                    <em>{:lang('Showlum')}</em>
+                                </a>
+                            </span>
+                        </div>
+                    </dd>
+                </dl>
+                
+                {notempty name="list"}
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="center" width="30">
+                            <input class="check-all" type="checkbox">
+                        </th>
+                        <th class="left" style="width:35px;">ID</th>
+                        <th class="left">{:lang('Thumb')}</th>
+                        <th class="left">{:lang('Path')}</th>
+                        <th class="left">{:lang('Size')}</th>
+                        <th class="left">{:lang('Module')}</th>
+                        <th class="left">{:lang('Upload_time')}</th>
+                        <th class="center" style="width:80px;">{:lang('Type')}</th>
+                        <th class="actions">{:lang('Actions')}</th>
+                    </tr>
+                    </thead>
+                    
+                    <tbody>
+                    {volist name="list" id="vo"}
+                    <tr>
+                        <td class="center">
+                            <input class="ids" type="checkbox" value="{$vo['id']}" name="ids[]">
+                        </td>
+                        <td class="left">{$vo['id']}</td>
+                        <td class="left"><img src="__UPLOADS__/{$vo['path']}" height="24" /> </td>
+                        <td class="left">{$vo['path']}</td>
+                        <td class="left">{$vo['size']|format_bytes}</td>
+                        <td class="left">{$vo['module']}</td>
+                        <td class="left">{$vo['create_time']}</td>
+                        <td class="center">{$vo['type']}</td>
+                        <td class="actions">
+                            <a class="tooltip-link ajax-get confirm" title="{:lang('Delete_this_record')}"
+                               data-layer="{:lang('Want_delete')}" href="{:url('delete',array('id'=>$vo['id']))}"
+                               data-title="{:lang('Delete')}">
+                                <img src="__PUBLIC__/admin/images/delete.png" alt="{:lang('Delete')}"/>
+                            </a>
+                        </td>
+                    </tr>
+                    {/volist}
+                    </tbody>
+                </table>
+                <div class="pagination-wrapper">
+                    <div class="results-part"><span>{$_total}</span></div>
+                    <div class="links-part">{$page}</div>
+                </div>
+                {else /}
+                <div class="alert alert-warning">{:lang('No_record')}</div>
+                {/notempty}
+            </div>
+        
+        </div>
+    </div>
+
+    {include file="public/time_for_search" /}
+    
+    {/block}

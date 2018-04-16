@@ -1,0 +1,127 @@
+    {extend name="admin@public/poupbase"/}
+    
+    {block name="style"}
+    <style>
+        .btbor{ border-bottom: 1px solid #d6d6d6; margin: 2px 20px 10px !important;}
+    </style>
+    {/block}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content" style="margin:0px 10px 5px 8px;">
+        <div class="bloc" style="margin:10px 0px 0px;">
+            
+            <div class="content">
+                <form id="myform" method="post" style="margin-top:5px;" class="">
+                    <fieldset>
+                        <legend>{:lang('Order_info')}</legend>
+                        
+                        <div style="float:left; width:480px; padding-right:15px; border-right:1px dashed #000;">
+                            <div class="row btbor">
+                                <label class="w80">{:lang('Consignee_information')} </label>
+                            </div>
+                            
+                            <div class="row">
+                                <label class="w100">{:lang('Consignee')} : </label>
+                                <input type="text" name="consignee" id="consignee" value="{$data.consignee}" />
+                            </div>
+                            
+                            <div class="row">
+                                <label for="country" class="w100">{:lang('Country')} : </label>
+                                <select data-placeholder="{:lang('Goods_Country_Choose')}" class="chosen-select" tabindex="2" name="country" id="country" style="width:240px;">
+                                    <option value="0"></option>
+                                    
+                                    {foreach $arr_country as $arr}
+                                    <option value="{$arr['id']}" {eq name="data.country" value="$arr['name']"}selected="selected"{/eq}>{$arr['name']}</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                            
+                            <div class="row">
+                                <label class="w100">{:lang('areas')} : </label>
+                                
+                                <select name="province" id="province" style="width:120px;">
+                                    <option value="0">{:lang('province_must')}</option>
+                                </select>
+                                
+                                <select name="city" id="city" style="width:100px;">
+                                    <option value="0">{:lang('city_must')}</option>
+                                </select>
+                                
+                                <select name="district" id="district" style="width:100px;">
+                                    <option value="0">{:lang('area_must')}</option>
+                                </select>
+                            </div>
+                            
+                            <div class="row">
+                                <label class="w100">&nbsp;&nbsp;</label>
+                                <input type="text" name="address" id="address" value="{$data.address}" />
+                            </div>
+                            
+                            <div class="row">
+                                <label class="w100" for="mobile">{:lang('Phone')} : </label>
+                                <input type="text" name="mobile" id="mobile" value="{$data.mobile}" />
+                            </div>
+                            
+                            <div class="row">
+                                <label class="w100">{:lang('Order postscript')} : </label>
+                                <textarea style="width: 240px; height: 60px;">{$data.postscript}</textarea>
+                            </div>
+                        </div>
+                        
+                        <div style="float:left; width:300px;">
+                            <div class="row btbor">
+                                <label class="w80">{:lang('Money')} </label>
+                            </div>
+                            
+                            <div class="row">
+                                <label class="w100">{:lang('freight')} : </label>
+                                <input type="text" name="shipping_fee" id="shipping_fee" value="{$data.shipping_fee}" class="w60l"  />
+                            </div>
+                            
+                            <div class="row">
+                                <label class="w100">{:lang('Total_amount')} : </label>
+                                <input type="text" name="order_amount" id="order_amount" value="{$data.order_amount}" class="w80l" />
+                            </div>
+                        </div>
+                        
+                        <div class="clear"></div>
+                        
+                        <div class="buttons-wrapper bw-bottom" style="margin:30px auto 2px; text-align:center;">
+                            {eq name="ACTION_NAME" value="edit"}
+                            <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('savedata')}">
+                            <input name="id" type="hidden" value="{$data.id}"/>
+                            {else /}
+                            <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}">
+                            {/eq}
+                            <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                        </div>
+                    </fieldset>
+                
+                </form>
+            </div>
+        </div>
+    </div>
+    {/block}
+    
+    {block name="js"}
+    <script>
+        $(function () {
+            $(".bset").buttonset();
+    
+            <!--添加 Chosen 的选择框样式-->
+            var config = {
+                '.chosen-select'           : {},
+                '.chosen-select-deselect'  : { allow_single_deselect: true },
+                '.chosen-select-no-single' : { disable_search_threshold: 10 },
+                '.chosen-select-no-results': { no_results_text: '{:lang(\'Goods_Brand_Null\')}' },
+                '.chosen-select-rtl'       : { rtl: true },
+                '.chosen-select-width'     : { width: '95%' }
+            };
+            for (var selector in config) {
+                $(selector).chosen(config[selector]);
+            }
+    
+        })
+    </script>
+    {/block}

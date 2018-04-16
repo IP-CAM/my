@@ -1,0 +1,51 @@
+<form class="login-form" id="signup_form" onsubmit="return false;">
+    <div class="input-line">
+        <span class="input-label">{:lang('mobile')}</span>
+        <input id="username" class="form-text" data-ajax="{:url('passport/check_mobile/index',array('scene'=>'reg'))}"
+               required data-empty="{:lang('pleace input mobile')}" data-error="{:lang('mobile format error')}"
+               data-regex="^1[0-9]{10}|\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" name="username" type="text"
+               autocomplete="off" placeholder="{:lang('mobile')}">
+        <i class="icon-reset">×</i>
+        <div class="input-error"></div>
+    </div>
+    <div id="embed-captcha" style="margin-bottom: 20px;" data-url="{:url('member/passport/gt_login')}" ></div>
+    <div id="wait" style="height: 42px;text-align: center;line-height: 54px;border: 1px solid #ccc;border-radius: 2px;background-color: #f3f3f3"><img src="__ROOT__/loading.gif" alt=""></div>
+    <div id="notice" style="color: red" class="input-error"><i class="iconfont icon-jinggao"></i>{:lang('please_verify')}</div>
+    <div class="input-line" id="sendcode" style="display: none">
+        <span class="input-label">{:lang('sms_verify_code')}</span>
+        <input id="captcha" class="J-checkcode-input form-text" name="smscode" data-empty="{:lang('pleace input sms code')}"
+               data-error="{:lang('it`s must 6 int')}" required data-regex="^[0-9]{6}$" type="text" maxlength="6" autocomplete="off"
+               placeholder="{:lang('sms_verify_code')}">
+        <span class="code-img getcode" id="getcode" data-lang_tip="{:lang('send code again')}" data-url="{:url('member/passport/sendcode')}">{:lang('get sms code')}</span>
+        <div class="input-error"></div>
+    </div>
+    <div class="input-line">
+        <span class="input-label">{:lang('password')}</span>
+        <input id="password" required class="form-text" data-repeat="repassword" name="password" data-empty="{:lang('password_input')}"
+               data-error="{:lang('password_required')}" data-regex="^.{6,18}$" type="password" autocomplete="off" placeholder="{:lang('input 6~18 string')}">
+        <i class="icon-reset">×</i>
+        <div class="input-error"></div>
+    </div>
+    <div class="input-line">
+        <span class="input-label">{:lang('confirm_password')}</span>
+        <input id="repassword" required class="form-text" name="repassword" data-empty="{:lang('pleace input confirm password')}" data-error="{:lang('it`s must 6~18 string')}"
+               data-repeaterror="{:lang('the password not same')}" data-repeat="password" data-regex="^.{6,18}$" type="password"
+               autocomplete="off" placeholder="{:lang('input password again')}">
+        <i class="icon-reset">×</i>
+        <div class="input-error"></div>
+    </div>
+    
+    
+    <div class="form-remember">
+                            <span class="left">
+                                <input id="rem" class="hidden" type="checkbox" name="remember_me" value="1" checked="">
+                                <label class="check-box" for="rem">{:lang('i`m agree')}</label>
+                                <a href="" target="_blank">{:lang('website protocol')}</a>
+                            </span>
+    
+    </div>
+    <div class="form-submit">
+        <input id="dump_url" type="hidden" value="{:url('index')}">
+        <button id="signup-btn" class="submit-btn disabled" type="button">{:lang('now_register')}</button>
+    </div>
+</form>

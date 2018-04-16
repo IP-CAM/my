@@ -1,0 +1,103 @@
+    {extend name="admin@public/poupbase"/}
+
+    <!-- CONTENT -->
+    {block name="body"}
+        <div id="content" style="margin:0px 10px 5px 8px;">
+            <div class="bloc" style="margin:10px 0px 0px;">
+                <div class="content">
+                    <form id="myform" method="post" style="margin-top:5px;" class="" >
+                        <fieldset>
+                            <legend>{$meta_title|default=''}</legend>
+                            <div class="row">
+                                <label for="field_type" class="w100">{:lang('Field_type')}: <span class="required">*</span></label>
+                                <select id="field_type" name="field_type" style="width:190px;">
+                                    <option value="input" >Input({:lang('Inputs')})</option>
+                                    <option value="select" >Select({:lang('Selects')})</option>
+                                    <option value="radio" >Radio({:lang('Radios')})</option>
+                                    <option value="checkbox" >Checkbox({:lang('Checkboxs')})</option>
+                                    <option value="textarea" >Textare({:lang('Textareas')})</option>
+                                    <option value="time" >Time({:lang('Timess')})</option>
+                                </select>
+                            </div>
+                            <div class="row">
+                                <label for="field_name" class="w100">{:lang('Field')}: <span class="required">*</span></label>
+                                <input id="field_name" type="text" value="{$data['field_name']}" name="field_name" placeholder=""{eq name="ACTION_NAME" value="edit"}readonly{/eq} />
+                                <span>{:lang('Field_tips')} </span>
+                            </div>
+                            <div class="row">
+                                <label for="alias" class="w100">{:lang('Field_alias')}: <span class="required">*</span></label>
+                                <input id="alias" type="text" value="{$data['alias']}" name="alias" placeholder="" />
+                                <span>{:lang('Field_alias_tips')} </span>
+                            </div>
+                            <div class="row">
+                                <label for="input_tips" class="w100">{:lang('Input_tips')}: </label>
+                                <input id="input_tips" type="text" value="{$data['input_tips']}" name="input_tips" placeholder="" />
+                                <span>{:lang('Input_tips_mes')}</span>
+                            </div>
+                            <div class="row">
+                                <label for="regex" class="w100">{:lang('Field_regex')}: </label>
+                                <input id="regex" type="text" value="{$data['regex']}" name="regex" placeholder="" />
+                                <span>{:lang('Input_regex_mes')}</span>
+                            </div>
+                            <div class="row">
+                                <label for="regex_tip" class="w100">{:lang('Field_regex_tip')}: </label>
+                                <input id="regex_tip" type="text" value="{$data['regex_tip']}" name="regex_tip" placeholder="" />
+                                <span>{:lang('Input_regex_tip_mes')}</span>
+                            </div>
+
+                            <div class="row">
+                                <label for="length" class="w100">{:lang('Field_length')}:</label>
+                                {:lang('Field_length_min')}
+                                <input style="width: 30px;" id="length" type="text" value="{$data['length_min']}" name="length_min" placeholder="" />
+                                ~ &nbsp;
+                                {:lang('Field_length_max')}
+                                <input style="width: 30px;" id="length" type="text" value="{$data['length_max']}" name="length_max" placeholder="" />
+                                <span>{:lang('Field_length_mes')} </span>
+                            </div>
+
+
+                            <div class="row bset">
+                                <label class="w100">{:lang('Required')}:</label>
+                                <input name="required" type="radio" value="1" id="sex_1" {eq name="data.required" value="1"}checked{/eq} />
+                                <label for="sex_1" class="w80l_r_0">{:lang('Yes')}</label>
+                                <input name="required" type="radio" value="0" id="sex_0" {eq name="data.required" value="0"}checked{/eq} />
+                                <label for="sex_0" class="w80l_r_0">{:lang('No')}</label>
+                            </div>
+
+                            <div class="row">
+                                <label for="status" class="w100">{:lang('Status')}:</label>
+                                <div class="slideBox">
+                                    {eq name="ACTION_NAME" value="edit"}
+                                    <input id="status" value="1" type="checkbox" name="status"  {eq name="data['status']" value="1"}checked{/eq} />
+                                    {else /}
+                                    <input id="status" value="1" type="checkbox" name="status" checked />
+                                    {/eq}
+                                    <label for="status"></label>
+                                </div>
+                            </div>
+
+                            <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                                {eq name="ACTION_NAME" value="edit"}
+                                    <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('savedata')}">
+                                    <input type="hidden" name="id" value="{$data.id}" />
+                                {else /}
+                                    <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}">
+                                {/eq}
+                                <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                            </div>
+                        </fieldset>
+                        <input name="create_time" value="{:time()}" type="hidden">
+                    </form>
+                </div>
+            </div>
+        </div>
+    {/block}
+    
+    {block name="js"}
+        <!--<script type="text/javascript" src="__PUBLIC__/admin/js/autosize.js"></script>-->
+        <script>
+            $(function(){
+                $(".bset").buttonset();
+            })
+        </script>
+    {/block}

@@ -1,0 +1,82 @@
+{extend name="admin@public/poupbase" /}
+
+
+{block name="body"}
+<div id="content" style="margin:0px 10px 5px 8px;">
+    <div class="bloc" style="margin:10px 0px 0px;">
+        <div class="content">
+            <form id="myform" method="post" style="margin-top:5px;" class="">
+                <fieldset>
+                    <legend>+ {:lang('Recharge Detail')}</legend>
+
+                    <div class="row">
+                        <label for="engine_type" class="w100">订单号: <span class="required">*</span></label>
+                        <input type="text" readonly name="rec_sn" value="{$detail.rec_sn}"/>
+                    </div>
+
+                    <div class="row">
+                        <label for="name" class="w100" id="databaseid">昵称： <span class="required">*</span></label>
+                        <input type="text" readonly class="input w120l fu onlyletter" name="name" id="name"  value="{$detail.userid}"/>
+                    </div>
+
+                    <div class="row">
+                        <label for="langstr" class="w100">来源: <span class="required">*</span></label>
+                        <input type="text"  readonly class="input w120l fu onlyletter" name="langstr" id="langstr" value="{$detail.referer}"/>
+                    </div>
+
+                    <div class="row">
+                        <label for="searck_key" class="w100">充值金额: </label>
+                        <input type="text" readonly class="input w120l" name="searck_key" id="searck_key" value="{$detail.rec_money}" placeholder="title"/>
+                    </div>
+
+                    <div class="row">
+                        <div style="float:left;">
+                            <label for="search_list" class="w100">充值账户: </label>
+                            <input type="text" readonly class="input" name="search_list" id="search_list" style="width:220px;" value="{$detail.rec_account}">
+                        </div>
+                    </div>
+
+                    <div class="row bset">
+                        <div style="float:left;">
+                            <label class="w100">支付方式 : </label>
+                            <input name="need_pk" type="text" value="{$detail.pay_type}" readonly/>
+                        </div>
+                    </div>
+
+                    <div class="row bset">
+                        <div style="float:left;">
+                            <label class="w100">充值状态 : </label>
+                            {switch name='detail.status'}
+                            {case value='1'}<span class="blue">{:lang('Applying')}</span>{/case}
+                            {case value='2'}<span class="green">{:lang('Recharging')}</span>{/case}
+                            {case value='3'}<span class="green">{:lang('Recharge Finish')}</span>{/case}
+                            {case value='4'}<span class="red">{:lang('Invilid')}</span>{/case}
+                            {/switch}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <label for="remark" class="w100">交易流水: </label>
+                        <input type="text" class="input" name="remark" id="remark" value="{$detail.trade_no}"
+                               style="width:230px;" readonly/>
+                    </div>
+
+                    <div class="row">
+                        <label for="status" class="w100">创建时间:</label>
+                        <input type="text" class="input" value="{:time_format($detail.create_time,'Y-m-d H:i:s')}" readonly/>
+                    </div>
+                    <div class="row">
+                        <label for="status" class="w100">完成时间:</label>
+                        <input type="text" class="input" value="{:time_format($detail.finish_time,'Y-m-d H:i:s')}" readonly/>
+                    </div>
+                    <div class="row">
+                        <label for="status" class="w100">IP地址:</label>
+                        <input type="text" class="input" value="{:long2ip($detail.rec_ip)}" readonly/>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+{/block}

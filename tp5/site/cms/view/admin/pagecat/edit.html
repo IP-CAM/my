@@ -1,0 +1,63 @@
+    {extend name="admin@public/poupbase" /}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content" style="margin:0px 10px 5px 8px;">
+        <div class="bloc" style="margin:10px 0px 0px;">
+            <div class="content">
+                <form id="myform" method="post" style="margin-top:5px;" class="">
+                    <fieldset>
+                        <legend>{$meta_title|default=''}</legend>
+                        <div class="row">
+                            <label for="name" class="w100">{:lang('TypeName')}: <span class="required">*</span></label>
+                            <input id="name" type="text" value="{$data.name}" name="name"  />
+                        </div>
+                        <div class="row">
+                            <label for="alias" class="w100">{:lang('TypeAlias')}:</label>
+                            <input id="alias" type="text" value="{$data.alias}" name="alias" placeholder="" />
+                        </div>
+                       <!-- <div class="row">
+                            <label for="model" class="w100">{:lang('ByModel')}: <span class="required">*</span></label>
+                            <input id="model" type="text" value="{$data.model}" name="model" placeholder="" />
+                            <a class="tooltip-icon" title="{:lang('Model_tip')}"></a>
+                        </div>-->
+                        <div class="row">
+                            <div class="row" style="float: left">
+                                <label for="status" class="w100">{:lang('Status')}:</label>
+                                <div class="slideBox">
+                                    {eq name="ACTION_NAME" value="edit"}
+                                    <input id="status" value="1" type="checkbox" name="status" {eq name="data['status']"
+                                           value="1" }checked{/eq} />
+                                    {else /}
+                                    <input id="status" value="1" type="checkbox" name="status" checked/>
+                                    {/eq}
+                                    <label for="status"></label>
+                                </div>
+                            </div>
+                            <div class="row" style="float: left">
+                                <label for="sort" class="w100">{:lang('Sort')}:</label>
+                                <input type="number" class="input litle" min="0" name="sort" maxlength="5" id="sort" value='{$data.sort|default=0}'>
+                            </div>
+                        </div>
+                       
+                        <div class="row">
+                            <label for="description" class="w100">{:lang('Description')}: <span class="required">*</span></label>
+                            <textarea id="description" style="width: 280px; height: 60px;" name="description" placeholder="">{$data.description}</textarea>
+                        </div>
+                        
+                        <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                            <input name="submit" value="{:lang('Submit')}" type="submit" url="{:url('savedata')}" />
+                            <input name="reset" class="button white" value="{:lang('Reset')}" type="reset">
+                        </div>
+                    </fieldset>
+            </form>
+        </div>
+    </div>
+    </div>
+    
+    <script>
+        $(function() {
+            $(".bset").buttonset();
+        })
+    </script>
+    {/block}

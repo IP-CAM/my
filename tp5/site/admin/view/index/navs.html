@@ -1,0 +1,39 @@
+    {extend name="admin@public/poupbase"/}
+    
+    <!-- CONTENT -->
+    
+    {block name="body"}
+        <div id="content" style="margin:0px 10px 5px 8px;">
+            <div class="bloc" style="margin:10px 0px 0px;">
+                <div class="content">
+                    
+                    {foreach name="node_list" item="vo" key="key" }
+                        <dl class="node_list">
+                            <dt>
+                                {:lang($key)}
+                            </dt>
+
+                            {foreach name="vo['son']" item="v" key="ke" }
+                            <dd>
+                                <!--<a href="{:url($v.url)}"> {:lang($ke)} </a>-->
+                                {:lang($ke)}
+                            </dd>
+                            {/foreach}
+
+                        </dl>
+                    {/foreach}
+                    
+                    
+                </div>
+            </div>
+        </div>
+    {/block}
+    
+    {block name="style"}
+        <style>
+            .content{ min-height:405px;}
+            .node_list{ padding: 2px 5px; display: inline-block; width: 146px; height: auto; vertical-align: top;letter-spacing: normal;word-spacing: normal;border-style: dotted;border-color: #E6E6E6;border-width: 1px 0 0 1px;zoom: 1;}
+            .node_list dt{ font: lighter 15px/26px "microsoft yahei"; color: #218056; display: inline-block; width: 120px;}
+            .node_list dd{display:block; line-height: 16px;padding: 2px 6px;}
+        </style>
+    {/block}

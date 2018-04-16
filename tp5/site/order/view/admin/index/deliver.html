@@ -1,0 +1,200 @@
+    {extend name="admin@public/poupbase"/}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content" style="margin:0px 10px 5px 8px;">
+        <div class="bloc" style="margin:10px 0px 0px;">
+            
+            <div class="content">
+                <form id="myform" method="post" style="margin-top:5px;" class="">
+                    <fieldset style="min-height:403px;">
+                        <legend>{:lang('Deliver goods')}</legend>
+    
+                        <div class="row">
+                            <label class="w120">{:lang('Order_sn')} : </label>
+                            <label>{$data.order_sn}</label>
+                        </div>
+    
+                        <div class="row">
+                            <div class="fl">
+                                <label class="w120">{:lang('Consignee')} : </label>
+                                <input type="text" name="consignee" id="consignee" value="{$data.consignee}" class="w120l" disabled />
+                            </div>
+    
+                            <div class="fl">
+                                <label class="w80" for="mobile">{:lang('Phone')} : </label>
+                                <input type="text" name="mobile" id="mobile" value="{$data.mobile}" style="width: 120px;" placeholder="13800138000" disabled />
+                            </div>
+                        </div>
+    
+                        <div class="row">
+                            <label class="w120">{:lang('Delivery address')} : </label>
+                            <label style="width: 500px;">
+                            {$data.country} {$data.province} {$data.city} {$data.district} {$data.address}
+                            {if condition="$data['zipcode']!=0"}
+                                , {$data.zipcode}
+                            {/if}
+                            </label>
+                        </div>
+                        
+    
+                        <div class="row">
+                            
+                            <label class="w120">{:lang('freight')} : </label>
+                            <input type="text" name="shipping_fee" id="shipping_fee" value="{$data.symbol}{$data.shipping_fee}" class="w120l" disabled />
+                            
+                        </div>
+    
+                        <div class="row">
+                            <label class="w120">{:lang('shipping_warehouse')} : </label>
+                            <label style="width:500px;">
+                                {$warehouse_name}
+                            </label>
+                        </div>
+    
+                        <div class="row">
+                            <div class="fl">
+                                <label for="shipping_name" class="w120">{:lang('Expresscom')} : </label>
+                                <select name="shipping_name" id="shipping_name">
+                                    {notempty name = 'express'}
+                                    {foreach $express as $id => $arr}
+                                    {eq name="$arr['isdefault']" value="1"}
+                                    <option value="{$arr.title}" selected>{$arr.title}</option>
+                                    {else /}
+                                    <option value="{$arr.title}" >{$arr.title}</option>
+                                    {/eq}
+                                    
+                                    {/foreach}
+                                    {else /}
+                                    {:lang('First add express')}
+                                    {/notempty}
+                                </select>
+                                
+                            </div>
+                            
+                            <div class="fl">
+                                <label class="w80">{:lang('Waybill number')} : </label>
+                                <input type="text" name="shipping_no" id="shipping_no" value="{$data.shipping_no}" class="w120l" placeholder="8888888888"  />
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <label  class="w120">{:lang('Deliver mark')} : </label>
+                            <label style="width:500px">
+                                {$data.postscript}
+                            </label>
+                        </div>
+                        
+    
+                        {if condition="$data.inv_type==0"}
+                        <div class="row">
+                            <label class="w120">{:lang('is_inv')} : </label>
+                            <label>
+                                {:lang('no')}
+                            </label>
+                        </div>
+                        
+                        {else /}
+                        <div class="row">
+                            <label class="w120">{:lang('is_inv')} : </label>
+                            <label class="red" style="width:500px">
+                                {:lang('yes')}
+                            </label>
+                        </div>
+                        <div class="row">
+                            <label class="w120">{:lang('inv_type')} : </label>
+                            <label style="width:500px">
+                                {:lang('inv_type_'.$data.inv_type);}
+                                &nbsp;&nbsp;
+                                {:lang('inv_payee')} : {$data.inv_payee}
+                                &nbsp;&nbsp;
+                                {if condition="$data.inv_type==1"}
+                                {:lang('inv_number')} : {$data.inv_number}
+                                {/if}
+                            </label>
+                        </div>
+                        
+                        {/if}
+                        
+                        
+                        
+                        
+                        
+                        <div class="row scrollbar" style="min-height: 200px !important; overflow-y: scroll; overflow-x: hidden; margin-bottom: 40px; ">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="center" style="width: 4%">
+                                        <input type="checkbox" disabled checked />
+                                    </th>
+                                    <th class="left" style="width: 10%">{:lang('Goods_id')}</th>
+                                    <th class="left" style="width: 11%">{:lang('Goods_sn')}</th>
+                                    <th class="left" style="width: 11%">{:lang('Goods_code')}</th>
+                                    <th class="left" colspan="2" style="width: 30%; padding-right: 10px;">{:lang('Goods_title')}</th>
+                                    <th class="left" style="width: 10%">{:lang('Unit_price')}</th>
+                                    <th class="left" style="width: 8%">{:lang('Goods_umn')}</th>
+                                   
+                                </tr>
+                                </thead>
+            
+                                <tbody>
+                                {notempty name="goods"}
+                                {volist name="goods" id="vo"}
+                                <tr>
+                                    <td class="center">
+                                        <input type="checkbox" checked disabled>
+                                    </td>
+                                    <td class="left">{$vo.goods_id}</td>
+                                    <td class="left">{$vo.sku_code}</td>
+                                    <td class="left">{$vo.sku_barcode}</td>
+                                    <td class="left">
+                                        <a href="{:url('crossbbcg/goods/index').'?item_id='.$vo.goods_id}" target="_blank">
+                                            {if condition="substr($vo.sku_thumb,0,4) == 'http'"}
+                                            <img src="{:resizeImage($vo.sku_thumb)}"/>
+                                            {else /}
+                                            <img src="__UPLOADS__/{:resizeImage($vo.sku_thumb,'small')}"/>
+                                            {/if}
+                                        </a>
+                                    </td>
+                                    <td class="left" style="max-width: 160px;padding-right: 10px;" title="{$vo.goods_name} [{$vo.sku_array}]">
+                                        
+                                        {$vo.goods_name}
+    
+                                        {if condition="$vo['sku_array']"}
+                                        <br/>
+                                        <span style="color:#9e9e9e">{$vo['sku_array']}</span>
+                                        {/if}
+                                    </td>
+                                    <td class="left">{$vo.sku_price}</td>
+                                    <td class="left">{$vo.sku_number}</td>
+                                    
+                                </tr>
+                                {/volist}
+                                {else /}
+
+                                {/notempty}
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center; position:fixed; width:auto; height:50px; bottom:15px; right:45%; text-align:center">
+                            <input name="submit" value="{:lang('Confirm deliver goods')}" type="submit" url="{:url()}">
+                            <input name="order_id" id="order_id" type="hidden" value="{$data.order_id}"/>
+                            <input name="reset" class="button white" value="{:lang('Cancel deliver')}" type="reset">
+                        </div>
+                    </fieldset>
+    
+                </form>
+            </div>
+        </div>
+    </div>
+    {/block}
+    
+    {block name="js"}
+    <script type="text/javascript" src="__PUBLIC__/admin/js/autosize.js"></script>
+    <script>
+        $(function () {
+
+        })
+    </script>
+    {/block}

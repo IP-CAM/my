@@ -1,0 +1,95 @@
+<div class="gallery">
+			<div class="pic">
+                {notempty name="$data['thumb']"}
+                    {if condition="substr($data['thumb'],0,4)=='http'"}
+                    <a class="jqzoom" id="spec-n1" rel="gal1" href="{$data['thumb']}"><img class="one-img" src="{$data['thumb']}" /></a>
+                    {else /}
+                    <a class="jqzoom" id="spec-n1" rel="gal1" href="{:resizeImage($data['thumb'],'big',true)}"><img class="one-img" src="{:resizeImage($data['thumb'],'middle',true)}" /></a>
+                    {/if}
+                {/notempty}
+			</div>
+			<div id="spec-n5" data-type = "group" data-caroufredsel='{
+				width: 345,
+				height: 62,
+				circular: false,
+				infinite: false,
+				mousewheel: true,
+				auto: { play: false },
+				items: 5,
+				scroll: {
+					 items: 1,
+					
+					 easing: "swing",
+					 duration: 300,
+					 pauseOnHover: true, 
+					 fx: "scrollx" 
+					 }
+			}'>
+				<div class="control prev" id="spec-left"><div class="jiao-left"></div></div>
+						<div id="spec-list">
+							<ul class="list-h slide-content">
+                                {notempty name="$data['thumb']"}
+								<li class="zoomThumbActive slide-item">
+                                    {if condition="substr($data['thumb'],0,4)=='http'"}
+									<a href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: '{$data['thumb']}',largeimage:'{$data['thumb']}'}"><img src="{$data['thumb']}" /></a>
+                                    {else /}
+                                    <a href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: '{:resizeImage($data['thumb'],'middle',true)}',largeimage:'{:resizeImage($data['thumb'],'big',true)}'}"><img src="{:resizeImage($data['thumb'],'small',true)}" /></a>
+                                    {/if}
+								</li>
+                                {/notempty}
+                                
+                                {notempty name="$image_list"}
+                                    {foreach $image_list as $image}
+                                <li class="slide-item">
+                                {if condition="substr($image,0,4)=='http'"}
+									<a href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: '{$image}',largeimage: '{$image}'}"><img src="{$image}" /></a>
+                                {else /}
+                                    <a href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: '{:resizeImage($image,'middle',true)}',largeimage: '{:resizeImage($image,'big',true)}'}"><img src="{:resizeImage($image,'small',true)}" /></a>
+                                {/if}
+                                </li>
+                                    {/foreach}
+                                {/notempty}
+							</ul>
+							<!--rel-api
+						
+						smallimage:切换大图
+						largeimage：放大大图
+					-->
+						</div>
+						<div class="control next" id="spec-right"><em class="jiao-right"></em></div>
+				</div>
+				<!--分享-->
+
+						<div class="bdsharebuttonbox">
+							<span class="left">{:lang('Share')}：</span>
+							<a href="#" class="bds_tsina" data-cmd="tsina" title="{:lang('Share_Sina')}"></a>
+							<a href="#" class="bds_weixin" data-cmd="weixin" title="{:lang('Share_Weixin')}"></a>
+							<a href="#" class="bds_qzone" data-cmd="qzone" title="{:lang('Share_Qzone')}"></a>
+							<a href="#" class="bds_tqq" data-cmd="tqq" title="{:lang('Share_Tqq')}"></a>
+							<a href="#" class="bds_douban" data-cmd="douban" title="{:lang('Share_Douban')}"></a>
+						</div>
+						 <div class="fav-box">
+			                <a href="javascript:void(0); " class="btn btn-rounded btn-addfav  attention " data-url="{:url( 'crossbbcg/goods/collectGood', 'item_id='.$data.id)} ">
+                                {if condition="$is_collect"}
+                                <i class="mbg icon-fav" style="background-position: 0 0;"></i>
+                                {else /}
+                                <i class="mbg icon-fav"></i>
+                                {/if}
+                                <i class="text ">{:lang('Collect')}</i></a>
+			            </div>
+						<script>
+							window._bd_share_config = {
+								"common": {
+									"bdSnsKey": {},
+									"bdText": "{$data['meta_title']}",
+									"bdMini": "1",
+									"bdMiniList": false,
+									"bdPic": "{$data['thumb']}",
+									"bdStyle": "1",
+									"bdSize": "16"
+								},
+								"share": {}
+							};
+//							with(document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+						</script>
+			</div>

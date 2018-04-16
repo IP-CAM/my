@@ -1,0 +1,74 @@
+{extend name="store/base" /} 
+{block name="body"}
+<div class="steps">
+			<table width="100%">
+				<tbody>
+
+					<tr>
+						<td class="step-item step-1 active"><span><q class="icon">●</q><i>1</i>账号信息</span>
+							<div class="stepdiv">1</div>
+						</td>
+						<td class="step-item step-2 active">
+							<span><q class="icon">●</q><i>2</i>验证身份</span>
+							<div class="stepdiv">2</div>
+						</td>
+						<td class="step-item step-3 active"><span><q class="icon">●</q><i>3</i>设置新密码</span>
+							<div class="stepdiv">3</div>
+						</td>
+						
+					</tr>
+				</tbody>
+			</table>
+		</div>
+<div class="shop-login-box yahei">
+	<div class="form-body">
+		<div class="title">
+			<div class="t">找回密码</div>
+		</div>
+		<div class="content">
+		
+			<form action="" id="pwd_form">
+				<ul>
+				
+					<li class="form-row">
+							<label class="form-label">
+	                            <em> * </em> 新密码： </label>
+							<span class="form-act">
+	                           <input type="password" value="" name="userpassword" class="input-ln" datatype="*6-16" nullmsg="请设置密码！" errormsg="密码范围在6~16位之间！" />
+	                        </span>
+
+					</li>
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em> 确认新密码： </label>
+						<span class="form-act">
+                           <input type="password" value="test" name="userpassword2" tip="test" class="input-ln" datatype="*" recheck="userpassword" nullmsg="请再输入一次密码！" errormsg="您两次输入的账号密码不一致！" />
+                        </span>
+
+					</li>
+					<li class="form-row last">
+						<label for="" class="form-label">&nbsp;</label> 
+						<span class="form-act">
+                        	<button type="submit"  class="btn btn-import" rel="_request"> 下一步 </button>
+						</span>
+					</li>
+
+				</ul>
+			</form>
+			
+		</div>
+	</div>
+</div>
+
+{/block} {block name="footer_js"}
+
+<script type="text/javascript">
+
+	$("#pwd_form").Validform({
+		tiptype: 3,
+		showAllError: true
+	});
+	
+	
+</script>
+{/block}

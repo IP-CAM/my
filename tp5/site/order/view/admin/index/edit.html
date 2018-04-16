@@ -1,0 +1,75 @@
+    {extend name="admin@public/poupbase"/}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content" style="margin:0px 10px 5px 8px;">
+        <div class="bloc" style="margin:10px 0px 0px;">
+            
+            <div class="content">
+                <form id="myform" method="post" style="margin-top:5px;" class="">
+                    <fieldset style="height:485px;">
+                        <legend>{:lang('Order_info')}</legend>
+            
+                        <div class="row scrollbar" style="height: 240px; overflow-y: scroll; overflow-x: hidden; ">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="left" style="width: 8%">{:lang('Goods_id')}</th>
+                                    <th class="left" style="width: 13%">{:lang('Goods_sn')}</th>
+                                    <th class="left" style="width: 13%">{:lang('Goods_code')}</th>
+                                    <th class="left" style="width: 38%; padding-right: 10px;">{:lang('Goods_title')}</th>
+                                    <th class="left" style="width: 10%">{:lang('Unit_price')}</th>
+                                    <th class="left" style="width: 9%">{:lang('Goods_umn')}</th>
+                                    <th class="right" style="width:9%; padding-right: 16px;">{:lang('Total_fee')}</th>
+                                </tr>
+                                </thead>
+                    
+                                <tbody>
+                                {notempty name="goods['list']"}
+                                {volist name="goods['list']" id="vo"}
+                                <tr>
+                                    <td class="left">{$vo.goods_id}</td>
+                                    <td class="left">{$vo.sku_code}</td>
+                                    <td class="left">{$vo.sku_barcode}</td>
+                                    <td class="left slh tooltip-link" style="max-width: 160px;padding-right: 10px;" title="{$vo.goods_name} [{$vo.sku_array}]">
+                                        {$vo.goods_name} [{$vo.sku_array}]
+                                    </td>
+                                    <td class="left">{$vo.sku_price}</td>
+                                    <td class="left">{$vo.sku_number}</td>
+                                    <td class="right" style="padding-right: 16px;">{:number_format($vo['sku_number'] * ( $vo['sku_tax'] + $vo['sku_price']), 2)}</td>
+                                </tr>
+                                {/volist}
+                                {else /}
+                    
+                                {/notempty}
+                                </tbody>
+                            </table>
+                        </div>
+        
+                    </fieldset>
+    
+                </form>
+            </div>
+        </div>
+    </div>
+    {/block}
+    
+    {block name="js"}
+    <script>
+        $(function () {
+            var topindex = parent.layer.getFrameIndex(window.name); //获取当前窗体索引
+
+            layer.msg(
+                '{:lang("Dont support addnew order")}',
+                {
+                    icon:5,
+                    time: 3000,
+                    shade: 0.3
+                },
+                function(){
+                    parent.layer.close(topindex);
+                }
+            );
+        })
+    </script>
+    {/block}

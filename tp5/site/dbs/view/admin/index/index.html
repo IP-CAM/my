@@ -1,0 +1,134 @@
+	{extend name="admin@public/base"/}
+                
+    <!-- CONTENT --> 
+    {block name="body"}
+    <div id="content">
+        <div class="breadcrumbs">
+            {:lang('dbs')} : &nbsp;&nbsp; <span>{:lang('Useraction')}</span>
+    	</div>
+
+        <div class="bloc">
+            <div class="title">
+                <div class="tabs" id="navs">
+                    {include file="admin@public/navs" /}
+                </div>
+            </div>
+            <div class="content">
+                
+                <dl class="gzzt clearfix mtb10">
+                    <dd>
+                        <div class="boxr">
+                            {include file="admin@public/button" /}
+
+                            <?php
+                                $item = input('get.item');
+                                $prom = input('get.prom');
+                                $getlist = array();
+                            ?>
+
+                            <select id="item" style="height:25px; width:90px; margin-right:5px;">
+                                <option value="0" url="{:url('',array_merge($inputarr,array('item'=>'all')))}" {eq name="item" value="all"}selected{/eq}>{:lang('Whole_platform')}</option>
+                                <option value="pc" url="{:url('',array_merge($inputarr,array('item'=>'pc')))}" {eq name="item" value="pc"}selected{/eq}>{:lang('PC')}</option>
+                                <option value="phone" url="{:url('',array_merge($inputarr,array('item'=>'phone')))}" {eq name="item" value="phone"}selected{/eq}>{:lang('Phone')}</option>
+                                <option value="wechat" url="{:url('',array_merge($inputarr,array('item'=>'wechat')))}" {eq name="item" value="wechat"}selected{/eq}>{:lang('Wechat')}</option>
+                                <option value="tablet" url="{:url('',array_merge($inputarr,array('item'=>'tablet')))}" {eq name="item" value="tablet"}selected{/eq}>{:lang('Tablet')}</option>
+                                <option value="other" url="{:url('',array_merge($inputarr,array('item'=>'other')))}" {eq name="item" value="other"}selected{/eq}>{:lang('Other')}</option>
+                            </select>
+
+                            <select id="promotion" style="height:25px; width:90px; margin-right:5px;">
+                                <option value="0" url="{:url('',array_merge($inputarr,array('prom'=>'all')))}" {eq name="prom" value="all"}selected{/eq}>{:lang('All_activity')}</option>
+                                <option value="group" url="{:url('',array_merge($inputarr,array('prom'=>'group')))}" {eq name="prom" value="group"}selected{/eq}>{:lang('Group_purchase')}</option>
+                                <option value="prom" url="{:url('',array_merge($inputarr,array('prom'=>'promotion')))}" {eq name="prom" value="promotion"}selected{/eq}>{:lang('Prom')}</option>
+                                <option value="order" url="{:url('',array_merge($inputarr,array('prom'=>'order')))}" {eq name="prom" value="order"}selected{/eq}>{:lang('Order')}</option>
+                                <option value="timer" url="{:url('',array_merge($inputarr,array('prom'=>'timer')))}" {eq name="prom" value="timer"}selected{/eq}>{:lang('Timer')}</option>
+                                <option value="exchange_goods" url="{:url('',array_merge($inputarr,array('prom'=>'exchange_goods')))}" {eq name="prom" value="exchange_goods"}selected{/eq}>{:lang('Exchange_goods')}</option>
+                            </select>
+                            <script>
+                                $(function(){
+                                    $("#item, #promotion").change(function(){
+                                        var gotu_url = $(this).find('option:selected').attr('url');
+                                        eval("self.location='"+gotu_url+"'")
+                                    })
+                                })
+                            </script>
+                        </div>
+                    </dd>
+
+                    <form style="margin-top:0;" class="search-form">
+                        <dd>
+                            <div class="boxr ovh">
+                                <label for="name" style="margin:10px 10px 0 0; width:170px;">
+                                    <input type="text" class="searchinput" name="name" id="name" value="{:input('name')}" placeholder="{:lang('Search_tip')}" style="width:140px;"/>
+                                </label>
+                                <input type="button" name="search" id="sch-search" class="button white" value="{:lang('Search')}" url="{:url('', input('name'))}"/>
+                            </div>
+                        <dd>
+                    </form>
+                </dl>
+
+            {notempty name="list"}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="center" width="30"><input class="check-all" type="checkbox"></th>
+                        <th class="left" style="width:35px;"><a href="{:getUrlbyOrder('id')}">ID</a></th>
+                        <th class="left" style="width:170px;"><a href="{:getUrlbyOrder('name')}">{:lang('Titleid')}</a></th>
+                        <th class="left" style="width:110px;"><a href="{:getUrlbyOrder('title')}">{:lang('Actionname')}</a></th>
+                        <th class="left" style="width:90px;"><a href="{:getUrlbyOrder('type')}">{:lang('Type')}</a></th>
+                        <th class="left">{:lang('Actiondetailed')}</th>
+                        <th class="center"  style="width:60px;"><a href="{:getUrlbyOrder('status')}">{:lang('Status')}</a></th>
+                        <th class="actions">{:lang('Actions')}</th>
+                    </tr>
+                </thead>
+                    
+                    <tbody>
+                {volist name="list" id="vo"}
+                <tr>
+                    <td class="center"><input class="ids" type="checkbox" value="{$vo['id']}" name="ids[]"></td>
+                    <td class="left">{$vo['id']}</td>
+                    <td class="left">
+                    <a class="tooltip-link ajax-get edit" title="{:lang('Edit_this_record')}" href="{:url('edit',array('ids'=>$vo['id']))}" data-title="{:lang('Edit')}">
+                    {$vo['name']}
+                    </a>
+                    </td>
+                    <td class="left">{$vo['title']}</td>
+                    <td class="left">{$vo['type']}</td>
+                    <td class="left">{$vo['remark']}</td>
+                    <td class="center">
+                        {if condition="$vo['status'] eq 1"}
+                            <a href="{:url('disable',array('ids'=>$vo['id']))}" class="ajax-able" data-doing="{:lang('Disable')}">
+                                    <img src="__PUBLIC__/admin/images/enabled.png" title="{:lang('Enable')}" class="tooltip-link" alt="{:lang('Enable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png" />
+                                    </a>
+                        {else /}
+                            <a href="{:url('enable',array('ids'=>$vo['id']))}" class="ajax-able" data-doing="{:lang('Enable')}">
+                                    <img src="__PUBLIC__/admin/images/disabled.png" title="{:lang('Disable')}" class="tooltip-link" alt="{:lang('Disable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png" />
+                                    </a>
+                        {/if}
+                    </td>
+                    <td class="actions">
+                        <a class="tooltip-link ajax-get edit" title="{:lang('Edit_this_record')}" href="{:url('edit',array('ids'=>$vo['id']))}" data-title="{:lang('Edit')}">
+                            <img src="__PUBLIC__/admin/images/edit.png" alt="{:lang('Edit')}" />
+                        </a>
+                        <a class="tooltip-link ajax-get confirm" title="{:lang('Delete_this_record')}" data-layer="{:lang('Want_delete')}" href="{:url('deleteaction',array('ids'=>$vo['id']))}" data-title="{:lang('Delete')}">
+                            <img src="__PUBLIC__/admin/images/delete.png" alt="{:lang('Delete')}" />
+                        </a>
+                   </td>
+                </tr>
+                {/volist}
+                </tbody>
+            </table>
+            <div class="pagination-wrapper">
+            <div class="results-part"><span>{$_total}</span></div>
+            	<div class="links-part">{$page}</div>
+            </div>
+                
+            {else/}
+               <div class="alert alert-warning">{:lang('No_record')}</div>
+            {/notempty}
+            </div>
+        </div>
+    </div>
+    
+    {include file="admin@public/time_for_search" /}
+    
+    {/block}

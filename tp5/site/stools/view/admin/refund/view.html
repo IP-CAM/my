@@ -1,0 +1,92 @@
+    {extend name="admin@public/poupbase"/}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content" style="margin:0px 10px 5px 8px;">
+        <div class="bloc" style="margin:10px 0px 0px;">
+            <div class="content">
+                <form id="myform" method="post" style="margin-top:5px;" class="">
+                    <fieldset>
+                        <legend>{$meta_title|default=''}</legend>
+                        
+                        <div class="row">
+                            <label class="w140">{:lang('Payment order_sn')}: </label>
+                            <label>{$data.order_sn}</label>
+                        </div>
+                        
+                        <div class="row">
+                            <label class="w140">{:lang('Payment trade_no')}: </label>
+                            <label>{$data.trade_no}</label>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="fl">
+                                <label class="w140">{:lang('Payment account')}: </label>
+                                <label>{$data.account}</label>
+                            </div>
+                            
+                            <div class="fl">
+                                <label class="w140">{:lang('Seller account')}: </label>
+                                <label>{$data.refund_account}</label>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="fl">
+                                <label class="w140">{:lang('Payment money')}: </label>
+                                <label>{$data.money}</label>
+                            </div>
+                            
+                            <div class="fl">
+                                <label class="w140">{:lang('Order money')}: </label>
+                                <label>{$data.money}</label>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="fl">
+                                <label class="w140">{:lang('Payment username')}: </label>
+                                <label>{$data.uid}</label>
+                            </div>
+                            
+                            <div class="fl">
+                                <label class="w140">{:lang('Payment status')}: </label>
+                                <label>{$data.status}</label>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="fl">
+                                <label class="w140">{:lang('Payment class')}: </label>
+                                <label>{$data.refund_class}</label>
+                            </div>
+                            
+                            <div class="fl">
+                                <label class="w140">{:lang('Payment name')}: </label>
+                                <label></label>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="fl">
+                                <label class="w140">{:lang('Payment time')}: </label>
+                                <label>{$data.t_payed}</label>
+                            </div>
+                            
+                            <div class="fl">
+                                <label class="w140">{:lang('Payment ip')}: </label>
+                                <label>{$data.ip}</label>
+                            </div>
+                        </div>
+                        
+                        <div class="clear"></div>
+                        
+                        <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                            <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    {/block}

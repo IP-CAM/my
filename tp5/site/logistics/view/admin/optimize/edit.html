@@ -1,0 +1,302 @@
+    {extend name="admin@public/poupbase"/}
+    
+    <!-- CONTENT -->
+    
+    {block name="body"}
+        <div id="content" style="margin:0px 10px 5px 8px;">
+            <div class="bloc" style="margin:10px 0px 0px;">
+                <div class="content">
+                    <form id="myform" method="post" style="margin-top:5px;" class="">
+                        <fieldset>
+                            <legend>{$meta_title}</legend>
+                            <div class="thumb_box">
+                                <div class="thumb" style="width:90px; height:75px;">
+                                    <div class="upimg_tip">Logo</div>
+                                    <div class="upimg_cancel" title="{:lang('Cancel')}">x</div>
+                                    <img src="{notempty name='data.logo'}{$data.logo}{else /}__PUBLIC__/admin/images/upload-pic.gif{/notempty}" id="preview" class="upload" width="83" height="66" no-image="__PUBLIC__/admin/images/upload-pic.gif" title="{:lang('Upload img and file')}" url="{:url('img',array('m' => CONTROLLER_NAME,'input' => 'icon','thumb' => 'preview'))}" data-upload="__UPLOADS__" />
+                                    <input type="hidden" name="icon" id="icon" value="{$data.icon}" />
+                                </div>
+                            </div>
+                            
+                            <div class="thumb_box" style="top:100px;">
+                                <div class="thumb" style="width:90px; height:75px;">
+                                    <div class="upimg_tip">{:lang('Icon')}</div>
+                                    <div class="upimg_cancel" title="{:lang('Cancel')}">x</div>
+                                    <img src="{notempty name='data.icon'}{$data.icon}{else /}__PUBLIC__/admin/images/upload-pic.gif{/notempty}" id="icon_privew" class="upload" width="57" height="52" no-image="__PUBLIC__/admin/images/upload-pic.gif" title="{:lang('Upload img and file')}" url="{:url('img',array('m' => CONTROLLER_NAME,'input' => 'icon','thumb' => 'icon_privew'))}" data-upload="__UPLOADS__" />
+                                    <input type="hidden" name="icon" id="icon" value="{$data.icon}" />
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div style="float:left;">
+                                    <label for="title" class="w100">{:lang('Express_title')}: <span class="required">*</span></label>
+                                    <input  id="title" type="text" value="{$data.title}" name="title" placeholder="{:lang('Express_title')}" style="width:140px;" />
+                                </div>
+                                <div style="float:left;">
+                                    <label for="tel" class="w60l_r_0">{:lang('Express_tel')}: <span class="required">*</span></label>
+                                    <input  id="tel" type="text" value="{$data.tel}" name="tel"  class="green onlytel" maxlength="20" placeholder="0755-812345678" style="width:140px;" />
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div style="float:left;">
+                                    <label for="code" class="w100">{:lang('Express_code')}: <span class="required">*</span></label>
+                                    <input  id="code" type="text" value="{$data.code}" name="code" placeholder="ABC" class="notzh uu" style="width:100px;" />
+                                </div>
+                                
+                                <div style="float:left;">
+                                    <label for="website" class="w60l_r_0">{:lang('Website')}: <span class="required">*</span></label>
+                                    <input  id="website" type="text" value="{$data.website}" name="website" class="green onlyurl" style="width:180px;" placeholder="{:lang('Website_tip')}" />
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="checkurl" class="w100">{:lang('Checkurl')}: </label>
+                                <input  id="checkurl" type="text" value="{$data.checkurl}" name="checkurl" style="width:370px;" placeholder="{:lang('Website_tip')}" >
+                            </div>
+                            
+                            <div class="row">
+                                <label for="description" class="w100">{:lang('Description')}: </label>
+                                <input  id="description" type="text" value="{$data.description}" name="description" style="width:370px;" >
+                            </div>
+                            
+                            <div class="row bset">
+                                <label for="type" class="w100">{:lang('Express_type')}:</label>
+                                <input name="type" type="radio" value="1" id="type_1" {eq name="data.type" value="1"}checked{/eq} {eq name="ACTION_NAME" value="add"}checked{/eq}/>
+                                <label for="type_1" class="w120_r_0">{:lang('Express_1')}</label>
+                                <input name="type" type="radio" value="2" id="type_2" {eq name="data.type" value="2"}checked{/eq} />
+                                <label for="type_2" class="w120_r_0">{:lang('Express_2')}</label>
+                                <input name="type" type="radio" value="3" id="type_3" {eq name="data.type" value="3"}checked{/eq} />
+                                <label for="type_3" class="w120_r_0">{:lang('Express_3')}</label>
+                            </div>
+                            
+                            <div class="row">
+                                <div style="float:left;">
+                                    <label for="langid" class="w100">{:lang('Global')}:</label>
+                                    <div class="slideBox">
+                                        {eq name="ACTION_NAME" value="edit"}
+                                            <input id="langid" value="0" type="checkbox" name="langid" {eq name="data['langid']" value="0"}checked{/eq}  />
+                                         {else /}
+                                            <input id="langid" value="0" type="checkbox" name="langid" />
+                                        {/eq}
+                                        <label for="langid"></label>
+                                    </div>
+                                    <div style="float:left; margin:1px 10px;">
+                                        <a class="tooltip-icon" title="{:lang('Global_tip')}"></a>
+                                    </div>
+                                </div>
+                                
+                                <div style="float:left;display:;" id="varlangstr_box">
+                                    <label for="varlangstr" class="w80">{:lang('Langstr')}: </label>
+                                    <input  id="varlangstr" type="text" value="{$data.varlangstr}" name="varlangstr" class="fu onlyletter w120l"/>
+                                    <a class="tooltip-icon" title="{:lang('Langstr_tip')}"></a>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="isdelivery" class="w100">{:lang('Cash_on_delivery')}:</label>
+                                <div class="slideBox">
+                                    {eq name="ACTION_NAME" value="edit"}
+                                        <input id="isdelivery" value="1" type="checkbox" name="isdelivery"  {eq name="data['isdelivery']" value="1"}checked{/eq}/>
+                                    {else /}
+                                        <input id="isdelivery" value="1" type="checkbox" name="isdelivery" />
+                                    {/eq}
+                                    <label for="isdelivery"></label>
+                                </div>
+                                <div style="float:left; margin:1px 10px;">
+                                    <a class="tooltip-icon" title="{:lang('Cash_on_delivery_tip')}"></a>
+                                </div>
+                                <div style="float:left;">
+                                    <label for="isinsurance_off" class="w80">{:lang('Logistics_insurance')}:</label>
+                                    <div class="slideBox">
+                                        {eq name="ACTION_NAME" value="edit"}
+                                            <input id="isinsurance_off" type="checkbox" {neq name="data['isinsurance']" value='0'}checked{/neq} />
+                                        {else /}
+                                            <input id="isinsurance_off" type="checkbox" />
+                                        {/eq}
+                                        <label for="isinsurance_off"></label>
+                                    </div>
+                                </div>
+                                <div style="float:left; margin:1px 10px;">
+                                    <a class="tooltip-icon" title="{:lang('Logistics_insurance_tip')}"></a>
+                                </div>
+                                <div style="float:left; display:none;" id="isinsurance_box">
+                                    <input  id="isinsurance" type="text" min="1" max="99" value="<eq name="ACTION_NAME" value="add">0<else />{$data.isinsurance}</eq>" name="isinsurance" class="w50l_r_0"/>%
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="status" class="w100">{:lang('Status')}:</label>
+                                <div class="slideBox">
+                                    {eq name="ACTION_NAME" value="edit"}
+                                        <input id="status" value="1" type="checkbox" name="status"  {eq name="data['status']" value="1"}checked{/eq}/>
+                                    {else /}
+                                        <input id="status" value="1" type="checkbox" name="status" checked />
+                                    {/eq}
+                                    <label for="status"></label>
+                                </div>
+                                
+                                <div style="float:left;">
+                                    <label for="recommend" class="w100" style="width:105px;">{:lang('Recommend')}:</label>
+                                    <div class="slideBox">
+                                        {eq name="ACTION_NAME" value="edit"}
+                                            <input id="recommend" value="1" type="checkbox" name="recommend" {eq name="data['recommend']" value="1"}checked{/eq} />
+                                        {else /}
+                                            <input id="recommend" value="1" type="checkbox" name="recommend" />
+                                        {/eq}
+                                        <label for="recommend"></label>
+                                    </div>
+                                </div>
+                                
+                                <div style="float:left;">
+                                    <label for="sort" class="w60">{:lang('Sort')}: </label>
+                                    <input type="number" class="input litle" name="sort" maxlength="5" id="sort" value='{$data.sort|default=0}' />
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <label class="w100">{:lang('Express_price')} : <span class="required">*</span></label>
+                                <input class="button white newli" value="{:lang('Express_add_sub')}" type="button" style=" margin-right:10px;">
+                                <input class="button remove" value="{:lang('Remove_choose')}"  style="height:20px; line-height:20px; width:100px; text-align:center;" />
+                            </div>
+                            
+                            <div class="row">
+                                <label class="w100">&nbsp;&nbsp;</label>
+                                <input type="hidden" name="price_list" value="{$data.price_list}" />
+                                <style>
+                                    #pricelist{ padding:0 !important; margin:0 !important}
+                                    #pricelist li{ list-style:none;height: 24px;margin-top: 8px;}
+                                    #pricelist li span{ display:inline-block;}
+                                    #attrheader span{ display:inline-block; padding:4px; margin-right:10px;}
+                                </style>
+                                <div style="height:150px; overflow-y:scroll;"  id="attrheader">
+                                    <div style="list-style:none;">
+                                        <input type='checkbox' class="check-all" />
+                                        <span style="width:280px;">{:lang('Distribution_area')}</span>
+                                        <span style="width:90px;">{:lang('Distribution_fee')}</span>
+                                        <span style='width:60px;'>{:lang('Actions')}</span>
+                                    </div>
+                                    
+                                    <ul id="pricelist">
+                                        {notempty name="price_list"}
+                                            {volist name="price_list" id="vo"}
+                                                <li id="tr{$vo.id}">
+                                                    <input class='ids' type='checkbox' value='{$vo.id}' name="distrbution_id" checked />
+                                                    <span style='width:280px;'>{$vo.name}<input type="hidden" name="area_id[]" value="" /></span>
+                                                    <span style='width:90px;'><input type="hidden" name="area_price[]" value="" /></span>
+                                                    <a href='javascript:void(0);' class='del'> {:lang('Remove')} </a>
+                                                </li>
+                                            {/volist}
+                                        {/notempty}
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                                {eq name="ACTION_NAME" value="edit"}
+                                    <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('savedata')}">
+                                    <input type="hidden" name="id" value="{$data.id}" />
+                                {else /}
+                                    <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}">
+                                {/eq}
+                                <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {/block}
+    
+    {block name="js"}
+        <script>
+            $(function(){
+    
+                $(".bset").buttonset();
+    
+                <notempty name="data.isinsurance">$('#isinsurance_box').show();</notempty>
+                $('#isinsurance_off').click(function(){
+                    var ischecked = $(this).is(":checked");
+                    if(ischecked){
+                        $('#isinsurance_box').show();
+                        $('#isinsurance').val(3);
+                        $('#isinsurance').focus();
+                    }else{
+                        $('#isinsurance_box').hide();
+                        $('#isinsurance').val(0);
+                    }
+                })
+                
+                /*$('#langid').click(function(){
+                 var ischecked = $(this).is(":checked");
+                 if(ischecked){
+                 $('#varlangstr_box').show();
+                 $('#varlangstr').focus();
+                 }else{
+                 $('#varlangstr_box').hide();
+                 }
+                 })*/
+    
+                //向父元素添加选中的考题
+                function newli(id){
+                    var str = "<li>"
+                        +"<input type='checkbox' class='ids' name='distrbution_id[]' checked  />"
+                        +"<span style='width:280px;'><input type='hidden' name='area_id[]' /><input type='button' class='button white area' value='+' id=btn"+id+" data-id='"+id+"' /></span>"
+                        +"<span style='width:90px;'><input style='width:60px; height:20px;' name='area_price[]' /></span>"
+                        +"<span style='width:60px;'><a href='javascript:void(0);' class='del'>{:lang('Del')} </a></span>"
+                        +"</li>";
+                    return str;
+                }
+    
+                $(".newli").click(function(){
+                    var id = $("#pricelist").find('li').size()+1;
+                    var dom = newli(id);
+                    $('#pricelist').append(dom);
+                    $('#pricelist .input[type="text"]:last').focus();
+                })
+    
+                $(".remove").click(function(){
+                    var checkbox = $("#pricelist").find(':checkbox[type="checkbox"]');
+                    var checkbox_chk = $("#pricelist").find(':checkbox[type="checkbox"]:checked');
+                    if(checkbox.length < 1){
+                        layer.msg('{:lang("First_addnew")}');
+                        return false
+                    }
+                    if(checkbox_chk.length > 0){
+                        $(':checkbox[type="checkbox"]:checked').each(function() {
+                            $(this).closest("li").remove();
+                        });
+                    }else{
+                        layer.msg('{:lang("First_choose")}');
+                    }
+                })
+    
+                $('#pricelist').on("click",'.del',function(){
+                    $(this).closest("li").remove();
+                })
+    
+                $('#pricelist').on("click",'.area',function(){
+                    var title = '{:lang("Choose_area")}';
+                    var id = $(this).attr("data-id");
+                    var url = '{:url("area")}?target=btn'+id;
+                    var w = '500px';
+                    var h = '500px';
+    
+                    layer.open({
+                        type: 2,
+                        /*title:false,*/
+                        title: [
+                            title,
+                            "border:none; background:#333;font-size: 15px;font-weight:bold;color:#fff;"
+                        ],
+                        //skin: 'layui-layer-rim',
+                        //shadeClose: false,
+                        offset: 'rb',
+                        shade: [0.2, '#000'],
+                        area: [w, h],
+                        content: url
+                    });
+                })
+            })
+        </script>
+    {/block}

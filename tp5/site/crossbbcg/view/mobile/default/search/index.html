@@ -1,0 +1,3874 @@
+{extend name='public/base'}
+{block  name='css'}
+<link rel="stylesheet" href="__PUBLIC__/{$css_path}/search.css">
+{/block}
+{block name='body'}
+<div id="j-wechatTopbar"></div>
+<header class="g-hd">
+</header>
+<header class="g-hd m-topnav-space" id="g-hd">
+    <div class="m-topnav-wrap">
+        <div class=" m-topnav" id="topbar-box">
+            <div class="m-topnavbar">
+                <span class="tit" id="toptitle">蛇毒眼膜</span>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="m-contentwrap j-contentwrap">
+    <div class="searchbannerwrap" style="position: sticky;top: 0;z-index: 1000;">
+        <div class="m-searchbanner" id="j-searchinput">
+            <div class="m-searchinput">
+                <div class="m-searchbanner">
+                    <i class="u-goback"></i>
+                    <div class="m-searchbox">
+                        <i class="u-searchicon"></i>
+                        <input type="search" class="u-searchinput" readonly="readonly">
+                        <button type="reset" class="u-btn-reset"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="searchbarwrap " style="position: sticky; top: 44px; z-index: 1000;">
+        <div class="m-searchbar " id="searchbar">
+            <div class="j-searchbarwrap">
+                <div>
+                    <div class="filter">筛选<i class="icon icon-1"></i><i class="icon icon-2"></i></div>
+                    <ul class="type f-cb">
+                        <!--Regular list-->
+                        <!--Regular if81-->
+                        <li>
+                            <a href="javascript:void(0);" class="current">
+                                综合
+                            </a>
+                        </li>
+                        <!--Regular if82-->
+                        <li>
+                            <a href="javascript:void(0);" class="">
+                                销量
+                            </a>
+                        </li>
+                        <!--Regular if83-->
+                        <li>
+                            <a href="javascript:void(0);" class="">
+                                新品
+                            </a>
+                        </li>
+                        <!--Regular if84-->
+                        <li>
+                            <a href="javascript:void(0);" class="">
+                                价格&ensp;
+                                <!--Regular if85-->
+                                <span class="u-arrow"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="j-shortcutfilter">
+                    <div class="n-shortcut">
+                        
+                        <div class="n-shortcut-filter">
+                            <ul class="slist">
+                                <!--Regular list-->
+        
+                                <!--Regular if253-->
+                                <li class="sli" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                                    <div class="name">
+                                        <!--Regular if254-->
+                                        <i class="check"></i>考拉自营
+            
+                                    </div>
+                                </li>
+        
+        
+        
+        
+        
+                                <!--Regular if255-->
+                                <li class="sli" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                                    <div class="name">
+                                        品牌
+                                        <span class="arr"></span>
+                                    </div>
+                                </li>
+        
+        
+        
+        
+                                <!--Regular if256-->
+                                <li class="sli" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                                    <div class="name">
+                                        容量
+                                        <span class="arr"></span>
+                                    </div>
+                                </li>
+        
+        
+        
+        
+                                <!--Regular if257-->
+                                <li class="sli" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                                    <div class="name">
+                                        产品材质
+                                        <span class="arr"></span>
+                                    </div>
+                                </li>
+    
+    
+    
+                            </ul>
+                        </div>
+                        
+                        <div class="n-shortcut-list z-end">
+                            <div class="aniwrap">
+                                <div class="ani">
+                                    <div class="flistw">
+                                        <ul class="flist" style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);">
+                                            <!--Regular list-->
+                                            <li class="flit" style="display: none;">产品材质</li>
+        
+                                            <!--Regular list-->
+                                            <li class="fli" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                                                <div class="name">
+                                                    <span class="msg">304不锈钢</span><i class="check"></i>
+                                                </div>
+                                            </li>
+        
+                                            <li class="fli" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                                                <div class="name">
+                                                    <span class="msg">活性炭+超滤</span><i class="check"></i>
+                                                </div>
+                                            </li>
+        
+                                            <li class="fli" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                                                <div class="name">
+                                                    <span class="msg">不锈钢</span><i class="check"></i>
+                                                </div>
+                                            </li>
+        
+                                            <li class="fli" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                                                <div class="name">
+                                                    <span class="msg">PP聚丙烯</span><i class="check"></i>
+                                                </div>
+                                            </li>
+        
+                                            <li class="fli" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                                                <div class="name">
+                                                    <span class="msg">玻璃</span><i class="check"></i>
+                                                </div>
+                                            </li>
+        
+                                            <li class="fli" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                                                <div class="name">
+                                                    <span class="msg">塑料</span><i class="check"></i>
+                                                </div>
+                                            </li>
+        
+                                            <li class="fli" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                                                <div class="name">
+                                                    <span class="msg">外塑内钢</span><i class="check"></i>
+                                                </div>
+                                            </li>
+        
+                                            <li class="fli" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                                                <div class="name">
+                                                    <span class="msg">PU</span><i class="check"></i>
+                                                </div>
+                                            </li>
+        
+                                            <li class="fli" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                                                <div class="name">
+                                                    <span class="msg">聚乙烯</span><i class="check"></i>
+                                                </div>
+                                            </li>
+        
+                                            <li class="fli" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                                                <div class="name">
+                                                    <span class="msg">中空纤维</span><i class="check"></i>
+                                                </div>
+                                            </li>
+        
+                                            <li class="fli" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                                                <div class="name">
+                                                    <span class="msg">彩钢</span><i class="check"></i>
+                                                </div>
+                                            </li>
+    
+    
+                                        </ul>
+                                    </div>
+                                    <div class="btns">
+                                        <div class="reset"
+                                             style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                                            重置
+                                        </div>
+                                        <div class="confirm"
+                                             style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                                            确定
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="maskw"
+                                 style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div>
+                        </div>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="m-searchresult" id="searchresult">
+        <dl class="m-itemlist-col2 f-cb ">
+            <!--Regular list-->
+            <!--Regular if86-->
+            <dd class="">
+                <article class="m-itemcol2">
+                    
+                    <div class="m-picitem">
+                        
+                        <a href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}" class="imgwrap">
+                            
+                            <!--Regular if87-->
+                            <img
+                                src="https://pop.nosdn.127.net/f3a6ad76-f3d9-45dd-8326-6c37a6298385?imageView&amp;thumbnail=400x0&amp;quality=95&amp;type=webp"
+                                class="u-item-img">
+                            
+                            <!--inlcude-->
+                            
+                            <!--Regular if88-->
+                            
+                            <!--Regular if89--><!--Regular if90-->
+                            
+                            <!--Regular if91--><!--Regular if92--><!--Regular if93--><!--Regular if94-->
+                            <!--Regular if95-->
+                            
+                            <!--Regular if96-->
+                        
+                        </a>
+                        
+                        <!--Regular if97-->
+                        
+                        <div class="toptag">
+                            <img class="img"
+                                 src="https://haitao.nos.netease.com/4021ac80-1fa9-4ec6-9fe2-0599d5a153e7.png?imageView&amp;thumbnail=150x0&amp;quality=100">
+                        </div>
+                        <!--Regular if98-->
+                    </div>
+                    <div class="m-descitem">
+                        <p class="tit">
+                            <a class="link" href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}">
+                                <!--Regular if99-->
+                                星农联合公蟹3.5两 母蟹2.5两3对阳澄湖大闸蟹现货
+                            </a>
+                        </p>
+                        <!--Regular if100-->
+                        <div class="pricewrapw">
+                            <div class="pricewrap ">
+                                <!--Regular if101--><!--Regular if102-->
+                                <span class="price"><i class="rmb">¥</i>188</span>
+                                
+                                <!--Regular if103-->
+                                <span class="mktprice"><del>¥398</del></span>
+                                
+                                <!--Regular if104-->
+                            
+                            </div>
+                        </div>
+                        
+                        <div class="bottomtagsw">
+                            <div class="bottomtags" style="opacity: 1;">
+                                
+                                <!--Regular if105-->
+                                
+                                <!--Regular list--><span class="benefitpoint">特价</span>
+                                
+                                <!--Regular if106-->
+                                
+                                <!--Regular if108-->
+                                <span class="goodComment">100%好评</span>
+                            
+                            </div>
+                        </div>
+                    </div>
+                
+                </article>
+            </dd>
+            
+            <!--Regular if109-->
+            <dd class="">
+                <article class="m-itemcol2">
+                    
+                    <div class="m-picitem">
+                        
+                        <a href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}" class="imgwrap">
+                            
+                            <!--Regular if110-->
+                            <img
+                                src="https://pop.nosdn.127.net/321b07d1-0f74-4e60-a697-061bc24a1ae5?imageView&amp;thumbnail=400x0&amp;quality=95&amp;type=webp"
+                                class="u-item-img">
+                            
+                            <!--inlcude-->
+                            
+                            <!--Regular if111-->
+                            
+                            <!--Regular if112--><!--Regular if113-->
+                            
+                            <!--Regular if114--><!--Regular if115--><!--Regular if116--><!--Regular if117-->
+                            <!--Regular if118-->
+                            
+                            <!--Regular if119-->
+                        
+                        </a>
+                        
+                        <!--Regular if120-->
+                        
+                        <div class="toptag">
+                            <img class="img"
+                                 src="https://haitao.nos.netease.com/4021ac80-1fa9-4ec6-9fe2-0599d5a153e7.png?imageView&amp;thumbnail=150x0&amp;quality=100">
+                        </div>
+                        
+                        <!--Regular if121-->
+                    </div>
+                    
+                    <div class="m-descitem">
+                        
+                        <p class="tit">
+                            <a class="link" href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}">
+                                <!--Regular if122-->
+                                现货 星农联合公蟹3.0两 母蟹2.0两3对阳澄湖大闸蟹
+                            </a>
+                        </p>
+                        
+                        <!--Regular if123-->
+                        
+                        <div class="pricewrapw">
+                            <div class="pricewrap ">
+                                
+                                <!--Regular if124--><!--Regular if125-->
+                                <span class="price"><i class="rmb">¥</i>138</span>
+                                
+                                <!--Regular if126-->
+                                <span class="mktprice"><del>¥488</del></span>
+                                
+                                <!--Regular if127-->
+                            
+                            </div>
+                        </div>
+                        
+                        <div class="bottomtagsw">
+                            <div class="bottomtags" style="opacity: 1;">
+                                
+                                <!--Regular if128-->
+                                
+                                <!--Regular list--><span class="benefitpoint">特价</span>
+                                
+                                <!--Regular if129-->
+                                
+                                <!--Regular if131-->
+                                <span class="goodComment">99.5%好评</span>
+                            
+                            </div>
+                        </div>
+                    </div>
+                
+                </article>
+            </dd>
+            
+            <!--Regular if132-->
+            <dd class="">
+                <article class="m-itemcol2">
+                    
+                    <div class="m-picitem">
+                        
+                        <a href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}" class="imgwrap">
+                            
+                            <!--Regular if133-->
+                            <img
+                                src="https://pop.nosdn.127.net/6324b51c-3f1b-4f9a-8ea4-58e815652950?imageView&amp;thumbnail=400x0&amp;quality=95&amp;type=webp"
+                                class="u-item-img">
+                            
+                            <!--inlcude-->
+                            
+                            <!--Regular if134-->
+                            
+                            <!--Regular if135--><!--Regular if136-->
+                            
+                            <!--Regular if137--><!--Regular if138--><!--Regular if139--><!--Regular if140-->
+                            <!--Regular if141-->
+                            
+                            <!--Regular if142-->
+                        
+                        </a>
+                        
+                        <!--Regular if143-->
+                        
+                        <div class="toptag">
+                            <img class="img"
+                                 src="https://haitao.nos.netease.com/4021ac80-1fa9-4ec6-9fe2-0599d5a153e7.png?imageView&amp;thumbnail=150x0&amp;quality=100">
+                        </div>
+                        
+                        <!--Regular if144-->
+                    </div>
+                    
+                    <div class="m-descitem">
+                        
+                        <p class="tit">
+                            <a class="link" href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}">
+                                <!--Regular if145-->
+                                【现货】湖景楼阳澄湖大闸蟹公蟹3.5两 母蟹2.5两 8只礼盒装现货
+                            </a>
+                        </p>
+                        
+                        <!--Regular if146-->
+                        
+                        <div class="pricewrapw">
+                            <div class="pricewrap ">
+                                
+                                <!--Regular if147--><!--Regular if148-->
+                                <span class="price"><i class="rmb">¥</i>208</span>
+                                
+                                <!--Regular if149-->
+                                <span class="mktprice"><del>¥1088</del></span>
+                                
+                                <!--Regular if150-->
+                            
+                            </div>
+                        </div>
+                        
+                        <div class="bottomtagsw">
+                            <div class="bottomtags" style="opacity: 1;">
+                                
+                                <!--Regular if151-->
+                                
+                                <!--Regular list-->
+                                
+                                <!--Regular if152-->
+                                
+                                <!--Regular if154-->
+                                <span class="goodComment">96%好评</span>
+                            
+                            </div>
+                        </div>
+                    </div>
+                
+                </article>
+            </dd>
+            
+            <!--Regular if155-->
+            <dd class="">
+                <article class="m-itemcol2">
+                    
+                    <div class="m-picitem">
+                        
+                        <a href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}" class="imgwrap">
+                            
+                            <!--Regular if156-->
+                            <img
+                                src="https://pop.nosdn.127.net/269f13a6-b268-4c40-85cf-dcfe1eea73d2?imageView&amp;thumbnail=400x0&amp;quality=95&amp;type=webp"
+                                class="u-item-img">
+                            
+                            <!--inlcude-->
+                            
+                            <!--Regular if157-->
+                            
+                            <!--Regular if158--><!--Regular if159-->
+                            
+                            <!--Regular if160--><!--Regular if161--><!--Regular if162--><!--Regular if163-->
+                            <!--Regular if164-->
+                            
+                            <!--Regular if165-->
+                        
+                        </a>
+                        
+                        <!--Regular if166-->
+                        
+                        <div class="toptag">
+                            <img class="img"
+                                 src="https://haitao.nos.netease.com/4021ac80-1fa9-4ec6-9fe2-0599d5a153e7.png?imageView&amp;thumbnail=150x0&amp;quality=100">
+                        </div>
+                        
+                        <!--Regular if167-->
+                    </div>
+                    
+                    <div class="m-descitem">
+                        
+                        <p class="tit">
+                            <a class="link" href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}">
+                                <!--Regular if168-->
+                                现货 公蟹4.0两 母蟹3.0两4对星农联合阳澄湖大闸蟹现货礼盒
+                            </a>
+                        </p>
+                        
+                        <!--Regular if169-->
+                        
+                        <div class="pricewrapw">
+                            <div class="pricewrap ">
+                                
+                                <!--Regular if170--><!--Regular if171-->
+                                <span class="price"><i class="rmb">¥</i>258</span>
+                                
+                                <!--Regular if172-->
+                                <span class="mktprice"><del>¥888</del></span>
+                                
+                                <!--Regular if173-->
+                            
+                            </div>
+                        </div>
+                        
+                        <div class="bottomtagsw">
+                            <div class="bottomtags" style="opacity: 1;">
+                                
+                                <!--Regular if174-->
+                                
+                                <!--Regular list--><span class="benefitpoint">特价</span>
+                                
+                                <!--Regular if175-->
+                                
+                                <!--Regular if177-->
+                                <span class="goodComment">100%好评</span>
+                            
+                            </div>
+                        </div>
+                    </div>
+                
+                </article>
+            </dd>
+            
+            <!--Regular if178-->
+            <dd class="">
+                <article class="m-itemcol2">
+                    
+                    <div class="m-picitem">
+                        
+                        <a href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}" class="imgwrap">
+                            
+                            <!--Regular if179-->
+                            <img
+                                src="https://pop.nosdn.127.net/a0b8589f-9918-480e-b437-6041bc50c9d1?imageView&amp;thumbnail=400x0&amp;quality=95&amp;type=webp"
+                                class="u-item-img">
+                            
+                            <!--inlcude-->
+                            
+                            <!--Regular if180-->
+                            
+                            <!--Regular if181--><!--Regular if182-->
+                            
+                            <!--Regular if183--><!--Regular if184--><!--Regular if185--><!--Regular if186-->
+                            <!--Regular if187-->
+                            
+                            <!--Regular if188-->
+                        
+                        </a>
+                        
+                        <!--Regular if189-->
+                        
+                        <div class="toptag">
+                            <img class="img"
+                                 src="https://haitao.nos.netease.com/4021ac80-1fa9-4ec6-9fe2-0599d5a153e7.png?imageView&amp;thumbnail=150x0&amp;quality=100">
+                        </div>
+                        
+                        <!--Regular if190-->
+                    </div>
+                    
+                    <div class="m-descitem">
+                        
+                        <p class="tit">
+                            <a class="link" href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}">
+                                <!--Regular if191-->
+                                【现货】湖景楼阳澄湖大闸蟹 公蟹3.5两 母蟹2.5两 10只鲜活礼盒装
+                            </a>
+                        </p>
+                        
+                        <!--Regular if192-->
+                        
+                        <div class="pricewrapw">
+                            <div class="pricewrap ">
+                                
+                                <!--Regular if193--><!--Regular if194-->
+                                <span class="price"><i class="rmb">¥</i>258</span>
+                                
+                                <!--Regular if195-->
+                                <span class="mktprice"><del>¥1288</del></span>
+                                
+                                <!--Regular if196-->
+                            
+                            </div>
+                        </div>
+                        
+                        <div class="bottomtagsw">
+                            <div class="bottomtags" style="opacity: 1;">
+                                
+                                <!--Regular if197-->
+                                
+                                <!--Regular list-->
+                                
+                                <!--Regular if198-->
+                                
+                                <!--Regular if200-->
+                                <span class="goodComment">100%好评</span>
+                            
+                            </div>
+                        </div>
+                    </div>
+                
+                </article>
+            </dd>
+            
+            <!--Regular if201-->
+            <dd class="">
+                <article class="m-itemcol2">
+                    
+                    <div class="m-picitem">
+                        
+                        <a href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}" class="imgwrap">
+                            
+                            <!--Regular if202-->
+                            <img
+                                src="https://pop.nosdn.127.net/86aab0ad-1084-4566-be12-d7fad671767e?imageView&amp;thumbnail=400x0&amp;quality=95&amp;type=webp"
+                                class="u-item-img">
+                            
+                            <!--inlcude-->
+                            
+                            <!--Regular if203-->
+                            
+                            <!--Regular if204--><!--Regular if205-->
+                            
+                            <!--Regular if206--><!--Regular if207--><!--Regular if208--><!--Regular if209-->
+                            <!--Regular if210-->
+                            
+                            <!--Regular if211-->
+                        
+                        </a>
+                        
+                        <!--Regular if212-->
+                        
+                        <div class="toptag">
+                            <img class="img"
+                                 src="https://haitao.nos.netease.com/4021ac80-1fa9-4ec6-9fe2-0599d5a153e7.png?imageView&amp;thumbnail=150x0&amp;quality=100">
+                        </div>
+                        
+                        <!--Regular if213-->
+                    </div>
+                    
+                    <div class="m-descitem">
+                        
+                        <p class="tit">
+                            <a class="link" href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}">
+                                <!--Regular if214-->
+                                下单送2只 蟹灵阁阳澄湖大闸蟹公蟹3.0两母蟹2.0两 3对装现货
+                            </a>
+                        </p>
+                        
+                        <!--Regular if215-->
+                        
+                        <div class="pricewrapw">
+                            <div class="pricewrap ">
+                                
+                                <!--Regular if216--><!--Regular if217-->
+                                <span class="price"><i class="rmb">¥</i>128</span>
+                                
+                                <!--Regular if218-->
+                                <span class="mktprice"><del>¥498</del></span>
+                                
+                                <!--Regular if219-->
+                            
+                            </div>
+                        </div>
+                        
+                        <div class="bottomtagsw">
+                            <div class="bottomtags" style="opacity: 1;">
+                                
+                                <!--Regular if220-->
+                                
+                                <!--Regular list--><span class="benefitpoint">特价</span>
+                                
+                                <!--Regular if221-->
+                                
+                                <!--Regular if223-->
+                                <span class="goodComment">90%好评</span>
+                            
+                            </div>
+                        </div>
+                    </div>
+                
+                </article>
+            </dd>
+            
+            <!--Regular if224-->
+            <dd class="">
+                <article class="m-itemcol2">
+                    
+                    <div class="m-picitem">
+                        
+                        <a href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}" class="imgwrap">
+                            
+                            <!--Regular if225-->
+                            <img
+                                src="https://pop.nosdn.127.net/56c4b5c8-ac1c-46ca-b29d-ce1bf02d27cd?imageView&amp;thumbnail=400x0&amp;quality=95&amp;type=webp"
+                                class="u-item-img">
+                            
+                            <!--inlcude-->
+                            
+                            <!--Regular if226-->
+                            
+                            <!--Regular if227--><!--Regular if228-->
+                            
+                            <!--Regular if229--><!--Regular if230--><!--Regular if231--><!--Regular if232-->
+                            <!--Regular if233-->
+                            
+                            <!--Regular if234-->
+                        
+                        </a>
+                        
+                        <!--Regular if235-->
+                        
+                        <div class="toptag">
+                            <img class="img"
+                                 src="https://haitao.nos.netease.com/4021ac80-1fa9-4ec6-9fe2-0599d5a153e7.png?imageView&amp;thumbnail=150x0&amp;quality=100">
+                        </div>
+                        
+                        <!--Regular if236-->
+                    </div>
+                    
+                    <div class="m-descitem">
+                        
+                        <p class="tit">
+                            <a class="link" href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}">
+                                <!--Regular if237-->
+                                星农联合公蟹3.5两 母蟹2.5两4对阳澄湖大闸蟹现货
+                            </a>
+                        </p>
+                        
+                        <!--Regular if238-->
+                        
+                        <div class="pricewrapw">
+                            <div class="pricewrap ">
+                                
+                                <!--Regular if239--><!--Regular if240-->
+                                <span class="price"><i class="rmb">¥</i>198</span>
+                                
+                                <!--Regular if241-->
+                                <span class="mktprice"><del>¥888</del></span>
+                                
+                                <!--Regular if242-->
+                            
+                            </div>
+                        </div>
+                        
+                        <div class="bottomtagsw">
+                            <div class="bottomtags" style="opacity: 1;">
+                                
+                                <!--Regular if243-->
+                                
+                                <!--Regular list--><span class="benefitpoint">特价</span>
+                                
+                                <!--Regular if244-->
+                                
+                                <!--Regular if246-->
+                                <span class="goodComment">100%好评</span>
+                            
+                            </div>
+                        </div>
+                    </div>
+                
+                </article>
+            </dd>
+            
+            <!--Regular if247-->
+            <dd class="">
+                <article class="m-itemcol2">
+                    
+                    <div class="m-picitem">
+                        
+                        <a href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}" class="imgwrap">
+                            
+                            <!--Regular if248-->
+                            <img
+                                src="https://pop.nosdn.127.net/1a15ff38-32b6-4d47-b14f-3a349d5c8cf0?imageView&amp;thumbnail=400x0&amp;quality=95&amp;type=webp"
+                                class="u-item-img">
+                            
+                            <!--inlcude-->
+                            
+                            <!--Regular if249-->
+                            
+                            <!--Regular if250--><!--Regular if251-->
+                            
+                            <!--Regular if252--><!--Regular if253--><!--Regular if254--><!--Regular if255-->
+                            <!--Regular if256-->
+                            
+                            <!--Regular if257-->
+                        
+                        </a>
+                        
+                        <!--Regular if258-->
+                        
+                        <div class="toptag">
+                            <img class="img"
+                                 src="https://haitao.nos.netease.com/4021ac80-1fa9-4ec6-9fe2-0599d5a153e7.png?imageView&amp;thumbnail=150x0&amp;quality=100">
+                        </div>
+                        
+                        <!--Regular if259-->
+                    </div>
+                    
+                    <div class="m-descitem">
+                        
+                        <p class="tit">
+                            <a class="link" href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}">
+                                <!--Regular if260-->
+                                舟鲜生 野生红膏梭子蟹蟹糊 400克
+                            </a>
+                        </p>
+                        
+                        <!--Regular if261-->
+                        
+                        <div class="pricewrapw">
+                            <div class="pricewrap ">
+                                
+                                <!--Regular if262--><!--Regular if263-->
+                                <span class="price"><i class="rmb">¥</i>45.9</span>
+                                
+                                <!--Regular if264-->
+                                <span class="mktprice"><del>¥56</del></span>
+                                
+                                <!--Regular if265-->
+                            
+                            </div>
+                        </div>
+                        
+                        <div class="bottomtagsw">
+                            <div class="bottomtags" style="opacity: 1;">
+                                
+                                <!--Regular if266-->
+                                
+                                <!--Regular list--><span class="benefitpoint">券</span>
+                                
+                                <!--Regular if267-->
+                                
+                                <!--Regular if269-->
+                                <span class="goodComment">93%好评</span>
+                            
+                            </div>
+                        </div>
+                    </div>
+                
+                </article>
+            </dd>
+            
+            <!--Regular if270-->
+            <dd class="">
+                <article class="m-itemcol2">
+                    
+                    <div class="m-picitem">
+                        
+                        <a href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}" class="imgwrap">
+                            
+                            <!--Regular if271-->
+                            <img
+                                src="https://pop.nosdn.127.net/18c1871f-bfa3-4c16-97ed-e8c78d6e78a9?imageView&amp;thumbnail=400x0&amp;quality=95&amp;type=webp"
+                                class="u-item-img">
+                            
+                            <!--inlcude-->
+                            
+                            <!--Regular if272-->
+                            
+                            <!--Regular if273--><!--Regular if274-->
+                            
+                            <!--Regular if275--><!--Regular if276--><!--Regular if277--><!--Regular if278-->
+                            <!--Regular if279-->
+                            
+                            <!--Regular if280-->
+                        
+                        </a>
+                        
+                        <!--Regular if281-->
+                        
+                        <div class="toptag">
+                            <img class="img"
+                                 src="https://haitao.nos.netease.com/4021ac80-1fa9-4ec6-9fe2-0599d5a153e7.png?imageView&amp;thumbnail=150x0&amp;quality=100">
+                        </div>
+                        
+                        <!--Regular if282-->
+                    </div>
+                    
+                    <div class="m-descitem">
+                        
+                        <p class="tit">
+                            <a class="link" href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}">
+                                <!--Regular if283-->
+                                星农联合阳澄湖大闸蟹现货公蟹4.0两 母蟹3.0两4对
+                            </a>
+                        </p>
+                        
+                        <!--Regular if284-->
+                        
+                        <div class="pricewrapw">
+                            <div class="pricewrap ">
+                                
+                                <!--Regular if285--><!--Regular if286-->
+                                <span class="price"><i class="rmb">¥</i>328</span>
+                                
+                                <!--Regular if287-->
+                                <span class="mktprice"><del>¥1888</del></span>
+                                
+                                <!--Regular if288-->
+                            
+                            </div>
+                        </div>
+                        
+                        <div class="bottomtagsw">
+                            <div class="bottomtags" style="opacity: 1;">
+                                
+                                <!--Regular if289-->
+                                
+                                <!--Regular list--><span class="benefitpoint">特价</span>
+                                
+                                <!--Regular if290-->
+                                
+                                <!--Regular if292-->
+                                <span class="goodComment">97.2%好评</span>
+                            
+                            </div>
+                        </div>
+                    </div>
+                
+                </article>
+            </dd>
+            
+            <!--Regular if293-->
+            <dd class="">
+                <article class="m-itemcol2">
+                    
+                    <div class="m-picitem">
+                        
+                        <a href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}" class="imgwrap">
+                            
+                            <!--Regular if294-->
+                            <img
+                                src="https://pop.nosdn.127.net/6e954e98-13d4-4567-8c8a-b059dc10ab75?imageView&amp;thumbnail=400x0&amp;quality=95&amp;type=webp"
+                                class="u-item-img">
+                            
+                            <!--inlcude-->
+                            
+                            <!--Regular if295-->
+                            
+                            <!--Regular if296--><!--Regular if297-->
+                            
+                            <!--Regular if298--><!--Regular if299--><!--Regular if300--><!--Regular if301-->
+                            <!--Regular if302-->
+                            
+                            <!--Regular if303-->
+                        
+                        </a>
+                        
+                        <!--Regular if304-->
+                        
+                        <!--Regular if305-->
+                    </div>
+                    
+                    <div class="m-descitem">
+                        
+                        <p class="tit">
+                            <a class="link" href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}">
+                                <!--Regular if306-->
+                                现货 星农联合公蟹4.5两 母蟹3.0两4对阳澄湖大闸蟹现货
+                            </a>
+                        </p>
+                        
+                        <!--Regular if307-->
+                        
+                        <div class="pricewrapw">
+                            <div class="pricewrap ">
+                                
+                                <!--Regular if308--><!--Regular if309-->
+                                <span class="price"><i class="rmb">¥</i>328</span>
+                                
+                                <!--Regular if310-->
+                                <span class="mktprice"><del>¥2388</del></span>
+                                
+                                <!--Regular if311-->
+                            
+                            </div>
+                        </div>
+                        
+                        <div class="bottomtagsw">
+                            <div class="bottomtags" style="opacity: 1;">
+                                
+                                <!--Regular if312-->
+                                
+                                <!--Regular list--><span class="benefitpoint">特价</span>
+                                
+                                <!--Regular if313-->
+                                
+                                <!--Regular if315-->
+                                <span class="goodComment">100%好评</span>
+                            
+                            </div>
+                        </div>
+                    </div>
+                
+                </article>
+            </dd>
+            
+            <!--Regular if316-->
+            <dd class="">
+                <article class="m-itemcol2">
+                    
+                    <div class="m-picitem">
+                        
+                        <a href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}" class="imgwrap">
+                            
+                            <!--Regular if317-->
+                            <img
+                                src="https://pop.nosdn.127.net/747a8ebc-a3e6-4c63-8600-733dcdad67ac?imageView&amp;thumbnail=400x0&amp;quality=95&amp;type=webp"
+                                class="u-item-img">
+                            
+                            <!--inlcude-->
+                            
+                            <!--Regular if318-->
+                            
+                            <!--Regular if319--><!--Regular if320-->
+                            
+                            <!--Regular if321--><!--Regular if322--><!--Regular if323--><!--Regular if324-->
+                            <!--Regular if325-->
+                            
+                            <!--Regular if326-->
+                        
+                        </a>
+                        
+                        <!--Regular if327-->
+                        
+                        <!--Regular if328-->
+                    </div>
+                    
+                    <div class="m-descitem">
+                        
+                        <p class="tit">
+                            <a class="link" href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}">
+                                <!--Regular if329-->
+                                【现货】湖景楼阳澄湖大闸蟹 公蟹3.0两4只 母蟹2.0两4只 鲜活礼盒装
+                            </a>
+                        </p>
+                        
+                        <!--Regular if330-->
+                        
+                        <div class="pricewrapw">
+                            <div class="pricewrap ">
+                                
+                                <!--Regular if331--><!--Regular if332-->
+                                <span class="price"><i class="rmb">¥</i>158</span>
+                                
+                                <!--Regular if333-->
+                                <span class="mktprice"><del>¥768</del></span>
+                                
+                                <!--Regular if334-->
+                            
+                            </div>
+                        </div>
+                        
+                        <div class="bottomtagsw">
+                            <div class="bottomtags" style="opacity: 1;">
+                                
+                                <!--Regular if335-->
+                                
+                                <!--Regular list-->
+                                
+                                <!--Regular if336-->
+                                
+                                <!--Regular if338-->
+                                <span class="goodComment">90.5%好评</span>
+                            
+                            </div>
+                        </div>
+                    </div>
+                
+                </article>
+            </dd>
+            
+            <!--Regular if339-->
+            <dd class="">
+                <article class="m-itemcol2">
+                    
+                    <div class="m-picitem">
+                        
+                        <a href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}" class="imgwrap">
+                            
+                            <!--Regular if340-->
+                            <img
+                                src="https://pop.nosdn.127.net/174103fe-64bd-41e0-aaa4-495d8daa0d65?imageView&amp;thumbnail=400x0&amp;quality=95&amp;type=webp"
+                                class="u-item-img">
+                            
+                            <!--inlcude-->
+                            
+                            <!--Regular if341-->
+                            
+                            <!--Regular if342--><!--Regular if343-->
+                            
+                            <!--Regular if344--><!--Regular if345--><!--Regular if346--><!--Regular if347-->
+                            <!--Regular if348-->
+                            
+                            <!--Regular if349-->
+                        
+                        </a>
+                        
+                        <!--Regular if350-->
+                        
+                        <!--Regular if351-->
+                    </div>
+                    
+                    <div class="m-descitem">
+                        
+                        <p class="tit">
+                            <a class="link" href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}">
+                                <!--Regular if352-->
+                                星农联合公蟹3.0两 母蟹2.0两 4对阳澄湖大闸蟹现货礼盒
+                            </a>
+                        </p>
+                        
+                        <!--Regular if353-->
+                        
+                        <div class="pricewrapw">
+                            <div class="pricewrap ">
+                                
+                                <!--Regular if354--><!--Regular if355-->
+                                <span class="price"><i class="rmb">¥</i>138</span>
+                                
+                                <!--Regular if356-->
+                                <span class="mktprice"><del>¥298</del></span>
+                                
+                                <!--Regular if357-->
+                            
+                            </div>
+                        </div>
+                        
+                        <div class="bottomtagsw">
+                            <div class="bottomtags" style="opacity: 1;">
+                                
+                                <!--Regular if358-->
+                                
+                                <!--Regular list--><span class="benefitpoint">特价</span>
+                                
+                                <!--Regular if359-->
+                                
+                                <!--Regular if361-->
+                                <span class="goodComment">100%好评</span>
+                            
+                            </div>
+                        </div>
+                    </div>
+                
+                </article>
+            </dd>
+            
+            <!--Regular if362-->
+            <dd class="">
+                <article class="m-itemcol2">
+                    
+                    <div class="m-picitem">
+                        
+                        <a href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}" class="imgwrap">
+                            
+                            <!--Regular if363-->
+                            <img
+                                src="https://pop.nosdn.127.net/2e3f72a4-9654-4e7c-933a-486a81bbf738?imageView&amp;thumbnail=400x0&amp;quality=95&amp;type=webp"
+                                class="u-item-img">
+                            
+                            <!--inlcude-->
+                            
+                            <!--Regular if364-->
+                            
+                            <!--Regular if365--><!--Regular if366-->
+                            
+                            <!--Regular if367--><!--Regular if368--><!--Regular if369--><!--Regular if370-->
+                            <!--Regular if371-->
+                            
+                            <!--Regular if372-->
+                        
+                        </a>
+                        
+                        <!--Regular if373-->
+                        
+                        <div class="toptag">
+                            <img class="img"
+                                 src="https://haitao.nos.netease.com/4021ac80-1fa9-4ec6-9fe2-0599d5a153e7.png?imageView&amp;thumbnail=150x0&amp;quality=100">
+                        </div>
+                        
+                        <!--Regular if374-->
+                    </div>
+                    
+                    <div class="m-descitem">
+                        
+                        <p class="tit">
+                            <a class="link" href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}">
+                                <!--Regular if375-->
+                                星农联合公蟹4.0两 母蟹2.8两4对阳澄湖大闸蟹现货礼盒
+                            </a>
+                        </p>
+                        
+                        <!--Regular if376-->
+                        
+                        <div class="pricewrapw">
+                            <div class="pricewrap ">
+                                
+                                <!--Regular if377--><!--Regular if378-->
+                                <span class="price"><i class="rmb">¥</i>238</span>
+                                
+                                <!--Regular if379-->
+                                <span class="mktprice"><del>¥1588</del></span>
+                                
+                                <!--Regular if380-->
+                            
+                            </div>
+                        </div>
+                        
+                        <div class="bottomtagsw">
+                            <div class="bottomtags" style="opacity: 1;">
+                                
+                                <!--Regular if381-->
+                                
+                                <!--Regular list--><span class="benefitpoint">特价</span>
+                                
+                                <!--Regular if382-->
+                                
+                                <!--Regular if384-->
+                                <span class="goodComment">100%好评</span>
+                            
+                            </div>
+                        </div>
+                    </div>
+                
+                </article>
+            </dd>
+            
+            <!--Regular if385-->
+            <dd class="">
+                <article class="m-itemcol2">
+                    
+                    <div class="m-picitem">
+                        
+                        <a href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}" class="imgwrap">
+                            
+                            <!--Regular if386-->
+                            <img
+                                src="https://pop.nosdn.127.net/82054962-9e17-4e3e-8423-44a7e6f03d6a?imageView&amp;thumbnail=400x0&amp;quality=95&amp;type=webp"
+                                class="u-item-img">
+                            
+                            <!--inlcude-->
+                            
+                            <!--Regular if387-->
+                            
+                            <!--Regular if388--><!--Regular if389-->
+                            
+                            <!--Regular if390--><!--Regular if391--><!--Regular if392--><!--Regular if393-->
+                            <!--Regular if394-->
+                            
+                            <!--Regular if395-->
+                        
+                        </a>
+                        
+                        <!--Regular if396-->
+                        
+                        <div class="toptag">
+                            <img class="img"
+                                 src="https://haitao.nos.netease.com/4021ac80-1fa9-4ec6-9fe2-0599d5a153e7.png?imageView&amp;thumbnail=150x0&amp;quality=100">
+                        </div>
+                        
+                        <!--Regular if397-->
+                    </div>
+                    
+                    <div class="m-descitem">
+                        
+                        <p class="tit">
+                            <a class="link" href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}">
+                                <!--Regular if398-->
+                                【现货】湖景楼阳澄湖大闸蟹 4.5两公蟹 3.0两母蟹 8只鲜活礼盒装
+                            </a>
+                        </p>
+                        
+                        <!--Regular if399-->
+                        
+                        <div class="pricewrapw">
+                            <div class="pricewrap ">
+                                
+                                <!--Regular if400--><!--Regular if401-->
+                                <span class="price"><i class="rmb">¥</i>358</span>
+                                
+                                <!--Regular if402-->
+                                <span class="mktprice"><del>¥2098</del></span>
+                                
+                                <!--Regular if403-->
+                            
+                            </div>
+                        </div>
+                        
+                        <div class="bottomtagsw">
+                            <div class="bottomtags" style="opacity: 1;">
+                                
+                                <!--Regular if404-->
+                                
+                                <!--Regular list-->
+                                
+                                <!--Regular if405-->
+                                
+                                <!--Regular if407-->
+                                <span class="goodComment">100%好评</span>
+                            
+                            </div>
+                        </div>
+                    </div>
+                
+                </article>
+            </dd>
+            
+            <!--Regular if408-->
+            <dd class="">
+                <article class="m-itemcol2">
+                    
+                    <div class="m-picitem">
+                        
+                        <a href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}" class="imgwrap">
+                            
+                            <!--Regular if409-->
+                            <img
+                                src="https://pop.nosdn.127.net/5f5fe260-38aa-4a5e-a51e-8ede24f6271c?imageView&amp;thumbnail=400x0&amp;quality=95&amp;type=webp"
+                                class="u-item-img">
+                            
+                            <!--inlcude-->
+                            
+                            <!--Regular if410-->
+                            
+                            <!--Regular if411--><!--Regular if412-->
+                            
+                            <!--Regular if413--><!--Regular if414--><!--Regular if415--><!--Regular if416-->
+                            <!--Regular if417-->
+                            
+                            <!--Regular if418-->
+                        
+                        </a>
+                        
+                        <!--Regular if419-->
+                        
+                        <div class="toptag">
+                            <img class="img"
+                                 src="https://haitao.nos.netease.com/4021ac80-1fa9-4ec6-9fe2-0599d5a153e7.png?imageView&amp;thumbnail=150x0&amp;quality=100">
+                        </div>
+                        
+                        <!--Regular if420-->
+                    </div>
+                    
+                    <div class="m-descitem">
+                        
+                        <p class="tit">
+                            <a class="link" href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}">
+                                <!--Regular if421-->
+                                星农联合公蟹3.5两 母蟹2.5两5对阳澄湖大闸蟹现货
+                            </a>
+                        </p>
+                        
+                        <!--Regular if422-->
+                        
+                        <div class="pricewrapw">
+                            <div class="pricewrap ">
+                                
+                                <!--Regular if423--><!--Regular if424-->
+                                <span class="price"><i class="rmb">¥</i>258</span>
+                                
+                                <!--Regular if425-->
+                                <span class="mktprice"><del>¥1288</del></span>
+                                
+                                <!--Regular if426-->
+                            
+                            </div>
+                        </div>
+                        
+                        <div class="bottomtagsw">
+                            <div class="bottomtags" style="opacity: 1;">
+                                
+                                <!--Regular if427-->
+                                
+                                <!--Regular list--><span class="benefitpoint">特价</span>
+                                
+                                <!--Regular if428-->
+                                
+                                <!--Regular if430-->
+                                <span class="goodComment">100%好评</span>
+                            
+                            </div>
+                        </div>
+                    </div>
+                
+                </article>
+            </dd>
+            
+            <!--Regular if431-->
+            <dd class="">
+                <article class="m-itemcol2">
+                    
+                    <div class="m-picitem">
+                        
+                        <a href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}" class="imgwrap">
+                            
+                            <!--Regular if432-->
+                            <img
+                                src="https://pop.nosdn.127.net/3450ec87-696e-44a2-b617-ca826ade84c6?imageView&amp;thumbnail=400x0&amp;quality=95&amp;type=webp"
+                                class="u-item-img">
+                            
+                            <!--inlcude-->
+                            
+                            <!--Regular if433-->
+                            
+                            <!--Regular if434--><!--Regular if435-->
+                            
+                            <!--Regular if436--><!--Regular if437--><!--Regular if438--><!--Regular if439-->
+                            <!--Regular if440-->
+                            
+                            <!--Regular if441-->
+                        
+                        </a>
+                        
+                        <!--Regular if442-->
+                        
+                        <div class="toptag">
+                            <img class="img"
+                                 src="https://haitao.nos.netease.com/4021ac80-1fa9-4ec6-9fe2-0599d5a153e7.png?imageView&amp;thumbnail=150x0&amp;quality=100">
+                        </div>
+                        
+                        <!--Regular if443-->
+                    </div>
+                    
+                    <div class="m-descitem">
+                        
+                        <p class="tit">
+                            <a class="link" href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}">
+                                <!--Regular if444-->
+                                海猛 英国面包蟹黄金蟹400g-600g*2只 膏多黄多
+                            </a>
+                        </p>
+                        
+                        <!--Regular if445-->
+                        
+                        <div class="pricewrapw">
+                            <div class="pricewrap ">
+                                
+                                <!--Regular if446--><!--Regular if447-->
+                                <span class="price"><i class="rmb">¥</i>119</span>
+                                
+                                <!--Regular if448-->
+                                <span class="mktprice"><del>¥169</del></span>
+                                
+                                <!--Regular if449-->
+                            
+                            </div>
+                        </div>
+                        
+                        <div class="bottomtagsw">
+                            <div class="bottomtags" style="opacity: 1;">
+                                
+                                <!--Regular if450-->
+                                
+                                <!--Regular list-->
+                                
+                                <!--Regular if451-->
+                                
+                                <!--Regular if453-->
+                                <span class="goodComment">92.7%好评</span>
+                            
+                            </div>
+                        </div>
+                    </div>
+                
+                </article>
+            </dd>
+            
+            <!--Regular if454-->
+            <dd class="">
+                <article class="m-itemcol2">
+                    
+                    <div class="m-picitem">
+                        
+                        <a href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}" class="imgwrap">
+                            
+                            <!--Regular if455-->
+                            <img
+                                src="https://pop.nosdn.127.net/a3584350-380b-4f25-93bb-d7ea83131182?imageView&amp;thumbnail=400x0&amp;quality=95&amp;type=webp"
+                                class="u-item-img">
+                            
+                            <!--inlcude-->
+                            
+                            <!--Regular if456-->
+                            
+                            <!--Regular if457--><!--Regular if458-->
+                            
+                            <!--Regular if459--><!--Regular if460--><!--Regular if461--><!--Regular if462-->
+                            <!--Regular if463-->
+                            
+                            <!--Regular if464-->
+                        
+                        </a>
+                        
+                        <!--Regular if465-->
+                        
+                        <div class="toptag">
+                            <img class="img"
+                                 src="https://haitao.nos.netease.com/4021ac80-1fa9-4ec6-9fe2-0599d5a153e7.png?imageView&amp;thumbnail=150x0&amp;quality=100">
+                        </div>
+                        
+                        <!--Regular if466-->
+                    </div>
+                    
+                    <div class="m-descitem">
+                        
+                        <p class="tit">
+                            <a class="link" href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}">
+                                <!--Regular if467-->
+                                【现货】湖景楼阳澄湖大闸蟹 公蟹3.0两 母蟹2.0两 8只鲜活礼盒
+                            </a>
+                        </p>
+                        
+                        <!--Regular if468-->
+                        
+                        <div class="pricewrapw">
+                            <div class="pricewrap ">
+                                
+                                <!--Regular if469--><!--Regular if470-->
+                                <span class="price"><i class="rmb">¥</i>168</span>
+                                
+                                <!--Regular if471-->
+                                <span class="mktprice"><del>¥768</del></span>
+                                
+                                <!--Regular if472-->
+                            
+                            </div>
+                        </div>
+                        
+                        <div class="bottomtagsw">
+                            <div class="bottomtags" style="opacity: 1;">
+                                
+                                <!--Regular if473-->
+                                
+                                <!--Regular list-->
+                                
+                                <!--Regular if474-->
+                                
+                                <!--Regular if476-->
+                                <span class="goodComment">100%好评</span>
+                            
+                            </div>
+                        </div>
+                    </div>
+                
+                </article>
+            </dd>
+            
+            <!--Regular if477-->
+            <dd class="">
+                <article class="m-itemcol2">
+                    
+                    <div class="m-picitem">
+                        
+                        <a href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}" class="imgwrap">
+                            
+                            <!--Regular if478-->
+                            <img
+                                src="https://pop.nosdn.127.net/5542dd2c-d957-48f3-be69-94ff599a4c4e?imageView&amp;thumbnail=400x0&amp;quality=95&amp;type=webp"
+                                class="u-item-img">
+                            
+                            <!--inlcude-->
+                            
+                            <!--Regular if479-->
+                            
+                            <!--Regular if480--><!--Regular if481-->
+                            
+                            <!--Regular if482--><!--Regular if483--><!--Regular if484--><!--Regular if485-->
+                            <!--Regular if486-->
+                            
+                            <!--Regular if487-->
+                        
+                        </a>
+                        
+                        <!--Regular if488-->
+                        
+                        <div class="toptag">
+                            <img class="img"
+                                 src="https://haitao.nos.netease.com/4021ac80-1fa9-4ec6-9fe2-0599d5a153e7.png?imageView&amp;thumbnail=150x0&amp;quality=100">
+                        </div>
+                        
+                        <!--Regular if489-->
+                    </div>
+                    
+                    <div class="m-descitem">
+                        
+                        <p class="tit">
+                            <a class="link" href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}">
+                                <!--Regular if490-->
+                                【第二份半价】蟹灵阁 阳澄湖大闸蟹全母螃蟹2.0两 6只装现货
+                            </a>
+                        </p>
+                        
+                        <!--Regular if491-->
+                        
+                        <div class="pricewrapw">
+                            <div class="pricewrap ">
+                                
+                                <!--Regular if492--><!--Regular if493-->
+                                <span class="price"><i class="rmb">¥</i>88</span>
+                                
+                                <!--Regular if494-->
+                                <span class="mktprice"><del>¥498</del></span>
+                                
+                                <!--Regular if495-->
+                            
+                            </div>
+                        </div>
+                        
+                        <div class="bottomtagsw">
+                            <div class="bottomtags" style="opacity: 1;">
+                                
+                                <!--Regular if496-->
+                                
+                                <!--Regular list--><span class="benefitpoint">2件7.5折</span><span
+                                class="benefitpoint">特价</span>
+                                
+                                <!--Regular if497-->
+                                
+                                <!--Regular if499-->
+                                <span class="goodComment">95.7%好评</span>
+                            
+                            </div>
+                        </div>
+                    </div>
+                
+                </article>
+            </dd>
+            
+            <!--Regular if500-->
+            <dd class="z-nbd">
+                <article class="m-itemcol2">
+                    
+                    <div class="m-picitem">
+                        
+                        <a href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}" class="imgwrap">
+                            
+                            <!--Regular if501-->
+                            <img
+                                src="https://pop.nosdn.127.net/7ea04115-7bfd-452a-86aa-8c24b8f7ab0e?imageView&amp;thumbnail=400x0&amp;quality=95&amp;type=webp"
+                                class="u-item-img">
+                            
+                            <!--inlcude-->
+                            
+                            <!--Regular if502-->
+                            
+                            <!--Regular if503--><!--Regular if504-->
+                            
+                            <!--Regular if505--><!--Regular if506--><!--Regular if507--><!--Regular if508-->
+                            <!--Regular if509-->
+                            
+                            <!--Regular if510-->
+                        
+                        </a>
+                        
+                        <!--Regular if511-->
+                        
+                        <div class="toptag">
+                            <img class="img"
+                                 src="https://haitao.nos.netease.com/4021ac80-1fa9-4ec6-9fe2-0599d5a153e7.png?imageView&amp;thumbnail=150x0&amp;quality=100">
+                        </div>
+                        
+                        <!--Regular if512-->
+                    </div>
+                    
+                    <div class="m-descitem">
+                        
+                        <p class="tit">
+                            <a class="link" href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}">
+                                <!--Regular if513-->
+                                蟹灵阁阳澄湖大闸蟹公蟹4.0两 母蟹3.0两 4对礼盒装现货
+                            </a>
+                        </p>
+                        
+                        <!--Regular if514-->
+                        <div class="pricewrapw">
+                            <div class="pricewrap ">
+                                <!--Regular if515--><!--Regular if516-->
+                                <span class="price"><i class="rmb">¥</i>248</span>
+                                <!--Regular if517-->
+                                <span class="mktprice"><del>¥888</del></span>
+                                <!--Regular if518-->
+                            </div>
+                        </div>
+                        <div class="bottomtagsw">
+                            <div class="bottomtags" style="opacity: 1;">
+                                <!--Regular if519-->
+                                <!--Regular list--><span class="benefitpoint">特价</span>
+                                <!--Regular if520-->
+                                <!--Regular if522-->
+                                <span class="goodComment">88.9%好评</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </dd>
+            <!--Regular if523-->
+            <dd class="z-nbd">
+                <article class="m-itemcol2">
+                    <div class="m-picitem">
+                        <a href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}" class="imgwrap">
+                            <!--Regular if524-->
+                            <img
+                                src="https://pop.nosdn.127.net/5998916c-74b8-450f-8ecc-5dfde4e1ce06?imageView&amp;thumbnail=400x0&amp;quality=95&amp;type=webp"
+                                class="u-item-img">
+                            <!--inlcude-->
+                            <!--Regular if525-->
+                            <!--Regular if526--><!--Regular if527-->
+                            <!--Regular if528--><!--Regular if529--><!--Regular if530--><!--Regular if531-->
+                            <!--Regular if532-->
+                            <!--Regular if533-->
+                        </a>
+                        <!--Regular if534-->
+                        <div class="toptag">
+                            <img class="img"
+                                 src="https://haitao.nos.netease.com/4021ac80-1fa9-4ec6-9fe2-0599d5a153e7.png?imageView&amp;thumbnail=150x0&amp;quality=100">
+                        </div>
+                        <!--Regular if535-->
+                    </div>
+                    <div class="m-descitem">
+                        <p class="tit">
+                            <a class="link" href="{:url('crossbbcg/goods/index',array('item_id'=>1279))}">
+                                <!--Regular if536-->
+                                【买就送同规格2只】蟹灵阁阳澄湖大闸蟹公蟹3.5两 母蟹2.5两 4对
+                            </a>
+                        </p>
+                        <!--Regular if537-->
+                        <div class="pricewrapw">
+                            <div class="pricewrap ">
+                                <!--Regular if538--><!--Regular if539-->
+                                <span class="price"><i class="rmb">¥</i>168</span>
+                                <!--Regular if540-->
+                                <span class="mktprice"><del>¥988</del></span>
+                                <!--Regular if541-->
+                            </div>
+                        </div>
+                        <div class="bottomtagsw">
+                            <div class="bottomtags" style="opacity: 1;">
+                                <!--Regular if542-->
+                                <!--Regular list--><span class="benefitpoint">限时购</span>
+                                <!--Regular if543-->
+                                <!--Regular if545-->
+                                <span class="goodComment">90%好评</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </dd>
+        </dl>
+    </div>
+</div>
+<div class="m-layermsk  bgFadeIn " style="min-height: 736px;display: none">
+    <div class="m-window " style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+        <div class="winsiderightw">
+            <!--Regular list-->
+            <div class=" winsideright animate" style="transform: translate3d(0rem, 0px, 0px); z-index: 2;">
+                <!--Regular if5-->
+                
+                <!--Regular if6-->
+                
+                <!--inlcude--><div class="n-slidefilter" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                
+                <div class="filterlist">
+                    
+                    <div style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);">
+                        
+                        <!--Regular list-->
+                        <div class="n-addr" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                            <i class="icon"></i><span>广东省深圳市龙华新区</span>
+                        </div>
+                        
+                        <section class="filtertype brandselect">
+                            <div class="title">
+                                <span>考拉服务</span>
+                                <!--Regular if7-->
+                                <span class="titleinfo" style="display: none;">
+      考拉自营
+    </span>
+                            </div>
+                            <div class="btnlist" style="height: 80px;">
+                                <!--Regular list-->
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if8-->
+          <i class="check"></i>促销
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5 z-sel" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if9-->
+          <i class="check"></i>考拉自营
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if10-->
+          <i class="check"></i>仅看有货
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if11-->
+          <i class="check"></i>包税
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if12-->
+          <i class="check"></i>黑卡会员价
+        
+      </span>
+                                </div>
+                            
+                            </div>
+                            <!--Regular if13-->
+                        </section>
+                        
+                        <section class="filtertype pricerange">
+                            <div class="title">价格</div>
+                            <div class="range">
+                                <div class="iptw f-bdw5">
+                                    <input type="tel" class="ipt" placeholder="最低价">
+                                </div>
+                                <span class="sp"></span>
+                                <div class="iptw f-bdw5">
+                                    <input type="tel" class="ipt" placeholder="最高价">
+                                </div>
+                            </div>
+                            <!--Regular if14-->
+                        </section>
+                        
+                        <section class="filtertype brandselect">
+                            <div class="title">
+                                <span>品牌</span>
+                                <!--Regular if15-->
+                                <span class="more" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">更多</span>
+                                
+                                <span class="titleinfo">
+      
+    </span>
+                            </div>
+                            <div class="btnlist" style="height: 120px;">
+                                <!--Regular list-->
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if16-->
+          <i class="check"></i>碧然德
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if17-->
+          <i class="check"></i>倍世
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if18-->
+          <i class="check"></i>PUR
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if19-->
+          <i class="check"></i>莱卡
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if20-->
+          <i class="check"></i>三菱丽阳
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if21-->
+          <i class="check"></i>乐儿宝
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if22-->
+          <i class="check"></i>尖端银泉
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if23-->
+          <i class="check"></i>利其尔
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if24-->
+          <i class="check"></i>满趣健
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if25-->
+          <i class="check"></i>网易严选
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if26-->
+          <i class="check"></i>孔雀
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if27-->
+          <i class="check"></i>膳魔师
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if28-->
+          <i class="check"></i>Rakuten
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if29-->
+          <i class="check"></i>象印
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if30-->
+          <i class="check"></i>迪士尼
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if31-->
+          <i class="check"></i>史丹利
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if32-->
+          <i class="check"></i>XD DESIGN
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if33-->
+          <i class="check"></i>驼峰
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if34-->
+          <i class="check"></i>乐基因
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if35-->
+          <i class="check"></i>斯坦利
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if36-->
+          <i class="check"></i>虎牌
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if37-->
+          <i class="check"></i>鸭嘴兽
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if38-->
+          <i class="check"></i>德龙
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if39-->
+          <i class="check"></i>优地
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if40-->
+          <i class="check"></i>NATHAN
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if41-->
+          <i class="check"></i>福腾宝
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if42-->
+          <i class="check"></i>松下
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if43-->
+          <i class="check"></i>领豪
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if44-->
+          <i class="check"></i>怡万家
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if45-->
+          <i class="check"></i>南部池永
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if46-->
+          <i class="check"></i>Gululu
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if47-->
+          <i class="check"></i>OUTDOOR
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if48-->
+          <i class="check"></i>波米欧利.罗克
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if49-->
+          <i class="check"></i>Osprey
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if50-->
+          <i class="check"></i>凯膳怡
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if51-->
+          <i class="check"></i>GSI
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if52-->
+          <i class="check"></i>爱慕莎
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if53-->
+          <i class="check"></i>小林制药
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if54-->
+          <i class="check"></i>星巴克
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if55-->
+          <i class="check"></i>多样屋
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if56-->
+          <i class="check"></i>小白熊
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if57-->
+          <i class="check"></i>飞利浦
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if58-->
+          <i class="check"></i>博朗
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if59-->
+          <i class="check"></i>阿司倍鹭
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if60-->
+          <i class="check"></i>托马斯和朋友
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if61-->
+          <i class="check"></i>ritter
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if62-->
+          <i class="check"></i>贝恩施
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if63-->
+          <i class="check"></i>摩飞
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if64-->
+          <i class="check"></i>酷水
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if65-->
+          <i class="check"></i>HydraPak
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if66-->
+          <i class="check"></i>SEA TO SUMMIT
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if67-->
+          <i class="check"></i>Guzzini
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if68-->
+          <i class="check"></i>Stojo
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if69-->
+          <i class="check"></i>贝亲
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if70-->
+          <i class="check"></i>夏普
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if71-->
+          <i class="check"></i>苏泊尔
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if72-->
+          <i class="check"></i>无印良品
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if73-->
+          <i class="check"></i>Hape
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if74-->
+          <i class="check"></i>凯德氏
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if75-->
+          <i class="check"></i>Kashimura
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if76-->
+          <i class="check"></i>土拨鼠
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if77-->
+          <i class="check"></i>凯伍德
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if78-->
+          <i class="check"></i>Design Letters
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if79-->
+          <i class="check"></i>Hario
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if80-->
+          <i class="check"></i>吉普户外
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if81-->
+          <i class="check"></i>MAM
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if82-->
+          <i class="check"></i>利比
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if83-->
+          <i class="check"></i>NUK
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if84-->
+          <i class="check"></i>KEVNHAUN
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if85-->
+          <i class="check"></i>酷彩
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if86-->
+          <i class="check"></i>特福
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if87-->
+          <i class="check"></i>尼达利
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if88-->
+          <i class="check"></i>芭比
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if89-->
+          <i class="check"></i>博世
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if90-->
+          <i class="check"></i>babycare
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if91-->
+          <i class="check"></i>陆宝
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if92-->
+          <i class="check"></i>MIYOSHI
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if93-->
+          <i class="check"></i>GLASSLOCK
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if94-->
+          <i class="check"></i>黑钻
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if95-->
+          <i class="check"></i>野田珐琅
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if96-->
+          <i class="check"></i>美浓烧
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if97-->
+          <i class="check"></i>西门子
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if98-->
+          <i class="check"></i>helios
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if99-->
+          <i class="check"></i>乐格氏
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if100-->
+          <i class="check"></i>REGATTA
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if101-->
+          <i class="check"></i>ALLGO
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if102-->
+          <i class="check"></i>SIGG
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if103-->
+          <i class="check"></i>米技
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if104-->
+          <i class="check"></i>DOMOL
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if105-->
+          <i class="check"></i>Smeg
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if106-->
+          <i class="check"></i>LAKEN
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if107-->
+          <i class="check"></i>Leifheit
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if108-->
+          <i class="check"></i>YONEX 尤尼克斯
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if109-->
+          <i class="check"></i>Goat Mug
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if110-->
+          <i class="check"></i>NORTHLAND 诺诗兰
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if111-->
+          <i class="check"></i>Nostalgia Electrics
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if112-->
+          <i class="check"></i>易简
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if113-->
+          <i class="check"></i>喔喔牛
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if114-->
+          <i class="check"></i>新安怡
+        
+      </span>
+                                </div>
+                            
+                            </div>
+                            <!--Regular if115-->
+                        </section>
+                        
+                        <section class="filtertype brandselect">
+                            <div class="title">
+                                <span>厨房餐饮</span>
+                                <!--Regular if116-->
+                                <span class="titleinfo">
+      
+    </span>
+                            </div>
+                            <div class="btnlist" style="height: 80px;">
+                                <!--Regular list-->
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if117-->
+          <i class="check"></i>水壶
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if118-->
+          <i class="check"></i>滤水壶
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if119-->
+          <i class="check"></i>滤水/滤芯
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if120-->
+          <i class="check"></i>杯子/水壶
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if121-->
+          <i class="check"></i>茶具
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if122-->
+          <i class="check"></i>厨房储物
+        
+      </span>
+                                </div>
+                            
+                            </div>
+                            <!--Regular if123-->
+                        </section>
+                        
+                        <section class="filtertype brandselect">
+                            <div class="title">
+                                <span>家用电器</span>
+                                <!--Regular if124-->
+                                <span class="more" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">更多</span>
+                                
+                                <span class="titleinfo">
+      
+    </span>
+                            </div>
+                            <div class="btnlist" style="height: 40px;">
+                                <!--Regular list-->
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if125-->
+          <i class="check"></i>电热水壶
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if126-->
+          <i class="check"></i>其它厨房电器
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if127-->
+          <i class="check"></i>咖啡机
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if128-->
+          <i class="check"></i>其他生活电器
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if129-->
+          <i class="check"></i>净水器
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if130-->
+          <i class="check"></i>厨房电器配件
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if131-->
+          <i class="check"></i>饮水机
+        
+      </span>
+                                </div>
+                            
+                            </div>
+                            <!--Regular if132-->
+                        </section>
+                        
+                        <section class="filtertype brandselect">
+                            <div class="title">
+                                <span>其他分类</span>
+                                <!--Regular if133-->
+                                <span class="more" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">更多</span>
+                                
+                                <span class="titleinfo">
+      
+    </span>
+                            </div>
+                            <div class="btnlist" style="height: 40px;">
+                                <!--Regular list-->
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if134-->
+          <i class="check"></i>水杯/水壶
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if135-->
+          <i class="check"></i>水杯餐具
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if136-->
+          <i class="check"></i>户外露营装备
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if137-->
+          <i class="check"></i>户外箱包及配件
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if138-->
+          <i class="check"></i>其他户外装备及工具
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if139-->
+          <i class="check"></i>暖奶消毒
+        
+      </span>
+                                </div>
+                            
+                            </div>
+                            <!--Regular if140-->
+                        </section>
+                        
+                        <section class="filtertype brandselect">
+                            <div class="title">
+                                <span>容量</span>
+                                <!--Regular if141-->
+                                <span class="more" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">更多</span>
+                                
+                                <span class="titleinfo">
+      
+    </span>
+                            </div>
+                            <div class="btnlist" style="height: 40px;">
+                                <!--Regular list-->
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if142-->
+          <i class="check"></i>120-199毫升
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if143-->
+          <i class="check"></i>201-300毫升
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if144-->
+          <i class="check"></i>301-400毫升
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if145-->
+          <i class="check"></i>401-500毫升
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if146-->
+          <i class="check"></i>500毫升以上
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if147-->
+          <i class="check"></i>501-600毫升
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if148-->
+          <i class="check"></i>601-700毫升
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if149-->
+          <i class="check"></i>801-1000毫升
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if150-->
+          <i class="check"></i>1000毫升以上
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if151-->
+          <i class="check"></i>1.1升以下
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if152-->
+          <i class="check"></i>1.2-1.5升
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if153-->
+          <i class="check"></i>1.6(含)升-2.0(含)升
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if154-->
+          <i class="check"></i>2升以上
+        
+      </span>
+                                </div>
+                            
+                            </div>
+                            <!--Regular if155-->
+                        </section>
+                        
+                        <section class="filtertype brandselect">
+                            <div class="title">
+                                <span>产品材质</span>
+                                <!--Regular if156-->
+                                <span class="more" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">更多</span>
+                                
+                                <span class="titleinfo">
+      
+    </span>
+                            </div>
+                            <div class="btnlist" style="height: 40px;">
+                                <!--Regular list-->
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if157-->
+          <i class="check"></i>304不锈钢
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if158-->
+          <i class="check"></i>活性炭+超滤
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if159-->
+          <i class="check"></i>不锈钢
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if160-->
+          <i class="check"></i>PP聚丙烯
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if161-->
+          <i class="check"></i>玻璃
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if162-->
+          <i class="check"></i>塑料
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if163-->
+          <i class="check"></i>外塑内钢
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if164-->
+          <i class="check"></i>PU
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if165-->
+          <i class="check"></i>聚乙烯
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if166-->
+          <i class="check"></i>中空纤维
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if167-->
+          <i class="check"></i>彩钢
+        
+      </span>
+                                </div>
+                            
+                            </div>
+                            <!--Regular if168-->
+                        </section>
+                        
+                        <section class="filtertype brandselect">
+                            <div class="title">
+                                <span>适用群体</span>
+                                <!--Regular if169-->
+                                <span class="titleinfo">
+      
+    </span>
+                            </div>
+                            <div class="btnlist" style="height: 40px;">
+                                <!--Regular list-->
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if170-->
+          <i class="check"></i>儿童
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if171-->
+          <i class="check"></i>成人
+        
+      </span>
+                                </div>
+                            
+                            </div>
+                            <!--Regular if172-->
+                        </section>
+                        
+                        <section class="filtertype brandselect">
+                            <div class="title">
+                                <span>适用场景</span>
+                                <!--Regular if173-->
+                                <span class="more" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">更多</span>
+                                
+                                <span class="titleinfo">
+      
+    </span>
+                            </div>
+                            <div class="btnlist" style="height: 40px;">
+                                <!--Regular list-->
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if174-->
+          <i class="check"></i>通用
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if175-->
+          <i class="check"></i>野营
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if176-->
+          <i class="check"></i>车载
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if177-->
+          <i class="check"></i>登山
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if178-->
+          <i class="check"></i>健身
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if179-->
+          <i class="check"></i>徒步
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if180-->
+          <i class="check"></i>骑行
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if181-->
+          <i class="check"></i>家用
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if182-->
+          <i class="check"></i>出行户外
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if183-->
+          <i class="check"></i>办公
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if184-->
+          <i class="check"></i>全屋净水
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if185-->
+          <i class="check"></i>运动休闲
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if186-->
+          <i class="check"></i>商用水处理
+        
+      </span>
+                                </div>
+                            
+                            </div>
+                            <!--Regular if187-->
+                        </section>
+                        
+                        <section class="filtertype brandselect">
+                            <div class="title">
+                                <span>风格</span>
+                                <!--Regular if188-->
+                                <span class="more" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">更多</span>
+                                
+                                <span class="titleinfo">
+      
+    </span>
+                            </div>
+                            <div class="btnlist" style="height: 40px;">
+                                <!--Regular list-->
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if189-->
+          <i class="check"></i>户外
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if190-->
+          <i class="check"></i>简约/经典
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if191-->
+          <i class="check"></i>运动
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if192-->
+          <i class="check"></i>创意潮流
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if193-->
+          <i class="check"></i>卡通
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if194-->
+          <i class="check"></i>迷彩风
+        
+      </span>
+                                </div>
+                            
+                            </div>
+                            <!--Regular if195-->
+                        </section>
+                        
+                        <section class="filtertype brandselect">
+                            <div class="title">
+                                <span>特点</span>
+                                <!--Regular if196-->
+                                <span class="more" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">更多</span>
+                                
+                                <span class="titleinfo">
+      
+    </span>
+                            </div>
+                            <div class="btnlist" style="height: 40px;">
+                                <!--Regular list-->
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if197-->
+          <i class="check"></i>带茶隔
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if198-->
+          <i class="check"></i>长寿命膜
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if199-->
+          <i class="check"></i>无桶
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if200-->
+          <i class="check"></i>双出水
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if201-->
+          <i class="check"></i>带防腐涂层
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if202-->
+          <i class="check"></i>有手柄
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if203-->
+          <i class="check"></i>滤芯寿命提醒
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if204-->
+          <i class="check"></i>大通量
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if205-->
+          <i class="check"></i>低废水比
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if206-->
+          <i class="check"></i>带提绳
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if207-->
+          <i class="check"></i>保温
+        
+      </span>
+                                </div>
+                            
+                            </div>
+                            <!--Regular if208-->
+                        </section>
+                        
+                        <section class="filtertype brandselect">
+                            <div class="title">
+                                <span>功能</span>
+                                <!--Regular if209-->
+                                <span class="more" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">更多</span>
+                                
+                                <span class="titleinfo">
+      
+    </span>
+                            </div>
+                            <div class="btnlist" style="height: 40px;">
+                                <!--Regular list-->
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if210-->
+          <i class="check"></i>除颗粒物
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if211-->
+          <i class="check"></i>除泥沙
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if212-->
+          <i class="check"></i>除铁锈
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if213-->
+          <i class="check"></i>除水垢
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if214-->
+          <i class="check"></i>除重金属
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if215-->
+          <i class="check"></i>加热
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if216-->
+          <i class="check"></i>除余氯
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if217-->
+          <i class="check"></i>自动断电
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if218-->
+          <i class="check"></i>防干烧
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if219-->
+          <i class="check"></i>保温
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if220-->
+          <i class="check"></i>补水保湿
+        
+      </span>
+                                </div>
+                            
+                            </div>
+                            <!--Regular if221-->
+                        </section>
+                        
+                        <section class="filtertype brandselect">
+                            <div class="title">
+                                <span>产品类型</span>
+                                <!--Regular if222-->
+                                <span class="titleinfo">
+      
+    </span>
+                            </div>
+                            <div class="btnlist" style="height: 40px;">
+                                <!--Regular list-->
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if223-->
+          <i class="check"></i>活性炭+超滤
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if224-->
+          <i class="check"></i>净水杯
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if225-->
+          <i class="check"></i>中空纤维
+        
+      </span>
+                                </div>
+                            
+                            </div>
+                            <!--Regular if226-->
+                        </section>
+                        
+                        <section class="filtertype brandselect">
+                            <div class="title">
+                                <span>是否直饮</span>
+                                <!--Regular if227-->
+                                <span class="titleinfo">
+      
+    </span>
+                            </div>
+                            <div class="btnlist" style="height: 40px;">
+                                <!--Regular list-->
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if228-->
+          <i class="check"></i>非直饮
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if229-->
+          <i class="check"></i>直饮
+        
+      </span>
+                                </div>
+                            
+                            </div>
+                            <!--Regular if230-->
+                        </section>
+                        
+                        <section class="filtertype brandselect">
+                            <div class="title">
+                                <span>出水方式</span>
+                                <!--Regular if231-->
+                                <span class="titleinfo">
+      
+    </span>
+                            </div>
+                            <div class="btnlist" style="height: 40px;">
+                                <!--Regular list-->
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if232-->
+          <i class="check"></i>直饮式
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if233-->
+          <i class="check"></i>吸管式
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if234-->
+          <i class="check"></i>按压式
+        
+      </span>
+                                </div>
+                            
+                            </div>
+                            <!--Regular if235-->
+                        </section>
+                        
+                        <section class="filtertype brandselect">
+                            <div class="title">
+                                <span>国家/地区</span>
+                                <!--Regular if236-->
+                                <span class="more" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">更多</span>
+                                
+                                <span class="titleinfo">
+      
+    </span>
+                            </div>
+                            <div class="btnlist" style="height: 40px;">
+                                <!--Regular list-->
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if237-->
+          <i class="check"></i>日本
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if238-->
+          <i class="check"></i>美国
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if239-->
+          <i class="check"></i>德国
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if240-->
+          <i class="check"></i>中国
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if241-->
+          <i class="check"></i>意大利
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if242-->
+          <i class="check"></i>荷兰
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if243-->
+          <i class="check"></i>英国
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if244-->
+          <i class="check"></i>中国台湾
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if245-->
+          <i class="check"></i>奥地利
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if246-->
+          <i class="check"></i>澳大利亚
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if247-->
+          <i class="check"></i>丹麦
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if248-->
+          <i class="check"></i>法国
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if249-->
+          <i class="check"></i>韩国
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if250-->
+          <i class="check"></i>西班牙
+        
+      </span>
+                                </div>
+                                
+                                <div class="btn f-bdw5" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <span class="name">
+        <!--Regular if251-->
+          <i class="check"></i>瑞士
+        
+      </span>
+                                </div>
+                            
+                            </div>
+                            <!--Regular if252-->
+                        </section>
+                    
+                    
+                    </div>
+                
+                </div>
+                
+                <div class="n-slideoperation f-bdw5">
+                    <div class="reset" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">重置</div>
+                    <div class="confirm" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">确定<span class="num" style="">（274件商品）</span></div>
+                </div>
+            
+            </div>
+            
+            
+            
+            
+            </div>
+        
+        </div>
+    </div>
+</div>
+<div class="m-searchpop" style="display: none;">
+    <form action="{:url('crossbbcg/search/index')}" target="_self" method="get">
+        <div class="m-searchbanner">
+            <i class="u-goback"></i>
+            <div class="m-searchbox">
+                <i class="u-searchicon"></i>
+                <input type="search" name="key" class="u-searchinput" autocomplete="off" placeholder=" 好奇铂金" required="required">
+                <!--Regular if438-->
+                <button type="reset" class="u-btn-reset" style="display: none;"></button>
+            </div>
+            <button type="submit" class="u-btn-search">搜索</button>
+        </div>
+    </form>
+    <div class="m-hotwordwrap">
+        <h3 class="u-title">热门搜索</h3>
+        <!--Regular if439-->
+        <div class="m-hotwordlist">
+            
+            <!--Regular list-->
+            <a class="u-hotword z-highlight" href="{:url('crossbbcg/search/index',array('like'=>'麦片'))}" target="_self">麦片</a>
+            
+            <a class="u-hotword " href="{:url('crossbbcg/search/index',array('like'=>'麦片'))}" target="_self">点卡</a>
+            
+            <a class="u-hotword " href="{:url('crossbbcg/search/index',array('like'=>'麦片'))}" target="_self">大闸蟹</a>
+            
+            <a class="u-hotword z-highlight" href="{:url('crossbbcg/search/index',array('like'=>'麦片'))}" target="_self">卫衣女</a>
+            
+            <a class="u-hotword " href="{:url('crossbbcg/search/index',array('like'=>'麦片'))}" target="_self">米粉</a>
+            
+            <a class="u-hotword " href="{:url('crossbbcg/search/index',array('like'=>'麦片'))}" target="_self">卸妆水</a>
+            
+            <a class="u-hotword " href="{:url('crossbbcg/search/index',array('like'=>'麦片'))}" target="_self">奶粉 成人</a>
+            
+            <a class="u-hotword " href="{:url('crossbbcg/search/index',array('like'=>'麦片'))}" target="_self">电动牙刷</a>
+            
+            <a class="u-hotword " href="{:url('crossbbcg/search/index',array('like'=>'麦片'))}" target="_self">机油</a>
+            
+            <a class="u-hotword " href="{:url('crossbbcg/search/index',array('like'=>'麦片'))}" target="_self">花王</a>
+            
+            <a class="u-hotword z-highlight" href="{:url('crossbbcg/search/index',array('like'=>'麦片'))}" target="_self">air force</a>
+            
+            <a class="u-hotword z-highlight" href="{:url('crossbbcg/search/index',array('like'=>'麦片'))}" target="_self">水壶</a>
+            
+            <a class="u-hotword " href="{:url('crossbbcg/search/index',array('like'=>'麦片'))}" target="_self">沐浴露</a>
+            
+            <a class="u-hotword " href="{:url('crossbbcg/search/index',array('like'=>'麦片'))}" target="_self">拖鞋</a>
+            
+            <a class="u-hotword " href="{:url('crossbbcg/search/index',array('like'=>'麦片'))}" target="_self">swisse</a>
+            
+            <!--Regular if440-->
+        </div>
+    
+    </div>
+    <div class="m-associatewrap" style="display: none;">
+        <div class="m-associatelist">
+            <!--Regular list-->
+        </div>
+    </div>
+</div>
+{/block}
+
+{block  name='js'}
+<script>
+    $(function () {
+        $('.m-searchbox').on('click',function () {
+            console.log(123);
+            $('.m-searchpop').show();
+            $('.m-contentwrap').hide();
+        });
+        $('.u-goback').click(function () {
+            if ($('.m-contentwrap').css('display') === 'none') {
+                $('.m-searchpop').hide();
+                $('.m-contentwrap').show();
+            } else {
+                window.history.go(-1);
+            }
+        });
+        $('.slist li').click(function () {
+            if ($(this).hasClass('z-slidedown')) {
+                $(this).removeClass('z-slidedown');
+                $(this).find('.arr').removeClass('down');
+                $('.n-shortcut-list').addClass('z-end').removeClass('z-show');
+            } else {
+                $(this).siblings().removeClass('z-slidedown');
+                if (!$(this).find('.check').length) {
+                    $(this).addClass('z-slidedown');
+                    $(this).find('.arr').addClass('down');
+                    $('.n-shortcut-list').addClass('z-show').removeClass('z-end');
+                } else {
+                    $(this).siblings().removeClass('z-slidedown');
+                    $(this).parent().find('.arr').removeClass('down');
+                    $('.n-shortcut-list').addClass('z-end').removeClass('z-show');
+                    if ($(this).hasClass('z-sel')) {
+                        $(this).removeClass('z-sel');
+                    } else {
+                        $(this).addClass('z-sel');
+                    }
+                }
+            }
+        });
+        $('.filter').click(function () {
+            $('.m-layermsk').show();
+        })
+    })
+</script>
+{/block}

@@ -1,0 +1,24 @@
+<!--head-->
+<div class="ly-headw">
+    <div class="ly-head">
+        <div class="ly-head-left left">
+            <div class="text">{:lang('Welcome')}{$shopname}</div>
+        </div>
+        <div class="ly-head-right right">
+            <ul>
+                {empty name="user"}
+                <li class="left"><a href="{:url('/member/passport/index')}">{:lang('Login')}</a></li>
+                <li class="sep left">|</li>
+                <li class="left "><a href="{:url('/member/passport/signup')}">{:lang('Register')}</a></li>
+                <li class="sep left">|</li>
+                {else /}
+                <li class="left "><a href="{:url('/member/index')}">{$user.nickname}</a></li>
+                <li class="sep left">|</li>
+                <li class="left "><a href="{:url('/member/passport/logout')}">{:lang('LoginOut')}</a></li>
+                <li class="sep left">|</li>
+                {/empty}
+            </ul>
+        </div>
+    </div>
+</div>
+<!--headEND-->

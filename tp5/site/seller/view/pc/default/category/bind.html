@@ -1,0 +1,136 @@
+{extend name='common/poupbase'}
+{block name='body'}
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <div class="row" style="top: 19px">
+                        <form action="">
+                        <div class="page-header-top" >
+                            <div style="position: relative;display: inline-block; vertical-align: middle; margin:10px 4px">
+                                <select name="cat_id" id="cat_id" class="pull-right" style="max-width:200px;height: 30px;border: 1px solid #ccc;margin-right: 2px">
+                                    <option value="all">{:lang('all_category')}</option>
+                                    {foreach $catlist as $v}
+                                    <option value="{$v.id}" {eq name=":input('cat_id')" value="$v.id"}selected{/eq}>
+                                    {$v.char} {$v.title} {notempty name="$v.name"}({$v.name}){/notempty}
+                                    </option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                            <div style="position: relative;display: inline-block; vertical-align: middle; margin-right: 4px">
+                                <input type="text" name="key_words" value="{:input('key_words')}" class=" pull-right" placeholder="{:lang('goods_search_tips')}" style="height: 30px;border: 1px solid #ccc;padding: 5px">
+                                <select name="condition" id="condition" class="pull-right" style="height: 30px;border: 1px solid #ccc;border-radius: 3px 0 0 5px;border-right: 0">
+                                    <option value="name">{:lang('Goods_name')}</option>
+                                    <option value="good_code" {eq name=":input('condition')" value="good_code"}selected{/eq}>{:lang('Goods_sn')}</option>
+                                    <option value="brand_id" {eq name=":input('condition')" value="brand_id"}selected{/eq}>{:lang('Goods_brand')}</option>
+                                </select>
+                            </div>
+                                <button type="submit" class="btn btn-info etbtn"><i class="fa fa-search"></i></button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th style="width: 30px"><input type="checkbox" name="all" id=""></th>
+                            <th style="width: 50px">ID</th>
+                            <th >{:lang('goods_name')}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {notempty name='$list'}
+                        {foreach $list as $v}
+                        <tr>
+                            <td><input type="checkbox" class="ids" value="{$v.id}" {in name="$v.id" value="$bind_info.goods_ids"}checked{/in}></td>
+                            <td>{$v.id}</td>
+                            <td>
+                                {if condition="empty($v.thumb)"}
+                                <img src="__PUBLIC__/admin/images/up_thumb.png" alt="user" class="img-circle" width="50"/>
+                                {elseif condition="substr($v.thumb,0,4)=='http'" /}
+                                <img src="{$v.thumb}" alt="user" class="img-circle" width="50"/>
+                                {else /}
+                                <img src="{:resizeImage($v.thumb,'thumb',true)}" alt="user" class="img-circle" width="50"/>
+                                {/if}
+                                {$v.name}
+                            </td>
+                        </tr>
+                        {/foreach}
+                        {/notempty}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="9">
+                                    <div class="text-right pagination" id="page">
+                                        {$list->appends(input())->render()}
+                                    </div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="box-footer">
+                    <form action="">
+                        <input type="hidden" id="ids" name="goods_ids" value=''>
+                        <input type="hidden" name="id" value="{$id}">
+                        <input type="submit" value="{:lang('save')}" name="submit" url="{:url('seller/category/save_bind')}">
+                    </form>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+</section>
+{/block}
+{block name='js'}
+<script>
+    $(function () {
+        var param = JSON.parse('{:json_encode($bind_info.goods_ids)}');
+        if (param) {
+            $('#ids').val(param.join(','));
+        }
+        $('.table').on('click','.ids',function () {
+            var ids_arr = get_ids('arr');
+            if ($(this).is(':checked')) {
+                if ($.inArray($(this).val(),ids_arr) < 0) {
+                    ids_arr.push($(this).val());
+                }
+            } else {
+                ids_arr.splice($.inArray($(this).val(),ids_arr), 1);
+            }
+            $('#ids').val(ids_arr.join(','));
+            console.log(ids_arr);
+        });
+
+        $(document).on('click','#page a',function () {console.log(1231);
+            var url = $(this).attr('href');
+            var data = {ids:get_ids('arr')};
+            $.post(url,data,function (re) {
+                if (re.code === 1) {
+                    $('.table tbody').empty().html(re.data);
+                    $('#page').empty().html(re.page);
+                }
+                return false;
+            });
+            console.log(url);
+            return false;
+        });
+    });
+    function get_ids(type) {
+        if (type === 'str') {
+            var ids = $('#ids').val();
+        } else {
+            if ($('#ids').val()) {
+                var ids = $('#ids').val().split(',');
+            } else {
+                var ids = [];
+            }
+        }
+        return ids;
+    }
+</script>
+{/block}

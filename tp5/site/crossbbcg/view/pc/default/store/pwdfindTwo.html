@@ -1,0 +1,154 @@
+{extend name="store/base" /} 
+{block name="body"}
+		<div class="steps steps-five">
+			<table width="100%">
+				<tbody>
+
+					<tr>
+						<td class="step-item step-1 active"><span><q class="icon">●</q><i>1</i>公司基本信息</span>
+							<div class="stepdiv">1</div>
+						</td>
+						<td class="step-item step-2 active">
+							<span><q class="icon">●</q><i>2</i>银行及税务信息</span>
+							<div class="stepdiv">2</div>
+						</td>
+						<td class="step-item step-3"><span><q class="icon">●</q><i>3</i>店铺信息提交完成</span>
+							<div class="stepdiv">3</div>
+						</td>
+						<td class="step-item step-4 last"><span><q class="icon">●</q><i>3</i>等待审核审核通过</span>
+							<div class="stepdiv">4</div>
+						</td>
+						<td class="step-item step-5 last"><span><q class="icon">●</q><i>3</i>等待签约</span>
+							<div class="stepdiv">5</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="shop-login-box yahei">
+			<div class="form-body">
+				<div class="title">
+					<div class="t">税务登记信息</div>
+				</div>
+				<div class="content">
+
+					<form action="" id="pwd_form">
+						<ul>
+							<li class="legend ">税务登记证</li>
+							<li class="form-row">
+								<label class="form-label">
+                            <em> * </em> 税务登记证号： </label>
+								<span class="form-act">
+                            <input datatype="s5-50" class="input-ln" type="text"  value="" />
+                        </span>
+
+							</li>
+
+							<li class="form-row">
+								<label for="" class="form-label"> <em> * </em> 税务登记证复印件： </label>
+								<span class="form-act">
+                            <ul class="images-upload clearfix">
+                                <li class="handle img-thumbnail" >
+                                    <i class="icon-close-b action-remove">
+                                        &times;
+                                    </i>
+                                    <img src="/site/crossbbcg/pc/default/ad/od1.jpg" />
+                                    <input datatype="*" type="hidden" name="img[]" />
+                                </li>
+                                <li class="img-thumbnail action-upload" style="display: none;">
+                                    <input type="file" class="action-file-input" />
+                                    <span class="icon-add">
+                                        +
+                                    </span>
+							</li>
+						</ul>
+						</span>
+						<div class="form-tips">法人身份证正面复印件不能大于2MB <em onclick="showdemo('税务登记证复印件','/static/images/demo/sfzzm.png',['450px', '340px'])">查看示例<i class="iconfont icon-help identity-helper" id="show_tips"></i></em></div>
+						</li>
+
+						<li class="legend ">结算账号</li>
+						<li class="form-row">
+							<label class="form-label">
+                            <em> * </em> 银行开户公司名： </label>
+							<span class="form-act">
+                            <input datatype="s5-50" placeholder="开户银行" class="input-ln" type="text"  value="" />
+                        </span>
+
+						</li>
+						<li class="form-row">
+							<label class="form-label">
+                            <em> * </em> 银行开户账号： </label>
+							<span class="form-act">
+                            <input datatype="s5-50" placeholder="账号" class="input-ln" type="text"  value="" />
+                        </span>
+
+						</li>
+						<li class="form-row">
+							<label class="form-label">
+                            <em> * </em> 开户银行所在地： </label>
+							<span class="form-act">
+                            <input datatype="s5-50" placeholder="开户银行所在地" class="input-ln" type="text"  value="" />
+                        </span>
+
+						</li>
+						<li class="form-row">
+							<label class="form-label">
+                            <em> * </em> 开户银行： </label>
+							<span class="form-act">
+                            <input datatype="s5-50" placeholder="支行名称" class="input-ln" type="text"  value="" />
+                        </span>
+
+						</li>
+						<li class="form-row last">
+							<label for="" class="form-label">&nbsp;</label> <span class="form-act">
+								<a class="btn btn-back" href="{url('store/pwdfindOne')}">返回上一步</a>
+                        	<button type="submit" class="btn btn-import" rel="_request">保存</button>
+							</span>
+						</li>
+						</ul>
+					</form>
+				</div>
+			</div>
+		</div>
+				{/block}
+		{block name="footer_js"}
+		<script type="text/javascript">
+			$(function() {
+//				laydate({
+//					elem: '#cl_riqi',
+//					event: 'click',
+//					choose: function(datas) {
+//						$('#cl_riqi').html(datas);
+//						$('#cl_riqi_input').val(datas).blur()
+//					}
+//
+//				});
+//
+//				laydate({
+//					elem: '#cl_riqi2',
+//					event: 'click',
+//					choose: function(datas) {
+//						$('#cl_riqi2').html(datas);
+//						$('#cl_riqi_input2').val(datas).blur()
+//					}
+//
+//				});
+
+				$("#pwd_form").Validform({
+					tiptype: 3,
+					showAllError: true
+				});
+			})
+
+			function showdemo(title, img_src, area) {
+				layer.open({
+					"title": title,
+					'skin': 'layer-ext-blue',
+					type: 1,
+					area: area,
+					shadeClose: true,
+					content: "<img style='display:block;margin:0 auto;padding-top:15px' src=" + img_src + ">"
+				})
+			}
+		</script>
+{/block}

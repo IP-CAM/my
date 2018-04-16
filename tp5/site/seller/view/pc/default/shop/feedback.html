@@ -1,0 +1,53 @@
+{extend name='public/layout'}
+
+{block name='body'}
+<div id="toolTipLayer" style="position: absolute; z-index: 9999; display: none; visibility: visible; left: 95px; top: 573px;"></div>
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+    <div class="fixed-bar">
+        <div class="item-title">
+            <div class="subject">
+                <h3>意见反馈 - 提交反馈</h3>
+            </div>
+        </div>
+    </div>
+    <form class="form-horizontal" id="handleposition" method="post">
+        <div class="ncap-form-default">
+            <dl class="row">
+                <dt class="tit">
+                    <label><em>*</em>{:lang('realname')}</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" id="seller_name" name="seller_name" value="" class="input-txt">
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label><em>*</em>{:lang('email')}</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" id="email" name="email"  value="" class="input-txt">
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label><em>*</em>{:lang('tel')}</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" id="condition" name="mobile" value=""  class="input-txt">
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label><em>*</em>{:lang('feedback_content')}</label>
+                </dt>
+                <dd class="opt">
+                    <textarea name="content" id="" cols="44" rows="10"></textarea>
+                </dd>
+            </dl>
+            <div class="bot"><input class="btns blue" type="submit" url="{:url()}" name="submit" value="{:lang('submit')}"/></div>
+        </div>
+    </form>
+</div>
+{/block}

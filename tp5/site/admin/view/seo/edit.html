@@ -1,0 +1,80 @@
+    {extend name="public/poupbase"/}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+        <div id="content" style="margin:0px 10px 5px 8px;">
+            <div class="bloc" style="margin:10px 0px 0px;">
+                <div class="content">
+                    <form id="myform" method="post" style="margin-top:5px;" class="">
+                        <fieldset>
+                            <legend>{$meta_title|default=''}</legend>
+                            <div class="row">
+                                <label for="status" class="w100">{:lang('Status')}: <span class="required">*</span></label>
+                                <div class="slideBox">
+                                    {eq name="ACTION_NAME" value="edit"}
+                                        <input id="status" value="1" type="checkbox" name="status"  {eq name="data['status']" value="1"}checked{/eq}/>
+                                    {else /}
+                                        <input id="status" value="1" type="checkbox" name="status" checked />
+                                    {/eq}
+                                    <label for="status"></label>
+                                </div>
+                                <div style="float:left; margin-left:10px; line-height:24px;">
+                                    {:lang('Status_tip')}
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="model" class="w100">{:lang('Route_model')}: <span class="required">*</span></label>
+                                <input id="model" type="text" value="{$data.model}" name="model" placeholder="Home" class="input fu" />
+                            </div>
+                            
+                            <div class="row">
+                                <label for="controller" class="w100">{:lang('Route_controller')}: </label>
+                                <input id="controller" type="text" value="{$data.controller}" name="controller" placeholder="Index" class="input fu" />
+                            </div>
+                            
+                            <div class="row">
+                                <label for="method" class="w100">{:lang('Route_method')}: </label>
+                                <input id="method" type="text" value="{$data.method}" name="method" placeholder="index" class="input notzh" />
+                            </div>
+                            
+                            <div class="row">
+                                <label for="parameter" class="w100">{:lang('Route_parameter')}: </label>
+                                <input id="parameter" type="text" value="{$data.parameter}" name="parameter" style="width:320px;" placeholder="{:lang('Route_parameter_tip')}"/>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="domain" class="w100">{:lang('Route_prefix')}: <span class="required">*</span></label>
+                                <input id="domain" type="text" value="{$data.domain}" style="width:160px;" name="domain" placeholder="{:lang('Route_domain_tip')}" />
+                                admin.a.com
+                            </div>
+                            
+                            <div class="row">
+                                <label for="remark" class="w100">{:lang('Remark')}: </label>
+                                <input id="remark" type="text" value="{$data.remark}" name="remark" style="width:320px;" placeholder="{:lang('Route_remark_tip')}" />
+                            </div>
+                            
+                            <div class="row">
+                                <label for="sort" class="w100">{:lang('Sort')}: </label>
+                                <input type="number" class="input litle" min="0" name="sort" maxlength="5" id="sort" value='{$data.sort|default=0}'>
+                            </div>
+                            
+                            <div class="clear"></div>
+                            <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                                {eq name="ACTION_NAME" value="edit"}
+                                    <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('savedata')}">
+                                    <input type="hidden" name="id" value="{$data.id}" />
+                                {else /}
+                                    <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}">
+                                {/eq}
+                                <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {/block}
+    
+    {block name="js"}
+    {/block}

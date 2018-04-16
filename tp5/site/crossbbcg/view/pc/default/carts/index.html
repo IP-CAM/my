@@ -1,0 +1,172 @@
+{extend name="common/base" /} {block name="title"}
+<title>{$meta_title}</title>
+{/block} {block name="css"}
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/cart.css" /> {/block} {block name="body"}
+<!--面包屑-->
+
+<div class="ly-main clearfix">
+	<div class="cart-top clearfix">
+		<div class="left">
+			<em class="iconfont icon-cart"></em><span>{:lang('Cart')}</span>
+		</div>
+		<div class="right">
+			<div id="cart_steps" class="steps">
+				<table width="100%">
+					<tbody>
+						<tr>
+							<td class="step-item step-1 active"><span><q class="icon">●</q><i>1</i>{:lang('Cart')}</span>
+								<div class="stepdiv">1</div>
+							</td>
+							<td class="step-item step-2">
+								<span><q class="icon">●</q><i>2</i>{:lang('Write_Submit_Order')}</span>
+								<div class="stepdiv">2</div>
+							</td>
+							<td class="step-item step-3 last"><span><q class="icon">●</q><i>3</i>{:lang('Success_Submit_Order')}</span>
+								<div class="stepdiv">3</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+    
+    <!-- ajax更新购物车数据-->
+    {notempty name="arr_good"}
+	<div class="cart-main">
+		<div class="items-title">
+			<ul class="clearfix">
+				<li class="check"><label><input type="checkbox"  class="all-check">{:lang('All_Checked')}</label>
+                <input type="hidden" value="{:url('crossbbcg/carts/changeSelected')}" id="changeSelected"/>
+                </li>
+				<li class="goods">{:lang('Goods')}</li>
+				<li class="kg">&nbsp;<!--{:lang('Weight')}--></li>
+				<li class="unit-price">{:lang('Unit_Price')}（{:lang('Currency_'.config('catalog_currency_code'))}）</li>
+				<li class="quantity">{:lang('Good_Num')}</li>
+				<li class="subtotal">{:lang('Good_Count')}（{:lang('Currency_'.config('catalog_currency_code'))}）</li>
+				<li class="edit">{:lang('Action')}</li>
+			</ul>
+		</div>
+		
+        {foreach $arr_good as $key => $arr}
+		<dl class="item-box">
+            {notempty name="$key"}
+			<dt class="t">
+				<div class="check"><input class="ly-mcElectBundle seller-check" type="checkbox" name="orders[]" value="{$key}"><em class="dp-name">
+            {notempty name="$arr_seller_id[$key]"}
+            <a href="{:url('seller/store/index','seller_id='. $arr_seller_id[$key])}" title="{$key}">{$key}</a>
+            {else /}
+            {$key}
+            {/notempty}
+        </em></div>
+			</dt>
+            {else /}
+            <dt class="t" style="display:none;">
+            <div class="check"><input class="ly-mcElectBundle seller-check" type="checkbox" name="orders[]" value="{$key}"><em class="dp-name">{$key}</em></div>
+            </dt>
+            {/notempty}
+			<dd class="b">
+                {foreach $arr as $arr2}
+				<ul class="goods-item clearfix">
+					<li class="check">
+						<li class="check"><label><input class="ly-mcElectBundle" name="items[]" value="{$arr2['id']}" type="checkbox" {eq name="$arr2['selected']" value="1"}checked="checked"{/eq}></label></li>
+					</li>
+					<li class="goods">
+						<div class="goods-pic">
+							<a class="ly-mcPic" href="{$arr2['href']}" title="{$arr2['good_name']}" target="_blank">
+                                
+                                {if condition="empty($arr2['thumb'])"}
+                                <img src="__PUBLIC__/{$img_path}/no-image.png" />
+                                {elseif condition="substr($arr2['thumb'],0,4)=='http'"}
+                                <img src="{$arr2['thumb']}">
+                                {else /}
+                                <img src="{:resizeImage($arr2['thumb'],'thumb',true)}">
+                                {/if}
+                            
+                            </a>
+						</div>
+						<div class="goods-name" style="height:auto;">
+                            <a href="{$arr2['href']}">{$arr2['good_name']}</a>
+                            <!--商品选项名-->
+                            <p>{$arr2['sku_name']}</p>
+                        </div>
+                        
+					</li>
+					<li class="kg"><!--{$arr2['weight']}{$arr2['weight_class_id']}--></li>
+					<li class="unit-price">
+                        <!--<span style="text-decoration: line-through;color:#9c9c9c;">{$arr2['format_market_price']}</span> <br/>-->
+                        {$arr2['format_sale_price']}
+                    </li>
+					<li class="quantity">
+						<div class="computing addcat-item">
+							<span class="reduce btn-flat btn-decrease">-</span>
+							<input type="text" class="num action-quantity-input" value="{$arr2['num']}" min="{$arr2['minimum']}" max="{$arr2['maximum']}" data-cart-id="{$arr2['id']}" data-url="{:url('crossbbcg/carts/changeCartNum')}"/>
+							<span class="add btn-flat btn-increase">+</span>
+						</div>
+					</li>
+					<li class="subtotal">{$arr2['format_subtotal']}</li>
+					<li class="edit">
+						<a href="javascript:void(0)" class="cart-delete" data-url="{:url('crossbbcg/carts/deleteCartGood','cart_id='.$arr2['id'])}">{:lang('Delete')}</a>|
+						<a href="javascript:void(0);" class="attention" data-url="{:url('crossbbcg/goods/collectGood','item_id='.$arr2['good_id'])}">{:lang('Collect')}</a>
+					</li>
+				</ul>
+				{/foreach}
+				<div class="cart-item-bottom clearfix">
+					
+				</div>
+			</dd>
+		</dl>
+        {/foreach}
+		<div class="cart-footer clearfix">
+			<div class="left">
+				<em class="check"><label><input type="checkbox"  class="all-check">{:lang('All_Checked')}</label></em>
+				<a class="cart-delete-more" data-url="{:url('crossbbcg/carts/deleteCartGood')}">{:lang('Delete_Checked_Goods')}</a>
+				</em>
+			</div>
+			<div class="right">
+				<em>{:lang('Checked_Goods')} <span class="red" id="all_selected">{$all_selected}</span> {:lang('Unit_Good')}</em>
+                
+                <!--<span>{:lang('Weight')}：<em id="all_weight">{$all_weight}</em></span>-->
+                
+                <span>{:lang('Goods_Tax')}：<em id="all_tax">{$all_tax}</em></span>
+                
+				<em>{:lang('Price_Count')}（{:lang('no_shipping_price')}）{:lang('Colon')}<span class="price" id="all_price">{$all_price}</span> </em>
+                
+				<button class="btn-submit" type="submit" id="carts_checkout" data-url="{:url('crossbbcg/carts/checkout')}">{:lang('Go_Checkout')}</button>
+			</div>
+		</div>
+	</div>
+    {else /}
+    <!-- 无商品，空购物车页面-->
+    <div class="ly-no-data" style="background: #fff;border: 1px solid #e6e6e6;">
+        <div class="no-box">
+        		<div class="icon-box">
+        			<div class="icon iconfont icon-gouwuchekong1"></div>
+        		</div>
+        		<div class="text">
+        			<div class="s">{:lang('empty_cart')}</div>
+        			<div class="btn-box"><a href="{:url('crossbbcg/index/index')}">{:lang('return_home')}</a></div>
+        		</div>
+        </div>
+        
+    </div>
+    {/notempty}
+
+</div>
+
+{include file="search/recommend_goods"}
+
+<div class="js_language">
+    <span id="js_cart_delete">{:lang('js_cart_delete')}</span>
+    <span id="js_cart_choose_delete">{:lang('js_cart_choose_delete')}</span>
+    <span id="js_cart_please_choose_delete">{:lang('js_cart_please_choose_delete')}</span>
+    <span id="js_cart_please_choose">{:lang('js_cart_please_choose')}</span>
+</div>
+{/block}
+<!--此板块为页面单独js加载-->
+{block name="footer_js"}
+<script type="text/javascript">
+	//需要加载的js文件
+	Private_Script = ['cart','public'];
+</script>
+{/block}

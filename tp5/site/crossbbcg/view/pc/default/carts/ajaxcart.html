@@ -1,0 +1,75 @@
+{notempty name="arr_good"}
+<div class="min-cat">
+	<dl>
+		<dt>
+			<a data-tmc="topCart" href="{:url('crossbbcg/carts/index')}" title="{:lang('see_cart_all')}">{:lang('see_cart_all')}</a>
+            <input type="hidden" value="{:url('crossbbcg/carts/changeSelected')}" id="changeSelected"/>
+			<div class="ck"><input id="ElectCart" type="checkbox" data-tmc="elect" class="tm-mcElectCart all-check"></div>
+			<label for="ElectCart">{:lang('check_all')}</label>
+		</dt>
+		<dd>
+            {foreach $arr_good as $key => $arr}
+			<div class="item-box" >
+				<div class="t">
+					<div class="ck"><input class="tm-mcElectBundle seller-check" type="checkbox" data-tmc="elect" name="orders[]" value="{$key}"></div>
+					<div class="dp-name"><span title="{$key}">{$key}</span></div>
+					<div class="mcCost" style="display:none;"><strong class="tm-mcPrice">sub_total</strong></div>
+				</div>
+				<div class="b">
+                    {foreach $arr as $arr2}
+							<div class="min-cart-item tm-mcOrder">
+								<div class="tm-mcChk">
+                                    <input class="tm-mcElect" data-tmc="elect" name="items[]" value="{$arr2['id']}" type="checkbox" {eq name="$arr2['selected']" value="1"}checked="checked"{/eq}>
+                                </div>
+								<div class="tm-mcItem">
+                                    {if condition="empty($arr2['thumb'])"}
+									<a class="tm-mcPic" href="{$arr2['href']}" title="{$arr2['good_name']}" target="_blank"><img height="50" src="__PUBLIC__/{$img_path}/no-image.png"></a>
+                                    {elseif condition="substr($arr2['thumb'],0,4)=='http'"}                       <a class="tm-mcPic" href="{$arr2['href']}" title="{$arr2['good_name']}" target="_blank"><img height="50" src="{$arr2['thumb']}"></a>
+                                    {else /}
+                                    <a class="tm-mcPic" href="{$arr2['href']}" title="{$arr2['good_name']}" target="_blank"><img height="50" src="{:resizeImage($arr2['thumb'],'small',true)}"></a>
+                                    {/if}
+                                    
+								</div>
+								<div class="tm-mcSku">
+									<p title="{$arr2['sku_name']}">{$arr2['sku_name']}</p>
+								</div>
+								<div class="tm-mcAmount">
+									<a href="javascript:void(0)" class="btn-flat tm-mcMinus tm-mcMinusOff btn-decrease" hidefocus="true"><s></s></a>
+                                    <span class="tm-mcQuantity action-quantity-input" min="{$arr2['minimum']}" max="{$arr2['maximum']}" data-cart-id="{$arr2['id']}" data-url="{:url('crossbbcg/carts/changeCartNum')}">{$arr2['num']}</span>
+									<a href="javascript:void(0)" class="btn-flat tm-mcPlus btn-increase" hidefocus="true"><s></s><b></b></a>
+								</div>
+								<div class="tm-mcCost">
+									<a href="javascript:void(0)" class="tm-mcDel" title="{:lang('Delete')}" data-tmc="del" data-url="{:url('crossbbcg/carts/deleteCartGood','cart_id='.$arr2['id'])}"></a><strong class="tm-mcPrice">{$arr2['format_subtotal']}</strong></div>
+							</div>
+							
+                    {/foreach}
+				</div>
+			</div>
+			{/foreach}
+		</dd>
+	</dl>
+	<div class="min-cart-tarinfo">
+		<div class="s clearfix">
+			<div class="left">{:lang('Checked_Goods')} <span class="red" id="all_selected">{$all_selected}</span> {:lang('Unit_Good')}</div>
+			<div class="left price">{:lang('Price_Count')}（{:lang('no_shipping_tax_price')}）{:lang('Colon')}<span class="price" id="all_price">{$all_price}</span></div>
+		</div>
+		<div class="min-cart-button">
+			<button class="min-cart-submit" id="carts_checkout" data-url="{:url('crossbbcg/carts/checkout')}">{:lang('Go_Checkout')}</button>
+		</div>
+	</div>
+	
+</div>
+<div class="js_language">
+    <span id="js_cart_delete">{:lang('js_cart_delete')}</span>
+    <span id="js_cart_choose_delete">{:lang('js_cart_choose_delete')}</span>
+    <span id="js_cart_please_choose_delete">{:lang('js_cart_please_choose_delete')}</span>
+    <span id="js_cart_please_choose">{:lang('js_cart_please_choose')}</span>
+</div>
+{else /}
+<div class="ly-no-data">
+    <div class="icon iconfont icon-zanwujilu"></div>
+    <div class="text">
+        {:lang('empty_record')}
+    </div>
+</div>
+{/notempty}

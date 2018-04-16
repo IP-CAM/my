@@ -1,0 +1,309 @@
+    <!--head-->
+    <div class="ly-header-fixed">
+        <div class="n">
+            <div class="ly-logo left">
+                <a href="{:url('crossbbcg/index/index')}">
+                    <img src="__UPLOADS__/{$shoplogo}" alt="{$shopname}" />
+                </a>
+            </div>
+            <div class="ly-search" id="ly_search">
+                <form action="{:url('crossbbcg/search/index')}">
+                    <!--data-action 为各项的搜索提交地址-->
+                    <dl class="ly-search-select">
+                        <dt><span>{:lang('Search_Product')}</span><i class="jiao jiao-down"></i></dt>
+                        <dd style="display: none;">
+                            <em class="act" data-action="{:url('crossbbcg/search/index')}">{:lang('Search_Product')}</em>
+                            <!-- TODO 店铺搜索 -->
+                            <!--<em data-action="{:url('crossbbcg/search/index')}">{:lang('search_seller')}</em>-->
+                
+                        </dd>
+                    </dl>
+                    <input type="text" id="search_text" autocomplete="off" name="like" placeholder="{$catalog_search}" value="{:$like}" data-default="{$catalog_search}"/>
+                    <button type="submit">{:lang('Search')}</button>
+                </form>
+                <div class="ly-search-keys">
+                    <ul>
+                        {foreach :widget('crossbbcg/Ad/get_ad', ['id' => 3,'limit'=>5]) as $v}
+                        <li><a href="{$v.ad_link}">{$v.name}</a></li>
+                        {/foreach}
+                    </ul>
+                </div>
+        
+                <!--搜索历史记录-->
+                {if condition ="$search_history"}
+                <div class="search-results hide" style="display: none;">
+                    <ul class="history-results">
+                        <li class="title">
+                            <span>{:lang('recent_search')}</span>
+                            <a href="javascript:void(0);" class="clear-history clear">
+                                <i></i> {:lang('to_empty')}
+                            </a>
+                        </li>
+                
+                        {foreach $search_history as $key=>$value}
+                        <li class="rec_over search-{$key}">
+							<span>
+								<a href="{:url('crossbbcg/search/index') . '?like='.$value}" title="{$value}">{$value}</a>
+								<i onclick="search_remove('search-{$key}')" class="iconfont icon-remove" data-url="{:url('crossbbcg/search/deleteSearchHistory',['key'=>$value])}"></i>
+							</span>
+                        </li>
+                        {/foreach}
+            
+                    </ul>
+                    <ul class="rec-results">
+                        <li class="title">
+                            <span>{:lang('hot_search')}</span>
+                            <i class="close">×</i>
+                        </li>
+                        {foreach :widget('crossbbcg/Ad/get_ad',array('id'=>5,'limit'=>10)) as $v}
+                        <li>
+                            <a href="{:url('crossbbcg/search/index').'?like='.$v.name}" title="{$v.ad_info}">{$v.name}</a>
+                        </li>
+                        {/foreach}
+                    </ul>
+                </div>
+                {/if}
+            </div>
+            
+            <div class="login-info">
+                <a href="{:url('member/passport/index')}" class="s-i">{:lang('Login')}</a>
+                <a href="{:url('member/passport/signup')}" class="s-n">{:lang('free_register')}</a>
+            </div>
+        </div>
+    </div>
+    <div class="ly-headw">
+        <div class="ly-head">
+            <div class="ly-head-left left">
+                <div class="text">{:lang('Welcome')}{$shopname}</div>
+            </div>
+            <div class="ly-head-right right">
+                <ul>
+                    
+                    {empty name="user"}
+                    <li class="left"><a href="{:url('member/passport/index')}">{:lang('Login')}</a></li>
+                    <li class="sep left">|</li>
+                    <li class="left "><a href="{:url('member/passport/signup')}">{:lang('Register')}</a></li>
+                    <li class="sep left">|</li>
+                    {else /}
+                    <li class="left "><a href="{:url('member/index/index')}">{$user.nickname}</a></li>
+                    <li class="sep left">|</li>
+                    <li class="left "><a href="{:url('member/passport/logout')}">{:lang('LoginOut')}</a></li>
+                    <li class="sep left">|</li>
+                    {/empty}
+                    
+                    <!--顶部协议-->
+                    {notempty name="$top_protocol_title"}
+                    <li class="left"><a href="{:url('crossbbcg/help/index','id='.$top_protocol_id)}">{$top_protocol_title}</a></li>
+                    <li class="sep left">|</li>
+                    {/notempty}
+                    
+                    <!--手机端访问-->
+                    <li class="left"><a href="{:url('', ['__skin__'=>config('skin.mobile'), '__theme__'=>'mobile'])}">{:lang('Wap_Site')}</a></li>
+                    
+                    
+                    <!--微信二维码-->
+                    {notempty name="$weixin_img"}
+                    <li class="sep left">|</li>
+                    <li class="left">
+                        <a href="javascript:void(0);" class="attention-weixin">{:lang('Attention')}</a>
+                        <div style="z-index:99;position:absolute;display:none;">
+                        <img src="__UPLOADS__/{$weixin_img}" width="100" height="100"/>
+                        </div>
+                    </li>
+                    {/notempty}
+    
+                    <!--qq在线客服-->
+                    {notempty name="$kefu_qq"}
+                    <li class="sep left">|</li>
+                    <li class="left">
+                    <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={$kefu_qq}&site=qq&menu=yes">
+                        {:lang('Online_Service')}
+                    </a>
+                    </li>
+                    {/notempty}
+                    
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--headEND-->
+    <!--top-->
+    
+    <div class="ly-topw ">
+        <div class="ly-top w1200">
+            <!--logo-->
+            <div class="ly-logo left">
+                <a href="{:url('crossbbcg/index/index')}">
+                    <img src="__UPLOADS__/{$shoplogo}" alt="{$shopname}" />
+                </a>
+            </div>
+            <!--logoEND-->
+            <!--搜索-->
+            <div class="ly-search" id="ly_search">
+                <form action="{:url('crossbbcg/search/index')}">
+                    <!--data-action 为各项的搜索提交地址-->
+                    <dl class="ly-search-select">
+                        <dt><span>{:lang('Search_Product')}</span><i class="jiao jiao-down"></i></dt>
+                        <dd style="display: none;">
+                            <em class="act" data-action="{:url('crossbbcg/search/index')}">{:lang('Search_Product')}</em>
+                            <!-- TODO 店铺搜索 -->
+                            <!--<em data-action="{:url('crossbbcg/search/index')}">{:lang('search_seller')}</em>-->
+                
+                        </dd>
+                    </dl>
+                    <input type="text" id="search_text" autocomplete="off" name="like" placeholder="{$catalog_search}" value="{:$like}" data-default="{$catalog_search}"/>
+                    <button type="submit">{:lang('Search')}</button>
+                </form>
+                <div class="ly-search-keys">
+                    <ul>
+                        {foreach :widget('crossbbcg/Ad/get_ad', ['id' => 3,'limit'=>5]) as $v}
+                        <li><a href="{$v.ad_link}">{$v.name}</a></li>
+                        {/foreach}
+                    </ul>
+                </div>
+        
+                <!--搜索历史记录-->
+                {if condition ="$search_history"}
+                <div class="search-results hide" style="display: none;">
+                    <ul class="history-results">
+                        <li class="title">
+                            <span>{:lang('recent_search')}</span>
+                            <a href="javascript:void(0);" class="clear-history clear">
+                                <i></i> {:lang('to_empty')}
+                            </a>
+                        </li>
+                
+                        {foreach $search_history as $key=>$value}
+                        <li class="rec_over search-{$key}">
+							<span>
+								<a href="{:url('crossbbcg/search/index') . '?like='.$value}" title="{$value}">{$value}</a>
+								<i onclick="search_remove('search-{$key}')" class="iconfont icon-remove" data-url="{:url('crossbbcg/search/deleteSearchHistory',['key'=>$value])}"></i>
+							</span>
+                        </li>
+                        {/foreach}
+            
+                    </ul>
+                    <ul class="rec-results">
+                        <li class="title">
+                            <span>{:lang('hot_search')}</span>
+                            <i class="close">×</i>
+                        </li>
+                        {foreach :widget('crossbbcg/Ad/get_ad',array('id'=>5,'limit'=>10)) as $v}
+                        <li>
+                            <a href="{:url('crossbbcg/search/index').'?like='.$v.name}" title="{$v.ad_info}">{$v.name}</a>
+                        </li>
+                        {/foreach}
+                    </ul>
+                </div>
+                {/if}
+            </div>
+            <!--搜索END-->
+            
+            <!--购物车-->
+            <a href="{:url('crossbbcg/carts/index')}" class="ly-cat">
+                <dl >
+                    <dt class="icon iconfont icon-cart"></dt>
+                    <dd>{:lang('Cart')}(<em class="cart_num">{$cart_num}</em>)</dd>
+                </dl>
+            </a>
+            <div class="catbg"><span class="nav-jiao"></span></div>
+        </div>
+    </div>
+    <!--topEND-->
+    <!--nav-->
+    <div class="ly-nav-box">
+        <div class="ly-nav">
+            <!--左侧分类-->
+            <div class="left ly-category">
+                <h3><i class="iconfont icon-rectangular4"></i>{:lang('All_Categories')}</h3>
+                {notempty name="arr_header_category"}
+                <ul class="public-category">
+                    {foreach arr_header_category as $key => $arr}
+                    <li>
+                        <div class="item">
+                            <h4><a href="{$arr['href']}">{$arr['title']}<i>></i></a></h4>
+                            {present name="$arr['child']"}
+                            <div class="sub">
+                                {foreach $arr['child'] as $key2 => $arr2}
+                                {php} if($key2 >= 4){break;} {/php}
+                                <span><a href="{$arr2['href']}">{$arr2['title']}</a></span>
+                                {/foreach}
+                            </div>
+                            {/present}
+                        </div>
+                        <div class="child">
+                            <div class="box">
+                                <div class="left cat-items">
+                                    {present name="$arr['child']"}
+                                    {foreach $arr['child'] as $key2 => $arr2}
+                                    
+                                    <div class="two-line">
+                                        <dl>
+                                            <dt><a href="{$arr2['href']}">{$arr2['title']}</a></dt>
+                                            {present name="$arr2['child']"}
+                                            <dd>
+                                                {foreach $arr2['child'] as $key3 => $arr3}
+                                                <a href="{$arr3['href']}">{$arr3['title']}</a>
+                                                {/foreach}
+                                            </dd>
+                                            {/present}
+                                        </dl>
+                                    </div>
+                                    {/foreach}
+                                    {/present}
+                                </div>
+                                <!--品牌-->
+                                <div class="cat-brand">
+                                    {notempty name="$arr['brands']"}
+                                    <div class="title">{:lang('brands')}</div>
+                                    <div class="clearfix">
+                                        {foreach $arr['brands'] as $arr4}
+                                        <a class="left" href="{:url('crossbbcg/search/index','brand_id='.$arr4['id'])}" target="_blank">
+                                            {if condition="substr($arr4['logo'],0,4)=='http'"}
+                                            <img src="{$arr4['logo']}" alt="{$arr4['name']}" />
+                                            {else /}
+                                            <img src="__UPLOADS__/{$arr4['logo']}" alt="{$arr4['name']}" />
+                                            {/if}
+                                        </a>
+                                        {/foreach}
+                                    </div>
+                                    {/notempty}
+                                </div>
+                                <!--品牌end-->
+                            </div>
+                        </div>
+                    </li>
+                    {/foreach}
+                </ul>
+                {/notempty}
+
+            </div>
+            <!--左侧分类END-->
+            <!--网站导航条-->
+            <div class="ly-nav-list">
+                <ul class="claearfix">
+                    {eq name="$is_home" value="true"}
+                    <li class="current"><a href="{:url('crossbbcg/index/index')}">{:lang('Home')}</a></li>
+                    {else /}
+                    <li><a href="{:url('crossbbcg/index/index')}">{:lang('Home')}</a></li>
+                    {/eq}
+                    
+                    {foreach $arr_header_nav as $arr}
+                        {eq name="$now_url" value="$arr['url']"}
+                    <li class="current"><a href="{$arr['url']}">{$arr['title']}</a></li>
+                        {else /}
+                    <li><a href="{$arr['url']}">{$arr['title']}</a></li>
+                        {/eq}
+                    
+                    {/foreach}
+                    
+                </ul>
+                
+            </div>
+            <div class="ly-shop-rz">
+                    <a href="{:url('seller/login/welcome')}" target="_blank"><i class="iconfont icon-ruzhu"></i> {:lang('seller_join')}</a>
+                </div>
+            <!--网站导航条END-->
+        </div>
+    </div>

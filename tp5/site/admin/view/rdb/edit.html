@@ -1,0 +1,127 @@
+    {extend name="public/poupbase"/}
+    
+    <!-- CONTENT -->
+    
+    {block name="body"}
+      <div id="content" style="margin:0px 10px 5px 8px;">
+        <div class="bloc" style="margin:10px 0px 0px;">
+          <div class="content">
+            <form id="myform" method="post" style="margin-top:5px;" class="">
+              <fieldset>
+                <legend>{$meta_title|default=''}</legend>
+                <div class="thumb_box">
+                    <div class="thumb">
+                    <div class="upimg_tip">{:lang('Icon')}</div>
+                    <img src="{notempty name='data.icon'}__PUBLIC__/admin/images/{$data.icon}{else /}__PUBLIC__/admin/images/upload-pic.gif{/notempty}" id="preview" class="upload" width="55" height="50" style="margin-top:20px;" no-image="__PUBLIC__/admin/images/upload-pic.gif" url="{:url('public/img',array('m' => CONTROLLER_NAME,'input' => 'icon','thumb' => 'preview'))}" />
+                    <input type="hidden" name="icon" id="icon" value="{$data.icon}" />
+                    </div>
+                </div>
+                
+                <div class="row">
+                  <label for="engine_type" class="w100">{:lang('Dbtype')}: <span class="required">*</span></label>
+                  <select name="engine_type" id="engine_type">
+                      <option value="0" {eq name="data['engine_type']" value="0"}selected{/eq}>{:lang('No_database')}</option>
+                      <option value="MyISAM" {eq name="data['engine_type']" value="MyISAM"}selected{/eq} {eq name="ACTION_NAME" value="add"}selected{/eq}>MyISAM</option>
+                      <option value="InnoDB" {eq name="data['engine_type']" value="InnoDB"}selected{/eq}>InnoDB</option>
+                      <option value="MEMORY" {eq name="data['engine_type']" value="MEMORY"}selected{/eq}>MEMORY</option>
+                      <option value="BLACKHOLE" {eq name="data['engine_type']" value="BLACKHOLE"}selected{/eq}>BLACKHOLE</option>
+                      <option value="MRG_MYISAM" {eq name="data['engine_type']" value="MRG_MYISAM"}selected{/eq}>MRG_MYISAM</option>
+                      <option value="ARCHIVE" {eq name="data['engine_type']" value="ARCHIVE"}selected{/eq}>ARCHIVE</option>
+                  </select>
+                </div>
+                
+                <div class="row">
+                  {eq name="data['engine_type']" value="0">
+                  <label for="name" class="w100" id="databaseid">{:lang('Modelid')}: <span class="required">*</span></label>
+                  {else /}
+                  <label for="name" class="w100" id="databaseid">{:lang('Databaseid')}: <span class="required">*</span></label>
+                  {/eq}
+                  <input type="text" class="input w140l fu onlyletter" name="name" id="name" value="{$data.name}" placeholder="tablename" />
+                  <a class="tooltip-icon" title="{:lang('Databasename')}"></a>
+                </div>
+                
+                <div class="row">
+                  <label for="langstr" class="w100">{:lang('Langstr')}: <span class="required">*</span></label>
+                  <input type="text" class="input w140l fu onlyletter" name="langstr" id="langstr" value="{$data.langstr}" />
+                  <a class="tooltip-icon" title="{:lang('Langstr')}"></a>
+                </div>
+                
+                <div class="row">
+                  <div style="float:left;">
+                  <label for="searck_key" class="w100">{:lang('Default_search_field')}: </label>
+                  <input type="text" class="input" name="searck_key" id="searck_key" style="width:85px;" value="{$data.searck_key}" placeholder="title" />
+                  <a class="tooltip-icon" title="{:lang('Default_search_field_tip')}"></a>
+                  </div>
+                  <div style="float:left;">
+                  <label for="searck_list" class="w80">{:lang('Searck_list')}: </label>
+                  <input type="text" class="input" name="Searck_list" id="searck_list" placeholder="id,title,name,status" style="width:150px;" value="{empty name="data.searck_list"}*{else /}{$data.searck_list}{/empty}">
+                  <a class="tooltip-icon" title="{:lang('Searck_list_tip')}"></a>
+                  </div>
+                </div>
+                
+                <div class="row bset">
+                    <div style="float:left;">
+                    <label class="w100">{:lang('Musttmiankey')} : </label>
+                    <input name="need_pk" type="radio" value="1" id="need_pk_1" {eq name="data.need_pk" value="1">checked{/eq}  {eq name="ACTION_NAME" value="add">checked{/eq} />
+                    <label for="need_pk_1" class="w50l_r_0">{:lang('Yes')}</label>
+                   
+                    <input name="need_pk" type="radio" value="0" id="need_pk_0" {eq name="data.need_pk" value="0"}checked{/eq} />
+                    <label for="need_pk_0" class="w50l_r_0">{:lang('No')}</label>
+                    </div>
+                    <div style="float:left;">
+                    <label class="w100">{:lang('Manylang')} : </label>
+                    <input name="islangs" type="radio" value="1" id="lang_1" {eq name="data.islangs" value="1"}checked{/eq}  />
+                    <label for="lang_1" class="w50l_r_0">{:lang('Yes')}</label>
+                   
+                    <input name="islangs" type="radio" value="0" id="lang_0" {eq name="data.islangs" value="0"}checked{/eq}  {eq name="ACTION_NAME" value="add">checked{/eq}/>
+                    <label for="lang_0" class="w50l_r_0">{:lang('No')}</label>
+                   </div>
+                </div>
+                            
+                <div class="row">
+                  <label for="remark" class="w100">{:lang('Remark')}: </label>
+                  <input type="text" class="input" name="remark" id="remark" value="{$data.remark}" style="width:310px;" />
+                </div>
+    
+                <div class="row">
+                  <label for="status" class="w100">{:lang('Status')}:</label>
+                  <div class="slideBox">
+                    {eq name="ACTION_NAME" value="edit"}
+                        <input id="status" value="1" type="checkbox" name="status"  {eq name="data['status']" value="1"}checked{/eq}/>
+                    {else /}
+                        <input id="status" value="1" type="checkbox" name="status" checked />
+                    {/eq}
+                    <label for="status"></label>
+                  </div>
+                </div>            
+                
+                <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                  {eq name="ACTION_NAME" value="edit"}
+                  <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('update')}">
+                  <input name="modelid" type="hidden"  value="{$data.modelid}" />
+                  {else /}
+                  <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('update')}">
+                  {/eq}
+                  <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+    {/block}
+    
+    {block name="js"}
+    <script>
+    $(function(){
+        $(".bset").buttonset();	
+        $('#engine_type').change(function(){
+            if($(this).val() == 0){
+                $('#databaseid').html("{:lang('Modelid')}: <span class='required'>*</span>");	
+            }else{
+                $('#databaseid').html("{:lang('Databaseid')}: <span class='required'>*</span>");	
+            }
+        })
+    })
+    </script>
+    {/block}

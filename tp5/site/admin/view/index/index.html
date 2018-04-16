@@ -1,0 +1,195 @@
+    {extend name="public/base"}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content">
+        <div class="breadcrumbs">
+            <a href="{:url('Index/index')}">{$meta_title|default=''}</a>
+        </div>
+        <div class="clear"></div>
+        <!--<div class="bloc" id="blocHotKeys">
+              <div class="title">{:lang('Dashboard')}</div>
+              &lt;!&ndash;<div class="content sortable-content">&ndash;&gt;
+              <div class="content">
+                  <ul class="ibox">
+                      <li>
+                          <div class="ibox-title">
+                              <span>日</span>
+                              <span>周</span>
+                              <span>月</span>
+                              <h5>收入</h5>
+                          </div>
+                          <div class="clear"></div>
+                          <div class="ibox-content">
+                              <h3>40 886,200</h3>
+                          </div>
+                      </li>
+    
+                      <li>
+                          <div class="ibox-title">
+                              <span>日</span>
+                              <span>周</span>
+                              <span>月</span>
+                              <h5>订单</h5>
+                          </div>
+                          <div class="clear"></div>
+                          <div class="ibox-content">
+                              <h3>40 886,200</h3>
+                          </div>
+                      </li>
+    
+                      <li>
+                          <div class="ibox-title">
+                              <span>日</span>
+                              <span>周</span>
+                              <span>月</span>
+                              <h5>注册</h5>
+                          </div>
+                          <div class="clear"></div>
+                          <div class="ibox-content">
+                              <h3>40 886,200</h3>
+                          </div>
+                      </li>
+    
+                      <li>
+                          <div class="ibox-title">
+                              <span>日</span>
+                              <span>周</span>
+                              <span>月</span>
+                              <h5>活跃用户</h5>
+                          </div>
+                          <div class="clear"></div>
+                          <div class="ibox-content">
+                              <h3>40 886,200</h3>
+                          </div>
+                      </li>
+                  </ul>
+              </div>
+          </div>-->
+    
+        <div class="alert alert-warning spans">
+            提示信息
+        </div>
+        <div class="clear"></div>
+        <div class="bloc bloc-left" id="info">
+            <div class="content">
+            
+            </div>
+        </div>
+        
+        <div class="bloc bloc-right" id="blocNews">
+            <div class="content">
+            
+            </div>
+        </div>
+        <div class="bloc bloc-left" id="blocStatistics">
+            <!--<div class="title collapsible">-->
+            <div class="title">
+                <div class="tabs static" id="blockStatistics">
+                    <a id="tabStat1_link" href="#tabStat1">{:lang('Systeminfo')}</a>
+                    <a id="tabStat2_link" href="#tabStat2">{:lang('Myaccount')}</a>
+                    <a id="tabStat3_link" href="#tabStat3">{:lang('Adminlog')}</a>
+                </div>
+            </div>
+            <div class="content">
+                <div id="tabStat1" style="display:block;">
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <td width="40%">Today:</td>
+                            <td><b>2014-09-30 03:40:26</b></td>
+                        </tr>
+                        <tr>
+                            <td>Application:</td>
+                            <td><b>ApPHP Directy CMF</b></td>
+                        </tr>
+                        <tr>
+                            <td>Version:</td>
+                            <td><b>2.3.2</b></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="tabStat2" style="display:block;">
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <td width="40%">Last Login:</td>
+                            <td><b>2014-09-15 19:22:05</b></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="tabStat3" style="display:block;">
+                    <table class="table">
+                        <tr>
+                            <td width="40%">Total Admins:</td>
+                            <td><b>3</b></td>
+                        </tr>
+                        <tr>
+                            <td>Last 5 registered admins:</td>
+                            <td><b>admin3, admin2, admin</b></td>
+                        </tr>
+                        </tbody>
+                    
+                    </table>
+                </div>
+            </div>
+        </div>
+    
+        <div class="bloc bloc-right" id="blocLogs">
+            <!--<div class="title collapsible">-->
+            <div class="title">
+                <div class="tabs static" id="blockStatistics">
+                    <a id="tabStat1_link" href="#tabStat1">{:lang('Systeminfo')}</a>
+                    <a id="tabStat2_link" href="#tabStat2">{:lang('Myaccount')}</a>
+                    <a id="tabStat3_link" href="#tabStat3">{:lang('Adminlog')}</a>
+                </div>
+            </div>
+            <div class="content">
+                <div id="tabStat1" style="display:block;">
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <td width="40%">Today:</td>
+                            <td><b>2014-09-30 03:40:26</b></td>
+                        </tr>
+                        <tr>
+                            <td>Application:</td>
+                            <td><b>ApPHP Directy CMF</b></td>
+                        </tr>
+                        <tr>
+                            <td>Version:</td>
+                            <td><b>2.3.2</b></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="tabStat2" style="display:block;">
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <td width="40%">Last Login:</td>
+                            <td><b>2014-09-15 19:22:05</b></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="tabStat3" style="display:block;">
+                    <table class="table">
+                        <tr>
+                            <td width="40%">Total Admins:</td>
+                            <td><b>3</b></td>
+                        </tr>
+                        <tr>
+                            <td>Last 5 registered admins:</td>
+                            <td><b>admin3, admin2, admin</b></td>
+                        </tr>
+                        </tbody>
+                
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {/block}

@@ -1,0 +1,600 @@
+{extend name="common/base" /}
+
+{block name="title"}
+<title>ETshop-{:lang('Goods_favor')}</title>
+{/block}
+
+{block name="css"}
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/member.css" />
+{/block}
+
+{block name="body"}
+<!--面包屑-->
+<div class="ly-path">
+    <ul class="clearfix">
+        <li class="home">
+            <a href="{:url('crossbbcg/index/index')}" title="{:lang('go_min')}">{:lang('Home')}</a>
+            <span>&gt;&nbsp;</span>
+        </li>
+        <li>
+            <a href="{:url('member/index/index')}" title="">{:lang('Member')}</a>
+            <span>&gt;&nbsp;</span>
+        </li>
+        <li>
+            <h1>{:lang('Goods_favor')}</h1>
+        </li>
+    </ul>
+</div>
+<div class="ly-main member-main clearfix">
+	{include file="index/left_menu"}
+	<div class="member-right">
+		<div class="member-content">
+			<div class="title member-title member-max-title">
+				<div class="t">{:lang('add_wishlist')}</div>
+			<ul class="tabs member-fav-tabs">
+                    <li >
+                        <a href="/member/comment/index.html">商品收藏</a>
+                    </li>
+                    <li class="active">
+                        <a href="/member/comment/index.html?condition=is_img">店鋪收藏<em></em></a>
+                    </li>
+               </ul>
+			</div>
+			<div class="body pb15 mh600 favor yahei">
+				<div class="collection-list-warp clearfix">
+					<ul class="shop-ul">
+						<li>
+							<div class="shop-left">
+								<div class="shop-logo">
+									<a href="merchants_store.php?merchant_id=16"><img src="/site/crossbbcg/pc/default/image/xc2.jpg"></a>
+								</div>
+								<div class="shop-name">
+									<a href="merchants_store.php?merchant_id=16" class="name">迪卡侬专卖店</a>
+				
+									<a id="IM" onclick="openWin(this)" href="javascript:;" ru_id="16" class="p-kefu">
+										<i class="iconfont icon-kefu"></i>
+									</a>
+				
+								</div>
+								<div class="dsc-store-item">
+									<div class="s-score">
+										<div class="xing-box">
+											<span class="act"><i class="iconfont icon-xingact"></i></span>
+											<span class="act"><i class="iconfont icon-xingact"></i></span>
+											<span class="act"><i class="iconfont icon-xingact"></i></span>
+											<span class=""><i class="iconfont icon-xingact"></i></span>
+											<span class=""><i class="iconfont icon-xingact"></i></span>
+											<em>4分</em>
+											<i class="iconfont icon-down"></i>
+										</div>
+										
+									</div>
+									<div class="s-score-info">
+										<div class="s-cover"></div>
+										<div class="g-s-parts">
+											
+											<div class="parts-item parts-goods">
+												<span class="col1">描述</span>
+												<span class="col2 ftx-02">5</span>
+												
+											</div>
+											<div class="parts-item parts-goods">
+												<span class="col1">服务</span>
+												<span class="col2 ftx-02">5</span>
+												
+											</div>
+											<div class="parts-item parts-goods">
+												<span class="col1">物流</span>
+												<span class="col2 ftx-01">5</span>
+												
+											</div>
+										</div>
+										<div class="tel">电话：123456789</div>
+									</div>
+								</div>
+								<div class="shop-btn">
+									<a id="IM" href="javascript:;" ru_id="16" class="sc-btn">联系客服</a>
+				
+									<a href="" class="sc-btn">进入店铺</a>
+								</div>
+								<div class="p-oper">
+									<a href="javascript:void(0)" target="_blank">取消关注</a>
+								</div>
+							</div>
+							
+						</li>
+						<li>
+							<div class="shop-left">
+								<div class="shop-logo">
+									<a href="merchants_store.php?merchant_id=16"><img src="/site/crossbbcg/pc/default/image/xc2.jpg"></a>
+								</div>
+								<div class="shop-name">
+									<a href="merchants_store.php?merchant_id=16" class="name">迪卡侬专卖店</a>
+				
+									<a id="IM" onclick="openWin(this)" href="javascript:;" ru_id="16" class="p-kefu">
+										<i class="iconfont icon-kefu"></i>
+									</a>
+				
+								</div>
+								<div class="dsc-store-item">
+									<div class="s-score">
+										<div class="xing-box">
+											<span class="act"><i class="iconfont icon-xingact"></i></span>
+											<span class="act"><i class="iconfont icon-xingact"></i></span>
+											<span class="act"><i class="iconfont icon-xingact"></i></span>
+											<span class=""><i class="iconfont icon-xingact"></i></span>
+											<span class=""><i class="iconfont icon-xingact"></i></span>
+											<em>4分</em>
+											<i class="iconfont icon-down"></i>
+										</div>
+										
+									</div>
+									<div class="s-score-info">
+										<div class="s-cover"></div>
+										<div class="g-s-parts">
+											
+											<div class="parts-item parts-goods">
+												<span class="col1">描述</span>
+												<span class="col2 ftx-02">5</span>
+												
+											</div>
+											<div class="parts-item parts-goods">
+												<span class="col1">服务</span>
+												<span class="col2 ftx-02">5</span>
+												
+											</div>
+											<div class="parts-item parts-goods">
+												<span class="col1">物流</span>
+												<span class="col2 ftx-01">5</span>
+												
+											</div>
+										</div>
+										<div class="tel">电话：123456789</div>
+									</div>
+								</div>
+								<div class="shop-btn">
+									<a id="IM" href="javascript:;" ru_id="16" class="sc-btn">联系客服</a>
+				
+									<a href="" class="sc-btn">进入店铺</a>
+								</div>
+								<div class="p-oper">
+									<a href="javascript:void(0)" target="_blank">取消关注</a>
+								</div>
+							</div>
+							
+						</li>
+						<li>
+							<div class="shop-left">
+								<div class="shop-logo">
+									<a href="merchants_store.php?merchant_id=16"><img src="/site/crossbbcg/pc/default/image/xc2.jpg"></a>
+								</div>
+								<div class="shop-name">
+									<a href="merchants_store.php?merchant_id=16" class="name">迪卡侬专卖店</a>
+				
+									<a id="IM" onclick="openWin(this)" href="javascript:;" ru_id="16" class="p-kefu">
+										<i class="iconfont icon-kefu"></i>
+									</a>
+				
+								</div>
+								<div class="dsc-store-item">
+									<div class="s-score">
+										<div class="xing-box">
+											<span class="act"><i class="iconfont icon-xingact"></i></span>
+											<span class="act"><i class="iconfont icon-xingact"></i></span>
+											<span class="act"><i class="iconfont icon-xingact"></i></span>
+											<span class=""><i class="iconfont icon-xingact"></i></span>
+											<span class=""><i class="iconfont icon-xingact"></i></span>
+											<em>4分</em>
+											<i class="iconfont icon-down"></i>
+										</div>
+										
+									</div>
+									<div class="s-score-info">
+										<div class="s-cover"></div>
+										<div class="g-s-parts">
+											
+											<div class="parts-item parts-goods">
+												<span class="col1">描述</span>
+												<span class="col2 ftx-02">5</span>
+												
+											</div>
+											<div class="parts-item parts-goods">
+												<span class="col1">服务</span>
+												<span class="col2 ftx-02">5</span>
+												
+											</div>
+											<div class="parts-item parts-goods">
+												<span class="col1">物流</span>
+												<span class="col2 ftx-01">5</span>
+												
+											</div>
+										</div>
+										<div class="tel">电话：123456789</div>
+									</div>
+								</div>
+								<div class="shop-btn">
+									<a id="IM" href="javascript:;" ru_id="16" class="sc-btn">联系客服</a>
+				
+									<a href="" class="sc-btn">进入店铺</a>
+								</div>
+								<div class="p-oper">
+									<a href="javascript:void(0)" target="_blank">取消关注</a>
+								</div>
+							</div>
+							
+						</li>
+						<li>
+							<div class="shop-left">
+								<div class="shop-logo">
+									<a href="merchants_store.php?merchant_id=16"><img src="/site/crossbbcg/pc/default/image/xc2.jpg"></a>
+								</div>
+								<div class="shop-name">
+									<a href="merchants_store.php?merchant_id=16" class="name">迪卡侬专卖店</a>
+				
+									<a id="IM" onclick="openWin(this)" href="javascript:;" ru_id="16" class="p-kefu">
+										<i class="iconfont icon-kefu"></i>
+									</a>
+				
+								</div>
+								<div class="dsc-store-item">
+									<div class="s-score">
+										<div class="xing-box">
+											<span class="act"><i class="iconfont icon-xingact"></i></span>
+											<span class="act"><i class="iconfont icon-xingact"></i></span>
+											<span class="act"><i class="iconfont icon-xingact"></i></span>
+											<span class=""><i class="iconfont icon-xingact"></i></span>
+											<span class=""><i class="iconfont icon-xingact"></i></span>
+											<em>4分</em>
+											<i class="iconfont icon-down"></i>
+										</div>
+										
+									</div>
+									<div class="s-score-info">
+										<div class="s-cover"></div>
+										<div class="g-s-parts">
+											
+											<div class="parts-item parts-goods">
+												<span class="col1">描述</span>
+												<span class="col2 ftx-02">5</span>
+												
+											</div>
+											<div class="parts-item parts-goods">
+												<span class="col1">服务</span>
+												<span class="col2 ftx-02">5</span>
+												
+											</div>
+											<div class="parts-item parts-goods">
+												<span class="col1">物流</span>
+												<span class="col2 ftx-01">5</span>
+												
+											</div>
+										</div>
+										<div class="tel">电话：123456789</div>
+									</div>
+								</div>
+								<div class="shop-btn">
+									<a id="IM" href="javascript:;" ru_id="16" class="sc-btn">联系客服</a>
+				
+									<a href="" class="sc-btn">进入店铺</a>
+								</div>
+								<div class="p-oper">
+									<a href="javascript:void(0)" target="_blank">取消关注</a>
+								</div>
+							</div>
+							
+						</li>
+						<li>
+							<div class="shop-left">
+								<div class="shop-logo">
+									<a href="merchants_store.php?merchant_id=16"><img src="/site/crossbbcg/pc/default/image/xc2.jpg"></a>
+								</div>
+								<div class="shop-name">
+									<a href="merchants_store.php?merchant_id=16" class="name">迪卡侬专卖店</a>
+				
+									<a id="IM" onclick="openWin(this)" href="javascript:;" ru_id="16" class="p-kefu">
+										<i class="iconfont icon-kefu"></i>
+									</a>
+				
+								</div>
+								<div class="dsc-store-item">
+									<div class="s-score">
+										<div class="xing-box">
+											<span class="act"><i class="iconfont icon-xingact"></i></span>
+											<span class="act"><i class="iconfont icon-xingact"></i></span>
+											<span class="act"><i class="iconfont icon-xingact"></i></span>
+											<span class=""><i class="iconfont icon-xingact"></i></span>
+											<span class=""><i class="iconfont icon-xingact"></i></span>
+											<em>4分</em>
+											<i class="iconfont icon-down"></i>
+										</div>
+										
+									</div>
+									<div class="s-score-info">
+										<div class="s-cover"></div>
+										<div class="g-s-parts">
+											
+											<div class="parts-item parts-goods">
+												<span class="col1">描述</span>
+												<span class="col2 ftx-02">5</span>
+												
+											</div>
+											<div class="parts-item parts-goods">
+												<span class="col1">服务</span>
+												<span class="col2 ftx-02">5</span>
+												
+											</div>
+											<div class="parts-item parts-goods">
+												<span class="col1">物流</span>
+												<span class="col2 ftx-01">5</span>
+												
+											</div>
+										</div>
+										<div class="tel">电话：123456789</div>
+									</div>
+								</div>
+								<div class="shop-btn">
+									<a id="IM" href="javascript:;" ru_id="16" class="sc-btn">联系客服</a>
+				
+									<a href="" class="sc-btn">进入店铺</a>
+								</div>
+								<div class="p-oper">
+									<a href="javascript:void(0)" target="_blank">取消关注</a>
+								</div>
+							</div>
+							
+						</li>
+						<li>
+							<div class="shop-left">
+								<div class="shop-logo">
+									<a href="merchants_store.php?merchant_id=16"><img src="/site/crossbbcg/pc/default/image/xc2.jpg"></a>
+								</div>
+								<div class="shop-name">
+									<a href="merchants_store.php?merchant_id=16" class="name">迪卡侬专卖店</a>
+				
+									<a id="IM" onclick="openWin(this)" href="javascript:;" ru_id="16" class="p-kefu">
+										<i class="iconfont icon-kefu"></i>
+									</a>
+				
+								</div>
+								<div class="dsc-store-item">
+									<div class="s-score">
+										<div class="xing-box">
+											<span class="act"><i class="iconfont icon-xingact"></i></span>
+											<span class="act"><i class="iconfont icon-xingact"></i></span>
+											<span class="act"><i class="iconfont icon-xingact"></i></span>
+											<span class=""><i class="iconfont icon-xingact"></i></span>
+											<span class=""><i class="iconfont icon-xingact"></i></span>
+											<em>4分</em>
+											<i class="iconfont icon-down"></i>
+										</div>
+										
+									</div>
+									<div class="s-score-info">
+										<div class="s-cover"></div>
+										<div class="g-s-parts">
+											
+											<div class="parts-item parts-goods">
+												<span class="col1">描述</span>
+												<span class="col2 ftx-02">5</span>
+												
+											</div>
+											<div class="parts-item parts-goods">
+												<span class="col1">服务</span>
+												<span class="col2 ftx-02">5</span>
+												
+											</div>
+											<div class="parts-item parts-goods">
+												<span class="col1">物流</span>
+												<span class="col2 ftx-01">5</span>
+												
+											</div>
+										</div>
+										<div class="tel">电话：123456789</div>
+									</div>
+								</div>
+								<div class="shop-btn">
+									<a id="IM" href="javascript:;" ru_id="16" class="sc-btn">联系客服</a>
+				
+									<a href="" class="sc-btn">进入店铺</a>
+								</div>
+								<div class="p-oper">
+									<a href="javascript:void(0)" target="_blank">取消关注</a>
+								</div>
+							</div>
+							
+						</li>
+						<li>
+							<div class="shop-left">
+								<div class="shop-logo">
+									<a href="merchants_store.php?merchant_id=16"><img src="/site/crossbbcg/pc/default/image/xc2.jpg"></a>
+								</div>
+								<div class="shop-name">
+									<a href="merchants_store.php?merchant_id=16" class="name">迪卡侬专卖店</a>
+				
+									<a id="IM" onclick="openWin(this)" href="javascript:;" ru_id="16" class="p-kefu">
+										<i class="iconfont icon-kefu"></i>
+									</a>
+				
+								</div>
+								<div class="dsc-store-item">
+									<div class="s-score">
+										<div class="xing-box">
+											<span class="act"><i class="iconfont icon-xingact"></i></span>
+											<span class="act"><i class="iconfont icon-xingact"></i></span>
+											<span class="act"><i class="iconfont icon-xingact"></i></span>
+											<span class=""><i class="iconfont icon-xingact"></i></span>
+											<span class=""><i class="iconfont icon-xingact"></i></span>
+											<em>4分</em>
+											<i class="iconfont icon-down"></i>
+										</div>
+										
+									</div>
+									<div class="s-score-info">
+										<div class="s-cover"></div>
+										<div class="g-s-parts">
+											
+											<div class="parts-item parts-goods">
+												<span class="col1">描述</span>
+												<span class="col2 ftx-02">5</span>
+												
+											</div>
+											<div class="parts-item parts-goods">
+												<span class="col1">服务</span>
+												<span class="col2 ftx-02">5</span>
+												
+											</div>
+											<div class="parts-item parts-goods">
+												<span class="col1">物流</span>
+												<span class="col2 ftx-01">5</span>
+												
+											</div>
+										</div>
+										<div class="tel">电话：123456789</div>
+									</div>
+								</div>
+								<div class="shop-btn">
+									<a id="IM" href="javascript:;" ru_id="16" class="sc-btn">联系客服</a>
+				
+									<a href="" class="sc-btn">进入店铺</a>
+								</div>
+								<div class="p-oper">
+									<a href="javascript:void(0)" target="_blank">取消关注</a>
+								</div>
+							</div>
+							
+						</li>
+						<li>
+							<div class="shop-left">
+								<div class="shop-logo">
+									<a href="merchants_store.php?merchant_id=16"><img src="/site/crossbbcg/pc/default/image/xc2.jpg"></a>
+								</div>
+								<div class="shop-name">
+									<a href="merchants_store.php?merchant_id=16" class="name">迪卡侬专卖店</a>
+				
+									<a id="IM" onclick="openWin(this)" href="javascript:;" ru_id="16" class="p-kefu">
+										<i class="iconfont icon-kefu"></i>
+									</a>
+				
+								</div>
+								<div class="dsc-store-item">
+									<div class="s-score">
+										<div class="xing-box">
+											<span class="act"><i class="iconfont icon-xingact"></i></span>
+											<span class="act"><i class="iconfont icon-xingact"></i></span>
+											<span class="act"><i class="iconfont icon-xingact"></i></span>
+											<span class=""><i class="iconfont icon-xingact"></i></span>
+											<span class=""><i class="iconfont icon-xingact"></i></span>
+											<em>4分</em>
+											<i class="iconfont icon-down"></i>
+										</div>
+										
+									</div>
+									<div class="s-score-info">
+										<div class="s-cover"></div>
+										<div class="g-s-parts">
+											
+											<div class="parts-item parts-goods">
+												<span class="col1">描述</span>
+												<span class="col2 ftx-02">5</span>
+												
+											</div>
+											<div class="parts-item parts-goods">
+												<span class="col1">服务</span>
+												<span class="col2 ftx-02">5</span>
+												
+											</div>
+											<div class="parts-item parts-goods">
+												<span class="col1">物流</span>
+												<span class="col2 ftx-01">5</span>
+												
+											</div>
+										</div>
+										<div class="tel">电话：123456789</div>
+									</div>
+								</div>
+								<div class="shop-btn">
+									<a id="IM" href="javascript:;" ru_id="16" class="sc-btn">联系客服</a>
+				
+									<a href="" class="sc-btn">进入店铺</a>
+								</div>
+								<div class="p-oper">
+									<a href="javascript:void(0)" target="_blank">取消关注</a>
+								</div>
+							</div>
+							
+						</li>
+						<li>
+							<div class="shop-left">
+								<div class="shop-logo">
+									<a href="merchants_store.php?merchant_id=16"><img src="/site/crossbbcg/pc/default/image/xc2.jpg"></a>
+								</div>
+								<div class="shop-name">
+									<a href="merchants_store.php?merchant_id=16" class="name">迪卡侬专卖店</a>
+				
+									<a id="IM" onclick="openWin(this)" href="javascript:;" ru_id="16" class="p-kefu">
+										<i class="iconfont icon-kefu"></i>
+									</a>
+				
+								</div>
+								<div class="dsc-store-item">
+									<div class="s-score">
+										<div class="xing-box">
+											<span class="act"><i class="iconfont icon-xingact"></i></span>
+											<span class="act"><i class="iconfont icon-xingact"></i></span>
+											<span class="act"><i class="iconfont icon-xingact"></i></span>
+											<span class=""><i class="iconfont icon-xingact"></i></span>
+											<span class=""><i class="iconfont icon-xingact"></i></span>
+											<em>4分</em>
+											<i class="iconfont icon-down"></i>
+										</div>
+										
+									</div>
+									<div class="s-score-info">
+										<div class="s-cover"></div>
+										<div class="g-s-parts">
+											
+											<div class="parts-item parts-goods">
+												<span class="col1">描述</span>
+												<span class="col2 ftx-02">5</span>
+												
+											</div>
+											<div class="parts-item parts-goods">
+												<span class="col1">服务</span>
+												<span class="col2 ftx-02">5</span>
+												
+											</div>
+											<div class="parts-item parts-goods">
+												<span class="col1">物流</span>
+												<span class="col2 ftx-01">5</span>
+												
+											</div>
+										</div>
+										<div class="tel">电话：123456789</div>
+									</div>
+								</div>
+								<div class="shop-btn">
+									<a id="IM" href="javascript:;" ru_id="16" class="sc-btn">联系客服</a>
+				
+									<a href="" class="sc-btn">进入店铺</a>
+								</div>
+								<div class="p-oper">
+									<a href="javascript:void(0)" target="_blank">取消关注</a>
+								</div>
+							</div>
+							
+						</li>
+					</ul>
+				</div>
+            </div>
+		</div>
+	</div>
+</div>
+</div>
+{/block}
+
+<!--此板块为页面单独js加载-->
+{block name="footer_js"}
+<script type="text/javascript">
+    Private_Script = ['favor'];
+</script>
+{/block}

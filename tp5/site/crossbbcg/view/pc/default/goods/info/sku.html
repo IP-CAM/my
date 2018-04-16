@@ -1,0 +1,47 @@
+{foreach $arr_sku as $key => $arr}
+<div class="spec-lists" data-url="{:url('crossbbcg/goods/getSku')}" data-item_id="{$data.id}">
+	<dl class="clearfix spec-item">
+		<dt>{$key}：</dt>
+		<dd>
+			<ul class="clearfix">
+                <!--选中 selected-->
+                {foreach $arr as $arr2}
+                    <!--sku选项图片-->
+                    {if condition="$arr2['sku_image']!=''"}
+				<li class="spec-attr">
+                    {if condition="substr($arr2['sku_image'],0,4)=='http'"}
+					<a href="javascript:void(0);" data-rel="{$arr2['option_value_id']}" rel="{gallery: 'gal1', smallimage: '{$arr2['sku_image']}',largeimage:'{$arr2['sku_image']}'}">
+                        <img width="50" height="50" src="{$arr2['sku_image']}" title="{$arr2['name']}" alt="{$arr2['name']}"/>
+                    </a>
+                        {else /}
+                    <a href="javascript:void(0);" data-rel="{$arr2['option_value_id']}" rel="{gallery: 'gal1', smallimage: '{:resizeImage($arr2['sku_image'],'middle',true)}',largeimage:'{:resizeImage($arr2['sku_image'],'big',true)}'}">
+                        <img width="50" height="50" src="{:resizeImage($arr2['sku_image'],'small',true)}" title="{$arr2['name']}" alt="{$arr2['name']}"/>
+                    </a>
+                    </a>
+                    {/if}
+				</li>
+                    {else /}
+                <li class="spec-attr">
+                    <a href="javascript:void(0);" data-rel="{$arr2['option_value_id']}" data-image="{$arr2['sku_image']}"> <span>{$arr2['name']}</span> <i></i> </a>
+                </li>
+                    {/if}
+                {/foreach}
+			</ul>
+		</dd>
+	</dl>
+</div>
+{/foreach}
+
+<!--默认单个sku，无选项商品-->
+<input type="hidden" name="choose_sku" value="{$choose_sku}"/>
+<div class="js_language">
+    <span id="sku_error">{:lang('sku_quantity_error')}</span>
+    <span id="js_choose">{:lang('please_choose')}</span>
+    <span id="js_region_error">{:lang('js_region_error')}</span>
+    
+</div>
+<script type="text/javascript">
+	var skuAll ={$all_sku}
+</script>
+
+

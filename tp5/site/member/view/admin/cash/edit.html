@@ -1,0 +1,75 @@
+    {extend name="admin@public/poupbase"/}
+
+    <!-- CONTENT -->
+    {block name="body"}
+        <div id="content" style="margin:0px 10px 5px 8px;">
+            <div class="bloc" style="margin:10px 0px 0px;">
+                <div class="content">
+                    <form id="myform" method="post" style="margin-top:5px;" class="" >
+                        <fieldset>
+                            <legend>{$meta_title|default=''}</legend>
+                            
+                            <div class="row">
+                                <div style="float: left">
+                                    <span style="padding-left: 62px">{:lang('Without_to')}:</span>
+                                    <span style="padding-left: 20px">银行：{$data['bank_name']}&nbsp;&nbsp;户名：{$data['account_name']}&nbsp;&nbsp;账号：{$data['account_bank']}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <span style="padding-left: 50px">{:lang('Without_money')}:
+                                </span><span style="padding-left: 20px">{$data['money']}</span>
+                            </div>
+                            <div class="row">
+                                <span style="padding-left: 50px">{:lang('Without_time')}:</span>
+                                <span style="padding-left: 20px">{$data['create_time']}</span>
+                            </div>
+                            {if condition="$data['status'] neq 0"}
+                            <div class="row">
+                                <span style="padding-left: 50px">{:lang('Without_status')}:</span>
+                                {if condition="$data['status'] eq 0"}
+                                <span style="padding-left: 20px">{:lang('Panding')}</span>
+                                {elseif condition="$data['status'] eq 2" /}
+                                <span style="padding-left: 20px">{:lang('Fail')}</span>
+                                {else /}
+                                <span style="padding-left: 20px">{:lang('Successful')}</span>
+                                {/if}
+                                {if condition="$data['update_time'] neq ''"}
+                                <span style="padding-left: 30px">{:lang('Without_uptime')}:</span>
+                                <span style="padding-left: 30px">{$data['update_time']}</span>
+                                {/if}
+                            </div>
+                            {else /}
+                            <div class="row">
+                                <label for="pand_remark" class="w100">{:lang('Without_status')}:</label>
+                                <span style="padding-left: 15px">{:lang('Successful')}:</span>
+                                <input type="radio" name="status" value="1" checked>
+                                <span style="padding-left: 15px">{:lang('Fail')}:</span>
+                                <input type="radio" name="status" value="2" >
+                            </div>
+                            {/if}
+                            <div class="row">
+                                <label for="pand_remark" class="w100">{:lang('Without_pand_remark')}:</label>
+                                <input id="pand_remark" type="text" value="{$data['pand_remark']}" name="pand_remark" placeholder="" />
+                            </div>
+
+                            <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                                    <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('edit')}">
+                                    <input type="hidden" name="id" value="{$data.id}" />
+                                <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                            </div>
+                        </fieldset>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    {/block}
+    
+    {block name="js"}
+        <script type="text/javascript" src="__PUBLIC__/admin/js/autosize.js"></script>
+        <script>
+            $(function(){
+                $(".bset").buttonset();
+            })
+        </script>
+    {/block}

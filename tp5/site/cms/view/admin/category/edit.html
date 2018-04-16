@@ -1,0 +1,295 @@
+        {extend name="admin@public/poupbase" /}
+    
+        <!-- CONTENT -->
+        {block name="body"}
+            <div id="content" style="margin:0px 10px 5px 8px;">
+                <div class="bloc" style="margin:10px 0px 0px;">
+                    <div class="content">
+                        <form id="myform" method="post" style="margin-top:5px;" class="">
+                        <fieldset>
+                            <legend>{$meta_title|default=''}</legend>
+                            <div class="thumb_box">
+                                <div class="thumb">
+                                    <div class="upimg_tip">{:lang('Thumb')}</div>
+                                    <div class="upimg_cancel" title="{:lang('Cancel')}">x</div>
+                                    <img src="{notempty name='data.catimage'}{$data.catimage}{else /}__PUBLIC__/admin/images/upload-pic.gif{/notempty}" id="preview" class="upload" width="110" height="100" no-image="__PUBLIC__/admin/images/upload-pic.gif" title="{:lang('Upload img and file')}" url="{:url('img',array('m' => $controller_name,'input' => 'catimage','thumb' => 'preview'))}" data-upload="__UPLOADS__" />
+                                    <input type="hidden" name="catimage" id="catimage" value="{$data.catimage}" />
+                                </div>
+                            </div>
+        
+                            <div style="float:left; width:600px; padding-right:15px; border-right:1px dashed #000;">
+                                <div class="row">
+                                    <div style="float:left;">
+                                        <label for="pid" class="w100">{:lang('Uplevel')}: </label>
+                                        <select name="pid" id="pid" style="width:190px; margin-right: 16px;">
+                                            <option value="0">{:lang('Asfirstlevel')}</option>
+                                            {volist name="catlist" id="co"}
+                                            <option value="{$co.id}" {eq name="ACTION_NAME" value="edit"}{eq name="co.id" value="$data.pid"}selected{/eq} {else /} {eq name="co.id" value="$pid"}selected{/eq} {/eq}> {$co.title} {notempty name="co.name"}({$co.name}){/notempty}</option>
+                                            {/volist}
+                                        </select>
+                                    </div>
+        
+                                    <div style="float:left">
+                                        <label for="sort" class="w80" style="width: 105px;">{:lang('Sort')}: </label>
+                                        <input type="number" class="input litle" min="0" name="sort" maxlength="5" id="sort" value='{$data.sort|default=0}'>
+                                    </div>
+                                </div>
+        
+                                <div class="row">
+                                    <div style="float:left;">
+                                        <label for="title" class="w100">{:lang('Category title pc')}: <span class="required">*</span></label>
+                                        <input id="title" type="text" value="{$data.title}" name="title" class="input" style="width:180px;" placeholder="{:lang('Category title pc tip')}"  />
+                                        <a class="tooltip-icon" title="{:lang('Category title pc tip')}"></a>
+                                    </div>
+        
+                                    <div style="float:left;">
+                                        <label for="name" class="w80" style="width: 90px;">{:lang('Category_name')} : </label>
+                                        <input id="name" type="text" value="{$data.name}" name="name" class="onlyletter to_" placeholder="blog" style="width:100px;" />
+                                        <a class="tooltip-icon" title="{:lang('Category_name_tip')}"></a>
+                                    </div>
+                                </div>
+        
+                                <div class="row">
+                                    <div style="float:left;">
+                                        <label for="mobtitle" class="w100">{:lang('Category title mob')}: <span class="required">*</span></label>
+                                        <input id="mobtitle" type="text" value="{$data.mobtitle}" name="mobtitle" placeholder="{:lang('Category title mob tip')}" style="width:180px;" />
+                                        <a class="tooltip-icon" title="{:lang('Category title mob tip')}"></a>
+                                    </div>
+                                </div>
+        
+                                <div class="row">
+                                    <div style="float:left;">
+                                        <label for="class" class="w100">Class style: </label>
+                                        <input id="class" name="class" type="text" value="{$data.class}" style="width:180px;" placeholder=".ft12" />
+                                    </div>
+        
+                                    <div style="float:left:">
+                                        <label for="listrow" class="w100">{:lang('List_row')} :</label>
+                                        <input id="listrow" type="number" value="{$data.listrow|default=35}" name="listrow" class="input litle"/>
+                                        <a class="tooltip-icon" title="{:lang('List_row_tip')}"></a>
+                                    </div>
+                                </div>
+        
+                                <div class="row">
+                                    <div style="float:left;">
+                                        <label for="urlruleid" class="w100">{:lang('Url_rule')}: </label>
+                                        <select name="urlruleid" id="urlruleid" style="width: 190px;">
+                                            <option value="0">{:lang('Default url rule')}</option>
+                                            <option value="1">{:lang('Default')}</option>
+                                        </select>
+                                        <a class="tooltip-icon" title="{:lang('All_urlrules_tip')}"></a>
+                                    </div>
+                                    <div style="float:left;">
+                                        <label for="groupbys" class="w80" style="width: 92px;">{:lang('Group by')}: </label>
+                                        <select name="groupbys" id="groupbys" class="litle">
+                                            <option value="0"></option>
+                                            {for start="1" end="20"}
+                                                <option value="{$i}" {eq name="data.groupbys" value="$i"}selected{/eq}>{$i}</option>
+                                            {/for}
+                                        </select>
+                                        <a class="tooltip-icon" title="{:lang('Group by tip')}"></a>
+                                    </div>
+                                </div>
+        
+                                <div class="row">
+                                    <label for="seo_title" class="w100">{:lang('Seo Title')}:</label>
+                                    <input id="seo_title" type="text" value="{$data.seo_title}" name="seo_title" style="width:450px;" placeholder="{:lang('Seo Title')}" />
+                                </div>
+        
+                                <div class="row">
+                                    <label for="seo_keywords" class="w100">{:lang('Seo Keywords')}:</label>
+                                    <input id="seo_keywords" type="text" value="{$data.seo_keywords}" name="seo_keywords" style="width:450px;" placeholder="{:lang('Seo Keywords')}" />
+                                </div>
+        
+                                <div class="row">
+                                    <label for="seo_description" class="w100">{:lang('Seo Description')}:</label>
+                                    <textarea name="seo_description" id="seo_description" style="width:450px; height:35px;resize: none;" placeholder="{:lang('Seo Description')}">{$data.seo_description}</textarea>
+                                </div>
+        
+                                <div class="row">
+                                    <div style="float:left;" class="bset">
+                                        <label class="w100">{:lang('Is_first')} : </label>
+                                        <input name="listtype" type="radio" value="1" id="listtype_1" {eq name="data.listtype" value="1"}checked{/eq} />
+                                        <label for="listtype_1" class="w50l_r_0">{:lang('Yes')}</label>
+                
+                                        <input name="listtype" type="radio" value="0" id="listtype_0" {eq name="data.listtype" value="0"}checked{/eq} {eq name="ACTION_NAME" value="add"}checked{/eq} />
+                                        <label for="listtype_0" class="w50l_r_0">{:lang('No')}</label>
+                                    </div>
+                                </div>
+        
+                                <div class="row">
+                                    <div style="float:left;" id="template_lists_box">
+                                        <label class="w100">
+                                            {notempty name="data.listtype"}{:lang('First_tpl')}{else /}{:lang('List_tpl')}{/notempty}: </label>
+                                        <select name="template_lists" id="template_lists" class="sel_w170_m_r_26">
+                                            <option value="" >{:lang('Default')}</option>
+                                            <option value="1" >template_index.html</option>
+                                            <option value="0" >template_index.html</option>
+                                            <option value="0" >this_is_template_index.html</option>
+                                        </select>
+                                    </div>
+            
+                                    <div style="float:left;{notempty name="data.listtype"}display:none;{/notempty}" id="template_detail_box">
+                                        <label class="w70">{:lang('Detail_tpl')}: </label>
+                                        <select name="template_detail" id="template_detail" class="sel_w170_m_r_26">
+                                            <option value="" >{:lang('Default')}</option>
+                                            <option value="1" >template_lists.html</option>
+                                            <option value="0" >template_lists.html</option>
+                                            <option value="0" >this_is_template_lists.html</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div style="float:left; width:200px; padding-top:95px;">
+                                <div class="row">
+                                    <label for="pc_status" class="w80">{:lang('Pc_on')}</label>
+                                    <div class="slideBox">
+                                        {eq name="ACTION_NAME" value="edit"}
+                                        <input id="pc_status" value="1" type="checkbox" name="pc_status" {eq name="data['pc_status']" value="1"}checked{/eq}/>
+                                        {else /}
+                                        <input id="pc_status" value="1" type="checkbox" name="pc_status" checked />
+                                        {/eq}
+                                        <label for="pc_status"></label>
+                                    </div>
+                                    <div style="float:left; margin:1px 10px;">
+                                        <a class="tooltip-icon" title="{:lang('Pc_on_tip')}"></a>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <label for="status" class="w80">{:lang('Wap_on')}</label>
+                                    <div class="slideBox">
+                                        {eq name="ACTION_NAME" value="edit"}
+                                        <input id="status" value="1" type="checkbox" name="status" {eq name="data['status']" value="1"}checked{/eq}/>
+                                        {else /}
+                                        <input id="status" value="1" type="checkbox" name="status" checked />
+                                        {/eq}
+                                        <label for="status"></label>
+                                    </div>
+                                    <div style="float:left; margin:1px 10px;">
+                                        <a class="tooltip-icon" title="{:lang('Wap_on_tip')}"></a>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <label for="api_status" class="w80">{:lang('Api_on')}</label>
+                                    <div class="slideBox">
+                                        {eq name="ACTION_NAME" value="edit"}
+                                        <input id="api_status" value="1" type="checkbox" name="api_status" {eq name="data['api_status']" value="1"}checked{/eq}/>
+                                        {else /}
+                                        <input id="api_status" value="1" type="checkbox" name="api_status" checked />
+                                        {/eq}
+                                        <label for="api_status"></label>
+                                    </div>
+                                    <div style="float:left; margin:1px 10px;">
+                                        <a class="tooltip-icon" title="{:lang('Api_on_tip')}"></a>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <label for="allow_publish" class="w80">{:lang('Allow_publish')}</label>
+                                    <div class="slideBox">
+                                        {eq name="ACTION_NAME" value="edit"}
+                                        <input id="allow_publish" value="1" type="checkbox" name="allow_publish" {eq name="data['allow_publish']" value="1"}checked{/eq}/>
+                                        {else /}
+                                        <input id="allow_publish" value="1" type="checkbox" name="allow_publish" checked />
+                                        {/eq}
+                                        <label for="allow_publish"></label>
+                                    </div>
+        
+                                    <div style="float:left; margin:1px 10px;">
+                                        <a class="tooltip-icon" title="{:lang('Allow_publish_tip')}"></a>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <label for="is_check" class="w80">{:lang('Is_check')}</label>
+                                    <div class="slideBox">
+                                        {eq name="ACTION_NAME" value="edit"}
+                                        <input id="is_check" value="1" type="checkbox" name="is_check" {eq name="data['is_check']" value="1"}checked{/eq} />
+                                        {else /}
+                                        <input id="is_check" value="1" type="checkbox" name="is_check" checked />
+                                        {/eq}
+                                        <label for="is_check"></label>
+                                    </div>
+                                    <div style="float:left; margin:1px 10px;">
+                                        <a class="tooltip-icon" title="{:lang('Is_check_tip')}"></a>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <label for="is_reply" class="w80">{:lang('Is_replay')}:</label>
+                                    <div class="slideBox">
+                                        {eq name="ACTION_NAME" value="edit"}
+                                        <input id="is_reply" value="1" type="checkbox" name="is_reply" {eq name="data['is_reply']" value="1"}checked{/eq} />
+                                        {else /}
+                                        <input id="is_reply" value="1" type="checkbox" name="is_reply" checked />
+                                        {/eq}
+                                        <label for="is_reply"></label>
+                                    </div>
+                                    <div style="float:left; margin:1px 10px;">
+                                        <a class="tooltip-icon" title="{:lang('Is_replay_tip')}"></a>
+                                    </div>
+                                </div>
+    
+                                <div class="row">
+                                    <label for="is_recom" class="w80">{:lang('Is_recom')}:</label>
+                                    <div class="slideBox">
+                                        {eq name="ACTION_NAME" value="edit"}
+                                        <input id="is_recom" value="1" type="checkbox" name="is_recom" {eq name="data['is_recom']" value="1"}checked{/eq} />
+                                        {else /}
+                                        <input id="is_recom" value="1" type="checkbox" name="is_recom" />
+                                        {/eq}
+                                        <label for="is_recom"></label>
+                                    </div>
+                                </div>
+        
+                                <div class="row">
+                                    <label for="langid" class="w80">{:lang('Global cat')}:</label>
+                                    <div class="slideBox">
+                                        <input id="langid" value="{php}echo LANG{/php}" type="checkbox" name="langid" {eq name="ACTION_NAME" value="edit"}{eq name="data['langid']" value=""}checked{/eq} {/eq} />
+                                        <label for="langid"></label>
+                                    </div>
+                                    <div style="float:left; margin:1px 10px;">
+                                        <a class="tooltip-icon" title="{:lang('Global cat tip')}"></a>
+                                    </div>
+                                </div>
+                                
+                            </div>
+        
+                            <div class="clear"></div>
+                            
+                            <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                                {eq name="$action_name" value="edit"}
+                                  <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('savedata')}" />
+                                  <input name="id" type="hidden"  value="{$data.id}" />
+                                {else /}
+                                  <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}" />
+                                {/eq}
+                                <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                            </div>
+                        </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+    
+    
+            <script>
+            $(function() {
+                    $(".bset").buttonset();
+    
+                    $(':input[name="listtype"]').click(function(){
+                        var val = $(this).val();
+                        if(val==0){
+                            $('#template_detail_box').show();
+                            $('#template_lists_box label').text("{:lang('List_tpl')}");
+                        }else{
+                            $('#template_lists_box label').text("{:lang('First_tpl')}");
+                            $('#template_detail_box').hide();
+                        }
+                    })
+            })
+            </script>
+        {/block}

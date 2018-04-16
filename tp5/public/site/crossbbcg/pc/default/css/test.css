@@ -1,0 +1,253 @@
+.my-account .order-table {
+    width: 100%;
+    font-family: Arial, \5b8b\4f53;
+    color: #333;
+}
+
+.my-account .order-summary {
+    line-height: 48px;
+    background: #f3f8fc;
+    font-family: \5fae\8f6f\96c5\9ed1;
+    color: #3288bb;
+}
+
+.my-account .order-status {
+    margin-right: 14px;
+}
+
+.my-account .order-status b {
+    font-weight: normal;
+    color: #f39;
+}
+
+.my-account .order-number {
+    margin-left: 11px;
+}
+
+.my-account .exchange-time {
+    margin-left: 30px;
+}
+
+.my-account .item-image,
+.my-account .item-name,
+.my-account .item-name,
+.my-account .item-amount,
+.my-account .item-price,
+.my-account .item-freight,
+.my-account .item-total-price,
+.my-account .item-links {
+    padding: 10px 0;
+    border-top: 1px solid #e6e6e6;
+    text-align: center;
+}
+
+.my-account .item-image {
+    width: 80px;
+    vertical-align: top;
+}
+
+.my-account .item-image img {
+    border: 1px solid #f1f1f1;
+}
+
+.my-account .item-name {
+    width: 187px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.my-account .item-name a,
+.my-account .item-name a:visited {
+    display: block;
+    width: 156px;
+    max-height: 38px;
+    line-height: 18px;
+    margin-top: -2px;
+    margin-left: 6px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #3288bb;
+}
+
+.my-account .item-name a:hover {
+    text-decoration: underline;
+}
+
+.my-account .item-name .item-options {
+    margin-left: 6px;
+    color: grey;
+}
+
+.my-account .item-name .item-options span {
+    display: block;
+}
+
+.my-account .item-amount {
+    width: 80px;
+    vertical-align: middle;
+}
+
+.my-account .item-price {
+    padding: 10px 20px;
+    vertical-align: middle;
+}
+
+.my-account .item-freight {
+    display: none;
+    width: 118px;
+    padding-top: 32px;
+    border-left: 1px solid #e6e6e6;
+    vertical-align: top;
+}
+
+.my-account .item-total-price {
+    width: 118px;
+    padding-top: 32px;
+    border-left: 1px solid #e6e6e6;
+    vertical-align: top;
+}
+
+.my-account .item-total-price .price {
+    font-family: Arial, \5fae\8f6f\96c5\9ed1;
+}
+
+.my-account .item-links {
+    width: 118px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    border-left: 1px solid #e6e6e6;
+    font-family: \5b8b\4f53;
+    vertical-align: top;
+}
+
+.my-account .view-detail {
+    color: #3288bb;
+}
+
+.my-account .view-detail:hover {
+    text-decoration: underline;
+    color: #3288bb;
+}
+
+.my-account .pay-button,
+.my-account .idv-button,
+.my-account .trace-button,
+.my-account .confirm-button {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    width: 90px;
+    height: 26px;
+    line-height: 26px;
+    margin: 3px 0;
+    border-radius: 2px;
+    background: #fff;
+    text-align: center;
+    text-decoration: none;
+}
+
+.my-account .pay-button,
+.my-account .idv-button {
+    background: #f44;
+    color: #fff;
+}
+
+.my-account .trace-button {
+    width: 88px;
+    height: 24px;
+    line-height: 24px;
+    border: 1px solid #e6e6e6;
+    background: #fff;
+    color: #666;
+}
+
+.my-account .confirm-button {
+    background: #44a9e2;
+    color: #fff;
+}
+
+.my-account .v-info {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    width: 90px;
+    line-height: 18px;
+    margin: 3px 0;
+    color: #6b0;
+}
+
+.my-account .go-post {
+    display: inline-block;
+    margin-top: 6px;
+    padding: 2px 6px;
+    border: 1px solid #d0a185;
+    border-radius: 5px;
+    background: #fced18;
+    color: #987154;
+    position: relative;
+}
+
+.my-account .go-post b,
+.my-account .go-post i {
+    display: block;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-bottom: 6px solid #fced18;
+    position: absolute;
+    top: -12px;
+    left: 42px;
+}
+
+.my-account .go-post b {
+    border-width: 7px;
+    border-bottom-color: #d0a185;
+    top: -14px;
+    left: 41px;
+}
+
+.my-account .v-info.fail {
+    width: auto;
+    padding-right: 18px;
+    background: url(../images/v4/shaidan_unpass.png) right center no-repeat;
+    color: #f33;
+    cursor: help;
+}
+
+.my-account .f-reason {
+    display: none;
+}
+
+.member-content {
+    width: 120px;
+    line-height: 18px;
+    padding: 6px 12px;
+    border: 1px solid #fac97a;
+    background: #ffffe5;
+    color: #666;
+    text-align: left;
+    position: absolute;
+    z-index: 10;
+}
+
+.member-content b,
+.member-content i {
+    display: block;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-left: 6px solid #ffffe5;
+    position: absolute;
+    top: 10px;
+    right: -12px;
+    z-index: 11;
+}
+
+.member-content b {
+    border-width: 7px;
+    border-left-color: #fac97a;
+    top: 9px;
+    right: -14px;
+    z-index: 11;
+}
+

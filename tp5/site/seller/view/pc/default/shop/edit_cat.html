@@ -1,0 +1,134 @@
+{extend name='common/poupbase'}
+{block name='css'}
+<style>
+    label{font-weight: 400;!important;}
+    .input-group{margin: 10px;}
+    .form-control {
+        display: block;
+        width: 100%;
+        height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;}
+</style>
+{/block}
+
+{block name='body'}
+<div class="row">
+    <form action="#" class="form-horizontal">
+        <div class="box" style="border: 0;min-height: 345px;margin-bottom: 0">
+            <div class="box-body" style="padding-right: 15px;padding-top: 35px">
+                <div class="clearfix">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="img" class="col-sm-3 control-label">一级分类</label>
+                            <div class="col-sm-6">
+                                <select name="" id="parent-category" class="form-control">
+                                    <option value="0">{:lang('pleace choose first category')}</option>
+                                    {foreach $arr_category as $k=>$v}
+                                    <option value="{$v.id}" {eq name="$data.cat_id" value="$v.id"}selected{/eq}>{$v.title}</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="url" class="col-sm-3 control-label">二级分类</label>
+                            <div class="col-sm-6">
+                                <select name="" id="child-category" class="form-control">
+                                    <option value="0">{:lang('pleace choose second category')}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="type" class="col-sm-3 control-label">三级分类</label>
+                            <div class="col-sm-6">
+                                <select name="goods_cat_id" id="grandchild-category" class="form-control">
+                                    <option value="0">{:lang('pleace choose three category')}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box-foot" style="text-align: center;padding-bottom: 10px">
+                {eq name='$action_name' value='edit'}
+                <input type="hidden" name="id" value="{$data.id}">
+                {/eq}
+                <input type="submit" value="{:lang('submit')}" url="{:url('')}" name="submit" class="btn btn-info" />
+            </div>
+        </div>
+    </form>
+</div>
+{/block}
+
+{block name='js'}
+<script>
+    $(function () {
+        {eq name='$action_name' value='edit'}
+        $("#parent-category").trigger('change');
+        {/eq}
+    });
+    $("#parent-category").on('change',function () {
+        var parentid = $(this).val();
+        if (!parentid) {
+            return false;
+        }
+        $.ajax({
+            url:"{:url('seller/goods/getcategories')}",
+            type:'post',
+            dataType:'json',
+            data:{
+                pid:parentid,
+                all:1
+            },
+            success:function (re) {
+                var _html = '';
+                $.each(re,function (i,e) {
+                    _html += "<option value='"+e.id+"'>"+e.title+"</option>"
+                });
+                $("#child-category").html(_html);
+                $('#child-category').trigger('change');
+                $("#child-category").show();
+            },
+            error:function () {
+                console.log("{:lang('service_buzy')}");
+            }
+        })
+    });
+    $("#child-category").on('change',function () {
+        var parentid = $(this).val();
+        if (!parentid) {return false;}
+        $.ajax({
+            url:"{:url('seller/goods/getcategories')}",
+            type:'post',
+            dataType:'json',
+            data:{
+                pid:parentid,
+                all:1
+            },
+            success:function (re) {
+                var _html = '';
+                $.each(re,function (i,e) {
+                    _html += "<option value='"+e.id+"'>"+e.title+"("+e.kickback+"%)</option>"
+                });
+                $("#grandchild-category").html(_html);
+                $('#grandchild-category').trigger('change');
+                $("#grandchild-category").show();
+            },
+            error:function () {
+                console.log("{:lang('service_buzy')}");
+            }
+        })
+    });
+</script>
+{/block}

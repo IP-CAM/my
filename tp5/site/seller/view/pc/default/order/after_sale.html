@@ -1,0 +1,220 @@
+{extend name='common/base'}
+
+{block name='css'}
+<link href="__PUBLIC__/{$css_path}/daterangepicker.css" rel="stylesheet">
+{/block}
+
+{block name="breadcrumb"}
+<li>{:lang('nav_order')}</li>
+<li class="active">{$meta_title|default=''}</li>
+{/block}
+
+{block name='body'}
+<section class="content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <div class="row">
+                        <form action="{:url('seller/order/after_sale')}">
+                            <div class="page-header-top">
+                                <a href="{:url('seller/order/after_sale')}" class="btn btn-flat bg-olive btn-sm"><i class="fa fa-feed"></i>{:lang('all')}</a>
+                                
+                                <div class="btn-group btn btn-flat" >
+                                    <button type="button" class="btn btn-primary etbtn">
+                                        {if condition="$status!==false"}
+                                        {:lang('after_status_'.$status)}
+                                        <input type="hidden" value="{$status}" name="status" />
+                                        {else /}
+                                        {:lang('after_status')}
+                                        {/if}
+                                    </button>
+                                    <button type="button" class="btn btn-primary etbtn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        <span class="caret"></span>
+                                        <span class="sr-only"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        {foreach $arr_status as $value}
+                                        <li><a href="{:url('seller/order/after_sale',array_merge($status_url,['status'=>$value]))}">{:lang('after_status_'.$value)}</a></li>
+                                        {/foreach}
+                                        <li class="divider"></li>
+                                        <li><a href="{:url('seller/order/after_sale',$status_url)}">{:lang('after_status')}</a></li>
+                                    </ul>
+                                </div>
+    
+                                <div class="btn-group btn btn-flat" style="padding-left: 0;">
+                                    <button type="button" class="btn btn-primary etbtn">
+                                        {if condition="$rtype!==false"}
+                                        {:lang('after_type_'.$rtype)}
+                                        <input type="hidden" value="{$rtype}" name="rtype" />
+                                        {else /}
+                                        {:lang('all_rtype')}
+                                        {/if}
+                                    </button>
+                                    <button type="button" class="btn btn-primary etbtn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        <span class="caret"></span>
+                                        <span class="sr-only"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        {foreach $arr_rtype as $value}
+                                        <li><a href="{:url('seller/order/after_sale',array_merge($rtype_url,['rtype'=>$value]))}">{:lang('after_type_'.$value)}</a></li>
+                                        {/foreach}
+                                        <li class="divider"></li>
+                                        <li><a href="{:url('seller/order/after_sale',$rtype_url)}">{:lang('all_rtype')}</a></li>
+                                    </ul>
+                                </div>
+    
+                                <div class="btn-group btn btn-flat" style="padding-left: 0;">
+                                    <button type="button" class="btn btn-primary etbtn">
+                                        {if condition="$platform_type"}
+                                        {$platform_type}
+                                        <input type="hidden" value="{$platform_type}" name="platform_type" />
+                                        {else /}
+                                        {:lang('all_platform')}
+                                        {/if}
+                                    </button>
+                                    <button type="button" class="btn btn-primary etbtn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        <span class="caret"></span>
+                                        <span class="sr-only"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        {foreach $arr_platform as $value}
+                                        <li><a href="{:url('seller/order/after_sale',array_merge($platform_type_url,['platform_type'=>$value]))}">{$value}</a></li>
+                                        {/foreach}
+                                        <li class="divider"></li>
+                                        <li><a href="{:url('seller/order/after_sale',$platform_type_url)}">{:lang('all_platform')}</a></li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="time" style="width: 220px; position: relative;display: inline-block;vertical-align: middle; margin-right: 6px">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        
+                                        <input type="text" class="form-control pull-left" id="reservation" name="time" placeholder="{:lang('choose_after_sale_time')}" value="{$time}" style="padding: 4px 12px; height: 30px">
+                                    </div>
+                                </div>
+                                
+                                <div style="position: relative;display: inline-block;vertical-align: middle; margin-right: 6px">
+                                    <div class="input-group input-group-sm" style="width:270px">
+                                        <input type="text" placeholder="{:lang('seller_order_search_tips')}" class="form-control" value="{$search_name}" name="search_name">
+                                        <div class="input-group-btn">
+                                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <table id="demo-foo-addrow" class="table table-bordered table-striped" data-page-size="10">
+                        <thead>
+                        <tr>
+                            <th>{:lang('order_sn')}</th>
+                            <th>{:lang('after_status')}</th>
+                            <th>{:lang('after_rtype')}</th>
+                            <th>{:lang('after_sale_in_reason')}</th>
+                            <th>{:lang('consignee')}</th>
+                            <th>{:lang('return_money')}</th>
+                            <th>{:lang('order_total_money')}</th>
+                            <th>{:lang('pay_source')}</th>
+                            <th>{:lang('apply_after_sale_time')}</th>
+                            <th class="text-center">{:lang('opreration')}</th>
+                        </tr>
+                        </thead>
+                        {notempty name="$list"}
+                        <tbody>
+                        {foreach $list as $v}
+                        <tr>
+                            <td>{$v.order_sn}</td>
+                            
+                            <td>
+                                {eq name="$v['status']" value="0"}
+                                <span class="text-red">
+                                    {:lang('after_status_'.$v.status)}
+                                </span>
+                                {else /}
+                                {:lang('after_status_'.$v.status)}
+                                {/eq}
+                            </td>
+                            
+                            <td>
+                                {:lang('after_type_'.$v.rtype)}
+                            </td>
+                            <td>{$v.return_reason}</td>
+                            
+                            <td><span data-original-title="{$v['getorder']['country']} {$v['getorder']['province']} {$v['getorder']['city']} {$v['getorder']['district']} {$v['getorder']['address']}" data-toggle="tooltip" data-placement='top'>{$v['getorder']['consignee']} &nbsp;&nbsp; {$v['getorder']['mobile']}</span></td>
+                            <td class="text-red">
+                                
+                                {$v['getorder']['symbol']}
+                                {$v['applyprice']}
+                                
+                            </td>
+                            
+                            <td>
+                                {$v['getorder']['symbol']}{$v['getorder']['order_amount']}
+                            </td>
+                            
+                            <td>
+                                {$v['getorder']['platform_type']}
+                            </td>
+                            
+                            <td>{$v.create_time}</td>
+                            <td class="actions">
+                                
+                                <a class="tooltip-link ajax-get f18" data-original-title="{:lang('action')}" data-toggle="tooltip" data-placement='top' data-width="900" data-height="700" data-showbar="1" data-title="{$v['getorder']['consignee']} - {$v['getorder']['order_sn']}" data-skin="skin-blue" href="{:url('after_sale_info',array('order_sn'=>$v.order_sn,'rec_id'=>$v.rec_id))}"><i class="fa fa-edit"></i></a>
+                                
+                                <a class="tooltip-link ajax-get f18" data-original-title="{:lang('View')}" data-toggle="tooltip" data-placement='top' data-width="900" data-height="700" data-showbar="1" data-title="{$v['getorder']['consignee']} - {$v.order_sn}" data-skin="skin-blue" href="{:url('info',array('order_sn'=>$v.order_sn))}"><i class="fa fa-eye"></i></a>
+                            
+                            </td>
+                        </tr>
+                        {/foreach}
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="9">
+                                <div class="text-right pagination" >
+                                    {$list->appends(input())->render()}
+                                </div>
+                                <span>&nbsp;{:lang('total')}&nbsp;&nbsp;{$total}</span>
+                            </td>
+                        </tr>
+                        </tfoot>
+                        {else /}
+                        <tbody>
+                            <tr>
+                                <td colspan="9" class="text-center">
+                                    {:lang('empty')}
+                                </td>
+                            </tr>
+                        </tbody>
+                        {/notempty}
+                        
+                        
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{/block}
+
+{block name='js'}
+<script src="__PUBLIC__/{$js_path}/moment.min.js"></script>
+<script src="__PUBLIC__/{$js_path}/daterangepicker.js"></script>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        //Date range picker
+        $('#reservation').daterangepicker({
+            autoUpdateInput: false
+        });
+
+
+    });
+</script>
+{/block}

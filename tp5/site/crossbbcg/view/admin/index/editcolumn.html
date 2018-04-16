@@ -1,0 +1,75 @@
+    {extend name="admin@public/poupbase"/}
+    
+    {block name="style"}
+    <style>
+        #ovh{padding: 0 !important;overflow-x: hidden;overflow-y: auto;position: relative;height: 360px;
+        }
+        #ovh::-webkit-scrollbar{width: 8px;background-color: #F5F5F5;}
+    
+        /*定义滚动条轨道 内阴影+圆角*/
+        #ovh::-webkit-scrollbar-track{-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); background-color: #F5F5F5;}
+    
+        /*定义滑块 内阴影+圆角*/
+        #ovh::-webkit-scrollbar-thumb {border-radius: 10px;-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3); background-color: #555;}
+
+        .grippy{
+            float: left;
+            display: inline-block;
+            padding: 0 5px 0 3px;
+            zoom: 1;
+            vertical-align: middle;
+            cursor: pointer;
+        }
+        
+    </style>
+    {/block}
+
+    {block name="body"}
+    <div id="content" style="margin:0px 10px 5px 8px;">
+        <div class="bloc" style="margin:10px 0px 0px;">
+            <div class="content">
+                <form id="myform" method="post" action="{:url()}" style="height: 415px; margin:0 !important;" class="">
+                    <fieldset>
+                        <legend>{:lang('Showlum')}</legend>
+                        <!-- Multiple Checkboxes -->
+                        <div id="ovh">
+                        {volist name="column" id="co"}
+                            <div style="height: 17px; line-height: 17px; display: block;margin: 0; clear: both;">
+                                <img src="__PUBLIC__/admin/images/grippy.gif" class="grippy" />
+                                <label class="checkbox" style="margin-top: 2px; line-height: 16px;">
+                                    <input type="checkbox" name="good_column[]" value="{$co}">
+                                    {php}
+                                    $arr_before = [];
+                                    $arr_after = [];
+                                    if(($has = strpos($co , '_'))!==false){
+                                    $arr_before = explode('_',$co);
+                                    foreach($arr_before as $arr){
+                                    $arr_after[] = ucfirst($arr);
+                                    }
+                                    echo lang('Goods_' . implode('_',$arr_after));
+                                    }else{
+                                    echo lang('Goods_'.ucfirst($co));
+                                    }
+                                    {/php}
+                                </label>
+                            </div>
+                        {/volist}
+                        </div>
+                    </fieldset>
+                
+                
+                    <div class="buttons-wrapper bw-bottom clear" style="margin:10px auto 2px; text-align:center; position:fixed; width:auto; height:50px; bottom:0px; right:30px;">
+                        <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('save')}" class="button"/>
+                    
+                        <input name="reset" class="button white" value="{:lang('Goods_Cancel')}" type="reset">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {/block}
+
+    {block name="js"}
+    
+    
+    {/block}

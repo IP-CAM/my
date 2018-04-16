@@ -1,0 +1,184 @@
+{extend name="admin@public/base" /}
+
+<!-- CONTENT -->
+{block name="body"}
+<div id="content">
+    <div class="breadcrumbs">
+        {:lang('Contents')} : &nbsp;&nbsp; {:lang('Areasys')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+    </div>
+    
+    <div class="bloc">
+        <div class="title">
+            <div class="tabs" id="navs">
+                {include file="admin@public/navs" /}
+            </div>
+        
+            {include file="admin@public/lang" /}
+        </div>
+        <div class="content">
+            
+            <dl class="gzzt clearfix mtb10">
+                <dd>
+                    <div class="boxr">
+                        {include file="admin@public/button" /}
+                    </div>
+                </dd>
+                
+                <dd>
+                    <div class="boxr ovh">
+                        <form style="margin-top:0;" class="search-form">
+                            <label for="name" style="margin:10px 10px 0 0; width:220px;">
+                                <input type="text" id="name" class="searchinput" name="name" placeholder="{:lang('Search_area')}" style="width: 190px;" />
+                            </label>
+                            <input type="button" name="search" id="sch-search" class="button white" value="{:lang('Search')}" url="{:url('', input('name'))}"/>
+                        </form>
+                    </div>
+                <dd>
+                
+                <dd>
+                    <div class="boxl fl">
+                        <span>{:lang('Count_all')}：<b>{$_total}</b></span>
+                    </div>
+                </dd>
+                <dd style="float: right !important;">
+                    <div class="boxl">
+                            <span>
+                                <a href="javascript:void(0)" data-url="{:url('create_region_json')}" class="create-json tooltip-link" title="{:lang('create_json')}">
+                                    
+                                </a>
+                            </span>
+                        
+                            <span>
+                                <a href="javascript:location.reload();" class="refresh tooltip-link" title="{:lang('Refresh')}">
+                                    <em>{:lang('Refresh')}</em>
+                                </a>
+                            </span>
+                        <span>
+                                <a href="javascript:void(0);" class="ajax-get setting tooltip-link colum" title="{:lang('Showlum')}" data-title="{:lang('Showlum')}">
+                                    <em>{:lang('Showlum')}</em>
+                                </a>
+                            </span>
+                    </div>
+                </dd>
+            </dl>
+            
+            {notempty name="list"}
+            
+            <table class="table">
+                <thead>
+                <tr>
+                    <th class="center" width="30"><input class="check-all" type="checkbox"></th>
+                    <th class="left" style="width:50px;"><a href="{:getUrlbyOrder('id')}">ID</a></th>
+                    <th class="left" style="width:40px;">{:lang('Banner Image')}</th>
+                    <th class="left" style="width:120px;" ><a href="{:getUrlbyOrder('name')}">{:lang('AreaName')}</a></th>
+                    <th class="center" style="width:70px;"><a href="{:getUrlbyOrder('code')}">{:lang('Code')}</a></th>
+                    <th class="center" style="width:70px;"><a href="{:getUrlbyOrder('')}">{:lang('Main_lang')}</a></th>
+                    <th class="center" style="width:70px;"><a href="{:getUrlbyOrder('')}">{:lang('Zipcode')}</a></th>
+                    <th class="center" style="width:70px;"><a href="{:getUrlbyOrder('')}">{:lang('Country code')}</a></th>
+                    <th class="center" style="width:70px;"><a href="{:getUrlbyOrder('')}">{:lang('Time_zone')}</a></th>
+                    <th class="center" style="width:100px;"><a href="{:getUrlbyOrder('')}">{:lang('lower area')}</a></th>
+                    <th class="center" style="width:50px;"><a href="{:getUrlbyOrder('')}">{:lang('Default')}</a></th>
+                    <th class="center" style="width:50px;"><a href="{:getUrlbyOrder('')}">{:lang('Status')}</a></th>
+                    <th class="center" style="width:40px;"><a href="{:getUrlbyOrder('sort')}">{:lang('Sort')}</a></th>
+                    <th class="actions" style="width:30px;">{:lang('Actions')}</th>
+                </tr>
+                </thead>
+                
+                <tbody>
+                {volist name="list" id="vo"}
+                <tr>
+                    <td class='center'>
+                        <input class='ids' type='checkbox' value='{$vo.id}' name='ids[]'>
+                    </td>
+                    <td class='left'>{$vo.id}</td>
+                    <td class='left'>
+                        {empty name="vo.banner_img"}
+                        <img width='20px' src='__PUBLIC__/admin/images/icons/no-image.png' alt="{:lang('No_image')}" />
+                        {else /}
+                        <img width='20px' src='{$vo.banner_img}' alt="{:lang($vo.name)}" />
+                        {/empty}
+                    </td>
+                    <td class='left'>
+                        <a class="tooltip-link ajax-get edit {empty name='vo.langid'}green{/empty}" {empty name='vo.langid'}title="{:lang('Global cat tip')}"{else /}title="{:lang('Edit_this_record')}"{/empty}  href="{:url('edit', ['ids'=>$vo['id']])}" data-title="{:lang('Edit Category')}" >
+                        {empty name="vo.zh_name"}{$vo['name']}{else /} {$vo['zh_name']} {/empty}
+                        </a>&nbsp;
+                        ( <a href="{:url('add_child', ['ids'=>$vo['id']])}" class="ajax-get edit zoom" data-title="{:lang('Addnew Category')}"> + </a> )
+                    </td>
+                    <td class='center'>{$vo.code}</td>
+                    <td class='center'>{$vo.main_lang}</td>
+                    <td class='center'>{$vo.zipcode}</td>
+                    <td class='center'>{$vo.countrycode}</td>
+                    <td class='center'>{$vo.timezoneid}</td>
+                    <td class='center'>
+                        [ <a  href="{:url('index', ['ids'=>$vo['id']])}">{:lang('lower area')}</a>]
+                    </td>
+                    
+                    
+                    
+                    <td class='center'>
+                        {eq name="vo.isdefault" value="1"}
+                        <a href="{:url('disable', ['pk'=>'isdefault','ids'=>$vo['id']])}" class="ajax-able" data-doing="{:lang('Not_Allow_publish')}" data-enable-span="{:lang('Yes')}" data-disable-span="{:lang('No')}">
+                            <span class="badge-green">{:lang('Yes')}</span>
+                        </a>
+                        {else /}
+                        <a href="{:url('enable', ['pk'=>'isdefault','ids'=>$vo['id']])}" class="ajax-able" data-doing="{:lang('Allow_publish')}" data-enable-span="{:lang('Yes')}" data-disable-span="{:lang('No')}">
+                            <span class="badge-gray">{:lang('No')}</span>
+                        </a>
+                        {/eq}
+                    </td>
+    
+                    <td class="center">
+                        {if condition="$vo['status'] eq 1"}
+                        <a href="{:url('disable',array('ids'=>$vo['id']))}" class="ajax-able" data-doing="{:lang('Disable')}">
+                            <img src="__PUBLIC__/admin/images/enabled.png" title="{:lang('Enable')}" class="tooltip-link" alt="{:lang('Enable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png" />
+                        </a>
+                        {else /}
+                        <a href="{:url('enable',array('ids'=>$vo['id']))}" class="ajax-able" data-doing="{:lang('Enable')}">
+                            <img src="__PUBLIC__/admin/images/disabled.png" title="{:lang('Disable')}" class="tooltip-link" alt="{:lang('Disable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png" />
+                        </a>
+                        {/if}
+                    </td>
+    
+                    <td class='center'>
+                        <input name='sorts[$id]' type='text' size='1' value='{$vo.sort}' class='center sorts'/>
+                    </td>
+                    <td class='actions'>
+                        <a class="tooltip-link ajax-get confirm" title="{:lang('Delete_this_record')}" data-layer="{:lang('Want_delete')}" href="{:url('deleteaction',array('ids'=>$vo['id']))}" data-title="{:lang('Delete')}">
+                            <img src="__PUBLIC__/admin/images/delete.png" alt="{:lang('Delete')}" />
+                        </a>
+                    </td>
+                </tr>
+                {/volist}
+                </tbody>
+            </table>
+            <div class="pagination-wrapper">
+                <div class="results-part"><span>{$_total}</span></div>
+                <div class="links-part">{$page}</div>
+            </div>
+            
+            {else/}
+            <div class="alert alert-warning">{:lang('No_record')}</div>
+            {/notempty}
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $('.create-json').click(function(){
+        var url = $(this).data('url');
+        $.ajax({
+            type: 'post',
+            url: url,
+            dataType: 'json',
+            success: function (json) {
+                if (json['code']) {
+                    layer.msg(json['msg'],{icon:1, time: 2000 ,shade: 0.3});
+                } else {
+                    layer.msg(json['msg'],{icon:2, time: 2000 ,shade: 0.3});
+                }
+
+            }
+        });
+    });
+</script>
+{/block}
+

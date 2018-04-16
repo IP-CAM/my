@@ -1,0 +1,187 @@
+{extend name="admin@public/poupbase" /}
+{block name="body"}
+<style>
+    .table{
+        border-left:1px solid #ccc;
+        border-top:1px solid #ccc;
+        margin-bottom: 8px;
+    }
+    .table td{
+        border-right:1px solid #ccc;
+        height: 39px;
+        text-align: center;
+        padding-right: 10px;
+    }
+    #content em, #content em a{
+        font-style: normal;
+        cursor: pointer;
+    }
+</style>
+<div id="content" style="margin:0px 10px 5px 8px;">
+    <div class="bloc">
+        <div class="content" style="min-height: 394px">
+            <div style="display:block; /*height: 420px;*/">
+                <div class="extbody">
+                    <form id="myform" method="post" style="margin-top:5px;" class="">
+                        <fieldset>
+                            <legend>{:lang('business_category_list')}</legend>
+                            <table class="table" id="cate_detail">
+                                <tr id="cate_info">
+                                    <td style="background-color: #F2F2F2;">{:lang('first_cate')}</td>
+                                    <td style="background-color: #F2F2F2;">{:lang('second_cate')}</td>
+                                    <td style="background-color: #F2F2F2;">{:lang('third_cate')}</td>
+                                    <td style="background-color: #F2F2F2;">{:lang('commission_ratio')}</td>
+                                    <td style="background-color: #F2F2F2;">{:lang('operation')}</td>
+                                </tr>
+                                {foreach $data.goods_cat as $v}
+                                <tr>
+                                    <td>{$v.first_title}</td>
+                                    <td>{$v.second_title}</td>
+                                    <td>{$v.third_title}</td>
+                                    <td>{$v.commission}%</td>
+                                    <td>{:lang('remove')}</td>
+                                </tr>
+                                {/foreach}
+                            </table>
+                        </fieldset>
+                        <fieldset>
+                            <legend>{:lang('add_business_category')}</legend>
+                            <label class="w100">{:lang('choose_category')}</label>
+                            <select datatype="*" style="width: 150px" id="parent-category">
+                                <option value="0">{:lang('pleace choose first category')}</option>
+                                {foreach $category as $v}
+                                <option value="{$v.id}">{$v.title}</option>
+                                {/foreach}
+                            </select>
+                            <select datatype="*" style="width: 150px" id="child-category">
+                                <option value="0">{:lang('pleace choose second category')}</option>
+                            </select>
+                            <select datatype="*" style="width: 150px" id="grandchild-category">
+                                <option value="0">{:lang('pleace choose three category')}</option>
+                            </select>
+                        </fieldset>
+                        <div class="buttons-wrapper bw-bottom" style="margin:20px auto 2px; text-align:center;">
+                            <input type="hidden" name="id" value="{$data.id}" />
+                            <input name="submit" value="{:lang('submit')}" type="submit"  url="{:url('save')}" />
+                            <input name="reset" class="button white" value="{:lang('cancel')}" type="reset">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $(".bset").buttonset();
+    });
+    //商品分类js
+    $("#parent-category").on('change',function () {
+        var parentid = $(this).val();
+        if (!parentid) {
+            return false;
+        }
+        $.ajax({
+            url:"{:url('seller/login/getcategories')}",
+            type:'post',
+            dataType:'json',
+            data:{
+                pid:parentid
+            },
+            success:function (re) {
+                var _html = '';
+                $.each(re,function (i,e) {
+                    _html += "<option value='"+e.id+"'>"+e.title+"</option>"
+                });
+                $("#child-category").html(_html);
+                $("#child-category").show();
+                $.ajax({
+                    url:"{:url('seller/login/getcategories')}",
+                    type:'post',
+                    dataType:'json',
+                    data:{
+                        pid:re[0].id
+                    },
+                    success:function (re) {
+                        var _html = '';
+                        $.each(re,function (i,e) {
+                            _html += "<option value='"+e.id+"'>"+e.title+"</option>"
+                        });
+                        $("#grandchild-category").html(_html);
+                        $('#grandchild-category').trigger('change');
+                        $("#grandchild-category").show();
+                    },
+                    error:function () {
+                        console.log("{:lang('service_buzy')}");
+                    }
+                })
+
+            },
+            error:function () {
+                console.log("{:lang('service_buzy')}");
+            }
+        })
+    });
+    $("#child-category").on('change',function () {
+        var parentid = $(this).val();
+        if (!parentid) {
+            return false;
+        }
+        $.ajax({
+            url:"{:url('seller/login/getcategories')}",
+            type:'post',
+            dataType:'json',
+            data:{
+                pid:parentid
+            },
+            success:function (re) {
+                var _html = '';
+                $.each(re,function (i,e) {
+                    _html += "<option value='"+e.id+"'>"+e.title+"</option>"
+                });
+                $("#grandchild-category").html(_html);
+                $('#grandchild-category').trigger('change');
+                $("#grandchild-category").show();
+            },
+            error:function () {
+                console.log("{:lang('service_buzy')}");
+            }
+        })
+    });
+    $('#grandchild-category').on('change',function () {
+        var cat_id = $(this).val();
+        var first_cate = $('#parent-category option[value='+$("#parent-category").val()+']').text();
+        var second_cate = $('#child-category option[value='+$("#child-category").val()+']').text();
+        //加载当前分类信息
+        $.ajax({
+            url:"{:url('seller/login/get_cate_info')}",
+            type:'post',
+            dataType:'json',
+            data:{
+                id:cat_id
+            },
+            success:function (re) {
+                if (re.code) {
+                    add_cate(first_cate,second_cate,re.data.title,re.data.kickback,cat_id);
+                }
+            }
+        })
+    });
+
+    function add_cate(first_cate,second_cate,third_info,commission,id) {
+        if ($('#cate_detail').find('.remove_'+id).length) {
+            $('.remove_'+id).parent().parent().remove();
+        }
+        var _html = '<tr><td>'+first_cate+'</td>'+
+            '<td>'+second_cate+'</td>'+
+            '<td>'+third_info+'</td>'+
+            '<td>'+commission+'%</td>'+
+            '<td><em class="remove_'+id+'" onclick="remove($(this))">删除</em></td>'+
+            '<input type="hidden" name="goods_cat[]" value="'+id+'"></tr>';
+        $('#cate_info').after(_html);
+    }
+    function remove(that) {
+        that.parent().parent().remove();
+    }
+</script>
+{/block}

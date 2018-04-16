@@ -1,0 +1,111 @@
+        {extend name="admin@public/poupbase" /}
+        
+        <!-- CONTENT -->
+        {block name="body"}
+        <div id="content" style="margin:0px 10px 5px 8px;">
+            <div class="bloc" style="margin:10px 0px 0px;">
+                <div class="content">
+                    <form id="myform" method="post" style="margin-top:5px;" class="">
+                        <fieldset>
+                            <legend>{$meta_title}</legend>
+                            <div class="row">
+                                <label for="name" class="w140">{:lang('Name')}: <span class="required">*</span></label>
+                                <input id="name" type="text" value="{$data.name}" name="name" class="input onlyletter"/>
+                            </div>
+                            <div class="row">
+                                <label for="title" class="w140">{:lang('Title')}: <span class="required">*</span></label>
+                                <input id="title" type="text" value="{$data.title}" name="title" class="input"
+                                       style="width:300px;"/>
+                            </div>
+                            <div class="row">
+                                <label for="remark" class="w140">{:lang('Remark')}: </label>
+                                <input id="remark" type="text" value="{$data.remark}" name="remark" class="input"
+                                       style="width:360px;"/>
+                            </div>
+                            
+                            <div class="row bset">
+                                <label for="group" class="w140">{:lang('Group')}: </label>
+                                <select id="group" name="group" class="w140c">
+                                    <option value="0"
+                                            {eq name="data.group" value="0"}selected{/eq}>{:lang('Nogroup')}</option>
+                                    {volist name="Think.config.CONFIG_GROUP_LIST" id="group"}
+                                    <option value="{$key}"
+                                            {eq name="data.group" value="$key"}selected{/eq}>{$group}</option>
+                                    {/volist}
+                                </select>
+                            </div>
+                            
+                            <div class="row bset">
+                                <label class="w140">{:lang('Type')}:<span class="required">*</span></label>
+                            
+                            </div>
+                            
+                            <div class="row">
+                                <label for="value" class="w140">{:lang('Value')}: </label>
+                                <textarea name="value" id="value" style="width:370px; height:70px;resize: none;">{$data.value}</textarea>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="extra" class="w140">{:lang('Extra')} : </label>
+                                <textarea name="extra" id="extra" style="width:370px; height:70px;resize: none;">{$data.extra}</textarea>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="status" class="w140">{:lang('Status')}:</label>
+                                <div class="slideBox">
+                                    {eq name="ACTION_NAME" value="edit"}
+                                    <input id="status" value="1" type="checkbox" name="status"
+                                           {eq name="data['status']" value="1"}checked{/eq}
+                                    />
+                                    {else/}
+                                    <input id="status" value="1" type="checkbox" name="status" checked/>
+                                    {/eq}
+                                    <label for="status"></label>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="langid" class="w140">{:lang('Global')}:</label>
+                                <div class="slideBox">
+                                    {eq name="ACTION_NAME" value="edit"}
+                                    <input id="langid" value="0" type="checkbox" name="langid"
+                                           {eq name="data['langid']" value="0"}checked{/eq}
+                                    />
+                                    {else/}
+                                    <input id="langid" value="0" type="checkbox" name="langid"/>
+                                    {/eq}
+                                    <label for="langid"></label>
+                                </div>
+                                <div style="float:left; margin:1px 10px;">
+                                    <a class="tooltip-icon" title="{:lang('Global_tip')}"></a>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="sort" class="w140">{:lang('Sort')}: </label>
+                                <input type="text" class="input litle" name="sort" maxlength="5" id="sort"
+                                       value='{$data.sort|default=0}'>
+                            </div>
+                            <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                                {eq name="ACTION_NAME" value="edit"}
+                                <input name="submit" value="{:lang('Update')}" type="submit" url="{:url()}">
+                                <input type="hidden" name="id" value="{$data.id}"/>
+                                {else/}
+                                <input name="submit" value="{:lang('Create')}" type="submit" url="{:url()}">
+                                {/eq}
+                                <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {/block}
+        
+        {block name="js"}
+        <script>
+            $(function () {
+                $(".bset").buttonset();
+            })
+        </script>
+        {/block}

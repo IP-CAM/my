@@ -1,0 +1,196 @@
+{extend name="admin@public/poupbase" /}
+
+<!-- CONTENT -->
+{block name="body"}
+<div id="content" style="margin:0px 10px 5px 8px;">
+    <div class="bloc" style="margin:10px 0px 0px;">
+        <div class="content">
+            <dl class="gzzt clearfix mtb10">
+                <!-- 多列显示 未完成-->
+                <dd>
+                    <div class="boxr ovh">
+                        <select name="cat_id" id="cat_id" style="width: 180px;height: 26px;margin: 10px 10px 0 0" class="go_search">
+                            <option value="0" url="{:url('',array_merge(input(),['cat_id'=>0]))}">{:lang('All_Cateogries')}</option>
+                            {foreach $cate_arr as $v}
+                            <option value="{$v.category_id}" {eq name=":input('cat_id')" value="$v.category_id"}seleted{/eq} url="{:url('',array_merge(input(),['cat_id'=>$v.category_id]))}">
+                                {$v.sort_name}
+                            </option>
+                            {/foreach}
+                        </select>
+                    </div>
+                </dd>
+                <script>
+                    $('.go_search').change(function(){
+                        var gotu_url = $(this).find('option:selected').attr('url');
+                        eval("self.location='"+gotu_url+"'");
+                    });
+                </script>
+                <dd>
+                    <div class="boxr ovh">
+                        <form style="margin-top:0;" class="search-form" id="search-form" method="get" action="">
+                            <select name="type" id="type" style="height:26px;float: left; margin:10px 10px 0 0;" class="go_search">
+                                <option value="name">{:lang('Goods_name')}</option>
+                                <option value="good_code">{:lang('Goods_sn')}</option>
+                            </select>
+                            <label for="search" style="margin:10px 10px 0 0; width:110px;">
+                                <input id="search" type="text" class="searchinput" name="key_words" value="{:input('key_words')}" style="width:80px;" placeholder="{:lang('key_words')}"/>
+                            </label>
+                            <input type="submit" id="goods-search" class="button white" value="{:lang('Search')}" />
+                        </form>
+                    </div>
+                </dd>
+            </dl>
+            {notempty name="goods_list"}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th style="width: 25px;"><input class="check-all" type="checkbox"></th>
+                    <th class="left">{:lang('Goods_name')}</th>
+                    <th class="left">{:lang('Thumb')}</th>
+                    <th class="left">{:lang('Goods_Category')}</th>
+                    <th class="left">{:lang('Selling_price')}</th>
+                    <th class="left">{:lang('Goods_Quantity')}</th>
+                    <th class="left" style="width:100px;">{:lang('Goods_sn')}</th>
+                </tr>
+                </thead>
+                
+                <tbody>
+                {volist name="goods_list" id="vo"}
+                <tr>
+                    <td class="center"><input class="ids" type="checkbox" value="{$vo['id']}" name="ids[]"></td>
+                    <td class="left" style="width: 180px">{$vo['name']}</td>
+                    <td class="left thumb" style="position:relative;">
+                        {if condition=" empty($vo['thumb']) "}
+                        <img src="__PUBLIC__/admin/images/icons/no-image.png" height="18" />
+                        {elseif condition="substr($vo['thumb'],0,4)=='http'"}
+                        <img src="{$vo.thumb}" height="18" />
+                        {else /}
+                        <img src="__UPLOADS__/{$vo.thumb}" height="18" alt="{$vo['name']}" />
+                        {/if}
+                        <div style="position:absolute;top:20px;left:20px;z-index:999;border:5px solid #eee;display:none;" class="show"></div>
+                    </td>
+                    <td class="left">
+                        {present name="$arr_category[$vo['cat_id']]"}
+                        {$arr_category[$vo['cat_id']]}
+                        {else /}
+                        {:lang('Null')}
+                        {/present}
+                    </td>
+                    
+                    <td class="left">{$vo['sale_price']}</td>
+                    
+                    <td class="left">
+                        {if $vo['quantity'] <= 7}
+                        <h5><span class="red bold"> {$vo['quantity']}</span></h5>
+                        {else /}
+                        {$vo['quantity']}
+                        {/if}
+                    </td>
+                    <td class="left">{$vo['good_code']}</td>
+                </tr>
+                {/volist}
+                </tbody>
+            </table>
+            <div class="pagination-wrapper">
+                <div class="results-part"><span>{$goods_list->total()}</span></div>
+                <div class="links-part">{$goods_list->appends(input())->render();}</div>
+            </div>
+            {else/}
+            <div class="alert alert-warning">{:lang('No_record')}</div>
+            {/notempty}
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        var goodsids = parent.$('input[name="goods_ids"]');
+        var vs = goodsids.val().split(',');
+        $(':checkbox[name="ids[]"]').each(function(){
+            if( $.inArray( this.value,vs )!=-1) this.checked=true;
+        })
+
+        $('.check-all').click(function(){
+            if (parent.$('#goods_list').hasClass('edit')){
+                layer.msg();
+                return false;
+            }
+            var status = $(this).is(':checked');
+            $(':checkbox[name="ids[]"]').each(function(){
+                var that = $(this);
+                var id = that.val();
+                var title = that.parent().parent().find('td').eq(1).text();
+                var dom = trainlist(id, title);
+                var vs = goodsids.val().split(',');
+                var i=$.inArray(id,vs);
+                parent.$("#tr"+id).remove();
+                if (status) {
+                    if (i == -1) {
+                        vs.push(id);
+                    }
+                    parent.$('#goodslist').after(dom);
+                    parent.$('#goods_list').show();
+                } else if(i != -1){
+                    vs.splice(i,1);
+                }
+                goodsids.val(vs);
+            });
+        });
+        $('.ids').click(function () {
+            var that = $(this);
+            var status = that.is(':checked');
+            var id = that.val();
+            var vs = goodsids.val().split(',');
+            parent.$("#tr"+id).remove();
+            var i=$.inArray(id,vs);
+            if (status) {
+                var title = that.parent().parent().find('td').eq(1).text();
+                var dom = trainlist(id, title);
+                if (i == -1) {
+                    vs.push(id);
+                }
+                parent.$('#goodslist').after(dom);
+                parent.$('#goods_list').show();
+            } else if(i != -1){
+                vs.splice(i,1);
+            }
+            goodsids.val(vs);
+        });
+        function trainlist(id,goodsname) {
+            var _html ='<tr id="tr'+id+'">';
+            _html +='<td class="goods_td">'+goodsname+'</td>';
+            _html +='<td class="goods_td goods_sort"><input type="number" min="0" name="sort_'+id+'" value="0" class="number_sort" style="border: 0;width: 88%;text-align: center"/></td>';
+            _html +='</tr>';
+            return _html;
+        }
+
+    });
+    function changeStatus(id,status){
+        $.ajax({
+            url:'{:url('changeStatus')}',
+            type:"post",
+            data:{'id':id,'status':status},
+            dataType:"json",
+            cache: false,
+            time:3000,
+            success:function(data){
+            },
+            error:function(){
+                that.html('{:lang("Ver_err")}');
+            }
+        });
+    }
+    // 图片浏览
+    $('.thumb img').mousemove(function () {
+        if($(this).attr('src').indexOf('no-image.png')<=0) {
+            var image = '<img src="' + $(this).attr('src') + '" height="200"/>';
+            $(this).parent().find('.show').html(image);
+            $(this).parent().find('.show').show();
+        }
+    }).mouseleave(function () {
+        $(this).parent().find('.show').hide();
+    });
+
+</script>
+{include file="admin@public/time_for_search" /}
+
+{/block}

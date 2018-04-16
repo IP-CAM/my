@@ -1,0 +1,122 @@
+{extend name="admin@public/base" /}
+
+<!-- CONTENT -->
+{block name="body"}
+<div id="content">
+    <div class="breadcrumbs">
+        {:lang('Seller')} : &nbsp;&nbsp; {:lang('Shopaccount')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+    </div>
+    
+    <div class="bloc">
+        <div class="title">
+            <div class="tabs" id="navs">
+                {include file="admin@public/navs" /}
+            </div>
+            
+            {include file="admin@public/lang" /}
+        </div>
+        <div class="content">
+            
+            <dl class="gzzt clearfix mtb10">
+                <dd>
+                    <div class="boxr">
+                        {include file="admin@public/button" /}
+                    </div>
+                </dd>
+                
+                <form style="margin-top:0;" class="search-form">
+                    <dd>
+                        <div class="boxr ovh">
+                            <select name="seller_id" >
+                                <option value="all">{:lang('ALL')}</option>
+                                {foreach $store_list as $v}
+                                <option value="{$v.seller_id}" {eq name="$v.seller_id" value=":input('seller_id')"}selected{/eq}>{$v.seller_name}</option>
+                                {/foreach}
+                            </select>
+                            <select name="cate_status" >
+                                <option value="all" >{:lang('status')}</option>
+                                <option value="-1" {eq name=":input('cate_status')" value="-1"}selected{/eq}>{:lang('checked_fail')}</option>
+                                <option value="0" {eq name=":input('cate_status')" value="0"}selected{/eq}>{:lang('store_checking')}</option>
+                                <option value="1" {eq name=":input('cate_status')" value="1"}selected{/eq}>{:lang('had_passed')}</option>
+                            </select>
+                        </div>
+                    </dd>
+                    <dd>
+                        <div class="boxr ovh">
+                            
+                            <input type="submit"  id="sch-search" class="button white" value="{:lang('Search')}"/>
+                        </div>
+                    </dd>
+                </form><dd style="float: right !important;">
+                <div class="boxl">
+                        <span>
+                            <a href="javascript:location.reload();" class="refresh tooltip-link" title="{:lang('Refresh')}">
+                                <em>{:lang('Refresh')}</em>
+                            </a>
+                        </span>
+                    <span>
+                            <a href="javascript:void(0);" class="ajax-get setting tooltip-link colum" title="{:lang('Showlum')}" data-title="{:lang('Showlum')}">
+                                <em>{:lang('Showlum')}</em>
+                            </a>
+                        </span>
+                </div>
+            </dd>
+            </dl>
+            
+            {notempty name="list"}
+            
+            <table class="table">
+                <thead>
+                <tr>
+                    <th class="center" width="30"><input class="check-all" type="checkbox"></th>
+                    <th class="left" ><a href="{:getUrlbyOrder('id')}">店铺名称</a></th>
+                    <th class="left">类目名称</th>
+                    <th class="left">状态</th>
+                    <th class="actions" style="width:50px;text-align: center">{:lang('Actions')}</th>
+                </tr>
+                </thead>
+                
+                <tbody>
+                {volist name="list" id="vo"}
+                {notempty name='vo'}
+                {foreach $vo.cat as $k=>$v}
+                <tr>
+                    <td class="center">
+                        <input class="ids" type="checkbox" value="{$vo['seller_id'].'-'.$v['id']}" name="ids[]">
+                    </td>
+                    <td class="left"><a href="{:url('seller/admin.index/edit',['ids'=>$vo.id])}" class="tooltip-link ajax-get " data-title="{:lang('edit_store_info')}" data-height="750" data-width="1080" data-showbar="1">{$vo['seller_name']}</a></td>
+                    <td class="left">{$v['sort_name']}</td>
+                    <td>
+                        {switch name='$vo["goods_cat"][$v.id]'}
+                        {case value='-1'}<span class="blue">{:lang('checked_fail')}</span>{/case}
+                        {case value='0'}<span class="red">{:lang('store_checking')}</span>{/case}
+                        {case value='1'}<span>{:lang('had_passed')}</span>{/case}
+                        {/switch}
+                    </td>
+                    <td class="actions" style="text-align: center">
+                        <a class="tooltip-link ajax-get confirm" title="{:lang('Pass')}" data-title="{:lang('Pass')}" href="{:url('cate_pass',array('ids'=>$vo['seller_id'].'-'.$v['id']))}"  data-showbar="1">
+                            <img src="__PUBLIC__/admin/images/enabled.png" alt="{:lang('Edit')}" />
+                        </a>
+                        <a class="tooltip-link ajax-get confirm" title="{:lang('Reject')}" data-title="{:lang('Reject')}" href="{:url('cate_fail',array('ids'=>$vo['seller_id'].'-'.$v['id']))}" data-height="450" data-width="750" data-showbar="1">
+                            <img src="__PUBLIC__/admin/images/uninstall.png" alt="{:lang('Edit')}" />
+                        </a>
+                    </td>
+                </tr>
+                {/foreach}
+                {/notempty}
+                {/volist}
+                </tbody>
+            </table>
+            <div class="pagination-wrapper">
+            
+            </div>
+            
+            {else/}
+            <div class="alert alert-warning">{:lang('No_record')}</div>
+            {/notempty}
+        </div>
+    </div>
+</div>
+{include file="admin@public/time_for_search" /}
+
+{/block}

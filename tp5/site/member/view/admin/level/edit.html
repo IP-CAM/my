@@ -1,0 +1,122 @@
+    {extend name="admin@public/poupbase" /}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content" style="margin:0px 10px 5px 8px;">
+        <div class="bloc" style="margin:10px 0px 0px;">
+            <div class="content">
+                <form id="myform" method="post" style="margin-top:5px;" class="">
+                    <fieldset>
+                        <legend>{$meta_title|default=''}</legend>
+                        <div class="row">
+                            <label for="tag" class="w140">{:lang('UserLevel_tag')}: <span class="required">*</span></label>
+                            <input id="tag" type="text" value="{$data.tag}" name="tag" class="input fu onlyletter w100l"
+                                   placeholder="V0" />
+                            <a class="tooltip-icon" title="{:lang('Langstr_name_tip')}"></a>
+                        </div>
+                        
+                        <div class="row">
+                            <label for="name" class="w140">{:lang('UserLevel_name')}: <span
+                                class="required">*</span></label>
+                            <input id="name" type="text" value="{$data.name}" name="name" class="input"
+                                   placeholder="{:lang('User level name pla')}"/>
+                            <a class="tooltip-icon" title="{:lang('Langstr_name_tip')}"></a>
+                        </div>
+                        
+                        <div class="row">
+                            <label for="alias" class="w140">{:lang('UserLevel_alias')}: <span
+                                class="required">*</span></label>
+                            <input id="alias" type="text" value="{$data.alias}" name="alias" class="input fu onlyletter"
+                                   placeholder="General"/>
+                            <a class="tooltip-icon" title="{:lang('Langstr_alias_tip')}"></a>
+                        </div>
+                        
+                        <div class="row">
+                            <label for="quota" class="w140">{:lang('Quota')}: <span class="required">*</span></label>
+                            <input id="quota" type="text" value="{$data.quota|default=0}" name="quota"
+                                   class="input w80l onlynumber cen"/>
+                            <a class="tooltip-icon" title="{:lang('Quota_tip')}"></a>
+                        </div>
+                        
+                        <div class="row">
+                            <label class="w140">{:lang('Empirical range')}: </label>
+                            <input type="number" value="{$data.minempirical}" name="minempirical"
+                                   class="input onlynumber tooltip-link" title="{:lang('Min empirical')}" style="width: 80px;" placeholder="0" /> ~ &nbsp;
+                            <input type="number" value="{$data.maxempirical}" name="maxempirical"
+                                   class="input onlynumber tooltip-link" title="{:lang('Max empirical')}" style="width: 80px;" placeholder="999999" />
+                        </div>
+    
+                        <div class="row">
+                            <label class="w140">{:lang('Point range')}: </label>
+                            <input type="number" value="{$data.minpoint}" name="minpoint"
+                                   class="input onlynumber tooltip-link" title="{:lang('Min point')}" style="width: 80px;" placeholder="0" /> ~ &nbsp;
+                            <input type="number" value="{$data.maxpoint}" name="maxpoint"
+                                   class="input onlynumber tooltip-link" title="{:lang('Max point')}" style="width: 80px;" placeholder="99999" />
+                        </div>
+    
+                        <div class="row">
+                            <label for="discount" class="w140">{:lang('Discount num')}: <span
+                                class="required">*</span></label>
+                            <input id="discount" type="text" value="{$data.discount|default=0}" name="discount"
+                                   class="input w50 onlynumber"/>% &nbsp;&nbsp;
+                            {:lang('Discount_tip')}
+                        </div>
+                        
+                        <div class="row">
+                            <label class="w140">{:lang('UserLevel_lang')}:</label>
+                            <div class="bset" style="margin-right: 20px;">
+                                <input name="langid" type="radio" value="{php}echo LANG{/php}" id="lang_1" {eq
+                                       name="data.langid" value="LANG" }checked{/eq} />
+                                <label for="lang_1" class="w80l_r_0">{:lang('Currlang')}</label>
+                                <input name="langid" type="radio" value="" id="lang_0" {empty name="data.langid" }checked{/empty}
+                                />
+                                <label for="lang_0" class="w80l_r_0">{:lang('Alllang')}</label>
+                            </div>
+                            
+                            <a class="tooltip-icon" style="display: inline-block; line-height: 3; margin-left: 15px;"
+                               title="{:lang('Langstr_lang_tip')}"></a>
+                        </div>
+                        
+                        <div class="row">
+                            <label for="mark" class="w140">{:lang('Level mark')}: </label>
+                            <input id="mark" type="text" value="{$data.mark|default=''}" name="mark" class="input"
+                                   style="width: 320px;"/>
+                        </div>
+                        
+                        <div class="row">
+                            <label for="status" class="w140">{:lang('Status')}:</label>
+                            <div class="slideBox">
+                                {eq name="ACTION_NAME" value="edit"}
+                                <input id="status" value="1" type="checkbox" name="status" {eq name="data['status']"
+                                       value="1" }checked{/eq} />
+                                {else /}
+                                <input id="status" value="1" type="checkbox" name="status" checked/>
+                                {/eq}
+                                <label for="status"></label>
+                            </div>
+                        </div>
+                        
+                        <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                            {eq name="ACTION_NAME" value="edit"}
+                            <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('savedata')}">
+                            <input type="hidden" name="id" value="{$data.id}"/>
+                            {else /}
+                            <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}">
+                            {/eq}
+                            <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    {/block}
+    
+    {block name="js"}
+    <!--<script type="text/javascript" src="__PUBLIC__/admin/js/autosize.js"></script>-->
+    <script>
+        $(function () {
+            $(".bset").buttonset();
+        })
+    </script>
+    {/block}

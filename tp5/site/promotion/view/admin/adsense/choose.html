@@ -1,0 +1,167 @@
+    {extend name="admin@public/poupbase"/}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+        <div id="content" style="margin:0px 10px 5px 8px;">
+            <div class="bloc" style="margin:10px 0px 0px;">
+                <style>
+                    .table2 { width:100%; text-align:left; }
+                    .table2 thead th{ border-bottom:1px solid #BDBDBD; line-height:26px;}
+                    .table2 thead tr th { font-weight:bold; color:#151515; font-size:13px; padding-bottom:2px; cursor:pointer; }
+                    .table2 thead tr th:first-child { padding-left:5px; }
+                    .table2 thead tr th a { color:#151515; }
+                    .table2 tbody tr td { height:30px; vertical-align:middle; border-bottom:1px solid #dadada; border-top:1px solid #ffffff; word-wrap:break-word; word-break:break-all; }
+                    .table2 tbody tr td input[type=checkbox] { margin:0px; vertical-align: -1px;}
+                    .table2 tbody tr td:first-child { padding-left:5px; }
+                    .table2 tbody tr:nth-child(2n+1) td { background-color:#f0f0f0; }
+                    .table2 tbody tr:hover td{ color:#353535; background-color:#ccc; border-bottom:1px solid #dadada; border-top:1px solid #fff; }
+                    .h36{ height:36px !important;}.lh36{ line-height:36px;}
+                    .labes{ cursor:pointer;}
+                </style>
+                <div class="content" style="height:430px;">
+                    
+                    
+                    <dl class="gzzt clearfix mtb10 h36" style="margin-top:0px;">
+                        
+                        <dd>
+                            <form action="" method="get" style="margin-top:0; ">
+                                <div class="boxr lh36">
+                                    <label style="width:auto;text-align:left;line-height:26px;padding-right:20px;padding-left:10px;">
+                                        {:lang('Search_key')}
+                                    </label>
+                                    <label for="search" style="margin:5px 10px 0 0; width:150px;">
+                                        <input type="text" id="search" name="search_key" placeholder="{:lang('Search_tip')}" class="searchinput" style="width:120px;"/>
+                                    </label>
+                                    <input type="submit" name="search" class="button white" value="{:lang('Search')}" />
+                                    <a href="javascript:location.reload();">{:lang('Refresh')}</a>
+                                    <input type="button" class="button" value="{:lang('Close_win')}" onClick="parent.layer.close(parent.layer.getFrameIndex(window.name));" style="margin-left:10px;" />
+                                </div>
+                            </form>
+                        <dd>
+                    </dl>
+                    
+                    {notempty name="list"}
+                        <table class="table2">
+                            <thead>
+                            <tr>
+                                <th class="center" width="30"><input class="check-all select-all" type="checkbox"  /></th>
+                                <th class="left" style="width:35px;">ID</th>
+                                <th class="left"><a href="{:getUrlbyOrder('title')}">{:lang('Title')}</a></th>
+                                <th class="left" style="width:70px;"><a href="{:getUrlbyOrder('type')}">{:lang('Selling_price')}</a></th>
+                                <th class="left" style="width:60px;"><a href="{:getUrlbyOrder('title')}">{:lang('Stock')}</a></th>
+                            </tr>
+                            </thead>
+                    
+                    <tbody>
+                            
+                            {volist name="list" id="vo"}
+                                <tr class="labes">
+                                    <td class="center"><input class="ids" type="checkbox" value="{$vo['id']}" name="ids[]"></td>
+                                    <td class="left">{$vo['id']}</td>
+                                    <td class="left">{$vo['name']}</td>
+                                    <td class="left">{$vo['shop_price']}</td>
+                                    <td class="left">400</td>
+                                </tr>
+                            {/volist}
+                            </tbody>
+                        </table>
+                        {notempty name="_page"}
+                            <div class="pagination-wrapper" style=" margin-top:10px;">
+                                <div class="results-part"><span>{$_total}</span></div>
+                                <div class="links-part">{$page}</div>
+                            </div>
+                        {/notempty}
+                     {else/}
+                        <div class="alert alert-warning">{:lang('No_record')}</div>
+                    {/notempty}
+                </div>
+            </div>
+        </div>
+        <script>
+            $(function(){
+                var totalpage = parent.$('input[name="goods_id"]');  //父级页面对象
+                var parenttrainlist = parent.$('#goodslist');
+                $(".labes").click(function(){
+                    var that = $(this);
+                    var attr = that.find("input").attr("type");
+                    var value = that.find("input").val();
+                    var ischecked = that.find("input").is(':checked');
+                    var vs = totalpage.val().split(',');
+                    var id = that.find("input").val();
+                    var title = that.find("td").eq(2).text();
+                    var selling = that.find("td").eq(3).text();
+                    var stock = that.find("td").eq(4).text();
+                    //生成DOM元素
+                    var dom = trainlist(id, title, selling, stock);
+                    var edom;
+    
+                    if (attr == "checkbox")	{
+                        if(ischecked){
+                            that.find("input").prop({checked:false});
+                        }else{
+                            that.find("input").prop({checked:true});
+                        }
+                        var i=$.inArray(value,vs);
+    
+                        if(!ischecked){
+                            if(i==-1)vs.push(value) ;
+                            parent.$('#goodslist').append(dom);
+                        }else if(i!=-1){
+                            vs.splice(i,1);
+                            parent.$("#tr"+id).remove();
+                        }
+    
+                        vs[0]||vs.shift();
+                        totalpage.val(vs);
+                    }
+                    return false; //防止事件冒泡
+                });
+    
+                //把原来选中的补上
+                var oldVs = totalpage.val().split(',');
+                $(':checkbox[name="ids[]"]').each(function(){
+                    if( $.inArray( this.value,oldVs )!=-1) this.checked=true;
+                })
+    
+                $('.select-all').click(function(){
+                    $(':checkbox[name="ids[]"]').each(function(){
+                        var that = $(this);
+                        var id = that.val();
+                        var title = that.closest("tr").find("td").eq(2).text();
+                        var selling = that.closest("tr").find("td").eq(3).text();
+                        var stock = that.closest("tr").find("td").eq(4).text();
+                        var dom = trainlist(id, title, selling, stock);
+                        var vs=totalpage.val().split(',');
+                        var i=$.inArray(this.value,vs);
+    
+                        parent.$("#tr"+id).remove();
+    
+                        if(this.checked){
+                            if(i==-1)vs.push(this.value) ;
+                            parent.$('#goodslist').append(dom);
+                        }else if(i!=-1){
+                            vs.splice(i,1);
+                            parent.$("#tr"+id).remove();
+                        }
+                        vs[0]||vs.shift();
+                        totalpage.val(vs);
+                    })
+                })
+    
+                //向父元素添加选中的考题
+                function trainlist(id, title, selling, stock){
+    
+                    var str = "<li id='tr"+id+"'>"
+                        +"<input class='ids' type='checkbox' value='"+id+"' checked />"
+                        +"<span class='span_w250'>"+title+"</span>"
+                        +"<span class='span_w70 cen'><input class='small h18' name='timed_price[]'></span>"
+                        +"<span class='span_w90 cen'>"+selling+"</span>"
+                        +"<span class='span_w70 cen'>"+stock+"</span>"
+                        +"<span class='span_w50 rig'><a href='javascript:void(0);' class='del'> {:lang('Remove')} </a></span>"
+                        +"</li>";
+                    return str;
+                }
+    
+            })
+        </script>
+    {/block}

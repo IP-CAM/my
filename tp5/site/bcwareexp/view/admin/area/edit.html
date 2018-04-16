@@ -1,0 +1,173 @@
+{extend name="admin@public/poupbase"/}
+
+<!-- CONTENT -->
+{block name="body"}
+<div id="content" style="margin:0px 10px 5px 8px;">
+    <div class="bloc" style="margin:10px 0px 0px;">
+        <div class="content">
+            <form id="myform" method="post" style="margin-top:5px;" class="">
+                <fieldset>
+                    <legend>{$meta_title}</legend>
+                    <div class="thumb_box" style="right: 20px;">
+                        <div class="thumb">
+                            <div class="upimg_tip">{:lang('Thumb')}</div>
+                            <div class="upimg_cancel" title="{:lang('Cancel')}">x</div>
+                            <img src="{notempty name='data.banner_img'}{$data.banner_img}{else /}__PUBLIC__/admin/images/upload-pic.gif{/notempty}" id="preview" class="upload" width="80" height="70" no-image="__PUBLIC__/admin/images/upload-pic.gif" url="{:url('img',array('m' => $controller_name,'input' => 'banner_img','thumb' => 'preview'))}" data-upload="__UPLOADS__"/>
+                            <input type="hidden" name="banner_img" id="banner_img" value="{$data.banner_img}" />
+                        </div>
+                    </div>
+                    <div class="row" id="country_id">
+                        <label for="country" class="w100">{:lang('Uplevelstate')}: <span class="required">*</span></label>
+                        <select name="pid" id="country" style="width:130px; margin-right: 16px;">
+                            <option value="0">{:lang('Asfirststate')}</option>
+                            {volist name="levellist" id="co"}
+                            <option value="{$co.id}" {eq name="ACTION_NAME" value="edit" }{eq name="co.id"
+                                    value="$data['id']" } selected {/eq} {else /} {eq name="co.id" value="$id"}selected{/eq} {/eq}>{:lang($co.name)}
+                            </option>
+                            {/volist}
+                        </select>
+                    </div>
+    
+                    <div class="row">
+                        <label for="name" class="w100">{:lang('AreaName')}: <span class="required">*</span></label>
+                        <input type="text"  name="name" id="name" placeholder="China_state({:lang('China')})" value="{$data.name}">
+                    </div>
+    
+                    <div class="row">
+                        <label for="main_lang" class="w100">{:lang('Main_lang')}: <span
+                            class="required">*</span></label>
+                        <select id="main_lang"  style="width:220px;margin-right: 16px;" name="main_lang">
+                            {notempty name="langs"}
+                            {volist name="langs" id="lang"}
+                            <option  value="{$key}" {if condition="$key eq LANG " }selected{
+                            /if}>{$lang[0]} ( {$lang[1]} )</option>
+            
+                            {/volist}
+                            {else/}
+                            <option value="0">{:lang('No_record')}</option>
+                            {/notempty}
+                        </select>
+                    </div>
+                    
+                    <div class="row">
+                        <label for="timezoneid" class="w100">{:lang('Time_zone')}: <span
+                            class="required">*</span></label>
+                        <select name="timezoneid" id="timezoneid" style="width:380px;">
+                            {include file="admin@public/timezone" /}
+                        </select>
+                    </div>
+    
+                    <div class="row">
+                        <label for="code" class="w100">{:lang('Area code')}: <span
+                            class="required">*</span></label>
+                        <input type="text" style="width: 70px"  placeholder="110000" name="code" id="code"
+                               value="{$data.code}" maxlength="6">
+                        <a class="tooltip-icon" title="{:lang('Country_code_tip')}"></a>
+                    </div>
+    
+                    <div class="row">
+                        <div class="fl">
+                            <label for="zipcode" class="w80" style="width:105px;">{:lang('Zipcode')}: <span class="required">*</span></label>
+                            <input type="text" class="input onlynumber" name="zipcode" id="zipcode"
+                               value="{$data.zipcode}" maxlength="5" style="width:70px;">
+                        </div>
+    
+                        <div class="fl">
+                            <label for="countrycode" class="w140">{:lang('Country code')}: </label>
+                            <input type="text" class="input onlynumber" name="countrycode" id="countrycode"
+                                   value="{$data.countrycode}" style="width:60px;">
+                        </div>
+                    </div>
+    
+                    <div class="row">
+                        <label for="sort" class="w100">{:lang('Sort')}: </label>
+                        <input type="number" class="input litle" name="sort" maxlength="5" id="sort"
+                               value='{$data.sort|default=0}'/>
+                    </div>
+    
+                    <div class="row">
+                        <div class="fl">
+                            <label for="status" class="w100">{:lang('Status')}:</label>
+                            <div class="slideBox">
+                                {eq name="ACTION_NAME" value="edit"}
+                                <input id="status" value="1" type="checkbox" name="status" {eq name="data['status']"
+                                       value="1" }checked{/eq} />
+                                {else /}
+                                <input id="status" value="1" type="checkbox" name="status" checked/>
+                                {/eq}
+                                <label for="status"></label>
+                            </div>
+                        </div>
+    
+                        <div class="fl">
+                            <label for="isdefault" class="w100">{:lang('Default')}:</label>
+                            <div class="slideBox">
+                                {eq name="ACTION_NAME" value="edit"}
+                                <input id="isdefault" value="1" type="checkbox" name="isdefault" {eq
+                                       name="data['isdefault']" value="1" }checked{/eq}/>
+                                {else /}
+                                <input id="isdefault" value="1" type="checkbox" name="isdefault" checked/>
+                                {/eq}
+                                <label for="isdefault"></label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                        {eq name="ACTION_NAME" value="edit"}
+                        <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('savedata')}">
+                        <input name="id" type="hidden" value="{$data.id}"/>
+                        {else /}
+                        <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}">
+                        {/eq}
+                        <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="js"}
+<script>
+    $(function () {
+        function add_attr(attr) {
+            
+            return _html;
+        }
+
+        $('#country_id').change(function () {
+            if ($(this).val() == 0) {
+                return false;
+            } else {
+                var country_id = $(this).val();
+                $.post("{:url('add')}", {'country_id': country_id}, function (msg) {
+                    //请求成功
+                    if (msg.code == '1') {
+                        if ($('#attr').html()) {
+                            $('#attr').html(add_attr(msg.data));
+                        } else {
+                            $('#type').append(add_attr(msg.data));
+                        }
+
+                        return true;
+                    }
+                });
+            }
+        })
+    });
+</script>
+
+<script charset="utf-8" src="__STATIC__/jquery-citys/jquery.citys.js"></script>
+<script type="text/javascript">
+    $('#demo2').citys({
+        required:false,
+        nodata:'disabled',
+        onChange:function(data){
+            var text = data['direct']?'(直辖市)':'';
+            $('#place').text('当前选中地区：'+data['province']+text+' '+data['city']+' '+data['area']);
+        }
+    });
+</script>
+{/block}

@@ -1,0 +1,533 @@
+{extend name="shop/base" /} {block name="body"}
+<div class="ly-Allwrap clearfix">
+	<div class="shop-info-box">
+		<div class="shop-info">
+			<div class="shop-name">{$store_info.seller_name}</div>
+			<div class="shop-score">
+				<div class="item">
+					<span>评 分</span>
+					<em>{$store_info.shop_grade}</em>
+				</div>
+			</div>
+			<div class="right">
+				<a href="">收藏店铺 <i class="iconfont icon-guanzhu"></i></a>
+				<a href="">联系客服 <i class="iconfont icon-kefu"></i></a>
+			</div>
+		</div>
+	</div>
+
+	<div class="n">
+		<div class="ly-flash">
+			<!--请参考index.js 参数设置 此处为全屏轮播配置项 , 可覆盖默认配置项 data-carouFredSel(必须)  为加载标识  data-type(必须) 轮播类型full 为全屏-->
+			<div class="slide-full" data-type="full" data-carouFredSel='{
+				auto:{
+					autoplay:true,
+					pauseDuration:5000,
+				},
+				direction:"left",
+				scroll:{
+					item:1,
+					easing:"swing"
+				}
+					}'>
+				<div class="prev" id="prev"></div>
+				<div class="next" id="next"></div>
+				<ol class="slide-content clearfix">
+					<li class="slide-item">
+						<a href="#"> <img src="__PUBLIC__/{$module_path}ad/shop_1.jpg" /> </a>
+						<a href="#"> <img src="__PUBLIC__/crossbbcg/pc/default/ad/shop_1.jpg" /> </a>
+					</li>
+					<li class="slide-item" >
+						<a href="#"> <img src="__PUBLIC__/{$module_path}ad/shop_2.jpg" /> </a>
+					</li>
+				</ol>
+				<div class="slide-page">
+					<span class="selected">●</span>
+					<span class="">●</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="shop-index-goods">
+	<dl class="goods-ly-list">
+		<dt class="ly-title">
+            <i class="line-left"></i>
+            <a href="https://www.hncgo.com/country.html?id=1" target="_blank">掌柜推荐</a>
+            <i class="line-right"></i>
+        </dt>
+
+		<dd>
+
+			<ul class="goods-list clearfix">
+				<li class="goods-item">
+				
+					<div class="item">
+						
+						<div class="goods-pic">
+							<a target="_blank" href="#"><img  class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__PUBLIC__/{$module_path}ad/g1.jpg" alt=""></a>
+						</div>
+						<div class="goods-info">
+							<h6 class="goods-name">
+                                <a href="#" target="_blank" title=" 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货"> 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货</a>
+                            </h6>
+							<ul class="clearfix">
+								<li class="price">
+									<i>239.000</i>
+								</li>
+							</ul>
+							<div class="buy">
+								<a href="#" title="">立即购买</a>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li class="goods-item">
+				
+					<div class="item">
+						
+						<div class="goods-pic">
+							<a target="_blank" href="#"><img  class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__PUBLIC__/{$module_path}ad/g1.jpg" alt=""></a>
+
+						</div>
+						<div class="goods-info">
+							<h6 class="goods-name">
+                                <a href="#" target="_blank" title=" 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货"> 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货</a>
+                            </h6>
+							<ul class="clearfix">
+								<li class="price">
+									<i>239.000</i>
+								</li>
+							</ul>
+							<div class="buy">
+								<a href="#" title="">立即购买</a>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li class="goods-item">
+				
+					<div class="item">
+						
+						<div class="goods-pic">
+							<a target="_blank" href="#"><img  class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__PUBLIC__/{$module_path}ad/g1.jpg" alt=""></a>
+
+						</div>
+						<div class="goods-info">
+							<h6 class="goods-name">
+                                <a href="#" target="_blank" title=" 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货"> 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货</a>
+                            </h6>
+							<ul class="clearfix">
+								<li class="price">
+									<i>239.000</i>
+								</li>
+							</ul>
+							<div class="buy">
+								<a href="#" title="">立即购买</a>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li class="goods-item">
+				
+					<div class="item">
+						
+						<div class="goods-pic">
+							<a target="_blank" href="#"><img  class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__PUBLIC__/{$module_path}ad/g1.jpg" alt=""></a>
+
+						</div>
+						<div class="goods-info">
+							<h6 class="goods-name">
+                                <a href="#" target="_blank" title=" 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货"> 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货</a>
+                            </h6>
+							<ul class="clearfix">
+								<li class="price">
+									<i>239.000</i>
+								</li>
+							</ul>
+							<div class="buy">
+								<a href="#" title="">立即购买</a>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li class="goods-item">
+				
+					<div class="item">
+						
+						<div class="goods-pic">
+							<a target="_blank" href="#"><img  class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__PUBLIC__/{$module_path}ad/g1.jpg" alt=""></a>
+
+						</div>
+						<div class="goods-info">
+							<h6 class="goods-name">
+                                <a href="#" target="_blank" title=" 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货"> 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货</a>
+                            </h6>
+							<ul class="clearfix">
+								<li class="price">
+									<i>239.000</i>
+								</li>
+							</ul>
+							<div class="buy">
+								<a href="#" title="">立即购买</a>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li class="goods-item">
+				
+					<div class="item">
+						
+						<div class="goods-pic">
+							<a target="_blank" href="#"><img  class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__PUBLIC__/{$module_path}ad/g1.jpg" alt=""></a>
+
+						</div>
+						<div class="goods-info">
+							<h6 class="goods-name">
+                                <a href="#" target="_blank" title=" 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货"> 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货</a>
+                            </h6>
+							<ul class="clearfix">
+								<li class="price">
+									<i>239.000</i>
+								</li>
+							</ul>
+							<div class="buy">
+								<a href="#" title="">立即购买</a>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li class="goods-item">
+				
+					<div class="item">
+						
+						<div class="goods-pic">
+							<a target="_blank" href="#"><img  class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__PUBLIC__/{$module_path}ad/g1.jpg" alt=""></a>
+
+						</div>
+						<div class="goods-info">
+							<h6 class="goods-name">
+                                <a href="#" target="_blank" title=" 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货"> 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货</a>
+                            </h6>
+							<ul class="clearfix">
+								<li class="price">
+									<i>239.000</i>
+								</li>
+							</ul>
+							<div class="buy">
+								<a href="#" title="">立即购买</a>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li class="goods-item">
+				
+					<div class="item">
+						
+						<div class="goods-pic">
+
+							<a target="_blank" href="#"><img  class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__PUBLIC__/{$module_path}ad/g1.jpg" alt=""></a>
+
+						</div>
+						<div class="goods-info">
+							<h6 class="goods-name">
+                                <a href="#" target="_blank" title=" 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货"> 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货</a>
+                            </h6>
+							<ul class="clearfix">
+								<li class="price">
+									<i>239.000</i>
+								</li>
+							</ul>
+							<div class="buy">
+								<a href="#" title="">立即购买</a>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li class="goods-item">
+				
+					<div class="item">
+						
+						<div class="goods-pic">
+
+							<a target="_blank" href="#"><img  class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__PUBLIC__/{$module_path}ad/g1.jpg" alt=""></a>
+
+						</div>
+						<div class="goods-info">
+							<h6 class="goods-name">
+                                <a href="#" target="_blank" title=" 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货"> 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货</a>
+                            </h6>
+							<ul class="clearfix">
+								<li class="price">
+									<i>239.000</i>
+								</li>
+							</ul>
+							<div class="buy">
+								<a href="#" title="">立即购买</a>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li class="goods-item">
+				
+					<div class="item">
+						
+						<div class="goods-pic">
+
+							<a target="_blank" href="#"><img  class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__PUBLIC__/{$module_path}ad/g1.jpg" alt=""></a>
+
+						</div>
+						<div class="goods-info">
+							<h6 class="goods-name">
+                                <a href="#" target="_blank" title=" 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货"> 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货</a>
+                            </h6>
+							<ul class="clearfix">
+								<li class="price">
+									<i>239.000</i>
+								</li>
+							</ul>
+							<div class="buy">
+								<a href="#" title="">立即购买</a>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</dd>
+	</dl>
+	<dl class="goods-ly-list">
+		<dt class="ly-title">
+            <i class="line-left"></i>
+            <a href="https://www.hncgo.com/country.html?id=1" target="_blank">新品上市</a>
+            <i class="line-right"></i>
+        </dt>
+
+		<dd>
+
+			<ul class="goods-list clearfix">
+				<li class="goods-item">
+				
+					<div class="item">
+						
+						<div class="goods-pic">
+							<a target="_blank" href="#"><img  class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__PUBLIC__/crossbbcg/pc/default/ad/g1.jpg" alt=""></a>
+						</div>
+						<div class="goods-info">
+							<h6 class="goods-name">
+                                <a href="#" target="_blank" title=" 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货"> 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货</a>
+                            </h6>
+							<ul class="clearfix">
+								<li class="price">
+									<i>239.000</i>
+								</li>
+							</ul>
+							<div class="buy">
+								<a href="#" title="">立即购买</a>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li class="goods-item">
+				
+					<div class="item">
+						
+						<div class="goods-pic">
+							<a target="_blank" href="#"><img  class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__PUBLIC__/crossbbcg/pc/default/ad/g1.jpg" alt=""></a>
+						</div>
+						<div class="goods-info">
+							<h6 class="goods-name">
+                                <a href="#" target="_blank" title=" 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货"> 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货</a>
+                            </h6>
+							<ul class="clearfix">
+								<li class="price">
+									<i>239.000</i>
+								</li>
+							</ul>
+							<div class="buy">
+								<a href="#" title="">立即购买</a>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li class="goods-item">
+				
+					<div class="item">
+						
+						<div class="goods-pic">
+							<a target="_blank" href="#"><img  class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__PUBLIC__/crossbbcg/pc/default/ad/g1.jpg" alt=""></a>
+						</div>
+						<div class="goods-info">
+							<h6 class="goods-name">
+                                <a href="#" target="_blank" title=" 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货"> 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货</a>
+                            </h6>
+							<ul class="clearfix">
+								<li class="price">
+									<i>239.000</i>
+								</li>
+							</ul>
+							<div class="buy">
+								<a href="#" title="">立即购买</a>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li class="goods-item">
+				
+					<div class="item">
+						
+						<div class="goods-pic">
+							<a target="_blank" href="#"><img  class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__PUBLIC__/crossbbcg/pc/default/ad/g1.jpg" alt=""></a>
+						</div>
+						<div class="goods-info">
+							<h6 class="goods-name">
+                                <a href="#" target="_blank" title=" 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货"> 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货</a>
+                            </h6>
+							<ul class="clearfix">
+								<li class="price">
+									<i>239.000</i>
+								</li>
+							</ul>
+							<div class="buy">
+								<a href="#" title="">立即购买</a>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li class="goods-item">
+				
+					<div class="item">
+						
+						<div class="goods-pic">
+							<a target="_blank" href="#"><img  class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__PUBLIC__/crossbbcg/pc/default/ad/g1.jpg" alt=""></a>
+						</div>
+						<div class="goods-info">
+							<h6 class="goods-name">
+                                <a href="#" target="_blank" title=" 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货"> 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货</a>
+                            </h6>
+							<ul class="clearfix">
+								<li class="price">
+									<i>239.000</i>
+								</li>
+							</ul>
+							<div class="buy">
+								<a href="#" title="">立即购买</a>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li class="goods-item">
+				
+					<div class="item">
+						
+						<div class="goods-pic">
+							<a target="_blank" href="#"><img  class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__PUBLIC__/crossbbcg/pc/default/ad/g1.jpg" alt=""></a>
+						</div>
+						<div class="goods-info">
+							<h6 class="goods-name">
+                                <a href="#" target="_blank" title=" 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货"> 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货</a>
+                            </h6>
+							<ul class="clearfix">
+								<li class="price">
+									<i>239.000</i>
+								</li>
+							</ul>
+							<div class="buy">
+								<a href="#" title="">立即购买</a>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li class="goods-item">
+				
+					<div class="item">
+						
+						<div class="goods-pic">
+							<a target="_blank" href="#"><img  class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__PUBLIC__/crossbbcg/pc/default/ad/g1.jpg" alt=""></a>
+						</div>
+						<div class="goods-info">
+							<h6 class="goods-name">
+                                <a href="#" target="_blank" title=" 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货"> 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货</a>
+                            </h6>
+							<ul class="clearfix">
+								<li class="price">
+									<i>239.000</i>
+								</li>
+							</ul>
+							<div class="buy">
+								<a href="#" title="">立即购买</a>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li class="goods-item">
+				
+					<div class="item">
+						
+						<div class="goods-pic">
+							<a target="_blank" href="#"><img  class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__PUBLIC__/crossbbcg/pc/default/ad/g1.jpg" alt=""></a>
+						</div>
+						<div class="goods-info">
+							<h6 class="goods-name">
+                                <a href="#" target="_blank" title=" 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货"> 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货</a>
+                            </h6>
+							<ul class="clearfix">
+								<li class="price">
+									<i>239.000</i>
+								</li>
+							</ul>
+							<div class="buy">
+								<a href="#" title="">立即购买</a>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li class="goods-item">
+				
+					<div class="item">
+						
+						<div class="goods-pic">
+							<a target="_blank" href="#"><img  class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__PUBLIC__/crossbbcg/pc/default/ad/g1.jpg" alt=""></a>
+						</div>
+						<div class="goods-info">
+							<h6 class="goods-name">
+                                <a href="#" target="_blank" title=" 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货"> 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货</a>
+                            </h6>
+							<ul class="clearfix">
+								<li class="price">
+									<i>239.000</i>
+								</li>
+							</ul>
+							<div class="buy">
+								<a href="#" title="">立即购买</a>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li class="goods-item">
+				
+					<div class="item">
+						
+						<div class="goods-pic">
+							<a target="_blank" href="#"><img  class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__PUBLIC__/crossbbcg/pc/default/ad/g1.jpg" alt=""></a>
+						</div>
+						<div class="goods-info">
+							<h6 class="goods-name">
+                                <a href="#" target="_blank" title=" 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货"> 日本花王Merries妙而舒学步裤 拉拉裤 特大号XL 38片 透气柔软舒适 2包装 新旧包装随机发货</a>
+                            </h6>
+							<ul class="clearfix">
+								<li class="price">
+									<i>239.000</i>
+								</li>
+							</ul>
+							<div class="buy">
+								<a href="#" title="">立即购买</a>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</dd>
+	</dl>
+</div>
+{/block}

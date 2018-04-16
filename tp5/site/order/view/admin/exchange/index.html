@@ -1,0 +1,143 @@
+{extend name="admin@public/base"/}
+
+<!-- CONTENT -->
+{block name="body"}
+<div id="content">
+    <div class="breadcrumbs">
+        {:lang('Ordersys')} : &nbsp;&nbsp; {:lang('Oexchange')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+    </div>
+    
+    <div class="bloc">
+        <div class="title">
+            <div class="tabs" id="">
+                {include file="admin@public/navs" /}
+            </div>
+            
+            {include file="admin@public/lang" /}
+        </div>
+        <div class="content">
+            
+            <dl class="gzzt clearfix mtb10">
+                <dd>
+                    <div class="boxr">
+                        {include file="admin@public/button" /}
+                    </div>
+                </dd>
+                
+                <form style="margin-top:0;" class="search-form">
+                    <dd>
+                        <div class="boxr ovh">
+                            <label for="start" style="margin:10px 10px 0 0; width:156px;">
+                                <input type="text" id="start" value="{:input('start_time')}" name="start_time"
+                                       placeholder="{:lang('Begin_time')}" class="w130 input_img"/>
+                            </label>
+                            <label style="width:10px;line-height:32px; margin-right:2px;">~</label>
+                            <label for="end" style="margin:10px 10px 0 0; width:150px;">
+                                <input type="text" id="end" value="{:input('end_time')}" name="end_time"
+                                       placeholder="{:lang('End_time')}" class="w130 input_img"/>
+                            </label>
+                        </div>
+                    <dd>
+                    
+                    <dd>
+                        <div class="boxr ovh">
+                            <label for="name" style="margin:10px 10px 0 0; width:200px;">
+                                <input type="text" id="name" class="searchinput" name="name" value="{:input('name')}"
+                                       placeholder="{:lang('Search_tip')}" style="width:170px;"/>
+                            </label>
+                            <input type="button" name="search" id="sch-search" class="button white"
+                                   value="{:lang('Search')}" url="{:url('',input(''))}"/>
+                        </div>
+                    <dd>
+                </form>
+                
+                <dd>
+                    <div class="boxl fl">
+                            <span><b>{:lang('Delivery_count')}</b><font>0</font>
+                    </div>
+                </dd>
+            </dl>
+            
+            {notempty name="list">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th class="center" width="30"><input class="check-all" type="checkbox"></th>
+                    <th class="left" style="width:35px;">ID</th>
+                    <th class="left">{:lang('Language_Name')}</th>
+                    <th class="center" style="width:100px;">{:lang('Flag')}</th>
+                    <th class="center" style="width:100px;">{:lang('Code')}</th>
+                    <th class="center" style="width:100px;">{:lang('Direction')}</th>
+                    <th class="center" style="width:100px;"><a href="{:getUrlbyOrder('sort')}">{:lang('Sort')}</a></th>
+                    <th class="center" style="width:100px;">{:lang('Used_On')}</th>
+                    <th class="center" style="width:100px;">{:lang('Active')}</th>
+                    <th class="actions">{:lang('Actions')}</th>
+                </tr>
+                </thead>
+                
+                <tbody>
+                {volist name="list" id="vo"}
+                <tr>
+                    <td class="center"><input class="ids" type="checkbox" value="{$vo['id']}" name="ids[]"></td>
+                    <td class="left">{$vo['id']}</td>
+                    <td class="left">
+                        <a class="tooltip-link" title="{:lang('Edit_this_record')}"
+                           href="{:url('editlangs',array('ids'=>$vo['id']))}">
+                            {$vo['name']}
+                        </a>
+                    </td>
+                    <td class="center"><img width="16px" src="__PUBLIC__/static/images/flags/{$vo['flag']}"
+                                            alt="{$vo['name']}"/>
+                    </td>
+                    <td class="center upper-case">{$vo['mark']}</td>
+                    <td class="center upper-case">{$vo['direction']}</td>
+                    <td class="center"><input name="sorts[{$vo['id']}]" type="text" value="{$vo.sort}" maxlength="5"
+                                              class="center sorts"/></td>
+                    <td class="center capitalize">{$vo['currencies']}</td>
+                    <td class="center">
+                        {if condition="$vo['status'] eq 1"}
+                        <a href="{:url('disable',array('ids'=>$vo['id']))}" class="ajax-able"
+                           data-doing="{:lang('Disable')}">
+                            <img src="__PUBLIC__/admin/images/enabled.png" title="{:lang('Enable')}"
+                                 class="tooltip-link" alt="{:lang('Enable')}" height="16px"
+                                 data-enabled="__PUBLIC__/admin/images/enabled.png"
+                                 data-disabled="__PUBLIC__/admin/images/disabled.png"/>
+                        </a>
+                        {else /}
+                        <a href="{:url('enable',array('ids'=>$vo['id']))}" class="ajax-able"
+                           data-doing="{:lang('Enable')}">
+                            <img src="__PUBLIC__/admin/images/disabled.png" title="{:lang('Disable')}"
+                                 class="tooltip-link" alt="{:lang('Disable')}" height="16px"
+                                 data-enabled="__PUBLIC__/admin/images/enabled.png"
+                                 data-disabled="__PUBLIC__/admin/images/disabled.png"/>
+                        </a>
+                        {/if}
+                    </td>
+                    <td class="actions">
+                        <a class="tooltip-link ajax-get edit" title="{:lang('Edit_this_record')}"
+                           href="{:url('edit',array('ids'=>$vo['id']))}" data-title="{:lang('Edit')}">
+                            <img src="__PUBLIC__/admin/images/edit.png" alt="{:lang('Edit')}"/></a>
+                        <a class="tooltip-link ajax-get confirm" title="{:lang('Disable_lang')}"
+                           data-layer="{:lang('Disable_lang')}" href="{:url('delete',array('ids'=>$vo['id']))}"
+                           title="{:lang('Disable')}">
+                            <img src="__PUBLIC__/admin/images/disabled.png" alt="{:lang('Disable_lang')}"/>
+                        </a>
+                    </td>
+                </tr>
+                {/volist}
+                </tbody>
+            </table>
+            <div class="pagination-wrapper">
+                <div class="results-part"><span>{$_total}</span></div>
+                <div class="links-part">{$page}</div>
+            </div>
+            {else/}
+            <div class="alert alert-warning">{:lang('No_record')}</div>
+            {/notempty}
+        
+        </div>
+    </div>
+</div>
+
+{include file="admin@public/time_for_search" /}
+{/block}

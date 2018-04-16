@@ -1,0 +1,439 @@
+    {extend name="common/base" /}
+    
+    {block name="title"}
+    <title>{$meta_title|default=lang('Default_Meta_Title')}</title>
+    {/block}
+    
+    {block name="css"}
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/goods_list.css" />
+    {/block}
+    
+    {block name="body"}
+    <div class="ly-path">
+        <ul class="clearfix">
+            <li class="home">
+                <a href="{:url('crossbbcg/index/index')}" title="{:lang('Go_Home')}">{:lang('Home')}</a>
+                <span>&gt;&nbsp;</span>
+            </li>
+            {foreach $breadcrumb as $key=>$arr}
+            <li>
+                <a href="{$arr['href']}" alt="{$arr['name']}">{$arr['name']}</a>
+                {if condition="$key!=count($breadcrumb)-1"}
+                <span>&gt;&nbsp;</span>
+                {/if}
+            </li>
+            {/foreach}
+        </ul>
+    </div>
+    <div class="js_language">
+        <span id="delete_this">{:lang('delete_this')}</span>
+    </div>
+    <div class="ly-main clearfix">
+        <div class="ly-main-left">
+            {include file="common/left_cat"} {include file="common/left_goods"}
+        </div>
+        <div class="ly-goods-list">
+        <!--  品牌介绍 -->
+            {if condition="input('brand_id')"}
+            {if condition="strpos(input('brand_id/s'), '_')===false"}
+            {php} $brand_id = input('brand_id/d');{/php}
+            {present name="$brands[$brand_id]"}
+            <div class="gallery-brand">
+                <dl>
+                    <dt>
+                    <div class="img">
+                    
+                    {if condition="empty($brands[$brand_id]['logo']) "}
+                    <img src="__PUBLIC__/{$img_path}/no-image.png" height="90" alt="{$brands[$brand_id]['name']}" />
+                    {elseif condition="substr($brands[$brand_id]['logo'],0,4)=='http'"}
+                    <img width="180" height="90" class="lazy" src="__PUBLIC__/{$img_path}/tm.gif"
+                         data-original="{$brands[$brand_id]['logo']}" alt="{$brands[$brand_id]['name']}">
+                    {else /}
+                    <img width="180" height="90" class="lazy" src="__PUBLIC__/{$img_path}/tm.gif"
+                         data-original="__UPLOADS__/{$brands[$brand_id]['logo']}" alt="{$brands[$brand_id]['name']}">
+                    {/if}
+                    </div>
+                    
+                    </dt>
+                    <dd>
+                        <div class="name">{$brands[$brand_id]['name']}</div>
+                        <div class="text">{$brands[$brand_id]['description']}</div>
+                    </dd>
+                </dl>
+            </div>
+            {/present}
+            {/if}
+            {/if}
+            <div class="ly-filter-box clearfix" data-inputs='{$inputs}'>
+                {eq name="has_filter" value="true"}
+                <div class="block block-layered-nav">
+                    <div class="ly-block-content">
+                        {eq name="has_choose" value="true"}
+                        <div class="currently clearfix ">
+                            <div class="block-subtitle">{:lang('Now_Choose')}：</div>
+                            <ol>
+                                {if condition="input('brand_id')"}
+                                    {if condition="strpos(input('brand_id/s'), '_')!==false"}
+                                    {php}$arr = explode('_',input('brand_id/s')); {/php}
+                                    {foreach $arr as $brand}
+                                <li>
+                                    <a href="javascript:history.back(-1);" title="{:lang('Delete_Choose')}" class="btn-remove">{:lang('Delete_Choose')}</a>
+                                    <span class="label">{:lang('Brand_Ids')}：</span> {$arr_brand[$brand]['name']}
+                                </li>
+                                    {/foreach}
+                                    {else /}
+                                <li>
+                                    <a href="javascript:history.back(-1);" title="{:lang('Delete_Choose')}" class="btn-remove">{:lang('Delete_Choose')}</a>
+                                    <span class="label">{:lang('Brand_Ids')}：</span> {$arr_brand[input('brand_id')]['name']}
+                                </li>
+                                    {/if}
+                                {/if}
+                                
+                                {if condition="input('country_id')"}
+                                {if condition="strpos(input('country_id/s'), '_')!==false"}
+                                {php}$arr = explode('_',input('country_id/s')); {/php}
+                                {foreach $arr as $country}
+                                <li>
+                                    <a href="javascript:history.back(-1);" title="{:lang('Delete_Choose')}" class="btn-remove">{:lang('Delete_Choose')}</a>
+                                    <span class="label">{:lang('Country_Ids')}：</span> {$arr_country[$country]['name']}
+                                </li>
+                                {/foreach}
+                                {else /}
+                                <li>
+                                    <a href="javascript:history.back(-1);" title="{:lang('Delete_Choose')}" class="btn-remove">{:lang('Delete_Choose')}</a>
+                                    <span class="label">{:lang('Country_Ids')}：</span> {$arr_country[input('country_id')]['name']}
+                                </li>
+                                {/if}
+                                {/if}
+                                
+                                {php}
+                                $count_option = count($arr_option);
+                                if($count_option!=0) {
+                                $i = 0;
+                                for($i=1;$i<=$count_option;$i++) {
+                                    if(input('?option_value_'.$i)){
+                                        $i_value = input('option_value_'.$i);
+                                        if(strpos($i_value, '_')!==false){
+                                        $i_arr = explode('_',$i_value);
+                                        foreach($i_arr as $i_a){
+                                
+                                foreach($arr_option as $key=>$arr){
+                                $i_name = array_search($i_a,$arr);
+                                if($i_name){
+                                echo '<li><a href="javascript:history.back(-1);" title="'.lang('Delete_Choose').'" class="btn-remove">'.lang('Delete_Choose').'</a><span class="label">'.$key.'：</span>'.$i_name.'</li>';
+                                }
+                                }
+                                        }
+                                
+                                        
+                                        }else{
+                                
+                                foreach($arr_option as $key=>$arr){
+                                $i_name = array_search($i_value,$arr);
+                                if($i_name){
+                                echo '<li><a href="javascript:history.back(-1);" title="'.lang('Delete_Choose').'" class="btn-remove">'.lang('Delete_Choose').'</a><span class="label">'.$key.'：</span>'.$i_name.'</li>';
+                                }
+                                }
+                                        }
+                                    }
+                                }
+                                }
+                                {/php}
+                            </ol>
+                            <div class="actions">
+                                <a href="{$clear_all_url}">{:lang('Clear_All')}</a>
+                            </div>
+                        </div>
+                        {/eq}
+                        <dl id="ly-filter_lists" class="clearfix">
+                            {php}$count =0;{/php}
+                            {notempty name="arr_brand"}
+                            <div class="ly-filter-items clearfix"  data-name="{:lang('Brand_Ids')}" data-type="brand_id">
+                                <dt>{:lang('Brand_Ids')}</dt>
+                                <dd>
+                                    <ol>
+                                        {foreach $arr_brand as $arr}
+                                        <li>
+                                            <a href="{:url('',array_merge(input(),['brand_id'=>$arr['id']]))}" title="{$arr['name']}" data-id="{$arr['id']}">{$arr['name']}<em></em></a>
+                                        </li>
+                                        {/foreach}
+                                    </ol>
+                                  <div class="ar">
+                                      {if condition="count($arr_brand)>1"}
+                                    <a href="javascript:void(0);" class="show-morefilter" title="{:lang('More_Choose')}">{:lang('More_Choose')}</a>
+                                    {/if}
+                                    {if condition="count($arr_brand)>5"}
+                                    <a href="javascript:void(0);" class="show-more" title="{:lang('More')}">{:lang('More')}</a>
+                                  
+                                    {/if}
+                                    </div>
+                                    <div class="btn-box" data-url="{$brand_url}" data-type="brand_id">
+                                        <span class="confirm">{:lang('Confirm')}</span>
+                                        <span class="abolish">{:lang('Cancel')}</span>
+                                    </div>
+                                </dd>
+                            </div>
+                            {php}$count++;{/php}
+                            {/notempty}
+                            
+                            {notempty name="arr_country"}
+                            <div class="ly-filter-items clearfix"  data-type="country_id" data-name="{:lang('Country_Ids')}">
+                                <dt>{:lang('Country_Ids')}</dt>
+                                <dd>
+                                    <ol>
+                                        {foreach $arr_country as $arr}
+                                        <li>
+                                            <a href="{:url('',array_merge(input(),['country_id'=>$arr['id']]))}" title="{$arr['name']}" data-id="{$arr['id']}">                    <img src="{$arr['national_flag']}" >
+                                                {$arr['name']}<em></em></a>
+                                        </li>
+                                        {/foreach}
+                                    </ol>
+                                  <div class="ar">
+                                      {if condition="count($arr_country)>1"}
+                                    <a href="javascript:void(0);" class="show-morefilter" title="{:lang('More_Choose')}">{:lang('More_Choose')}</a>
+                                    {/if}
+                                    {if condition="count($arr_country)>5"}
+                                    <a href="javascript:void(0);" class="show-more" title="{:lang('More')}">{:lang('More')}</a>
+                                    {/if}
+                                  </div>
+                                    <div class="btn-box" data-url="{$country_url}" data-type="country_id">
+                                        <span class="confirm">{:lang('Confirm')}</span>
+                                        <span class="abolish">{:lang('Cancel')}</span>
+                                    </div>
+                                </dd>
+                            </div>
+                            {php}$count++;{/php}
+                            {/notempty}
+                            
+                            {notempty name="arr_option"} {php} $n =1;{/php}
+                                {foreach $arr_option as $key=>$arr}
+                            <div class="ly-filter-items clearfix" data-type="option_value_{$n}" data-name="{$key}" >
+                                {notempty name="$arr['option_values']"}
+                                <dt>{$key}</dt>
+                                <dd>
+                                    <ol>
+                                        {foreach $arr['option_values'] as $arr2}
+                                        <li>
+                                            <a href="{:url('',array_merge(input(),['option_value_'.$n=>$arr2['option_value_id']]))}" title="{$arr2['name']}" data-id="{$arr2['option_value_id']}">{$arr2['name']}<em></em></a>
+                                        </li>
+                                        {/foreach}
+                                    </ol>
+                                   <div class="ar">
+                                     {if condition="count($arr['option_values'])>1"}
+                                    <a href="javascript:void(0);" class="show-morefilter" title="{:lang('More_Choose')}">{:lang('More_Choose')}</a>
+                                    {/if}
+                                    {if condition="count($arr['option_values'])>5"}
+                                    <a href="javascript:void(0);" class="show-more" title="{:lang('More')}">{:lang('More')}</a>
+                                    {/if}
+                                   </div>
+                                    <div class="btn-box" data-url="{php} $ov='option_value_'.$n.'_url';  echo $$ov;{/php}" data-type="option_value_{$n}">
+                                        <span class="confirm">{:lang('Confirm')}</span>
+                                        <span class="abolish">{:lang('Cancel')}</span>
+                                    </div>
+                                </dd>
+                                {/notempty}
+                            </div>
+                            {php} $n++; $count++;{/php}    {/foreach}
+                            {/notempty}
+    
+                    {notempty name="arr_attribute"}  {php} $row_att=1; {/php}
+                    {foreach $arr_attribute as $key => $arr}
+                    {notempty name="$arr['attribute']"}
+                    {foreach $arr['attribute'] as $key2=>$arr2}
+                    {eq name="$arr2['filtrate']" value="1"}
+                    <div class="ly-filter-items clearfix" data-type="attribute_value_{$row_att}" data-name="{:lang('attribute_group_ids')}" >
+                        <dt>{$arr2['name']}</dt>
+                        <dd>
+                            {php}
+                            $arr_merge = explode(',',$arr2['attribute_value']);
+                            {/php}
+                            <ol>
+                                {foreach $arr_merge as $key3 => $value3}
+                                <li>
+                                    <a href="{:url('',array_merge(input(),['attribute_value_'.$row_att=>$value3]))}" title="{$value3}" data-id="{$value3}">{$value3}<em></em></a>
+                                </li>
+                                {/foreach}
+                            </ol>
+                            <div class="ar">
+                                {if condition="count($arr_merge)>1"}
+                                <a href="javascript:void(0);" class="show-morefilter" title="{:lang('More_Choose')}">{:lang('More_Choose')}</a>
+                                {/if}
+                                {if condition="count($arr_merge)>5"}
+                                <a href="javascript:void(0);" class="show-more" title="{:lang('More')}">{:lang('More')}</a>
+                
+                                {/if}
+                            </div>
+                            <div class="btn-box" data-url="{php} $att='attribute_value_'.$row_att.'_url';  echo $$att;{/php}" data-type="attribute_value_{$row_att}">
+                                <span class="confirm">{:lang('Confirm')}</span>
+                                <span class="abolish">{:lang('Cancel')}</span>
+                            </div>
+                        </dd>
+                    </div>
+                    {php}$row_att++; $count++;{/php}
+                    {/eq}
+                    {/foreach}
+                    {/notempty}
+                    {/foreach}
+                    {/notempty}
+                            
+                    
+                            
+                    
+                            {if condition="$count>100"}
+                            <div class="more-expand-area" data-more="{:lang('pick_down')}" data-up="{:lang('pick_up')}">
+                                <a class="more-btn" href="javascript:void(0)">{:lang('More_Option')}<span class="d">&nbsp;</span></a>
+                            </div>
+                            {/if}
+                        </dl>
+    
+                    </div>
+                </div>
+                {else /}
+                 <!-- TODO 搜索无结果的时候 推荐关键词 -->
+                {/eq}
+                <div class="filter-pager clearfix">
+                    <div class="toolbar">
+                        <div class="sort-by">
+                            <ul>
+                                <li>
+                                    {if condition="input('_field')=='sort'"}
+                                        {if condition="input('_order')=='asc'"}
+                                    <a class="asc selected" href="{:getUrlbyOrder('sort')}">{:lang('Recommend')}</a>
+                                        {else /}
+                                    <a class="desc selected" href="{:getUrlbyOrder('sort')}">{:lang('Recommend')}</a>
+                                        {/if}
+                                    {else /}
+                                    <a class="desc" href="{:getOrderUrl('sort','desc')}">{:lang('Recommend')}</a>
+                                    {/if}
+                                </li>
+                                <li>
+                                    {if condition="input('_field')=='sale_price'"}
+                                        {if condition="input('_order')=='asc'"}
+                                    <a class="asc selected" href="{:getUrlbyOrder('sale_price')}">{:lang('Price')}</a>
+                                        {else /}
+                                    <a class="desc selected" href="{:getUrlbyOrder('sale_price')}">{:lang('Price')}</a>
+                                        {/if}
+                                    {else /}
+                                    <a class="asc" href="{:getOrderUrl('sale_price','asc')}">{:lang('Price')}</a>
+                                    {/if}
+                                </li>
+                                <li>
+                                    {if condition="input('_field')=='create_time'"}
+                                        {if condition="input('_order')=='asc'"}
+                                    <a class="asc selected" href="{:getUrlbyOrder('create_time')}">{:lang('Latest')}</a>
+                                        {else /}
+                                    <a class="desc selected" href="{:getUrlbyOrder('create_time')}">{:lang('Latest')}</a>
+                                        {/if}
+                                    {else /}
+                                    <a class="asc" href="{:getOrderUrl('create_time','asc')}">{:lang('Latest')}</a>
+                                    {/if}
+                                </li>
+                                <li>
+                                    {if condition="input('_field')=='sales_volume'"}
+                                    {if condition="input('_order')=='asc'"}
+                                    <a class="asc selected" href="{:getUrlbyOrder('sales_volume')}">{:lang('Best_Sales')}</a>
+                                    {else /}
+                                    <a class="desc selected" href="{:getUrlbyOrder('sales_volume')}">{:lang('Best_Sales')}</a>
+                                    {/if}
+                                    {else /}
+                                    <a class="desc" href="{:getOrderUrl('sales_volume','desc')}">{:lang('Best_Sales')}</a>
+                                    {/if}
+                                </li>
+    
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="pager">
+                        <p class="amount">{:sprintf(lang('Search_Total'),$search_total,$page,$max_page)}</p>
+                        <div class="pages">
+                            <ol>
+                                <li>
+                                    {if condition="$page==1"}
+                                    <a class="previous i-previous" href="javascript:void(0)" title="{:lang('Previous_Page')}" style="color:#999">{:lang('Previous_Page')}</a>
+                                    {else /}
+                                    <a class="previous i-previous" href="{$previous_url}" title="{:lang('Previous_Page')}" style="color:#333">{:lang('Previous_Page')}</a>
+                                    {/if}
+                                </li>
+                                <li>
+                                    {if condition="$page==$max_page"}
+                                    <a class="next i-next" href="javascript:void(0)" title="{:lang('Next_Page')}" style="color:#999">{:lang('Next_Page')}</a>
+                                    {else /}
+                                    <a class="next i-next" href="{$next_url}" title="{:lang('Next_Page')}" style="color:#333">{:lang('Next_Page')}</a>
+                                    {/if}
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--goods-->
+            <div class="goods-grid">
+                {notempty name="arr_goods"}
+                <ul class="goods-list clearfix">
+                    {foreach $arr_goods as $arr}
+                    <li class="goods-item  addcat-item">
+                        <div class="goods-pic ">
+                            <a href="{$arr['href']}" target="_blank" title="{$arr['name']}">
+                                {notempty name="$arr['thumb']"}
+                                    {if condition="substr($arr['thumb'],0,4)=='http'"}
+                                <img width="200" height="200" class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="{$arr['thumb']}" alt="{$arr['name']}" />
+                                    {else /}
+                                <img width="200" height="200" class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__UPLOADS__/{$arr['thumb']}" alt="{$arr['name']}" />
+                                    {/if}
+                                {else /}
+                                <img width="200" height="200" class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__PUBLIC__/{$img_path}/no-image.png" alt="{$arr['name']}" />
+                                {/notempty}
+                            </a>
+                        </div>
+                        <div class="goods-info">
+                            <div class="price-box">
+                                <span class="price">{$arr['sale_price']}</span>
+                                <span class="mkt-price">{$arr['market_price']}</span>
+                            </div>
+                            <div class="goods-name">
+                                <a href="{$arr['href']}" target="_blank">{$arr['name']}</a>
+                            </div>
+    
+                        </div>
+                        <div class="button-box">
+                            <div class="item item-1">
+                                <div class="ly-number-list">
+                                    <a href="javascript:void(0);" class="btn btn-flat btn-increase">+</a>
+                                    <input type="text" name="item[quantity]" min="{$arr['minimum']}" max="{$arr['maximum']}" itemId="{$arr['id']}" value="{$arr['minimum']}" class="action-quantity-input">
+                                    <a href="javascript:void(0);" class="btn btn-flat btn-decrease">-</a>
+                                </div>
+                            </div>
+                            <div class="item item-2">
+                                <button class="btn-addcart" data-url="{:url('crossbbcg/carts/addcart')}">{:lang('Add_Cart')}</button>
+                            </div>
+                            <div class="item item-3"><img src="{$arr['national_flag']}" alt="{$arr['country_name']}" title="{$arr['country_name']}"/></div>
+                        </div>
+                    </li>
+                    {/foreach}
+                </ul>
+                {else /}
+                <div class="ly-no-data" style="background: #fff;border: 1px solid #e6e6e6;">
+                    <div class="icon iconfont icon-zanwujilu"></div>
+                    <div class="text">{:lang('empty_record')}</div>
+                </div>
+                {/notempty}
+            </div>
+            <!--goods end-->
+            <!--page-->
+            <div class="pagenavi">
+            {$list->appends(input())->render();}
+            </div>
+            <!--page end-->
+        </div>
+    </div>
+    {include file="search/recommend_goods"}
+    {:widget('crossbbcg/common/toolbar')}
+    {/block}
+    <!--此板块为页面单独js加载-->
+    {block name="footer_js"}
+    <script type="text/javascript">
+        //需要加载的js文件
+        Private_Script = ['goodsList'];
+    </script>
+    {/block}

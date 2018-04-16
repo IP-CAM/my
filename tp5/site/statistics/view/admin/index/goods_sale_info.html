@@ -1,0 +1,156 @@
+{extend name="admin@public/base" /}
+{block name='css'}
+<style type="text/css">
+    #content .ibox li{
+        min-height: 76px;!important;
+    }
+</style>
+{/block}
+
+<!-- CONTENT -->
+{block name="body"}
+<div id="content">
+    <div class="breadcrumbs">
+        {:lang('Statistics')} : &nbsp;&nbsp; {:lang('goodsRank')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+    </div>
+    
+    <div class="bloc">
+        <div class="title">
+            <div class="tabs" id="navs">
+                {include file="admin@public/navs" /}
+            </div>
+            
+            {include file="admin@public/lang" /}
+        </div>
+        <div class="content">
+            
+            <dl class="gzzt clearfix mtb10">
+                <dd>
+                    <div class="boxr">
+                        {include file="admin@public/button" /}
+                    </div>
+                </dd>
+                
+                <dd>
+                    <div class="boxr ovh">
+                        <select id="status" style="height:25px;width: 120px;  margin-right:4px;">
+                            <option value="" url="{:url('')}">所有店铺</option>
+                            {foreach $store_list as $k=>$v}
+                            <option value="{$k}" url="{:url('',array('seller_id'=>$k))}" {eq name=":input('seller_id')" value="$k"}selected{/eq}>{$v}</option>
+                            {/foreach}
+                        </select>
+                        <select id="brand_id" style="height:25px;width: 120px;   margin-right:4px;">
+                            <option value="" url="{:url('')}">所有品牌</option>
+                            {foreach $brand_list as $k=>$v}
+                            <option value="{$k}" url="{:url('',array('brand_id'=>$k))}" {eq name=":input('brand_id')" value="$k"}selected{/eq}>{$v}</option>
+                            {/foreach}
+                        </select>
+                        <select id="cat_id" style="height:25px;width: 120px;   margin-right:4px;">
+                            <option value="" url="{:url('')}">所有分类</option>
+                            {foreach $cate_name as $k=>$v}
+                            <option value="{$k}" url="{:url('',array('cat_id'=>$k))}" {eq name=":input('cat_id')" value="$k"}selected{/eq}>{$v}</option>
+                            {/foreach}
+                        </select>
+                        <script>
+                            $(function () {
+                                $("#status,#brand_id,#cat_id").change(function () {
+                                    var gotu_url = $(this).find('option:selected').attr('url');
+                                    eval("self.location='" + gotu_url + "'")
+                                })
+                            })
+                        </script>
+                    </div>
+                </dd>
+                
+                <form style="margin-top:0;" class="search-form">
+                    <dd>
+                        <div class="boxr ovh">
+                            <label for="start" style="margin:10px 10px 0 0; width:156px;">
+                                <input type="text" id="start" value="{:input('start_time')}" name="start_time"
+                                       placeholder="{:lang('Begin_time')}" class="w130 input_img"/>
+                            </label>
+                            <label style="width:10px;line-height:32px; margin-right:2px;">~</label>
+                            <label for="end" style="margin:10px 10px 0 0; width:150px;">
+                                <input type="text" id="end" value="{:input('end_time')}" name="end_time"
+                                       placeholder="{:lang('End_time')}" class="w130 input_img"/>
+                            </label>
+                        </div>
+                    <dd>
+                    
+                    <dd>
+                        <div class="boxr ovh">
+                            <label for="name" style="margin:10px 10px 0 0; width:230px;">
+                                <input type="text" class="searchinput" id="name" name="name" value="{:input('name')}"
+                                       placeholder="{:lang('goodsSaleInfo_search_tips')}" style="width:200px;"/>
+                            </label>
+                            <input type="button" name="search" id="sch-search" class="button white"
+                                   value="{:lang('Search')}" url="{:url('', input('name'))}"/>
+                        </div>
+                    <dd>
+                    
+                    <dd style="float: right !important;">
+                        <div class="boxl">
+                                <span>
+                                    <a href="javascript:location.reload();" class="refresh tooltip-link"
+                                       title="{:lang('Refresh')}">
+                                            <em>{:lang('Refresh')}</em>
+                                    </a>
+                                </span>
+                            <span>
+                                    <a href="javascript:void(0);" class="ajax-get setting tooltip-link colum"
+                                       title="{:lang('Showlum')}" data-title="{:lang('Showlum')}">
+                                        <em>{:lang('Showlum')}</em>
+                                    </a>
+                                </span>
+                        </div>
+                    </dd>
+                </form>
+            </dl>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>商品名称</th>
+                        <th>商品编码</th>
+                        <th>所属店铺</th>
+                        <th>所属品牌</th>
+                        <th>所属类目</th>
+                        <th>销量</th>
+                        <th>售卖时间</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {foreach $trade_list as $k=>$v}
+                    <tr>
+                        <td><a href="{:url('crossbbcg/goods/index',array('item_id'=>$v.goods_id))}" target="_blank">{$v.goods_name}</a></td>
+                        <td>{$v.sku_code}</td>
+                        <td>{if condition="isset($store_list[$v.seller_id])"}
+                            {$store_list[$v.seller_id]}
+                            {/if}</td>
+                        <td>{$brand_list[$v.brand_id]}</td>
+                        <td>{$cate_name[$v.cat_id]}</td>
+                        <td>{$v.sku_number}</td>
+                        <td>{:time_format('Y-m-d H:i:s',$v.create_time)}</td>
+                    </tr>
+                    {/foreach}
+                </tbody>
+            </table>
+            <div class="pagination-wrapper">
+                <div class="results-part">
+                    {$trade_list->total()}
+                </div>
+                <div class="links-part">
+                    {$trade_list->appends(input())->render()}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{include file="admin@public/time_for_search" /}
+
+{/block}
+
+{block name='js'}
+
+
+{/block}

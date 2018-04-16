@@ -1,0 +1,89 @@
+{extend name="admin@public/base" /}
+
+<!-- CONTENT -->
+{block name="body"}
+<div id="content">
+    <div class="breadcrumbs">
+        {:lang('Core')} : &nbsp;&nbsp; {:lang('Licesons')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+    </div>
+    
+    <div class="bloc">
+        <div class="title">
+            <div class="tabs" id="navs">
+                {include file="admin@public/navs" /}
+            </div>
+            
+            {include file="admin@public/lang" /}
+        </div>
+        <div class="content">
+            
+            <dl class="gzzt clearfix mtb10">
+                <dd>
+                    <div class="boxr">
+                        {include file="admin@public/button" /}
+                    </div>
+                </dd>
+                
+                <form style="margin-top:0;" class="search-form">
+                    <dd>
+                        <div class="boxr ovh">
+                            <label for="search" style="margin:10px 10px 0 0; width:120px;">
+                                <input type="text" class="searchinput" name="name" value="{:input('name')}" placeholder="{:lang('Url_liceson')}" style="width:90px;"/>
+                            </label>
+                            <input type="button" name="search" id="sch-search" class="button white" value="{:lang('Search')}" url="{:url('', input('name'))}"/>
+                        </div>
+                    <dd><dd style="float: right !important;">
+                    <div class="boxl">
+                        <span>
+                            <a href="javascript:location.reload();" class="refresh tooltip-link" title="{:lang('Refresh')}">
+                                <em>{:lang('Refresh')}</em>
+                            </a>
+                        </span>
+                        <span>
+                            <a href="javascript:void(0);" class="ajax-get setting tooltip-link colum" title="{:lang('Showlum')}" data-title="{:lang('Showlum')}">
+                                <em>{:lang('Showlum')}</em>
+                            </a>
+                        </span>
+                    </div>
+                </dd>
+                </form>
+            </dl>
+            {notempty name="list"}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th class="center" width="30"><input class="check-all" type="checkbox"></th>
+                    <th class="center" >{:lang('Domain_Url')}</th>
+                    <th class="center" >{:lang('IP')}</th>
+                    <th class="center" >{:lang('time')}</th>
+                    <th class="center" >运行次数</th>
+                </tr>
+                </thead>
+                
+                <tbody>
+                {foreach $list as $k=>$vo}
+                <tr>
+                    <td class="center">
+                        <input class="ids" type="checkbox" value="{$k}" name="ids[]">
+                    </td>
+                    <td class="center" >{$k}</td>
+                    <td class="center" >{$vo['ip']}</td>
+                    <td class="center">{:time_format($vo['time'])}</td>
+                    <td class="center">{$vo.num}</td>
+                </tr>
+                {/foreach}
+                </tbody>
+            </table>
+            <div class="pagination-wrapper">
+            </div>
+            {else /}
+            <div class="alert alert-warning">{:lang('No_record')}</div>
+            {/notempty}
+        </div>
+    </div>
+
+</div>
+
+{include file="admin@public/time_for_search" /}
+
+{/block}

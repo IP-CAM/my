@@ -1,0 +1,61 @@
+{include file='public/head_top' /}
+{include file="store/head_top" /}
+<div class="shop-info" style="display: none;">
+	<div class="n clearfix w1200">
+		<div class="shop-name">
+			{$store_info.seller_name}
+		</div>
+	</div>
+</div>
+<div class="sho-nav-box yahei">
+	<div class="shop-nav">
+		<div class="shop-cate">
+			<div class="title">{:lang('shop_category')}</div>
+			<div class="cate-list">
+				<ul>
+                    {foreach $category as $v}
+					<li class="item">
+						<dl>
+							<dt><a href="{:url('seller/store/items',array('seller_id'=>$store_info.seller_id,'cate_id'=>$v.id))}" target="_blank">{$v.name}</a></dt>
+							<dd>
+								<ul>
+                                    {notempty name='$v.son'}
+                                    {foreach $v.son as $vv}
+									<li>
+										<a href="{:url('seller/store/items',array('seller_id'=>$store_info.seller_id,'cate_id'=>$vv.id))}}" target="_blank">{$vv.name}</a>
+									</li>
+                                    {/foreach}
+									{/notempty}
+								</ul>
+							</dd>
+						</dl>
+					</li>
+                    {/foreach}
+				</ul>
+			</div>
+
+		</div>
+		<div class="nav-list">
+			<ul>
+    
+				<li>
+					<a href="{:url('seller/store/index',array('seller_id'=>$store_info.seller_id))}">{:lang('store_index')}</a>
+				</li>
+                {foreach $category as $v}
+                {eq name="$v.is_nav" value='1'}
+				<li>
+					<a href="{:url('seller/store/items',array('seller_id'=>$store_info.seller_id,'cate_id'=>$v.id))}">{$v.name}</a>
+				</li>
+                {/eq}
+                {/foreach}
+			</ul>
+			<div class="shop-search">
+				<form action="">
+                    <input type="hidden" name="seller_id" value="{$store_info.seller_id}">
+					<input type="text" name="keywords"  value="" placeholder="{:lang('search_in_store')}" />
+					<button type="submit" class="iconfont icon-search"></button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

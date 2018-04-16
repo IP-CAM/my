@@ -1,0 +1,115 @@
+    {extend name="public/poupbase"/}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+        <div id="content" style="margin:0px 10px 5px 8px;">
+            <div class="bloc">
+                <div class="content">
+                    <div style="display:block; /*height: 420px;*/">
+                        <div class="extbody">
+                            <form id="myform" method="post" style="margin-top:5px;" class="">
+                                <fieldset>
+                                    <legend>{$meta_title|default=''}</legend>
+    
+                                    {present name="extSetup.special.logo"}
+                                    <div class="row">
+                                        <label for="logo" class="w160">{:lang('Icon')}: </label>
+                                        <img src="__STATIC__/images/{$extSetup['subjection']}/{$extSetup['special']['logo']}" height="30" id="logo"/>
+                                    </div>
+                                    {/present}
+    
+                                    <div class="row">
+                                        <label class="w160">{$extSetup['name']}: </label>
+                                        <label style="width: 320px;">{$extSetup['description']}</label>
+                                    </div>
+    
+                                    {present name="extSetup.special.appofficial"}
+                                    <div class="row">
+                                        <label for="appofficial" class="w160">{:lang('Appofficial')}: </label>
+                                        <label style="width: 320px;" id="appofficial"><a href="{$extSetup['special']['appofficial']}" target="_blank">{$extSetup['special']['appofficial']}</a> </label>
+                                    </div>
+                                    {/present}
+    
+                                    <div class="row bset">
+                                        <label class="w160">{:lang('Support platform')}: </label>
+                                        
+                                        {present name="extSetup.platform"}
+                                            {foreach name="extSetup.platform.option" item="vo"}
+                                            <input name="{$key}" type="{$extSetup.platform.type}" value="1" id="{$vo}" checked />
+                                            <label for="{$vo}" class="w120_r_0" {notempty name="extSetup.platform.tip"} class="tooltip-link" title="{$extSetup.platform.tip}"{/notempty}>{$vo}</label>
+                                            {/foreach}
+                                        
+                                        {else /}
+    
+                                        <input name="pc" type="checkbox" value="1" id="pc" {notpresent name="data['pc']"}checked{else /}{eq name="data['pc']" value="1" }checked{/eq}{/notpresent} />
+                                        <label for="pc" class="w80l_r_0">PC</label>
+                                        
+                                        <input name="wap_app" type="checkbox" value="1" id="wap_app" {present name="data['wap_app']"}{eq name="data['wap_app']" value="1" }checked{/eq}{/present}/>
+                                        <label for="wap_app" class="w120_r_0">Wap/App</label>
+    
+                                        <input name="api" type="checkbox" value="1" id="api" {present name="data['api']"}{eq name="data['api']" value="1" }checked{/eq}{/present} />
+                                        <label for="api" class="w80l_r_0">Api</label>
+    
+                                        <input name="other" type="checkbox" value="1" id="other" {present name="data['other']"}{eq name="data['other']" value="1" }checked{/eq}{/present} />
+                                        <label for="other" class="w80l_r_0">Other</label>
+    
+                                        {/present}
+                                    </div>
+                                    
+                                    {volist name="config" id="co"}
+                                    <div class="row">
+                                        <label for="setting[{$co.name}]" class="w160">{$co.title}:
+                                            {eq name="co.validate" value="required"}
+                                            <span class="required">*</span>
+                                            {/eq}
+                                        </label>
+                                        {$co.output}
+                                    </div>
+                                    {/volist}
+    
+                                    <div class="row">
+                                        <label for="sort" class="w160">{:lang('Sort')}:</label>
+                                        <input type="number" class="input litle" name="sort" maxlength="5" id="sort" value='{$data.sort|default=0}' />
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <label for="status" class="w160">{:lang('Isactive')}:</label>
+                                        <div class="slideBox">
+                                            <input id="status" value="1" type="checkbox" name="status"  {notpresent name="data['status']"}checked{else /}{eq name="data['status']" value="1" }checked{/eq}{/notpresent}/>
+                                            <label for="status"></label>
+                                        </div>
+                                    </div>
+    
+                                    <div class="buttons-wrapper bw-bottom" style="margin:20px auto 2px; text-align:center;">
+                                        <input type="hidden" name="jump" value="{$jump}" />
+                                        <input type="hidden" name="code" value="{$extSetup['code']}" />
+                                        <input type="hidden" name="subjection" value="{$extSetup['subjection']}" />
+                                        <input name="submit" value="{:lang('Save')}" type="submit" url="{:url('', ['group'=>input('group')])}">
+                                        <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                                    </div>
+                                    
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {/block}
+    
+    {block name="js"}
+    <script type="text/javascript" src="__PUBLIC__/admin/js/autosize.js"></script>
+    <script>
+        $(function(){
+            $(".bset").buttonset();
+
+            $(".datainput").datetimepicker({
+                dateFormat: "{:config('kernel.timeformat')}",
+                //timeFormat: 'HH:mm:ss',
+                onSelect: function(dateText, inst) {
+                    $.datepicker.regional["{:config('kernel.localdate')}"];
+                }
+            });
+        })
+    </script>
+    {/block}

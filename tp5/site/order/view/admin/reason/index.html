@@ -1,0 +1,99 @@
+	{extend name="admin@public/base"/}
+                
+    <!-- CONTENT --> 
+    {block name="body"}
+    <div id="content">
+    	<div class="breadcrumbs">
+            {:lang('Ordersys')} : &nbsp;&nbsp; {:lang('Service')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+    	</div>
+
+        <div class="bloc">
+            <div class="title">
+                <div class="tabs" id="navs">
+                    {include file="admin@public/navs" /}
+                </div>
+
+                {include file="admin@public/lang" /}
+            </div>
+            <div class="content">
+                
+                <dl class="gzzt clearfix mtb10">
+                <dd>
+                    <div class="boxr">
+                        {include file="admin@public/button" /}
+                    </div>
+                </dd>
+                
+                <form style="margin-top:0;" class="search-form">
+                <dd>
+                    <div class="boxr ovh">
+                      <label for="search" style="margin:10px 10px 0 0; width:150px;">
+                      <input type="text" class="searchinput" name="name" value="{:input('name')}" placeholder="{:lang('Search_tip')}" style="width:120px;"/>
+                      </label>
+                      <input type="button" name="search" id="sch-search" class="button white" value="{:lang('Search')}" url="{:url('', input('name'))}"/>
+                    </div>
+                <dd>
+                </form>
+                
+                <dt>{:lang('Items_count')}</dt>
+                <dd>
+                    <div class="boxl fl">
+                        <span>{:lang('Count_all')}：<b>{$_total}</b></span>
+                        <span class="red">{:lang('Disable')}：<b>{$_total - $_enable}</b></span>
+                        <span class="green">{:lang('Enable')}：<b>{$_enable}</b></span>
+                    </div>
+                </dd>
+                    <dd style="float: right !important;">
+                        <div class="boxl">
+                            <span>
+                                <a href="javascript:location.reload();" class="refresh tooltip-link" title="{:lang('Refresh')}">
+                                    <em>{:lang('Refresh')}</em>
+                                </a>
+                            </span>
+                            <span>
+                                <a href="javascript:void(0);" class="ajax-get setting tooltip-link colum" title="{:lang('Showlum')}" data-title="{:lang('Showlum')}">
+                                    <em>{:lang('Showlum')}</em>
+                                </a>
+                            </span>
+                        </div>
+                    </dd>
+            </dl>
+            
+            {notempty name="Item"}
+            <table class="table">
+                <thead>
+                <tr>
+                <th class="center" width="30"><input class="check-all" type="checkbox"></th>
+                <th class="left" style="width:35px;">ID</th>
+                <th style="width:35px;">{:lang('Icon')}</th>
+                <th class="left" style="width:120px;">{:lang('Items_name')}</th>
+                <th class="left" style="width:100px;">{:lang('Cn_remark')}</th>
+                <th class="left" style="width:90px;">{:lang('Model')}</th>
+                <th class="left" style="width:130px;">{:lang('Dir')}</th>
+                <th class="left">{:lang('Keywords')}</th>
+                <th class="center" style="width:50px;">{:lang('Nav_show')}</th>
+                <th class="center" style="width:50px;">{:lang('Status')}</th>
+                <th class="center" style="width:50px;">{:lang('Sort')}</th>
+                <th class="actions">{:lang('Actions')}</th>
+                </tr>
+                </thead>
+                    
+                    <tbody>
+                
+                
+                {$Item}
+                
+                </tbody>
+            </table>
+            <div class="pagination-wrapper">
+            	
+            </div>
+            
+            {else/}
+               <div class="alert alert-warning">{:lang('No_record')}</div>
+            {/notempty}
+            
+            </div>
+        </div>
+    </div>
+    {/block}

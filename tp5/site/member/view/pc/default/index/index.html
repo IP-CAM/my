@@ -1,0 +1,176 @@
+    {extend name="common/base" /}
+    
+    {block name="title"}
+    <title>{:lang('Home')}</title>
+    {/block}
+    
+    {block name="css"}
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/member.css" />
+    {/block}
+    
+    {block name="body"}
+    <!--面包屑-->
+    <div class="ly-path">
+        <ul class="clearfix">
+            <li class="home">
+                <a href="{:url('crossbbcg/index/index')}" title="{:lang('go_min')}">{:lang('Home')}</a>
+                <span>&gt;&nbsp;</span>
+            </li>
+            <li>
+                <h1>{:lang('Member')}</h1>
+            </li>
+        </ul>
+    </div>
+    <div class="ly-main member-main clearfix">
+        {include file="index/left_menu"}
+        <div class="member-right">
+            <div class="member-top">
+                <!--会员基本信息-->
+                <div class="user-detail">
+                    <div class="user-logo">
+                        {if condition="empty($user.headimg)"}
+                        <img src="__PUBLIC__/{$img_path}/member_tx.png"   width="80" height="80"/>
+                        {elseif condition="substr($user.headimg,0,4) == 'http'"}
+                        <img src="{$user.headimg}" alt="" width="80" height="80"/>
+                        {else /}
+                        <img src="__UPLOADS__/{$user.headimg}"  width="80" height="80"/>
+                        {/if}
+                    </div>
+                    
+                    <div class="user-info">
+                        <div class="name">{$user.nickname}</div>
+                        <div class="lv level-1">{$level.name}</div>
+                    </div>
+                    <div class="money-box">
+                        <!-- TODO 余额 -->
+                        <div class="item yue"><i class="iconfont icon-yue"></i>{:lang('balance')}：<em>￥{$user.money}</em></div>
+                        <a href="{:url('member/index/point')}" class="item jifen"><i class="iconfont icon-jifen"></i>{:lang('points')}：<em>{$user.score}</em></a>
+                        <a href="{:url('member/index/coupon')}" class="item youhuiquan"><i class="iconfont icon-youhuiquan"></i>{:lang('coupon')}：<em>{$coupon}</em>{:lang('zhang')}</a>
+                    </div>
+                </div>
+                <!--会员基本信息END-->
+                <div class="secure">
+                    <div class="title">
+                        <div class="jdt">
+                            <strong>{:lang('safe_class')}　
+                                {if condition="$user['mobile'] && $user['email']"}
+                                <i class="effective"></i><i class="effective"></i><i></i>
+                                {elseif condition="$user['mobile'] eq '' && $user['email'] eq ''" /}
+                                <i class=""></i><i class=""></i><i></i>
+                                {elseif condition="$user['mobile'] eq '' || $user['email'] eq ''" /}
+                                <i class="effective"></i><i class=""></i><i></i>
+                                {/if}
+                            </strong>
+                        </div>
+                    </div>
+                    <div class="content">
+                        {notempty name="$user['mobile']"}
+                        <a href="{:url('AlterMobile')}" class="act">{:lang('mobile')} {$user.mobile}
+                            {:lang('unbind_tel')}
+                        </a>
+                        {else /}
+                        <a href="{:url('verifyMobileCheck')}" class="act">
+                            {:lang('bind_tel')}
+                        </a>
+                        {/notempty}
+                        
+                        {notempty name="$user['email']"}
+                        <a href="{:url('AlterEmail')}">{:lang('email')} {$user.email} {:lang('unbind_email')}</a>
+                        {else /}
+                        <a href="{:url('verifyemailcheck')}">{:lang('to_bind_email')}</a>
+                        {/notempty}
+                    
+                    </div>
+                </div>
+                <div class="member-order-info">
+                    <ul>
+                        <li>
+                            <a href="{:url('member/index/orderlist')}">{:lang('all_orders')}<em>{$count_all}</em></a>
+                        </li>
+                        <li>
+                            <a href="{:url('member/index/orderlist','order_status=wait_buyer_pay')}">{:lang('wait_buyer_pay')}<em>{$count_wait}</em></a>
+                        </li>
+                        <li>
+                            <a href="{:url('member/index/orderlist','order_status=wait_seller_send_goods')}">{:lang('wait_seller_send_goods')}<em>{$count_send}</em></a>
+                        </li>
+                        <li>
+                            <a href="{:url('member/index/orderlist','order_status=wait_buyer_confirm_goods')}">{:lang('wait_buyer_confirm_goods')}<em>{$count_confirm}</em></a>
+                        </li>
+                        <li>
+        
+                            <a href="{:url('member/index/orderlist','order_status=comment')}">{:lang('wait_buyer_evaluate')}<em>{$count_comment}</em></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="member-content">
+                <div class="title member-title"><span>{:lang('recent_order')}</span>
+                    <a href="{:url('member/index/orderList')}">{:lang('see_all_order')} <em class="simsun">></em> </a>
+                </div>
+                <div class="body pb15">
+                    {include file="index/order_item"}
+                </div>
+            
+            </div>
+            <br/>
+            <div class="member-content">
+                <div class="title member-title"><span>{:lang('recent_favorites')}</span>
+                    <a href="{:url('member/index/favor')}">{:lang('see_all_favorites')} <em class="simsun">></em> </a>
+                </div>
+                <div class="body member-fav">
+                    <ul class="goods-list clearfix slide-content">
+                        {notempty name="collect"}
+                        {volist name="collect" id="vo"}
+                        <li class="goods-item slide-item">
+                            <div class="item">
+                                <div class="goods-pic">
+                                    <a href="{:url('crossbbcg/goods/index','item_id='.$vo['goods']['id'])}" target="_blank" title="{$vo['goods']['name']}">
+                                        {if condition="substr($vo['goods']['thumb'],0,4)=='http'"}
+                                        <img src="{$vo['goods']['thumb']}" />
+                                        {else /}
+                                        <img src="{:resizeImage($vo['goods']['thumb'],'middle',true)}" />
+                                        {/if}
+                                    </a>
+                                </div>
+                                <div class="goods-info">
+                                    <div class="goods-name">
+                                        <a href="{:url('crossbbcg/goods/index','item_id='.$vo['goods']['id'])}" target="_blank">{$vo['goods']['name']}</a>
+                                    </div>
+                                    <div class="price-box">
+                                        <span class="price">{$vo['goods']['sale_price']}</span>
+                                        <span class="mkt-price">{$vo['goods']['market_price']}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        {/volist}
+                        {else /}
+    
+                        <div class="ly-no-data" style="background: #fff;border: 0px solid #e6e6e6;">
+                            <div class="icon iconfont icon-zanwujilu"></div>
+                            <div class="text">{:lang('empty_record')}</div>
+                        </div>
+                        
+                        {/notempty}
+                    </ul>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+    {/block}
+    
+    <!--此板块为页面单独js加载-->
+    {block name="footer_js"}
+    <script type="text/javascript">
+        /* 修改提示的脚本*/
+        {if condition="$member_remind"}
+        alert('{:$member_remind}');
+        {/if}
+        
+        
+        //需要加载的js文件
+        Private_Script = ['member','aftersalesDetail'];
+    </script>
+    {/block}

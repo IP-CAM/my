@@ -1,0 +1,70 @@
+<div class="product-supplier">
+	<div class="n">
+		<!--店铺logo-->
+		<div class="logo">
+            {present name="$seller['logo']"}
+			<div class="logo-box"><a href="{:url('seller/store/index','seller_id='. $data['seller_id'])}" title="{$seller['seller_name']}" target="_blank"><img src="__UPLOADS__/{$seller['logo']}" /></a></div>
+            {/present}
+            <div class="title">
+				<a href="{:url('seller/store/index','seller_id='. $data['seller_id'])}" title="{$seller['seller_name']}" target="_blank">{$seller['seller_name']}</a>
+			</div>
+		</div>
+		<div class="supplier-info">
+			<ul class="clearfix">
+				<li> <span class="t">掌柜：</span><em>好孩子123</em> </li>
+				<li> <span class="t">联系：</span><em><span class="lx"><i class="iconfont icon-liuyan"> </i>和我联系</em> </span></li>
+				<li> <span class="t">资质：</span><em><i class="iconfont icon-renzheng"> </i> <span class="bzj" title="已基纳5000元保证金"><i class="iconfont icon-baozhengjindanbao"></i>5000</span></em> </li>
+			</ul>
+		</div>
+
+		<div class="grade">
+			<div class="g-s-parts clearfix">
+				<div class="parts-item parts-goods">
+					<span class="col1">描述</span>
+					<span class="col2 ftx-02">5.0</span>
+			
+				</div>
+				<div class="parts-item parts-goods">
+					<span class="col1">服务</span>
+					<span class="col2 ftx-02">5.0</span>
+			
+				</div>
+				<div class="parts-item parts-goods" style="border: 0;">
+					<span class="col1">物流</span>
+					<span class="col2 ftx-01">5.0</span>
+				</div>
+			</div>
+			
+		</div>
+		<div class="btn-box">
+			<a href="{:url('seller/store/index','seller_id='. $data['seller_id'])}" title="{:lang('To_Store')}" target="_blank">{:lang('To_Store')}</a>
+			<a href="javascript:void(0)" title="{:lang('Attention_Store')}" class="attention" data-url="{:url('crossbbcg/goods/attentionStore','store_id='.$seller['id'])}">{:lang('Attention_Store')}</a>
+		</div>
+        
+		<dl class="tuijian-dl">
+            {notempty name="$arr_see"}
+			<dt>{:lang('see_again')}</dt>
+			<dd>
+				<ul class="clearfix">
+                    {foreach $arr_see as $key => $arr}
+					<li>
+						<a href="{$arr['href']}" target="_blank">
+                            
+                            {if condition="empty($arr['thumb'])"}
+                            <img width="80" height="80" class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__PUBLIC__/{$img_path}/no-image.png">
+                            {elseif condition="substr($arr['thumb'],0,4)=='http'"}
+                            <img width="80" height="80" class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="{$arr['thumb']}" alt="{$arr['name']}"/>
+                            {else /}
+                            <img width="80" height="80" class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="{:resizeImage($arr['thumb'],'thumb',true)}" alt="{$arr['name']}"/>
+                            {/if}
+                            
+							<span class="price">{$arr['sale_price']}</span>
+						</a>
+					</li>
+                    {/foreach}
+				</ul>
+			</dd>
+            {/notempty}
+		</dl>
+	</div>
+</div>

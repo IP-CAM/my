@@ -1,0 +1,182 @@
+    {extend name="admin@public/base" /}
+
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content">
+        <div class="breadcrumbs">
+            {:lang('Promotion')} : &nbsp;&nbsp; {:lang('Rushsys')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+        </div>
+
+        <div class="bloc">
+            <div class="title">
+                <div class="tabs" id="navs">
+                    {include file="admin@public/navs" /}
+                </div>
+
+                {include file="admin@public/lang" /}
+            </div>
+            <div class="content">
+                
+                <dl class="gzzt clearfix mtb10">
+                    <dd>
+                        <div class="boxr">
+                            {include file="admin@public/button" /}
+                        </div>
+                    </dd>
+                    <dd>
+                        <div class="boxr ovh">
+                            <select id="model" style="height:27px;margin-right:5px;">
+                                <option url="{:url('', ['name' => input('name')])}" {if condition="!isset($item)"}selected{/if}>
+                                {:lang('Choose_model')}
+                                </option>
+
+                            </select>
+                            <script>
+                                $(function(){
+                                    $("#model").change(function(){
+                                        var gotu_url = $(this).find('option:selected').attr('url');
+                                        eval("self.location='"+gotu_url+"'")
+                                    })
+                                })
+                            </script>
+                        </div>
+                    </dd>
+                    <dd>
+                        <div class="boxr ovh">
+                            <form style="margin-top:0;" class="search-form">
+                                <label for="name" style="margin:10px 10px 0 0; width:230px;">
+                                    <input type="text" class="searchinput" id="name" name="name" placeholder="{:lang('Search_tip')}" style="width: 200px;" />
+                                </label>
+                                </label>
+                                <input type="button" name="search" id="sch-search" class="button white" value="{:lang('Search')}" url="{:url('', input('name'))}"/>
+                            </form>
+                        </div>
+                    <dd>
+                    <dd>
+                        <div class="boxl fl">
+                            <span>{:lang('Count_all')}：<b>{$_total}</b></span>
+                        </div>
+                    </dd>
+                    <dd style="float: right !important;">
+                        <div class="boxl">
+                            <span>
+                                <a href="javascript:location.reload();" class="refresh tooltip-link" title="{:lang('Refresh')}">
+                                    <em>{:lang('Refresh')}</em>
+                                </a>
+                            </span>
+                            <span>
+                                <a href="javascript:void(0);" class="ajax-get setting tooltip-link colum" title="{:lang('Showlum')}" data-title="{:lang('Showlum')}">
+                                    <em>{:lang('Showlum')}</em>
+                                </a>
+                            </span>
+                        </div>
+                    </dd>
+                </dl>
+
+                {notempty name="list"}
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="center" width="30"><input class="check-all" type="checkbox"></th>
+                        <th class="left" style="width:35px;"><a href="{:getUrlbyOrder('id')}">ID</a></th>
+                        <th class="left" style="width:40px;">{:lang('Image')}</th>
+                        <th class="left"><a href="{:getUrlbyOrder('title')}">{:lang('Category_Title')}</a></th>
+                        <th class="left" style="width:80px;"><a href="{:getUrlbyOrder('name')}">{:lang('Category_name')}</a></th>
+                        <th class="left" style="width:80px;"><a href="{:getUrlbyOrder('models')}">{:lang('Category_module')}</a></th>
+                        <th class="left"><a href="{:getUrlbyOrder('groups')}">{:lang('Group')}</a></th>
+                        <th class="center" style="width:40px;"><a href="{:getUrlbyOrder('status')}">{:lang('Status')}</a></th>
+                        <th class="center" style="width:40px;"><a href="{:getUrlbyOrder('allow_publish')}">{:lang('Allow_publish')}</a></th>
+                        <th class="center" style="width:30px;"><a href="{:getUrlbyOrder('pc_status')}">{:lang('Pc_on')}</a></th>
+                        <th class="center" style="width:40px;"><a href="{:getUrlbyOrder('phone_status')}">{:lang('Phone_on')}</a></th>
+                        <th class="center" style="width:40px;"><a href="{:getUrlbyOrder('weixin_status')}">{:lang('Weixin_on')}</a></th>
+                        <th class="center" style="width:30px;"><a href="{:getUrlbyOrder('name')}">{:lang('Api_on')}</a></th>
+                        <th class="center" style="width:30px;"><a href="{:getUrlbyOrder('name')}">{:lang('App_on')}</a></th>
+                        <th class="center" style="width:40px;"><a href="{:getUrlbyOrder('name')}">{:lang('Is_replay_s')}</a></th>
+                        <th class="center" style="width:30px;"><a href="{:getUrlbyOrder('name')}">{:lang('Is_check')}</a></th>
+                        <th class="center" style="width:70px;"><a href="{:getUrlbyOrder('sort')}">{:lang('Sort')}</a></th>
+                        <th class="actions" style="width:50px;">{:lang('Actions')}</th>
+                    </tr>
+                    </thead>
+                    
+                    <tbody>
+                    {volist name="list" id="vo"}
+                    <tr>
+                        <td class="center">
+                            <input class="ids" type="checkbox" value="{$vo['id']}" name="ids[]">
+                        </td>
+                        <td class="left">{$vo['id']}</td>
+                        <td class="left">
+                            {if condition=" empty($vo['logo']) "}
+                            <img src="__PUBLIC__/admin/images/icons/no-image.png" height="18" alt="{$vo['name']}" />
+                            {else /}
+                            <img src="{$vo.logo}" height="18" alt="{$vo['name']}" />
+                            {/if}
+                        </td>
+                        <td class="left">
+                            {$vo['firstchar']} -
+                            <a class="tooltip-link ajax-get edit" title="{:lang('Edit_this_record')}" data-title="{:lang('Edit')}" href="{:url('edit',array('ids'=>$vo['id']))}" data-showbar="1">
+                                {$vo['name']}
+                            </a>
+                        </td>
+                    
+                        <td class="left">{$vo['alias']}</td>
+                        <td class="left">{$vo['pcat']}</td>
+                        <td class="left"><a href="{$vo.url}" target="_blank" rel="nofollow">{$vo.url}</a></td>
+                        <td class="center">
+                            {if condition="$vo['langid'] eq 0"}
+                            <span class="badge-green">{:lang('Yes')}</span>
+                            {else /}
+                            <span class="badge-gray">{:lang('No')}</span>
+                            {/if}
+                        </td>
+                                
+                        <td class="center">
+                            {if condition="$vo['isrecommend'] eq 1"}
+                            <a href="{:url('disable',array('field'=>'isrecommend','ids'=>$vo['id']))}" class="ajax-able" data-doing="{:lang('Disable')}" data-enable-span="{:lang('Yes')}" data-disable-span="{:lang('No')}">
+                                <span class="badge-green">{:lang('Yes')}</span>
+                            </a>
+                            {else /}
+                            <a href="{:url('enable',array('field'=>'isrecommend','ids'=>$vo['id']))}" class="ajax-able" data-doing="{:lang('Enable')}" data-enable-span="{:lang('Yes')}" data-disable-span="{:lang('No')}">
+                                <span class="badge-gray">{:lang('No')}</span>
+                            </a>
+                            {/if}
+                        </td>
+                        <td class="center">
+                            {if condition="$vo['status'] eq 1"}
+                            <a href="{:url('disable',array('ids'=>$vo['id']))}" class="ajax-able" data-doing="{:lang('Disable')}">
+                                <img src="__PUBLIC__/admin/images/enabled.png" title="{:lang('Enable')}" class="tooltip-link" alt="{:lang('Enable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png" />
+                            </a>
+                            {else /}
+                            <a href="{:url('enable',array('ids'=>$vo['id']))}" class="ajax-able" data-doing="{:lang('Enable')}">
+                                <img src="__PUBLIC__/admin/images/disabled.png" title="{:lang('Disable')}" class="tooltip-link" alt="{:lang('Disable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png" />
+                            </a>
+                            {/if}
+                        </td>
+                        
+                        <td class="center">
+                            <input name="sorts[{$vo.id}]" type="text" value="{$vo.sort}" maxlength="5" class="center sorts">
+                        </td>
+                        <td class="actions">
+                            <a class="tooltip-link ajax-get edit" title="{:lang('Edit_this_record')}" data-title="{:lang('Edit')}" href="{:url('edit',array('ids'=>$vo['id']))}"  data-showbar="1">
+                                <img src="__PUBLIC__/admin/images/edit.png" alt="{:lang('Edit')}" />
+                            </a>
+                            <a class="tooltip-link ajax-get confirm" data-layer="{:lang('Want_delete')}" title="{:lang('Delete_this_record')}" href="{:url('delete',array('ids'=>$vo['id']))}" data-title="{:lang('Delete')}" >
+                                <img src="__PUBLIC__/admin/images/delete.png" alt="{:lang('Delete')}" />
+                            </a>
+                        </td>
+                    </tr>
+                    {/volist}
+                    </tbody>
+                </table>
+                <div class="pagination-wrapper">
+                    <div class="results-part"><span>{$_total}</span></div>
+                    <div class="links-part">{$page}</div>
+                </div>
+                {else/}
+                <div class="alert alert-warning">{:lang('No_record')}</div>
+                {/notempty}
+            </div>
+        </div>
+    </div>
+    {/block}

@@ -1,0 +1,54 @@
+{notempty name=":widget('crossbbcg/Ad/get_goods_ad',['id'=>20,'limit'=>4])"}
+<dl class="goods-ly-list" >
+
+	<dt class="ly-title">
+		<h3>{:lang('recommend_goods')}</h3>
+	</dt>
+
+	<dd class="normal-goods">
+		<ul class="goods-list clearfix">
+            {foreach :widget('crossbbcg/Ad/get_goods_ad',['id'=>20,'limit'=>4]) as $v}
+			<li class="goods-item item1  clearfix   first">
+
+				<div class="item">
+					<div class="goods-pic">
+						<a target="_blank" href="{:url('crossbbcg/goods/index').'?item_id='.$v['id']}">
+                            {notempty name="$v['thumb']"}
+                            {if condition="substr($v['thumb'],0,4)=='http'"}
+                            <img width="188" height="188" class="imglazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="{$v['thumb']}" alt="{$v['name']}" />
+                            {else /}
+                            <img width="188" height="188" class="imglazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__UPLOADS__/{$v['thumb']}" alt="{$v['name']}" />
+                            {/if}
+                            {else /}
+                            <img width="188" height="188" class="imglazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__PUBLIC__/{$img_path}/no-image.png" alt="{$v['name']}" />
+                            {/notempty}
+                        </a>
+					</div>
+					<div class="goods-info" style="">
+						<h6 class="goods-name">
+					  <a href="{:url('crossbbcg/goods/index').'?item_id='.$v['id']}" target="_blank" title="{$v['name']}">{$v['name']}</a>
+					</h6>
+
+						<ul class="clearfix">
+
+							<li class="price">
+
+								<i>￥{$v['sale_price']}</i>
+							</li>
+
+							<li class="mk-price">
+
+								<i>￥{$v['market_price']}</i>
+							</li>
+
+						</ul>
+
+					</div>
+
+				</div>
+			</li>
+			{/foreach}
+		</ul>
+	</dd>
+</dl>
+{/notempty}

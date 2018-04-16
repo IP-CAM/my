@@ -1,0 +1,97 @@
+{extend name="common/base" /}
+
+{block name="title"}
+<title>ETshop-{:lang('Security')}</title>
+{/block}
+
+{block name="css"}
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/member.css" />
+{/block}
+
+{block name="body"}
+<!--面包屑-->
+<div class="ly-path">
+    <ul class="clearfix">
+        <li class="home">
+            <a href="{:url('crossbbcg/index/index')}" title="{:lang('go_min')}">{:lang('Home')}</a>
+            <span>&gt;&nbsp;</span>
+        </li>
+        <li>
+            <a href="{:url('member/member/index')}" title="">{:lang('Member')}</a>
+            <span>&gt;&nbsp;</span>
+        </li>
+        <li>
+            <h1>{:lang('Security')}</h1>
+        </li>
+    </ul>
+</div>
+<div class="ly-main member-main clearfix">
+	{include file="index/left_menu"}
+	<div class="member-right">
+		<div class="member-content">
+			<div class="title member-title member-max-title">
+				<div class="t">{:lang('security_center')}</div>
+			</div>
+			<div class="body pb15 mh600 security yahei">
+				<div class="safe-setting-box">
+					<dl class="safe-setting">
+						<dt>
+							<i class="iconfont icon-dui-copy" ></i>
+						<span class="title">{:lang('login_password')}</span>
+						<span class="intro">{:lang('login_pwd_tips')}</span>
+                        </dt>
+						<dd class="operate">
+						<a href="{:url('member/index/AlterPassword')}">{:lang('edit_password')} &gt;</a>
+						</dd>
+					</dl>
+					<dl class="safe-setting">
+						<dt>
+                            {notempty name="$data['mobile']"}
+                            <i class="iconfont icon-dui-copy" ></i>
+                            {else/}
+                            <i class="iconfont icon-jinggao1" ></i>
+                            {/notempty}
+						<span class="title">{:lang('mobile_bind')}</span>
+						<span class="intro">{:lang('mobile_bind_tips')}</span>
+						</dt>
+						<dd class="operate">
+							<!--一般只显示一个-->
+                            {notempty name="$data['mobile']"}
+                            <a href="{:url('member/index/AlterMobile')}"> {:lang('edit_mobile')}&gt;</a>
+                            {else/}
+                            <a href="{:url('member/index/VerifyMobilecheck')}">{:lang('mobile_bind')} &gt;</a>
+                            {/notempty}
+						</dd>
+					</dl>
+					<dl class="safe-setting border-none">
+						<dt>
+                            {notempty name="$data['email']"}
+                            <i class="iconfont icon-dui-copy" ></i>
+                            {else/}
+                            <i class="iconfont icon-jinggao1" ></i>
+                            {/notempty}
+						<span class="title">{:lang('email_bind')}</span>
+					</dt>
+						<dd class="operate">
+							<!--一般只显示一个-->
+                            {notempty name="$data['email']"}
+                            <a href="{:url('member/index/AlterEmail')}">{:lang('edit_email')} &gt;</a>
+                            {else/}
+                            <a href="{:url('member/index/VerifyEmailcheck')}">{:lang('email_bind')} &gt;</a>
+                            {/notempty}
+						</dd>
+					</dl>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{/block}
+
+<!--此板块为页面单独js加载-->
+{block name="footer_js"}
+<script type="text/javascript">
+	//需要加载的js文件
+	//Private_Script = ['seinfoset'];
+</script>
+{/block}

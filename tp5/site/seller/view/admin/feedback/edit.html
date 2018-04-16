@@ -1,0 +1,64 @@
+{extend name="admin@public/poupbase" /}
+{block name="body"}
+<style>
+    .cont{
+        display: block;
+        margin-top: 6px;
+        float: left;
+        line-height: 17px;
+        width: 77px;
+    }
+    .row{
+        height: 50px;
+    }
+</style>
+<div id="content" style="margin:0px 10px 5px 8px;">
+    <div class="bloc">
+        <div class="content">
+            <div style="display:block; /*height: 420px;*/">
+                <div class="extbody">
+                    <form id="myform" method="post" style="margin-top:5px;" class="">
+                        <fieldset>
+                            <legend>{:lang('Feedback Detail')}</legend>
+                            <div class="row">
+                                <label class="w100">{:lang('name')}:</label>
+                                <span class="cont">{$data.seller_name}</span>
+                                <label class="w100">{:lang('Appeal_time')}: </label>
+                                <span class="cont" style="width: 115px">{$data.create_time}</span>
+                            </div>
+                            <div class="row">
+                                <label class="w100">{:lang('status')}:</label>
+                                {switch name='data.status'}
+                                {case value='1'}<span class="blue cont" >{:lang('Waitting_answer')}</span>{/case}
+                                {case value='2'}<span class="green cont">{:lang('answered')}</span>{/case}
+                                {/switch}
+                                <label class="w100">{:lang('operator')}: </label>
+                                <span class="cont">{$data.operator}</span>
+                            </div>
+                            <div class="row">
+                                <label class="w100">{:lang('feedback_content')}:</label>
+                                <span style="margin-top: 5px;line-height: 24px;">{$data.content}</span>
+                            </div>
+                            <div class="row">
+                                <label class="w100">{:lang('Answer')}</label>
+                                <textarea type="text" name="handling_content">{notempty name='data.handling_content'}{$data.handling_content}{/notempty}</textarea>
+                            </div>
+                            <div class="buttons-wrapper bw-bottom" style="margin:20px auto 2px; text-align:center;">
+                                <input type="hidden" name="id" value="{$data.id}" />
+                                {empty name='data.handling_content'}<input name="submit" value="保存" type="submit"  url="{:url('savedata')}" />{/empty}
+                                <input name="reset" class="button white" value="取消" type="reset">
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $(".bset").buttonset();
+    });
+</script>
+{/block}

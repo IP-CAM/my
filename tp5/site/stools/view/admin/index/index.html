@@ -1,0 +1,177 @@
+    {extend name="admin@public/base" /}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content">
+        <div class="breadcrumbs">
+            {:lang('Ordersys')} : &nbsp;&nbsp; {:lang('Stools')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+        </div>
+        
+        <div class="bloc">
+            <div class="title">
+                <div class="tabs" id="navs">
+                    {include file="admin@public/navs" /}
+                </div>
+                
+                {include file="admin@public/lang" /}
+            </div>
+            <div class="content">
+                
+                <dl class="gzzt clearfix mtb10">
+                    <dd>
+                        <div class="boxr">
+                            {include file="admin@public/button" /}
+                        </div>
+                    </dd>
+                    
+                    <dd>
+                        <div class="boxr ovh">
+                            <select id="status" style="height:25px; width:80px; margin-right:4px;">
+                                <option value="" url="{:url('')}">{:lang('Whole')}</option>
+                                <option value="succ" url="{:url('',array_merge($inputarr, ['status'=>'succ']))}" {eq name="status" value="succ" }selected{/eq}>{:lang('Pay success')}</option>
+                                <option value="failed" url="{:url('',array_merge($inputarr, ['status'=>'failed']))}" {eq name="status" value="failed" }selected{/eq}>{:lang('Fail')}</option>
+                                <option value="error" url="{:url('',array_merge($inputarr, ['status'=>'error']))}" {eq name="status" value="error" }selected{/eq}>{:lang('Payerror')}</option>
+                            </select>
+    
+                            <script>
+                                $(function () {
+                                    $("#status").change(function () {
+                                        var gotu_url = $(this).find('option:selected').attr('url');
+                                        eval("self.location='" + gotu_url + "'")
+                                    })
+                                })
+                            </script>
+                        </div>
+                    </dd>
+                    
+                    <form style="margin-top:0;" class="search-form">
+                        <dd>
+                            <div class="boxr ovh">
+                                <label for="start" style="margin:10px 10px 0 0; width:156px;">
+                                    <input type="text" id="start" value="{:input('start_time')}" name="start_time"
+                                           placeholder="{:lang('Begin_time')}" class="w130 input_img"/>
+                                </label>
+                                <label style="width:10px;line-height:32px; margin-right:2px;">~</label>
+                                <label for="end" style="margin:10px 10px 0 0; width:150px;">
+                                    <input type="text" id="end" value="{:input('end_time')}" name="end_time"
+                                           placeholder="{:lang('End_time')}" class="w130 input_img"/>
+                                </label>
+                            </div>
+                        <dd>
+                        
+                        <dd>
+                            <div class="boxr ovh">
+                                <label for="name" style="margin:10px 10px 0 0; width:230px;">
+                                    <input type="text" class="searchinput" id="name" name="name" value="{:input('name')}"
+                                           placeholder="{:lang('Payform search tip')}" style="width:200px;"/>
+                                </label>
+                                <input type="button" name="search" id="sch-search" class="button white"
+                                       value="{:lang('Search')}" url="{:url('', input('name'))}"/>
+                            </div>
+                        <dd>
+                        
+                        <dd style="float: right !important;">
+                            <div class="boxl">
+                                <span>
+                                    <a href="javascript:location.reload();" class="refresh tooltip-link"
+                                           title="{:lang('Refresh')}">
+                                            <em>{:lang('Refresh')}</em>
+                                    </a>
+                                </span>
+                                <span>
+                                    <a href="javascript:void(0);" class="ajax-get setting tooltip-link colum"
+                                           title="{:lang('Showlum')}" data-title="{:lang('Showlum')}">
+                                        <em>{:lang('Showlum')}</em>
+                                    </a>
+                                </span>
+                            </div>
+                        </dd>
+                    </form>
+                </dl>
+                
+                {notempty name="list"}
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="center" width="30"><input class="check-all" type="checkbox"></th>
+                        <th class="left" style="width:35px;">ID</th>
+                        
+                        <th class="left" style="width:160px;">
+                            <a href="{:getUrlbyOrder('trade_no')}">{:lang('Trade_no')}</a>
+                        </th>
+                        <th class="left" style="width:130px;">
+                            <a href="{:getUrlbyOrder('order_sn')}">{:lang('Order_sn')}</a>
+                        </th>
+                        <th class="left"><a href="{:getUrlbyOrder('money')}">{:lang('Payment money')}</a></th>
+                        <th class="left" style="width:100px;">{:lang('Payment IP')}</th>
+                        <th class="left" style="width:120px;">
+                            <a href="{:getUrlbyOrder('t_payed')}">{:lang('Payment overtime')}</a>
+                        </th>
+                        <th class="left" style="width:110px;"><a href="{:getUrlbyOrder('pay_class')}">{:lang('Payment type')}</a></th>
+                        <th class="left" style="width:90px;">
+                            <a href="{:getUrlbyOrder('uid')}">{:lang('Account')}</a>
+                        </th>
+                        <th class="left"><a href="{:getUrlbyOrder('pay_account')}">{:lang('Payment account')}</a></th>
+                        <th class="actions" style="width: 40px;">
+                            <a href="{:getUrlbyOrder('status')}">{:lang('Status')}</a>
+                        </th>
+                    </tr>
+                    </thead>
+                    
+                    <tbody>
+                    {volist name="list" id="vo"}
+                    <tr>
+                        <td class="center">
+                            <input class="ids" type="checkbox" value="{$vo['id']}" name="ids[]">
+                        </td>
+                        <td class="left">{$vo['id']}</td>
+                        
+                        <td class="left slh tooltip-link" style="max-width: 150px;" title="{$vo['trade_no']}">
+                            <a href="{:url('view', ['order_sn'=>$vo['order_sn']])}" class="ajax-get edit" data-title="{:lang('View payinfo')}" data-height="426" data-width="800" data-showbar="1">
+                                {$vo['trade_no']}
+                            </a>
+                        </td>
+                        <td class="left slh tooltip-link" style="max-width: 130px;">{$vo['order_sn']}</td>
+                        <td class="left">{$vo['money']}</td>
+                        <td class="left">{$vo['ip']}</td>
+                        
+                        <td class="left">
+                            {neq name="vo.t_payed" value="0"}{$vo.t_payed|time_format}{/neq}
+                        </td>
+                        <td class="left slh tooltip-link" style="max-width: 120px;" title="{$vo['pay_name']|lang}">{$vo['pay_name']|lang}</td>
+                        <td class="left slh tooltip-link" style="max-width: 80px;" title="{:get_username($vo['uid'], 'mobile')}">{:get_username($vo['uid'], 'mobile')}</td>
+                        <td class="left slh tooltip-link" style="max-width: 80px;" title="{$vo['pay_account']}">{$vo['pay_account']}</td>
+                        <td class="actions">
+                        {switch name="vo.status"}
+                            {case value="error"}
+                                <span class="red">{:lang('error')}</span>
+                            {/case}
+                            {case value="succ"}
+                                <span class="green">{:lang('Success')}</span>
+                            {/case}
+                            {case value="failed"}
+                                <span class="red">{:lang('Fail')}</span>
+                            {/case}
+                            {default /} <span style="color: green">{$vo['status']}</span>
+                        {/switch}
+                        </td>
+                    </tr>
+                    {/volist}
+                    </tbody>
+                </table>
+                <div class="pagination-wrapper">
+                    <div class="results-part"><span>{$_total}</span></div>
+                    <div class="links-part">{$page}</div>
+                </div>
+                
+                {else /}
+                <div class="alert alert-warning">{:lang('No_record')}</div>
+                {/notempty}
+            </div>
+        </div>
+    
+    </div>
+    
+    {include file="admin@public/time_for_search" /}
+    
+    {/block}

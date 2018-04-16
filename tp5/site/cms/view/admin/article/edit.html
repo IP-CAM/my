@@ -1,0 +1,209 @@
+{extend name="admin@public/poupbase" /}
+
+<!-- CONTENT -->
+{block name="body"}
+<div id="content" style="margin:0px 10px 5px 8px;">
+    <div class="bloc" style="margin:10px 0px 0px;">
+        <div class="content">
+            <form id="myform" method="post" style="margin-top:5px;" class="">
+                <fieldset>
+                    <legend>{$meta_title|default=''}</legend>
+                    <div class="thumb_box" style="right: 100px;">
+                        <div class="thumb">
+                            <div class="upimg_tip">{:lang('Thumb')}</div>
+                            <div class="upimg_cancel" title="{:lang('Cancel')}">x</div>
+                            <img
+                                src="{notempty name='data.cover_image'}{$data.cover_image}{else /}__PUBLIC__/admin/images/upload-pic.gif{/notempty}"
+                                id="preview" class="upload" width="110" height="100"
+                                no-image="__PUBLIC__/admin/images/upload-pic.gif"
+                                url="{:url('img',array('m' => $controller_name,'input' => 'cover_image','thumb' => 'preview'))}" data-upload="__UPLOADS__" />
+                            <input type="hidden" name="cover_image" id="cover_image" value="{$data.cover_image}"/>
+                        </div>
+                    </div>
+                    
+                    <div style="float:left; width:520px; padding-right:15px; border-right:1px dashed #000;">
+                        <div class="row">
+                            <div style="float: left">
+                                <label for="category_id" class="w70" style="width: 90px;">{:lang('Articlecat')}:<span
+                                    class="required">*</span></label>
+                                <select name="category_id" id="category_id" style="width:130px; margin-right: 16px;">
+                                    <option value="0">{:lang('Asfirstlevel')}</option>
+                                    {volist name="catlist" id="co"}
+                                    <option value="{$co.id}" {eq name="ACTION_NAME" value="edit" }{eq name="co.id"
+                                            value="$data.category_id" }selected{/eq} {else /} {eq name="co.id" value="$category_id"}selected{/eq} {/eq}>{$co.char}
+                                    {$co.title}</option>
+                                    {/volist}
+                                </select>
+                            </div>
+                        
+                        </div>
+                        <div class="row">
+                            <div style="float:left;">
+                                <label for="title" style="width: 90px" class="w70">{:lang('Article title')}: <span
+                                    class="required">*</span></label>
+                                <input id="title" type="text" value="{$data.title}" name="title" style="width:120px;"/>
+                            </div>
+                            <div style="float:left;">
+                                <label for="name" style="width: 90px" class="w70">{:lang('Article name')}: </label>
+                                <input id="name" type="text" class="onlyletter" value="{$data.name}" name="name"
+                                       style="width:120px;"/>
+                            </div>
+                        
+                        </div>
+                        <div class="row">
+                            <div style="float:left;">
+                                <label for="author" style="width: 90px" class="w70">{:lang('Article author')}:</label>
+                                <input id="author" type="text" value="{$data.author}" name="author" style="width:120px;"
+                                       pagination="{:lang('Circle admin tip')}"/>
+                            </div>
+                            <div style="float:left;">
+                                <label for="author_email" style="width: 90px" class="w70">{:lang('Article author email')}: </label>
+                                <input id="author_email" type="text" value="{$data.author_email}" name="author_email"
+                                       style="width:120px;" pagination="{:lang('E_mail')}"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div style="float: left">
+                                <label for="link" style="width: 90px" class="w70">{:lang('Article link')}:</label>
+                                <input id="link" type="text" value="{$data.link}" name="link" style="width:120px;"
+                                       pagination=""/>
+                            </div>
+                            <div style="float: left">
+                                <label for="file_url" style="width: 90px" class="w70">{:lang('Article file url')}:</label>
+                                <input id="file_url" type="text" value="{$data.file_url}" name="file_url"
+                                       style="width:120px;" pagination=""/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label for="about" style="width: 90px" class="w70">{:lang('Article about')}: </label>
+                            <textarea id="about" style="width: 280px; height: 60px;" name="about" placeholder="">{$data.about}</textarea>
+                        </div>
+                        <div class="row" style="margin-left:40px">
+                            <div class="clear"></div>
+                            <label for="contents">{:lang('Content')}: </label>
+                            <textarea id="contents" name="contents">{$data.contents}</textarea>
+                            <script charset="utf-8" src="__STATIC__/kindeditor/kindeditor-all-min.js"></script>
+                            <script>
+                                KindEditor.ready(function (K) {
+                                    editor = K.create('#contents', {
+                                        resizeType: 1,
+                                        allowPreviewEmoticons: false,
+                                        allowImageUpload: false,
+                                        minWidth: 470,
+                                        minHeight: 185,
+                                        langType: '{:jsup(config('default_lang'))}',
+                                        items: [
+                                            'undo', 'redo', '|', 'bold', 'italic', 'underline',
+                                            'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                                            'insertunorderedlist', '|', 'image', 'media'],
+                                        afterBlur: function () {
+                                            this.sync();
+                                        }
+                                    });
+                                });
+                            </script>
+                        </div>
+                    </div>
+                    
+                    <div style="float:left; width:280px; padding-top:110px;">
+                        <div class="row">
+                            <label for="sort" class="w120" style="width: 105px;">{:lang('Sort')}: </label>
+                            <input type="number" class="input litle" min="0" name="sort" maxlength="5" id="sort"
+                                   value='{$data.sort|default=0}'>
+                        </div>
+                        <div class="row">
+                            <label for="open_type" class="w120">{:lang('File open')}:</label>
+                            <div class="slideBox">
+                                {eq name="ACTION_NAME" value="edit"}
+                                <input id="open_type" value="1" type="checkbox" name="open_type" {eq
+                                       name="data['open_type']" value="1" }checked{/eq} />
+                                {else /}
+                                <input id="open_type" value="1" type="checkbox" name="open_type"/>
+                                {/eq}
+                                <label for="open_type"></label>
+                            </div>
+                            <a style="margin-left: 8px" class="tooltip-icon" title="{:lang('File tip')}"></a>
+                        </div>
+                        <div class="row">
+                            <label for="is_comment" class="w120">{:lang('Is_recom')}:</label>
+                            <div class="slideBox">
+                                {eq name="ACTION_NAME" value="edit"}
+                                <input id="is_comment" value="1" type="checkbox" name="is_comment" {eq
+                                       name="data['is_comment']" value="1" }checked{/eq} />
+                                {else /}
+                                <input id="is_comment" value="1" type="checkbox" name="is_comment"/>
+                                {/eq}
+                                <label for="is_comment"></label>
+                            </div>
+                        
+                        </div>
+                        <div class="row">
+                            <label for="is_review" class="w120">{:lang('Field_display')}:</label>
+                            <div class="slideBox">
+                                {eq name="ACTION_NAME" value="edit"}
+                                <input id="is_review" value="1" type="checkbox" name="is_review" {eq
+                                       name="data['is_review']" value="1" }checked{/eq} />
+                                {else /}
+                                <input id="is_review" value="1" type="checkbox" name="is_review"/>
+                                {/eq}
+                                <label for="is_review"></label>
+                            </div>
+                        
+                        </div>
+                        <div class="row">
+                            <label for="is_top" class="w120">{:lang('Istop tip')}:</label>
+                            <div class="slideBox">
+                                {eq name="ACTION_NAME" value="edit"}
+                                <input id="is_top" value="1" type="checkbox" name="is_top" {eq
+                                       name="data['is_top']" value="1" }checked{/eq} />
+                                {else /}
+                                <input id="is_top" value="1" type="checkbox" name="is_top"/>
+                                {/eq}
+                                <label for="is_top"></label>
+                            </div>
+                        
+                        </div>
+                        
+                        <div class="row">
+                            <label for="status" class="w120">{:lang('Status')}:</label>
+                            <div class="slideBox">
+                                {eq name="ACTION_NAME" value="edit"}
+                                <input id="status" value="1" type="checkbox" name="status" {eq name="data['status']"
+                                       value="1" }checked{/eq} />
+                                {else /}
+                                <input id="status" value="1" type="checkbox" name="status" checked/>
+                                {/eq}
+                                <label for="status"></label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                    {eq name="$action_name" value="edit"}
+                    <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('savedata')}"/>
+                    <input name="id" type="hidden" value="{$data.id}"/>
+                    <input name="scene" type="hidden" value="edit">
+                    {else /}
+                    <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}"/>
+                    {/eq}
+                    <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $(".bset").buttonset();
+
+        $("#dead_line").datepicker({
+            dateFormat: "{:config('kernel.timeformat')}",
+            maxDate: new Date(),
+            onSelect: function (dateText, inst) {
+                $.datepicker.regional["{:config('kernel.localdate')}"];
+            }
+        });
+    })
+</script>
+
+{/block}

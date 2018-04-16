@@ -1,0 +1,33 @@
+<div class="left-cat associated-cat">
+			<div class="ly-title cat1-title">店铺分类</div>
+			<ul class="ly-wrap">
+				<li class="cat1 cat-all  last">
+					<dl>
+						<dd class="cat2-box">
+                            {foreach $category as $v}
+							<div class="cat2  cat2-all">
+								<div class="cat2-title">
+                                    {empty name='$v.son'}
+                                    <a href="{:url('items').'?seller_id='.$store_info.seller_id.'&cate_id='.$v.id}" class="act">{$v.name}</a>
+                                    {else /}
+                                    <a href="javascript:void(0);" class="act">{$v.name}</a>
+                                    <span class="show"></span> </div>
+                                    {/empty}
+									
+									
+                                {notempty name='$v.son'}
+								<div class="cat3-box ">
+                                    {foreach $v.son as $vv}
+									<a href="{:url('items').'?seller_id='.$store_info.seller_id.'&cate_id='.$vv.id}" class="">{$vv.name}</a>
+                                    {/foreach}
+								</div>
+                                {/notempty}
+							</div>
+                            {/foreach}
+                            
+						</dd>
+					</dl>
+				</li>
+			</ul>
+
+		</div>

@@ -1,0 +1,185 @@
+{extend name="common/base" /} {block name="title"}
+<title>{$meta_title|default=lang('Default_Meta_Title')}</title>
+{/block} {block name="css"}
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/cart.css"/> {/block} {block name="body"}
+<!--面包屑-->
+
+<div class="ly-main clearfix">
+    <div class="cart-top clearfix">
+        <div class="left">
+            <em class="iconfont icon-dingdan"></em><span>{:lang('Success_Submit_Order')}</span>
+        </div>
+        <div class="right">
+            <div id="cart_steps" class="steps">
+                <table width="100%">
+                    <tbody>
+                    <tr>
+                        <td class="step-item step-1 active"><span><q class="icon">●</q><i>1</i>{:lang('Cart')}</span>
+                            <div class="stepdiv">1</div>
+                        </td>
+                        <td class="step-item step-2 active">
+                            <span><q class="icon">●</q><i>2</i>{:lang('Write_Submit_Order')}</span>
+                            <div class="stepdiv">2</div>
+                        </td>
+                        <td class="step-item step-3 last active"><span><q class="icon">●</q><i>3</i>{:lang('Success_Submit_Order')}</span>
+                            <div class="stepdiv">3</div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <div class="checkout-main pay-main">
+        <div class="pay-title">
+			<span class="success-span">
+                <i class="iconfont icon-dui-copy"></i>
+                <em>{:lang('payment_description')}</em>
+			</span>
+            <div class="center order_cancel-tip">
+                {:lang('If_not_pay_order_cancel')}
+                <span id="hour_show" class="red"></span>
+                <span id="minute_show" class="red"></span>
+                
+                {:lang('If_not_pay_order_cancel2')}
+            </div>
+            <div class="success-text">
+                <em>{:lang('order_id')}：{$order_sn}</em>
+                <em>{:lang('order_payment')}：<span class="price">{:$symbol . $order_amount}</span></em>
+                <em><a href="{:url('member/index/orderdetail','order_sn='.$order_sn)}" target="_blank">{:lang('check_order')}></a></em>
+            </div>
+        </div>
+        <dl class="checkout-litem pay-list">
+            {notempty name="arr_payments"}
+            
+            <dt class="title">
+                <span>{:lang('choose_payment_method')}:</span>
+            </dt>
+            <dd>
+                <ul class="clearfix">
+                    <!--选择样式current-->
+                    {foreach $arr_payments as $payment}
+                    <li class="pay-item {eq name="payment['default']" value="1"}current{/eq}" >
+                    <label style="background: url({$payment['logo']}) no-repeat center center;" alt="{$payment['title']}">
+                        <input class="ui-input hide" type="radio" name="payment_method" value="{$payment['code']}" {eq name="payment['default']" value="1" }checked="checked" {/eq}/>
+                    </label>
+                    </li>
+                    {/foreach}
+                </ul>
+            </dd>
+            {else /}
+            <dd>
+                {:lang('payment_null')}
+            </dd>
+            {/notempty}
+        </dl>
+        <dl class="checkout-litem  price-list clearfix">
+            
+            <!--提交按钮-->
+            <dd>
+                <div class="submit-box">
+                    <button type="submit" class="btn-submit" onclick="show_pay_tips()">{:lang('go_checkout')}</button>
+                </div>
+            </dd>
+            <!--提交按钮END-->
+        </dl>
+    
+    </div>
+
+</div>
+
+{/block}
+<!--此板块为页面单独js加载-->
+{block name="footer_js"}
+<script>
+    function show_pay_tips() {
+        var request_data = {
+            order_sn: "{$order_sn}"
+        };
+        $.ajax({
+            type: 'post',
+            url: "{:url('crossbbcg/carts/checkOrder')}",
+            data: request_data,
+            dataType: 'json',
+            success: function (json) {
+                if(json['code']){
+                    layer.open({
+                        'skin': 'layer-ext-blue',
+                        type: 1,
+                        area: ['350px', '150px'],
+                        scrollbar: false,
+                        title: false, //'{:lang('reminder')}',
+                        maxmin: false,
+                        anim: 0,
+                        shadeClose: true,
+                        shade: [0.3, '#333333'],
+                        content: $('#pay_tips').html()
+
+                    });
+                    var url = "{:url('crossbbcg/carts/toPay')}";
+                    var code = $('input[name="payment_method"]:checked').val();
+                    url += '?payment_code=' + code;
+                    window.open(url);
+                }else{
+                    window.location.href = json['url'];
+                }
+                  
+            }
+        });
+    }
+
+    <!--剩余关闭时间-->
+    {php}
+    $surplus = $expire_time - (time()-strtotime($create_time));
+    {/php}
+
+    var intDiff = parseInt({$surplus});//倒计时总秒数量
+    function timer(intDiff){
+        window.setInterval(function(){
+            var day=0,
+                hour=0,
+                minute=0,
+                second=0;//时间默认值
+            if(intDiff > 0){
+                day = Math.floor(intDiff / (60 * 60 * 24));
+                hour = Math.floor(intDiff / (60 * 60));
+                minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
+                second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+            }
+            if (minute <= 9) minute = '0' + minute;
+            if (second <= 9) second = '0' + second;
+
+            $('#hour_show').html('<s id="h"></s>'+hour+" {:lang('hour')}");
+            $('#minute_show').html('<s></s>'+minute+" {:lang('minute')}");
+            
+            intDiff--;
+        }, 1000);
+    }
+    timer(intDiff);
+</script>
+
+<script type="text/javascript">
+    //需要加载的js文件
+    //Private_Script = ['paycenter'];
+</script>
+<script type="text/html" id="pay_tips">
+    <div class="payment-online">
+        <p>{:lang('checkout_description')}：</p>
+        <div class="pay-stat">
+            <div class="pay-success">
+                <h4>{:lang('checkout_success')}：</h4>
+                <div class="action">
+                    <a href="{:url('member/index/orderdetail','order_sn='.$order_sn)}" class="lnklike popup-btn-close" target="_blank">{:lang('check_order')}</a>
+                </div>
+            </div>
+            <div class="pay-failure">
+                <h4>{:lang('checkout_fail')}：</h4>
+                <div class="action">
+                    <a href="javascript:location.reload();" class="lnklike popup-btn-close">{:lang('again_checkout')}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+{/block}

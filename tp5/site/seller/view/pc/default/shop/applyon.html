@@ -1,0 +1,146 @@
+{extend name='public/mini_layout'}
+
+{block name='body'}
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+    <style>
+        .row{
+            display: block;
+            width: 100%;
+            height:50px;
+        }
+        label{
+            display: inline-block;
+            width: 150px;
+            text-align: right;
+            padding-right: 20px;
+        }
+    </style>
+    <form class="form-horizontal" id="myform" method="post">
+        <div class="ncap-form-default">
+            <div class="row">
+                <div style="float: left;margin:10px;">
+                    <label for="seller_name">{:lang('seller_name')}:</label>
+                    <input type="text" name="seller_name" value=""/>
+                </div>
+                <div style="float: left;margin:10px">
+                    <label for="email">{:lang('Email')}:</label>
+                    <input type="text" name="email" value=""/>
+                </div>
+            </div>
+            <div class="row">
+                <div style="float: left;margin: 10px">
+                    <label for="name">{:lang('tel')}:</label>
+                    <input type="text" name="mobile" value=""/>
+                </div>
+                <div style="float: left;margin: 10px">
+                    <label for="name">{:lang('Telephone')}:</label>
+                    <input type="text" name='phone' value=""/>
+                </div>
+            </div>
+            <div class="row">
+                <div style="float: left;margin: 10px">
+                    <label for="name">{:lang('company_name')}:</label>
+                    <input type="text" name="company" value=""/>
+                </div>
+                <div style="float: left;margin: 10px">
+                    <label for="name">{:lang('corporate')}:</label>
+                    <input type="text" name="corporate" value=""/>
+                </div>
+            </div>
+            <div class="row">
+                <div style="float: left;margin: 10px">
+                    <label for="name">{:lang('organization_code')}:</label>
+                    <input type="text" name="organization_code" value=""/>
+                </div>
+                <div style="float: left;margin: 10px">
+                    <label for="name">{:lang('corporate_card')}:</label>
+                    <input name="corporate_card" type="text" class="input" value="" id="corporate_card" placeholder="image/logo.png" />
+                    <input class="button white upload" value="{:lang('Selectimg')}" title="{:lang('Selectimg')}" type="button" title="{:lang('Upload img and file')}" url="{:url('img',array('input' => 'corporate_card'))}" data-upload="__UPLOADS__" />
+                    <a href="javascript:void(0)" class="preview" data-src="logo" data-width="200" data-height="200" data-area="200">{:lang('Preview')}</a>
+                </div>
+            </div>
+            <div class="row">
+                <div style="float: left;margin: 10px">
+                    <label for="name">{:lang('license_no')}: </label>
+                    <input type="text" name="license_no" value=""/>
+                </div>
+                <div style="float: left;margin: 10px">
+                    <label for="name">{:lang('paper_img')}:</label>
+                    <input name="business_license" type="text" class="input" value="" id="business_license" placeholder="image/logo.png" />
+                    <input class="button white upload" value="{:lang('Selectimg')}" title="{:lang('Selectimg')}" type="button" title="{:lang('Upload img and file')}" url="{:url('img',array('input' => 'business_license'))}" data-upload="__UPLOADS__" />
+                    <a href="javascript:void(0)" class="preview" data-src="logo" data-width="200" data-height="200" data-area="200">{:lang('Preview')}</a>
+                </div>
+            </div>
+            <div class="row">
+                <div style="float: left;margin: 10px">
+                    <label for="">{:lang('build_time')}:</label>
+                    <input type="text" size="20" id="build_time" name="build_time" value="" class="qsbox">
+                </div>
+                <div style="float: left;margin: 10px">
+                    <label for="name">{:lang('seller_logo')}:</label>
+                    <input name="logo" type="text" class="input" value="" id="logo" placeholder="image/logo.png" />
+                    <input class="button white upload" value="{:lang('Selectimg')}" title="{:lang('Selectimg')}" type="button" title="{:lang('Upload img and file')}" url="{:url('img',array('input' => 'logo'))}" data-upload="__UPLOADS__" />
+                    <a href="javascript:void(0)" class="preview" data-src="logo" data-width="200" data-height="200" data-area="200">{:lang('Preview')}</a>
+                </div>
+            </div>
+            <div class="row">
+                <div style="float: left;margin: 10px">
+                    <label for="">店铺类型：</label>
+                    <select name="cat_id" style="width: 141px">
+                        {volist name='option' id='vo'}
+                        <option value="{$vo.id}">{$vo.name}</option>
+                        {/volist}
+                    </select>
+                </div>
+                <div style="float: left;margin: 10px">
+                    <label for="tax_registration_certificate">{:lang('tax_certificate')}:</label>
+                    <input name="tax_registration_certificate" type="text" class="input" value="" id="tax_registration_certificate" placeholder="image/logo.png" />
+                    <input class="button white upload" value="{:lang('Selectimg')}" title="{:lang('Selectimg')}" type="button" title="{:lang('Upload img and file')}" url="{:url('img',array('input' => 'tax_registration_certificate'))}" data-upload="__UPLOADS__" />
+                    <a href="javascript:void(0)" class="preview" data-src="logo" data-width="200" data-height="200" data-area="200">{:lang('Preview')}</a>
+                </div>
+            </div>
+            <div class="row">
+                <div style="float: left;margin: 10px;">
+                    <label for="">{:lang('Cash deposit')}: </label>
+                    <input type="text" name="cash" value=""/>
+                </div>
+                <div style="float: left;margin: 10px">
+                    <label for="name">{:lang('website')}: </label>
+                    <input type="text" name="home_url" value=""/>
+                </div>
+            </div>
+            <div class="row">
+                <div style="float: left;margin: 10px">
+                    <label for="">{:lang('gathering_info')}:</label>
+                    <input type="text" name="bank" value="" placeholder="{:lang('bank')}"/>
+                    <input type="text" name="bank_no" value="" placeholder="{:lang('bank_no')}"/>
+                    <input type="text" name='bank_name' value="" placeholder="{:lang('bank_name')}"/>
+                </div>
+            </div>
+            <div class="row">
+                <div style="float: left;margin: 10px">
+                    <label for="">QQ：</label>
+                    <input type="text" name="qq" value=""/>
+                </div>
+            </div>
+            <div class="row">
+                <div style="float: left;margin: 10px;width: 100%">
+                    <label>{:lang('shop_description')}:</label>
+                    <textarea name="shop_description" id="" cols="80" rows="10"></textarea>
+                </div>
+            </div>
+            <div class="bot" style="padding: 12px 0 10px 44%"><input class="btns blue" type="submit" name="submit" value="确认提交" url="{:url('')}"></div>
+        </div>
+    </form>
+</div>
+<script>
+    $(function () {
+        $('#build_time').layDate();
+        $('body').css('overflow-y','hidden');
+        $('body').css('background-color','#fff');
+    })
+    
+</script>
+{/block}

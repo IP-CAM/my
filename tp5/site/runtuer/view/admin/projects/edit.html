@@ -1,0 +1,278 @@
+    {extend name="admin@public/poupbase"/}
+    
+    <!-- CONTENT -->
+    
+    {block name="body"}
+        <div id="content" style="margin:0px 10px 5px 8px;">
+            <div class="bloc" style="margin:10px 0px 0px;">
+                <div class="content">
+                    <form id="myform" method="post" style="margin-top:5px;" class="">
+                        <fieldset>
+                            <legend>{$meta_title|default=''}</legend>
+                            <div class="row">
+                                <div style="float:left;">
+                                    <label for="title" class="w100">{:lang('Project_name')}: <span class="required">*</span></label>
+                                    <input id="title" type="text" value="{$data.title}" name="title" style=" width:240px;" placeholder="{:lang('Project_name_tip')}" />
+                                </div>
+                                
+                                <div style="float:left;">
+                                    <select id="status" name="status" class="w100">
+                                        {foreach name="statu" item="st"}
+                                            {eq name="ACTION_NAME" value="edit"}
+                                                <option value="{$key}" {eq name="data.status" value="$key"}selected{/eq}>{$st}</option>
+                                            {else /}
+                                                <option value="{$key}">{$st}</option>
+                                            {/eq}
+                                        {/foreach}
+                                    </select>
+                                </div>
+                                
+                                <div style="float:left; margin:auto 8px auto 40px;">
+                                    <input id="contact_time" type="text" value="{eq name="ACTION_NAME" value="edit"}{$data.contact_time|time_format}{else /}{:time_format()}{/eq}" name="contact_time" class="w100l green datainput"/>
+                                    <a class="tooltip-icon" title="{:lang('Contact_time')}"></a>
+                                </div>
+                            
+                            </div>
+                            
+                            <div class="row">
+                                <div style="float:left;">
+                                    <label for="type" class="w100">{:lang('Project_type')}: </label>
+                                    <select id="type" name="type" class="w140">
+                                        <optgroup label="{:lang('Web_dev')}">
+                                            <option value="1" {eq name="data.type" value="1"}selected{/eq} {eq name="ACTION_NAME" value="add"}selected{/eq}>{:lang('Shop_dev')}</option>
+                                            <option value="2" {eq name="data.type" value="2"}selected{/eq}>{:lang('Comprehensive_website')}</option>
+                                            <option value="3" {eq name="data.type" value="3"}selected{/eq}>{:lang('Enterprise_website')}</option>
+                                            <option value="4" {eq name="data.type" value="4"}selected{/eq}>{:lang('Marketing_website')}</option>
+                                            <option value="5" {eq name="data.type" value="5"}selected{/eq}>{:lang('Program_dev')}</option>
+                                        </optgroup>
+                                        <optgroup label="{:lang('Mobile_dev')}">
+                                            <option value="6" {eq name="data.type" value="6"}selected{/eq}>{:lang('Mobile_website')}</option>
+                                            <option value="7" {eq name="data.type" value="7"}selected{/eq}>{:lang('Weixin_dev')}</option>
+                                        </optgroup>
+                                        <optgroup label="{:lang('App_dev')}">
+                                            <option value="8" {eq name="data.type" value="8"}selected{/eq}>{:lang('Android_dev')}</option>
+                                            <option value="9" {eq name="data.type" value="9"}selected{/eq}>{:lang('IOS_dev')}</option>
+                                            <option value="10" {eq name="data.type" value="10"}selected{/eq}>{:lang('WP_app_dev')}</option>
+                                        </optgroup>
+                                        <optgroup label="{:lang('Web_service')}">
+                                            <option value="11" {eq name="data.type" value="11"}selected{/eq}>{:lang('Seo_extension')}</option>
+                                            <option value="12" {eq name="data.type" value="12"}selected{/eq}>{:lang('Vhost')}</option>
+                                            <option value="13" {eq name="data.type" value="13"}selected{/eq}>{:lang('Vps')}</option>
+                                            <option value="14" {eq name="data.type" value="14"}selected{/eq}>{:lang('Server')}</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                                
+                                <div style="float:left;">
+                                    <label for="dev_lang" class="w100">{:lang('Dev_lang')}: <span class="required">*</span></label>
+                                    <select id="dev_lang" name="dev_lang" class="w100">
+                                        {volist name="dev_lang" id="dl"}
+                                        <option value="{$key}" {eq name="key" value="$data.dev_lang"}selected{/eq}>
+                                        {$key}
+                                        </option>
+                                        {/volist}
+                                    </select>
+                                </div>
+                                
+                                <div style="float:left;">
+                                    <label for="planned_cycle" class="w80">{:lang('Planned_cycle')}: </label>
+                                    <select id="planned_cycle" name="planned_cycle" class="w100">
+                                        <option value="1" {eq name="data.planned_cycle" value="1"}selected{/eq}>1 {:lang('Day')}</option>
+                                        <option value="3" {eq name="data.planned_cycle" value="3"}selected{/eq}>3 {:lang('Day')}</option>
+                                        <option value="6" {eq name="data.planned_cycle" value="6"}selected{/eq}>6 {:lang('Day')}</option>
+                                        <option value="10" {eq name="data.planned_cycle" value="10"}selected{/eq}>10 {:lang('Day')}</option>
+                                        <option value="15" {eq name="data.planned_cycle" value="15"}selected{/eq} {eq name="ACTION_NAME" value="add"}selected{/eq}>15 {:lang('Day')}</option>
+                                        <option value="20" {eq name="data.planned_cycle" value="30"}selected{/eq}>20 {:lang('Day')}</option>
+                                        <option value="30" {eq name="data.planned_cycle" value="30"}selected{/eq}>30 {:lang('Day')}</option>
+                                        <option value="45" {eq name="data.planned_cycle" value="45"}selected{/eq}>45 {:lang('Day')}</option>
+                                        <option value="60" {eq name="data.planned_cycle" value="60"}selected{/eq}>60 {:lang('Day')}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div style="float:left;">
+                                    <label for="contact_name" class="w100">{:lang('Contact_name')}: <span class="required">*</span></label>
+                                    <input id="contact_name" type="text" value="{$data.contact_name}" name="contact_name" class="w80l" style="width:124px;" placeholder="{:lang('Contact_name_tip')}" />
+                                </div>
+                                
+                                <div style="float:left;">
+                                    <label for="planned_amount" class="w100" style="width:90px;">{:lang('Planned_amount')}: <span class="required">*</span></label>
+                                    <input id="planned_amount" type="text" value="{eq name="ACTION_NAME" value="edit"}{$data.planned_amount}{else /}0.00{/eq}" name="planned_amount" class="w80l blue"  />
+                                </div>
+                                
+                                <div style="float:left;">
+                                    <label for="level" class="w70" style="width:75px;">{:lang('Level')}: </label>
+                                    <select id="level" name="level" class="w100">
+                                        {for start="0" end="5"}
+                                            <option value="{$i}" {eq name="data.level" value="$i"}selected{/eq}>{$i} {:lang('Level_s')}</option>
+                                        {/for}
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div style="float:left;">
+                                    <label for="contact_tel" class="w100">{:lang('Contact_tel')}: </label>
+                                    <input id="contact_tel" type="text" value="{$data.contact_tel}" name="contact_tel" placeholder="13800138000" class="w80l" style="width:124px" />
+                                </div>
+                                
+                                <div style="float:left;">
+                                    <label for="bid_price" class="w100" style="width:90px;">{:lang('Bid_price')}: <span class="required">*</span></label>
+                                    <input id="bid_price" type="text" value="{eq name="ACTION_NAME" value="edit"}{$data.bid_price}{else /}0.00{/eq}" name="bid_price" class="w80l red"  />
+                                </div>
+                                
+                                <div style="float:left;">
+                                    <label for="isforeign" class="w80" style="width:75px;">{:lang('Foreign')}: </label>
+                                    <select id="isforeign" name="isforeign" class="w100l">
+                                        {volist name="isforeign" id="k"}
+                                            <option value="{$key}" {eq name="data.isforeign" value="$key"}selected{/eq}>{$k}</option>
+                                        {/volist}
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div style="float:left;">
+                                    <label for="contact_qq" class="w100">{:lang('Contact_qq')}: </label>
+                                    <input id="contact_qq" type="text" value="{$data.contact_qq}" name="contact_qq" class="w100l" placeholder="307102049" style="width:114px" />
+                                </div>
+                                
+                                <div style="float:left;">
+                                    <label for="hasdomain" class="w100" style="width:90px;">{:lang('Hasdomain')}</label>
+                                    <div class="slideBox">
+                                        {eq name="ACTION_NAME" value="edit"}
+                                            <input id="hasdomain" value="1" type="checkbox" name="hasdomain"  {eq name="data['hasdomain']" value="1"}checked{/eq}/>
+                                        {else /}
+                                            <input id="hasdomain" value="1" type="checkbox" name="hasdomain" checked />
+                                        {/eq}
+                                        <label for="hasdomain"></label>
+                                    </div>
+                                </div>
+                                
+                                <div style="float:left;">
+                                    <label for="hasvhost" class="w100" style="width:104px;">{:lang('Hasvhost')}</label>
+                                    <div class="slideBox">
+                                        {eq name="ACTION_NAME" value="edit"}
+                                            <input id="hasvhost" value="1" type="checkbox" name="hasvhost"  {eq name="data['hasvhost']" value="1"}checked{/eq}/>
+                                        {else /}
+                                            <input id="hasvhost" value="1" type="checkbox" name="hasvhost" checked />
+                                        {/eq}
+                                        <label for="hasvhost"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="clear"></div>
+                                <label for="project_content" class="w100">{:lang('Project_content')}: </label>
+                                <textarea id="project_content" name="project_content">{$data.project_content}</textarea>
+                                <script charset="utf-8" src="__STATIC__/kindeditor/kindeditor-all-min.js"></script>
+                                <script>
+                                    KindEditor.ready(function(K) {
+                                        editor = K.create('#project_content', {
+                                            resizeType : 1,
+                                            allowPreviewEmoticons : false,
+                                            allowImageUpload : false,
+                                            minWidth : 560,
+                                            minHeight : 125,
+                                            langType : '{:jsup(config('default_lang'))}',
+                                            items : [
+                                                'source', '|','undo', 'redo', '|','bold', 'italic', 'underline',
+                                                'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                                                'insertunorderedlist', '|', 'image'],
+                                            afterBlur: function () { this.sync(); }
+                                        });
+                                    });
+                                </script>
+                            </div>
+                            
+                            <div class="row">
+                                <div style="float:left;">
+                                    <label for="begin_time" class="w100">{:lang('Begin_time')}: <span class="required">*</span></label>
+                                    <input id="begin_time" type="text" value="{eq name="ACTION_NAME" value="edit"}{$data.begin_time|time_format}{else /}{:time_format()}{/eq}" name="begin_time" class="w100c green datainput "/>
+                                </div>
+                                
+                                <div style="float:left;">
+                                    <label for="finish_time" class="w80">{:lang('Finish_time')}: </label>
+                                    <input id="finish_time" type="text" value="{eq name="ACTION_NAME" value="edit"}{$data.finish_time|time_format}{else /}{:date('Y-m-d H:s',strtotime('+3 day', time()))}{/eq}" name="finish_time" class="w100l blue datainput "/>
+                                </div>
+                                
+                                <div style="float:left;">
+                                    <label for="actual_collection" class="w60">{:lang('Actual_collection')}:</label>
+                                    <input id="actual_collection" type="text" value="{eq name="ACTION_NAME" value="edit"}{$data.actual_collection}{else /}0.00{/eq}" name="actual_collection" class="red" style="width:70px;"/>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                
+                                <div style="float:left;">
+                                    <label for="dev_name" class="w100">{:lang('Dev_name')}: </label>
+                                    <input id="dev_name" type="text" value="{$data.dev_name}" name="dev_name" style="width:140px;" />
+                                </div>
+                                
+                                <div style="float:left;">
+                                    <label class="w80" style="width:80px;">{:lang('Pay_type')}:</label>
+                                    <select id="pay_type" name="pay_type" class="w120l">
+                                        <option value="10" {eq name="data.pay_type" value="10"}selected{/eq}>{:lang('Full_fee')}</option>
+                                        <option value="532" {eq name="data.pay_type" value="532"}selected{/eq}>5-3-2</option>
+                                        <option value="631" {eq name="data.pay_type" value="631"}selected{/eq}>6-3-1</option>
+                                        <option value="523" {eq name="data.pay_type" value="523"}selected{/eq}>5-2-3</option>
+                                        <option value="0" {eq name="data.pay_type" value="0"}selected{/eq}>{:lang('No_pay')}</option>
+                                    </select>
+                                </div>
+                                
+                                <div style="float:left;">
+                                    <label for="froms" class="w80">{:lang('Project_from')}: <span class="required">*</span></label>
+                                    <select id="froms" name="froms" class="w100l">
+                                        {volist name="from" id="f"}
+                                            <option value="{$key}" {eq name="data.froms" value="$key"}selected{/eq}>{$f}</option>
+                                        {/volist}
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                                {eq name="ACTION_NAME" value="edit"}
+                                    <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('savedata')}">
+                                    <input name="id" type="hidden"  value="{$data.id}" />
+                                {else /}
+                                    <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}">
+                                {/eq}
+                                <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {/block}
+    
+    {block name="js"}
+        <script>
+            $(function(){
+                $("#contact_time").datetimepicker({
+                    dateFormat: "{:config('kernel.timeformat')}",
+                    maxDate: new Date(),
+                });
+                
+                $("#begin_time").datetimepicker({
+                    dateFormat: "{:config('kernel.timeformat')}",
+                    minDate: new Date(),
+                    onSelect:function(dateText,inst){
+                        $.datepicker.regional[ "{:config('kernel.localdate')}" ];
+                        $("#finish_time").datepicker("option","minDate",dateText);
+                    }
+                });
+                
+                $("#finish_time").datetimepicker({
+                    dateFormat: "{:config('kernel.timeformat')}",
+                    minDate: 1,
+                    onSelect:function(dateText,inst){
+                        $.datepicker.regional[ "{:config('kernel.localdate')}" ];
+                        $("#begin_time").datepicker("option","maxDate",dateText);
+                    }
+                });
+            })
+        </script>
+    {/block}

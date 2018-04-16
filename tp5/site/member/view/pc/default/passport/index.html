@@ -1,0 +1,110 @@
+    {extend name="common/base" /}
+    
+    {block name="title"}
+    <title>{:lang('Login')}</title>
+    {/block}
+    
+    {block name="css"}
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/passport.css"/>
+    {/block}
+    
+    {block name="body"}
+    <!--面包屑-->
+    <div class="login-main-box">
+        <div class="brand-box" style="background-color:#1989eb">
+            <!--TODO 随机广告图片-->
+            <div class="wraper">
+                <a href=""><img src="__PUBLIC__/{$img_path}/login_3.png" width="512"/></a>
+            </div>
+        </div>
+        
+        <div class="wraper clearfix">
+            <div class="form-box">
+                <div class="login-switch ewm" onclick="$('.qrcode-login,.pc').toggle();$(this).toggle()"></div>
+                <div class="login-switch pc" style="display: none;"
+                     onclick="$('.qrcode-login,.ewm').toggle();$(this).toggle()"></div>
+                <div class="qrcode-login" style="display: none;">
+                    <div class="login-title">{:lang('Safe_Telephone_Login')}</div>
+                    <div class="qrcode-mod">
+                        <div class="qrcode-main">
+                            <div class="qrcode-img"><img src="{:qrcode()}" style="width:140px;"></div>
+                        </div>
+                        <div class="qrcode-desc">
+                            {:lang('scan_login')}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-header">
+                    
+                    <h1 class="left">{:lang('member_login')}</h1>
+                    <span class="go-reg right">
+                            <a href="{:url('member/passport/signup')}">{:lang('now_register')}&gt;&gt;</a>
+                        </span>
+                </div>
+                <form class="login-form" id="login_form" onsubmit="return false;">
+                    <div class="input-line">
+                        <!--ajax验证 测试账号 13599999999 可通过-->
+                        <span class="input-label">{:lang('mobile')}</span>
+                        <input id="username" class="form-text"
+                               data-ajax="{:url('member/passport/check_mobile',array('scene'=>'login'))}" required
+                               data-empty="{:lang('telephone_email_input')}" data-error="{:lang('must_telephone_email')}"
+                               data-regex="^1[0-9]{10}|\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" name="username"
+                               type="text" autocomplete="off" placeholder="{:lang('telephone_or_email')}">
+                        <i class="icon-reset">×</i>
+                        <div class="input-error"></div>
+                    </div>
+                    <div class="input-line">
+                         <span class="input-label">{:lang('login_password')}</span>
+                        <input id="password" required class="form-text" name="password" data-empty="{:lang('password_input')}"
+                               data-error="{:lang('password_required')}" data-regex="^.{6,18}$" type="password" autocomplete="off"
+                               placeholder="{:lang('input 6~18 string')}">
+                        <i class="icon-reset">×</i>
+                        <div class="input-error"></div>
+                    </div>
+                    
+                    <!--<div style="margin-bottom: 20px;height:44px;">-->
+                    <!--<div id="embed-captcha" data-url="{:url('member/passport/gt_login')}"></div>-->
+                    <!--<div id="wait" style="height: 42px;text-align: center;line-height: 54px;border: 1px solid #ccc;border-radius: 2px;background-color: #f3f3f3"><img src="__ROOT__/loading.gif" alt=""></div>-->
+                    <!--<p id="notice" style="color: red" class="input-error">{:lang('please_verify')}</p>-->
+                    <!--</div>-->
+                    
+                    <div class="form-remember">
+                        <span class="left">
+                            <!--TODO 永久登录-->
+                            <input id="rem" class="hidden" type="checkbox" name="remember_me" value="1" checked="">
+                            <label class="check-box" for="rem">{:lang('remeber')}</label>
+                        </span>
+                        <a class="right" href="{:url('member/passport/findpwd')}">{:lang('forget_password')}?</a>
+                    </div>
+                    
+                    <div class="form-submit">
+                        <button type="button" id="login-btn" class="submit-btn disabled" data-url="{:url('member/passport/index')}">{:lang('Login')}</button>
+                    </div>
+                
+                </form>
+                <div class="form-footer">
+                    <dl>
+                        <dt>{:lang('Quick_Login')}:</dt>
+                        <dd class="qq">
+                            <a title="{:lang('Qq')}" href="#" class="iconfont icon-qq"></a>
+                            <a title="{:lang('Sina')}" href="#" class="iconfont icon-zfb"></a>
+                            <a title="{:lang('Alipay')}" href="#" class="iconfont icon-xinlang"></a>
+                        </dd>
+                    </dl>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+    {/block}
+    
+    <!--此板块为页面单独js加载-->
+    {block name="footer_js"}
+    <script type="text/javascript">
+        // 极验证
+        
+        
+        //需要加载的js文件
+        Private_Script = ['passport'];
+    </script>
+    {/block}

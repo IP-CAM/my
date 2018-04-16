@@ -1,0 +1,139 @@
+    {extend name="admin@public/poupbase"/}
+    
+    {block name="style"}
+    <style>
+        #ovh{padding: 0 !important;overflow-x: hidden;overflow-y: auto;position: relative;height: 450px;
+        }
+        #ovh::-webkit-scrollbar{width: 8px;background-color: #F5F5F5;}
+    
+        /*定义滚动条轨道 内阴影+圆角*/
+        #ovh::-webkit-scrollbar-track{-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); background-color: #F5F5F5;}
+    
+        /*定义滑块 内阴影+圆角*/
+        #ovh::-webkit-scrollbar-thumb {border-radius: 10px;-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3); background-color: #555;}
+
+        .arr_attribute{position:absolute;top:24px;right:12px;border:1px solid #ddd;width:60%;height:80%;overflow:auto;background-color:#fff;}
+        .remove{position:absolute;top:5px;right:5px;font-weight:700;cursor:pointer;}
+        
+    </style>
+    {/block}
+
+    {block name="body"}
+    <div id="content" style="margin:0px 10px 5px 8px;">
+        <div class="bloc" style="margin:10px 0px 0px;">
+            <div class="content" style="position:relative;">
+                <form id="myform" method="post" action="{:url()}" style="height:520px; margin:0 !important;" class="">
+                    <fieldset style="height:95%;">
+                        
+                        {eq name="column" value="brand"}
+                        <legend>{:lang('Brand_Ids')}</legend>
+                        {/eq}
+                        {eq name="column" value="option"}
+                        <legend>{:lang('option_ids')}</legend>
+                        {/eq}
+                        {eq name="column" value="attribute_group"}
+                        <legend>{:lang('attribute_ids')}</legend>
+                        {/eq}
+                        
+                        <!-- Multiple Checkboxes -->
+                        <div id="ovh">
+                        {volist name="list" id="arr"}
+                            <div style="height: 17px; line-height: 17px; display: block;margin: 0; clear: both;">
+                                <label class="checkbox" style="margin-top: 2px; line-height: 16px;width:100%;margin-bottom:4px;border-bottom:1px solid #ddd;padding-bottom:5px;">
+                                    <input type="checkbox" name="column[{$arr['id']}]" value="1" data-id="{$arr['id']}" {eq name="arr['selected']" value="1"}checked{/eq}>
+                                    {$arr['name']}
+                                </label>
+                            </div>
+                        {/volist}
+                        </div>
+                    </fieldset>
+    
+                    {eq name="column" value="attribute_group"}
+                    <div class="arr_attribute" style="display:none;">
+                        <p style="text-align:center;background-color:#f2f2f2;padding:6px 0 4px;position:relative;">{:lang('attribute_value_preview')} <span class="remove">X</span></p>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th width="130">{:lang('Attribute_Name')}</th>
+                                    <th width="300">{:lang('attribute_value')}</th>
+                                    <th>{:lang('filtrate')}</th>
+                                </tr>
+                            </thead>
+                            <tbody id="attribute_box" >
+                               
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                    {/eq}
+                    <div class="buttons-wrapper bw-bottom clear" style="margin:0; text-align:center; width:auto; height:50px; position:absolute;bottom:0;left:45%;">
+                        
+                        {eq name="column" value="brand"}
+                        <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('brandIdsSave')}" class="button"/>
+                        {/eq}
+                        {eq name="column" value="option"}
+                        <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('optionIdsSave')}" class="button"/>
+                        {/eq}
+                        {eq name="column" value="attribute_group"}
+                        <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('attributeGroupIdsSave')}" class="button"/>
+                        {/eq}
+                        
+                        <input name="ids" hidden value="{$ids}" />
+                        <input name="reset" class="button white" value="{:lang('Goods_Cancel')}" type="reset">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {/block}
+
+    {block name="js"}
+    {eq name="column" value="attribute_group"}
+    <script type="text/javascript">
+        $('.remove').click(function(){
+            $(this).parents('.arr_attribute').hide();
+        });
+        var validate = 1;
+        $('.checkbox').click(function(){
+            var id = $(this).children('input[type="checkbox"]').data('id');
+            console.log(validate);
+            
+            if(validate) {
+                $.ajax({
+                    type: 'post',
+                    url: "{:url('getAttributeValue')}",
+                    data: {attribute_gorup_id: id},
+                    dataType: 'json',
+                    beforeSend: function () {
+                        $('.arr_attribute').hide();
+                        $('#attribute_box').empty();
+                        validate = 0;
+                    },
+                    complete: function () {
+                        $('.arr_attribute').show();
+                        validate = 1;
+                    },
+                    success: function (json) {
+                        var _html = '';
+                        $.each(json, function (n, arr) {
+                            _html += '<tr><td class="slh" style="max-width: 130px;" title="'+arr.name+'">' + arr.name + '</td><td class="slh" style="max-width: 300px;" title="'+arr.attribute_value+'">' + arr.attribute_value + '</td><td class="slh">';
+                            if(arr.filtrate){
+                                _html += "{:lang('Yes')}";
+                            }else{
+                                _html += "{:lang('No')}";
+                            }
+                            _html += '</td></tr>';
+                        });
+                        if (!_html) {
+                            _html = '<tr><td colspan="3">' + "{:lang('empty_attribute_value')}" + '</td></tr>'
+                        }
+                        $('#attribute_box').append(_html);
+                    }
+                });
+            }
+        });
+    </script>
+    {/eq}
+    
+    
+    {/block}

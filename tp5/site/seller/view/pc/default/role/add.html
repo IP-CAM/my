@@ -1,0 +1,121 @@
+{extend name='common/poupbase'}
+{block name='css'}
+<style type="text/css">
+    ul li{list-style:none;}
+    .choose_right{cursor: pointer;margin: 10px}
+</style>
+{/block}
+
+{block name='body'}
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                        {eq name='action_name' value='add'}
+                        <span>{:lang('add_role')}</span>
+                        {else /}
+                        <span>{:lang('edit_role')}</span>
+                        {/eq}
+                    </h3>
+                </div>
+                <div class="box-body">
+                    <form action="{:url('seller/role/add')}" >
+                    <table class="table table-bordered">
+                        <tr>
+                            <td width="100" class="text-right">{:lang('role_name')}</td>
+                            <td>
+                                <input type="text" name="name" value="{$data.name}" class="form-control">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="100" class="text-right">
+                                {:lang('jurisdiction')}
+                            </td>
+                            <td>
+                                <ul data-widget="tree">
+                                    {foreach $nodeArr as $k=>$v}
+                                    <li class="treeview">
+                                        <!--<a href="JavaScript:void(0);">-->
+                                            <input type="checkbox" name="right[]" class="checkboxs" {notempty name='$data.rightArr'}{in name="$v.url" value="$data.rightArr"}checked {/in} {in name=':strtolower($k)' value='$data.rightArr'}checked {/in}{/notempty} value="{empty name='$v.url'}{:strtolower($k)}{else /}{:strtolower($v.url)}{/empty}"><span class="choose_right">{:lang($k)}
+                                        {notempty name='$v.button'}
+                                        <i class="fa fa-chevron-right"></i>
+                                        {/notempty}
+                                        </span>
+                                        <!--</a>-->
+                                        {notempty name='$v.button'}
+                                        
+                                        <ul class="treeview-menu">
+                                            {foreach $v.button as $kk=>$vv}
+                                            <li class="treeview">
+                                                <!--<a href="JavaScript:void(0);">-->
+                                                    <input type="checkbox" name="right[]" class="checkboxs" value="{:strtolower($vv.url)}" {in name=":strtolower($vv.url)" value="$data.rightArr"}checked{/in}><span class="choose_right">{:lang($kk)}
+                                                {notempty name='$vv.button'}
+                                                <i class="fa fa-chevron-right"></i>
+                                                {/notempty}
+                                                </span>
+                                                <!--</a>-->
+                                                {notempty name='$vv.button'}
+                                                <ul class="treeview-menu">
+                                                    {foreach $vv.button as $kkk=>$vvv}
+                                                    <li>
+                                                        <!--<a href="JavaScript:void(0);">-->
+                                                        <input type="checkbox" name="right[]" class="checkboxs" value="{:strtolower($vvv[1])}" {in name=":strtolower($vvv[1])" value="$data.rightArr"}checked{/in}><span class="choose_right">{:lang($kkk)}</span>
+                                                        <!--</a>-->
+                                                    </li>
+                                                    {/foreach}
+                                                </ul>
+                                                {/notempty}
+                                            </li>
+                                            {/foreach}
+                                        </ul>
+                                        {/notempty}
+                                    </li>
+                                    {/foreach}
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="center">
+                                {eq name='action_name' value='edit'}
+                                <input type="hidden" name="id" value="{$data.id}">
+                                {/eq}
+                                <input type="submit" value="{:lang('submit')}" name="submit" class="btn btn-info" url="{:url('')}">
+                            </td>
+                        </tr>
+                    </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+{/block}
+
+{block name="js"}
+<script type="text/javascript">
+    $('.choose_right').click(function () {
+        var sib = $(this).next();
+        if ($(this).hasClass('menu-open')) {
+            $(this).removeClass('menu-open');
+            $(this).find('i').removeClass('fa-chevron-down');
+            $(this).find('i').addClass('fa-chevron-right');
+            sib.hide();
+        } else {
+            $(this).addClass('menu-open');
+            $(this).find('i').removeClass('fa-chevron-right');
+            $(this).find('i').addClass('fa-chevron-down');
+            sib.show();
+        }
+    });
+    $('.checkboxs').click(function () {
+        if ($(this).is(':checked')) {
+            $(this).parent().find('.checkboxs').attr('checked',true);
+        } else {
+            $(this).parent().find('.checkboxs').attr('checked',false);
+        }
+    })
+</script>
+{/block}

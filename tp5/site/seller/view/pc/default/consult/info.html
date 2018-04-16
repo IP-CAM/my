@@ -1,0 +1,67 @@
+{extend name='common/poupbase'}
+{block name='css'}
+{/block}
+
+{block name='body'}
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- The time line -->
+            <ul class="timeline">
+                <li>
+                    <i class="fa"></i>
+                    
+                    <div class="timeline-item">
+                        <span class="time"><i class="fa fa-clock-o"></i>{$info.create_time}</span>
+                        
+                            <h3 class="timeline-header">{$info.nickname}</h3>
+                        
+                        <div class="timeline-body">
+                            <span >{:lang('consult_question')}：</span>{$info.question}
+                        </div>
+                    </div>
+                </li>
+                {notempty name="$info['reply']"}
+                {foreach $info['reply'] as $rv}
+                <li>
+                    <i class="fa"></i>
+                    <div class="timeline-item">
+                        <span class="time"><i class="fa fa-clock-o"></i>{$rv.create_time}</span>
+                        <h3 class="timeline-header">{$rv.nickname}</h3>
+                        <div class="timeline-body">
+                            <span>{:lang('Reply_Content')}：</span>{$rv.answer}
+                        </div>
+                    </div>
+                </li>
+                {/foreach}
+                {/notempty}
+                <li>
+                    <i class="fa"></i>
+                    <div class="timeline-item">
+                        <h3 class="timeline-header">{:lang('Consult_Reply')}</h3>
+                        <div class="timeline-body">
+                            <form action="">
+                                <input type="hidden" name="refer_id" value="{$info.id}"/>
+                                <textarea name="answer" id="" cols="30" rows="10" class="form-control" placeholder="{:lang('pleace_input_reply_content')}" style="height: 100px;"></textarea>
+                                <input type="submit" name="submit" url="{:url('seller/consult/reply')}" class="btn btn-info" style="margin-top:10px;"/>
+                            </form>
+                        
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+{/block}
+
+{block name="js"}
+<script type="text/javascript">
+    layer.photos({
+        photos: '#layer-photos'
+        ,anim: 5
+    });
+</script>
+{/block}

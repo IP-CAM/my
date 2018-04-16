@@ -1,0 +1,21 @@
+{notempty name=":widget('Ad/get_ad',array('id'=>6,'limit'=>14))"}
+<dl class="ly-index-brand">
+	<dt class="index-title">
+		<h3><span>{:lang('brand_guan')}</span><em>{:lang('to_brand_guan_tip')}</em></h3>
+		<a href="{:url('crossbbcg/brand/index')}" title="{:lang('to_brand_guan')}" class="more" target="_blank" >{:lang('to_brand_guan')} <i> &gt; </i></a>
+		
+	</dt>
+	<dd>
+		<ul>
+            {foreach :widget('Ad/get_ad',array('id'=>6,'limit'=>14)) as $v}
+			<li>
+				<a href="{$v.ad_link}"  class="hover_solid" title="{$v.name}">
+					<span class="brand-pic"><img class="lazy" heidth="80" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__UPLOADS__/{$v.ad_thumb}" alt="{$v.name}" /></span>
+					<em>{$v.ad_info}</em>
+				</a>
+			</li>
+			{/foreach}
+		</ul>
+	</dd>
+</dl>
+{/notempty}

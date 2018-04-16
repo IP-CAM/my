@@ -1,0 +1,48 @@
+    {extend name="admin@public/poupbase" /}
+
+    <!-- CONTENT -->
+
+    {block name="body"}
+        <div id="content" style="margin:0px 10px 5px 8px;">
+            <div class="bloc" style="margin:10px 0px 0px;">
+                <div class="content">
+                    <form id="myform" method="post" style="margin-top:5px;" class="">
+                        <fieldset>
+                            <legend>{:lang('Logs')}{:lang('Info')}</legend>
+                            <div class="row">
+                                <label for="actionname" class="w100">{:lang('Actionname')}: </label>
+                                <label>{:get_action($info['action_id'])["title"]}</label>
+                            </div>
+                            <div class="row">
+                                <label for="actionuser" class="w100">{:lang('Actionuser')}: </label>
+                                <label>{:get_admin_name($info['uid'])}</label>
+                            </div>
+                            <div class="row">
+                                <label for="actionip" class="w100">{:lang('Actionip')}: </label>
+                                <label>{:long2ip($info['action_ip'])}</label>
+                            </div>
+                            <div class="row">
+                                <label for="actiontime" class="w100">{:lang('Actiontime')}: </label>
+                                <label>{$info['create_time']}</label>
+                            </div>
+                            <div class="row">
+                                <fieldset style="margin:0 50px;">
+                                    <legend>{:lang('Remark')}:</legend>
+                                    <ul>
+                                        <li>{$info.remark}</li>
+                                    </ul>
+                                </fieldset>
+                            </div>
+                            <div class="buttons-wrapper bw-bottom" style="margin:20px auto 2px; text-align:center;">
+                                <input name="reset" value="{:lang('Close')}" type="button" />
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {/block}
+
+    {block name="js"}
+        <script type="text/javascript" src="__PUBLIC__/admin/js/autosize.js"></script>
+    {/block}

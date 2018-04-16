@@ -1,0 +1,107 @@
+{extend name="common/base" /}
+
+{block name="title"}
+<title>ETshop-首页</title>
+{/block}
+
+{block name="css"}
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/member.css" />
+{/block}
+
+{block name="body"}
+<!--面包屑-->
+<div class="ly-path">
+	<ul class="clearfix">
+		<li class="home">
+			<a href="/index.php/crossbbcg/index/index.html" title="前往主页">首页</a>
+			<span>&gt;&nbsp;</span>
+		</li>
+		<li>
+			<a href="/index.php/crossbbcg/index/index.html" title="">会员中心</a>
+			<span>&gt;&nbsp;</span>
+		</li>
+		<li>
+			<h1>我的团队</h1>
+		</li>
+	</ul>
+</div>
+<div class="ly-main member-main clearfix">
+	{include file="index/left_menu"}
+	<div class="member-right">
+		<div class="member-content">
+			<div class="title member-title member-max-title">
+				<div class="t">我的团队</div>
+				<div class="right">
+					<a href="{:url('member/applyMoney/index')}" class="btn btn-cut">申请提现</a>
+					<a href="{:url('member/bankCard/index')}" class="btn btn-cut">我的银行卡</a>
+				</div>
+			</div>
+			<div class="body pb15 mh600">
+				<div class="team-top">
+					<div class="member-top">
+						<!--会员基本信息-->
+						<div class="user-detail">
+							<div class="user-logo">
+								<img src="__PUBLIC__/crossbbcg/pc/default/ad/tx.jpg" alt="">
+							</div>
+							<div class="user-info">
+								<div class="name">13599999999</div>
+								<div class="lv level-1"><i class="icon icon-lv"></i>普通会员</div>
+
+							</div>
+							<div class="money-box">
+								<div class="item yue">总收入：<em>￥1000.00</em></div>
+								<div class="item yue">可提现余额：<em>￥1000.00</em></div>
+							
+							</div>
+						</div>
+				
+						
+						
+					</div>
+				</div>
+				<div class="point-body">
+					<div class="member-sub-title clearfix"><span>我的团队</span></div>
+					<br />
+					<table class="item-table public-table">
+						<colgroup>
+							<col width="15%">
+							<col width="15%">
+							<col width="15%">
+							<col width="15%">
+
+						</colgroup>
+						<thead>
+							<tr>
+								<td>日期</td>
+								<td>用户名</td>
+								<td>账号</td>
+								<td>备注</td>
+
+							</tr>
+						</thead>
+
+						<tbody>
+							<tr>
+								<td class="center"> 2017-07-12 15:19:29</td>
+								<td class="center">北方的狼</td>
+								<td class="center">13599686589</td>
+								<td class="center">三级分销商</td>
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{/block}
+
+<!--此板块为页面单独js加载-->
+{block name="footer_js"}
+<script type="text/javascript">
+	//需要加载的js文件
+	//Private_Script = ['memberComment'];
+</script>
+{/block}

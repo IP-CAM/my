@@ -1,0 +1,65 @@
+<!--推荐商品-->
+<!--自动判断多于6个滚动-->
+{notempty name="arr_hot"}
+<div class="product-hot-goods" data-type="group" data-carouFredSel='{
+				items:5,
+				circular:false,
+				infinite:false,
+				width:1190,
+				direction:"left",
+				items:6,
+				scroll:{
+					items:6,
+					easing:"swing"
+				}
+					}'>
+	<dl class="goods-ly-list">
+		<dt class="ly-title">
+		<h3>{:lang('hot_sole')}</h3>
+        <div class="page-btn">
+			<a class="slider-btn prev" href="javascript:void(0)" title="" style="display: none">{:lang('Previous_Page')}</a>
+			<a class="slider-btn next" href="javascript:void(0)" title="" style="display: none">{:lang('Next_Page')}</a>
+		</div>
+				
+	</dt>
+	
+		<!-- goods -->
+		<dd class="slide-goods" style="position: relative;overflow: hidden;margin:0 auto;width:1187px">
+				<ul class="goods-list clearfix slide-content">
+                    {foreach $arr_hot as $arr}
+					<li class="goods-item slide-item">
+						<div class="item">
+							<div class="goods-pic">
+							<a href="{$arr['href']}" target="_blank" title="{$arr['name']}">
+                                {notempty name="$arr['thumb']"}
+                                {if condition="substr($arr['thumb'],0,4)=='http'"}
+                                <img src="{$arr['thumb']}" alt="{$arr['name']}" />
+                                {else /}
+                                <img  width="177" height="177" class="lazy" data-original="{:resizeImage($arr['thumb'],'thumb',true)}" src="__PUBLIC__/{$img_path}/tm.gif" alt="{$arr['name']}" />
+                                {/if}
+                                {else /}
+                                <img width="177" height="177" class="lazy" data-original="__PUBLIC__/{$img_path}/no-image.png" src="__PUBLIC__/{$img_path}/tm.gif" alt="{$arr['name']}" />
+                                {/notempty}
+								
+							</a>
+						</div>
+						<div class="goods-info">
+							<div class="goods-name">
+								<a href="" target="_blank">{$arr['name']}</a>
+							</div>
+							<div class="price-box">
+								<span class="price">{$arr['sale_price']}</span>
+								<span class="mkt-price">{$arr['market_price']}</span>
+							</div>
+						</div>
+						</div>
+					</li>
+                    {/foreach}
+				</ul>
+
+		</dd>
+		<!-- doodsEND -->
+	</dl>
+
+</div>
+{/notempty}

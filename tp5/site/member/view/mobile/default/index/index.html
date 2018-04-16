@@ -1,0 +1,116 @@
+{extend name='public/base' /}
+{block name='css'}
+<link rel="stylesheet" href="__PUBLIC__/{$css_path}/selfinfo.css"/>
+{/block}
+{block name='body'}
+<header class="g-hd">
+</header>
+<header class="g-hd m-topnav-space" id="g-hd">
+    <div class="m-topnav-wrap">
+        <div class=" m-topnav" id="topbar-box">
+            <div class="m-topnavbar">
+                <span class="tit" id="toptitle">个人中心</span>
+                <div class="btns">
+                    <a href="{:url('crossbbcg/index/index')}" class="u-topbaridx" title="回首页"></a>
+                    <a href="{:url('crossbbcg/carts/index')}" title="购物车" id="j-gocart"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="g-bd">
+    <div class="m-profile">
+        <div class="m-avatar">
+            <a href="{:url('member/index/seinfoset')}">
+                {if condition="empty($user.headimg)"}
+                <img src="__PUBLIC__/{$img_path}/member_tx.png" alt="用户头像">
+                {elseif condition="substr($user.headimg,0,4) == 'http'"}
+                <img src="{$user.headimg}" alt="用户头像">
+                {else /}
+                <img src="__UPLOADS__/{$user.headimg}" alt="用户头像">
+                {/if}
+                
+            </a>
+        </div>
+        <div class="m-username">
+            <a href="{:url('member/index/seinfoset')}">
+                <span class="m-nick">{$user.username}</span><i class="u-arrow"></i>
+            </a>
+        </div>
+    </div>
+    <a href="{:url('member/index/orderlist')}" class="u-link-item f-border-bottom">
+        <div class="u-link-item-inner">
+            <div class="u-link-item-left">
+                我的订单
+            </div>
+            <div class="u-link-item-right u-hint">
+                <span>查看订单</span><i class="u-arrow"></i>
+            </div>
+        </div>
+    </a>
+    <ul class="m-order-items">
+        <li class="m-order-item m-order-all">
+            <a href="{:url('member/index/orderlist')}">全部</a>
+        </li>
+        <li class="m-order-item m-wait-pay">
+            <a href="{:url('member/index/orderlist',array('order_status'=>'wait_buyer_pay'))}">待付款</a>
+            {gt name='$count_wait' value='0'}
+            <i class="u-badge">{$count_wait}</i>
+            {/gt}
+        </li>
+        <li class="m-order-item m-wait-send">
+            <a href="{:url('member/index/orderlist',array('order_status'=>'wait_seller_send_goods'))}">待发货</a>
+            {gt name='$count_send' value='0'}
+            <i class="u-badge">{$count_send}</i>
+            {/gt}
+        </li>
+        <li class="m-order-item m-wait-receive">
+            <a href="{:url('member/index/orderlist',array('order_status'=>'wait_buyer_confirm_goods'))}">待收货</a>
+            {gt name='$count_confirm' value='0'}
+            <i class="u-badge">{$count_confirm}</i>
+            {/gt}
+        </li>
+    </ul>
+    <a href="#" class="u-link-item f-border-bottom">
+        <div class="u-link-item-inner">
+            <div class="u-link-item-left">
+                我的优惠券
+            </div>
+            <div class="u-link-item-right">
+                <span>0张优惠券</span><i class="u-arrow"></i>
+            </div>
+        </div>
+    </a>
+    <a href="{:url('member/index/favor')}" class="u-link-item f-border-bottom">
+        <div class="u-link-item-inner">
+            <div class="u-link-item-left">
+                我的收藏
+            </div>
+            <div class="u-link-item-right">
+                <i class="u-arrow"></i>
+            </div>
+        </div>
+    </a>
+    <a href="#" class="u-link-item f-border-bottom">
+        <div class="u-link-item-inner">
+            <div class="u-link-item-left">
+                关于Etshop
+            </div>
+            <div class="u-link-item-right">
+                <i class="u-arrow"></i>
+            </div>
+        </div>
+    </a>
+    <a href="#" class="u-link-item f-border-bottom j-downloaditem">
+        <div class="u-link-item-inner">
+            <div class="u-link-item-left">
+                下载APP
+            </div>
+            <div class="u-link-item-right">
+                <i class="u-arrow"></i>
+            </div>
+        </div>
+    </a>
+</div>
+
+{/block}

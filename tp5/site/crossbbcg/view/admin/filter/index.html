@@ -1,0 +1,174 @@
+    {extend name="admin@public/base" /}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+        <div id="content">
+            <div class="breadcrumbs">
+                {:lang('Crossbbcg')} : &nbsp;&nbsp; {:lang('Bbcggoodsys')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+            </div>
+    
+            <div class="bloc">
+                <div class="title">
+                    <div class="tabs" id="navs">
+                        {include file="admin@public/navs" /}
+                    </div>
+                    
+                    {include file="admin@public/lang" /}
+                </div>
+                <div class="content">
+                
+                <dl class="gzzt clearfix mtb10">
+                    <dd>
+                        <div class="boxr">
+                            {include file="admin@public/button" /}
+                        </div>
+                    </dd>
+                    <dd>
+                        <div class="boxr ovh">
+                            <form style="margin-top:0;" class="search-form">
+                                <label for="search" style="margin:10px 10px 0 0; width:180px;">
+                              
+                                    <input id="search" type="text" class="searchinput" name="name" value="{:input('name')}" placeholder="{:lang('Filter_Name')}" style="width:150px;"/>
+                                    
+                                </label>
+                
+                                <input type="button" name="search" id="sch-search" class="button white" value="{:lang('Search')}" url="{:url('', input('name'))}"/>
+                                
+                            </form>
+                        </div>
+                    </dd>
+                    <dd style="float: right !important;">
+                        <div class="boxl">
+                            <span>
+                                <a href="javascript:location.reload();" class="refresh tooltip-link" title="{:lang('Refresh')}">
+                                    <em>{:lang('Refresh')}</em>
+                                </a>
+                            </span>
+                            <span style="display:none">
+                                <a href="javascript:void(0);" class="ajax-get setting tooltip-link colum" title="{:lang('Showlum')}" data-title="{:lang('Showlum')}">
+                                    <em>{:lang('Showlum')}</em>
+                                </a>
+                            </span>
+                        </div>
+                    </dd>
+                </dl>
+                
+                    {notempty name="list"}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="center" width="30"><input class="check-all" type="checkbox"></th>
+                                <th class="left" width="30"><a href="{:getUrlbyOrder('id')}">{:lang('id')}</a></th>
+                                <th class="left" width="200"><a href="{:getUrlbyOrder('name')}">{:lang('Filter_Name')}</a></th>
+                                <th class="left" width="420">{:lang('Option_Ids')}</th>
+                                <th class="left" width="420">{:lang('Brand_Ids')}</th>
+                                <th class="left">{:lang('Country_Ids')}</th>
+                                <th class="center" style="width:60px;"><a href="{:getUrlbyOrder('status')}">{:lang('Status')}</a></th>
+                                <th class="center" style="width:60px;"><a href="{:getUrlbyOrder('sort')}">{:lang('Sort')}</a></th>
+                                <th class="actions">{:lang('Actions')}</th>
+                            </tr>
+                        </thead>
+                    
+                    <tbody>
+                        {volist name="list" id="vo"}
+                            <tr>
+                                <td class="center">
+                                    <input class="ids" type="checkbox" value="{$vo['id']}" name="ids[]">
+                                </td>
+                                <td class="left">{$vo['id']}</td>
+
+                                <td class="left slh tooltip-link" title="{$vo['name']}">
+                                <a href="{:url('edit',array('ids'=>$vo['id']))}" class="colum ajax-get edit" title="{:lang('Edit')}" data-width="500" data-height="500" data-showbar="1">
+                                {$vo['name']}
+                                </a>
+                                </td>
+    
+                                {php}
+                                $option_arr = '';
+                                $option_ids = explode(',',$vo['option_ids']);
+                                foreach($arr_option as $arr){
+                                    if(in_array($arr['option_id'],$option_ids))
+                                    {
+                                        $option_arr .= $arr['name'] . ',';
+                                    }
+                                }
+                                {/php}
+                                <td class="left slh tooltip-link" title="{$option_arr}" style="max-width: 150px;">
+                                    <a class="ajax-get colum" data-title="{:lang('Edit')}" href="{:url('editcolumn',['ids'=>$vo['id'],'column'=>'option'])}" data-showbar="1" data-width="300" data-height="500" title="{:lang('Edit')}">
+                                    [{$option_arr}]
+                                    </a>
+                                </td>
+    
+                                {php}
+                                $brand_arr = '';
+                                $brand_ids = explode(',',$vo['brand_ids']);
+                                foreach($arr_brand as $arr){
+                                    if(in_array($arr['id'],$brand_ids))
+                                    {
+                                        $brand_arr .= $arr['name'] . ',';
+                                    }
+                                }
+                                {/php}
+                                <td class="left slh tooltip-link" title="{$brand_arr}" style="max-width: 150px;">
+                                    <a class="ajax-get colum" data-title="{:lang('Edit')}" href="{:url('editcolumn',['ids'=>$vo['id'],'column'=>'brand'])}" data-showbar="1" data-width="300" data-height="500">
+                                        [{$brand_arr}]
+                                    </a>
+                                </td>
+    
+                                {php}
+                                $country_arr = '';
+                                $country_ids = explode(',',$vo['country_ids']);
+                                foreach($arr_country as $arr){
+                                    if(in_array($arr['id'],$country_ids))
+                                    {
+                                        $country_arr .= $arr['name'] . ',';
+                                    }
+                                }
+                                {/php}
+                                <td class="left slh tooltip-link" title="{$country_arr}" style="max-width: 240px;">
+                                    
+                                    <a class="ajax-get colum" data-title="{:lang('Edit')}" href="{:url('editcolumn',['ids'=>$vo['id'],'column'=>'country'])}" data-showbar="1" data-width="300" data-height="500" title="{:lang('Edit')}">
+                                        [{$country_arr}]
+                                    </a>
+                                </td>
+    
+                                <td class="center">
+                                {if condition="$vo['status'] eq 1"}
+                                <a href="{:url('disable',array('pk'=>'status','ids'=>$vo['id']))}" class="ajax-able" data-doing="{:lang('Disable')}" data-enable-span="{:lang('Yes')}" data-disable-span="{:lang('No')}">
+                                    <span class="badge-green">{:lang('Yes')}</span>
+                                </a>
+                                {else /}
+                                <a href="{:url('enable',array('pk'=>'status','ids'=>$vo['id']))}" class="ajax-able" data-doing="{:lang('Enable')}" data-enable-span="{:lang('Yes')}" data-disable-span="{:lang('No')}">
+                                    <span class="badge-gray">{:lang('No')}</span>
+                                </a>
+                                {/if}
+                                </td>
+                        
+                                <td class="center">
+                                    <input name="sorts[{$vo.id}]" type="text" value="{$vo.sort}" maxlength="5" class="center sorts" onBlur="sort('{:url(\'sort\')}','{$vo.id}',this.value)"></td>
+                                <td class="actions">
+                                
+                                <a class="tooltip-link ajax-get confirm edit" title="{:lang('Delete_this_record')}" data-layer="{:lang('Delete_Filter_Confirm')}" href="{:url('delete',array('ids'=>$vo['id']))}" data-title="{:lang('Delete')}" >
+                                    <img src="__PUBLIC__/admin/images/delete.png" alt="{:lang('Delete')}" />
+                                </a>
+                                </td>
+                            </tr>
+                        {/volist}
+                        </tbody>
+                    </table>
+                        <div class="pagination-wrapper">
+                            <div class="results-part"><span>{$total}</span></div>
+                            <div class="links-part">{$list->appends(input())->render();}</div>
+                        </div>
+    
+                    {else /}
+                        <div class="alert alert-warning">{:lang('No_record')}</div>
+                    {/notempty}
+                </div>
+            </div>
+    
+        </div>
+    
+{include file="admin@public/time_for_search" /}
+    
+{/block}

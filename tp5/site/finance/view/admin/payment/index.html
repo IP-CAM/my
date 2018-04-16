@@ -1,0 +1,235 @@
+    {extend name="admin@public/base"/}
+
+    {block name="body"}
+    <div id="content">
+        <div class="breadcrumbs">
+            {:lang('Finance')} : &nbsp;&nbsp; {:lang('Finconf')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+        </div>
+
+    <div class="bloc">
+        <div class="title">
+            <div class="tabs" id="navs">
+                {include file="admin@public/navs" /}
+            </div>
+
+            {include file="admin@public/lang" /}
+        </div>
+
+        <div class="content">
+                
+                <dl class="gzzt clearfix mtb10">
+                <dd>
+                    <div class="boxr">
+                        {include file="admin@public/button" /}
+                    </div>
+                </dd>
+                    <dd style="float: right !important;">
+                        <div class="boxl">
+                            <span>
+                                <a href="javascript:location.reload();" class="refresh tooltip-link" title="{:lang('Refresh')}">
+                                    <em>{:lang('Refresh')}</em>
+                                </a>
+                            </span>
+                            <span>
+                                <a href="javascript:void(0);" class="ajax-get setting tooltip-link colum" title="{:lang('Showlum')}" data-title="{:lang('Showlum')}">
+                                    <em>{:lang('Showlum')}</em>
+                                </a>
+                            </span>
+                        </div>
+                    </dd>
+            </dl>
+            
+            <table class="table">
+                <thead>
+                <tr>
+                    <!--<th class="center" width="30"><input class="check-all" type="checkbox"></th>-->
+                    <th class="left" style="width:35px;">ID</th>
+                    <th class="left">{:lang('Name')}</th>
+                    <th class="left">{:lang('Identity')}</th>
+                    <!--<th class="left">{:lang('Subjection')}</th>-->
+                    <th class="left">{:lang('Description')}</th>
+                    <th class="center">{:lang('Author')}</th>
+                    <th class="center" style="width:80px;">{:lang('Version')}</th>
+                    <!--<th class="center" style="width:80px;">{:lang('Lastver')}</th>-->
+                    <th class="center"  style="width:60px;">
+                        <a href="{:getUrlbyOrder('sort')}">{:lang('Sort')}</a>
+                    </th>
+                    <th class="center" style="width:80px;">{:lang('Status')}</th>
+                    <th class="actions" style="width:100px;">{:lang('Actions')}</th>
+                </tr>
+                </thead>
+                    
+                    <tbody>
+                {notempty name="seapays"}
+                <tr>
+                    <td colspan="10" style="padding: 0;">
+                        <div class="alert alert-success" style="margin:0;">{:lang('Seapays')}</div>
+                    </td>
+                </tr>
+                {volist name="seapays" id="vo"}
+                <tr>
+                    <!--<td class="center">
+                    {notempty name="vo.uninstall"}
+                    <input class="ids" type="checkbox" value="{$vo['id']}" name="ids[]">
+                    {/notempty}
+                    </td>-->
+                    <td class="left"> {$key + 1}</td>
+                    <td class="left">{$vo.name}</td>
+                    <td class="left">{$vo.code}</td>
+                    <!--<td class="left">
+                        <a href="{:url('',array('group'=>$vo.subjection))}">{$vo.subjection}</a>
+                    </td>-->
+                    <td class="left slh tooltip-link" title="{$vo.description}" style="max-width: 250px; line-height: 1.7;">
+                        {$vo.description}
+                    </td>
+                    <td class="center">
+                        <a target="_blank" href="{$vo.website|default='http://www.runtuer.com'}">
+                            {$vo.author}
+                        </a>
+                    </td>
+                    <td class="center">{$vo.version}</td>
+                    <!--<td class="center lastver" data-ver="{$vo.version}" {notempty name="vo.upgrade"}data-update="{$vo.upgrade}"{/notempty}>
+                    <a class="tooltip-link red ajax-get" data-showbar="1" data-width="480" data-height="320" data-layer="{:lang('Upgrade_e_to', array('cnname'=>$vo.name, 'enname'=>$vo.code, 'lastver'=>''))}" title="{:lang('Upgrade_e_to', array('cnname'=>$vo.name, 'enname'=>$vo.code))}" href="{:url('upgradeto',array('code'=>$vo.code, 'subjection' => $vo.subjection, 'url'=>'upgradetourl', 'istrue'=>1))}"></a>
+                    </td>-->
+    
+                    <td class="center">
+                        {notempty name="vo.id"}
+                        <input name="sorts[{$vo.id}]" type="text" size="1" value="{$vo.sort}" class="center sorts">
+                        {/notempty}
+                    </td>
+                    <td class="center">
+                        {if condition="$vo.status eq 1"}
+                        <a href="{:url('admin/extend/disable', array('code'=> $vo['code'], 'subjection'=>$vo['subjection']))}" class="ajax-able" data-doing="{:lang('Disable')}">
+                            <img src="__PUBLIC__/admin/images/enabled.png" title="{:lang('Enable')}" class="tooltip-link" alt="{:lang('Enable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png" />
+                        </a>
+                        {else /}
+                        {if condition="$vo.uninstall eq 1"}
+                        <a href="{:url('admin/extend/enable', array('code'=> $vo['code'], 'subjection'=>$vo['subjection']))}" class="ajax-able" data-doing="{:lang('Enable')}">
+                            <img src="__PUBLIC__/admin/images/disabled.png" title="{:lang('Disable')}" class="tooltip-link" alt="{:lang('Disable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png" />
+                        </a>
+                        {else /}
+                        <img src="__PUBLIC__/admin/images/notinstall.png" title="{:lang('Notinstall')}" class="tooltip-link" alt="{:lang('Notinstall')}" height="16px" />
+                        {/if}
+                        {/if}
+                    </td>
+            
+                    <td class="actions">
+                        {notempty name="vo.uninstall"}
+                        {if condition="($vo.status egt 0) AND ($vo.allow_uninstall eq 1)"}
+                
+                        {eq name="$vo.status" value="1"}
+                        <a class="ajax-get btn_submit green" href="{:url('admin/extend/config', array('code'=> $vo['code'], 'subjection'=>$vo['subjection']))}" data-layer="{:lang('Setting')} ：{$vo.name} " data-showbar=1 data-title="{$vo.name} {:lang('Setting')}" data-width="600" data-height="520">
+                            {:lang('Setting')}
+                        </a>
+                        {/eq}
+                        {/if}
+                
+                        {if condition="$vo.allow_uninstall eq 1"}
+                        <a class="tooltip-link ajax-get confirm warning btn_submit red" title="{:lang('Uninstall', array('name'=>$vo.name))}" href="{:url('admin/extend/uninstall',array('code'=> $vo['code'], 'subjection'=>$vo['subjection']))}" data-layer="{:lang('Uninstallext', array('subjection' => lang($vo.subjection), 'name' => $vo.name, 'code' => $vo.code))}" data-title="{:lang('Uninstall', array('name'=>$vo.name))}">
+                            {:lang('Uninstall', array('name'=>''))}
+                        </a>
+                        {/if}
+                        {else /}
+                        <a class="tooltip-link ajax-get confirm btn_submit" title="{:lang('Install')}" href="{:url('admin/extend/install', array('code'=> $vo['code'], 'subjection'=>$vo['subjection']))}" data-layer="{:lang('Install')} ：{$vo.name}({$vo.code}) ?" data-title="{:lang('Install')} ：{$vo.name}">
+                            {:lang('Install')}
+                        </a>
+                        {/notempty}
+                    </td>
+                </tr>
+                {/volist}
+                {else /}
+                <div class="alert alert-warning">{:lang('No_record')}</div>
+                {/notempty}
+
+                {notempty name="payments"}
+                <tr>
+                    <td colspan="10" style="padding: 0;">
+                        <div class="alert alert-info" style="margin:0;">{:lang('Common_Payments')}</div>
+                    </td>
+                </tr>
+
+                {volist name="payments" id="vo"}
+                <tr>
+                    <!--<td class="center">
+                    {notempty name="vo.uninstall"}
+                    <input class="ids" type="checkbox" value="{$vo['id']}" name="ids[]">
+                    {/notempty}
+                    </td>-->
+                    <td class="left"> {$key + 1}</td>
+                    <td class="left">{$vo.name}</td>
+                    <td class="left">{$vo.code}</td>
+                    <!--<td class="left">
+                        <a href="{:url('',array('group'=>$vo.subjection))}">{$vo.subjection}</a>
+                    </td>-->
+                    <td class="left slh tooltip-link" title="{$vo.description}" style="max-width: 250px; line-height: 1.7;">
+                        {$vo.description}
+                    </td>
+                    <td class="center">
+                        <a target="_blank" href="{$vo.website|default='http://www.runtuer.com'}">
+                            {$vo.author}
+                        </a>
+                    </td>
+                    <td class="center">{$vo.version}</td>
+                    <!--<td class="center lastver" data-ver="{$vo.version}" {notempty name="vo.upgrade"}data-update="{$vo.upgrade}"{/notempty}>
+                    <a class="tooltip-link red ajax-get" data-showbar="1" data-width="480" data-height="320" data-layer="{:lang('Upgrade_e_to', array('cnname'=>$vo.name, 'enname'=>$vo.code, 'lastver'=>''))}" title="{:lang('Upgrade_e_to', array('cnname'=>$vo.name, 'enname'=>$vo.code))}" href="{:url('upgradeto',array('code'=>$vo.code, 'subjection' => $vo.subjection, 'url'=>'upgradetourl', 'istrue'=>1))}"></a>
+                    </td>-->
+    
+                    <td class="center">
+                        {notempty name="vo.id"}
+                        <input name="sorts[{$vo.id}]" type="text" size="1" value="{$vo.sort}" class="center sorts">
+                        {/notempty}
+                    </td>
+                    <td class="center">
+                        {if condition="$vo.status eq 1"}
+                        <a href="{:url('admin/extend/disable', array('code'=> $vo['code'], 'subjection'=>$vo['subjection']))}" class="ajax-able" data-doing="{:lang('Disable')}">
+                            <img src="__PUBLIC__/admin/images/enabled.png" title="{:lang('Enable')}" class="tooltip-link" alt="{:lang('Enable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png" />
+                        </a>
+                        {else /}
+                        {if condition="$vo.uninstall eq 1"}
+                        <a href="{:url('admin/extend/enable', array('code'=> $vo['code'], 'subjection'=>$vo['subjection']))}" class="ajax-able" data-doing="{:lang('Enable')}">
+                            <img src="__PUBLIC__/admin/images/disabled.png" title="{:lang('Disable')}" class="tooltip-link" alt="{:lang('Disable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png" />
+                        </a>
+                        {else /}
+                        <img src="__PUBLIC__/admin/images/notinstall.png" title="{:lang('Notinstall')}" class="tooltip-link" alt="{:lang('Notinstall')}" height="16px" />
+                        {/if}
+                        {/if}
+                    </td>
+    
+                    <td class="actions">
+                        {notempty name="vo.uninstall"}
+                        {if condition="($vo.status egt 0) AND ($vo.allow_uninstall eq 1)"}
+        
+                        {eq name="$vo.status" value="1"}
+                        <a class="ajax-get btn_submit green" href="{:url('admin/extend/config', array('code'=> $vo['code'], 'subjection'=>$vo['subjection']))}" data-layer="{:lang('Setting')} ：{$vo.name} " data-showbar=1 data-title="{$vo.name} {:lang('Setting')}" data-width="600" data-height="520">
+                            {:lang('Setting')}
+                        </a>
+                        {/eq}
+                        {/if}
+        
+                        {if condition="$vo.allow_uninstall eq 1"}
+                        <a class="tooltip-link ajax-get confirm warning btn_submit red" title="{:lang('Uninstall', array('name'=>$vo.name))}" href="{:url('admin/extend/uninstall',array('code'=> $vo['code'], 'subjection'=>$vo['subjection']))}" data-layer="{:lang('Uninstallext', array('subjection' => lang($vo.subjection), 'name' => $vo.name, 'code' => $vo.code))}" data-title="{:lang('Uninstall', array('name'=>$vo.name))}">
+                            {:lang('Uninstall', array('name'=>''))}
+                        </a>
+                        {/if}
+                        {else /}
+                        <a class="tooltip-link ajax-get confirm btn_submit" title="{:lang('Install')}" href="{:url('admin/extend/install', array('code'=> $vo['code'], 'subjection'=>$vo['subjection']))}" data-layer="{:lang('Install')} ：{$vo.name}({$vo.code}) ?" data-title="{:lang('Install')} ：{$vo.name}">
+                            {:lang('Install')}
+                        </a>
+                        {/notempty}
+                    </td>
+                </tr>
+                {/volist}
+                {else /}
+                <div class="alert alert-warning">{:lang('No_record')}</div>
+                {/notempty}
+                
+                </tbody>
+            </table>
+            <div class="pagination-wrapper">
+    
+            </div>
+        </div>
+
+    </div>
+    </div>
+    {/block}

@@ -1,0 +1,119 @@
+    {extend name="admin@public/poupbase"/}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content" style="margin:0px 10px 5px 8px;">
+        <div class="bloc" style="margin:10px 0px 0px;">
+            <div class="content">
+                <form id="myform" method="post" style="margin-top:5px;" class="">
+                    <fieldset>
+                        <legend>{$meta_title|default=''}</legend>
+                        <div class="row">
+                            <div style="float:left;">
+                                <label for="status" class="w120">{:lang('Status_liceson')}:</label>
+                                <div class="slideBox">
+                                    {eq name="ACTION_NAME" value="edit"}
+                                    <input id="status" value="1" type="checkbox" name="status"  {eq name="data['status']" value="1"}checked{/eq}/>
+                                    {else /}
+                                    <input id="status" value="1" type="checkbox" name="status" checked />
+                                    {/eq}
+                                    <label for="status"></label>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="row">
+                            <div style="float:left">
+                                <label for="version" class="w140" style="width: 150px;">{:lang('Version_num')}: </label>
+                                <input type="text" id="version" name="version" value="{$data.version}" class="w140l" placeholder="1.0.0.000000" />
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div style="float:left;">
+                                <label for="title" class="w120">{:lang('Title_liceson')}: <span class="required">*</span></label>
+                                <input  id="title" type="text" value="{$data.title}" maxlength="50" name="title" style="width:190px;" placeholder="{:lang('Title_tip')}" />
+                            </div>
+                            
+                            <div style="float:left;">
+                                <label for="code" class="w120">{:lang('Code_liceson')}: <span class="required">*</span></label>
+                                <input  id="code" type="text" value="{$data.code}" name="code" class="w140l" placeholder="{:lang('Code_tip')}" />
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div style="float:left">
+                                <label for="username" class="w120">{:lang('Username')}: </label>
+                                <input type="text" id="username" name="username" value="{$data.username}" placeholder="{:lang('Username_tip')}" style="width:190px;"  />
+                            </div>
+                            
+                            <div style="float:left">
+                                <label for="password" class="w120">{:lang('Password')}: </label>
+                                <input type="text" id="password" name="password" value="{$data.password}" placeholder="{:lang('Password_tip')}" style="width:158px;"  />
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div style="float:left;">
+                                <label for="url" class="w120">{:lang('Url_liceson')}: <span class="required">*</span></label>
+                                <input  id="url" type="text" value="{$data.url}" name="url" style="width:508px;" placeholder="{:lang('Url_liceson_tip')}" />
+                            </div>
+                        </div>
+    
+                        <div class="row">
+                            <div style="float:left;">
+                                <label for="url" class="w120">{:lang('Url_liceson')}: <span class="required">*</span></label>
+                                <input  id="url" type="text" value="{$data.url}" name="url" style="width:508px;" placeholder="{:lang('Url_liceson_tip')}" />
+                            </div>
+                        </div>
+    
+                        <div class="row">
+                            <div style="float:left;">
+                                <label for="url" class="w120">{:lang('Url_liceson')}: <span class="required">*</span></label>
+                                <input  id="url" type="text" value="{$data.url}" name="url" style="width:508px;" placeholder="{:lang('Url_liceson_tip')}" />
+                            </div>
+                        </div>
+                        
+                        <div class="clear"></div>
+                        
+                        <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                            {eq name="ACTION_NAME" value="edit"}
+                            <input name="submit" value="{:lang('Update')}" type="submit" url="{:url()}" />
+                            <input name="id" type="hidden"  value="{$data.id}" />
+                            {else /}
+                            <input name="submit" value="{:lang('Create')}" type="submit" url="{:url()}" />
+                            {/eq}
+                            <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    {/block}
+    
+    {block name="js"}
+    <script>
+        $(function() {
+            $(".bset").buttonset();
+            $("#start_time").datetimepicker({
+                dateFormat: "{:config('kernel.timeformat')}",
+                minDate: new Date(),
+                onSelect: function(dateText, inst) {
+                    $.datepicker.regional["{:config('kernel.localdate')}"];
+                    $("#end_time").datepicker("option", "minDate", dateText);
+                    $("#end_time").focus();
+                }
+            });
+            $("#end_time").datetimepicker({
+                dateFormat: "{:config('kernel.timeformat')}",
+                minDate: +1,
+                onSelect: function(dateText, inst) {
+                    $.datepicker.regional["{:config('kernel.localdate')}"];
+                    $("#start_time").datepicker("option", "maxDate", dateText);
+                }
+            });
+        })
+    </script>
+    {/block}

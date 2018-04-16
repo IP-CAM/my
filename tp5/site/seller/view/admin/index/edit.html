@@ -1,0 +1,352 @@
+{extend name="admin@public/poupbase"/}
+
+<!-- CONTENT -->
+{block name="body"}
+<style>
+    .table tbody tr:nth-child(2n+1) td {
+        background-color: #fff;
+    }
+    .table{
+        border-left:1px solid #ccc;
+        border-top:1px solid #ccc;
+        margin-bottom: 8px;
+    }
+    .table td{
+        border-right:1px solid #ccc;
+        height: 39px;
+        text-align: right;
+        padding-right: 10px;
+    }
+    .table tbody tr .bg_title{
+        text-align: left;
+        font-size: 15px;
+    }
+    .table .contents{
+        padding-left: 10px;
+        text-align: left;
+    }
+    .imgs{
+        width: 615px;
+    }
+    .table tbody tr td img{
+        border: 1px solid #e2e2e2;
+    }
+    .upimg_cancel{
+        background: url(/site/admin/images/uninstall.png) no-repeat;
+        position: relative;
+        left: 71px;
+        top: 6px;
+        z-index: 100;
+    }
+</style>
+<div id="content" style="margin:0px">
+    <div class="bloc" style="margin:0px;">
+        <div class="content" style="padding: 10px 20px 10px 20px">
+            <form id="myform" method="post" action="{:url('savedata')}" style="margin-top:5px;" class="" enctype="multipart/form-data">
+                <table class="table">
+                    <tr >
+                        <td colspan="6" style="background-color: #F2F2F2;" class="bg_title">{:lang('company&linkname')}</td>
+                    </tr>
+                    <tr>
+                        <td  style="background-color: #F2F2F2;">{:lang('company_name')}：</td>
+                        <td colspan="5" class="contents"><input type="text" name="company" class="w130" value="{$data.company}"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #F2F2F2;">{:lang('linkman')}：</td>
+                        <td class="contents" colspan="3"><input type="text" name="linkname" value="{$data.linkname}" class="w130"></td>
+                        <td style="background-color: #F2F2F2;">{:lang('linkman_mobile')}：</td>
+                        <td class="contents" colspan="2"><input type="text" name="mobile" class="w130" value="{$data.mobile}"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #F2F2F2;"> {:lang('company_address')}：</td>
+                        <td class="contents" colspan="3">
+                            {:widget('common/Area/choosearea', ['country' => $data.country, 'province' => $data.province, 'city' => $data.city, 'district' => $data.district])}
+                        </td>
+                        <td style="background-color: #F2F2F2;">{:lang('company_detail_address')}：</td>
+                        <td  class="contents" colspan="2">
+                            <input type="text" class="w130" name="address" value="{$data.address}">
+                        </td>
+                    </tr>
+                </table>
+                <table class="table">
+                    <tr>
+                        <td colspan="6" class="bg_title" style="background-color: #F2F2F2;">{:lang('business_infomation')}</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #F2F2F2;"> {:lang('business_license_type')}：</td>
+                        <td  class="contents">
+                            <select name="business_license_type" id="business_license_type">
+                                {foreach $business_license_type as $k=>$v}
+                                <option value="{$k}" {eq name="$data.business_license_type" value="$k"}selected{/eq}>{$v}</option>
+                                {/foreach}
+                            </select>
+                        </td>
+                        <td style="background-color: #F2F2F2;">{:lang('corporate')}：</td>
+                        <td class="contents"><input type="text" class="w130" name="corporate" value="{$data.corporate}"></td>
+                        <td style="background-color: #F2F2F2;">{:lang('license_no')}：</td>
+                        <td class="contents"> <input type="text" name="license_no" class="w130" value="{$data.license_no}"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #F2F2F2;">{:lang('build_time')}：</td>
+                        <td class="contents"><input type="text" id="build_time" name="build_time" class="w130 datainput" value="{:time_format($data.build_time,'Y-m-d')}"></td>
+                        <td style="background-color: #F2F2F2;">{:lang('registered_assets')}：</td>
+                        <td class="contents"><input type="text" name="registered_assets" class="w130" value="{$data.registered_assets}">{:lang('wan_yuan')}</td>
+                        <td style="background-color: #F2F2F2;">{:lang('organization_code')}：</td>
+                        <td class="contents"><input type="text" name="organization_code" class="w130" value="{$data.organization_code}"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #F2F2F2;">{:lang('organization_code_validity')}：</td>
+                        <td class="contents">
+                            <input type="text" id="organization_code_date_start" name="organization_code_date_start" class="w80 datainput" value="{$data.organization_code_date_start}">~
+                            <input type="text" id="organization_code_date_end" name="organization_code_date_end" class="w80 datainput" value="{$data.organization_code_date_end}">
+                        </td>
+                        <td style="background-color: #F2F2F2;">{:lang('Taxpayer_type')}：</td>
+                        <td  class="contents">
+                            <select name="taxpayer_type" id="taxpayer_type">
+                                {foreach $taxpayer_type as $k=>$v}
+                                <option value="{$v}" {eq name="$data.taxpayer_type" value="$v"}selected{/eq}>{$v}</option>
+                                {/foreach}
+                            </select>
+                        </td>
+                        <td  style="background-color: #F2F2F2;">{:lang('Tax_type_tax_code')}：</td>
+                        <td  class="contents">
+                            <select name="tax_code_type" id="tax_code_type">
+                                {foreach $tax_type_tax_code as $v}
+                                <option value="{$v}" {eq name="$data.tax_code_type" value="$v"}selected{/eq}>{$v}%</option>
+                                {/foreach}
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <table class="table">
+                    <tr>
+                        <td colspan="6" class="bg_title" style="background-color: #F2F2F2;">{:lang('store_info')}</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #F2F2F2;">{:lang('seller_name')}：</td>
+                        <td class="contents"><input type="text" name="seller_name" class="w130" value="{$data.seller_name}"></td>
+                        <td  style="background-color: #F2F2F2;">{:lang('seller_cat')}：</td>
+                        <td class="contents">
+                            <select name="cat_id" id="cat_id">
+                                {foreach $option as $v}
+                                <option value="{$v.id}" {eq name="$data.cat_id" value="$v.id"}selected{/eq}>{$v.name}</option>
+                                {/foreach}
+                            </select>
+                        </td>
+                        <td  style="background-color: #F2F2F2;">{:lang('shop_account')}：</td>
+                        <td class="contents"><input type="text" class="w130" disabled value="{:getShopAccount($data.seller_id)['nickname']}"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #F2F2F2;"> {:lang('sale_goods_num')}：</td>
+                        <td class="contents">
+                            <select name="sale_goods_num" id="sale_goods_num">
+                                {foreach $goods_num as $v}
+                                <option value="{$v}" {eq name="$data.sale_goods_num" value="$v"}selected{/eq}>{$v}</option>
+                                {/foreach}
+                            </select>
+                        </td>
+                        <td style="background-color: #F2F2F2;"> {:lang('average_sale_price')}：</td>
+                        <td class="contents">
+                            <select name="average_sale_price" id="average_sale_price">
+                                {foreach $predict_avg_price as $v}
+                                <option value="{$v}">{$v}</option>
+                                {/foreach}
+                            </select>
+                        </td>
+                        <td style="background-color: #F2F2F2;">{:lang('ware_info')}：</td>
+                        <td class="contents"><input type="text" value="自有仓"/></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #F2F2F2;">{:lang('detail_cate')}：</td>
+                        <td colspan="5" class="contents">
+                            <table class="table" style="margin: 10px 0">
+                                <tr>
+                                    <td style="background-color: #F2F2F2;">{:lang('first_cate')}</td>
+                                    <td style="background-color: #F2F2F2;">{:lang('second_cate')}</td>
+                                    <td style="background-color: #F2F2F2;">{:lang('third_cate')}</td>
+                                    <td style="background-color: #F2F2F2;">{:lang('commission_ratio')}</td>
+                                </tr>
+                                {foreach $data.goods_cat as $v}
+                                <tr>
+                                    <td>{$v.first_title}</td>
+                                    <td>{$v.second_title}</td>
+                                    <td>{$v.third_title}</td>
+                                    <td>{$v.commission}%</td>
+                                </tr>
+                                {/foreach}
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #F2F2F2;">{:lang('ware_address')}：</td>
+                        <td colspan="2" class="contents"><input type="text" class="middle" name="ware_address" value="{$data.ware_address}"></td>
+                        <td style="background-color: #F2F2F2;"> {:lang('after_sale_address')}：</td>
+                        <td colspan="2" class="contents"><input type="text" class="middle" name="after_sale_address" value="{$data.after_sale_address}"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #F2F2F2;"> {:lang('commonly_express')}：</td>
+                        <td colspan="5" class="contents"><input type="text" class="large" name="common_express" value="{$data.common_express}"></td>
+                    </tr>
+                </table>
+                <table class="table">
+                    <tr>
+                        <td colspan="6" class="bg_title" style="background-color: #F2F2F2;">结算账户</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #F2F2F2;">{:lang('bank_name')}：</td>
+                        <td colspan="5" class="contents">
+                            <input type="text" class="large" name="bank_name" value="{$data.bank_name}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #F2F2F2;">{:lang('bank_no')}：</td>
+                        <td colspan="5" class="contents"><input type="text" name="bank_no" class="large" value="{$data.bank_no}"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #F2F2F2;">{:lang('bank')}：</td>
+                        <td colspan="5" class="contents"><input type="text" class="large" name="bank" value="{$data.bank}"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #F2F2F2;">{:lang('bank_address')}：</td>
+                        <td colspan="5" class="contents"><input type="text" name="bank_address" class="large" value="{$data.bank_address}"></td>
+                    </tr>
+                </table>
+                <table class="table">
+                    <tr >
+                        <td colspan="5" class="bg_title" style="background-color: #F2F2F2;">{:lang('license_infomation')}</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #F2F2F2;">{:lang('corporate_card_true')}：</td>
+                        <td colspan="5" class="contents">
+                            <div class="imgs">
+                                <div class="upimg_cancel" title="{:lang('cancel')}">&nbsp;</div>
+                                {notempty name='$data.corporate_card_true'}
+                                {if condition="substr($data.corporate_card_true,0,4)=='http'"}
+                                <img src="{$data.corporate_card_true}" id="corporate_card_true" class="upload" width="80" height="75" no-image="__PUBLIC__/admin/images/image.png" title="{:lang('Upload img and file')}" url="{:url('img',array('input' => 'card_true','thumb' => 'corporate_card_true'))}" data-upload="__UPLOADS__" />
+                                {else /}
+                                <img src="__UPLOADS__/{$data.corporate_card_true}" id="corporate_card_true" class="upload" width="80" height="75" no-image="__PUBLIC__/admin/images/image.png" title="{:lang('Upload img and file')}" url="{:url('img',array('input' => 'card_true','thumb' => 'corporate_card_true'))}" data-upload="__UPLOADS__" />
+                                {/if}
+                                {else /}
+                                <img src="__PUBLIC__/admin/images/image.png" id="corporate_card_true" class="upload" width="80" height="75" no-image="__PUBLIC__/admin/images/image.png" title="{:lang('Upload img and file')}" url="{:url('img',array('input' => 'card_true','thumb' => 'corporate_card_true'))}" data-upload="__UPLOADS__" />
+                                {/notempty}
+                                <input type="hidden" name="corporate_card_true" value="{$data.corporate_card_true}"  id="card_true">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #F2F2F2;">{:lang('corporate_card_false')}：</td>
+                        <td colspan="5"class="contents">
+                            <div class="imgs">
+                                <div class="upimg_cancel" title="{:lang('cancel')}">&nbsp;</div>
+                                {notempty name='$data.corporate_card_false'}
+                                {if condition="substr($data.corporate_card_false,0,4)=='http'"}
+                                <img src="{$data.corporate_card_false}" id="corporate_card_false" class="upload" width="80" height="75" no-image="__PUBLIC__/admin/images/image.png" title="{:lang('Upload img and file')}" url="{:url('img',array('input' => 'card_false','thumb' => 'corporate_card_false'))}" data-upload="__UPLOADS__" />
+                                {else /}
+                                <img src="__UPLOADS__/{$data.corporate_card_false}" id="corporate_card_false" class="upload" width="80" height="75" no-image="__PUBLIC__/admin/images/image.png" title="{:lang('Upload img and file')}" url="{:url('img',array('input' => 'card_false','thumb' => 'corporate_card_false'))}" data-upload="__UPLOADS__" />
+                                {/if}
+                                {else /}
+                                <img src="__PUBLIC__/admin/images/image.png" id="corporate_card_false" class="upload" width="80" height="75" no-image="__PUBLIC__/admin/images/image.png" title="{:lang('Upload img and file')}" url="{:url('img',array('input' => 'card_false','thumb' => 'corporate_card_false'))}" data-upload="__UPLOADS__" />
+                                {/notempty}
+                                <input type="hidden" name="corporate_card_false" value="{$data.corporate_card_false}"  id="card_false">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #F2F2F2;"> {:lang('paper_img')}：</td>
+                        <td colspan="5" class="contents">
+                            <div class="imgs">
+                                <div class="upimg_cancel" title="{:lang('cancel')}">&nbsp;</div>
+                                {notempty name='$data.business_license'}
+                                {if condition="substr($data.business_license,0,4)=='http'"}
+                                <img src="{$data.business_license}" id="business" class="upload" width="80" height="75" no-image="__PUBLIC__/admin/images/image.png" title="{:lang('Upload img and file')}" url="{:url('img',array('input' => 'business_license','thumb' => 'business'))}" data-upload="__UPLOADS__" />
+                                {else /}
+                                <img src="__UPLOADS__/{$data.business_license}" id="business" class="upload" width="80" height="75" no-image="__PUBLIC__/admin/images/image.png" title="{:lang('Upload img and file')}" url="{:url('img',array('input' => 'business_license','thumb' => 'business'))}" data-upload="__UPLOADS__" />
+                                {/if}
+                                {else /}
+                                <img src="__PUBLIC__/admin/images/image.png" id="business" class="upload" width="80" height="75" no-image="__PUBLIC__/admin/images/image.png" title="{:lang('Upload img and file')}" url="{:url('img',array('input' => 'business_license','thumb' => 'business'))}" data-upload="__UPLOADS__" />
+                                {/notempty}
+                                
+                                <input type="hidden" name="business_license" value="{$data.business_license}"  id="business_license">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #F2F2F2;">{:lang('tax_certificate')}：</td>
+                        <td colspan="5" class="contents">
+                            <div class="imgs">
+                                <div class="upimg_cancel" title="{:lang('cancel')}">&nbsp;</div>
+                                {notempty name='$data.tax_registration_certificate'}
+                                    {if condition="substr($data.tax_registration_certificate,0,4)=='http'"}
+                                <img src="{$data.tax_registration_certificate}" id="tax_registration_certificate" class="upload" width="80" height="75" no-image="__PUBLIC__/admin/images/image.png" title="{:lang('Upload img and file')}" url="{:url('img',array('input' => 'tax_certificate','thumb' => 'tax_registration_certificate'))}" data-upload="__UPLOADS__" />
+                                    {else /}
+                                <img src="__UPLOADS__/{$data.tax_registration_certificate}" id="tax_registration_certificate" class="upload" width="80" height="75" no-image="__PUBLIC__/admin/images/image.png" title="{:lang('Upload img and file')}" url="{:url('img',array('input' => 'tax_certificate','thumb' => 'tax_registration_certificate'))}" data-upload="__UPLOADS__" />
+                                    {/if}
+                                {else /}
+                                <img src="__PUBLIC__/admin/images/image.png" id="tax_registration_certificate" class="upload" width="80" height="75" no-image="__PUBLIC__/admin/images/image.png" title="{:lang('Upload img and file')}" url="{:url('img',array('input' => 'tax_certificate','thumb' => 'tax_registration_certificate'))}" data-upload="__UPLOADS__" />
+                                {/notempty}
+                                <input type="hidden" name="tax_registration_certificate" value="{$data.tax_registration_certificate}"  id="tax_certificate">
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="background-color: #F2F2F2;">{:lang('Organization_Code_Certificate')}：</td>
+                        <td colspan="5" class="contents">
+                            <div class="imgs">
+                                <div class="upimg_cancel" title="{:lang('cancel')}">&nbsp;</div>
+                                {notempty name="$data.organization_code_img"}
+                                    {if condition="substr($data.organization_code_img,0,4) == 'http'"}
+                                <img src="{$data.organization_code_img}" id="organization_code" class="upload" width="80" height="75" no-image="__PUBLIC__/admin/images/image.png" title="{:lang('Upload img and file')}" url="{:url('img',array('input' => 'organization_code_img','thumb' => 'organization_code'))}" data-upload="__UPLOADS__" />
+                                    {else /}
+                                <img src="__UPLOADS__/{$data.organization_code_img}" id="organization_code" class="upload" width="80" height="75" no-image="__PUBLIC__/admin/images/image.png" title="{:lang('Upload img and file')}" url="{:url('img',array('input' => 'organization_code_img','thumb' => 'organization_code'))}" data-upload="__UPLOADS__" />
+                                    {/if}
+                                {else /}
+                                <img src="__PUBLIC__/admin/images/image.png" id="organization_code" class="upload" width="80" height="75" no-image="__PUBLIC__/admin/images/image.png" title="{:lang('Upload img and file')}" url="{:url('img',array('input' => 'organization_code_img','thumb' => 'organization_code'))}" data-upload="__UPLOADS__" />
+                                {/notempty}
+                                <input type="hidden" name="organization_code_img" value="{$data.organization_code_img}"  id="organization_code_img">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                    <input name="submit" value="{:lang('Submit')}" type="submit" url="{:url('savedata')}">
+                    <input type="hidden" name="id" value="{$data.id}" />
+                    <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{/block}
+
+{block name="js"}
+
+<script>
+    $(function(){
+        $("#build_time").datetimepicker({
+            dateFormat: "yy-mm-dd",
+            timeFormat: 'HH:mm:ss'
+        });
+        $("#organization_code_date_start").datetimepicker({
+            dateFormat: "yy-mm-dd"
+        });
+        $("#organization_code_date_end").datetimepicker({
+            dateFormat: "yy-mm-dd"
+        });
+
+        $(".bset").buttonset();
+        $('#morelogin_0').click(function () {
+            $('.areas').show();
+        });
+        $('#morelogin_1').click(function () {
+            $('.areas').hide();
+        });
+        $('.upimg_cancel').click(function () {
+            var that  = $(this);
+            that.parent().find('img').attr('src','/site/admin/images/image.png');
+            that.parent().find('input').val();
+        })
+    })
+</script>
+{/block}

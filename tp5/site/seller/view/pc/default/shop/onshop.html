@@ -1,0 +1,133 @@
+{extend name='public/layout'}
+
+{block name='body'}
+
+<script src="__PUBLIC__/{$module_path}js/muti.js"></script>
+<div id="toolTipLayer" style="position: absolute; z-index: 9999; display: none; visibility: visible; left: 95px; top: 573px;"></div>
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+    <div class="fixed-bar">
+        <div class="item-title">
+            <div class="subject">
+                <h3>{:lang('shop_manage')} - {:lang('onshop')}</h3>
+            </div>
+        </div>
+    </div>
+    {empty name='list'}
+    <div class="explanation">
+        <div class="title">
+            <p style="margin-top:10px "><a class="ncap-btn-big ncap-btn-red tooltip-link ajax-get" href="{:url('applyon')}" data-width="850" data-height="700" data-showbar="1" data-title="{:lang('apply')}{:lang('onshop')}">{:lang('immediately')}{:lang('apply')}</a></p>
+        </div>
+    </div>
+    {else /}
+    <form class="form-horizontal" id="form" method="post" style="border-bottom: 2px dashed #dacdcd ">
+        <div class="ncap-form-default">
+            <dl class="row">
+                <dt class="tit">
+                    <label>{:lang('shop_name')}</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" id="seller_name" name="seller_name" value="{$list.seller_name}" readonly class="input-txt">
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label>{:lang('seller_logo')}</label>
+                </dt>
+                <dd class="opt">
+                    <input name="logo" type="text" class="input img_upload" value="{$list.logo}" id="logo" placeholder="image/logo.png" />
+                    <button class="img_upload hover" type="button">{:lang('Selectimg')}</button>
+                    <input class="button white img_upload" value="{:lang('Selectimg')}" title="{:lang('Selectimg')}" type="button" data-title="{:lang('Upload img and file')}" data-url="{:url('img',array('input' => 'logo'))}" data-upload="__UPLOADS__" />
+                    <a href="javascript:(0)" class="preview" data-src="logo" data-width="200" data-height="200" data-area="200">{:lang('Preview')}</a>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label>{:lang('Goods_Crossware')}:</label>
+                </dt>
+                <dd class="opt">
+                    <span class="warehouse">
+                        {empty name='$warehouse'}
+                        <a href="javascript:(0);" class="ware_name">您的账号尚未绑定仓库，点击设置仓库</a>
+                        {else /}
+                        {php}$index=0{/php}
+                        <a href="javascript:(0);" class="ware_name">
+                        {foreach $warehouse as $k=>$v}
+                            {gt name="$index" value='0'},{/gt}{$v}
+                            {php}$index++;{/php}
+                        {/foreach}
+                        </a>
+                        {/empty}
+                        <input type="hidden" name="housecode" class="housecode" value='{:json_encode($housecode["housecode"])}' />
+                    </span>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label>{:lang('website')}:</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" id="home_url" name="home_url" value="{$list.home_url}" class="input-txt">
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label>{:lang('gathering_info')}:</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" id="bank" name="bank" value="{$list.bank}"  placeholder="{:lang('bank')}" class="input-txt">
+                    <input type="text" id="bank_no" name="bank_no" value="{$list.bank_no}" placeholder="{:lang('bank_no')}"  class="input-txt">
+                    <input type="text" id="bank_name" name="bank_name" value="{$list.bank_name}" placeholder="{:lang('bank_name')}"  class="input-txt">
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label>{:lang('description')}</label>
+                </dt>
+                <dd class="opt">
+                    <textarea name="shop_description" id="" cols="80" rows="10">{$list.shop_description}</textarea>
+                </dd>
+            </dl>
+            <input type="hidden" name="id" value="{$list.id}">
+            <div class="bot"><input type="submit" class="btns blue" name="submit" value="{:lang('update')}" url="{:url('edit_on_shop')}"/></div>
+        </div>
+    </form>
+    {/empty}
+    <div id="checks_div_select" class="checks_div_select" style="display: none;"></div>
+</div>
+<script>
+    $('.warehouse').click(function () {
+        $("#checks_div_select").html('');
+        var a= '{:json_encode($all_warehouse)}';
+        var options = JSON.parse(a);
+        var code = JSON.parse($('.housecode').val());
+        $("#checks_div_select").checks_select(options,code);
+        layer.open({
+            type:1,
+            content:'<div id="div">'+$("#checks_div_select").html()+'</div>',
+            btn:'{:lang("confirm")}',
+            title:'{:lang("choose_warehouse")}',
+            area:['300px', '400px'],
+            btnAlign:'c',
+            shade: 0.5,
+            yes:function () {
+                layer.closeAll();
+                var temp_code = [];
+                var temp_name = '';
+                $('#div').find("input:checked").each(function(is){
+                    temp_code.push($(this).val());
+                    if (is == 0) {
+                        temp_name = $(this).parent().text();
+                    } else {
+                        temp_name +=','+ $(this).parent().text();
+                    }
+                });
+                $('.ware_name').text(temp_name);
+                $('.housecode').val(JSON.stringify(temp_code));
+            }
+        });
+        
+    })
+</script>
+{/block}

@@ -1,0 +1,95 @@
+{extend name='common/poupbase'}
+{block name='css'}
+{/block}
+
+{block name='body'}
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                        {eq name='action_name' value='add'}
+                        <span>{:lang('add_son_account')}</span>
+                        {else /}
+                        <span>{:lang('edit_son_account')}</span>
+                        {/eq}
+                    </h3>
+                </div>
+                <div class="box-body">
+                    <form action="">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td width="100" class="text-right">{:lang('select_role')}</td>
+                            <td>
+                                <select name="role_id" id="" class="form-control">
+                                    {volist name='rolelist' id='vo'}
+                                    <option value="{$vo.id}" {eq name="$data.role_id" value="$vo.id"}selected{/eq}>{$vo.name}</option>
+                                    {/volist}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="100" class="text-right">
+                                {:lang('username')}
+                            </td>
+                            <td>
+                                <input type="text" name="nickname" value="{$data.nickname}" class="form-control">
+                            </td>
+                        </tr>
+                        {eq name='action_name' value='add'}
+                        <tr>
+                            <td width="100" class="text-right">{:lang('password')}</td>
+                            <td>
+                                <input type="password" name="password"  value="" class="form-control">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="100" class="text-right">{:lang('confirm_password')}</td>
+                            <td>
+                                <input type="password" name="repassword"  value="" class="form-control">
+                            </td>
+                        </tr>
+                        {/eq}
+                        <tr>
+                            <td width="100" class="text-right">{:lang('realname')}</td>
+                            <td>
+                                <input type="text" name="realname"  value="{$data.realname}" class="form-control">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="100" class="text-right">{:lang('tel')}</td>
+                            <td>
+                                <input type="text" name="mobile"  value="{$data.mobile}" class="form-control">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="100" class="text-right">{:lang('email')}</td>
+                            <td>
+                                <input type="text" name="email"  value="{$data.email}" class="form-control ">
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td colspan="2" class="center">
+                                {eq name='action_name' value='edit'}
+                                <input type="hidden" name="id" value="{$data.id}">
+                                {/eq}
+                                <input type="submit" value="{:lang('submit')}" name="submit" class="btn btn-info" url="{:url('')}">
+                            </td>
+                        </tr>
+                    </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+{/block}
+
+{block name="js"}
+<script type="text/javascript">
+
+</script>
+{/block}

@@ -1,0 +1,148 @@
+    {extend name='common/base'}
+    {block name='css'}
+    <link href="__PUBLIC__/{$css_path}/daterangepicker.css" rel="stylesheet">
+    
+    {/block}
+    {block name="breadcrumb"}
+    <li>{:lang('order_settle')}</li>
+    <li class="active">{$meta_title|default=''}</li>
+    {/block}
+    {block name='body'}
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <div class="row">
+                            <div class="page-header-top">
+                                <form action="">
+                                    <a class="btn btn-etshop addnew" href="{:url('seller/settle/index')}">
+                                        <i class="fa fa-feed"></i> {:lang('All')}
+                                    </a>
+                                    {:getSellerButton()}
+                                    
+                                    <div class="btn-group btn btn-flat" >
+                                        <button type="button" class="btn btn-success etbtn">
+                                            {switch name='$status'}
+                                            {case value='1'}{:lang('had_settle')}<input type="hidden" value="{$status}" name="status" />{/case}
+                                            {case value='0'}{:lang('no_settle')}<input type="hidden" value="{$status}" name="status" />{/case}
+                                            {default /}{:lang('settle_status')}
+                                            {/switch}
+                                        </button>
+                                        <button type="button" class="btn btn-success etbtn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                            <span class="caret"></span>
+                                            <span class="sr-only"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+    
+                                            <li><a href="{:url('seller/settle/index',array_merge(input(),array('status'=>1)))}">{:lang('had_settle')}</a></li>
+                                            <li><a href="{:url('seller/settle/index',array_merge(input(),array('status'=>0)))}">{:lang('no_settle')}</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="time" style="width: 200px; position: relative;display: inline-block;vertical-align: middle; margin-right: 6px">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                    
+                                            <input type="text" class="form-control pull-left" id="reservation" name="time" placeholder="{:lang('choose_bill_time')}" value="" style="padding: 4px 12px; height: 30px">
+                                        </div>
+                                    </div>
+                                    <input type="submit" value="{:lang('search')}" class="btn btn-info etbtn">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <table id="demo-foo-addrow" class="table table-bordered table-striped" data-page-size="10">
+                            <thead>
+                            <tr>
+                                <th>账期时间</th>
+                                <th>账单编号</th>
+                                <th>订单数量</th>
+                                <th>订单商品金额</th>
+                                <th>运费</th>
+                                <th>平台抽佣</th>
+                                <th>优惠券抵扣</th>
+                                <th>优惠活动金额</th>
+                                <th>退款金额</th>
+                                <th>结算金额</th>
+                                <th>结算状态</th>
+                                <th>{:lang('operation')}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {foreach $list as $v}
+                            <tr>
+                                <td>{:time_format($v.start_time,'Y-m-d H:i:s')}~{:time_format($v.end_time,'Y-m-d H:i:s')}
+                                </td>
+                                <td>
+                                    {$v.bill_sn}
+                                </td>
+                                <td>{$v.order_num}</td>
+                    
+                                <td>
+                                    {$v.goods_total_money}
+                                </td>
+                                <td>
+                                    {$v.freight}
+                                </td>
+                                <td>
+                                    {$v.platform_commission}
+                                </td>
+                                <td>
+                                    {$v.coupon}
+                                </td>
+                                <td>{$v.special_offer}</td>
+                                <td>{$v.refund_money}</td>
+                                <td>{$v.money}</td>
+                                <td>
+                                    {eq name='$v.status' value='1'}
+                                    <span>{:lang('had_settle')}</span>
+                                    {else /}
+                                    <span>{:lang('no_settle')}</span>
+                                    {/eq}
+                                </td>
+                                <td>
+                                    <a class="tooltip-link ajax-get btn btn-primary btn-sm"
+                                       data-original-title="{:lang('View')}" data-toggle="tooltip" data-placement='top'
+                                       data-width="900" data-height="700" data-showbar="1"
+                                       data-title="{:lang('settle_info')}" data-skin="skin-blue"
+                                       href="{:url('info',array('id'=>$v.id))}"><i class="fa fa-eye"></i></a>
+                        
+                                    
+                    
+                                </td>
+                            </tr>
+                            {/foreach}
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td colspan="12">
+                                    <div class="text-right pagination">
+                                        {$list->appends(input())->render()}
+                                    </div>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {/block}
+    {block name='js'}
+    <script src="__PUBLIC__/{$js_path}/moment.min.js"></script>
+    <script src="__PUBLIC__/{$js_path}/daterangepicker.js"></script>
+    <script>
+        $(function () {
+            $('#end_time').daterangepicker({
+                autoUpdateInput:false
+            });
+            $('#reservation').daterangepicker({
+                autoUpdateInput: false
+            });
+        })
+    </script>
+    {/block}

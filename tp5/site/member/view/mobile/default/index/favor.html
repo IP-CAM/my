@@ -1,0 +1,68 @@
+{extend name='public/base' /}
+{block name='body'}
+<div id="j-wechatTopbar"></div>
+<header class="g-hd">
+</header>
+<header class="g-hd m-topnav-space" id="g-hd">
+    <div class="m-topnav-wrap">
+        <div class=" m-topnav" id="topbar-box">
+            <div class="m-topnavbar">
+                <span class="tit" id="toptitle">我的收藏</span>
+                <div class="btns">
+                    <a href="{:url('crossbbcg/index/index')}" title="回首页" class="u-topbaridx"></a>
+                    {empty name="user"}
+                    <a href="{:url('member/passport/index')}" class="u-topbarlogin">登录</a>
+                    {else /}
+                    <a href="{:url('member/index/index')}" id="j-gousrcenter" title="个人中心" class="u-topbaruser usr"></a>
+                    {/empty}
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="m-searchresult" id="favorite">
+    {notempty name="data"}
+    <dl class="m-itemlist-col2 f-cb ">
+        {volist name="data" id="vo"}
+        <dd>
+            <article class="m-itemcol2">
+                <a href="{:url('crossbbcg/goods/index',array('item_id'=>$vo['goods']['id']))}" class="imgwrap">
+                    {if condition="empty($vo['goods']['thumb'])"}
+                    <img class="u-item-img"  src="__PUBLIC__/{$img_path}/no-image.png">
+                    {elseif condition="substr($vo['goods']['thumb'],0,4)=='http'"}
+                    <img class="u-item-img"  src="{$vo['goods']['thumb']}" >
+                    {else /}
+                    <img class="u-item-img"  src="{:resizeImage($vo['goods']['thumb'],'thumb',true)}">
+                    {/if}
+                </a>
+                <div class="txtwrap">
+                    <p class="tit">
+                        <a href="{:url('crossbbcg/goods/index',array('item_id'=>$vo['goods']['id']))}">
+                        {$vo['goods']['name']}</a>
+                    </p>
+                    <p class="mkt-price">{:lang('market_price')}¥<del>{$vo['goods']['market_price']}</del></p>
+                    <!--Regular if11-->
+                    <p class="act-price">{:lang('sale_price')}¥<span class="bold">{$vo['goods']['sale_price']}</span>
+                    </p>
+                </div>
+            </article>
+        </dd>
+        {/volist}
+    </dl>
+    {else /}
+    <div class="m-nodata">
+        <div class="m-emptydata">
+            <div class="f-tac"><span class="u-emptsearch">&nbsp;</span></div>
+            <div class="text">暂无收藏商品</div>
+        </div>
+    </div>
+    {/notempty}
+</div>
+{/block}
+{block name='js'}
+<script>
+    $(function () {
+        $('body').css('background-color','#f0f0f0');
+    })
+</script>
+{/block}

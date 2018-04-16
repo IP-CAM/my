@@ -1,0 +1,41 @@
+{extend name='public/layout'}
+
+{block name='body'}
+<div id="toolTipLayer"
+     style="position: absolute; z-index: 9999; display: none; visibility: visible; left: 95px; top: 573px;"></div>
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+    <div class="fixed-bar">
+        <div class="item-title">
+            <div class="subject">
+                <h3>安全中心</h3>
+            </div>
+        </div>
+    </div>
+    <form class="form-horizontal" id="handleposition" method="post">
+        <input type="hidden" name="id" value=""/>
+        <div class="ncap-form-default">
+            <dl class="row">
+                <dt class="tit">
+                    <label><em>*</em>手机号</label>
+                </dt>
+                <dd class="opt">
+                    <span class="input-txt">132****3223</span>
+                    <a class="btns orange" href="{:url('checkpwd')}">去验证</a>
+                </dd>
+            </dl>
+            
+            <dl class="row">
+                <dt class="tit">
+                    <label><em>*</em>邮箱</label>
+                </dt>
+                <dd class="opt">
+                    <span class="input-txt">111****h@qq.com</span>
+                    <a class="btns orange" href="{:url('checkpwd')}">去验证</a>
+                </dd>
+            </dl>
+        </div>
+    </form>
+</div>
+{/block}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		{block name="title"}
+		<title>{:lang('Crossbbcg_Title')}</title>
+		{/block}
+        
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        {notempty name="meta_keyword"}
+        <meta name="keywords" content= "{$meta_keyword}" />
+        {/notempty}
+        {notempty name="meta_description"}
+        <meta name="description" content= "{$meta_description}" />
+        {/notempty}
+        <link rel="icon" href="__ROOT__/favicon.ico" type="image/x-icon" />
+        
+		<script type="text/javascript">
+			//模板静态js路径
+			var root = '__ROOT__';
+			var RequireParam={
+				BaseScriptPath:(root == '') ? '/' : root,
+				BaseScript:['jquery', 'public'],
+				UpdateCartUrl:"{:url('crossbbcg/carts/update_num')}"
+			};
+			Private_Script=null
+		</script>
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/crossbbcg/{$path}/css/base.css"/>
+		<link rel="stylesheet" type="text/css" href="__STATIC__/layer-v3.0.3/skin/default/layer.css"/>
+		<link rel="stylesheet" type="text/css" href="__STATIC__/layer-v3.0.3/skin/blue/style.css"/>
+		<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_337798_uqin8ypiig7rpb9.css"/>
+
+	{block name="css"}{/block}
+	</head>
+	<body>
+    
+        {:widget('crossbbcg/common/header')}
+  
+		{block name="body"}{/block}
+
+        {:widget('crossbbcg/common/footer')}
+			
+        {block name="footer_js"}{/block}
+        <script type="text/javascript" data-main="__PUBLIC__/crossbbcg/{$path}/js/main" src="__STATIC__/js/require.js" ></script>
+        <div class="js_language">
+            <span id="js_cart_least">{:lang('js_cart_least')}</span>
+            <span id="js_cart_more">{:lang('js_cart_more')}</span>
+            <span id="js_cart_jian">{:lang('js_cart_jian')}</span>
+            <span id="js_add_cart_success">{:lang('js_add_cart_success')}</span>
+            <span id="js_choose_sku">{:lang('js_choose_sku')}</span>
+            <span id="js_ok">{:lang('js_ok')}</span>
+            <span id="js_no">{:lang('js_no')}</span>
+            <span id="js_copy_success">{:lang('js_copy_success')}</span>
+            <span id="js_copy_error">{:lang('js_copy_error')}</span>
+            <span id="js_again_code">{:lang('js_again_code')}</span>
+            <span id="js_code_success">{:lang('js_code_success')}</span>
+        </div>
+	</body>
+</html>

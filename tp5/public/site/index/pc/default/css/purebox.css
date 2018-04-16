@@ -1,0 +1,69 @@
+.pb{ 
+	background-color:rgba(0,0,0,.1);
+	position: fixed;
+	box-shadow:0 0 2px 2px #999; 
+
+	border-radius:5px;
+}
+.pb .cboxContent { 
+	background: #fff;
+	border-radius:5px;
+}
+.pb-hd {
+	position: relative;
+	padding: 0 16px;
+	height: 31px;
+	line-height: 31px;
+	background: #f3f3f3;
+}
+.pb-hd .pb-title{
+	font-weight:normal;
+	font-size: 14px;
+	color: #666;
+	font-family: "Microsoft YaHei";
+}
+.pb-hd .pb-x{ 
+	cursor: pointer;
+	display: block;
+	position: absolute;
+	z-index: 100000;
+	top: 10px;
+	right: 16px;
+	overflow: hidden;
+	width: 13px;
+	height: 13px;
+	background: url(../image/dialog.png) no-repeat;
+	font-size: 0;
+	text-indent:-99999px;
+}
+.pb-bd{
+	overflow: auto;
+	background: #fff;
+	position: relative;
+	border-radius:5px;
+}
+.pb .tip-box .pb-btn{ height:30px; line-height:30px; color:#fff; font-size:16px; padding:0 16px; background:#ec5051; border-radius:5px; display:block; float:left; cursor:pointer;}
+
+#dialog .tip-box{ position:absolute;top: 150px;left: 239px;}
+#dialog2 .tip-box{ position:absolute;top: 175px;left: 150px;}
+#dialog2 .tip-box .pb-btn{ height:30px; line-height:30px; color:#666; font-size:16px; padding:0 16px; background:#eaeaea; border-radius:5px; display:block; float:left; cursor:pointer;}
+#dialog2 .tip-box .pb-btn.pb-ok{ background:#ec5051; color:#fff; margin-right:15px;}
+#dialog .tip-box .pb-btn:hover,#dialog2 .tip-box .pb-btn.pb-ok:hover{ background:#dc3536;}
+#dialog2 .tip-box .pb-btn.pb-cl:hover{ background:#DCDCDC;}
+
+#emp_dialog .tip-box{position:absolute;top: 140px;left: 223px;}
+.emp_content{ font-size:18px; line-height:50px; text-align:center; padding:45px 0;}
+
+
+#downloadDialog{ box-shadow:0 0 10px 2px rgba(43,43,43,.3);}
+#downloadDialog .cboxContent{ border-radius:0;}
+#downloadDialog .pb-hd .pb-x{ width:16px; height:16px; background:url(../image/x.png) no-repeat; top:20px; right:20px;}
+#downloadDialog .pb-hd{ height:60px; background:#fff; border-bottom:1px solid #dde0e5;}
+#downloadDialog .pb-hd .pb-title{ font-size:20px; text-align:center; display:block; line-height:60px;}
+#downloadDialog .pb-bd{ padding:40px 75px;}
+#downloadDialog .pb-bd .items{ overflow:hidden;}
+#downloadDialog .pb-bd .items .item{ margin-bottom:20px;}
+#downloadDialog .pb-bd .items .item .text{ width:278px; height:38px; line-height:38px; border:1px solid #dde0e5; outline:0; border-radius:5px; padding:0 10px; font-size:14px;}
+#downloadDialog .pb-bd .items .item .text_2{ width:178px;}
+#downloadDialog .pb-bd .items .item .sms-btn{ width:80px; height:40px; line-height:40px; color:#fff; font-size:14px; text-align:center; background-color:#239ffd; display:block; float:right; border-radius:5px;}
+#downloadDialog .tip-box .pb-btn{ width:300px; height:50px; line-height:50px; color:#fff; text-align:center; font-size:14px; padding:0;}

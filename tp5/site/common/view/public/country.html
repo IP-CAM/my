@@ -1,0 +1,34 @@
+    <select name="country" id="country" style="width:200px;">
+        <option value="_NULL_">-{:lang('Please_choose')}-</option>
+    </select>
+    
+    <script>
+        $(function () {
+            var country     = '{$country}';
+            var country_id  = '{$country_id}';
+            var target      = '{:url("index/index/getarea")}';
+            $.get(target, {attr:'country'}).success(function (data) {
+                if (data.code == 1) {
+                    var opt = '';
+                    $.each(data.msg, function (i, val) {
+                        opt += '<option value="'+val.id+'" data-value="'+val.name+'">'+val.name+'</option>'
+                    })
+                    $("#country").append(opt);
+                    if(country != '')
+                    {
+                        //选中国家
+                        $("#country option[data-value="+country+"]").attr("selected", true);
+                    }
+                    if(country_id != '')
+                    {
+                        //选中国家
+                        $("#country option[value="+country_id+"]").attr("selected", true);
+                    }
+                } else {
+                    $("#country").empty().append('<option value="_NULL_">{:lang("Load area fail")}</option>');
+                }
+            });
+            
+        })
+    </script>
+    

@@ -1,0 +1,491 @@
+{extend name='common/poupbase'}
+{block name='css'}
+<link href="__PUBLIC__/{$js_path}/iCheck/all.css" rel="stylesheet">
+{/block}
+
+{block name='body'}
+<section class="content">
+    <div class="row">
+        
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">{:lang('after_sale_good')}</h3>
+                </div>
+                <div class="box-body">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th width="100">&nbsp;</th>
+                            <th width="400">{:lang('goods_name')}</th>
+                            <th>{:lang('goods_num')}</th>
+                            <th>{:lang('single_price')}</th>
+                            <th>{:lang('single_goods_total_money')}</th>
+                        </tr>
+                        <tr>
+                            <td class="text-center">
+                                <a href="{:url('crossbbcg/goods/index').'?item_id='.$good.goods_id}" target="_blank">
+                                    {if condition="substr($good.sku_thumb,0,4) == 'http'"}
+                                    <img src="{:resizeImage($good.sku_thumb)}"/>
+                                    {else /}
+                                    <img src="__UPLOADS__/{:resizeImage($good.sku_thumb,'small')}"/>
+                                    {/if}
+                                </a>
+                                
+                            </td>
+                            <td>
+                                <a href="{:url('crossbbcg/goods/index').'?item_id='.$good.goods_id}" target="_blank">{$good.goods_name}</a>
+                                {if condition="$good['sku_array']"}
+                                <br/><span style="color:#9e9e9e">{$good['sku_array']}</span>
+                                {/if}
+                                
+                            </td>
+                            <td>
+                                {$good.sku_number}
+                            </td>
+                            <td>
+                                {$order.symbol}{$good.sku_price}
+                            </td>
+                            <td>
+                                {$order.symbol}{$good.sku_price*$good.sku_number}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-12">
+            
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                        {:lang('basis_info')}
+                    </h3>
+                </div>
+                <form class="form-horizontal" method="post">
+                <div class="box-body">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td width="120" class="text-right">
+                                {:lang('after_sn')}</td>
+                            <td>
+                                {:lang($info.after_sn)}
+                            </td>
+                        
+                            <td width="120" class="text-right">
+                                {:lang('order_sn')}
+                            </td>
+                            <td>{$info.order_sn}</td>
+                        </tr>
+                        
+                        <tr>
+                            <td class="text-right">{:lang('after_rtype')}</td>
+                            <td>
+                                {:lang('after_type_'.$info.rtype)}
+                            </td>
+                            <td class="text-right">{:lang('after_status')}</td>
+                            <td>
+                                {eq name="$info['status']" value="0"}
+                                <span class="text-red">
+                                    {:lang('after_status_'.$info.status)}
+                                </span>
+                                {else /}
+                                {:lang('after_status_'.$info.status)}
+                                {/eq}
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td class="text-right">{:lang('after_sale_in_reason')}</td>
+                            <td>
+                                {$info.return_reason}
+                            </td>
+                            <td class="text-right">
+                                {:lang('apply_after_sale_time')}
+                            </td>
+                            <td>{$info.create_time}</td>
+                        </tr>
+                        
+                        <tr>
+                            <td class="text-right">{:lang('after_sale_description')}</td>
+                            <td colspan="3">
+                                {$info.return_description}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-right">{:lang('after_sale_image')}</td>
+                            <td colspan="3" id="photos">
+                                {notempty name="$images"}
+                                {foreach $images as $img}
+                                <img src="__UPLOADS__/{$img}" class="img-thumbnail" layer-src="__UPLOADS__/{$img}" alt="{:lang('after_sale_image')}" style="max-height:100px;"/>
+                                {/foreach}
+                                {/notempty}
+                            </td>
+                        </tr>
+                        
+                        <!--未审核显示-->
+                        {if condition="$info['status'] === 0"}
+                        <tr>
+                            <td class="text-right">
+                                {:lang('is_agree_after_sale')}
+                            </td>
+                            <td colspan="3">
+                                <!-- 同意 -->
+                                <label>
+                                    <input type="radio" name="agree" value="1" checked>
+                                    {:lang('agree')}
+                                </label>
+                                &nbsp;&nbsp;
+                                <label>
+                                    <input type="radio" name="agree" value="0">
+                                    <strong>{:lang('disagree')}</strong>
+                                </label>
+                            </td>
+                        </tr>
+                        
+                       
+                        {/if}
+                        
+                        {if condition="$info['rtype']!=0"}
+                        <tr>
+                            <td class="text-right">{:lang('return_address')}</td>
+                            <td colspan="3">
+                                {notempty name="$after_sale_address"}
+                                {$after_sale_address}
+                                {/notempty}
+                            </td>
+                        </tr>
+                            {if condition="$info['rtype']==2"}
+                             <input type="hidden" name="exchange" value="1" />
+                            {/if}
+                        {/if}
+                        
+                        {if condition="$info['rtype']!==2"}
+                        <tr>
+                            <td class="text-right">
+                                {:lang('return_money')}
+                            </td>
+                            <td colspan="3">
+                                <label>
+                                    {$order.symbol}
+                                    {if condition="$info['status']===0"}
+                                <input type="number" min="0" max="{$order.order_amount}" value="" name="applyprice"/>
+                                &nbsp;&nbsp;
+                                    ({:lang('max_return_money')}：{$order.symbol}{$order.order_amount})
+                                    {elseif condition="($info['status']==3||$info['status']==5) && $info['rtype']==1"}
+                                    <input type="number" min="0" max="{$order.order_amount}" value="{$info.applyprice}" name="applyprice"/>
+                                    &nbsp;&nbsp;
+                                    ({:lang('max_return_money')}：{$order.symbol}{$order.order_amount})
+                                    {else /}
+                                    {$info.applyprice}
+                                    {/if}
+                                </label>
+                            </td>
+                        </tr>
+                        {/if}
+    
+                        <!--仅退款，已通过审核，等待退款-->
+                        {if condition="$info['status']==3 && $info['rtype']==0"}
+                         <tr>
+                             <td class="text-right">{:lang('order_lock')}</td>
+                             <td colspan="3" class="text-red">
+                                 {:lang('after_sale_returning')}
+                             </td>
+                         </tr>
+                        {/if}
+    
+                        <!--退货退款，已通过审核-->
+                        {if condition="($info['status']==3||$info['status']==5) && $info['rtype']==1"}
+                        <tr>
+                            
+                            <td class="text-right">
+                                {:lang('shipping_no')}
+                            </td>
+                            <td colspan="3">
+                                {if condition="$info['shipping_no']!=''"}
+                                {$info.shipping_no} &nbsp;&nbsp; {$info.shipping_name}
+                                {else /}
+                                {:lang('empty_shipping_no')}
+                                {/if}
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td class="text-right">{:lang('is_agree_return')}</td>
+                            <td colspan="3">
+                                <label>
+                                    <input type="radio" name="agree" value="1" checked>
+                                    {:lang('agree')}
+                                </label>
+                                &nbsp;&nbsp;
+                                <label>
+                                    <input type="radio" name="agree" value="0">
+                                    <strong>{:lang('disagree')}</strong>
+                                </label>
+                                
+                            </td>
+                        </tr>
+                        {/if}
+    
+                        <!--退货退款 已驳回-->
+                        {if condition="$info['status']==2 && $info['rtype']==1"}
+                        <tr>
+        
+                            <td class="text-right">
+                                {:lang('shipping_no')}
+                            </td>
+                            <td colspan="3">
+                                {if condition="$info['shipping_no']!=''"}
+                                {$info.shipping_no} &nbsp;&nbsp; {$info.shipping_name}
+                                {else /}
+                                {:lang('empty_shipping_no')}
+                                {/if}
+                            </td>
+                        </tr>
+                        {/if}
+                        
+                        <!--退货退款，已完成退货，等待财务退款-->
+                        {if condition="$info['status']==6 && $info['rtype']==1"}
+                        <tr>
+        
+                            <td class="text-right">
+                                {:lang('shipping_no')}
+                            </td>
+                            <td colspan="3">
+                                {if condition="$info['shipping_no']!=''"}
+                                {$info.shipping_no} &nbsp;&nbsp; {$info.shipping_name}
+                                {else /}
+                                {:lang('empty_shipping_no')}
+                                {/if}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-right">{:lang('order_lock')}</td>
+                            <td colspan="3" class="text-red">
+                                {:lang('after_sale_returning')}
+                            </td>
+                        </tr>
+                        {/if}
+    
+    
+                        <!--换货，已通过审核-->
+                        {if condition="($info['status']==3||$info['status']==5) && $info['rtype']==2"}
+                        <tr>
+        
+                            <td class="text-right">
+                                {:lang('shipping_no')}
+                            </td>
+                            <td colspan="3">
+                                {if condition="$info['shipping_no']!=''"}
+                                {$info.shipping_no} &nbsp;&nbsp; {$info.shipping_name}
+                                {else /}
+                                {:lang('empty_shipping_no')}
+                                {/if}
+                            </td>
+                        </tr>
+    
+                        <tr>
+                            <td class="text-right">{:lang('is_receive_and_shipping')}</td>
+                            <td colspan="3">
+                                <label>
+                                    <input type="radio" name="agree" value="1" checked>
+                                    {:lang('is_confirm')}
+                                </label>
+                                &nbsp;&nbsp;
+                                <label>
+                                    <input type="radio" name="agree" value="0">
+                                    <strong>{:lang('is_reject')}</strong>
+                                </label>
+        
+                            </td>
+                        </tr>
+                        {/if}
+    
+                        <!--退货退款，已完成退货，等待财务退款-->
+                        {if condition="$info['status']==6 && $info['rtype']==2"}
+                        <tr>
+        
+                            <td class="text-right">
+                                {:lang('shipping_no')}
+                            </td>
+                            <td colspan="3">
+                                {if condition="$info['shipping_no']!=''"}
+                                {$info.shipping_no} &nbsp;&nbsp; {$info.shipping_name}
+                                {else /}
+                                {:lang('empty_shipping_no')}
+                                {/if}
+                            </td>
+                        </tr>
+                        
+                        {if condition="$info['rtype']!=2"}
+                        <tr>
+                            <td class="text-right">{:lang('order_lock')}</td>
+                            <td colspan="3" class="text-red">
+                                {:lang('after_sale_returning')}
+                            </td>
+                        </tr>
+                        {/if}
+                        {/if}
+    
+                        <!--拒绝理由-->
+                        <tr class="disagree-reason" style="display:none;">
+                            <td class="text-right">
+                                {:lang('disagree_reason')}
+                            </td>
+                            <td colspan="3">
+                                <textarea class="form-control" rows="3" name="disagree_reason"></textarea>
+                            </td>
+                        </tr>
+                        
+                        
+                    </table>
+                    <input type="hidden" value="{$info.after_sn}" name="after_sn"/>
+                    
+                </div>
+                <div class="box-footer">
+                    <!--必须要有售后地址才能够审核-->
+                    {notempty name="$after_sale_address"}
+                    
+                    {if condition="$info['status']==0"}
+                    <input type="button" name="submit" class="btn btn-info" url="{:url('seller/order/edit_after_sale')}" value="{:lang('submit')}" />
+                    <input type="button" class="btn btn-default" name="reset" value="{:lang('cancel')}">
+                    {/if}
+                    
+                    {else /}
+                    <span class="text-red">{:lang('after_sale_address_error')}</span>
+                    {/notempty}
+    
+                    {if condition="($info['status']==3||$info['status']==5) && $info['rtype']==1"}
+                    <input type="hidden" value="1" name="agree_return" />
+                    <input type="button" name="submit" class="btn btn-info" url="{:url('seller/order/edit_after_sale')}" value="{:lang('submit')}" />
+                    <input type="button" class="btn btn-default" name="reset" value="{:lang('cancel')}">
+                    {/if}
+    
+                    {if condition="($info['status']==3||$info['status']==5) && $info['rtype']==2"}
+                    <input type="hidden" value="1" name="agree_exchange" />
+                    <input type="button" name="submit" class="btn btn-info" url="{:url('seller/order/edit_after_sale')}" value="{:lang('submit')}" />
+                    <input type="button" class="btn btn-default" name="reset" value="{:lang('cancel')}">
+                    {/if}
+                    
+                    
+                    
+                </div>
+                </form>
+            </div>
+        </div>
+    
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">{:lang('order_goods_info')}</h3>
+                </div>
+                <div class="box-body">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th width="100">&nbsp;</th>
+                            <th width="400">{:lang('goods_name')}</th>
+                            <th>{:lang('goods_num')}</th>
+                            <th>{:lang('single_price')}</th>
+                            <!--<th>{:lang('member_discount_price')}</th>-->
+                            <th>{:lang('single_goods_total_money')}</th>
+                        </tr>
+                        {notempty name='order_goods'}
+                        {foreach $order_goods as $v}
+                        <tr>
+                            <td class="text-center">
+                            
+                                <a href="{:url('crossbbcg/goods/index').'?item_id='.$v.goods_id}" target="_blank">
+                                    {if condition="substr($v.sku_thumb,0,4) == 'http'"}
+                                    <img src="{:resizeImage($v.sku_thumb)}"/>
+                                    {else /}
+                                    <img src="__UPLOADS__/{:resizeImage($v.sku_thumb,'small')}"/>
+                                    {/if}
+                                </a>
+                        
+                            </td>
+                            <td>
+                                <a href="{:url('crossbbcg/goods/index').'?item_id='.$v.goods_id}" target="_blank">{$v.goods_name}</a>
+                                {if condition="$v['sku_array']"}
+                                <br/><span style="color:#9e9e9e">{$v['sku_array']}</span>
+                                {/if}
+                            </td>
+                        
+                            <td>{$v.sku_number}</td>
+                            <td>{$order.symbol}{$v.sku_price}</td>
+                            <td>{$order.symbol}{$v.sku_price*$v.sku_number}</td>
+                        </tr>
+                        {/foreach}
+                        {/notempty}
+                    
+                        <tr>
+                            <td colspan="4" class="text-right">{:lang('goods_amount')}</td>
+                            <td>{$order.symbol}{$order.goods_amount}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="text-right">{:lang('order_tax')}</td>
+                            <td>{$order.symbol}{$order.order_tax}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="text-right">{:lang('freight')}</td>
+                            <td>{$order.symbol}{$order.shipping_fee}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="text-right">{:lang('integral_amount')} （{$order.integral}）</td>
+                            <td>- {$order.symbol}0.00</td>
+                        </tr>
+                    
+                        <tr>
+                            <td colspan="4" class="text-right">{:lang('order_discount')}</td>
+                            <td>- {$order.symbol}{$order.discount} </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="text-right">{:lang('bonus_deduction')}</td>
+                            <td>- {$order.symbol}{$order.bonus}</td>
+                        </tr>
+                    
+                        <tr>
+                            <td colspan="4" class="text-right">{:lang('order_total_money')}</td>
+                            <td>{$order.symbol}{$order.order_amount}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+{/block}
+
+{block name="js"}
+
+<script src="__PUBLIC__/{$js_path}/iCheck/icheck.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        //Red color scheme for iCheck
+        $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+            checkboxClass: 'icheckbox_minimal-red',
+            radioClass   : 'iradio_minimal-red'
+        });
+
+        layer.photos({
+            photos: '#photos'
+            ,anim: 0 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+        });
+        
+        
+        // 不同意显示拒绝理由
+        $('input[name="agree"]').click(function(){
+            if($(this).val()==0){
+                $('.disagree-reason').show();
+            }else{
+                $('.disagree-reason').hide();
+            }
+        });
+    });
+    
+    
+    
+    
+</script>
+{/block}

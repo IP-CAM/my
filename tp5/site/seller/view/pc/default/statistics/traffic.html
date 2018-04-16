@@ -1,0 +1,160 @@
+    {extend name='common/base'}
+
+    {block name="breadcrumb"}
+    <li>{:lang('order_settle')}</li>
+    <li class="active">{$meta_title|default=''}</li>
+    {/block}
+    
+    {block name='body'}
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <div class="row">
+                            <div class="page-header-top">
+                                <form action="{:url('seller/statistics/traffic')}">
+                                    <a class="btn btn-etshop addnew" href="{:url('seller/statistics/traffic')}"><i class="fa fa-feed"></i> {:lang('All')}</a>
+                                    <div class="time"
+                                         style="width: 200px; position: relative;display: inline-block;vertical-align: middle; margin-right: 6px">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                            
+                                            <input type="text" class="form-control pull-left" id="reservation" name="time" placeholder="{:lang('operation_time')}" value="{$time}" style="padding: 4px 12px; height: 30px">
+                                        </div>
+                                    </div>
+                                    <input type="submit" value="{:lang('search')}" class="btn btn-info etbtn">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="box">
+                    <div class="box-body">
+                        <div class="col-lg-12" style="height: 350px" id="main1">
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <h4 class="box-title">流量数据</h4>
+                    </div>
+                    <div class="box-body">
+                        <table class="table-bordered table">
+                            <thead>
+                                <tr>
+                                    <th>排行</th>
+                                    <th>页面地址</th>
+                                    <th>PV</th>
+                                    <th>UV</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>www.runtuer.com</td>
+                                    <td>10</td>
+                                    <td>20</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>www.runtuer.com</td>
+                                    <td>10</td>
+                                    <td>20</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>www.runtuer.com</td>
+                                    <td>10</td>
+                                    <td>20</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </section>
+    <!-- /.content -->
+    {/block}
+    
+    {block name='js'}
+    <script src="__PUBLIC__/{$js_path}/moment.min.js"></script>
+    <script src="__PUBLIC__/{$js_path}/daterangepicker.js"></script>
+    <script src="https://cdn.bootcss.com/echarts/3.7.1/echarts.min.js"></script>
+    <script>
+        $('#reservation').daterangepicker({
+            autoUpdateInput: false
+        });
+        var myChart1 = echarts.init(document.getElementById('main1'));
+        var option1 = {
+            title : {
+                subtext: '流量分析',
+                //subtext: '纯属虚构'
+            },
+            tooltip : {
+                trigger: 'axis'
+            },
+            legend: {
+                data:['全部UV','电脑端UV','移动端UV']
+            },
+            toolbox: {
+                show : true,
+                feature : {
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},
+                    magicType : {show: true, type: ['line', 'bar']},
+                    restore : {show: true},
+                    saveAsImage : {show: true}
+                }
+            },
+            calculable : true,
+            xAxis : [
+                {
+                    type : 'category',
+                    boundaryGap : false,
+                    data : ['2017-09-30','2017-09-29','2017-09-28']
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value',
+                    axisLabel : {
+                        formatter: '{value}'
+                    }
+                }
+            ],
+            series : [
+                {
+                    name:'全部UV',
+                    type:'line',
+                    data:[1,2,3]
+                },
+                {
+                    name:'电脑端UV',
+                    type:'line',
+                    data:[4,5,6]
+                },
+                {
+                    name:'移动端UV',
+                    type:'line',
+                    data:[3,8,2]
+                }
+            ]
+        };
+        myChart1.setOption(option1);
+    </script>
+    {/block}

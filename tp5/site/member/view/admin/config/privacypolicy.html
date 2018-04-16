@@ -1,0 +1,82 @@
+    {extend name="admin@public/base" /}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content">
+        <div class="breadcrumbs">
+            {:lang('Member')} : &nbsp;&nbsp; {:lang('Usereconomy')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+        </div>
+        
+        <div class="bloc">
+            <div class="title">
+                <div class="tabs" id="navs">
+                    {include file="admin@public/navs" /}
+                </div>
+                
+                {include file="admin@public/lang" /}
+            </div>
+            
+            <form name="frmShopSettingsEdit" method="post" style="margin-top:5px;">
+                <div class="alert alert-warning">
+                    <button class="close" type="button">&times;</button>
+                    <span class="alert-content">{:lang('Privacypolicy_tip')}</span>
+                </div>
+    
+                <div class="content" style="padding-bottom: 20px; padding-top: 0px;">
+                    <table class="table kright">
+                        <tbody>
+                        <tr style="padding: 5px 0;">
+                            <td style="vertical-align:top; padding: 15px 15px;">{:lang('Privacypolicy')}: </td>
+                            <td>
+                                <div class="row">
+                                    <textarea id="privacypolicy" name="privacypolicy">{$data.privacypolicy}</textarea>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+    
+                <div class="buttons-wrapper" style="margin:0 0 30px; padding:0 0 0 18%;">
+                    <input name="submit" value="{:lang('Saveprivacypolicy')}" type="submit" url="{:url('save')}" />
+                </div>
+            </form>
+        
+        </div>
+    </div>
+    {/block}
+    
+    {block name="js"}
+    <script charset="utf-8" src="__STATIC__/kindeditor/kindeditor-all-min.js"></script>
+    <script>
+        KindEditor.ready(function(K) {
+            editor = K.create('#privacypolicy', {
+                resizeType : 0,
+                allowPreviewEmoticons : false,
+                allowImageUpload : false,
+                minWidth : 900,
+                minHeight : 300,
+                langType : "{:config('kernel.localdate')}",
+                items : [
+                    'source', '|','undo', 'redo', '|','bold', 'italic', 'underline',
+                    'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                    'insertunorderedlist', '|', 'image'],
+                afterBlur: function () { this.sync(); }
+            });
+        });
+        
+        $(function(){
+            $(".bset").buttonset();
+
+            {notempty name="data.regstatus"}$('#closedby').show();{/notempty}
+            $('#regstatus').click(function(){
+                var ischecked = $(this).is(":checked");
+                if(ischecked){
+                    $('#closedby').hide();
+                }else{
+                    $('#closedby').show();
+                }
+            })
+        })
+    </script>
+    {/block}

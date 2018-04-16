@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    {block name='seo'}{/block}
+
+    <meta name="author" content="runtuer.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="shortcut icon" href="__ROOT__/favicon.ico"/>
+    <link rel="stylesheet" href="__PUBLIC__/{$css_path}/style.css">
+    <link rel="stylesheet" href="__PUBLIC__/{$css_path}/swiper.min.css">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="baidu-site-verification" content="gMUGMQP6fs" />
+    <script>var imgUrl = '__PUBLIC__/{$img_path}/';</script>
+    {block name='css'}{/block}
+</head>
+
+<body>
+{block name='body'}{/block}
+
+<!--百度统计代码 theseaer-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?0311ccb4961223ed160802660045048d";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<script type="text/javascript" src="//s.union.360.cn/194025.js" async defer></script>
+
+{block name='js'}{/block}
+<script>
+    var curUrl  = '{:url()}';
+    $('.nav a').each(function () {
+        var hrefUrl = $(this).attr('href');
+        if(hrefUrl == curUrl)
+        {
+            $(this).addClass('curr').siblings().removeClass('curr');
+        }
+    })
+    /*PUSH页面到百度功能 start*/
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    /*PUSH页面到百度功能 end*/
+</script>
+</body>
+</html>

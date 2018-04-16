@@ -1,0 +1,354 @@
+    {extend name="admin@public/base"/}
+
+    {block name="style"}
+    <style>
+        .spans span{ margin: 0 8px;}
+    </style>
+    {/block}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content">
+        <div class="breadcrumbs">
+            {:lang('Ordersys')} : &nbsp;&nbsp; {:lang('Order')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+        </div>
+        
+        <div class="bloc">
+            <div class="title">
+                <div class="tabs" id="navs">
+                    {include file="admin@public/navs" /}
+                </div>
+                
+                {include file="admin@public/lang" /}
+            </div>
+            <div class="content">
+                
+                <dl class="gzzt clearfix mtb10">
+                    <dd>
+                        <div class="boxr">
+                            {include file="admin@public/button" /}
+                            
+                            <select id="status" style="height:25px; width:80px; margin-right:4px;">
+                                <option value="all" url="{:url('', ['status'=>'all'])}" {eq name="status" value="all" }selected{/eq}>{:lang('Allorders')}</option>
+                                <option value="WAIT_BUYER_PAY" url="{:url('', ['status'=>'WAIT_BUYER_PAY'])}" {eq name="status" value="WAIT_BUYER_PAY" }selected{/eq}>{:lang('WAIT_BUYER_PAY')}</option>
+                                <option value="WAIT_SELLER_SEND_GOODS" url="{:url('', ['status'=>'WAIT_SELLER_SEND_GOODS'])}" {eq name="status" value="WAIT_SELLER_SEND_GOODS" }selected{/eq}>{:lang('WAIT_SELLER_SEND_GOODS')}</option>
+                                <option value="WAIT_BUYER_CONFIRM_GOODS" url="{:url('', ['status'=>'WAIT_BUYER_CONFIRM_GOODS'])}" {eq name="status" value="WAIT_BUYER_CONFIRM_GOODS" }selected{/eq}>{:lang('WAIT_BUYER_CONFIRM_GOODS')}</option>
+                                <option value="TRADE_FINISHED" url="{:url('', ['status'=>'TRADE_FINISHED'])}" {eq name="status" value="TRADE_FINISHED" }selected{/eq}>{:lang('TRADE_FINISHED')}</option>
+                                <option value="TRADE_CLOSED" url="{:url('', ['status'=>'TRADE_CLOSED'])}" {eq name="status" value="TRADE_CLOSED" }selected{/eq}>{:lang('TRADE_CLOSED')}</option>
+                                <option value="TRADE_CLOSED_BY_SYSTEM" url="{:url('', ['status'=>'TRADE_CLOSED_BY_SYSTEM'])}" {eq name="status" value="TRADE_CLOSED_BY_SYSTEM" }selected{/eq}>{:lang('TRADE_CLOSED_BY_SYSTEM')}</option>
+                            </select>
+                            
+                            <select id="source" style="height:25px; width:60px; margin-right:4px;">
+                                <option value="0" url="{:url('',array_merge($inputarr, ['source'=>'all']))}" {eq name="source" value="all" }selected{/eq}>{:lang('Whole_platform')}</option>
+                                <option value="pc" url="{:url('',array_merge($inputarr, ['source'=>'pc']))}" {eq name="source" value="pc" }selected{/eq}>{:lang('PC')}</option>
+                                <option value="app" url="{:url('',array_merge($inputarr, ['source'=>'app']))}" {eq name="source" value="app" }selected{/eq}>{:lang('App')}</option>
+                                <option value="wechat" url="{:url('',array_merge($inputarr, ['source'=>'wechat']))}" {eq name="source" value="wechat" }selected{/eq}>{:lang('Wechat')}</option>
+                                <option value="wap" url="{:url('',array_merge($inputarr, ['source'=>'wap']))}" {eq name="source" value="wap" }selected{/eq}>{:lang('Wap')}</option>
+                                <option value="api" url="{:url('',array_merge($inputarr, ['source'=>'api']))}" {eq name="source" value="api" }selected{/eq}>{:lang('Api')}</option>
+                                <option value="other" url="{:url('',array_merge($inputarr, ['source'=>'other']))}" {eq name="source" value="other" }selected{/eq}>{:lang('Other')}</option>
+                            </select>
+                            
+                            <!--<select id="promotion" style="height:25px; width:80px; margin-right:4px;">
+                                <option value="0" url="{:url('',array_merge($inputarr,array('prom'=>'all')))}" {eq name="prom" value="all" }selected{/eq}>{:lang('All_activity')}</option>
+                                <option value="group" url="{:url('',array_merge($inputarr,array('prom'=>'group')))}" {eq name="prom" value="group" }selected{/eq}>{:lang('Group_purchase')}</option>
+                                <option value="prom" url="{:url('',array_merge($inputarr,array('prom'=>'promotion')))}" {eq name="prom" value="promotion" }selected{/eq}>{:lang('Prom')}</option>
+                                <option value="order" url="{:url('',array_merge($inputarr,array('prom'=>'order')))}" {eq name="prom" value="order" }selected{/eq}>{:lang('Order')}</option>
+                                <option value="timer" url="{:url('',array_merge($inputarr,array('prom'=>'timer')))}" {eq name="prom" value="timer" }selected{/eq}>{:lang('Timer')}</option>
+                                <option value="exchange_goods"
+                                        url="{:url('',array_merge($inputarr,array('prom'=>'exchange_goods')))}" {eq name="prom" value="exchange_goods" }selected{/eq}>{:lang('Exchange_goods')}</option>
+                            </select>-->
+                            
+                            <select id="partner" style="height:25px; width:120px; margin-right:4px;">
+                                <option value="0" url="{:url('',array_merge($inputarr,array('partner'=>'all')))}" {eq name="partner" value="all" }selected{/eq}>{:lang('Partner_platform')}</option>
+                            </select>
+                            <script>
+                                $(function () {
+                                    $("#status, #partner ,#source, #promotion").change(function () {
+                                        var gotu_url = $(this).find('option:selected').attr('url');
+                                        eval("self.location='" + gotu_url + "'")
+                                    })
+                                })
+                            </script>
+                        </div>
+                    </dd>
+                    
+                    <form style="margin-top:0;" class="search-form">
+                        <dd>
+                            <div class="boxr ovh">
+                                <label for="start" style="margin:10px 10px 0 0; width:156px;">
+                                    <input type="text" id="start" value="{:input('start_time')}" name="start_time"
+                                           placeholder="{:lang('Begin_time')}" class="w130 input_img"/>
+                                </label>
+                                <label style="width:10px;line-height:32px; margin-right:2px;">~</label>
+                                <label for="end" style="margin:10px 10px 0 0; width:150px;">
+                                    <input type="text" id="end" value="{:input('end_time')}" name="end_time"
+                                           placeholder="{:lang('End_time')}" class="w130 input_img"/>
+                                </label>
+                            </div>
+                        <dd>
+                        
+                        <dd>
+                            <div class="boxr ovh">
+                                <label for="name" style="margin:10px 10px 0 0; width:125px;">
+                                    <input type="text" class="searchinput" name="name" id="name" value="{:input('name')}"
+                                           placeholder="{:lang('Order_sn_tip')}" style="width:95px;"/>
+                                </label>
+                                <input type="button" name="search" id="sch-search" class="button white"
+                                       value="{:lang('Search')}" url="{:url('',input(''))}"/>
+                            </div>
+                        <dd>
+                    </form>
+                    
+                    <dd style="float: right !important;">
+                        <div class="boxl">
+                            <span>
+                                <a href="javascript:location.reload();" class="refresh tooltip-link"
+                                   title="{:lang('Refresh')}">
+                                    <em>{:lang('Refresh')}</em>
+                                </a>
+                            </span>
+                        </div>
+                    </dd>
+                </dl>
+                
+                <div class="alert alert-info spans">
+                    <span>{:lang('Order count all')}：<b>{$_total}; </b> </span>
+                    <span>{:lang('WAIT_BUYER_PAY')}：<b>{$_pay_total}; </b> </span>
+                    <span>{:lang('TRADE_FINISHED')}：<b>{$_finished_total}; </b> </span>
+                    <span>{:lang('TRADE_CLOSED')}：<b>{$_closed_total}; </b> </span>
+                    <span>{:lang('TRADE_CLOSED_BY_SYSTEM')}：<b>{$_sysclosed_total}; </b> </span>
+                    
+                    <div class="fr">
+                        <span class="red">{:lang('WAIT_SELLER_SEND_GOODS')} <b>{$_wait_send_total}; </b></span>
+                        <span class="green">{:lang('WAIT_BUYER_CONFIRM_GOODS')} <b>{$_wait_confirm_total}; </b></span>
+                    </div>
+                </div>
+                
+                {notempty name="list"}
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="center" width="30"><input class="check-all" type="checkbox"></th>
+                        <th class="left" style="width:120px;">
+                            <a href="{:getUrlbyOrder('order_sn')}">{:lang('Order_sn')}</a>
+                        </th>
+                        <th class="left" style="width:105px;"><a
+                            href="{:getUrlbyOrder('create_time')}">{:lang('Single_time')}</a></th>
+                        <th class="left" style="width:150px;"><a
+                            href="{:getUrlbyOrder('consignee')}">{:lang('Consignee')}</a>
+                        </th>
+                        <th class="left" style="width:60px;"><a
+                            href="{:getUrlbyOrder('order_amount')}">{:lang('Total_amount')}</a>
+                        </th>
+                        <th class="left" style="width:50px;"><a
+                            href="{:getUrlbyOrder('integral')}">{:lang('Integral')}</a></th>
+                        <th class="left" style="width:80px;">
+                            <a href="{:getUrlbyOrder('pay_name')}">{:lang('Payment_type')}</a>
+                        </th>
+                        <th class="center" style="width:60px;">
+                            <a href="{:getUrlbyOrder('platform_type')}">{:lang('Order_source')}</a>
+                        </th>
+                        <th class="center" style="width:60px;">
+                            <a href="{:getUrlbyOrder('status')}">{:lang('Order_status')}</a>
+                        </th>
+                        <th class="center" style="width:50px;">
+                            <a href="{:getUrlbyOrder('cancel_status')}">{:lang('Docancel')}</a>
+                        </th>
+                        <th class="actions" style="width:40px;">{:lang('Action')}</th>
+                    </tr>
+                    </thead>
+                    
+                    <tbody>
+                    {volist name="list" id="vo"}
+                    <tr>
+                        <td class="center">
+                            <input class="ids" type="checkbox" value="{$vo['order_id']}" name="ids[]">
+                        </td>
+                        <td class="left slh tooltip-link" style="max-width: 120px;" title="{$vo['order_sn']}">
+                            <a class="ajax-get {eq name='vo.pay_status' value='0'}blue{/eq}  {if condition="$vo.cancel_status == 'NO_APPLY' && $vo.status == 'WAIT_SELLER_SEND_GOODS'"}green{/if}"
+                               href="{:url('view', ['ordersn'=>$vo['order_sn']])}"
+                               data-title="{:lang('Vieworder')} : {$vo['order_sn']}"
+                               data-width="960" data-height="600" data-showbar="1">
+                                {$vo['order_sn']}
+                            </a>
+                        </td>
+                        <td class="left">{$vo["create_time"]}</td>
+                        <td class="left slh tooltip-link" style="max-width: 150px;" title="{$vo['consignee']}">
+                            {$vo['consignee']}
+                            [Tel:{empty name="vo.mobile"}{$vo['tel']}{else /}{$vo['mobile']}{/empty}]
+                            <a class="tooltip-icon"
+                               title="{$vo['address']}, Tel: {empty name='vo.tel'}{$vo['mobile']}{else /}{$vo['tel']}{/empty}"></a>
+                        </td>
+                        
+                        <td class="left">{$vo['symbol']} {$vo['order_amount']}</td>
+                        
+                        <td class="left">{$vo['integral']}</td>
+                        
+                        <td class="left slh tooltip-link" style="max-width: 80px;"
+                            title="{$vo['pay_name'] ? lang($vo['pay_name']) : ''}">
+                            {empty name="vo.pay_name"}
+                            <span style="color: #a2aec7">{:lang('Wait_pay')}</span>
+                            {else /}
+                            {:lang($vo['pay_name'])}
+                            {/empty}
+                        </td>
+                        
+                        <td class="center">
+                            {switch name="vo.platform_type"}
+                            {case value="pc"}
+                            <a href="{:url('',array_merge($inputarr,array('source'=>'pc')))}">
+                                [ {:lang('PC')} ]
+                            </a>
+                            {/case}
+                            {case value="app"}
+                            <a href="{:url('',array_merge($inputarr,array('source'=>'app')))}">
+                                <span class="green">[ {:lang('App')} ]</span>
+                            </a>
+                            {/case}
+                            {case value="wechat"}
+                            <a href="{:url('',array_merge($inputarr,array('source'=>'wechat')))}">
+                                <span class="blue">[ {:lang('Wechat')} ]</span>
+                            </a>
+                            {/case}
+                            {case value="wap"}
+                            <a href="{:url('',array_merge($inputarr,array('source'=>'wap')))}">
+                                <span class="violet">[ {:lang('Tablet')} ]</span>
+                            </a>
+                            {/case}
+                            {case value="other"}
+                            <a href="{:url('',array_merge($inputarr,array('source'=>'other')))}">
+                                <span class="red">[ {:lang('Other')} ]</span>
+                            </a>
+                            {/case}
+                            {default /}
+                            {/switch}
+                        </td>
+                        
+                        <td class="center">
+                            {switch name="vo.status"}
+                            {case value="WAIT_BUYER_PAY"}
+                                <span class="red L40">{:lang('WAIT_BUYER_PAY')}</span>
+                            {/case}
+                            {case value="WAIT_SELLER_SEND_GOODS"}
+                                <span class="green L40">{:lang('WAIT_SELLER_SEND_GOODS')}</span>
+                            {/case}
+                            {case value="WAIT_BUYER_CONFIRM_GOODS"}
+                                <span class="L40">{:lang('WAIT_BUYER_CONFIRM_GOODS')}</span>
+                            {/case}
+                            {case value="TRADE_FINISHED"}
+                                <span class="green L40">{:lang('TRADE_FINISHED')}</span>
+                            {/case}
+                            {case value="TRADE_CLOSED"}
+                                <span class=" L40">{:lang('TRADE_CLOSED')}</span>
+                            {/case}
+                            {case value="TRADE_CLOSED_BY_SYSTEM"}
+                                <span class=" L40">{:lang('TRADE_CLOSED_BY_SYSTEM')}</span>
+                            {/case}
+                            {default /}
+                            {/switch}
+                        </td>
+                        
+                        <td class="center">
+                            {switch name="vo.cancel_status"}
+                            {case value="NO_APPLY"}<span class="L40">{:lang('Noapply')}</span>{/case}
+                            {case value="WAIT_PROCESS"}<span class="violet L40">{:lang('Wait_process')}</span>{/case}
+                            {case value="REFUND_PROCESS"}<span class="L40 red">{:lang('Refund_process')}</span>{/case}
+                            {case value="SUCCESS"}<span class="L40">{:lang('Cancel_succ')}</span>{/case}
+                            {case value="FAILS"}<span class="L40">{:lang('Cancel_fail')}</span>{/case}
+                            {default /}
+                            {/switch}
+                        </td>
+                        
+                        <td class="actions">
+                            {if condition="$vo.cancel_status == 'NO_APPLY'"}
+                            {eq name="vo.status" value="WAIT_SELLER_SEND_GOODS"}
+                            <a href="{:url('deliver', ['order_id' => $vo['order_id'] ])}" class="deliver tooltip-link" data-showbar="1" data-height="640" data-width="800" data-title="{:lang('Deliver goods')}  : {$vo.order_sn}" title="{:lang('Deliver goods')} : {$vo.order_sn}">
+                                
+                                <img src="__PUBLIC__/admin/images/deliver.png" alt="{:lang('Deliver goods')}" height="16px" />
+                            </a>
+                            {/eq}
+                            {/if}
+                            
+                            {if condition="$vo.cancel_status == 'NO_APPLY'"}
+                            {eq name="vo.pay_status" value="0"}
+                            <a class="tooltip-link ajax-get" href="{:url('modify', ['ordersn'=>$vo['order_sn']])}"
+                               title="{:lang('Edit order')}" data-title="{:lang('Edit order')} : {$vo.order_sn}"
+                               data-height="525" data-width="760" data-showbar="1">
+                                <img src="__PUBLIC__/admin/images/edit.png"/>
+                            </a>
+                            
+                            <a class="tooltip-link ajax-get"
+                               data-layer="{:lang('Want_cancel_this_order')} <br /> {$vo.order_sn}"
+                               href="{:url('cancel', ['ordersn'=>$vo['order_sn']])}" title="{:lang('Ocancel')}"
+                               data-title="{:lang('Ocancel')} : {$vo.order_sn}" data-height="380" data-width="540"
+                               data-showbar="1">
+                                <img src="__PUBLIC__/admin/images/uninstall.png"/>
+                            </a>
+                            {/eq}
+                            {/if}
+                        </td>
+                    </tr>
+                    {/volist}
+                    </tbody>
+                </table>
+                
+                <div class="pagination-wrapper">
+                    <div class="results-part"><span>{$_total}</span></div>
+                    <div class="links-part">{$list->render()}</div>
+                </div>
+                {else /}
+                <div class="alert alert-warning">{:lang('No_record')}</div>
+                {/notempty}
+            </div>
+        </div>
+    </div>
+    
+    {include file="admin@public/time_for_search" /}
+    {/block}
+    
+    {block name="js"}}
+    <script>
+        $(function () {
+            function getRandom(){
+                var n = 6;
+                return Math.floor(Math.random()*n+1)
+            }
+
+            $('.deliver').on('click', function () {
+                var that = $(this);
+                var title = that.attr('data-title');
+                var boxw  = that.attr('data-width') +'px';
+                var boxh  = that.attr('data-height') +'px';
+                var url   = that.attr('href');
+                layer.open({
+                    type: 2,
+                    shift: getRandom(),
+                    skin: 'layui-layer-lan',
+                    title: [
+                        title,
+                        "border:none; background:#093;font-size: 15px;font-weight:bold;color:#fff;"
+                    ],
+                    shadeClose: false,
+                    shade: [0.5, '#000'],
+                    area: [boxw, boxh],
+                    content: url
+                });
+
+                return false;
+            })
+            
+            $(".tip").each(function (index, element) {
+                var tip_text = $(this).attr("data-tip");
+                var tip_color = $(this).attr("data-color");
+                if (tip_text) {
+                    layer.tips(tip_text, this, {
+                        tips: [1, tip_color],
+                        tipsMore: true,
+                        time: 0,
+                        //closeBtn: 2,
+                    });
+                }
+            });
+        })
+    </script>
+    {/block}

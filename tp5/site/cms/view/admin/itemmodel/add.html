@@ -1,0 +1,161 @@
+{extend name="admin@public/poupbase" /}
+
+<!-- CONTENT -->
+{block name="body"}
+<div id="content" style="margin:0px 10px 5px 8px;">
+    <div class="bloc" style="margin:10px 0px 0px;">
+        <div class="content">
+            <form id="myform" method="post" style="margin-top:5px;" class="">
+                <fieldset>
+                    <legend>{$meta_title|default=''}</legend>
+                    <div class="row">
+                        <label for="item_id" class="w100">{:lang('Uplevel')}: </label>
+                        <select name="item_id" id="item_id" style="width:190px; margin-right: 16px;">
+                            <option value="0">{:lang('Asfirstlevel')}</option>
+                            {volist name="itemlist" id="co"}
+                            <option value="{$co.id}" {eq name="ACTION_NAME" value="edit" }{eq name="co.id"
+                                    value="$data.item_id" }selected{
+                            /eq} {else /} {eq name="co.id" value="$pid"}selected{/eq} {/eq}>{$co.char}
+                            {$co.title} {notempty name="co.name"}({$co.name}){/notempty}</option>
+                            {/volist}
+                        </select>
+                    </div>
+                    <div class="row" id="type">
+                        <label for="type_id" class="w100">{:lang('Itemtype')}: <span class="required">*</span> </label>
+                        <select name="type_id" id="type_id" class="sel_w170">
+                            <option value="0" {eq name="data.type_id" value="0" }selected{
+                            /eq}>--{:lang('Please_choose')}--</option>
+                            {volist name="itemattr" id="ao"}
+                            <option value="{$ao.id}" {eq name="data.type_id" value="$ao.id" }selected{
+                            /eq}>{$ao.name}</option>
+                            {/volist}
+                        </select>
+                    </div>
+                    <div class="row">
+                        <label for="name" class="w100">{:lang('Modelname')}: <span class="required">*</span></label>
+                        <input type="text"  name="name" id="name"
+                               value="{$data.name}"/>
+                    </div>
+                    <div class="row">
+                        <label for="iden" class="w100">{:lang('Modelid')}: <span class="required">*</span></label>
+                        <input type="text" class="input w120l fu onlyletter" name="iden" id="iden"
+                               value="{$data.iden}"/>
+                    </div>
+                    
+                    <div class="row">
+                        <label for="remark" class="w100">{:lang('Remark')}: </label>
+                        <input type="text" class="input" name="remark" id="remark" value="{$data.remark}"
+                               style="width:230px;"/>
+                    </div>
+                    <div class="row">
+                        
+                        <label class="w100">{:lang('First_tpl')}: </label>
+                        
+                        <select name="template_lists" id="template_first" class="sel_w170_m_r_26">
+                            <option value="0">{:lang('Default')}</option>
+                            <option value="1">template_index.html</option>
+                            <option value="2">template_index.html</option>
+                            <option value="3">this_is_template_index.html</option>
+                        </select>
+                    
+                    </div>
+                    <div class="row">
+                        
+                        <label class="w100">{:lang('List_tpl')}: </label>
+                        
+                        <select name="template_lists" id="template_lists" class="sel_w170_m_r_26">
+                            <option value="0">{:lang('Default')}</option>
+                            <option value="1">template_index.html</option>
+                            <option value="2">template_index.html</option>
+                            <option value="3">this_is_template_index.html</option>
+                        </select>
+                    
+                    </div>
+                    <div class="row">
+                        <label class="w100">{:lang('Detail_tpl')}: </label>
+                        <select name="template_detail" id="template_detail" class="sel_w170_m_r_26">
+                            <option value="0">{:lang('Default')}</option>
+                            <option value="1">template_lists.html</option>
+                            <option value="2">template_lists.html</option>
+                            <option value="3">this_is_template_lists.html</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div style="float: left">
+                            <label for="status" class="w100">{:lang('Status')}:</label>
+                            <div class="slideBox">
+                                {eq name="action_name" value="edit"}
+                                <input id="status" value="1" type="checkbox" name="status" {eq name="data['status']"
+                                       value="1" }checked{/eq} />
+                                {else /}
+                                <input id="status" value="1" type="checkbox" name="status" checked/>
+                                {/eq}
+                                <label for="status"></label>
+                            </div>
+                        </div>
+                        <div style="float:left">
+                            <label for="sort" class="w60" style="width: 105px;">{:lang('Sort')}: </label>
+                            <input type="number" class="input litle" name="sort" maxlength="5" id="sort"
+                                   value='{$data.sort|default=0}'>
+                        </div>
+                    </div>
+                    
+                    <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                        {eq name="ACTION_NAME" value="edit"}
+                        <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('savedata')}">
+                        <input name="ids" type="hidden" value="{$data.id}">
+                        {else /}
+                        <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}">
+                        {/eq}
+                        <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                    
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="js"}
+<script>
+    $(function () {
+        function add_attr(attr) {
+            _html = '<div class="row" id="attr">';
+            _html += '<label for="type_id" class="w100">{:lang("Itemattr")}: <span class="required">*</span></label>';
+            _html += '<select name="attr_id" id="attr_id" class="sel_w170">';
+            _html += '<option value="0"{eq name="data.type_id" value="0" }selected{ /eq}>--{:lang("Please_choose")}--</option>';
+
+            for (var i = 0; i < attr.length; i++) {
+                var attr_id = attr[i].id;
+                _html += '<option value="' + attr[i].id + '" {eq name="data.attr_id" value="' + attr[i].id + '" }selected{ /eq}>' + attr[i].name + '</option>';
+            }
+            _html += '</select>';
+            _html += '</div>';
+            return _html;
+        }
+
+        $('#type_id').change(function () {
+            if ($(this).val() == 0) {
+                return false;
+            } else {
+                var type_id = $(this).val();
+                $.post("{:url('add')}", {'type_id': type_id}, function (msg) {
+                    //请求成功
+                    if (msg.code == '1') {
+                        if ($('#attr').html()) {
+                            $('#attr').html(add_attr(msg.data));
+                        } else {
+                            $('#type').append(add_attr(msg.data));
+                        }
+
+                        return true;
+                    }
+                });
+            }
+        })
+    });
+</script>
+{/block}
+
+
+

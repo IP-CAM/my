@@ -1,0 +1,112 @@
+{extend name='public/base'}
+{block name='css'}
+<link rel="stylesheet" href="__PUBLIC__/{$css_path}/orderdetail.css">
+{/block}
+{block name='body'}
+<header class="g-hd m-topnav-space" id="g-hd">
+    <div class="m-topnav-wrap">
+        <div class=" m-topnav" id="topbar-box">
+            <div class="m-topnavbar">
+                <span class="tit" id="toptitle">订单详情</span>
+                <div class="btns">
+                    <a href="{:url('crossbbcg/index/index')}" class="u-topbaridx" title="回首页"></a>
+                    {empty name="user"}
+                    <a href="{:url('member/passport/index')}" class="u-topbarlogin">登录</a>
+                    {else /}
+                    <a href="{:url('member/index/index')}" id="j-gousrcenter" title="个人中心" class="u-topbaruser usr"></a>
+                    {/empty}
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="g-bd">
+    <section class="m-orderStatus m-section">
+        <span class="u-icn u-icn-3"></span>
+        {switch name="$order_status"}
+        {case value='WAIT_BUYER_PAY'}
+        <div class="u-status">{:lang('now_order_status')}：
+            <span class="order-status">
+                {:lang('order_wait_buyer_pay')}
+            </span>
+        </div>
+        <div>{:lang('order_sn')}：<span class="order-number">{$data.order_sn}</span></div>
+        <div>{:lang('surplus')}<span class="countDown" id="countDown" lefttime = "5547">00时00分00秒</span>{:lang('should_pay_more')}</div>
+        {/case}
+        {case value='WAIT_BUYER_CONFIRM_GOODS'}
+        <div class="u-status">{:lang('now_order_status')}：
+            <span class="order-status">
+                {:lang('order_wait_confirm')}
+            </span>
+        </div>
+        <div>{:lang('order_sn')}：<span class="order-number">{$data.order_sn}</span></div>
+        <div>{:lang('surplus')}<span class="countDown" id="countDown" lefttime = "5547">00时00分00秒</span>{:lang('should_pay_more')}</div>
+        {/case}
+        {/switch}
+    </section>
+    <section class="m-pay m-section">
+        <span class="u-icn2"></span>
+        <div>
+            {:lang('real_pay')}：
+            <span class="payment-amount">{$data.symbol}{$data.order_amount}</span></div>
+    </section>
+    <section class="m-consignee m-section">
+        <span class="u-icn1"></span>
+        <div><span class="consignee">{$data.consignee}</span><span class="telephone">{$data.tel}</span></div>
+        <div><span class="address">{$data.country}&nbsp;&nbsp;{$data.province}&nbsp;&nbsp;{$data.city}&nbsp;&nbsp;{$data.district}&nbsp;&nbsp;{$data.address}</span></div>
+    </section>
+    <section class="m-goods m-section">
+        <a class="goods-list goods-list-shop" href="https://mall.kaola.com/app/9100">
+            <span>世果汇水果旗舰店</span></a>
+        <article class="m-commodities p-box" >
+            <div class="list" >
+                {php}$total =0;{/php}
+                {foreach $goods as $key=> $arr}
+                <div class="m-orders f-cb">
+                    <div class="pic u-tagbox">
+                        <a href="{:url('crossbbcg/goods/index',array('item_id'=>$arr['goods_id']))}" class=j-items data-goodsid=1843111 data-ordertype=1000 data-orderid={$data.order_sn} title="{$arr.goods_name}">
+                            {if condition="substr($arr['sku_thumb'],0,4)=='http'"}
+                            <img src="{$arr['sku_thumb']}" width="58" height="58">
+                            {else /}
+                            <img src="{:resizeImage($arr['sku_thumb'],'small',true)}" width="58" height="58">
+                            {/if}
+                        </a>
+                    </div>
+                    <div class="proinfo">
+                        <div class="tit">
+                            <a href="{:url('crossbbcg/goods/index',array('item_id'=>$arr['goods_id']))}" title="{$arr.goods_name}" class=j-items data-goodsid=1843111 data-ordertype=1000 data-orderid={$data.order_sn}>
+                                {$arr.goods_name}
+                            </a>
+                        </div>
+                        <div class="curprice"><span class="symbol">{$data.symbol}</span>{$data.order_amount}<p class="num">X {$arr.sku_number}</p></div>
+                        {if condition="$arr['sku_array']"}
+                        <p class="detail-description f-cb">
+                            <em class="sku_mod">{$arr['sku_array']}</em>
+                        </p>
+                        {/if}
+                    </div>
+                </div>
+                {/foreach}
+            </div>
+        </article>
+    </section>
+    <section class="m-settlement m-section">
+        <div class="settlement">结算</div>
+        <div class="stmt-detail">
+            <div>{:lang('good_total')}<span class="total-price">{$data.symbol}{$data.goods_amount}</span></div>
+            <div>{:lang('shipping_fee')}<span class="freight">{$data.symbol}{$data.shipping_fee}</span></div>
+            <div>{:lang('tax')}<span class="tariff">{$data.symbol}{$data.order_tax}</span></div>
+            <div class="chargeAndTime">
+                <div>
+                    {:lang('real_pay')}：
+                    <span class="accrued-charge">{$data.symbol}{$data.order_amount}</span>
+                </div>
+                <div class="u-orderTime">{:lang('trading_time')}：<span class="order-time">{$data.create_time}</span></div>
+            </div>
+        </div>
+    </section>
+    <section class="m-orderbtn">
+        <a id="js-close" data-id="201710171054GORDER8114410455" data-status="0" class="groupBuyDetailBtn" href="javascript:void(0)">取消订单</a>
+        <a id="js-buynow" class="u-btn" href="{:url('crossbbcg/carts/paycenter',array('order_sn'=>$data.order_sn))}">立即付款</a></section>
+</div>
+{/block}

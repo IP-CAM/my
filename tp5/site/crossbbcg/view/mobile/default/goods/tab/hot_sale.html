@@ -1,0 +1,32 @@
+<div id="recgoodsbox">
+    <!--Regular if8-->
+    <p class="v-sperate"></p>
+    <div class="n-recommendbox">
+        <h4 class="tit">热卖推荐</h4>
+        <div class="listwrap">
+            <ul class="recommendlist">
+                {foreach $arr_hot as $arr}
+                <li class="itm">
+                    <a class="v-link" href="{$arr['href']}" title="{$arr['name']}">
+                        {notempty name="$arr['thumb']"}
+                        {if condition="substr($arr['thumb'],0,4)=='http'"}
+                        <img class="v-img" src="$arr['thumb']">
+                        {else /}
+                        <img class="v-img" src="{:resizeImage($arr['thumb'],'thumb',true)}">
+                        {/if}
+                        
+                        {else /}
+                        <img class="v-img" src="__PUBLIC__/{$img_path}/no-image.png">
+                        {/notempty}
+                        <p class="subtit f-els-2">{$arr['name']}</p>
+                        <p class="priceinfo">
+                            <span class="curprice">{$arr['sale_price']}</span>&nbsp;&nbsp;<span
+                            class="mrkprice">{$arr['market_price']}</span>
+                        </p>
+                    </a>
+                </li>
+               {/foreach}
+            </ul>
+        </div>
+    </div>
+</div>

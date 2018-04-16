@@ -1,0 +1,115 @@
+    {extend name="admin@public/base"/}
+
+    {block name="style"}
+    <style>
+        .w120{ width:120px !important; }
+        .L40{ width:48px !important; overflow:hidden; display:inline-block}
+        .layui-layer-tips .layui-layer-content{ padding:2px 8px !important;line-height: 18px !important;}
+    </style>
+    {/block}
+
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content">
+        <div class="breadcrumbs">
+            {:lang('Systems')} : &nbsp;&nbsp; {:lang('Queuetask')} &nbsp;/&nbsp;<span>{$meta_title|default=''}</span>
+        </div>
+
+            <div class="bloc">
+                <div class="title">
+                    <div class="tabs" id="navs">
+                        {include file="admin@public/navs" /}
+                    </div>
+    
+                    {include file="admin@public/lang" /}
+                </div>
+
+                <div class="content">
+                
+                <dl class="gzzt clearfix mtb10">
+                        <dd>
+                            <div class="boxr">
+                                {include file="admin@public/button" /}
+                            </div>
+                        </dd>
+                    <dd style="float: right !important;">
+                        <div class="boxl">
+                            <span>
+                                <a href="javascript:location.reload();" class="refresh tooltip-link" title="{:lang('Refresh')}">
+                                    <em>{:lang('Refresh')}</em>
+                                </a>
+                            </span>
+                            <span>
+                                <a href="javascript:void(0);" class="ajax-get setting tooltip-link colum" title="{:lang('Showlum')}" data-title="{:lang('Showlum')}">
+                                    <em>{:lang('Showlum')}</em>
+                                </a>
+                            </span>
+                        </div>
+                    </dd>
+                    </dl>
+
+                    {notempty name="list"}
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="center" width="30">
+                                        <input class="check-all" type="checkbox">
+                                    </th>
+                                    <th class="left" style="width:40px;">ID</th>
+                                    <th class="left" style="width:85px;">{:lang('Appname')}</th>
+                                    <th class="left" style="width:110px;">{:lang('Taskname')}</th>
+                                    <th class="left" style="width:80px;">{:lang('Rule')}</th>
+                                    <th class="left">{:lang('Classdir')}</th>
+                                    <th class="left" style="width:220px;">{:lang('Description')}</th>
+                                    <th class="left">{:lang('Lastexectime')}</th>
+                                    <th class="center">{:lang('Status')}</th>
+                                    <th class="actions" style="width:50px; padding-right: 20px;">{:lang('Actions')}</th>
+                                </tr>
+                            </thead>
+                    
+                    <tbody>
+                                {volist name="list" id="vo"}
+                                    <tr>
+                                        <td class="center">
+                                            <input class="ids" type="checkbox" value="{$vo['appid']|strtolower}_event_{$vo['name']}" name="ids[]">
+                                        </td>
+                                        <td class="left">{$key +1 }</td>
+                                        <td class="left">{$vo['appid']}</td>
+                                        <td class="left">{$vo['name']}</td>
+                                        <td class="left">{$vo['schedule']}</td>
+                                        <td class="left">{$vo['appid']|strtolower}/event/{$vo['name']}</td>
+                                        <td class="left">{:lang($vo['description'])}</td>
+                                        <td class="left">{$vo['lasttime']}</td>
+                                        <td class="center">
+                                        {if condition="$vo['status'] eq 1"}
+                                            <span class="badge-green">Y</span>
+                                        {else /}
+                                            <span class="badge-gray">N</span>
+                                        {/if}
+                                        </td>
+                                        <td class="actions" style="padding-right: 20px;">
+                                            <a class="tooltip-link ajax-get confirm" title="{:lang('Exec cron by custom')}" data-layer="{:lang('Want exec cron by custom', ['cron'=>$vo['name']])}" href="{:url('execron', ['ids'=>strtolower($vo['appid']) .'_event_'. $vo['name']])}" data-title="{:lang('Exec cron by custom')}">
+                                                {:lang('Cron_exec')}
+                                            </a>
+                                             <!--|
+                                            <a class="tooltip-link ajax-get edit" title="{:lang('Edit this cron')}" href="{:url('edit', ['app'=>$vo['appid'], 'name'=>$vo['name']])}" data-title="{:lang('Edit this cron')}" data-showbar='1' data-width="560" data-height="405" >
+                                                {:lang('Cron_edit')}
+                                            </a>-->
+                                        </td>
+                                    </tr>
+                                {/volist}
+                            </tbody>
+                        </table>
+                        <div class="pagination-wrapper">
+                            
+                        </div>
+                        {else /}
+                        <div class="alert alert-warning">{:lang('No_record')}</div>
+                    {/notempty}
+                </div>
+            </div>
+    </div>
+
+    {include file="admin@public/time_for_search" /}
+    
+    {/block}

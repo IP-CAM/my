@@ -1,0 +1,37 @@
+{notempty name="collect"}
+<dl class="min-favor">
+    <dd>
+        <ul class="clearfix goods-list">
+            {volist name="collect" id="vo"}
+            <li class="goods-item">
+                <div class="goods-pic">
+                    <a href="{:url('seller/store/index','seller_id='.$vo['store']['seller_id'])}" target="_blank" title="{$vo['store']['seller_name']}">
+                        {if condition="substr($vo['store']['logo'],0,4)=='http'"}
+                        <img src="{$vo['store']['logo']}" />
+                        {else /}
+                        <img src="__UPLOADS__/{$vo['store']['logo']}" />
+                        {/if}
+                    </a>
+                </div>
+                <div class="goods-info">
+                    <div class="goods-name">
+                        <a href="{:url('seller/store/index','seller_id='.$vo['store']['seller_id'])}" target="_blank">{$vo['store']['seller_name']}</a>
+                    </div>
+                </div>
+            </li>
+            {/volist}
+        </ul>
+    </dd>
+</dl>
+{else /}
+<div class="ly-no-data">
+    <div class="icon iconfont icon-zanwujilu"></div>
+    <div class="text">
+        {if condition="is_login()"}
+        {:lang('empty_record')}
+        {else /}
+        <a href="{:url('member/passport/index')}">{:lang('login_first')}</a>
+        {/if}
+    </div>
+</div>
+{/notempty}

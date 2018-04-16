@@ -1,0 +1,74 @@
+    {extend name="admin@public/poupbase"/}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content" style="margin:0px 10px 5px 8px;">
+        <div class="bloc" style="margin:10px 0px 0px;">
+            
+            <div class="content">
+                <form id="myform" method="post" style="margin-top:5px;" class="">
+                    <fieldset>
+                        <legend>{$meta_title|default=''}</legend>
+    
+                        <div class="row">
+                            <label class="w120">{:lang('Order_sn')}</label>
+                            <label style="font-size: 16px; font-weight: bold;">{$data.order_sn}</label>
+                        </div>
+    
+                        <div class="row">
+                            <label class="w120">{:lang('Total_amount')}</label>
+                            <label class="green" style="font-size: 15px; font-weight: bold;">{$data.order_amount}</label>
+                        </div>
+                        
+                        <div class="row">
+                            <label for="cancel_reason" class="w120">{:lang('Cancel Reason')}: <span class="required">*</span></label>
+                            <textarea id="cancel_reason" name="cancel_reason" style="width: 200px; height: 80px;" placeholder="{:lang('Edit Cancel Reason')}"></textarea>
+                        </div>
+    
+                        <div class="row">
+                            <label class="w120">{:lang('Select Reason')}</label>
+                            <select id="cancel_reason_list" style="width: 200px;">
+                                <option>{:lang('Select the reason')}</option>
+                                <option>{:lang('I donot want to buy now')}</option>
+                                <option>{:lang('Price is more expensive')}</option>
+                                <option>{:lang('Price fluctuation')}</option>
+                                <option>{:lang('Goods out of stock')}</option>
+                                <option>{:lang('Double order')}</option>
+                                <option>{:lang('Payment info error')}</option>
+                                <option>{:lang('Payment info error')}</option>
+                                <option>{:lang('Invoice info failed')}</option>
+                                <option>{:lang('Invoice info failed')}</option>
+                                <option>{:lang('Other reason')}</option>
+                                <option>{:lang('Other reason')}</option>
+                            </select>
+                        </div>
+    
+                        <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                            <input name="submit" value="{:lang('Confirm cancel')}" type="submit" url="{:url()}">
+                            <input name="order_id" type="hidden"  value="{$data.order_id}" />
+                            <input name="reset" class="button white" value="{:lang('Give up Cancel')}" type="reset">
+                        </div>
+                    </fieldset>
+    
+                </form>
+            </div>
+        </div>
+    </div>
+    {/block}
+    
+    {block name="js"}
+    <script>
+        $(function () {
+            $("#cancel_reason_list").on('change', function () {
+                var that = $(this);
+                var val  = that.children('option:selected').text();
+                var reason = $('#cancel_reason').val();
+                if(reason != '') {
+                    $('#cancel_reason').append(', ' + val);
+                }else{
+                    $('#cancel_reason').append(val);
+                }
+            });
+        })
+    </script>
+    {/block}

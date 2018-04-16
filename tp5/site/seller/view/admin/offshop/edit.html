@@ -1,0 +1,118 @@
+    {extend name="admin@public/poupbase"/}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content" style="margin:0px 10px 5px 8px;">
+        <div class="bloc" style="margin:10px 0px 0px;">
+            <div class="content">
+                <form id="myform" method="post" style="margin-top:5px;" class="">
+                    <fieldset>
+                        <legend>{$meta_title}</legend>
+                        
+                        <div class="row">
+                            <div class="row">
+                                <div style="float:left;">
+                                    <label for="seller_name" class="w80" style="width: 85px;">{:lang('Seller_name')}: <span
+                                        class="required">*</span></label>
+                                    <input id="seller_name" type="text" value="{$data.seller_name}" name="seller_name"
+                                           style="width:180px;"/>
+                                </div>
+                                <div style="float:left;">
+                                    <label for="principal" class="w80" style="width: 85px;">{:lang('managers')}: <span
+                                        class="required">*</span></label>
+                                    <input id="principal" type="text" value="{$data.principal}" name="principal"
+                                           style="width:180px;"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div style="float:left;">
+                                    <label for="mobile" class="w80" style="width: 85px;">{:lang('phone')}: <span
+                                        class="required">*</span></label>
+                                    <input id="mobile" type="text" value="{$data.mobile}" name="mobile"
+                                           style="width:180px;"/>
+                                </div>
+                                <div style="float:left;">
+                                    <label for="phone" class="w80" style="width: 85px;">{:lang('tel')}: <span
+                                        class="required">*</span></label>
+                                    <input id="phone" type="text" value="{$data.phone}" name="phone" style="width:180px;"/>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div style="float:left;">
+                                    <div style="float:left;">
+                                        <label for="lng" class="w80" style="width: 85px;">{:lang('lng')}: <span
+                                            class="required">*</span></label>
+                                        <input id="lng" type="text" value="{$data.lng}" name="lng" style="width:180px;"/>
+                                    </div>
+                                    <label for="lat" class="w80" style="width: 85px;">{:lang('lat')}: <span
+                                        class="required">*</span></label>
+                                    <input id="lat" type="text" value="{$data.lat}" name="lat" style="width:180px;"/>
+                                    <a href="http://lbs.amap.com/console/show/picker" target="_blank"><span>{:lang('ibsmap')}</span></a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div style="float:left;">
+                                    <label for="cat_id" class="w80">{:lang('shopcat')}: <span
+                                        class="required">*</span></label></label>
+                                    <select name="cat_id" id="cat_id" class="sel_w170_m_r_26" style="margin-left:5px">
+                                        {volist name='option' id='vo'}
+                                        <option value="{$vo.id}">{$vo.name}</option>
+                                        {/volist}
+                                    </select>
+                                </div>
+                                <div style="float: left">
+                                    <label for="logo" class="w80" style="width: 85px">{:lang('logo')}:</label>
+                                    <input name="logo" type="text" class="input" value="{$data.logo}" id="logo"
+                                           style="width: 180px;margin-left: 4px;" placeholder="image/logo.png"/>
+                                    <input class="button white upload" value="{:lang('Selectimg')}"
+                                           title="{:lang('Selectimg')}" type="button" title="{:lang('Upload img and file')}"
+                                           url="{:url('img',array('input' => 'logo'))}" data-upload="__UPLOADS__"/>
+                                    <a href="javascript:void(0)" class="preview" data-src="logo" data-width="200"
+                                       data-height="200" data-area="200">{:lang('Preview')}</a>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="description" class="w80">{:lang('description')}: </label>
+                                <textarea id="description" name="description"
+                                          style="width:450px; height:30px; resize:none;margin-left:5px">{$data.description}</textarea>
+                            </div>
+                            <div class="row">
+                                <label class="w80">{:lang('Shop_area')}: <span
+                                    class="required">*</span></label>
+    
+                                {:widget('common/Area/choosearea', ['country' => $data.country, 'province' => $data.province, 'city' => $data.city, 'district' => $data.district])}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="row">
+                                <label for="address" class="w80" style="width: 85px;">{:lang('detail_address')}: <span
+                                    class="required">*</span></label>
+                                <input id="address" type="text" value="{$data.address}" name="address"
+                                       style="width:180px;"/>
+                            </div>
+                        </div>
+                        <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                            {eq name="ACTION_NAME" value="edit"}
+                            <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('editdata')}"/>
+                            <input name="id" type="hidden" value="{$data.id}"/>
+                            {else /}
+                            <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}"/>
+                            {/eq}
+                            <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    {/block}
+    
+    {block name="js"}
+    <script>
+        $(function () {
+            $(".bset").buttonset();
+        })
+    </script>
+    {/block}

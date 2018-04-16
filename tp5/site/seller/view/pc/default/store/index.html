@@ -1,0 +1,165 @@
+{extend name="public/base" /}
+{block name='title'}
+<title>{$store_info.seller_name}</title>
+{/block}
+{block name="body"}
+<div class="ly-Allwrap clearfix">
+	<div class="shop-info-box">
+		<div class="shop-info">
+			<div class="shop-name">{$store_info.seller_name}</div>
+			<div class="shop-score">
+				<div class="item">
+					<span>{:lang('comment_grade')}</span>
+					<em>{$store_info.shop_grade}</em>
+				</div>
+			</div>
+			<div class="right">
+				<a href="javascript:void(0);" class="attention" data-url="{:url('crossbbcg/goods/attentionStore').'?store_id='.input('seller_id')}">{:lang('collect_store')} <i class="iconfont icon-guanzhu"></i></a>
+				<a href="javascript:void(0);" >{:lang('contact_service')} <i class="iconfont icon-kefu"></i></a>
+			</div>
+		</div>
+	</div>
+
+	<div class="n">
+		<div class="ly-flash">
+			<!--请参考index.js 参数设置 此处为全屏轮播配置项 , 可覆盖默认配置项 data-carouFredSel(必须)  为加载标识  data-type(必须) 轮播类型full 为全屏-->
+			<div class="slide-full" data-type="full" data-carouFredSel='{
+				auto:{
+					autoplay:true,
+					pauseDuration:5000,
+				},
+				direction:"left",
+				scroll:{
+					item:1,
+					easing:"swing"
+				}
+					}'>
+				<div class="prev" id="prev"></div>
+				<div class="next" id="next"></div>
+				<ol class="slide-content clearfix">
+                    {foreach $shideshow as $v}
+					<li class="slide-item">
+						<a href="{$v.url}">
+                            {if condition='empty($v.img)'}
+                            <img src="__PUBLIC__/{$module_path}ad/shop_1.jpg" />
+                            {elseif condition="substr($v.img,0,4) == 'http'"}
+                            <img src="{$v.img}" />
+                            {else /}
+                            <img src="__UPLOADS__/{$v.img}" />
+                            {/if}
+                        </a>
+					</li>
+                    {/foreach}
+				</ol>
+				<div class="slide-page">
+                    {foreach $shideshow as $k=>$v}
+                    {eq name='$k' value='0'}
+                    <span class="selected">●</span>
+                    {else /}
+                    <span>●</span>
+                    {/eq}
+					{/foreach}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="shop-index-goods">
+	<dl class="goods-ly-list">
+		<dt class="ly-title">
+            <i class="line-left"></i>
+            <a href="https://www.hncgo.com/country.html?id=1" target="_blank">{:lang('seller_recommend')}</a>
+            <i class="line-right"></i>
+        </dt>
+		<dd>
+			<ul class="goods-list clearfix">
+                {foreach $store_recommend_goods_list as $v}
+				<li class="goods-item">
+				
+					<div class="item">
+						<div class="goods-pic">
+							<a target="_blank" href="{:url('crossbbcg/goods/index',array('item_id'=>$v.id))}">
+                                {if condition="empty($v.thumb)"}
+                                <img  class="lazy" src="__PUBLIC__/crossbbcg/pc/default/image/tm.gif" data-original="__PUBLIC__/crossbbcg/pc/default/image/no-image.png" alt="{$v.name}">
+                                {elseif condition="substr($v.thumb,0,4) == 'http'"}
+                                <img  class="lazy" src="__PUBLIC__/crossbbcg/pc/default/image/tm.gif" data-original="{$v.thumb}" alt="{$v.name}">
+                                {else /}
+                                <img  class="lazy" src="__PUBLIC__/crossbbcg/pc/default/image/tm.gif" data-original="__UPLOADS__/{$v.thumb}" alt="{$v.name}">
+                                {/if}
+                            </a>
+						</div>
+						<div class="goods-info">
+							<h6 class="goods-name">
+                                <a href="{:url('crossbbcg/goods/index',array('item_id'=>$v.id))}" target="_blank" title=" {$v.name}"> {$v.name}</a>
+                            </h6>
+							<ul class="clearfix">
+								<li class="price">
+									<i>{$v.sale_price}</i>
+								</li>
+							</ul>
+							<div class="buy">
+								<a href="{:url('crossbbcg/goods/index',array('item_id'=>$v.id))}" title="{$v.name}">{:lang('buy_now')}</a>
+							</div>
+						</div>
+					</div>
+				</li>
+				{/foreach}
+			</ul>
+		</dd>
+	</dl>
+	<dl class="goods-ly-list">
+		<dt class="ly-title">
+            <i class="line-left"></i>
+            <a href="javascript:void (0);">{:lang('New Arrival')}</a>
+            <i class="line-right"></i>
+        </dt>
+
+		<dd>
+
+			<ul class="goods-list clearfix">
+                {foreach $store_new_goods_list as $v}
+				<li class="goods-item">
+				
+					<div class="item">
+						
+						<div class="goods-pic">
+							<a target="_blank" href="{:url('crossbbcg/goods/index',array('item_id'=>$v.id))}">
+                                {if condition="empty($v.thumb)"}
+                                <img  class="lazy" src="__PUBLIC__/crossbbcg/pc/default/image/tm.gif" data-original="__PUBLIC__/crossbbcg/pc/default/image/no-image.png" alt="{$v.name}">
+                                {elseif condition="substr($v.thumb,0,4) == 'http'"}
+                                <img  class="lazy" src="__PUBLIC__/crossbbcg/pc/default/image/tm.gif" data-original="{$v.thumb}" alt="{$v.name}">
+                                {else /}
+                                <img  class="lazy" src="__PUBLIC__/crossbbcg/pc/default/image/tm.gif" data-original="{:resizeImage($v['thumb'],'thumb',true)}" alt="{$v.name}">
+                                {/if}
+                                
+                            </a>
+						</div>
+						<div class="goods-info">
+							<h6 class="goods-name">
+                                <a href="{:url('crossbbcg/goods/index',array('item_id'=>$v.id))}" target="_blank" title=" {$v.name}"> {$v.name}</a>
+                            </h6>
+							<ul class="clearfix">
+								<li class="price">
+									<i>{$v.sale_price}</i>
+								</li>
+							</ul>
+							<div class="buy">
+								<a href="{:url('crossbbcg/goods/index',array('item_id'=>$v.id))}" title="{$v.name}">{:lang('buy_now')}</a>
+							</div>
+						</div>
+					</div>
+				</li>
+				{/foreach}
+			</ul>
+		</dd>
+	</dl>
+</div>
+
+{/block}
+{block name="footer_js"}
+<script>
+    //需要加载的js文件
+    Private_Script = ['product'];
+</script>
+{/block}

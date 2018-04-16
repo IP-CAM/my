@@ -1,0 +1,212 @@
+    {extend name="admin@public/base"/}
+
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content">
+        <div class="breadcrumbs">
+            {:lang('Member')} : &nbsp;&nbsp; {:lang('User')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+        </div>
+
+        <div class="bloc">
+            <div class="title">
+                <div class="tabs" id="navs">
+                    {include file="admin@public/navs" /}
+                </div>
+
+                {include file="admin@public/lang" /}
+            </div>
+            <div class="content">
+                
+                <dl class="gzzt clearfix mtb10">
+                    <dd>
+                        <div class="boxr">
+                            {include file="admin@public/button" /}
+                        </div>
+                    </dd>
+                    
+                    <form style="margin-top:0;" class="search-form">
+                        <dd>
+                            <div class="boxr ovh">
+                                <label for="start" style="margin:10px 10px 0 0; width:156px;">
+                                    <input type="text" id="start" value="{:input('start_time')}" name="start_time" placeholder="{:lang('Begin_time')}" class="w130 input_img"/>
+                                </label>
+                                <label style="width:10px;line-height:32px; margin-right:2px;">~</label>
+                                <label for="end" style="margin:10px 10px 0 0; width:150px;">
+                                    <input type="text" id="end" value="{:input('end_time')}" name="end_time" placeholder="{:lang('End_time')}" class="w130 input_img"/>
+                                </label>
+                            </div>
+                        <dd>
+                        
+                        <dd>
+                            <div class="boxr ovh">
+                                <label for="name" style="margin:10px 10px 0 0; width:150px;">
+                                    <input type="text" class="searchinput" id="name" name="name" value="{:input('name')}" placeholder="{:lang('Search_member_tip')}" style="width:120px;"/>
+                                </label>
+                                
+                                <select id="group" style="height:25px; margin-right:5px; padding-right: 5px;">
+                                    <option value="" url="{:url('', array_merge($inputarr, ['levelid'=>'all']))}" {empty name="levelid"}selected{/empty}>
+                                    {:lang('Whole')}
+                                    </option>
+                                    {volist name="level" id="op"}
+                                    
+                                    <option value="{$op.id}" url="{:url('', array_merge($inputarr, ['levelid'=>$op.id]))}" {eq name="levelid" value="$op['id']"}selected{/eq}>
+                                    {$op.name}
+                                    </option>
+                                    {/volist}
+                                </select>
+                                <select id="type" style="height:25px; margin-right:5px; padding-right: 5px;">
+                                    <option value="" url="{:url('', array_merge($inputarr, ['type'=>'all']))}" {empty name="type"}selected{/empty}>
+                                    {:lang('Whole')}
+                                    </option>
+                                    <option value="username" url="{:url('', array_merge($inputarr, ['type'=> 'username']))}" {eq name="type" value="username"}selected{/eq}>
+                                    {:lang('Username')}
+                                    </option>
+                                    <option value="email" url="{:url('', array_merge($inputarr, ['type'=> 'email']))}" {eq name="type" value="email"}selected{/eq}>
+                                    {:lang('Email')}
+                                    </option>
+                                    <option value="mobile" url="{:url('', array_merge($inputarr, ['type'=> 'mobile']))}" {eq name="type" value="mobile"}selected{/eq}>
+                                    {:lang('Mobile')}
+                                    </option>
+                                </select>
+                                <input type="button" name="search" id="sch-search" class="button white" value="{:lang('Search')}" url="{:url('', input('name'))}"/>
+                            </div>
+                        <dd>
+                        <dd>
+                            <script>
+                                $(function(){
+                                    $("#group, #type").change(function(){
+                                        var gotu_url = $(this).find('option:selected').attr('url');
+                                        console.log(gotu_url);
+                                        eval("self.location='"+gotu_url+"'")
+                                    })
+                                })
+                            </script>
+                        </dd>
+                    </form>
+                </dl>
+    
+                <div class="alert alert-info">
+                    <span>{:lang('Count_all')}：<b>{$_total}</b></span>
+        
+                    <div class="fr">
+                        <span class="green"></span>
+                        <span class="red"></span>
+                    </div>
+                </div>
+
+                {notempty name="list"}
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="center" width="30"><input class="check-all" type="checkbox"></th>
+                        <th class="left" style="width:35px;"><a href="{:getUrlbyOrder('id')}">ID</a></th>
+                        <th class="left" style="width:60px;">
+                            <a href="{:getUrlbyOrder('mobile')}">{:lang('Mobile')}</a>
+                        </th>
+    
+                        <th class="left" style="width:90px;">
+                            <a href="{:getUrlbyOrder('email')}">{:lang('E-mail')}</a>
+                        </th>
+    
+                        <th class="left" style="width:90px;">
+                            <a href="{:getUrlbyOrder('username')}">{:lang('Username')}</a>
+                        </th>
+                        
+                        <th class="left" style="width:50px;">
+                            <a href="{:getUrlbyOrder('nickname')}">{:lang('Nicename')}</a>
+                        </th>
+                        
+                        <th class="left" style="width:70px;">
+                            <a href="{:getUrlbyOrder('reg_time')}">{:lang('Reg_time')}</a>
+                        </th>
+    
+                        <th class="left" style="width:50px;">
+                            <a href="{:getUrlbyOrder('money')}">{:lang('Account Money')}</a>
+                        </th>
+                        
+                        <th class="left" style="width:50px;">
+                            <a href="{:getUrlbyOrder('score')}">{:lang('Score')}</a>
+                        </th>
+    
+                        <th class="center" style="width:30px;">
+                            <a href="{:getUrlbyOrder('levelid')}">{:lang('Level')}</a>
+                        </th>
+    
+                        <th class="center" style="width:30px;">
+                            <a href="{:getUrlbyOrder('status')}">{:lang('Status')}</a>
+                        </th>
+                        
+                        <th class="actions" style="width:40px;">{:lang('Actions')}</th>
+                    </tr>
+                    </thead>
+                    
+                    <tbody>
+                    {volist name="list" id="vo"}
+                    <tr>
+                        <td class="center"><input class="ids" type="checkbox" value="{$vo['id']}" name="ids[]"></td>
+                        <td class="left">{$vo['id']}</td>
+    
+                        <td class="left">
+                            <a class="tooltip-link ajax-get edit" title="{:lang('Edit')} : {$vo['username']}" href="{:url('edit',array('ids'=>$vo['id']))}" data-title="{:lang('Edit')} : {$vo['username']}" {eq name="$vo['sex']" value="1"}style="color:#0000FF;"{/eq} {eq name="$vo['sex']" value="0"}style="color:red;"{/eq}>
+                            {$vo['mobile']}
+                            </a>
+                        </td>
+    
+                        <td class="left slh tooltip-link" title="{$vo['email']}" style="max-width: 90px; line-height: 1.7;">{$vo['email']}</td>
+    
+                        <td class="left slh tooltip-link" title="{$vo['email']}" style="max-width: 90px; line-height: 1.7;">
+                            {$vo['username']}
+                        </td>
+                        
+                        <td class="left">{$vo['nickname']}</td>
+                        
+                        <td class="left">{$vo['reg_time']|date="y-m-d h:s:i",###}</td>
+                        <td class="left">{$vo['money']}</td>
+                        <td class="left">{$vo['score']}</td>
+    
+                        <td class="left">{$vo['level']['name']}</td>
+                        
+                        <td class="center">
+                            {if condition="$vo['status'] eq 1"}
+                            <a href="{:url('disable', ['ids'=>$vo['id']])}" class="ajax-able" data-doing="{:lang('Lock')}">
+                                <img src="__PUBLIC__/admin/images/enabled.png" title="{:lang('UserNormal')}" class="tooltip-link" alt="{:lang('UserNormal')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png" />
+                            </a>
+                            {else /}
+                            <a href="{:url('enable', ['ids'=>$vo['id']])}" class="ajax-able" data-doing="{:lang('UserNormal')}">
+                                <img src="__PUBLIC__/admin/images/disabled.png" title="{:lang('Lock')}" class="tooltip-link" alt="{:lang('Lock')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png" />
+                            </a>
+                            {/if}
+                        </td>
+
+                        <td class="actions">
+                            <a class="tooltip-link ajax-get" title="{:lang('User_log')}" href="{:url('view',array('ids'=>$vo['id']))}" data-title="{:lang('User_log')}" data-showbar="1" data-width="780" data-height="580">
+                                {:lang('Loglist')}
+                            </a>&nbsp;
+                            <a class="tooltip-link ajax-get edit" title="{:lang('Resetpw_tip')}" href="{:url('password',array('ids'=>$vo['id']))}" data-title="{:lang('Resetpw_tip')}">
+                                {:lang('Resetpw')}
+                            </a>&nbsp;
+                            <a class="tooltip-link ajax-get confirm" title="{:lang('Delete_this_record')}" data-layer="{:lang('Want_delete')}" href="{:url('delete_false',array('ids'=>$vo['id']))}" data-title="{:lang('Delete')}">
+                                <img src="__PUBLIC__/admin/images/delete.png" alt="{:lang('Delete')}" />
+                            </a>
+                        </td>
+                    </tr>
+                    {/volist}
+                    </tbody>
+                </table>
+                <div class="pagination-wrapper">
+                    <div class="results-part"><span>{$_total}</span></div>
+                    <div class="links-part">{$page}</div>
+                </div>
+
+                {else/}
+                <div class="alert alert-warning">{:lang('No_record')}</div>
+                {/notempty}
+            </div>
+        </div>
+    </div>
+
+    {include file="admin@public/time_for_search" /}
+    {/block}
+    
+    
+   

@@ -1,0 +1,169 @@
+{extend name='public/layout'}
+
+{block name='body'}
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+    <div class="flexigrid">
+        <div class="mDiv">
+            <div class="ftitle">
+                <h3>{:lang('Settlement')}</h3>
+                <h5>({:lang('total')}{$list->total()}{:lang('record')})</h5>
+            </div>
+            <div title="{:lang('refresh_data')}" class="pReload"><i class="fa fa-refresh"></i></div>
+            <form class="navbar-form form-inline"   action="" >
+                <div class="sDiv">
+                    <div class="sDiv2">
+                        <input type="text" size="30" id="add_time_begin" name="start_time" value="{:input('start_time')}" class="qsbox"  placeholder="{:lang('start_time')}">
+                    </div>
+                    <div class="sDiv2">
+                        <input type="text" size="30" id="add_time_end" name="end_time" value="{:input('end_time')}" class="qsbox"  placeholder="{:lang('end_time')}">
+                    </div>
+                    <div class="sDiv2">
+                        <select name="status" class="select" style="width:100px;margin-right:5px;margin-left:5px">
+                            <option value="all">{:lang('all')}</option>
+                            <option value="2" {if condition="input('status') eq 2" }selected{/if}>{:lang('is_settlement')}</option>
+                            <option value="1" {if condition="input('status') eq 1" }selected{/if}>{:lang('no_settle')}</option>
+                        </select>
+                    </div>
+                    <div class="sDiv2">
+                        <input type="submit" class="btn" value="{:lang('search')}">
+                    </div>
+                </div>
+            </form>
+        
+        </div>
+        <div class="bDiv" style="height: auto;">
+            <div id="flexigrid" cellpadding="0" cellspacing="0" border="0">
+                <table id="dataTable"  cellpadding="0" cellspacing="0" style="table-layout:fixed;border-collapse:collapse;">
+                    <tbody>
+                    <colgroup>
+                        <col style="width:24px;" />
+                        <col style="width:160px;" />
+                        <col style="width:50px;" />
+                        <col style="width:100px;" />
+                        <col style="width:80px;" />
+                        <col style="width:80px;" />
+                        <col style="width:80px;" />
+                        <col style="width:80px;" />
+                        <col style="width:80px;" />
+                        <col style="width:80px;" />
+                        <col style="width:200px;" />
+                    </colgroup>
+                    <tr  style="background-color: #f5f5f5;cursor: e-resize">
+                        <td class="sign" axis="col0">
+                            <div style="width: 24px;"><i class="ico-check"></i></div>
+                        </td>
+                        <td align="center" abbr="article_title" axis="col3" class="">
+                            <div style="text-align: center;" class="">{:lang('bill_time')}</div>
+                        </td>
+                        <td align="center" abbr="article_show" axis="col5" class="">
+                            <div style="text-align: center;" class="">{:lang('order_num')}</div>
+                        </td>
+                        <td align="center" abbr="article_time" axis="col6" class="">
+                            <div style="text-align: center;" class="">{:lang('order_money')}</div>
+                        </td>
+                        <td align="center" abbr="article_time" axis="col6" class="">
+                            <div style="text-align: center;" class="">{:lang('freight')}</div>
+                        </td>
+                        <!--<td align="center" abbr="article_time" axis="col6" class="">-->
+                            <!--<div style="text-align: center;" class="">{:lang('integral_money')}</div>-->
+                        <!--</td>-->
+                        <td align="center" abbr="ac_id" axis="col4" class="">
+                            <div style="text-align: center;" class="">{:lang('bonus_money')}</div>
+                        </td>
+                        <td align="center" abbr="article_time" axis="col6" class="">
+                            <div style="text-align: center;" class="">{:lang('platform_Commission')}</div>
+                        </td>
+                        <td align="center" abbr="article_time" axis="col6" class="">
+                            <div style="text-align: center;" class="">{:lang('settle_money')}</div>
+                        </td>
+                        <td align="center" abbr="article_time" axis="col6" class="">
+                            <div style="text-align: center;" class="">{:lang('status')}</div>
+                        </td>
+                        <td align="center" axis="col1" >
+                            <div style="text-align: center; ">{:lang('operation')}</div>
+                        </td>
+                    </tr>
+                    {volist name='list' id='vo'}
+                    <tr>
+                        <td class="sign">
+                            <div style="width: 24px;"><i class="ico-check"></i></div>
+                        </td>
+                        <td align="left" class="">
+                            {:time_format($vo.start_time,'Y/m/d')}~{:time_format($vo.end_time,'Y/m/d')}
+                        </td>
+                        <td align="left" class="">
+                            {$vo.order_num}
+                        </td>
+                        <td align="left" class="">
+                            {$vo.order_money}
+                        </td>
+                        <td align="left" class="">
+                           {$vo.freight}
+                        </td>
+                        <td align="left" class="">
+                           {$vo.integral_money}
+                        </td>
+                        <td align="left" class="">
+                            {$vo.bonus}
+                        </td>
+                        <td align="left" class="">
+                            {$vo.platform_commission}
+                        </td>
+                        <td align="left" class="">
+                            {$vo.money}
+                        </td>
+                        <td align="left" class="">
+                            {switch name='vo.status'}
+                            {case value='-1'}<span>{:lang('invalid')}</span>   {/case}
+                            {case value='1'}<span>{:lang('no_settle')}</span>   {/case}
+                            {case value='2'}<span>{:lang('is_settlement')}</span>   {/case}
+                            {/switch}
+                        </td>
+                        <td align="left" class="handle">
+                            <div style="text-align: left; width: 200px; max-width:200px;">
+                                <a class="btns blue goods_list" data-url="{:url('view')}"><i class="fa fa-search"></i>{:lang('search_info')}</a>
+                                <a class="btns blue" href="{:url('edit')}"><i class="fa fa-pencil-square-o"></i>{:lang('settle_down')}</a>
+                            </div>
+                        </td>
+                    </tr>
+                    {/volist}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--分页位置-->
+        <div class='dataTables_paginate paging_simple_numbers'><ul class='pagination'>    </ul></div> </div>
+</div>
+<script>
+    $(document).ready(function(){
+        $('#add_time_begin').layDate();
+        $('#add_time_end').layDate();
+        // 表格行点击选中切换
+        $('#flexigrid > table>tbody >tr').click(function(){
+            $(this).toggleClass('trSelected');
+        });
+
+        // 点击刷新数据
+        $('.fa-refresh').click(function(){
+            location.href = location.href;
+        });
+
+    });
+
+    $('.goods_list').click(function(){
+        var url = $(this).attr('data-url');
+        layer.open({
+            type: 2,
+            title: '活动关联商品列表',
+            shadeClose: true,
+            shade: 0.5,
+            area: ['70%', '72%'],
+            content: url,
+        });
+    });
+
+</script>
+<script type="text/javascript" src="__PUBLIC__/{$module_path}js/drag.js"></script>
+{/block}

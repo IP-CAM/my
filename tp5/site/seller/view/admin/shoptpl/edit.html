@@ -1,0 +1,63 @@
+{extend name="admin@public/poupbase"/}
+
+<!-- CONTENT -->
+{block name="body"}
+<div id="content" style="margin:0px 10px 5px 8px;" xmlns="http://www.w3.org/1999/html">
+    <div class="bloc" style="margin:10px 0px 0px;">
+        <div class="content">
+            <form id="myform" method="post" action="{:url('savedata')}" style="margin-top:5px;" enctype="multipart/form-data">
+                <fieldset>
+                    <legend>{$meta_title|default=''}</legend>
+                    <div class="row">
+                        <label for="name" class="w120">{:lang('tpl_name')}: <span class="required">*</span></label>
+                        <input id="name" type="text" value="{$data.name}" name="name" placeholder="{:lang('tpl_name')}"  />
+                    </div>
+                    <div class="row">
+                        <label for="skin_name" class="w120">{:lang('skin_name')}: <span class="required">*</span></label>
+                        <input id="skin_name" type="text" value="{$data.skin_name}" name="skin_name" placeholder="{:lang('skin_name')}" />
+                    </div>
+                    <div class="row">
+                        <label for="picture" class="w120">{:lang('picture')}: <span class="required">*</span></label>
+                        <input name="picture" type="text" class="input" value="{$data.picture}" id="picture" style="width: 209px;" placeholder="image/logo.png" />
+                        <input class="button white upload" value="{:lang('Selectimg')}" title="{:lang('Selectimg')}" type="button" title="{:lang('Upload img and file')}" url="{:url('img',array('input' => 'picture'))}" data-upload="__UPLOADS__" />
+                        <a href="javascript:void(0)" class="preview" data-src="logo" data-width="200" data-height="200" data-area="200">{:lang('picture')}</a>
+                    </div>
+                    <div class="row">
+                        <label for="description" class="w120">{:lang('tpl_decri')}: <span class="required">*</span></label>
+                        <textarea id="description"  name="description"/>{$data.description}</textarea>
+                    </div>
+                    <div class="row" >
+                        <label for="status" class="w120">{:lang('Status')}:</label>
+                        <div class="slideBox">
+                            {eq name="ACTION_NAME" value="edit"}
+                            <input id="status" value="1" type="checkbox" name="status" {eq name="data['status']" value="1"}checked{/eq}/>
+                            {else /}
+                            <input id="status" value="1" type="checkbox" name="status" checked />
+                            {/eq}
+                            <label for="status"></label>
+                        </div>
+                    </div>
+                    
+                    <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                        {eq name="ACTION_NAME" value="edit"}
+                        <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('savedata')}">
+                        <input type="hidden" name="id" value="{$data.id}" />
+                        {else /}
+                        <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}">
+                        {/eq}
+                        <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="js"}
+<script>
+    $(function(){
+        $(".bset").buttonset();
+    })
+</script>
+{/block}

@@ -1,0 +1,133 @@
+ {extend name="common/base" /} {block name="title"}
+<title>{:lang('MyOrder')}</title>
+{/block} {block name="css"}
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/member.css" /> {/block} {block name="body"}
+<!--面包屑-->
+<div class="ly-path">
+	<ul class="clearfix">
+		<li class="home">
+			<a href="{:url('crossbbcg/index/index')}" title="{:lang('go_min')}">{:lang('Home')}</a>
+			<span>&gt;&nbsp;</span>
+		</li>
+		<li>
+			<a href="{:url('member/index/index')}" title="">{:lang('Member')}</a>
+			<span>&gt;&nbsp;</span>
+		</li>
+		<li>
+			<h1>{:lang('MyOrder')}</h1>
+		</li>
+	</ul>
+</div>
+<div class="ly-main member-main clearfix">
+	{include file="index/left_menu"}
+	<div class="member-right">
+
+		<div class="member-content">
+			<div class="title member-title member-max-title">
+				<ul class="tabs order-tabs">
+					<li class="{if condition=" $order_status=='all'"}active{/if}">
+						<a href="{:url('member/index/orderlist')}">{:lang('all_orders')}<em>{$count_all}</em></a>
+					</li>
+					<li class="{if condition=" $order_status=='wait_buyer_pay'"}active{/if}">
+						<a href="{:url('member/index/orderlist','order_status=wait_buyer_pay')}">{:lang('wait_buyer_pay')}<em>{$count_wait}</em></a>
+					</li>
+					<li class="{if condition=" $order_status=='wait_seller_send_goods'"}active{/if}">
+						<a href="{:url('member/index/orderlist','order_status=wait_seller_send_goods')}">{:lang('wait_seller_send_goods')}<em>{$count_send}</em></a>
+					</li>
+					<li class="{if condition=" $order_status=='wait_buyer_confirm_goods'"}active{/if}">
+						<a href="{:url('member/index/orderlist','order_status=wait_buyer_confirm_goods')}">{:lang('wait_buyer_confirm_goods')}<em>{$count_confirm}</em></a>
+					</li>
+					<li class="{if condition=" $order_status=='comment'"}active{/if}">
+
+						<a href="{:url('member/index/orderlist','order_status=comment')}">{:lang('wait_buyer_evaluate')}<em>{$count_comment}</em></a>
+					</li>
+				</ul>
+				<div class="right pr10">
+					<a href="{:url('member/index/orderlist','order_status=recycle')}" class="remove-link"> <i class="iconfont icon-remove"></i>{:lang('order_recycle')}</a>
+				</div>
+			</div>
+			<div class="body pb15 mh600">
+				<div class="order-form clearfix">
+					<form action="{:url('member/index/orderList')}" class="clearfix">
+						<div class="left">
+							<div class="input-box left">
+								<input type="text" name="name" id="name" value="{$search_name}" placeholder="{:lang('order_search_tips')}" />
+								<button type="submit">{:lang('order_search')}</button>
+							</div>
+							<div class="left"><span id="more_sx" class="more-sx">{:lang('more_search')}<i class="iconfont icon-down"></i></span></div>
+						</div>
+						<div class="right">
+							<select id="recently_order">
+								<option value="{:url('member/index/orderList')}" {eq name="$recently_order_id" value="0"}selected="selected"{/eq}>{:lang('all_order')}</option>
+								<option value="{:url('member/index/orderList','recently_order=1')}" {eq name="$recently_order_id" value="1"}selected="selected"{/eq}>{:lang('recently_three_order')}</option>
+								<option value="{:url('member/index/orderList','recently_order=2')}" {eq name="$recently_order_id" value="2"}selected="selected"{/eq}>{:lang('recently_six_order')}</option>
+								<option value="{:url('member/index/orderList','recently_order=3')}" {eq name="$recently_order_id" value="3"}selected="selected"{/eq}>{:lang('recently_year_order')}</option>
+							</select>
+						</div>
+						
+					</form>
+                    
+					<form action="{:url('member/index/orderList')}" id="more_from" class="more-form clearfix" {eq name="$more_search" value="0"}style="display: none;"{/eq}>
+						<ul>
+							<li class="form-item left">
+								<span class="left">{:lang('trading_time')}</span>
+                                {notempty name="$start"}
+								<div id="start_riqi" class="left inline laydate-icon">{$start}</div>
+                                <input name="start" type="hidden" value="{$start}"/>
+                                {else /}
+                                <div id="start_riqi" class="left inline laydate-icon">{:lang('begin_time')}</div>
+                                <input name="start" type="hidden" value=""/>
+                                {/notempty}
+                                
+								<div class="left yue"> ~ </div>
+                                
+                                {notempty name="$end"}
+								<div id="end_riqi" class="left inline laydate-icon">{$end}</div>
+                                <input name="end" type="hidden" value="{$end}"/>
+                                {else /}
+                                <div id="end_riqi" class="left inline laydate-icon">{:lang('end_time')}</div>
+                                <input name="end" type="hidden" value=""/>
+                                {/notempty}
+							</li>
+							<li class="form-item left">
+								<span class="left">{:lang('order_store')}</span>
+								<em class="left">
+                                    <input type="text" name="store_name" id="store_name" value="{$store_name}" placeholder="{:lang('please_input_store_name')}" />
+                                </em>
+							
+							</li>
+							
+							<li class="form-item left" style="padding-right: 10px;">
+								<span class="left">{:lang('sale_service')}	</span>
+								<em class="left">
+									<select name="sale_service">
+										<option value="0" {eq name="$sale_service_id" value="0"}selected="selected"{/eq}>{:lang('null')}</option>
+										<option value="1" {eq name="$sale_service_id" value="1"}selected="selected"{/eq}>{:lang('return_goods')}</option>
+										<option value="2" {eq name="$sale_service_id" value="2"}selected="selected"{/eq}>{:lang('return_to_money')}</option>
+									</select>
+								</em>
+							</li>
+							<li class="form-item left" style="padding-right: 5px;">
+                                <button type="submit">{:lang('search_to')}</button>
+                            </li>
+							<li class="form-item left">
+                                <a class="close" href="javascript:$('#more_from').hide()">{:lang('close')}</a>
+                            </li>
+						</ul>
+					</form>
+				</div>
+				{include file="index/order_item"}
+			</div>
+		</div>
+
+	</div>
+</div>
+{/block}
+
+<!--此板块为页面单独js加载-->
+{block name="footer_js"}
+<script type="text/javascript">
+	//需要加载的js文件
+	Private_Script = ['laydate','member','aftersalesDetail'];
+</script>
+{/block}

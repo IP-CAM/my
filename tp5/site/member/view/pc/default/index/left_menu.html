@@ -1,0 +1,74 @@
+    <div class="member-left">
+        <div class="title">
+            <a href="{:url('member/index/index')}" style="color:#fff;">{:lang('Member')}</a>
+        </div>
+        
+        <div class="content">
+            <dl>
+                <dt>{:lang('Mysales')}</dt>
+                <dd>
+                    <ul>
+                        <li {if condition="url('member/index/orderList') == $now_url_false"}class="current"{/if}>
+                        <a href="{:url('member/index/orderList')}">{:lang('MyOrder')}</a></li>
+                        <li {if condition="url('member/index/orderCancel') == $now_url_false"}class="current"{/if}>
+                        <a href="{:url('member/index/orderCancel')}">{:lang('Cancel_order')}</a></li>
+                        <li {if condition="url('member/index/aftersalesList') == $now_url_false"}class="current"{/if}>
+                        <a href="{:url('member/index/aftersalesList')}">{:lang('After_sales_list')}</a></li>
+                        <li {if condition="url('member/comment/index') == $now_url_false"}class="current"{/if}>
+                        <a href="{:url('member/comment/index')}">{:lang('Comment_Controller')}</a></li>
+                    </ul>
+                </dd>
+            </dl>
+            <dl>
+                <dt>{:lang('Seinfoset_manage')}</dt>
+                <dd>
+                    <ul>
+                        <li {if condition="url('member/index/seinfoset') == $now_url_false"}class="current"{/if}>
+                        <a href="{:url('member/index/seinfoset')}">{:lang('Seinfoset')}</a></li>
+                        <li {if condition="url('member/index/security') == $now_url_false"}class="current"{/if}>
+                        <a href="{:url('member/index/security')}">{:lang('Security')}</a></li>
+                        <li {if condition="url('member/index/addressList') == $now_url_false"}class="current"{/if}>
+                        <a href="{:url('member/index/addressList')}">{:lang('Address_list')}</a></li>
+                    </ul>
+                </dd>
+            </dl>
+            <dl>
+                <dt>{:lang('MyAccount')}</dt>
+                <dd>
+                    <ul>
+                        <li {if condition="url('member/index/favor') == $now_url_false"}class="current"{/if}>
+                        <a href="{:url('member/index/favor')}">{:lang('Goods_favor')}</a></li>
+                        <li {if condition="url('member/index/mypath') == $now_url_false"}class="current"{/if}>
+                        <a href="{:url('member/index/mypath')}">{:lang('mypath_record')}</a></li>
+                        <li {if condition="url('member/index/coupon') == $now_url_false"}class="current"{/if}>
+                        <a href="{:url('member/index/coupon')}">{:lang('MyCoupon')}</a></li>
+                        <li {if condition="url('member/index/point') == $now_url_false"}class="current"{/if}>
+                        <a href="{:url('member/index/point')}">{:lang('MyPoint')}</a></li>
+                    </ul>
+                </dd>
+            </dl>
+            <dl>
+                <dt>{:lang('MyDistribution')}</dt>
+                <dd>
+                    <ul>
+                    <li {if condition="url('member/index/Promote') == $now_url_false"}class="current"{/if}>
+                        <a href="{:url('member/index/Promote')}">{:lang('my_promote')}</a>
+                    </li>
+                    <li {if condition="url('member/index/Rebate') == $now_url_false"}class="current"{/if}>
+                        <a href="{:url('member/index/Rebate')}">{:lang('my_rebate')}</a>
+                    </li>
+                    <li {if condition="url('member/index/RebateRecord') == $now_url_false"}class="current"{/if}>
+                        <a href="{:url('member/index/RebateRecord')}">{:lang('my_rebaterecord')}</a>
+                    </li>
+                    
+                    <li {if condition="url('member/index/Team') == $now_url_false"}class="current"{/if}>
+                        <a href="{:url('member/index/Team')}">{:lang('my_team')}</a>
+                    </li>
+                    <li {if condition="url('member/index/Certificate') == $now_url_false"}class="current"{/if}>
+                        <a href="{:url('member/index/Certificate')}">{:lang('my_certificate')}</a>
+                    </li>
+                    </ul>
+                </dd>
+            </dl>
+        </div>
+    </div>

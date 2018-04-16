@@ -1,0 +1,254 @@
+{extend name="store/base" /} 
+{block name="body"}
+<div class="shop-login-box yahei">
+	<div class="form-body">
+		<div class="title">
+			<div class="t">注册商户</div>
+		</div>
+		<div class="content">
+			<form action="" id="pwd_form">
+				<ul>
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em> 用户名： </label>
+						<span class="form-act">
+                            <input placeholder="用户名" datatype="s6-16"  class="input-ln" type="text"  value="" />
+                        </span>
+
+					</li>
+
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em> 密码： </label>
+						<span class="form-act">
+                           <input type="password" value="" name="userpassword" class="input-ln" datatype="*6-16" nullmsg="请设置密码！" errormsg="密码范围在6~16位之间！" />
+                        </span>
+
+					</li>
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em> 确认密码： </label>
+						<span class="form-act">
+                           <input type="password" value="test" name="userpassword2" tip="test" class="input-ln" datatype="*" recheck="userpassword" nullmsg="请再输入一次密码！" errormsg="您两次输入的账号密码不一致！" />
+                        </span>
+
+					</li>
+
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em> 邮箱： </label>
+						<span class="form-act">
+                            <input placeholder="邮箱" datatype="e"  class="input-ln" type="text"  value="" />
+                        </span>
+
+					</li>
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em> 手机号： </label>
+						<span class="form-act">
+                            <input placeholder="手机号" datatype="m"  class="input-ln" type="text"  value="" />
+                        </span>
+
+					</li>
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em> 验证码： </label>
+						<span class="form-act">
+                            <input placeholder="请输入密码" datatype="*"  class="input-ln" type="text"  value="" />
+                        </span>
+
+					</li>
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em> 手机验证码： </label>
+						<span class="form-act">
+                            <input placeholder="请输入手机验证码" datatype="*"  class="input-ln" type="text"  value="" />
+                            <a data-url="请求地址" id="get_code">发送验证码</a>
+                        </span>
+
+					</li>
+					<li class="form-row">
+						<label class="form-label"> &#12288; </label>
+						<span class="form-act">
+                           <label>
+                           	 <input id="xieyi_check"  type="checkbox" name="" id="" value="" />我已阅读并同意 </label><a onclick="layer.open({ type: 1 ,area: ['800px', '500px'] ,title: '注册协议'  ,shade: 0.6 ,maxmin: true ,anim:0 ,content: $('#xieyi').html() })">《注册协议》</a>
+                           </label>
+                            
+                        </span>
+
+					</li>
+					<li class="form-row last">
+						<label for="" class="form-label">&nbsp;</label> <span class="form-act">
+                        	<button type="submit" disabled="disabled" class="btn btn-import" rel="_request"> <span> <span>
+                                        保存
+                                    </span>
+						</span>
+						</button>
+						</span>
+					</li>
+
+				</ul>
+			</form>
+		</div>
+	</div>
+</div>
+
+{/block} {block name="footer_js"}
+<script type="text/html" id="xieyi">
+	<div style="padding:20px;line-height: 2;">
+		淘宝提醒您：在使用淘宝平台各项服务前，请您务必仔细阅读并透彻理解本《法律声明及隐私权政策》（下称“本声明”）。如对本声明内容有任何疑问，您可通过淘宝客服（https://taobao.com/about/contact.php）或淘宝网服务中心（https://consumerservice.taobao.com）与我们联系。阅读本声明的过程中，如果您不同意本声明或其中任何内容，您应立即停止使用淘宝平台服务。如果您使用淘宝平台服务的，您的使用行为将被视为对本声明全部内容的认可。 Taobao reminds you that: Before you use the services of Taobao Platform, be sure to carefully read and thoroughly understand this Legal Statement and Privacy Right Policy (hereinafter the “Statement”). If you have any doubt about this Statement, you may contact us through Taobao customer service (https://taobao.com/about/contact.php) or Taobao.com service center (https://consumerservice.taobao.com). If you do not agree to this Statement or any contents hereof after you read it, you shall stop using the services of Taobao Platform immediately. Your use of the services of Taobao Platform in any way will be deemed as your acceptance of all contents of this Statement. 定义（Definitions） 淘宝平台：指包括淘宝网（域名为 taobao.com）、天猫（域名为tmall.com）、一淘网（域名为etao.com）、聚划算（域名为ju.tmall.com、ju.taobao.com）、闲鱼（域名为2.taobao.com）、飞猪（域名为fliggy.com、alitrip.com、feizhu.com）、阿里妈妈（域名为alimama.com）等网站及客户端。 淘宝：淘宝平台经营者的单称或合称，包括淘宝网、一淘网、闲鱼的经营者浙江淘宝网络有限公司，天猫、聚划算的经营者浙江天猫网络有限公司，飞猪的经营者杭州淘美航空服务有限公司，阿里妈妈的经营者杭州阿里科技有限公司等。 阿里平台：指包括淘宝平台、阿里巴巴中文站（域名为1688.com）、阿里巴巴国际站（域名为alibaba.com）、天猫国际（域名为tmall.hk）、飞猪国际（域名为alitrip.hk、fliggy.hk）、阿里云（域名为aliyun.com）、速卖通（域名为aliexpress.com）、虾米（域名为xiami.com）、云OS（域名为yunos.com）、点点虫（域名为ddchong.com）、菜鸟（域名为cainiao.com）、神马搜索（域名为sm.cn）、良心大药房网（maiyao.liangxinyao.com）等网站及客户端。 关联公司：指阿里平台的经营者及其他与淘宝存在关联关系的公司的单称或合称。 Taobao Platform: refers to taobao.com, tmall.com, etao.com, ju.tmall.com, ju.taobao.com, 2.taobao.com, fliggy.com, alitrip.com, feizhu.com, alimama.com and other websites and their clients. Taobao: refers to, individual or collectively, operators of Taobao Platform, including without limiting to Zhejiang Taobao Network Limited, the operator of taobao.com, etao.com and 2.taobao.com, Zhejiang Tmall Network Co., Ltd., the operator of tmall.com, ju.tmall.com and ju.taobao.com, Hangzhou Taomei Aviation Services Co., Ltd., the operator of fliggy.com, alitrip.com and feizhu.com, and Hangzhou Ali Technology Co., Ltd., the operator of alimama.com. Ali Platform: refers to Taobao Platform, 1688.com, alibaba.com, tmall.hk, alitrip.hk, fliggy.hk, aliyun.com, aliexpress.com, xiami.com, yunos.com, ddchong.com, cainiao.com, sm.cn, maiyao.liangxinyao.com and other websites and their clients. Affiliate: refers to, individually or collectively, operators of Ali Platform and other companies associated with Taobao. 法律声明（Legal Statement） 权利归属（Ownership of Rights） 除非淘宝另行声明，淘宝平台内的所有产品、技术、软件、程序、数据及其他信息（包括但不限于文字、图像、图片、照片、音频、视频、图表、色彩、版面设计、电子文档）的所有权利（包括但不限于版权、商标权、专利权、商业秘密及其他所有相关权利）均归淘宝或其关联公司所有。未经淘宝许可，任何人不得擅自使用（包括但不限于通过任何机器人、蜘蛛等程序或设备监视、复制、传播、展示、镜像、上载、下载）淘宝平台内的任何内容。 淘宝平台的Logo、“淘宝”、“Taobao”等文字、图形及其组合，以及淘宝平台的其他标识、徽记、产品和服务名称均为淘宝及其关联公司在中国和其它国家的商标，未经淘宝书面授权，任何人不得以任何方式展示、使用或作其他处理，也不得向他人表明您有权展示、使用或作其他处理。 Unless otherwise stated by Taobao, all rights (including but not limited to copyright, trademark right, patent right, trade secret and any other related rights) in, of and to all products, technologies, software, programs, data and other information (including but not limited to texts, images, pictures, photos, audios, videos, charts, colors, layout and electronic file) within Taobao Platform are vested in Taobao or its Affiliates. Without the consent of Taobao, it is not permitted to use (including but not limited to monitor, reproduce, distribute, display, mirror, upload and download via web robots, web spiders or other software or equipment) the said information. Logo of Taobao Platform, “淘宝”, “Taobao”, other texts, graphics and combination thereof as well as other marks, symbols, product names and service names within Taobao Platform are all trademarks of Taobao and its Affiliates in China and other countries. Without the written authorization of Taobao, no one may display, use or otherwise process any of the said trademarks in any way or indicate to others that he/she/it has the right to display, use or otherwise process any of the said trademarks. 责任限制（Limitation on Liability） 鉴于淘宝平台提供的服务属于电子公告牌（BBS）性质，淘宝平台上的店铺、商品信息（包括但不限于店铺名称、公司名称、 联系人及联络信息、产品的描述和说明、相关图片、视频等）均由会员自行提供并上传，由会员对其提供并上传的所有信息承担相应法律责任。 淘宝平台转载作品（包括论坛内容）出于传递更多信息之目的，并不意味淘宝赞同其观点或已经证实其内容的真实性。 Whereas the services provided by Taobao Platform are of the nature of bulletin board system (BBS), all information on shops and commodities on Taobao Platform (including but not limited to names of shops, names of companies, liaisons and contact information, product description and specification, pictures and videos) are provided and uploaded by members, who shall assume corresponding legal responsibility for the said information. Taobao Platform posts works (including contents on forums) for the purpose of distributing information, which does not mean that Taobao agrees with the viewpoints in the works or has confirmed the authenticity of the contents of the works. 知识产权保护（Protection of Intellectual Property Rights） 淘宝尊重知识产权，反对侵权盗版行为。知识产权权利人认为淘宝平台内容（包括但不限于淘宝平台会员发布的商品信息）可能涉嫌侵犯其合法权益，可以通过淘宝知识产权保护平台（qinquan.taobao.com）提出书面通知，淘宝收到后将及时处理。 Taobao respects intellectual property rights and opposes any act of infringement or pirating. If a holder of intellectual property rights believes that any content on Taobao Platform (including but not limited to commodity information published by any member of Taobao Platform) may infringe any of his/her/its legitimate rights and interests, he/she/it may send a written notice through Taobao’s intellectual property rights protection platform (qinquan.taobao.com). After receiving the notice, Taobao will deal with such issue in time. 隐私权政策（Privacy Right Policy） 淘宝（下称“我们”）尊重并保护用户隐私，在您使用淘宝平台提供的服务时，我们将按照本隐私权政策收集、使用及共享您的个人信息。本隐私权政策包含了我们收集、存储、使用、共享和保护您的个人信息的条款，我们希望通过本隐私权政策向您清晰地介绍我们对您个人信息的处理方式，因此我们建议您完整地阅读本隐私权政策，以帮助您了解维护自己隐私权的方式。 如果您不同意本隐私权政策任何内容，您应立即停止使用淘宝平台服务。当您使用淘宝平台提供的任一服务时，即表示您已同意我们按照本隐私权政策来合法使用和保护您的个人信息。 Taobao (hereinafter referred to as “we”) respects and protects the privacy of the users. When you use the services of Taobao Platform, we will collect, use and share your personal information in accordance with this Privacy Right Policy. This Privacy Right Policy contains terms and conditions on how we collect, store, use, share and protect your personal information. Through this Privacy Right Policy, we wish to clearly introduce to you how we deal with your personal information. Therefore, we advise you to read this Privacy Right Policy completely to understand the means of protecting your privacy right. If you do not agree to any contents of this Privacy Right Policy, you shall stop using the services of Taobao Platform immediately. Your use of the services provided by Taobao Platform in any way will be deemed as your agreement that we may legally use and protect your personal information in accordance with this Privacy Right Policy. 适用范围（Scope of Application） 为用户提供更好、更优、更个性化的服务是淘宝坚持不懈的追求，也希望通过我们提供的服务可以更方便您的生活。本隐私权政策适用于淘宝平台提供的所有服务，您访问淘宝平台及未设独立隐私权政策的关联公司网站及/或登陆相关客户端使用淘宝平台提供的服务，均适用本隐私权政策。 需要特别说明的是，本隐私权政策不适用于其他第三方向您提供的服务，例如淘宝上的卖家依托淘宝平台向您提供服务时，您向卖家提供的个人信息不适用于本隐私权政策。 To provide the users with better, higher-quality, more personalized services is our persistent pursuit. We also wish to provide more conveniences to your life through our services. This Privacy Right Policy is applicable to all services provided by Taobao Platform. When you visit Taobao Platform and any website of any Affiliate without an independent privacy right policy and/or log in any client concerned to use the services of Taobao Platform, this Privacy Right Policy will apply. Please note in particular that this Privacy Right Policy is not applicable to any services provided to you by any third party. For example, when any seller on Taobao provides services to you through Taobao Platform, any information provided by you to the seller is not subject to this Privacy Right Policy. 我们收集哪些信息（What Information We Collect） 为了向您提供更好、更优、更个性化的服务，我们将根据您使用的服务收集您的如下信息： 1.您向我们提供的信息 当您在淘宝平台创建账户时，您必须至少向我们提供会员名、电话号码及/或电子邮箱等信息，并创建密码。 您在使用淘宝平台时，需要根据服务的内容，选择填写及/或提交服务所必须的信息，可能包括您的姓名、性别、出生年月日、身份证号码、护照姓、护照名、护照号码、电话号码、电子邮箱、地址、支付宝账号及相关附加信息（如您所在的省份和城市、邮政编码等）。如果您不使用某些服务，则无需提供相关信息。 我们还会记录您在使用我们服务时提供的信息。例如您在淘宝发布的信息、搜索关键词信息、与淘宝客服联系时您提供的相关信息、您参与问卷调查时向我们发送的问卷答复信息等。 2.在您使用服务过程中收集的信息 我们会根据您授予的权限，接收并记录您所使用的设备相关信息，这些设备信息包括： 设备属性信息（如设备型号、操作系统版本、设备设置、唯一设备标识符等软硬件特征信息）、设备位置信息（如通过GPS、蓝牙或WIFI信号获得的位置信息）、设备连接信息（IP地址、浏览器的类型、电信运营商、使用的语言、访问日期和时间及您需求的网页记录等）。 对于从您的各种设备上收集到的信息，我们可能会将它们进行关联，以便我们能在这些设备上为您提供一致的服务。 此外，为提高您使用淘宝平台提供的服务的安全性，更准确地预防钓鱼网站欺诈和木马病毒，我们可能根据您的授权，通过了解一些您的网络使用习惯、您常用的软件信息等手段来判断您账户的风险，并可能会记录一些我们认为有风险的URL。 3.来自第三方的信息 当您与使用我们服务的关联公司、淘宝合作伙伴之间互动时，为共同向您提供服务及改进服务质量的合理需要，我们将从关联公司、合作伙伴处接收关于您的体验或您与其互动的信息。 为预防欺诈和确保安全，淘宝的关联公司、合作伙伴会依据适用的法律法规或征得您同意的前提下，向我们分享您的信息。 In order to provide you with better, higher-quality and more personalized services, we will collect the following information from the services used by you: 1. Information provided by you to us When you create an account on Taobao Platform, you must at least provide us with the member name, phone number and/or email address and other information, and set the password. When you use Taobao Platform, you need to choose to fill out and/or submit the information required for the services according to the content of the services, which may include your name, sex, date of birth, ID number, surname and given name on your passport, passport number, telephone number, email, address, Alipay account number and additional information (such as the province and city you are in, postal code, etc.). If you do not use certain services, you are not required to provide relevant information. We will also record the information provided by you when you use our services, including the information published by you on Taobao, information of search keywords, relevant information provided by you during your communication with Taobao customer service, and information of answers sent to us regarding any questionnaire, etc. 2. Information collected by us when you use the services With the authorization granted by you, we will receive and record relevant information of the devices used by you, including: Properties of devices (e.g., device model, operating system version, device configuration, unique device identifier and other software and hardware features), location of devices (e.g., the device location obtained via GPS, Bluetooth or WiFi), device connection information (IP address, type of browser, telecommunication service provider, language, date and time of visit, and record of websites of your interest, etc.). Regarding the information collected from your various devices, we may integrate them so as to provide you with consistent services on these devices. In addition, in order to improve safety when you use the services of Taobao Platform and prevent fraud by any phishing website and Trojan virus more accurately, with your authorization, we may judge the risk of your account by knowing your Internet use habit and information of software commonly used by you and other means, and may record some URLs which we deem as risky. 3. Information from any third party When you interact with the Affiliates and partners of Taobao that use our services, we will receive information about your experience or your interactions with them from such Affiliates and partners that is reasonably necessary for the purpose of jointly providing you with services and improving service quality. To prevent fraud and ensure security, the Affiliates and partners of Taobao will share your personal information with us pursuant to applicable laws or subject to your consent. 我们如何使用收集到的信息（How We Use the Collected Information） 收集您的信息是为了向您提供服务及提升服务质量，为了实现这一目的，我们会把您的信息用于下列用途： 1.向您提供您使用的各项服务，并维护、改进这些服务。 2.向您推荐您可能感兴趣的内容，包括但不限于向您发出产品和服务信息，或通过系统向您展示个性化的第三方推广信息，或者在征得您同意的情况下与淘宝的合作伙伴共享信息以便他们向您发送有关其产品和服务的信息。如您不希望接收上述信息，可通过相应的退订功能进行退订。 3.我们可能使用您的个人信息以预防、发现、调查欺诈、危害安全、非法或违反与我们或其关联方协议、政策或规则的行为，以保护您、我们的其他用户、我们或我们关联方的合法权益。 4.我们可能会将来自某项服务的信息与来自其他服务的信息结合起来，以便为您提供服务、个性化内容和建议。 5.经您许可的其他用途。 We collect your information for the purpose of providing you with services and improving the service quality. Therefore, we will use your information for the following purposes: 1. Provide you with various services you are using, and maintain and improve these services; 2. Recommend to you any contents which you may be interested in, including but not limited to send product and service information to you, or display personalized third-party promotional information to you through the system, or, subject to your consent, share information with the partners of Taobao so that they may send information about their products and services to you. If you would like to stop receiving these information, you may unsubscribe by using the relevant unsubscription function; 3. We may use your personal information to prevent, identify and investigate into fraud, any act endangering security, illegal activity, or any other act which violates any agreement, policy or rule with or of us or any of our Affiliates so as to protect the legitimate rights and interests of you, any of our other users, us or any of our Affiliates; 4. We may combine your personal information obtained from a kind of service with information from any other kind of service so as to provide you with services, personalized content and advice; 5. Any other purpose as permitted by you. 您如何管理自己的信息（How to Manage Your Own Information） 我们提供了便捷的方法，让您可以查询、更正及删除自己的账户信息等使用我们服务时您提供的个人信息。例如您可以登录“我的淘宝”、淘宝网服务中心等查询、修改自己的个人资料、隐私设置、安全设置，删除您的收货地址、交易订单等信息或注销您的淘宝账户。 如果您认为淘宝存在违反法律、行政法规的规定或者与您的约定收集、使用您个人信息的，您可以通过淘宝客服与我们取得联系。 We provide you with convenient ways to check, change and delete your account information and other personal information provided by you when using our services. For example, you may log in to “My Taobao” and Taobao.com service center to check and change your personal data, privacy settings, security settings, and delete your delivery address, transaction order and other information or delete your Taobao account. If you believe that Taobao collects and uses your personal information in violation of laws, administrative regulations or the agreement with you, you may contact Taobao customer service. 您共享的信息（Information Shared by You） 您可以通过我们的服务建立联系和相互分享。当您通过我们的服务创建交流、交易或分享时，您可以自主选择沟通、交易或分享的对象，作为能够看到您的交易内容、联络方式、交流信息或分享内容等相关信息的第三方。 在使用淘宝平台服务进行网上交易时，您不可避免的要向交易对方或潜在的交易对方披露自己的个人信息，如联络方式或者邮政地址。请您妥善保护自己的个人信息，仅在必要的情形下向他人提供。如您发现自己的个人信息泄密，尤其是您的账户或密码发生泄露，请您立即联络淘宝客服，以便淘宝采取相应措施。 公开信息是指您公开分享的任何信息。任何人都可以在使用和未使用淘宝 期间查看或访问这些信息。例如当您在淘宝平台进行交易，不选择“匿名购买”和/或“匿名评价”功能时，意味着您将公开分享您的成交价、成交信息及评价详情等数据。 为使用淘宝服务，可能存在您必须公开分享的信息。例如为构建诚信交易环境，您的信用评价信息（心、钻石、皇冠）需要被公开分享。若您是卖家，您应当根据适用的法律法规和淘宝规则的要求，公开分享企业名称等相关工商注册信息或者自然人经营者的信息。 请注意，您在使用我们服务时自愿共享的信息，可能会涉及您或他人的个人信息甚至个人敏感信息，如您在评价时选择上传包含个人信息的图片。请您更加谨慎地考虑，是否在使用我们的服务时共享甚至公开分享相关信息。 You may build connections and realize mutual sharing through our services. When you initiate communications, transactions or sharing through our services, you may choose at your own discretion the targets to communicate, deal and share with to become the third parties who will be able to view your transactions, contacts, communication information, contents shared or other relevant information. When you conduct online transactions through the services of Taobao Platform, it is inevitable that you need to disclose your personal information to the counterparty or potential counterparty, such as contacts or postal address. Please properly protect your personal information and provide it to others only when necessary. If you find that your personal information, especially your account or password, is divulged, please immediately contact Taobao customer service so that Taobao may take corresponding measures. Public information means any information shared by you in public. Anyone may view or access such information when he/she is using or not using Taobao. For example, if you do not choose “Anonymous Purchase” and/or “Anonymous Comment” when conducting transactions on Taobao Platform, you will share your transaction price, transaction information, comment details and other data in public. To use Taobao services, you may be required to share certain information in public. For example, in order to create an honest transaction environment, your credit rating information (hearts, diamonds and crowns) will be displayed in public. If you are a seller, you should share your corporate name and other relevant information about registration with the administration for industry and commerce or the information on individual business operator in accordance with applicable laws, regulations and Taobao rules. Please note that the information voluntarily shared by you when using our services may involve the personal information and even sensitive personal information of you or others, e.g., photos containing personal information uploaded by you when making comments. Please consider more prudently before sharing and even making public relevant information when using our services. 我们如何共享信息（How We Share Information） 我们对您的信息承担保密义务，不会出于第三方的营销目的而向其出售或提供您的任何信息，除下列情形外，我们不会与任何其他第三方共享您的个人信息： 1.事先获得授权。获得您的授权后，我们会与其他公司、组织和个人分享您的个人信息。只有您明确同意，我们才会共享您的身份证号、护照号、银行卡号、个人健康信息等个人敏感信息。 2.向淘宝的关联公司分享您的个人信息。我们只会共享必要的个人信息，且受本隐私政策中所声明目的的约束。 3.出于法律原因。为遵守适用的法律法规、诉讼目的或者行政机关、司法机构依法提出的要求，我们可能有必要披露您的个人信息。如果我们确定您出现违反适用的法律法规或淘宝规则或相关协议的情况，或为保护淘宝及其关联公司或用户或公众的权利、财产或安全免遭损害，我们也可能披露关于您的信息，包括相关违规行为以及淘宝已对您采取的措施。 4.用于外部处理。为实现本隐私权政策中声明的目的，我们可能让可信赖的合作伙伴作为数据处理者，根据我们的指示并遵循我们的隐私权政策以及其他任何相应的保密和安全措施来为我们处理您的个人信息。 5.协助解决争议。某些情况下只有共享您的信息，才能处理您与他人的纠纷或争议。例如您是适格的知识产权投诉人并已提起投诉，我们可能应被投诉人要求，向被投诉人披露，以便双方处理可能的权利纠纷；您在淘宝上创建的某一交易中，如交易任何一方履行或部分履行了交易义务并提出信息披露请求的，淘宝会视情况向该用户提供其交易对方的联络方式等必要信息，以促成纠纷的解决。 We are obliged to keep your personal information confidential and will not sell or provide any of your personal information to any third party for the purpose of marketing by such third party. We will not share your personal information with any other third party unless: 1. With your prior authorization. Subject to your authorization, we will share your personal information with other companies, organizations and individuals. Unless with your express consent, we will not share your ID number, passport number, bank card number, personal health information or other sensitive personal information; 2. Sharing your personal information with Taobao’s Affiliates. We will share personal information to the extent necessary and for the purposes stated in this Privacy Right Policy only; 3. As required by laws. We may be required to disclose your personal information in order to comply with applicable laws, regulations or requirements made by the administrative or judicial bodies in accordance with laws or for the purpose of litigation. If we determine that you have violated applicable laws, regulations, Taobao rules or relevant agreements, or we intend to protect Taobao, its Affiliates or users or the general public from damages to their rights, properties or safety, we may also disclose your information, including the relevant violation and measures taken by Taobao against you; 4. For external processing. To achieve the purposes stated in this Privacy Right Policy, we may engage reliable partners as data processors to process your personal information for us based on our instructions and in compliance with this Privacy Right Policy and any other corresponding confidentiality and security measures; 5. For assisting with dispute resolution. In certain circumstances, only through sharing your information can we settle your dispute or controversy with others. For example, if you are a qualified claimant of intellectual property rights who has filed a claim, we may disclose your personal information to the respondent at his/her/its request so as to solve the potential dispute between the parties, and with respect to a transaction initiated by you in Taobao, if either party to the transaction performs all or part of his/her/its obligations and requires disclosure of information, Taobao will provide the party with the contact information of the counterparty and other necessary information depending on the circumstance so as to facilitate resolution of dispute. Cookie和类似技术的使用（Use of Cookie and Similar Technologies） 为使您获得更轻松的访问体验，您访问淘宝平台相关网站或使用淘宝平台提供的服务时，我们可能会通过采用各种技术收集和存储相关信息，包括使用小型数据文件识别您的身份，这么做是为了解您的使用习惯，帮您省去重复输入注册信息的步骤，或者帮助判断您的账户安全。这些数据文件可能是Cookie、Flash Cookie，或您的浏览器或关联应用程序提供的其他本地存储（统称“Cookie”）。 请您理解，我们的某些服务只能通过使用Cookie才可得到实现。如果您的浏览器或浏览器附加服务允许，您可以修改对Cookie的接受程度或者拒绝淘宝的Cookie，但拒绝淘宝的Cookie在某些情况下可能会影响您安全访问淘宝平台相关网站和使用淘宝平台提供的服务。 网页上常会包含一些电子图像，称为“单像素 GIF 文件”或“网络 beacon”，它可以帮助网站计算浏览网页的用户或访问某些cookie。我们会通过网络beacon收集您浏览网页活动信息，例如您访问的页面地址、您先前访问的援引页面的位址、您停留在页面的时间、您的浏览环境以及显示设定等。 To provide you with better user experience, when you visit relevant websites of Taobao Platform or use the services provided by Taobao Platform, we may collect and store relevant information by employing various technologies, including verifying your identity through small data files. In this way, we will be able to understand your habits and help you avoid repeated input of registration information or assess the security of your account. These data files may be Cookie, Flash Cookie or other local storage provided by your browser or affiliated applications (hereinafter collectively referred to as “Cookie”). Please understand that some of our services are only available through use of “Cookie”. If permitted by your browser or additional browser services, you may amend your acceptance level to Cookie or reject Cookie of Taobao, but such rejection may affect your visit of related websites of Taobao Platform or use of the services of Taobao Platform under certain circumstances. There are often some electronic images (“Single Pixel GIF” or “Web Beacon") on web pages. Web Beacon may help a website to calculate the number of users who browse the web pages or access certain cookies. We will use Web Beacon to collect information on your browsing of web pages, such as the web page address you are visiting, the reference page address you previously visited, the duration of your stay on a web page, your browsing environment and display settings. 我们如何存留信息（How We Store Information） 淘宝收集的有关您的信息和资料将保存在淘宝及（或）其关联公司的服务器上，这些信息和资料可能传送至您所在国家、地区或淘宝收集信息和资料所在地并在该地被访问、存储和展示。 我们将在实现本隐私政策中所述目的所必需的期间内保留你的个人信息，除非法律要求或允许在更长的期间内保留这些信息。 Your personal information and data collected by Taobao will be stored in the servers of Taobao and/or its Affiliates, which may be transmitted to the country or region where you are located or the place where Taobao collects such information and data, and be accessed, stored and displayed at such place. We will retain your personal information for a period necessary for achieving the purposes stated in this Privacy Right Policy, unless it is required or allowed by laws to retain such information for a longer period. 您的个人信息保护（Protection of Your Personal Information） 淘宝非常重视您的个人信息安全。我们努力采取各种合理的物理、电子和管理方面的安全措施来保护您的个人信息，并尽最大合理努力使您的个人信息不会被泄漏、毁损或者丢失，包括但不限于SSL、信息加密存储、数据中心的访问控制。我们对可能接触到您个人信息的员工或外包人员也采取了严格管理，包括但不限于采取信息访问权限控制、与接触个人信息的人员签署保密协议、监控该等人员的操作情况等措施。 淘宝账户信息（包括账号名及密码信息）为非常重要的个人信息，请您妥善设置、保管您的淘宝账号名及密码信息。淘宝将通过备份、对密码进行加密等安全措施以保护您的账户信息等个人信息不丢失、不被滥用和变造。尽管有前述安全措施，但同时也请您理解在信息网络上不存在“完善的安全措施”。 请注意，单独的设备信息、搜索关键词信息等是无法与任何特定个人直接建立联系的数据，不属于个人信息。如果我们将这类非个人信息与其他信息结合用于识别自然人个人身份，或者将其与个人信息结合使用，则在结合使用期间，此类非个人信息将被视为个人信息。 Taobao attaches great importance to the security of your personal information. We will take a variety of physical, electronic and management measures that are reasonable to protect your personal information, and make our best reasonable efforts to prevent your personal information from being divulged, damaged or lost, including but not limited to SSL, encrypted information storage and access control for the data center. We also strictly manage the employees or contractors who may have access to your personal information, including but not limited to information access control, execution of confidentiality agreements with them, and monitoring of their operation. Taobao account information (including account name and password) are very important personal information. Please properly set and keep your Taobao account name and password. Taobao will take security measures such as backup and encryption of passwords to guarantee that your account information and other personal information will not be lost, misused or altered. Notwithstanding the said security measures, you are reminded that there are no “perfect security measures” in the information network. Please note that certain information such as information of devices only and information of search keywords are data that cannot be directly associated with any particular individual, and thus does not fall into personal information. If we combine such non-personal information with other information for the purpose of identifying individuals or use it in combination with personal information, then, such non-personal information shall be deemed as personal information during the period of such combined use. 未成年人保护（Protection of Minors） 我们重视未成年人的个人信息保护，如您为未成年人，建议您请您的监护人仔细阅读本隐私权政策，并在征得您的监护人同意的前提下使用我们的服务或向我们提供信息。 We attach importance to the protection of personal information of minors. If you are a minor, we suggest that you ask your guardian to read this Privacy Right Policy carefully, and you may use our services and/or provide us with information subject to the consent of your guardian. 本政策的修订（Amendment to This Privacy Right Policy） 我们可不定期修改本《法律声明及隐私权政策》，变更后的《法律声明及隐私权政策》将在修订生效前通过淘宝平台公告或以其他适当方式通知您。该等情况下，若您继续使用我们的服务，即表示同意受经修订的《法律声明及隐私权政策》的约束。 We may amend this Legal Statement and Privacy Right Policy from time to time and will publish the amended Legal Statement and Privacy Right Policy on Taobao Platform or otherwise notify you before such amendment takes effect. In such case, if you continue to use our services, it shall be deemed that you have agreed to be bound by the amended Legal Statement and Privacy Right Policy.
+	</div>
+</script>
+<script type="text/javascript">
+	// 通用倒计时，包括倒计时所在容器，倒数秒数，显示方式，回调。
+	function countdown(element, options) {
+		var self = this;
+		options = $.extend({
+			start: 60,
+			secondOnly: false,
+			callback: null
+		}, options || {});
+		var t = options.start;
+		var sec = options.secondOnly;
+		var fn = options.callback;
+		var d = +new Date();
+		var diff = Math.round((d + t * 1000) / 1000);
+		this.timer = timeout(element, diff, fn);
+		this.stop = function() {
+			clearTimeout(self.timer);
+		};
+
+		function timeout(element, until, fn) {
+			var str = '',
+				started = false,
+				left = {
+					d: 0,
+					h: 0,
+					m: 0,
+					s: 0,
+					t: 0
+				},
+				current = Math.round(+new Date() / 1000),
+				data = {
+					d: '天',
+					h: '时',
+					m: '分',
+					s: 's'
+				};
+
+			left.s = until - current;
+
+			if(left.s < 0) {
+				return;
+			} else if(left.s == 0) {
+				fn && fn();
+			}
+			if(!sec) {
+				if(Math.floor(left.s / 86400) > 0) {
+					left.d = Math.floor(left.s / 86400);
+					left.s = left.s % 86400;
+					str += left.d + data.d;
+					started = true;
+				}
+				if(Math.floor(left.s / 3600) > 0) {
+					left.h = Math.floor(left.s / 3600);
+					left.s = left.s % 3600;
+					started = true;
+				}
+			}
+			if(started) {
+				str += ' ' + left.h + data.h;
+				started = true;
+			}
+			if(!sec) {
+				if(Math.floor(left.s / 60) > 0) {
+					left.m = Math.floor(left.s / 60);
+					left.s = left.s % 60;
+					started = true;
+				}
+			}
+			if(started) {
+				str += ' ' + left.m + data.m;
+				started = true;
+			}
+			if(Math.floor(left.s) > 0) {
+				started = true;
+			}
+			if(started) {
+				str += ' ' + left.s + data.s;
+				started = true;
+			}
+
+			$(element).html(str);
+			return setTimeout(function() {
+				timeout(element, until, fn);
+			}, 1000);
+		}
+	}
+
+	$("#pwd_form").Validform({
+		tiptype: 3,
+		showAllError: true
+	});
+
+	//点击发送验证码
+	$('#get_code').click(function() {
+		if(!$(this).hasClass('disabled')) {
+			var obj = {};
+			var username = '手机号' //$(this).parents('#signup_form').find('[name=username]');
+			var captcha = '验证码' //$(this).parents('#signup_form').find('[name=captcha]');
+
+			if(captcha && username) {
+				sendVerify(this, {
+					username: username,
+					captcha: captcha
+				})
+			}
+
+		}
+	})
+	$('#xieyi_check').change(function() {
+		if($(this).prop('checked')) {
+			$(this).parents('form').find('[type=submit]').removeAttr('disabled')
+		} else {
+			$(this).parents('form').find('[type=submit]').attr('disabled', 'disabled')
+		}
+
+	})
+
+	function sendVerify(el, data) {
+		var url = $(el).data('url');
+		var textCont = $(el);
+		$(el).addClass('disabled');
+		textCont.html($(el).text() + '(<i class="red">0</i>)');
+		var cd = new countdown(textCont.find('i'), {
+			start: 60, //等待时间
+			secondOnly: false,
+			callback: function(e) {
+				$(el).removeClass('disabled');
+				textCont.html('重发验证码');
+			}
+		});
+		$.post(url, data, function(rs) {
+			layer.msg('发送验证码成功');
+			if(rs.code == 0) {
+				cd.stop();
+				$(el).removeClass('disabled');
+				textCont.html('重发验证码');
+			}
+
+		});
+	}
+
+	function showdemo(title, img_src, area) {
+		layer.open({
+			"title": title,
+			'skin': 'layer-ext-blue',
+			type: 1,
+			area: area,
+			shadeClose: true,
+			content: "<img style='display:block;margin:0 auto;padding-top:15px' src=" + img_src + ">"
+		})
+	}
+</script>
+{/block}

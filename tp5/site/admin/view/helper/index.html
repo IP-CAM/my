@@ -1,0 +1,440 @@
+    {extend name="public/base" /}
+
+    <!-- CONTENT -->
+    {block name="body"}
+        <div id="content">
+            <div class="breadcrumbs">
+                {:lang('General')} : &nbsp;&nbsp; {:lang('Application')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+            </div>
+
+            <div class="bloc">
+                <div class="title">
+                    <div class="tabs" id="navs">
+                        {include file="public/navs" /}
+                    </div>
+
+                    {include file="public/lang" /}
+                </div>
+    
+                <form name="siteconfig" method="post" style="margin-top:5px;">
+                    <div class="alert alert-success">
+                        <button class="close" type="button">&times;</button>
+                        <span class="alert-content">{:lang('Global config tip')}</span>
+                    </div>
+        
+                    <div class="bloc" id="blocStatistics">
+                        <!--<div class="title collapsible">-->
+                        <div class="title">
+                            <div class="tabs static pot" id="blockStatistics">
+                                <ul>
+                                    <a id="tabStat1_link" href="#tabStat1">
+                                        <li>{:lang('Langhelper')}</li>
+                                    </a>
+                                    <a id="tabStat2_link" href="#tabStat2">
+                                        <li>{:lang('Cssicons')}</li>
+                                    </a>
+                                    <a id="tabStat3_link" href="#tabStat3">
+                                        <li>{:lang('Cssstyle')}</li>
+                                    </a>
+                                    <a id="tabStat4_link" href="#tabStat4">
+                                        <li>{:lang('Jsconst')}</li>
+                                    </a>
+                                    <a id="tabStat5_link" href="#tabStat5">
+                                        <li>{:lang('Tplconst')}</li>
+                                    </a>
+                                    <a id="tabStat6_link" href="#tabStat6">
+                                        <li>{:lang('Devhelper')}</li>
+                                    </a>
+                                </ul>
+                
+                            </div>
+                        </div>
+                        <div class="content">
+                            <div id="tabStat1" style="display:block; padding: 0 0 30px;">
+                                <ul class="langul">
+                                    {foreach name="langs" id="vo" key="key"}
+                                    <li>{$key}: <font class="green"> {$vo}</font></li>
+                                    {/foreach}
+                                    <div class="clear"></div>
+                                </ul>
+                            </div>
+    
+                            <div id="tabStat2" style="display:block; padding: 0 0 30px;">
+                                <ul class="icons">
+                                    <li class="after-icon"><font class="green">after-icon</font></li>
+                                    <li class="api-icon"><font class="green">api-icon</font></li>
+                                    <li class="admin-icon"><font class="green">admin-icon</font></li>
+                                    <li class="conf-icon"><font class="green">conf-icon</font></li>
+                                    <li class="setting-icon"><font class="green">setting-icon</font></li>
+                                    <li class="export-icon"><font class="green">export-icon</font></li>
+                                    <li class="import-icon"><font class="green">import-icon</font></li>
+                                    <li class="report-icon"><font class="green">report-icon</font></li>
+                                    <li class="hotel-icon"><font class="green">hotel-icon</font></li>
+                                    <li class="ticket-icon"><font class="green">ticket-icon</font></li>
+                                    <li class="website-icon"><font class="green">website-icon</font></li>
+                                    <li class="country-icon"><font class="green">country-icon</font></li>
+                                    <li class="equipment-icon"><font class="green">equipment-icon</font></li>
+                                    <li class="platform-icon"><font class="green">platform-icon</font></li>
+                                    <li class="shopid-icon"><font class="green">shopid-icon</font></li>
+                                    <li class="day-icon"><font class="green">day-icon</font></li>
+                                    <li class="week-icon"><font class="green">week-icon</font></li>
+                                    <li class="review-icon"><font class="green">review-icon</font></li>
+                                    <li class="feedback-icon"><font class="green">feedback-icon</font></li>
+                                    <li class="express-icon"><font class="green">express-icon</font></li>
+                                    <li class="lten-icon"><font class="green">lten-icon</font></li>
+                                    <li class="excute-icon"><font class="green">excute-icon</font></li>
+                                    <li class="makerinfo-icon"><font class="green">makerinfo-icon</font></li>
+                                    <li class="party-icon"><font class="green">party-icon</font></li>
+                                    <li class="list-icon"><font class="green">list-icon</font></li>
+                                    <li class="job-icon"><font class="green">job-icon</font></li>
+                                    <li class="password-icon"><font class="green">password-icon</font></li>
+                                    <li class="info-icon"><font class="green">info-icon</font></li>
+                                    <li class="forget-icon"><font class="green">forget-icon</font></li>
+                                    <li class="option-icon"><font class="green">option-icon</font></li>
+                                    <li class="core-icon"><font class="green">core-icon</font></li>
+                                    <li class="card-icon"><font class="green">card-icon</font></li>
+                                    <li class="discount-icon"><font class="green">discount-icon</font></li>
+                                    <li class="domain-icon"><font class="green">domain-icon</font></li>
+                                    <li class="tpl-icon"><font class="green">tpl-icon</font></li>
+                                    <li class="email-icon"><font class="green">email-icon</font></li>
+                                    <li class="mail-icon"><font class="green">mail-icon</font></li>
+                                    <li class="sms-icon"><font class="green">sms-icon</font></li>
+                                    <li class="hooks-icon"><font class="green">hooks-icon</font></li>
+                                    <li class="addons-icon"><font class="green">addons-icon</font></li>
+                                    <li class="shop-icon"><font class="green">shop-icon</font></li>
+                                    <li class="up-icon"><font class="green">up-icon</font></li>
+                                    <li class="down-icon"><font class="green">down-icon</font></li>
+                                    <li class="uu-icon"><font class="green">uu-icon</font></li>
+                                    <li class="curr-icon"><font class="green">curr-icon</font></li>
+                                    <li class="finance-icon"><font class="green">finance-icon</font></li>
+                                    <li class="otoshop-icon"><font class="green">otoshop-icon</font></li>
+                                    <li class="cat-icon"><font class="green">cat-icon</font></li>
+                                    <li class="game-icon"><font class="green">game-icon</font></li>
+                                    <li class="special-icon"><font class="green">special-icon</font></li>
+            
+                                    <li class="reback-icon"><font class="green">reback-icon</font></li>
+                                    <li class="back-icon"><font class="green">back-icon</font></li>
+                                    <li class="wifi-icon"><font class="green">wifi-icon</font></li>
+                                    <li class="push-icon"><font class="green">push-icon</font></li>
+                                    <li class="sale-icon"><font class="green">sale-icon</font></li>
+                                    <li class="time-icon"><font class="green">time-icon</font></li>
+                                    <li class="queue-icon"><font class="green">queue-icon</font></li>
+                                    <li class="count-icon"><font class="green">count-icon</font></li>
+                                    <li class="merge-icon"><font class="green">merge-icon</font></li>
+                                    <li class="record-icon"><font class="green">record-icon</font></li>
+                                    <li class="items-icon"><font class="green">items-icon</font></li>
+                                    <li class="parent-icon"><font class="green">parent-icon</font></li>
+                                    <li class="lang-icon"><font class="green">lang-icon</font></li>
+                                    <li class="dir-icon"><font class="green">dir-icon</font></li>
+                                    <li class="tool-icon"><font class="green">tool-icon</font></li>
+                                    <li class="earth-icon"><font class="green">earth-icon</font></li>
+                                    <li class="new-icon"><font class="green">new-icon</font></li>
+                                    <li class="groupon-icon"><font class="green">groupon-icon</font></li>
+                                    <li class="tools-icon"><font class="green">tools-icon</font></li>
+                                    <li class="level-icon"><font class="green">level-icon</font></li>
+                                    <li class="users-icon"><font class="green">users-icon</font></li>
+                                    <li class="source-icon"><font class="green">source-icon</font></li>
+                                    <li class="doctor-icon"><font class="green">doctor-icon</font></li>
+                                    <li class="cloud-icon"><font class="green">cloud-icon</font></li>
+                                    <li class="teacher-icon"><font class="green">teacher-icon</font></li>
+            
+                                    <li class="more-icon"><font class="green">more-icon</font></li>
+                                    <li class="coupons-icon"><font class="green">coupons-icon</font></li>
+                                    <li class="logistics-icon"><font class="green">logistics-icon</font></li>
+                                    <li class="fulldiscount-icon"><font class="green">fulldiscount-icon</font></li>
+                                    <li class="xy-icon"><font class="green">xy-icon</font></li>
+                                    <li class="package-icon"><font class="green">package-icon</font></li>
+                                    <li class="online-icon"><font class="green">online-icon</font></li>
+                                    <li class="sell-icon"><font class="green">sell-icon</font></li>
+                                    <li class="tag-icon"><font class="green">tag-icon</font></li>
+                                    <li class="custom-icon"><font class="green">custom-icon</font></li>
+                                    <li class="send-icon"><font class="green">send-icon</font></li>
+                                    <li class="q-icon"><font class="green">q-icon</font></li>
+                                    <li class="db-icon"><font class="green">db-icon</font></li>
+                                    <li class="run-icon"><font class="green">run-icon</font></li>
+                                    <li class="pc-icon"><font class="green">pc-icon</font></li>
+            
+                                    <li class="wap-icon"><font class="green">wap-icon</font></li>
+                                    <li class="app-icon"><font class="green">app-icon</font></li>
+                                    <li class="vr-icon"><font class="green">vr-icon</font></li>
+                                    <li class="ai-icon"><font class="green">ai-icon</font></li>
+                                    <li class="model-icon"><font class="green">model-icon</font></li>
+                                    <li class="seo-icon"><font class="green">seo-icon</font></li>
+                                    <li class="wechat-icon"><font class="green">wechat-icon</font></li>
+                                    <li class="file-icon"><font class="green">file-icon</font></li>
+                                    <li class="protocol-icon"><font class="green">protocol-icon</font></li>
+                                    <li class="consultation-icon"><font class="green">consultation-icon</font></li>
+                                    <li class="comment-icon"><font class="green">comment-icon</font></li>
+                                    <li class="oauth-icon"><font class="green">oauth-icon</font></li>
+                                    <li class="action-icon"><font class="green">action-icon</font></li>
+                                    <li class="inv-icon"><font class="green">inv-icon</font></li>
+                                    <li class="log-icon"><font class="green">log-icon</font></li>
+                                    <li class="rule-icon"><font class="green">rule-icon</font></li>
+                                    <li class="pay-icon"><font class="green">pay-icon</font></li>
+                                    <li class="search-icon"><font class="green">search-icon</font></li>
+                                    <li class="coll-icon"><font class="green">coll-icon</font></li>
+                                    <li class="lock-icon"><font class="green">lock-icon</font></li>
+                                    <li class="unlock-icon"><font class="green">unlock-icon</font></li>
+                                    <li class="key-icon"><font class="green">key-icon</font></li>
+                                    <li class="over-icon"><font class="green">over-icon</font></li>
+                                    <li class="test-icon"><font class="green">test-icon</font></li>
+                                    <li class="dev-icon"><font class="green">dev-icon</font></li>
+                                    <li class="pri-icon"><font class="green">pri-icon</font></li>
+                                    <li class="ware-icon"><font class="green">ware-icon</font></li>
+                                    <li class="err-icon"><font class="green">err-icon</font></li>
+                                    <li class="ok-icon"><font class="green">ok-icon</font></li>
+                                    <li class="fail-icon"><font class="green">fail-icon</font></li>
+                                    <li class="plug-icon"><font class="green">plug-icon</font></li>
+                                    <li class="ext-icon"><font class="green">ext-icon</font></li>
+                                    <div class="clear"></div>
+                                </ul>
+                            </div>
+    
+                            <div id="tabStat3" style="display:block;">
+                                <table class="table kright">
+                                    <tbody>
+                                    <tr class="safebox">
+                                        <td style="vertical-align:middle; padding: 5px 0px;">
+                                            {:lang('Length unit')}
+                                        </td>
+                                        <td style="vertical-align:middle; padding: 8px 15px; line-height: 1.8">
+                                            w60;<br />
+                                            w60;<br />
+                                            w60l;<br />
+                                            w70;<br />
+                                            w80;<br />
+                                            w80l;<br />
+                                            w80c;<br />
+                                            w100_mr10;<br />
+                                            w100;<br />
+                                            w100l;<br />
+                                            w100c10;<br />
+                                            w100c;<br />
+                                            w120;<br />
+                                            w120l;<br />
+                                            w120c;<br />
+                                            w120_r10;<br />
+                                            w130;<br />
+                                            w130c;<br />
+                                            w130l;<br />
+                                            w140;<br />
+                                            w140c;<br />
+                                            w140l;<br />
+                                            w160;<br />
+                                            w160l;<br />
+                                            w180;<br />
+                                            w180l
+                                        </td>
+                                    </tr>
+
+                                    <tr class="safebox">
+                                        <td style="vertical-align:middle; padding: 5px 0px;">
+                                            {:lang('Color')}
+                                        </td>
+                                        <td style="vertical-align:middle; padding: 8px 15px; line-height: 1.8">
+                                            <span class="red">red</span>
+                                            <span class="green">green</span>
+                                            <span class="blue">blue</span>
+                                            <span class="violet">violet</span>
+                                            <span class="orange">orange</span>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="safebox">
+                                        <td style="vertical-align:middle; padding: 5px 0px;">
+                                            {:lang('Label Color')}
+                                        </td>
+                                        <td style="vertical-align:middle; padding: 8px 15px; line-height: 1.8">
+                                            <span class="badge-green">G</span> &lt;span class="badge-green"&gt;green&lt;/span&gt; <br />
+                                            <span class="badge-red">R</span> &lt;span class="badge-red"&gt;red&lt;/span&gt; <br />
+                                            <span class="badge-gray">G</span> &lt;span class="badge-gray"&gt;gray&lt;/span&gt; <br />
+                                        </td>
+                                    </tr>
+        
+                                    </tbody>
+                                </table>
+                            </div>
+    
+                            <div id="tabStat4" style="display:block;">
+                                <table class="table kright">
+                                    <tbody>
+                                        <tr>
+                                            <td style="vertical-align:middle;">
+                                                form
+                                            </td>
+                                            <td style="vertical-align:middle;">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="vertical-align:middle;">
+                                                &nbsp;&nbsp;&nbsp;
+                                            </td>
+                                            <td style="vertical-align:middle;">
+                                            
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="vertical-align:middle;">
+                                                &nbsp;&nbsp;&nbsp;
+                                            </td>
+                                            <td style="vertical-align:middle;">
+    
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="vertical-align:middle;">
+                                                JS
+                                            </td>
+                                            <td style="vertical-align:middle;">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="vertical-align:middle;">
+                                                &nbsp;&nbsp;&nbsp;
+                                            </td>
+                                            <td style="vertical-align:middle;">
+    
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="vertical-align:middle;">
+                                                &nbsp;&nbsp;&nbsp;
+                                            </td>
+                                            <td style="vertical-align:middle;">
+    
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="vertical-align:middle;">
+                                                &nbsp;&nbsp;&nbsp;
+                                            </td>
+                                            <td style="vertical-align:middle;">
+    
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+    
+                            <div id="tabStat5" style="display:block;">
+                                <table class="table kright">
+                                    <tbody>
+                                    <tr>
+                                        <td style="vertical-align:middle;">
+                                        &nbsp;&nbsp;
+                                        </td>
+                                        <td style="vertical-align:middle;">
+                                            LANG, MODULE_NAME, CONtrOLLER_NAME, ACTION_NAME, MODULE_PATH, IS_WAP, IS_WECHAT, IS_APP
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td style="vertical-align:middle;">
+                                            &nbsp;&nbsp;
+                                        </td>
+                                        <td style="vertical-align:middle;">
+                                            __MENU__, __CHILD__, __SOON__
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="vertical-align:middle;">
+                                            &nbsp;&nbsp;
+                                        </td>
+                                        <td style="vertical-align:middle;">
+                                            module_name, controller_name, action_name
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="vertical-align:middle;">
+                                            &nbsp;&nbsp;
+                                        </td>
+                                        <td style="vertical-align:middle;">
+                                            css_path, js_path, img_path, module_path
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="vertical-align:middle;">
+                                            &nbsp;&nbsp;
+                                        </td>
+                                        <td style="vertical-align:middle;">
+                                            applist
+                                        </td>
+                                        </tr>
+                                    
+                                    <tr>
+                                        <td style="vertical-align:middle;">
+                                            &nbsp;&nbsp;
+                                        </td>
+                                        <td style="vertical-align:middle;">
+                                            _page
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="vertical-align:middle;">
+                                            &nbsp;&nbsp;
+                                        </td>
+                                        <td style="vertical-align:middle;">
+                                            _total
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="vertical-align:middle;">
+                                            &nbsp;&nbsp;
+                                        </td>
+                                        <td style="vertical-align:middle;">
+                                            data, list
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="vertical-align:middle;">
+                                            &nbsp;&nbsp;
+                                        </td>
+                                        <td style="vertical-align:middle;">
+                                            meta_title
+                                        </td>
+                                    </tr>
+        
+                                    </tbody>
+                                </table>
+                            </div>
+                
+                            <div id="tabStat6">
+                                <table class="table kright">
+                                    <tbody>
+                                    <tr class="safebox">
+                                        <td style="vertical-align:middle; padding: 8px 15px;"></td>
+                                        <td style="vertical-align:middle; padding: 8px 15px;">
+                                        
+                                        </td>
+                                    </tr>
+                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+            
+                    </div>
+                </form>
+            </div>
+        </div>
+    {/block}
+    
+    {block name="style"}
+    <style>
+        .langul, .icons, .styles{height: auto; padding-top: 0px;}
+        .langul li{line-height: 26px; font-size: 15px; width: 49%; display: block; float: left;}
+        .icons li{line-height: 30px; width: 170px; font-size: 16px; display: block; float: left;padding:0 8px 0 20px;}
+        .safebox{font-size: 15px;}
+        
+    </style>
+    {/block}

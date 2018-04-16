@@ -1,0 +1,110 @@
+    {extend name="admin@public/poupbase" /}
+    
+    <!-- CONTENT -->
+    
+    {block name="body"}
+    <div id="content" style="margin:0px 10px 5px 8px;">
+        <div class="bloc" style="margin:10px 0px 0px;">
+            <div class="content">
+                <form id="myform" method="post" style="margin-top:5px;" class="">
+                    <fieldset>
+                        <legend>{$meta_title|default=''}</legend>
+    
+                        <div class="row">
+                            <label for="tasktitle" class="w130">{:lang('Task title')}: </label>
+                            <input type="text" id="tasktitle" value="{$data.title}" name="title" style="width: 150px;" placeholder="{:lang('Task title pla')}" /> &nbsp;
+                            <a class="tooltip-icon" title="{:lang('Task title tip')}"></a>
+                        </div>
+    
+                        <div class="row bset">
+                            <label class="w130">{:lang('Task runas')}: </label>
+                            <input name="runas" type="radio" value="1" id="runas_1" {eq name="data.runas" value="1"}checked{/eq} {notpresent name="data.runas"}checked{/notpresent} />
+                            <label for="runas_1" class="w150_r_0">{:lang('Debug')}</label>
+                            <input name="runas" type="radio" value="0" id="runas_0" {eq name="data.runas" value="0"}checked{/eq} />
+                            <label for="runas_0" class="w150_r_0">{:lang('Onlines')}</label>
+                        </div>
+    
+                        <div class="row">
+                            <label for="params" class="w130">{:lang('Task params')}: </label>
+                            <input type="text" id="params" value="{$data.params}" name="params" style="width: 300px;" /> &nbsp;
+                        </div>
+    
+                        <div class="row">
+                            <label for="mark" class="w130">{:lang('Task mark')}: </label>
+                            <input type="text" id="mark" value="{$data.mark}" name="mark" style="width: 300px;" /> &nbsp;
+                        </div>
+    
+                        <div class="row">
+                            <label for="time" class="w130">{:lang('Task time')}: </label>
+                            <input type="text" id="time" value="{$data.time}" name="time" style="width: 150px;" /> &nbsp;
+                        </div>
+    
+                        <div class="row">
+                            <label for="key" class="w130">{:lang('Task key')}: </label>
+                            <input type="text" id="key" value="{$data.key}" name="key" style="width: 300px;" /> &nbsp;
+                        </div>
+    
+                        <div class="row">
+                            <label for="custom" class="w130">{:lang('Task custom')}: </label>
+                            <input type="text" id="custom" value="{$data.custom}" name="custom" style="width: 150px;" /> &nbsp;
+                        </div>
+    
+                        <div class="row bset">
+                            <label class="w130">{:lang('Task warming')}: </label>
+                            <input name="warmingtype" type="checkbox" value="1" id="warmingtype_1" {eq name="data.warmingtype" value="1"}checked{/eq} {notpresent name="data.warmingtype"}checked{/notpresent} />
+                            <label for="warmingtype_1" class="w150_r_0">{:lang('Debug')}</label>
+                            <input name="warmingtype" type="checkbox" value="0" id="warmingtype_0" {eq name="data.warmingtype" value="0"}checked{/eq} />
+                            <label for="warmingtype_0" class="w150_r_0">{:lang('Onlines')}</label>
+                        </div>
+    
+                        <div class="row">
+                            <label for="mail" class="w130">{:lang('Task warming mail')}: </label>
+                            <input type="text" id="mail" value="{$data.mail}" name="mail" style="width: 240px;" placeholder="example@runtuer.com" /> &nbsp;
+                        </div>
+    
+                        <div class="row">
+                            <label for="phone" class="w130">{:lang('Task warming phone')}: </label>
+                            <input type="text" id="phone" value="{$data.phone}" placeholder="13800138000" name="phone" style="width: 150px;" /> &nbsp;
+                        </div>
+    
+                        <div class="row">
+                            <label for="im" class="w130">{:lang('Task warming im')}: </label>
+                            <input type="text" id="im" value="{$data.im}" placeholder="{:lang('Wechat number')}" name="im" style="width: 150px;" /> &nbsp;
+                            <a class="tooltip-icon" title="{:lang('Warming im tip')}"></a>
+                        </div>
+    
+                        <div class="row">
+                            <label for="status" class="w130">{:lang('Status')}</label>
+                            <div class="slideBox">
+                                {eq name="ACTION_NAME" value="edit"}
+                                    <input id="status" value="1" type="checkbox" name="status"  {eq name="data['status']" value="1"}checked{/eq} />
+                                {else /}
+                                    <input id="status" value="1" type="checkbox" name="status" checked />
+                                {/eq}
+                                <label for="status"></label>
+                            </div>
+                            <div style="float:left; margin:1px 10px;">
+                                <a class="tooltip-icon" title="{:lang('Task status tip')}"></a>
+                            </div>
+                        </div>
+                        
+                        <div class="clear"></div>
+                        
+                        <div class="buttons-wrapper bw-bottom" style="margin:10px auto 20px; text-align:center;">
+                            <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('save')}">
+                            <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    {/block}
+
+    {block name="js"}
+    <script>
+        $(function(){
+            $(".bset").buttonset();
+        })
+    </script>
+    {/block}

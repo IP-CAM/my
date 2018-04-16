@@ -1,0 +1,77 @@
+    {extend name="public/base" /}
+
+    <!-- CONTENT -->
+    {block name="body"}
+        <div id="content">
+            <div class="breadcrumbs">
+                {:lang('General')} : &nbsp;&nbsp; {:lang('Application')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+            </div>
+
+            <div class="bloc">
+                <div class="title">
+                    <div class="tabs" id="navs">
+                        {include file="public/navs" /}
+                    </div>
+
+                    {include file="public/lang" /}
+                </div>
+
+                <div class="content">
+                    <div class="alert alert-success" style="margin-top: -2px;">{:lang('How to Hook')}</div>
+
+                    {notempty name="list"}
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th class="center" width="30">
+                                    <input class="check-all" type="checkbox">
+                                </th>
+                                <th class="left" style="width:35px;">ID</th>
+                                <th class="left">{:lang('Appname')}</th>
+                                <th class="left">{:lang('Classname')}</th>
+                                <th class="left">{:lang('Hookfuncname')}</th>
+                                <th class="left" style="width:280px;">{:lang('Hookmark')}</th>
+                                <th class="left" style="width:250px;">{:lang('Classspace')}</th>
+                                <th class="center" style="width:80px;">{:lang('Versionday')}</th>
+                                <th class="center">{:lang('Status')}</th>
+                                <!--<th class="actions" style="width: 40px;">{:lang('Actions')}</th>-->
+                            </tr>
+                            </thead>
+                    
+                    <tbody>
+                            {volist name="list" id="vo"}
+                            <tr>
+                                <td class="center">
+                                    <input class="ids" type="checkbox" value="{$vo['class']}" name="ids[]">
+                                </td>
+                                <td class="left">{$i}</td>
+                                <td class="left">{$vo.module|ucfirst}</td>
+                                <td class="left">{$vo.name}</td>
+                                <td class="left">{$vo.func}</td>
+                                <td class="left">{$vo.mark}</td>
+                                <td class="left">{$vo.class}</td>
+                                <td class="center">{$vo.ver}</td>
+                                <td class="center">
+                                    {if condition="$vo['install'] eq 1"}
+                                        <img src="__PUBLIC__/admin/images/enabled.png" title="{:lang('Enable')}" class="tooltip-link" alt="{:lang('Enable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png" />
+                                    {else /}
+                                        <img src="__PUBLIC__/admin/images/notinstall.png" title="{:lang('After install module and use it')}" class="tooltip-link" alt="{:lang('After install module and use it')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png" />
+                                    {/if}
+                                </td>
+                                <!--<td class="actions"></td>-->
+    
+                            </tr>
+                            {/volist}
+                            </tbody>
+                        </table>
+                        <div class="pagination-wrapper">
+
+                        </div>
+                    {else /}
+                        <div class="alert alert-warning">{:lang('No_record')}</div>
+                    {/notempty}
+                </div>
+
+            </div>
+        </div>
+    {/block}

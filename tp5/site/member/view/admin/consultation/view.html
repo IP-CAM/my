@@ -1,0 +1,82 @@
+{extend name="admin@public/poupbase" /}
+{block name="body"}
+<style>
+    .cont{
+        display: block;
+        margin-top: 6px;
+        float: left;
+        line-height: 17px;
+        width: 77px;
+    }
+    .row{
+        height: 50px;
+    }
+</style>
+<div id="content" style="margin:0px 10px 5px 8px;">
+    <div class="bloc">
+        <div class="content">
+            <div style="display:block; /*height: 420px;*/">
+                <div class="extbody">
+                    <form id="myform" method="post" style="margin-top:5px;" class="">
+                        <fieldset>
+                            <legend>{:lang('Refer Detail')}</legend>
+                            <div class="row">
+                                    <label for="logo" class="w100">{:lang('Refer Name')}:</label>
+                                    <span class="cont">{$info.nickname}</span>
+                                    <label for="logo" class="w100">{:lang('Refer Time')}: </label>
+                                    <span class="cont" style="width: 115px">{$info.create_time}</span>
+                            </div>
+                            <div class="row">
+                                <label for="logo" class="w100">{:lang('Goods name')}:</label>
+                                <span class="cont">{$info.goods_name}</span>
+                                <label for="logo" class="w100">{:lang('Goods Pic')}: </label>
+                                <img src="__PUBLIC__/{$info.goods_logo_url}" alt="{:lang('Goods Pic')}" style="width: 50px;height: 50px;">
+                            </div>
+                            <div class="row">
+                                <label for="logo" class="w100">{:lang('Refer question')}</label>
+                                <span class="cont">{$info.question}</span>
+                            </div>
+                            <div class="row">
+                                <label for="logo" class="w100">{:lang('Answer')}</label>
+                                <textarea type="text" name="answer"></textarea>
+                            </div>
+
+                            <div class="buttons-wrapper bw-bottom" style="margin:20px auto 2px; text-align:center;">
+                                <input type="hidden" name="refer_id" value="{$info.id}" />
+                                <input name="submit" value="保存" type="submit" url="{:url('store')}">
+                                <input name="reset" class="button white" value="取消" type="reset">
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </div>
+
+                <div class="extbody">
+                    <fieldset>
+                        <legend>{:lang('Reply_list')}</legend>
+                        {notempty name="info.reply"}
+                        {volist name='info.reply' id='vo'}
+                        <div class="row">
+                            {gt name="vo.admin_id" value="0"}
+                            <label for="logo" class="w100">【{:lang('Admin')}:{$vo.nickname}】{:time_format($vo.reply_time,'Y-m-d H:i:s')}:</label>
+                            {/gt}
+                            {gt name="vo.user_id" value="0"}
+                            <label for="logo" class="w100">【{:lang('Users')}:{$vo.nickname}】{:time_format($vo.reply_time,'Y-m-d H:i:s')}:</label>
+                            {/gt}
+                            {gt name="vo.seller_id" value="0"}
+                            <label for="logo" class="w100">【{:lang('Seller')}:{$vo.nickname}】{:time_format($vo.reply_time,'Y-m-d H:i:s')}:</label>
+                            {/gt}
+                            <span>{$vo.answer}</span>
+                        </div>
+                        {/volist}
+                        {else/}
+                        <div class="alert alert-warning">{:lang('No_record')}</div>
+                        {/notempty}
+                    </fieldset>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

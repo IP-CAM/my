@@ -1,0 +1,92 @@
+{extend name="common/base" /}
+
+{block name="title"}
+<title>ETshop-{:lang('Verify_mobile')}</title>
+{/block}
+
+{block name="css"}
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/member.css" />
+{/block}
+
+{block name="body"}
+<!--面包屑-->
+<div class="ly-path">
+    <ul class="clearfix">
+        <li class="home">
+            <a href="{:url('crossbbcg/index/index')}" title="{:lang('go_min')}">{:lang('Home')}</a>
+            <span>&gt;&nbsp;</span>
+        </li>
+        <li>
+            <a href="{:url('member/index/index')}" title="">{:lang('Member')}</a>
+            <span>&gt;&nbsp;</span>
+        </li>
+        <li>
+            <h1>{:lang('Verify_mobile')}</h1>
+        </li>
+    </ul>
+</div>
+<div class="ly-main member-main clearfix">
+	{include file="index/left_menu"}
+	<div class="member-right">
+		<div class="member-content">
+			<div class="title member-title member-max-title">
+				<div class="t">{:lang('mobile_bind')}</div>
+
+			</div>
+			<div class="body pb15 mh600 security yahei">
+				<div class="pwd-box">
+					<div class="steps">
+						<table width="100%">
+							<tbody>
+								<tr>
+									<td class="step-item step-1 active">
+										<span><q class="icon">●</q><i>1</i>{:lang('check_login_password')}</span>
+										<div class="stepdiv">1</div>
+									</td>
+									<td class="step-item step-2 active">
+										<span><q class="icon">●</q><i>2</i>{:lang('set mobile')}</span>
+										<div class="stepdiv">2</div>
+									</td>
+									<td class="step-item step-3 last">
+										<span><q class="icon">●</q><i>3</i>{:lang('finish')}</span>
+										<div class="stepdiv">3</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<form class="login-form" action="{:url('member/AlterMobileSuccess/index')}" id="pwd_form">
+
+						<div class="input-line">
+
+							<span class="input-label">{:lang('telephone')}</span>
+							<input id="username" class="form-text" data-ajax="{:url('passport/check_mobile/index',array('scene'=>'reg'))}" required="" data-empty="{:lang('pleace input mobile')}" data-error="{:lang('mobile format error')}" data-regex="^1[0-9]{10}|\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" name="username" type="text" autocomplete="off" placeholder="{:lang('telephone')}">
+							<i class="icon-reset">×</i>
+							<div class="input-error"></div>
+						</div>
+						<div class="input-line" style="">
+							<span class="input-label">{:lang('sms_verify_code')}</span>
+							<input id="captcha" class="J-checkcode-input form-text" name="smscode" data-empty="{:lang('pleace input sms code')}" data-error="{:lang('it`s must 6 int')}" required="" data-regex="^[0-9]{6}$" type="text" maxlength="6" autocomplete="off" placeholder="0156">
+							<span class="code-img getcode" id="getcode" data-lang-send="{:lang('send code again')}" data-url="{:url('member/passport/sendcode')}">{:lang('get sms code')}</span>
+							<div class="input-error"></div>
+						</div>
+
+						<div class="form-submit">
+							<button id="verify-mobile-two" data-url="{:url('verifyMobile')}" class="submit-btn" >{:lang('next step')}</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+{/block}
+
+<!--此板块为页面单独js加载-->
+{block name="footer_js"}
+<script type="text/javascript">
+	//需要加载的js文件
+	Private_Script = ['AlterMobile'];
+</script>
+{/block}

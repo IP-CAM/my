@@ -1,0 +1,269 @@
+    {extend name='common/base'}
+
+    {block name='css'}
+    <link href="__PUBLIC__/{$css_path}/daterangepicker.css" rel="stylesheet">
+    {/block}
+    
+    {block name="breadcrumb"}
+    <li>{:lang('order_settle')}</li>
+    <li class="active">{$meta_title|default=''}</li>
+    {/block}
+    
+    {block name='body'}
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="box">
+                    <div class="box-header">
+                        <div class="row">
+                            <div class="page-header-top">
+                                <form action="{:url('seller/statistics/trade')}">
+                                <a class="btn btn-etshop addnew" href="{:url('seller/statistics/trade')}"><i class="fa fa-feed"></i> {:lang('All')}</a>
+                                <div class="time"
+                                     style="width: 200px; position: relative;display: inline-block;vertical-align: middle; margin-right: 6px">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+            
+                                        <input type="text" class="form-control pull-left" id="reservation" name="time" placeholder="{:lang('operation_time')}" value="{$time}" style="padding: 4px 12px; height: 30px">
+                                    </div>
+                                </div>
+                                <input type="submit" value="{:lang('search')}" class="btn btn-info etbtn">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-aqua">
+                    <div class="inner">
+                        <h3>{$new_orders.num}</h3>
+                        <p>{:lang('new_order_money')}</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-shopping-cart"></i>
+                    </div>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-green">
+                    <div class="inner">
+                        <h3>{:round($new_orders.money,2)}</h3>
+                        <p>新增订单金额</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-yellow">
+                    <div class="inner">
+                        <h3>{$paid_orders.num}</h3>
+                    
+                        <p>{:lang('paid_order_num')}</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-person-add"></i>
+                    </div>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-red">
+                    <div class="inner">
+                        <h3>{:round($paid_orders.money,2)}</h3>
+                        <p>{:lang('paid_order_money')}</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-pie-graph"></i>
+                    </div>
+                </div>
+            </div>
+            <!-- ./col -->
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h4 class="box-title">{:lang('order_deal_record')}</h4>
+                        <div class="box-tools pull-right">
+                            <button class="btn btn-box-tool" data-widget="collspse" type="button"><i class="fa fa-minus"></i></button>
+                            <button class="btn btn-box-tool" data-widget="remove" type="button"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="col-md-12" id="main" style="height: 300px">
+                    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <h4 class="box-title">{:lang('trade_data')}</h4>
+                    </div>
+                    <div class="box-body">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <td class="center" style="font-size: 15px">{:lang('time')}</td>
+                                <td class="center" style="font-size: 15px">{:lang('new_order_num')}</td>
+                                <td class="center" style="font-size: 15px">{:lang('new_order_money')}</td>
+                                <td class="center" style="font-size: 15px">{:lang('paid_order_num')}</td>
+                                <td class="center" style="font-size: 15px">{:lang('paid_order_money')}</td>
+                                <td class="center" style="font-size: 15px">{:lang('per customer transaction')}</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="center">{$time_range}</td>
+                                <td class="center">{$new_orders.num}</td>
+                                <td class="center">{:round($new_orders.money,2)}</td>
+                                <td class="center">{$paid_orders.num}</td>
+                                <td class="center">{:round($paid_orders.money,2)}</td>
+                                <td class="center">10</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box-footer">
+            
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <h4 class="box-title">{:lang('business data')}</h4>
+                    </div>
+                    <div class="box-body">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <td class="center" style="font-size: 15px">{:lang('time')}</td>
+                                <td class="center" style="font-size: 15px">{:lang('finished_order_num')}</td>
+                                <td class="center" style="font-size: 15px">{:lang('finished_order_money')}</td>
+                                <td class="center" style="font-size: 15px">{:lang('cancel_order_num')}</td>
+                                <td class="center" style="font-size: 15px">{:lang('cancel_order_money')}</td>
+                                <td class="center" style="font-size: 15px">{:lang('afterservice_order_num')}</td>
+                                <td class="center" style="font-size: 15px">{:lang('afterservice_order_money')}</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="center">{$time_range}</td>
+                                <td class="center">{$finished_orders.num}</td>
+                                <td class="center">{:round($finished_orders.money,2)}</td>
+                                <td class="center">{$cancel_orders.num}</td>
+                                <td class="center">{:round($cancel_orders.money,2)}</td>
+                                <td class="center">{$afterservice.num}</td>
+                                <td class="center">{:round($afterservice.money,2)}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box-footer">
+            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+    {/block}
+    
+    {block name='js'}
+    <script src="__PUBLIC__/{$js_path}/moment.min.js"></script>
+    <script src="__PUBLIC__/{$js_path}/daterangepicker.js"></script>
+    <script src="https://cdn.bootcss.com/echarts/3.7.1/echarts.min.js"></script>
+    <script type="text/javascript">
+        //Date range picker
+        $('#reservation').daterangepicker({
+            autoUpdateInput: false
+        });
+        var myChart = echarts.init(document.getElementById('main'));
+        var time = {$statistics['time']};
+        var all = {$statistics['all']};
+        var paid = {$statistics['paid']};
+        var no_paid = {$statistics['no_paid']};
+        var finished = {$statistics['finished']};
+        var option = {
+            title : {
+                subtext: '{:lang("order_trade_record")}',
+                //subtext: '纯属虚构'
+            },
+            tooltip : {
+                trigger: 'axis'
+            },
+            legend: {
+                data:['{:lang("all_order_status")}','{:lang("no_pay_order")}','{:lang("paid_order")}','{:lang("finished_order")}']
+            },
+            toolbox: {
+                show : true,
+                feature : {
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},
+                    magicType : {show: true, type: ['line', 'bar']},
+                    restore : {show: true},
+                    saveAsImage : {show: true}
+                }
+            },
+            calculable : true,
+            xAxis : [
+                {
+                    type : 'category',
+                    boundaryGap : false,
+                    data : time
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value',
+                    axisLabel : {
+                        formatter: '{value}'
+                    }
+                }
+            ],
+            series : [
+                {
+                    name:'{:lang("all_order_status")}',
+                    type:'line',
+                    data:all
+                },
+                {
+                    name:'{:lang("no_pay_order")}',
+                    type:'line',
+                    data:no_paid
+                },
+                {
+                    name:'{:lang("paid_order")}',
+                    type:'line',
+                    data:paid
+                },
+                {
+                    name:'{:lang("finished_order")}',
+                    type:'line',
+                    data:finished
+                }
+            ]
+        };
+        myChart.setOption(option);
+    </script>
+    {/block}

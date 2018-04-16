@@ -1,0 +1,163 @@
+
+<div class="detail detail_box">
+	<div class="country-ct ">
+		<!--品牌 国旗-->
+			<div class="brand-box left">
+				<img src="{$data.national_flag}" alt="{$data.country_name}" />{$data.country_name}
+                {if condition="$data['brand_name']"} | {$data['brand_name']}{/if}
+			</div>
+			<div class="right icon-box">
+                {eq name="$data['type']" value="direct_mail"}
+				<span class="zhiyou"><i class="iconfont icon-quanqiu"></i>{:lang('direct_mail')}</span>
+                {/eq}
+                {eq name="$data['type']" value="bonded"}
+				<span class="baoshui"><i class="iconfont icon-quanqiu"></i>{:lang('bonded')}</span>
+                {/eq}
+                {eq name="$data['type']" value="pay_taxes"}
+				<span class="wanshui"><i class="iconfont icon-quanqiu"></i>{:lang('pay_taxes')}</span>
+                {/eq}
+                
+                {notempty name="$seller['cat_name']"}
+				<span class="ziying">{$seller['cat_name']}</span>
+                {/notempty}
+			</div>
+	</div>
+	<!--标题-->
+	<div class="title">
+		<h2>{$data['name']}</h2>
+	</div>
+	<!--副标题-->
+	<div class="sub-title">
+		{if condition="$data['sub_title']"} {$data['sub_title']} {/if}
+	</div>
+	<!--价格-->
+	{include file="goods/info/price"}
+	<!--  TODO 商品活动
+	<dl class="item-info huodong">
+		<dt class="left">活&#12288;&#12288;动：</dt>
+		<dd class="left">
+            <em class="red-lb">新人专享</em>
+            <a href="" target="_blank"> <font class="red">花少节目</font></a>
+        </dd>
+	</dl>
+	-->
+	<dl class="shuifei item-info">
+        <dt class="left">{:lang('goods_detail_tax')}：</dt>
+		<dd class="left">
+			 <span class="tax">{$data['tax']}</span> &nbsp; {:lang('Goods_Tax_Des')}&#12288;
+			<a id="shuifei_link" href="javascript:void(0);" target="_blank" data-title="{:lang('tax_rule')}">{:lang('To_Tax_Rule')}<i class="jiao-right"></i></a>
+		</dd>
+	</dl>
+	<dl class=" item-info" style="display:none;">
+        <dt class="left">{:lang('about_service')}：</dt>
+		<dd class="left">
+			<p>{:lang('about_good')} <span id="cross_name"></span> {:lang('deliver')}</p>
+			<!--   TODO 预计送达时间
+			<div>24:00前完成支付，预计 <font color="#333" class="bold">9月7日(周四)</font> 送达</div>-->
+		</dd>
+	</dl>
+	<!-- 配送 -->
+	<div class="other-info">
+		<ul>
+			<li>
+				<span>{:lang('Item_Shipping')}</span>
+				<em>
+					  <div class="post-age"> 
+   <div class="region-chooser-container region-chooser" style="z-index: 3">
+    <div class="region-chooser-selected">
+     <div class="region">
+      <span>{:lang('loading')}</span>
+     </div>
+    </div>
+    <div class="region-chooser-box" id="region-chooser-box" style="display: none;">
+     <div class="region-chooser-close">×</div>
+     {eq name="$exist_region" value="true"}
+     <div id="region-content" data-url="__STATIC__/js/region.json" data-item_id="{$data.id}" data-freight_url = {:url('crossbbcg/goods/shippingPrice')}></div>
+     {else /}
+     <div id="region-content" data-url="__PUBLIC__/{$js_path}/region.json" data-item_id="{$data.id}" data-freight_url = {:url('crossbbcg/goods/shippingPrice')}></div>
+     {/eq}
+        
+    </div>
+    <div style="clear: both;"></div>
+   </div> 
+   <div class="post-age-info">
+       <p></p>
+    <!--<select name="">
+    	<option value="">申通快递 : ¥12</option>
+    	<option value="">申通快递 : ¥12</option>
+    	<option value="">申通快递 : ¥12</option>
+    </select>-->
+   </div> 
+  </div>
+				</em>
+			</li>
+		</ul>
+	</div>
+	<div class="buy_info addcat-item">
+		<!--规格-->
+		{include file="goods/info/sku"}
+		<!--数量-->
+		<dl class="clearfix computing-dl">
+			<dt>{:lang('Item_Number')}</dt>
+			<dd>
+				<div class="computing-box">
+					<div class="computing">
+						<span id="quantity_dec_btn" class="reduce btn-flat btn-decrease">-</span>
+						<input id="quantity_txt" type="text" class="num action-quantity-input" value="{$data['minimum']}" min="{$data['minimum']}" max="{$data['maximum']}" data-maximum="{$data['maximum']}" itemId="{$data['id']}" />
+						<span id="quantity_add_btn" class="add btn-flat btn-increase">+</span>
+					</div>
+					<div class="goods-num">
+						{:lang('Quantity')}<em>{$data['quantity']}</em>{$data['package_unit']}
+					</div>
+				</div>
+
+			</dd>
+		</dl>
+
+		<!--购买按钮-->
+		<div class="action-btn clearifx">
+
+			<div class="btn-box">
+				<!-- 判断sku库存是否为0，或不存在-->
+				{if condition="$data['quantity'] <=0 "}
+                <a class="nobuy-btn" href="javascript:void(0); " title="{:lang( 'Sell_Out')}">{:lang('Sell_Out')}</a>
+                
+                {else /}
+                <a id="once_order_btn" class="buy-btn btn-addcart check " href="javascript:void(0); " data-url="{:url( 'crossbbcg/carts/addcart')} " title="{:lang( 'Buy_Now')} ">{:lang('Buy_Now')}</a>
+                <a id="add_cart_btn" class="add-btn btn-addcart check " title="{:lang( 'Add_Cart')} " href="javascript:void(0); " data-url="{:url('crossbbcg/carts/addcart')} ">
+                	<i class="iconfont icon-cart"></i>{:lang('Add_Cart')}</a>
+                {/if}
+                <em class="qrcode-box">
+                	<i class="iconfont icon-shouji"></i><span>{:lang('buy_by_phone')}</span>
+                	<!-- 网页二维码 -->
+				<div class="wap-erm">
+					<em><img src="{$data['wechat_qr_code']}" /></em>
+					<!--<span>{:lang('Wechat_Qr_Code_Buy')}</span>-->
+				</div>
+                </em>
+                
+            </div>
+        </div>
+	</div>
+    {if condition="!empty($data['promise'])"}
+	<dl class="item-info">
+		<dt class="left">{:lang('promise')}：</dt>
+		<dd class="left">
+            {foreach $data['promise'] as $value}
+            <em>{$value}</em>&#12288;&#12288;&#12288;
+            {/foreach}
+            
+        </dd>
+	</dl>
+    {/if}
+    {notempty name="$arr_payments"}
+	<dl class="item-info">
+		<dt class="left">{:lang('goods_payments')}：</dt>
+		<dd class="left">
+            {foreach $arr_payments as $key => $arr}
+            <em>{$arr['title']}</em> &nbsp;&nbsp;
+            {/foreach}
+        </dd>
+	</dl>
+    {/notempty}
+</div>

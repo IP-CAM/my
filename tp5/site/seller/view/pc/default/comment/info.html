@@ -1,0 +1,73 @@
+{extend name='common/poupbase'}
+{block name='css'}
+{/block}
+
+{block name='body'}
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- The time line -->
+            <ul class="timeline">
+                <li>
+                    <i class="fa">
+                        {eq name='$info.isanonymous' value='1'}
+                        <img src="__PUBLIC__/{$module_path}image/admin.png" alt="" width="35" class="img-circle" style="background-color: #ccc;margin-top: -3px;margin-left: -3px">
+                        {else /}
+                        {present name='headimg'}
+                        {empty name='$headimg'}
+                        <img src="__PUBLIC__/{$module_path}image/admin.png" alt="" width="35" class="img-circle" style="background-color: #ccc;margin-top: -3px;margin-left: -3px">
+                        {else /}
+                        <img src="{$headimg}" alt="" class="direct-chat-img"/>
+                        {/empty}
+                        {else /}
+                        <img src="__PUBLIC__/{$module_path}image/admin.png" alt="" width="35" class="img-circle" style="background-color: #ccc;margin-top: -3px;margin-left: -3px">
+                        {/present}
+                        {/eq}
+                    </i>
+                    
+                    <div class="timeline-item">
+                        <span class="time"><i class="fa fa-clock-o"></i>{$info.create_time}</span>
+                        
+                        <h3 class="timeline-header"><a href="#">{$info.from_membername}</a></h3>
+                        
+                        <div class="timeline-body">
+                            {$info.comment_content}
+                        </div>
+                        {notempty name='$info["image"]'}
+                        <div class="timeline-footer">
+                            {foreach $info['image'] as $k=>$v}
+                            <img layer-pid="{$k}" layer-src="__PUBLIC__/{$module_path}{$v}" src="__PUBLIC__/{$module_path}{$v}" alt="" class="layer-img">
+                            {/foreach}
+                        </div>
+                        {/notempty}
+                    </div>
+                </li>
+                <li>
+                    <div class="timeline-item">
+                        <h3 class="timeline-header"><a href="#">{:lang('comment_reply')}</a></h3>
+                        <div class="timeline-body">
+                            <form action="">
+                                <input type="hidden" name="id" value="{$info.id}"/>
+                                <textarea name="reply" id="" cols="30" rows="10" class="form-control" placeholder="{:lang('pleace_input_reply_content')}">{$info.reply}</textarea>
+                                <input type="submit" name="submit" url="{:url('seller/comment/reply')}" class="btn btn-info" style="margin-top:10px;"/>
+                            </form>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+{/block}
+
+{block name="js"}
+<script type="text/javascript">
+    layer.photos({
+        photos: '#layer-photos'
+        ,anim: 5
+    });
+</script>
+{/block}

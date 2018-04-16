@@ -1,0 +1,340 @@
+<!--评论头部-->
+<div class="comment-hd clearfix">
+	<div class="l">
+		<div class="t">{:lang('comment_good_rate')}</div>
+		<div class="b">{$good_comment_rate}%</div>
+	</div>
+	<!--act为选中状态-->
+
+	<div class="goods-grade-score">
+		<div class="item-w clearfix">
+			<div class="level-name">{:lang('comment_good')}({$good_comment->total()})</div>
+			<div class="score-parent">
+				<div class="scorew">
+					<div class="score-progress" style="width:{$good_comment_rate}%"></div>
+
+				</div>
+
+			</div>
+		</div>
+		<div class="item-w clearfix">
+			<div class="level-name">{:lang('comment_well')}({$medium_comment->total()})</div>
+			<div class="score-parent">
+				<div class="scorew">
+					<div class="score-progress" style="width:{$medium_comment_rate}%;"></div>
+
+				</div>
+
+			</div>
+		</div>
+		<div class="item-w clearfix">
+			<div class="level-name">{:lang('comment_bad')}({$bad_comment->total()})</div>
+			<div class="score-parent">
+				<div class="scorew">
+					<div class="score-progress" style="width:{$bad_comment_rate}%;"></div>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+	<div class="count-grade">
+		<div class="t">{:lang('Composite Score')}</div>
+		<div class="xing-box">
+			<span class="act"><i></i></span>
+			<span {egt name="$goods_avg_score" value="2"}class="act"{/egt}><i></i></span>
+			<span {egt name="$goods_avg_score" value="3"}class="act"{/egt}><i></i></span>
+			<span {egt name="$goods_avg_score" value="4"}class="act"{/egt}><i></i></span>
+			<span {eq name="$goods_avg_score" value="5"}class="act"{/eq}><i></i></span>
+			<em>{$goods_avg_score}{:lang('comment_score')}</em>
+		</div>
+	</div>
+</div>
+<!--评论头部END-->
+<!--评论内容-->
+<div class="comment-tab">
+	<ul class="claearfix">
+		<li class="active" data-target="all"><span>{:lang('all_comment')}</span></li>
+		<li data-target="good"><span>{:lang('comment_good')}({$good_comment->total()})</span></li>
+		<li data-target="well"><span>{:lang('comment_well')}({$medium_comment->total()})</span></li>
+		<li data-target="bad"><span>{:lang('comment_bad')}({$bad_comment->total()})</span></li>
+		<li data-target="showimg"><span>{:lang('show_img')}({$show_image->total()})</span></li>
+	</ul>
+</div>
+<div class="comment-bd">
+	<ul id="all">
+        {notempty name='$all_comment_list'}
+        {foreach $all_comment_list as $v}
+		<li class="comment-item">
+			<div class="item-s clearfix">
+				<!--用户信息-->
+				<div class="tx-box">
+                    {eq name='$v.isanonymous' value='1'}
+                    <div class="tx"> <img src="__PUBLIC__/crossbbcg/pc/default/ad/member_tx.png" /> </div>
+					<div class="usname">{:lang('anonymity')}</div>
+                    {else /}
+                    <div class="tx">
+                        {if condition="empty($v.headimg)"}
+                        <img src="__PUBLIC__/crossbbcg/pc/default/ad/member_tx.png" />
+                        {elseif condition="substr($v.headimg,0,4) == 'http'"}
+                        <img src="$v.headimg" />
+                        {else /}
+                        <img src="__UPLOADS__/{$v.headimg}" />
+                        {/if}
+                    </div>
+                    <div class="usname">{$v.from_membername}</div>
+                    {/eq}
+				</div>
+				<!--评分-->
+				<!--选中样式act-->
+				<div class="r xing-box">
+					<span class="act"><i></i></span>
+					<span {gt name="$v.score" value="1"}class="act"{/gt}><i></i></span>
+					<span {gt name="$v.score" value="2"}class="act"{/gt}><i></i></span>
+					<span {gt name="$v.score" value="3"}class="act"{/gt}><i></i></span>
+					<span {eq name="$v.score" value="5"}class="act"{/eq}><i></i></span>
+					<em>{$v.score}{:lang('comment_score')}</em>
+				</div>
+			</div>
+			<div class="comment-text"> {$v.comment_content} </div>
+            {notempty name='$v.reply'}
+			<div class="comment-text" style="color: #ff561c;">{:lang('seller_answer')}：{$v.reply}</div>
+			{/notempty}
+			<div class="comment-pic clearfix">
+				<!--a标签地址为放大图片地址-->
+				<!--rel 为分组-->
+                {notempty name="$v['image']"}
+                {foreach $v.image as $vv}
+				<div class="pb">
+					<a class="grouped" rel="group1" href="__ROOT__/uploads/{$vv}"><img src="__ROOT__/uploads/{$vv}" alt=""></a>
+				</div>
+                {/foreach}
+				{/notempty}
+
+			</div>
+			<div class="comment-time"> {:lang('date')}：{$v.create_time} </div>
+		</li>
+        {/foreach}
+        {/notempty}
+	</ul>
+    <ul id="good" style="display: none;">
+        {notempty name='good_comment'}
+        {foreach $good_comment as $v}
+        <li class="comment-item">
+            <div class="item-s clearfix">
+                <!--用户信息-->
+                <div class="tx-box">
+                    {eq name='$v.isanonymous' value='1'}
+                    <div class="tx"> <img src="__PUBLIC__/crossbbcg/pc/default/ad/member_tx.png" /> </div>
+                    <div class="usname">{:lang('anonymity')}</div>
+                    {else /}
+                    <div class="tx">
+                        {if condition="empty($v.headimg)"}
+                        <img src="__PUBLIC__/crossbbcg/pc/default/ad/member_tx.png" />
+                        {elseif condition="substr($v.headimg,0,4) == 'http'"}
+                        <img src="$v.headimg" />
+                        {else /}
+                        <img src="__UPLOADS__/{$v.headimg}" />
+                        {/if}
+                    </div>
+                    <div class="usname">{$v.from_membername}</div>
+                    {/eq}
+                </div>
+                <!--评分-->
+                <!--选中样式act-->
+                <div class="r xing-box">
+                    <span class="act"><i></i></span>
+                    <span {gt name="$v.score" value="1"}class="act"{/gt}><i></i></span>
+                    <span {gt name="$v.score" value="2"}class="act"{/gt}><i></i></span>
+                    <span {gt name="$v.score" value="3"}class="act"{/gt}><i></i></span>
+                    <span {eq name="$v.score" value="5"}class="act"{/eq}><i></i></span>
+                    <em>{$v.score}{:lang('comment_score')}</em>
+                </div>
+            </div>
+            <div class="comment-text"> {$v.comment_content} </div>
+            {notempty name='$v.reply'}
+            <div class="comment-text" style="color: #ff561c;">{:lang('seller_answer')}：{$v.reply}</div>
+            {/notempty}
+            <div class="comment-pic clearfix">
+                <!--a标签地址为放大图片地址-->
+                <!--rel 为分组-->
+                {notempty name="$v['image']"}
+                {foreach $v.image as $vv}
+                <div class="pb">
+                    <a class="grouped" rel="group1" href="__ROOT__/uploads/{$vv}"><img src="__ROOT__/uploads/{$vv}" alt=""></a>
+                </div>
+                {/foreach}
+                {/notempty}
+            
+            </div>
+            <div class="comment-time"> {:lang('date')}：{$v.create_time} </div>
+        </li>
+        {/foreach}
+        {/notempty}
+    </ul>
+    <ul id="well" style="display: none;">
+        {notempty name='$medium_comment'}
+        {foreach $medium_comment as $v}
+        <li class="comment-item">
+            <div class="item-s clearfix">
+                <!--用户信息-->
+                <div class="tx-box">
+                    {eq name='$v.isanonymous' value='1'}
+                    <div class="tx"> <img src="__PUBLIC__/crossbbcg/pc/default/ad/member_tx.png" /> </div>
+                    <div class="usname">{:lang('anonymity')}</div>
+                    {else /}
+                    <div class="tx">
+                        {if condition="empty($v.headimg)"}
+                        <img src="__PUBLIC__/crossbbcg/pc/default/ad/member_tx.png" />
+                        {elseif condition="substr($v.headimg,0,4) == 'http'"}
+                        <img src="$v.headimg" />
+                        {else /}
+                        <img src="__UPLOADS__/{$v.headimg}" />
+                        {/if}
+                    </div>
+                    <div class="usname">{$v.from_membername}</div>
+                    {/eq}
+                </div>
+                <!--评分-->
+                <!--选中样式act-->
+                <div class="r xing-box">
+                    <span class="act"><i></i></span>
+                    <span {gt name="$v.score" value="1"}class="act"{/gt}><i></i></span>
+                    <span {gt name="$v.score" value="2"}class="act"{/gt}><i></i></span>
+                    <span {gt name="$v.score" value="3"}class="act"{/gt}><i></i></span>
+                    <span {eq name="$v.score" value="5"}class="act"{/eq}><i></i></span>
+                    <em>{$v.score}{:lang('comment_score')}</em>
+                </div>
+            </div>
+            <div class="comment-text"> {$v.comment_content} </div>
+            {notempty name='$v.reply'}
+            <div class="comment-text" style="color: #ff561c;">{:lang('seller_answer')}：{$v.reply}</div>
+            {/notempty}
+            <div class="comment-pic clearfix">
+                <!--a标签地址为放大图片地址-->
+                <!--rel 为分组-->
+                {notempty name="$v['image']"}
+                {foreach $v.image as $vv}
+                <div class="pb">
+                    <a class="grouped" rel="group1" href="__ROOT__/uploads/{$vv}"><img src="__ROOT__/uploads/{$vv}" alt=""></a>
+                </div>
+                {/foreach}
+                {/notempty}
+            
+            </div>
+            <div class="comment-time"> {:lang('date')}：{$v.create_time} </div>
+        </li>
+        {/foreach}
+        {/notempty}
+    </ul>
+    <ul id="bad" style="display: none;">
+        {notempty name='$bad_comment'}
+        {foreach $bad_comment as $v}
+        <li class="comment-item">
+            <div class="item-s clearfix">
+                <!--用户信息-->
+                <div class="tx-box">
+                    {eq name='$v.isanonymous' value='1'}
+                    <div class="tx"> <img src="__PUBLIC__/crossbbcg/pc/default/ad/member_tx.png" /> </div>
+                    <div class="usname">{:lang('anonymity')}</div>
+                    {else /}
+                    <div class="tx">
+                        {if condition="empty($v.headimg)"}
+                        <img src="__PUBLIC__/crossbbcg/pc/default/ad/member_tx.png" />
+                        {elseif condition="substr($v.headimg,0,4) == 'http'"}
+                        <img src="$v.headimg" />
+                        {else /}
+                        <img src="__UPLOADS__/{$v.headimg}" />
+                        {/if}
+                    </div>
+                    <div class="usname">{$v.from_membername}</div>
+                    {/eq}
+                </div>
+                <!--评分-->
+                <!--选中样式act-->
+                <div class="r xing-box">
+                    <span class="act"><i></i></span>
+                    <span {gt name="$v.score" value="1"}class="act"{/gt}><i></i></span>
+                    <span {gt name="$v.score" value="2"}class="act"{/gt}><i></i></span>
+                    <span {gt name="$v.score" value="3"}class="act"{/gt}><i></i></span>
+                    <span {eq name="$v.score" value="5"}class="act"{/eq}><i></i></span>
+                    <em>{$v.score}{:lang('comment_score')}</em>
+                </div>
+            </div>
+            <div class="comment-text"> {$v.comment_content} </div>
+            {notempty name='$v.reply'}
+            <div class="comment-text" style="color: #ff561c;">{:lang('seller_answer')}：{$v.reply}</div>
+            {/notempty}
+            <div class="comment-pic clearfix">
+                <!--a标签地址为放大图片地址-->
+                <!--rel 为分组-->
+                {notempty name="$v['image']"}
+                {foreach $v.image as $vv}
+                <div class="pb">
+                    <a class="grouped" rel="group1" href="__ROOT__/uploads/{$vv}"><img src="__ROOT__/uploads/{$vv}" alt=""></a>
+                </div>
+                {/foreach}
+                {/notempty}
+            
+            </div>
+            <div class="comment-time"> {:lang('date')}：{$v.create_time} </div>
+        </li>
+        {/foreach}
+        {/notempty}
+    </ul>
+    <ul id="showimg" style="display: none;">
+        {notempty name='$show_image'}
+        {foreach $show_image as $v}
+        <li class="comment-item">
+            <div class="item-s clearfix">
+                <!--用户信息-->
+                <div class="tx-box">
+                    {eq name='$v.isanonymous' value='1'}
+                    <div class="tx"> <img src="__PUBLIC__/crossbbcg/pc/default/ad/member_tx.png" /> </div>
+                    <div class="usname">{:lang('anonymity')}</div>
+                    {else /}
+                    <div class="tx">
+                        {if condition="empty($v.headimg)"}
+                        <img src="__PUBLIC__/crossbbcg/pc/default/ad/member_tx.png" />
+                        {elseif condition="substr($v.headimg,0,4) == 'http'"}
+                        <img src="$v.headimg" />
+                        {else /}
+                        <img src="__UPLOADS__/{$v.headimg}" />
+                        {/if}
+                    </div>
+                    <div class="usname">{$v.from_membername}</div>
+                    {/eq}
+                </div>
+                <!--评分-->
+                <!--选中样式act-->
+                <div class="r xing-box">
+                    <span class="act"><i></i></span>
+                    <span {gt name="$v.score" value="1"}class="act"{/gt}><i></i></span>
+                    <span {gt name="$v.score" value="2"}class="act"{/gt}><i></i></span>
+                    <span {gt name="$v.score" value="3"}class="act"{/gt}><i></i></span>
+                    <span {eq name="$v.score" value="5"}class="act"{/eq}><i></i></span>
+                    <em>{$v.score}{:lang('comment_score')}</em>
+                </div>
+            </div>
+            <div class="comment-text"> {$v.comment_content} </div>
+            {notempty name='$v.reply'}
+            <div class="comment-text" style="color: #ff561c;">{:lang('seller_answer')}：{$v.reply}</div>
+            {/notempty}
+            <div class="comment-pic clearfix">
+                <!--a标签地址为放大图片地址-->
+                <!--rel 为分组-->
+                {notempty name="$v['image']"}
+                {foreach $v.image as $vv}
+                <div class="pb">
+                    <a class="grouped" rel="group1" href="__ROOT__/uploads/{$vv}"><img src="__ROOT__/uploads/{$vv}" alt=""></a>
+                </div>
+                {/foreach}
+                {/notempty}
+            </div>
+            <div class="comment-time"> {:lang('date')}：{$v.create_time} </div>
+        </li>
+        {/foreach}
+        {/notempty}
+    </ul>
+</div>

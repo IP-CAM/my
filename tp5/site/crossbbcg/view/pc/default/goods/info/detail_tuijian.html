@@ -1,0 +1,195 @@
+<div class="product-supplier">
+	<dl class="tuijian-list">
+		<dt class="tabs-top">
+				<ul class="mc-tab mcThree" ectype="rankMcTab">
+                    	<li class="curr" style="width:190px;">新品</li>
+                    	<!--<li>推荐</li>-->
+				</ul>
+			</dt>
+		<dd class="tabs-body show" data-type="group" data-caroufredsel="{
+				direction: 'down',
+				circular:false,
+				infinite:false,
+				width:190,
+				height:520,
+				items:4,
+				scroll:{
+					items:4,
+					easing:'swing'
+				}
+					}">
+			<ul class="goods-list slide-content">
+                {foreach $arr_new as $arr_good}
+				<li class="goods-item slide-item">
+                    {foreach $arr_good as $key => $arr}
+					<div  class="item">
+						<div class="goods-pic">
+							<a href="{$arr['href']}" title="{$arr['name']}">
+                                {if condition="empty($arr['thumb'])"}
+                                <img width="170" height="170" class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__PUBLIC__/{$img_path}/no-image.png">
+                                {elseif condition="substr($arr['thumb'],0,4)=='http'"}
+                                <img width="170" height="170" class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="{$arr['thumb']}" alt="{$arr['name']}"/>
+                                {else /}
+                                <img width="170" height="170" class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="{:resizeImage($arr['thumb'],'thumb',true)}" alt="{$arr['name']}"/>
+                                {/if}
+                            </a>
+						</div>
+						<div class="goods-info">
+							<div class="price-box">
+								<span class="price">{$arr['sale_price']}</span>
+							</div>
+						</div>
+					</div>
+                    {/foreach}
+				</li>
+                {/foreach}
+			</ul>
+			<div class="page-btn">
+				<span class="prev iconfont icon-up" style="display: none;"></span>
+				<span class="next iconfont icon-down" style="display: none;"></span>
+			</div>
+		</dd>
+		<!-- 推荐商品
+		<dd class="tabs-body"  data-type="group" data-caroufredsel="{
+				direction: 'down',
+				circular:false,
+				infinite:false,
+				width:190,
+				height:520,
+				items:4,
+				scroll:{
+					items:4,
+					easing:'swing'
+				}
+					}">
+			<ul class="goods-list slide-content">
+				<li class="goods-item slide-item">
+					<div  class="item">
+						<div class="goods-pic">
+							<a href="" title="商品名称"><img width="170" height="170" class="lazy" src="/site/{$img_path}/tm.gif" data-original="https://test.dscmall.cn/images/201703/thumb_img/0_thumb_G_1490174894779.jpg" alt=""></a>
+						</div>
+						<div class="goods-info">
+						
+							<div class="price-box">
+								<span class="price">¥99.00</span>
+							</div>
+						</div>
+					</div>
+					<div  class="item">
+						<div class="goods-pic">
+							<a href="" title="商品名称"><img width="170" height="170" class="lazy" src="/site/{$img_path}/tm.gif" data-original="https://test.dscmall.cn/images/201703/thumb_img/0_thumb_G_1490174894779.jpg" alt=""></a>
+						</div>
+						<div class="goods-info">
+							
+							<div class="price-box">
+								<span class="price">¥99.00</span>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li class="goods-item slide-item">
+					<div  class="item">
+						<div class="goods-pic">
+							<a href="" title="商品名称"><img width="170" height="170" class="lazy" src="/site/{$img_path}/tm.gif" data-original="https://test.dscmall.cn/images/201703/thumb_img/0_thumb_G_1490174894779.jpg" alt=""></a>
+						</div>
+						<div class="goods-info">
+						
+							<div class="price-box">
+								<span class="price">¥99.00</span>
+							</div>
+						</div>
+					</div>
+					<div  class="item">
+						<div class="goods-pic">
+							<a href="" title="商品名称"><img width="170" height="170" class="lazy" src="/site/{$img_path}/tm.gif" data-original="https://test.dscmall.cn/images/201703/thumb_img/0_thumb_G_1490174894779.jpg" alt=""></a>
+						</div>
+						<div class="goods-info">
+							
+							<div class="price-box">
+								<span class="price">¥99.00</span>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li class="goods-item slide-item">
+					<div  class="item">
+						<div class="goods-pic">
+							<a href="" title="商品名称"><img width="170" height="170" class="lazy" src="/site/{$img_path}/tm.gif" data-original="https://test.dscmall.cn/images/201703/thumb_img/0_thumb_G_1490174894779.jpg" alt=""></a>
+						</div>
+						<div class="goods-info">
+						
+							<div class="price-box">
+								<span class="price">¥99.00</span>
+							</div>
+						</div>
+					</div>
+					<div  class="item">
+						<div class="goods-pic">
+							<a href="" title="商品名称"><img width="170" height="170" class="lazy" src="/site/{$img_path}/tm.gif" data-original="https://test.dscmall.cn/images/201703/thumb_img/0_thumb_G_1490174894779.jpg" alt=""></a>
+						</div>
+						<div class="goods-info">
+							
+							<div class="price-box">
+								<span class="price">¥99.00</span>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li class="goods-item slide-item">
+					<div  class="item">
+						<div class="goods-pic">
+							<a href="" title="商品名称"><img width="170" height="170" class="lazy" src="/site/{$img_path}/tm.gif" data-original="https://test.dscmall.cn/images/201703/thumb_img/0_thumb_G_1490174894779.jpg" alt=""></a>
+						</div>
+						<div class="goods-info">
+						
+							<div class="price-box">
+								<span class="price">¥99.00</span>
+							</div>
+						</div>
+					</div>
+					<div  class="item">
+						<div class="goods-pic">
+							<a href="" title="商品名称"><img width="170" height="170" class="lazy" src="/site/{$img_path}/tm.gif" data-original="https://test.dscmall.cn/images/201703/thumb_img/0_thumb_G_1490174894779.jpg" alt=""></a>
+						</div>
+						<div class="goods-info">
+							
+							<div class="price-box">
+								<span class="price">¥99.00</span>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li class="goods-item slide-item">
+					<div  class="item">
+						<div class="goods-pic">
+							<a href="" title="商品名称"><img width="170" height="170" class="lazy" src="/site/{$img_path}/tm.gif" data-original="https://test.dscmall.cn/images/201703/thumb_img/0_thumb_G_1490174894779.jpg" alt=""></a>
+						</div>
+						<div class="goods-info">
+						
+							<div class="price-box">
+								<span class="price">¥99.00</span>
+							</div>
+						</div>
+					</div>
+					<div  class="item">
+						<div class="goods-pic">
+							<a href="" title="商品名称"><img width="170" height="170" class="lazy" src="/site/{$img_path}/tm.gif" data-original="https://test.dscmall.cn/images/201703/thumb_img/0_thumb_G_1490174894779.jpg" alt=""></a>
+						</div>
+						<div class="goods-info">
+							
+							<div class="price-box">
+								<span class="price">¥99.00</span>
+							</div>
+						</div>
+					</div>
+				</li>
+				
+			
+			</ul>
+			<div class="page-btn">
+				<span class="prev iconfont icon-up" style="display: none;"></span>
+				<span class="next iconfont icon-down" style="display: none;"></span>
+			</div>
+		</dd>-->
+	</dl>
+</div>

@@ -1,0 +1,81 @@
+    {extend name="public/poupbase"/}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content" style="margin:0px 10px 5px 8px;">
+        <div class="bloc" style="margin:10px 0px 0px;">
+            <div class="content">
+                <form id="myform" method="post" style="margin-top:5px;" class="">
+                    <fieldset>
+                        <legend>{$meta_title|default=''}</legend>
+    
+                        <div class="row">
+                            <div class="clear"></div>
+                            <label for="msgtpl" class="w120">{:lang('Tpl_content')}: </label>
+                            <textarea id="msgtpl" name="msgtpl">{$data.msgtpl}</textarea>
+                            <script charset="utf-8" src="__STATIC__/kindeditor/kindeditor-all-min.js"></script>
+                            <script>
+                                var editor_content;
+                                KindEditor.ready(function(K) {
+                                    editor_content = K.create('#msgtpl', {
+                                        resizeType : 1,
+                                        allowPreviewEmoticons : false,
+                                        allowImageUpload : false,
+                                        minWidth : 410,
+                                        minHeight : 210,
+                                        langType : '{:jsup(config('default_lang'))}',
+                                        items : [
+                                            'source', '|', 'undo', 'redo', '|','bold', 'italic', 'underline',
+                                            'insertunorderedlist', '|', 'link', 'unlink', 'image', 'media'],
+                                        afterBlur: function () { this.sync(); }
+                                    });
+                                });
+                            </script>
+                        </div>
+    
+                        <!--<div class="row">
+                            <label for="num" class="w120">{:lang('One_mob_vcode_num_day')}: </label>
+                            <input id="num" type="number" min="1" max="100" value="{$data.num|default='9'}" name="num" placeholder="9" class="input onlynumber" style="width:45px;" />
+                            {:lang('One_mob_vcode_num_day_tip')}
+                        </div>
+    
+                        <div class="row">
+                            <label for="expire" class="w120">{:lang('Vcode_expire_min')}: </label>
+                            <input id="expire" type="number" value="{$data.expire|default='10'}" name="expire" placeholder="10" class="input onlynumber" style="width:45px;" />
+                            {:lang('Vcode_expire_min_tip')}
+                        </div>-->
+    
+                        <div class="row">
+                            <label for="status" class="w120">{:lang('Status')}: <span class="required">*</span></label>
+                            <div class="slideBox">
+                                <input id="status" value="1" type="checkbox" name="status"  {eq name="data['status']" value="1"}checked{/eq}/>
+                                <label for="status"></label>
+                            </div>
+                            <div style="float:left; margin-left:10px; line-height:24px;">
+                                {:lang('Status_tip')}
+                            </div>
+                        </div>
+                        
+                        <div class="clear"></div>
+                        <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                            <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('saveedit')}">
+                            <input type="hidden" name="msgid" value="{$data.msgid}" />
+                            <input type="hidden" name="appid" value="{$data.appid}" />
+                            <input type="hidden" name="type" value="{$data.type}" />
+                            <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    {/block}
+
+    {block name="js"}
+        <!--<script type="text/javascript" src="__PUBLIC__/admin/js/autosize.js"></script>-->
+        <script>
+            $(function(){
+                $(".bset").buttonset();
+            })
+        </script>
+    {/block}

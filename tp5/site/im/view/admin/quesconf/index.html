@@ -1,0 +1,183 @@
+    {extend name="admin@public/base" /}
+
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content">
+        <div class="breadcrumbs">
+            {:lang('Im')} : &nbsp;&nbsp; {:lang('Workstream')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+        </div>
+
+        <div class="bloc">
+            <div class="title">
+                <div class="tabs" id="navs">
+                    {include file="admin@public/navs" /}
+                </div>
+
+                {include file="admin@public/lang" /}
+            </div>
+    
+            <div class="alert alert-warning">
+                <button class="close" type="button">&times;</button>
+                <span class="alert-content">{:lang('Shopconfmark')}</span>
+            </div>
+    
+            <form name="frmShopSettingsEdit" method="post">
+                <div class="bloc" id="blocStatistics">
+                    <!--<div class="title collapsible">-->
+                    <div class="title">
+                        <div class="tabs static pot" id="blockStatistics">
+                            <ul>
+                                <a id="tabStat1_link" href="#tabStat1">
+                                    <li>{:lang('Regconf')}</li>
+                                </a>
+                                <a id="tabStat2_link" href="#tabStat2">
+                                    <li>{:lang('Regagreement')}</li>
+                                </a>
+                                <a id="tabStat3_link" href="#tabStat3">
+                                    <li>{:lang('Memberapi')}</li>
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
+            
+                    <div class="content" style="padding-bottom: 20px;">
+                
+                        <div id="tabStat1" style="display:block;">
+                            <table class="table kright">
+                                <tbody>
+                                <tr>
+                                    <td>{:lang('Regstatus')}: </td>
+                                    <td>
+                                        <div class="slideBox" >
+                                            <input id="regstatus" value="1" type="checkbox" name="regstatus" {eq name="data.regstatus" value="1"}checked{/eq} {notpresent name="data.regstatus"}checked{/notpresent} />
+                                            <label for="regstatus"></label>
+                                        </div> &nbsp; &nbsp;
+                                        <span class="slideBoxafter">
+                                                {:lang('Regstatus_tip')}
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr id="closedby" style="display: none;">
+                                    <td>{:lang('Regclosedby')}:  </td>
+                                    <td>
+                                        <input name="regclosedby" type="text" placeholder="{:lang('Regclosedby_pla')}" style="width: 500px;" value="{$data.regclosedby|default= lang('Regclosedby_pla') }" />
+                                        {:lang('Regclosedby_tip')}
+                                    </td>
+                                </tr>
+                        
+                                <tr class="row bset">
+                                    <td>{:lang('Regtype')}: </td>
+                                    <td>
+                                        <div class="row bset">
+                                            <input name="account_type" type="checkbox" value="0" id="account_type_0" {eq name="data.account_type" value="0"}checked{/eq} {notpresent name="data.account_type"}checked{/notpresent} />
+                                            <label for="account_type_0" class="w110_r_0">{:lang('Atwill')}</label>
+                                            <input name="account_type" type="checkbox" value="1" id="account_type_1" {eq name="data.account_type" value="1"}checked{/eq} />
+                                            <label for="account_type_1" class="w110_r_0">{:lang('Mobile')}</label>
+                                            <input name="account_type" type="checkbox" value="2" id="account_type_2" {eq name="data.account_type" value="2"}checked{/eq} />
+                                            <label for="account_type_2" class="w110_r_0">{:lang('Email')}</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="row bset">
+                                    <td>{:lang('Regverification')}: </td>
+                                    <td>
+                                        <div class="row bset">
+                                            <input name="verification" type="radio" value="0" id="verification_0" {eq name="data.verification" value="0"}checked{/eq} {notpresent name="data.verification"}checked{/notpresent} />
+                                            <label for="verification_0" class="w110_r_0">{:lang('Email')}</label>
+                                            <input name="verification" type="radio" value="1" id="verification_1" {eq name="data.verification" value="1"}checked{/eq} />
+                                            <label for="verification_1" class="w110_r_0">{:lang('Mobile')}</label>
+                                            &nbsp; &nbsp;
+                                            <span class="slideBoxafter">
+                                                {:lang('Regverification_tip')}
+                                            </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{:lang('Registered_gift_point')}:  </td>
+                                    <td>
+                                        <input name="registered_gift_point" type="number" placeholder="1" style="width: 80px; text-align: center;" value="{$data.registered_gift_point|default=1}" min="1" max="999999" />
+                                        &nbsp;
+                                        <span class="slideBoxafter">
+                                                {:lang('Registered_gift_point_tip')}
+                                        </span>
+                                    </td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>{:lang('Cash withdrawal limit')}:  </td>
+                                    <td>
+                                        <input name="tradefinish" type="number" placeholder="15" style="width: 80px; text-align: center;" value="{$data.tradefinish|default=100}" min="1" />
+                                        &nbsp;
+                                        <span class="slideBoxafter">
+                                                {:lang('Cash withdrawal limit tip')}
+                                        </span>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                
+                        <div id="tabStat2">
+                            <table class="table kright">
+                                <tbody>
+                                <tr>
+                                    <td>{:lang('Shopname')}: </td>
+                                    <td class="left">
+                                        <input name="shopname" type="text" placeholder="{:lang('Shopname_pla')}" style="width: 300px;" value="{$data.shopname}" />
+                                        <a class="tooltip-icon" title="{:lang('Shopname_tip')}"></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                
+                        <div id="tabStat3">
+                            <table class="table kright">
+                                <tbody>
+                                <tr class="row bset">
+                                    <td>{:lang('Memberfields')}: </td>
+                                    <td>
+                                        <div class="row bset">
+                                            <input name="dis" type="radio" value="0" id="dis_0" {eq name="data.dis" value="0"}checked{/eq} {notpresent name="data.dis"}checked{/notpresent} />
+                                            <label for="dis_0" class="w150_r_0">{:lang('Disrule_1')}</label>
+                                            <input name="dis" type="radio" value="1" id="dis_1" {eq name="data.dis" value="1"}checked{/eq} />
+                                            <label for="dis_1" class="w150_r_0">{:lang('Disrule_2')}</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                        
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+            
+                    <div class="buttons-wrapper" style="margin:0 0 30px; padding:0 0 0 18%;">
+                        <input name="submit" value="{:lang('Saveshopconf')}" type="submit" url="{:url('save')}" />
+                    </div>
+        
+                </div>
+            </form>
+        </div>
+
+    </div>
+    
+    {include file="admin@public/time_for_search" /}
+    {/block}
+
+    {block name="js"}
+    <script>
+        $(function(){
+            $(".bset").buttonset();
+            {notempty name="data.regstatus"}$('#closedby').show();{/notempty}
+            $('#regstatus').click(function(){
+                var ischecked = $(this).is(":checked");
+                if(ischecked){
+                    $('#closedby').hide();
+                }else{
+                    $('#closedby').show();
+                }
+            })
+        })
+    </script>
+    {/block}

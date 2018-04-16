@@ -1,0 +1,68 @@
+    {extend name="common/base" /}
+    
+    {block name="title"}
+    <title>ETshop-</title>
+    {/block}
+    
+    {block name="css"}
+    <link rel="stylesheet" type="text/css"
+          href="__PUBLIC__/{$css_path}/passport.css"/>
+    {/block}
+    
+    {block name="body"}
+    <!--面包屑-->
+    <div class="login-main-box">
+        <div class="brand-box" style="background-color:#1989eb">
+            <div class="wraper">
+                <a href=""><img src="__PUBLIC__/crossbbcg/{$path}/ad/login_3.png" width="512"/></a>
+            </div>
+        </div>
+        <div class="wraper clearfix">
+            <div class="form-box">
+                <div class="login-switch ewm" onclick="$('.qrcode-login,.pc').toggle();$(this).toggle()"></div>
+                <div class="login-switch pc" style="display: none;"
+                     onclick="$('.qrcode-login,.ewm').toggle();$(this).toggle()"></div>
+                <div class="qrcode-login" style="display: none;">
+                    <div class="login-title">{:lang('Safe_Telephone_Login')}</div>
+                    <div class="qrcode-mod">
+                        <div class="qrcode-main">
+                            <div class="qrcode-img"><img src="//img.alicdn.com/tfscom/TB1V1DESXXXXXbZXXXXwu0bFXXX.png">
+                            </div>
+                        </div>
+                        <div class="qrcode-desc">
+                            {:lang('scan_login')}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-header">
+                    
+                    <h1 class="left">{:lang('now_register')}</h1>
+                    <span class="go-reg right"><a class="phone-signop-tag" style="display: none;">{:lang('mobile_register')}</a>
+                        <!--<a class="email-signop-tag">邮箱注册</a>|--><a href="{:url('passport/index/index')}">{:lang('had account to login')}&gt;&gt;</a></span>
+                </div>
+                {include file="passport/signup_form"}
+                
+                {include file="passport/email_form"}
+                <div class="form-footer">
+                    <dl>
+                        <dt>{:lang('Quick_Login')}:</dt>
+                        <dd class="qq">
+                            <a title="{:lang('Qq')}" href="#" class="iconfont icon-qq"></a>
+                            <a title="{:lang('Alipay')}" href="#" class="iconfont icon-zfb"></a>
+                            <a title="{:lang('Sina')}" href="#" class="iconfont icon-xinlang"></a>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+    {/block}
+    
+    <!--此板块为页面单独js加载-->
+    {block name="footer_js"}
+    <script type="text/javascript"></script>
+    <script type="text/javascript">
+        //需要加载的js文件
+        Private_Script = ['passport','gt'];
+    </script>
+    {/block}

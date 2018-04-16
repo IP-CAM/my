@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/{$module_path}plugins/bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/{$module_path}plugins/bootstrap/css/bootstrap-theme.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/{$module_path}plugins/bootstrap-select/bootstrap-select.min.css" />
+<script type="text/javascript" src="__STATIC__/js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="__STATIC__/layer-v3.0.3/layer.js"></script>
+<script type="text/javascript" src="__PUBLIC__/admin/js/commonv3.0.3.js"></script>
+<script type="text/javascript" src="__PUBLIC__/{$module_path}plugins/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="__PUBLIC__/{$module_path}plugins/bootstrap-select/bootstrap-select.js"></script>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{:lang('register')}</title>
+    <style>
+        /*登录模块*/
+        .nav_top{width:100%;height:60px; margin:auto; border-bottom:solid 1px #e8e8e8}
+        .nav_tcon{width:980px; height:60px;margin:auto;}
+        .nav_tcon .logoimg{width:35px; height:35px; float:left; margin-top:12px;}
+        .nav_tcon .logoimg>img{width:35px; height:35px}
+        .nav_tcon .logotitle{ float:left;height:35px; margin-top:12px;width:100px; margin-left:5px}
+        .nav_tcon .logotitle>span{width:100%; float:left; font-size:22px; font-weight:bold; font-family:"微软雅黑"; color:#666666; float:left; line-height:20px;}
+        .nav_tcon .logotitle>p{font-size:12px; color:#999}
+        .nav_tcon .logoname{ float:left;height:35px; line-height:35px; margin-top:12px;font-size:17px; font-weight:bold; font-family:"微软雅黑"; color:#777777;}
+        
+        .logo_content{width:100%;height:auto; display:table; padding:35px 0 50px 0; border-bottom:solid 1px #e8e8e8}
+        .logo_ccon{width:920px; height:auto;margin:auto;display:table}
+        .logobei{ float:left;}
+        
+        .logo_enter{ float:right;width:290px; height:440px; border:solid 1px #cfcfcf; margin-top:15px}
+        .info>span{display:inline-block;width:71px; margin:7px 15px 10px 15px; padding:4px 0 2px 0}
+        .info>span>a{ float:right; font-size:12px; color:#0c89ff}
+        .signin{ background:#0c89ff; color:#fff; cursor:pointer}
+        .info>input{ border-radius:4px;width:169px; margin:6px; height:30px; border:solid 1px #cfcfcf; text-indent:0.5em; font-size:16px;}
+        
+        .info>img.logo_ewm{width:106px; height:106px; margin:15px 92px}
+        .info .logo_zc{width:100%; float:left; text-align:center; }
+        .info .logo_zc>a{font-size:12px; color:#0c89ff}
+        .wid{
+            width: 169px;
+            margin: 6px;
+        }
+        
+        /*底部版权*/
+        .down_info{display:table;width:100%; margin:30px auto 0 auto; text-align:center}
+        .information{width:100%; height:25px; text-align:center}
+        .information>a{ text-decoration:none; color:#444; font-family:"微软雅黑"}
+        .down_info>p{width:100%; text-align:center; color:#999; font-size:11px; margin-top:2px}
+    </style>
+</head>
+
+<body style="background:#fff">
+<div class="nav_top">
+    <div class="nav_tcon">
+        <div class="logoimg"><img src="__ROOT__/logo.png" /></div>
+        <div class="logotitle">
+            <span>润土科技</span>
+            <p>Runter</p>
+        </div>
+        <div class="logoname">{:lang('shop_admin')}</div>
+    </div>
+</div>
+<div class="logo_content">
+    <div class="logo_ccon">
+        <img class="logobei" src="__PUBLIC__/{$module_path}/image/register_bg.png" style="height: 466px" width="578px"/>
+        <form id="form" action="" method="post">
+        <div class="logo_enter">
+            <div class="info">
+            <span>{:lang('Account_name')}:</span>
+            <input class="use_name" type="text" name="nickname" />
+            </div>
+            <div class="info">
+                <span>{:lang('pwd')}：</span>
+                <input class="use_password" name="password" type="password" />
+            </div>
+            <div class="info">
+                <span>{:lang('confirm_password')}:</span>
+                <input class="use_password" name="repassword" type="password" />
+            </div>
+            
+            <div class="info">
+                <span>{:lang('realname')}:</span>
+                <input class="use_password" name="realname" type="text" />
+            </div>
+            
+            <div class="info">
+                <span>{:lang('email')}:</span>
+                <input class="use_password" name="email" type="text" />
+            </div>
+            
+            <div class="info">
+                <span>{:lang('tel')}:</span>
+                <input class="onlytel" name="mobile" type="text" />
+            </div>
+            
+            <div class="info">
+                <span>{:lang('Goods_Warehouse')}:</span>
+                    <select name="housecode[]" id="cang" style="margin: 6px;width: 169px" title="{:lang('pleace choose warehouse')}" class="selectpicker show-tick form-control" multiple="multiple" data-live-search="true">
+                        {foreach $warehouse as $key=>$v}
+                        <option value="{$key}">{$v}</option>
+                        {/foreach}
+                    </select>
+            </div>
+            <div class="info">
+                <span>{:lang('captcha')}:</span>
+                <input class="captcha" name="captcha" type="text" />
+            </div>
+           <div class="info">
+               <input type="submit" style=" margin-top: 4px;height: 48px;width: 279px" class="signin" name="submit" url="{:url('save')}" value="{:lang('register')}" />
+               <span style="width: 270px;margin-top: 0px;padding-top: 0px"><a href="{:url('index')}">{:lang('login')}</a></span>
+           </div>
+        </div>
+        </form>
+    </div>
+</div>
+<div class="down_info">
+    <div class="information">
+        <a href="#">{:lang('about_us')}</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">{:lang('contact_us')}</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">{:lang('legal_notice')}</a>
+    </div>
+    <p>深圳市润土信息科技有限公司</p>
+    <p style="font-size:12px">2017  runter.com版权所有ICP证：粤B2-22222222    </p>
+    <img style="margin-top:5px" src="__ROOT__/favicon.ico" />
+</div>
+
+<script>
+    $(function () {
+        $('#cang').selectpicker({
+            'selectedText': 'cat'
+        });
+        $('.form-control').css({'margin':'6px','width':'169px'});
+    });
+    $('.captcha').on('click',function () {
+        layer.tips('<img src="{:captcha_src()}" alt="captcha" width="140" height="40"/>', '.captcha', {
+            tips: [1, '#3595CC'],
+            time: 100000
+        });
+    });
+    $('.captcha').on('blur',function () {
+        layer.closeAll('tips');
+    });
+</script>
+</body>
+</html>

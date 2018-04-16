@@ -1,0 +1,145 @@
+    {extend name="admin@public/base"/}
+
+    <!-- CONTENT -->
+    {block name="body"}
+        <div id="content">
+            <div class="breadcrumbs">
+                {:lang('General')} : &nbsp;&nbsp; {:lang('Authority')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+            </div>
+    
+            <div class="bloc">
+                <div class="title">
+                    <div class="tabs" id="navs">
+                        {include file="admin@public/navs" /}
+                    </div>
+        
+                    {include file="admin@public/lang" /}
+                </div>
+                
+                <div class="content">
+                
+                <dl class="gzzt clearfix mtb10">
+                        <dd>
+                            <div class="boxr">
+                                {include file="admin@public/button" /}
+                            </div>
+                        </dd>
+    
+                        <form style="margin-top:0;" class="search-form">
+                            <dd>
+                                <div class="boxr ovh">
+                                    <label for="name" style="margin:10px 10px 0 0; width:210px;">
+                                        <input type="text" class="searchinput" id="name" name="name" value="{:input('name')}" placeholder="{:lang('Search manager tip')}" style="width:180px;"/>
+                                    </label>
+                                    <input type="button" name="search" id="sch-search" class="button white" value="{:lang('Search')}" url="{:url('', input('name'))}"/>
+                                </div>
+                            <dd>
+                        </form><dd style="float: right !important;">
+                    <div class="boxl">
+                        <span>
+                            <a href="javascript:location.reload();" class="refresh tooltip-link" title="{:lang('Refresh')}">
+                                <em>{:lang('Refresh')}</em>
+                            </a>
+                        </span>
+                        <span>
+                            <a href="javascript:void(0);" class="ajax-get setting tooltip-link colum" title="{:lang('Showlum')}" data-title="{:lang('Showlum')}">
+                                <em>{:lang('Showlum')}</em>
+                            </a>
+                        </span>
+                    </div>
+                </dd>
+                    </dl>
+    
+                    {notempty name="list"}
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th class="center" width="30">
+                                    <input class="check-all" type="checkbox">
+                                </th>
+                                <th class="left" style="width:35px;">ID</th>
+                                <th class="left" style="width:140px">{:lang('Rolegroupname')}</th>
+                                <th class="left" style="width:160px">{:lang('Rolegroupname alias')}</th>
+                                <th class="left">{:lang('Description')}</th>
+                                <th class="center" style="width:80px">{:lang('Auth_mange')}</th>
+                                <th class="left" style="width:120px">{:lang('Create_time')}</th>
+                                <th class="center" style="width:80px">{:lang('Status')}</th>
+                                <th class="actions" style="width:40px">{:lang('Actions')}</th>
+                            </tr>
+                            </thead>
+                    
+                    <tbody>
+                            {volist name="list" id="vo"}
+                                <tr>
+                                    <td class="center">
+                                        {neq name="vo.id" value="1"}
+                                        <input class="ids" type="checkbox" value="{$vo['id']}" name="ids[]">
+                                        {/neq}
+                                    </td>
+                                    <td class="left">{$vo['id']}</td>
+                                    <td class="left">
+                                        {eq name="vo.id" value="1"}
+                                            {present name="vo.char"}{$vo['char']}{/present} {$vo['name']}
+                                        {else /}
+                                        <a class="tooltip-link ajax-get edit" title="{$vo['alias']}" href="{:url('edit',array('ids'=>$vo['id']))}" data-title="{:lang('Edit')}">
+                                            {present name="vo.char"}{$vo['char']}{/present} {$vo['name']}
+                                        </a>
+                                        {/eq}
+                                    </td>
+                                    <td class="left">{$vo['alias']}</td>
+                                    <td class="left">{$vo['description']}</td>
+                                    <td class="center">
+                                        {eq name="vo.id" value="1"}
+                                        ----
+                                        {else /}
+                                        <a href="{:url('access',array('gid'=>$vo['id']))}" class="tooltip-link ajax-get" title="{:lang('Auth_mange')}" data-width="960" data-height="700" data-showbar="1" data-title="{:lang('Auth_mange')}">
+                                            {:lang('Auth')}
+                                        </a>
+                                        {/eq}
+                                    </td>
+                                    <td class="left">{$vo['create_time']|time_format}</td>
+                                    <td class="center">
+                                        {if condition="$vo['status'] eq 1"}
+                                            {if condition="$vo['id'] neq 1"}
+                                                <a href="{:url('disable',array('ids'=>$vo['id']))}" class="ajax-able" data-doing="{:lang('Disable')}">
+                                                    <img src="__PUBLIC__/admin/images/enabled.png" title="{:lang('Enable')}" class="tooltip-link" alt="{:lang('Enable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png" />
+                                                </a>
+                                            {else /}
+                                                <span class="badge-green">{:lang('Yes')}</span>
+                                            {/if}
+                                        {else /}
+                                            {if condition="$vo['id'] neq 1"}
+                                                <a href="{:url('enable',array('ids'=>$vo['id']))}" class="ajax-able" data-doing="{:lang('Enable')}">
+                                                    <img src="__PUBLIC__/admin/images/disabled.png" title="{:lang('Disable')}" class="tooltip-link" alt="{:lang('Disable')}" height="16px" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png" />
+                                                </a>
+                                            {else /}
+                                                <span class="badge-gray">{:lang('No')}</span>
+                                            {/if}
+                                        {/if}
+                            
+                                    </td>
+                                    <td class="actions">
+                                        {if condition="$vo['id'] neq 1"}
+                                            <a class="tooltip-link ajax-get confirm" title="{:lang('Delete_this_record')}" data-layer="{:lang('Want_delete')}" href="{:url('delete',array('ids'=>$vo['id']))}" data-title="{:lang('Delete')}">
+                                                <img src="__PUBLIC__/admin/images/delete.png" alt="{:lang('Delete')}" />
+                                            </a>
+                                        {else /}
+                                            <img src="__PUBLIC__/admin/images/icons/no-image.png" title="{:lang('Not_allow_delete')}" class="tooltip-link" />
+                                        {/if}
+                                    </td>
+                                </tr>
+                            {/volist}
+                            </tbody>
+                        </table>
+                        <div class="pagination-wrapper">
+                            <div class="results-part"><span>{$_total}</span></div>
+                            <div class="links-part">{$page}</div>
+                        </div>
+                        {else/}
+                        <div class="alert alert-warning">{:lang('No_record')}</div>
+                    {/notempty}
+        
+                </div>
+            </div>
+        </div>
+    {/block}

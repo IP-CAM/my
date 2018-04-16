@@ -1,0 +1,114 @@
+    {extend name="admin@public/poupbase"/}
+    
+    {block name="style"}
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/style.css" />
+
+    <script charset="utf-8" src="__STATIC__/kindeditor/kindeditor-all-min.js"></script>
+    <style>
+        #content .bloc .content p{padding:5px 0;line-height:25px;}
+        .bb3 p{border-bottom:1px solid #dadada;height:25px;}
+        .bb3 p:last-child{border-width:0;}
+    </style>
+    {/block}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content" style="margin:0px 10px 5px 8px;">
+        <div class="bloc">
+            
+            <form id="myform" method="post" style="margin-top:5px;" class="">
+            <div class="content" style="height:590px;overflow:auto; ">
+                
+                    <div id="SkuQuantity" style="display:block;">
+                        <p>id： {$data['id']} &nbsp; &nbsp; {:lang('Goods_Name')}： {$data['name']} &nbsp; &nbsp; {:lang('Goods_sn')}： {$data['good_code']}</p>
+                        <fieldset>
+        
+                            <legend>{:lang('Goods_Sku_Quantity')}</legend>
+                            
+                            {eq name="action_name" value="add"}
+                            <p style="color:red;">{:lang('Goods_Sku_Quantity_Tip')}</p>
+                            {/eq}
+        
+                            <table class="table" style="width:100%;">
+                                <thead>
+                                <th style="width:150px;">{:lang('Goods_Sku')}</th>
+            
+                                <th style="text-align:right;">{:lang('Goods_Crossware')} ({:lang('Goods_Crossware_Code')})</th>
+            
+                                <th style="width:100px;text-align:center;">{:lang('Goods_Quantity')}</th>
+                                <th style="width:100px;text-align:center;">{:lang('Goods_Offline_Quantity')}</th>
+                                </thead>
+                                <tbody>
+                                {php}$key=0;{/php}
+                                {php}$key2=0;{/php}
+                                {foreach $arr_sku as $arr}
+                                <tr>
+                                    <td colsspan="{:count($seller_warehouse)}" style="border-right:1px solid #dadada">{$arr['sku']}<br/><br/>{$arr['name']}
+                                    </td>
+                                    <td class="bb3" style="text-align:right;">
+                                        {if condition="$seller_warehouse"}
+                                        {foreach $seller_warehouse as $arr2}
+                                        {present name="$arr_warehouse[$arr2]"}
+                                        <p>{$arr_warehouse[$arr2]} ({$arr2})</p>
+                                        {/present}
+                                        {/foreach}
+                                        {else /}
+                                        {:lang('Empty_Warehouse')} &nbsp;&nbsp;
+                                        {/if}
+                                    </td>
+                                    <td class="bb3">
+                                        {if condition="$seller_warehouse"}
+                                        {foreach $seller_warehouse as $arr2}
+                                        {present name="$arr_warehouse[$arr2]"}
+                                        <p style="text-align:center;"><input type="number" style="width:60px;" name="sku_quantity[{$key}][crossware_sku_quantity]" value="{$arr_sku_quantity[$arr['sku']][$arr2]['quantity']|default=0}" min="0"/></p>
+                    
+                                        <input name="sku_quantity[{$key}][crossware_code]" value="{$arr2}" hidden />
+                                        <input name="sku_quantity[{$key}][sku]" value="{$arr['sku']}" hidden />
+                                        {/present}
+                                        {php}$key++;{/php}
+                                        {/foreach}
+                                        {else /}
+                                        <!--无仓库情况下强制更新库存表
+                                        <input type="number" style="width:60px;" name="sku_all_quantity[{$arr['sku']}][quantity]" value="{$arr_sku_quantity[$arr['sku']]['quantity']|default=0}" min="0"/>
+                                        -->
+                                        {/if}
+                                    </td>
+                                    <td class="bb3">
+                                        {if condition="$seller_warehouse"}
+                                        {foreach $seller_warehouse as $arr2}
+                                        {present name="$arr_warehouse[$arr2]"}
+                                        <p style="text-align:center;"><input type="number" style="width:60px;" name="sku_quantity[{$key2}][crossware_sku_offline_quantity]" value="{$arr_sku_quantity[$arr['sku']][$arr2]['offline_quantity']|default=0}" min="0"/></p>
+                                        {/present}
+                                        {php}$key2++;{/php}
+                                        {/foreach}
+                                        {else /}
+                                        <!--无仓库情况下强制更新库存表
+                                        <input type="number" style="width:60px;" name="sku_all_quantity[{$arr['sku']}][offline_quantity]" value="{$arr_sku_quantity[$arr['sku']]['offline_quantity']|default=0}" min="0"/>
+                                        -->
+                                        {/if}
+                                    </td>
+                                </tr>
+                                {/foreach}
+                                </tbody>
+                            </table>
+                        </fieldset>
+                    </div>
+            </div>
+                
+                <div class="buttons-wrapper bw-bottom row" style="margin:0px auto 10px; text-align:center;">
+                    
+                    <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('saveSkuQuantity')}">
+                    <input type="hidden" name="id" value="{$data.id}"/>
+                    
+                    <input type="hidden" name="langid" value="{:LANG}" />
+                    <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                </div>
+                
+            </form>
+        </div>
+    </div>
+    {/block}
+    
+    {block name="js"}
+    
+    {/block}

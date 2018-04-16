@@ -1,0 +1,229 @@
+{extend name="admin@public/base"/}
+{block name="style"}
+<style>
+    .go_search{margin-top:10px;width:120px;}
+</style>
+{/block}
+
+<!-- CONTENT -->
+{block name="body"}
+<div id="content">
+    <div class="breadcrumbs">
+        {:lang('Ordersys')} : &nbsp;&nbsp; {:lang('Service')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+    </div>
+    
+    <div class="bloc">
+        <div class="title">
+            <div class="tabs" id="">
+                {include file="admin@public/navs" /}
+            </div>
+            
+            {include file="admin@public/lang" /}
+        </div>
+        <div class="content">
+            
+            <dl class="gzzt clearfix mtb10">
+                <dd>
+                    <div class="boxr">
+                        {include file="admin@public/button" /}
+                    </div>
+                </dd>
+                
+                <form style="margin-top:0;" class="search-form">
+                    <dd>
+                        <div class="boxr ovh">
+                            
+                            <select name="status" class="go_search">
+                                <option url="{:url('index',$status_url)}">{:lang('select_after_status')}</option>
+                                {foreach $arr_status as $value}
+                                
+                                {if condition="$status!==false && $status==$value"}
+                                <option value="{$value}" url="{:url('index',array_merge($status_url,['status'=>$value]))}" selected>{:lang('after_status_'.$value)}</option>
+                                {else /}
+                                <option value="{$value}" url="{:url('index',array_merge($status_url,['status'=>$value]))}">{:lang('after_status_'.$value)}</option>
+                                {/if}
+                                {/foreach}
+                            </select>
+                            
+                        </div>
+                    </dd>
+    
+                    <dd>
+                        <div class="boxr ovh">
+            
+                            <select name="rtype" class="go_search">
+                                <option url="{:url('index',$rtype_url)}">{:lang('select_after_rtype')}</option>
+                                {foreach $arr_rtype as $value}
+                
+                                {if condition="$rtype!==false && $rtype==$value"}
+                                <option value="{$value}" url="{:url('index',array_merge($rtype_url,['rtype'=>$value]))}" selected>{:lang('after_type_'.$value)}</option>
+                                {else /}
+                                <option value="{$value}" url="{:url('index',array_merge($rtype_url,['rtype'=>$value]))}">{:lang('after_type_'.$value)}</option>
+                                {/if}
+                                {/foreach}
+                            </select>
+        
+                        </div>
+                    </dd>
+                    
+                    <dd>
+                        <div class="boxr ovh">
+                            <label for="start" style="margin:10px 10px 0 0; width:100px;">
+                                <input type="text" id="start" value="{$start_time}" name="start_time" placeholder="{:lang('Begin_time')}" class="w80 input_img"/>
+                            </label>
+                            <label style="width:10px;line-height:32px; margin-right:2px;">~</label>
+                            <label for="end" style="margin:10px 10px 0 0; width:100px;">
+                                <input type="text" id="end" value="{$end_time}" name="end_time" placeholder="{:lang('End_time')}" class="w80 input_img"/>
+                            </label>
+                        </div>
+                    </dd>
+                    
+                    <dd>
+                        <div class="boxr ovh">
+                            <label for="search_name" style="margin:10px 10px 0 0; width:180px;">
+                                <input id="search_name" type="text" class="searchinput" name="search_name" value="{$search_name}" placeholder="{:lang('search_name_placeholder')}" style="width:150px;"/>
+                            </label>
+                            <input type="button" name="search" id="sch-search" class="button white" value="{:lang('Search')}" url="{:url('index',$search_url)}" />
+                        </div>
+                    </dd>
+                </form>
+            </dl>
+            
+            {notempty name="list"}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th class="center" width="30"><input class="check-all" type="checkbox"></th>
+                    <th class="left"><a href="{:getUrlbyOrder('id')}">ID</a></th>
+                    <th class="left"><a href="{:getUrlbyOrder('after_sn')}">{:lang('after_sn')}</a></th>
+                    <th class="left"><a href="{:getUrlbyOrder('status')}">{:lang('apply_after_status')}</a></th>
+                    <th class="left"><a href="{:getUrlbyOrder('rtype')}">{:lang('Rtype')}</a></th>
+                    <!--<th class="left"><a href="{:getUrlbyOrder('return_reason')}">{:lang('apply_after_reason')}</a></th>-->
+                    <th class="left">{:lang('consignee')}</th>
+                    <th class="left"><a href="{:getUrlbyOrder('applyprice')}">{:lang('applyprice')}</a></th>
+                    <!--<th class="left">{:lang('order_amount')}</th>-->
+                    <th class="left"><a href="{:getUrlbyOrder('seller_id')}">{:lang('belong_seller')}</a></th>
+                    <th class="left"><a href="{:getUrlbyOrder('create_time')}">{:lang('apply_after_sale_time')}</a></th>
+                    <th class="actions">{:lang('Actions')}</th>
+                </tr>
+                </thead>
+                
+                <tbody>
+                {volist name="list" id="vo"}
+                <tr>
+                    <td class="center" width="30">
+                        {eq name="$vo['status']" value="0"}
+                        <input class="ids" type="checkbox" value="{$vo['id']}" name="ids[]" />
+                        {else /}
+                        <input type="checkbox" disabled />
+                        {/eq}
+                        
+                    </td>
+                    <td class="left">{$vo['id']}</td>
+                    <td class="left">
+                        <a class="tooltip-link ajax-get blue" href="{:url('modify', ['id'=>$vo['id']])}" title="{:lang('edit')}" data-title="{$vo['getorder']['consignee']} : {$vo.after_sn}" data-height="600" data-width="960" data-showbar="1">
+                        {$vo['after_sn']}
+                        </a>
+                    </td>
+                    <td class="left upper-case">
+                        {eq name="$vo['status']" value="0"}
+                        <span class="red">
+                                    {:lang('after_status_'.$vo.status)}
+                                </span>
+                        {else /}
+                        {:lang('after_status_'.$vo.status)}
+                        {/eq}
+                    </td>
+                    <td class="left upper-case">
+                        {switch name='vo.rtype'}
+                        {case value='0'}<span>{:lang('Refund_Not_Return')}</span>{/case}
+                        {case value='1'}<span>{:lang('Refund_And_Return')}</span>{/case}
+                        {case value='2'}<span>{:lang('Only_Exchange')}</span>{/case}
+                        {/switch}
+                    </td>
+                    <!--<td class="left">{$vo.return_reason}</td>-->
+    
+                    <td class="left tooltip-link" title="{$vo['getorder']['country']} {$vo['getorder']['province']} {$vo['getorder']['city']} {$vo['getorder']['district']} {$vo['getorder']['address']}" >
+                        {$vo['getorder']['consignee']} &nbsp;&nbsp; {$vo['getorder']['mobile']}
+                    </td>
+                    
+                    <td class="left">
+                        {if condition="$vo['applyprice']==0"}
+                        {:lang('null')}
+                        {else /}
+                        {$vo['getorder']['symbol']}
+                        {$vo['applyprice']}
+                        {/if}
+    
+                    </td>
+                    <!--<td class="left">
+                        {$vo['getorder']['symbol']}
+                        {$vo['getorder']['order_amount']}
+                    </td>-->
+                    
+                    <td class="left">{$vo['sellerAccount']['nickname']}</td>
+                    <td class="left">{$vo.create_time}</td>
+                    <td class="actions">
+    
+                        <a class="tooltip-link ajax-get" href="{:url('modify', ['id'=>$vo['id']])}" title="{:lang('edit')}" data-title="{$vo['getorder']['consignee']} : {$vo.order_sn}" data-height="600" data-width="960" data-showbar="1">
+                            <img src="__PUBLIC__/admin/images/edit.png"/>
+                        </a>
+                    </td>
+                </tr>
+                {/volist}
+                </tbody>
+            </table>
+            <div class="pagination-wrapper">
+                <div class="results-part"><span>{$_total}</span></div>
+                <div class="links-part">{$list->render()}</div>
+            </div>
+            {else/}
+            <div class="alert alert-warning">{:lang('No_record')}</div>
+            {/notempty}
+        
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('.go_search').change(function () {
+            var gotu_url = $(this).find('option:selected').attr('url');
+            eval("self.location='" + decodeURI(gotu_url) + "'");
+        });
+        $('#sch-search').click(function () {
+            var url = $(this).attr('url'),
+                search = $('#search_name').val(),
+                start = $('#start').val(),
+                end = $('#end').val();
+
+            if ($.trim(search) != '') {
+                if (url.indexOf('?') > 0) {
+                    url += '&search_name=' + search;
+                } else {
+                    url += '?search_name=' + search;
+                }
+            }
+
+            if ($.trim(start) != '') {
+                if (url.indexOf('?') > 0) {
+                    url += '&start_time=' + start;
+                } else {
+                    url += '?start_time=' + start;
+                }
+            }
+
+            if ($.trim(end) != '') {
+                if (url.indexOf('?') > 0) {
+                    url += '&end_time=' + end;
+                } else {
+                    url += '?end_time=' + end;
+                }
+            }
+            
+            self.location = url;
+        });
+    });
+</script>
+
+{include file="admin@public/time_for_search" /}
+{/block}

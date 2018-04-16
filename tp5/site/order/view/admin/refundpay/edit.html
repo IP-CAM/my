@@ -1,0 +1,113 @@
+    {extend name="admin@public/poupbase"/}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content" style="margin:0px 10px 5px 8px;">
+        <div class="bloc" style="margin:10px 0px 0px;">
+            
+            <div class="content">
+                <form id="myform" method="post" style="margin-top:5px;" class="">
+                    <fieldset>
+                        <legend>{$meta_title|default=''}</legend>
+    
+                        <div class="row">
+                            <label class="w140">{:lang('Order_sn')} : </label>
+                            <label style="font-size: 15px; font-weight: bold;">{$data.order_sn}</label>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="fl">
+                                <label class="w140">{:lang('Total_amount')} : </label>
+                                <label style="font-weight: 400;">{$data.order_amount}</label>
+                            </div>
+                            <div class="fl">
+                                <label class="w100">{:lang('freight')} : </label>
+                                <label style="font-weight: 400;">{$data.shipping_fee}</label>
+                            </div>
+                        </div>
+    
+                        <div class="row">
+                            <div class="fl">
+                                <label class="w140">{:lang('Payment_type')} : </label>
+                                <label style="font-weight: 400;" class="green">
+                                    {notempty name="data.pay_name"}{$data.pay_name}{/notempty}
+                                </label>
+                            </div>
+                            
+                            <div class="fl">
+                                <label class="w100">{:lang('Shipping status')} : </label>
+                                <label style="font-size:15px; font-weight: bold;" class="red">
+                                    {eq name="data.shipping_status" value="1"}
+                                        {:lang('Delivered')}
+                                    {else /}
+                                        {:lang('Non_delivery')}
+                                    {/eq}
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="fl">
+                                <label class="w140">{:lang('Consignee')} : </label>
+                                <label style="font-weight: 400;">{$data.consignee}</label>
+                            </div>
+                            
+                            <div class="fl">
+                                <label class="w100">{:lang('Phone')} : </label>
+                                <label style="font-weight: 400;">{$data.mobile}</label>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <label class="w140">{:lang('Delivery address')} : </label>
+                            <input type="text" style="font-weight: 400; width: 470px;" class="slh tooltip-link" style="max-width: 470px;" title="{$data.country}{$data.province}{$data.city}{$data.district} {$data.address}" value="{$data.country}{$data.province}{$data.city}{$data.district} {$data.address}" disabled />
+                        </div>
+    
+                        <div class="row bset">
+                            <label class="w140 red" style="font-size: 15px; font-weight: bold;">{:lang('Process option')}</label>
+        
+                            <input name="isagree" type="radio" value="1" id="isagree_1" />
+                            <label for="isagree_1" class="w150_r_0">{:lang('Agree refund')}</label>
+        
+                            <input name="isagree" type="radio" value="0" id="isagree_0" checked />
+                            <label for="isagree_0" class="w150_r_0">{:lang('Not_agree refund')}</label>
+                        </div>
+    
+                        <div class="row" style="height: 60px;">
+                            <div class="fl processbox" style="display: none;">
+                                <label for="contents" class="w140">{:lang('Process contents')} : </label>
+                                <textarea id="contents" name="contents" style="width: 460px; height: 40px;"></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="buttons-wrapper bw-bottom" style="margin:30px auto 2px; text-align:center;">
+                            <input name="submit1" value="{:lang('Submit')}" type="submit" url="{:url()}">
+                            <input name="order_id" type="hidden" value="{$data.order_id}"/>
+                            <input name="order_sn" type="hidden" value="{$data.order_sn}"/>
+                            <input name="reset" class="button white" value="{:lang('Close_win')}" type="reset">
+                        </div>
+                    </fieldset>
+    
+                </form>
+            </div>
+        </div>
+    </div>
+    {/block}
+    
+    {block name="js"}
+    <script>
+        $(function () {
+            $(".bset").buttonset();
+
+            $('input[name="isagree"]').on('click', function () {
+               var val = $(this).val();
+               if(val == 1)
+               {
+                   $('.processbox').show().find('textarea').attr('disabled', false);
+               }else{
+                   $('.processbox').hide().find('textarea').attr('disabled', true);
+               }
+            });
+        })
+    </script>
+    {/block}

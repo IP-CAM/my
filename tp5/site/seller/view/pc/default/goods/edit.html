@@ -1,0 +1,1117 @@
+{extend name='common/poupbase'}
+{block name='css'}
+<script charset="utf-8" src="__STATIC__/kindeditor/kindeditor-all-min.js"></script>
+<style>
+    .panel-body .box-body h3{margin-top: 15px;  font-weight: 500;  font-family: 'Rubik', sans-serif;  font-size: 16px;  text-transform: uppercase;}
+    .marg_r{ margin-right: 3%;width: 31.3%;
+        height:34px;}
+    .img-rounded{border:1px solid #ccc}
+    .img_list{float: left;margin-right: 5px}
+    .table th{text-align: center;}
+    .table .col-xs-12{padding: 0;}
+    .table .col-xs-12 .form-control {padding: 0;text-align: center;}
+    .table tr td:first-child,.table tr th:first-child{min-width: 125px;}
+    .table .remove{text-align: center;font-size: 23px;padding: 0;!important;vertical-align: middle;}
+    fieldset{padding:.35em .625em .75em;margin:0 2px;border:1px solid silver;border-radius: 5px}
+    legend{padding:.5em;border:0;width:auto}
+    .fa-close{color:#d61414;font-size: 17px;cursor: pointer}
+    label{font-weight: 400;!important;}
+    .sku_quantity .ware p{padding: 0;text-align: right;vertical-align: middle;margin: 8px;height: 34px;line-height: 34px;}
+    .image-row ul{list-style: none;margin: 0 !important;padding: 0 !important;overflow-x: hidden;overflow-y: auto;position: relative;height: auto;}
+    .image-row ul li{border: 1px #c7c5ca solid; width: 113px;height: 113px;text-align: center; margin: 5px 12px 5px 0; position: relative; display: block; float: left; overflow: hidden; font-size: 12px;background: url(__PUBLIC__/admin/images/bg.png) no-repeat;}
+    .image-row ul li#filePickerBlock { width: 113px; height: 113px; background: url(__PUBLIC__/admin/images/image.png) no-repeat center 12px; border: 1px solid #eeeeee; border-radius: 0; cursor: pointer; }
+
+    .image-row ul li .icon {
+        cursor: pointer;
+        width: 113px;
+        height: 113px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        border: 0;
+        background-repeat: no-repeat;
+    }
+
+    .image-row ul li .icon:hover {
+        width: 111px;
+        height: 111px;
+        border: 3px solid #1094fa;
+    }
+
+    .image-row ul li .cancel {
+        position: absolute;
+        height: 0;
+        filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='#80000000', endColorstr='#80000000') \0;
+        width: 24px;
+        height: 24px;
+        margin: 3px 0 0 0;
+        cursor: pointer;
+        top: 0;
+        right: 0;
+        overflow: hidden;
+        z-index: 300;
+        background: url(__STATIC__/images/img-icons.png) no-repeat -48px 0;
+    }
+
+    .image-row ul li .cancel:hover {
+    
+    }
+
+    .image-row ul li.selected{
+        background-image: url(__PUBLIC__/admin/images/success.png);
+        background-position: 75px 75px;
+    }
+
+    .image-row ul li.selected .icon {
+        border: 3px solid #1094fa;
+        background-image: url(__PUBLIC__/admin/images/success.png);
+        background-position: 75px 75px;
+        width: 111px;
+        height: 111px;
+        
+    }
+
+    .image-row ul li.selected .icon:hover {
+        width: 111px;
+        height: 111px;
+        border: 3px solid #1094fa;
+        background-position: 72px 72px;
+    }
+    #image-sort ul{list-style-type:none;margin:0;padding:0;}
+    #image-sort li{float:left;width:114px;margin-right:12px;text-align:center;}
+    #image-sort li input{width:30px;}
+</style>
+{/block}
+{block name='body'}
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel-body">
+                <form action="#" class="form-horizontal">
+                    <div class="box box-info">
+                        <div class="box-body" style="padding-right: 15px">
+                            <div class="clearfix">
+                                <h3 class="box-title">{:lang('Goods_Base')}</h3>
+                                <hr class="m-t-0 m-b-40">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="" class="col-sm-3 control-label">{:lang('Goods_Category')}</label>
+                                        <div class="col-sm-9" style="padding-top:5px;">
+                                            {eq name='$action_name' value='edit'}
+                                            <a href="javascript:void(0)" id="now_category_name"  title="{:lang('Category_Tip')}">
+                                                {$now_category_name}
+                                                {else /}
+                                                <select name="category[]" id="parent-category" class="col-xs-3 marg_r">
+                                                    <option value="0">{:lang('pleace choose first category')}</option>
+                                                    {volist name='arr_category' id='vo'}
+                                                    <option value="{$vo.id}">{:lang($vo.title)}</option>
+                                                    {/volist}
+                                                </select>
+                                                <select name="category[]" id="child-category" class="col-xs-3 marg_r">
+                                                    <option value="0">{:lang('pleace choose second category')}</option>
+                                                </select>
+                                                <select name="category[]" id="grandchild-category" class="col-xs-3 marg_r" style="margin-right: 0">
+                                                    <option value="0">{:lang('pleace choose three category')}</option>
+                                                </select>
+                                                {/eq}
+                                                <input type="hidden" name="cat_id" id="cat_id" value="{$data.cat_id|default=0}" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                    {eq name='action_name' value='edit'}
+                                    <div class="form-group" style="display: none" id="edit_categoty">
+                                        <label for="" class="col-sm-3 control-label">{:lang('Goods_Category')}</label>
+                                        <div class="col-sm-9" style="padding-top:5px;">
+                                            <select name="category[]" id="parent-category" class="col-xs-3 marg_r">
+                                                <option value="0">{:lang('pleace choose first category')}</option>
+                                                {volist name='arr_category' id='vo'}
+                                                <option value="{$vo.id}">{:lang($vo.title)}</option>
+                                                {/volist}
+                                            </select>
+                                            <select name="category[]" id="child-category" class="col-xs-3 marg_r">
+                                                <option value="0">{:lang('pleace choose second category')}</option>
+                                            </select>
+                                            <select name="category[]" id="grandchild-category" class="col-xs-3 marg_r" style="margin-right: 0">
+                                                <option value="0">{:lang('pleace choose three category')}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    {/eq}
+                                    <div class="form-group">
+                                        <label for="sub_title" class="col-sm-3 control-label">{:lang('Goods_Sub_Title')}</label>
+        
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="sub_title" value="{$data.sub_title}" id="sub_title">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="good_code" class="col-sm-3 control-label">{:lang('Goods_sn')}</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="good_code" name="good_code" placeholder="SN1******" value="{$data.good_code}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="brand_id" class="col-sm-3 control-label">{:lang('Goods_Brand')}</label>
+                                        <div class="col-sm-9">
+                                            <select name="brand_id" id="brand_id" class="form-control">
+                                                <option value="0">{:lang('Null')}</option>
+                                                {volist name='arr_brands' id='vo'}
+                                                <option value="{$vo['id']}" {eq name="$data.brand_id" value="$vo['id']"}selected{/eq} data-country_id="{$vo.country_id}">{$vo['name']}</option>
+                                                {/volist}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    
+                                    <div class="form-group">
+                                        <label for="name" class="col-sm-3 control-label">{:lang('Goods_Name')}</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" style="display: inline-block;width: 95%" value="{$data.name}" id="name" name="name" />
+                                            <input type="checkbox" title="{:lang('Has en name tip')}" id="has_en_name" style="cursor: pointer">
+                                        </div>
+                                    </div>
+                                    <div class="form-group" id="en_name" style="display: none">
+                                        <label for="en_name" class="col-sm-3 control-label">{:lang('english_name')}</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" value="{$data.en_name}"  name="en_name" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="status" class="col-sm-3 control-label">{:lang('Goods_Status')}</label>
+                                        <div class="col-sm-9">
+                                            <select name="status" id="status" class="form-control">
+                                                {foreach $arr_status as $k=>$v}
+                                                <option value="{$k}" {eq name="$data.status" value="$k"}selected{/eq}>{:lang($v)}</option>
+                                                {/foreach}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="country_id" class="col-sm-3 control-label">{:lang('Goods_Country_Id')}</label>
+            
+                                        <div class="col-sm-9" >
+                                            <select name="country_id" id="country_id" class="form-control">
+                                                {volist name='arr_country' id='vo'}
+                                                <option value="{$vo['id']}" {eq name="$data.country_id" value="$vo['id']"}selected{/eq}>{$vo['name']}</option>
+                                                {/volist}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="" class="col-sm-2 control-label" style="width: 12.6%">{:lang('Goods_Additional_Image')}</label>
+                                        <div class="col-sm-10 image-row" >
+                                            <div style="display: none" id="selected-thumb"></div>
+                                            <ul id="image-list" style="list-style: none">
+                                                {notempty name="$image_list"}
+                                                <input type="hidden" name="image_list" value="{$image_list}" id="image_list" />
+                                                {else /}
+                                                <input type="hidden" name="image_list" value="" id="image_list" />
+                                                {/notempty}
+                                                    {notempty name="$data['thumb']"}
+                                                    {if condition="substr($data['thumb'],0,4)=='http'"}
+                                                    <li id="img-{$data['thumb']}" class="selected"><img src="{$data['thumb']}" width="179" height="113" _src="{$data['thumb']}" style="margin-left: -33px;" ><span class="icon"></span> <span class="cancel"></span></li>
+                                                    {else /}
+                                                    <li id="img-__UPLOADS__/{$data['thumb']}" class="selected"><img src="__UPLOADS__/{$data['thumb']}" width="179" height="113" _src="__UPLOADS__/{$data['thumb']}" style="margin-left: -33px;"><span class="icon"></span> <span class="cancel"></span></li>
+                                                    {/if}
+                                                    {/notempty}
+                                                {present name="$arr_image"}
+                                                    {foreach $arr_image as $image}
+                                                    {if condition="substr($image,0,4)=='http'"}
+                                                    <li id="img-{$image}"><img src="{$image}" width="179" height="113" _src="{$image}" style="margin-left: -33px;"><span class="icon"></span> <span class="cancel"></span></li>
+                                                    {else /}
+                                                    <li id="img-__UPLOADS__/{$image}"><img src="__UPLOADS__/{$image}" width="179" height="113" _src="__UPLOADS__/{$image}" style="margin-left: -33px;"><span class="icon"></span> <span class="cancel"></span></li>
+                                                    {/if}
+                                                    {/foreach}
+                                                {/present}
+                                                <li id="filePickerBlock" class="upload" title="{:lang('Upload img and file')}" url="{:url('seller/goods/img',array('input' => 'image_list', 'image_list' => 'preview', 'more' => '1','isthumb'=>1))}" data-upload="__UPLOADS__">
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="display:none;">
+                                        <label for="" class="col-sm-2 control-label" style="width: 12.6%">{:lang('img_sort')}</label>
+    
+                                        <div class="col-sm-10 "  id="image-sort">
+                                            {notempty name="$data['thumb']"}
+                                            <ul>
+                                                <li><input type="text" value="0" name="image_list_sort[]"/></li>
+                                                {foreach $arr_image as $key=>$image}
+                                                <li><input type="text" value="{$key}" name="image_list_sort[]"/></li>
+                                                {/foreach}
+                                            </ul>
+                                            {/notempty}
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="clearfix">
+                                <h3 class="box-title">{:lang('goods_info')}</h3>
+                                <hr class="m-t-0 m-b-40">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="type" class="col-sm-3 control-label">{:lang('Goods_Type')}</label>
+                                        <div class="col-sm-9">
+                                            <select name="type" id="type" class="form-control">
+                                                {foreach $arr_types as $k=>$v}
+                                                <option value="{$k}" {eq name="$data.type" value="$k"}selected{/eq}>{:lang('Goods_'. $v)}</option>
+                                                {/foreach}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group  hs" style="display: none">
+                                        <label for="hs_code" class="col-sm-3 control-label">{:lang('Goods_Hs_Code')}</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" id="hs_code" name="hs_code" value="{$data.hs_code}" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group  hs" style="display: none">
+                                        <label for="hs_code" class="col-sm-3 control-label hs">{:lang('Goods_Hs_Quarantine_Model')}</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" id="hs_quarantine_model" value="{$data.hs_quarantine_model}" name="hs_quarantine_model" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="package_num" class="col-sm-3 control-label">{:lang('Goods_Package_Num')}</label>
+                                        <div class="col-sm-9">
+                                            <input type="text"  id="package_num" value="{$data.package_num|default=1}" class="form-control" name="package_num" >
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="weight_class_id" class="col-sm-3 control-label">{:lang('Goods_Weight_Class_Id')}</label>
+                                        <div class="col-sm-9">
+                                            <select name="weight_class_id" id="weight_class_id" class="form-control">
+                                                {notempty name='arr_weights'}
+                                                {volist name='arr_weights' id='vo'}
+                                                <option value="{$vo}" {eq name="$data.weight_class_id" value="$vo" }selected{/eq}>{$vo}</option>
+                                                {/volist}
+                                                {/notempty}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="hs_unit" class="col-sm-3 control-label">{:lang('Goods_Weight')}</label>
+                                        <div class="col-sm-9">
+                                            <input type="text"  class="form-control" name="weight" value="{$data.weight|default='0.00'}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="minimum" class="col-sm-3 control-label">{:lang('minimum')}</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" min="1" class="form-control" id="minimum" name="minimum" value="{$data.minimum|default='1'}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="market_price" class="col-sm-3 control-label">{:lang('Goods_Market_Price')}</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" min="0.00" class="form-control" id="market_price" name="market_price" value="{$data.market_price|default='0.00'}" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="sale_price" class="col-sm-3 control-label">{:lang('Goods_Sale_Price')}</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" min="0.00" class="form-control" id="sale_price" name="sale_price" value="{$data.sale_price|default='0.00'}" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cost_price" class="col-sm-3 control-label">{:lang('Goods_Cost_Price')}</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" min="0.00" class="form-control" id="cost_price" name="cost_price" value="{$data.cost_price|default='0.00'}" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="sort" class="col-sm-3 control-label">{:lang('Sort')}</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" min="0" class="form-control" id="sort" name="sort" value="{$data.sort|default='0'}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">{:lang('Goods_Subtract')}</label>
+                                        <div class="col-sm-9">
+                                            <div class="btn-group" data-toggle="buttons">
+                                                <label  class="btn btn-default {eq name='$data.subtract' value='1'}active{/eq}">
+                                                    <input  type="radio" name="subtract" value="1" {eq name="$data.subtract" value="1"}checked{/eq}>{:lang('Goods_Subtract_1')}
+                                                </label>
+                                                <label  class="btn btn-default {eq name='$data.subtract' value='0'}active{/eq}">
+                                                    <input  type="radio" name="subtract" value="0" {eq name="$data.subtract" value="0"}checked{/eq}>{:lang('Goods_Subtract_0')}
+                                                </label>
+                                                <label  class="btn btn-default {eq name='$data.subtract' value='2'}active{/eq}">
+                                                    <input  type="radio" name="subtract" value="2" {eq name="$data.subtract" value="2"}checked{/eq}>{:lang('Goods_Subtract_2')}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group hs" style="display: none">
+                                        <label for="hs_code" class="col-sm-3 control-label">{:lang('Goods_Hs_Model')}</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" id="hs_model" value="{$data.hs_model}" name="hs_model" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="hs_unit" class="col-sm-3 control-label">{:lang('Goods_Package_Unit')}</label>
+                                        <div class="col-sm-9">
+                                            <select name="hs_unit" id="hs_unit" class="form-control">
+                                                {volist name='arr_package_units' id='vo'}
+                                                <option value="{$key}" {eq name="data.hs_unit" value="$key"}selected="selected"{/eq}>{$vo}</option>
+                                                {/volist}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tax_rate" class="col-sm-3 control-label">{:lang('Goods_Tax_Class_Id')}</label>
+                                        <div class="col-sm-9">
+                                            <select name="tax_rate" id="tax_rate" class="form-control">
+                                                {notempty name='arr_taxs'}
+                                                {volist name='arr_taxs' id='vo'}
+                                                {eq name='$action_name' value='edit'}
+                                                <option value="{$key}" {eq name="data.tax_rate" value="$key"}selected="selected"{/eq}>{$vo}</option>
+                                                {else /}
+                                                <option value="{$key}" {eq name="default_tax_class_id" value="$key"}selected="selected"{/eq}>{$vo}</option>
+                                                {/eq}
+                                                {/volist}
+                                                {/notempty}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="clear_weight" class="col-sm-3 control-label">{:lang('Goods_Clear_Weight')}</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" min="0.00" class="form-control" id="clear_weight" name="clear_weight" value="{$data.clear_weight|default='0.00'}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="maximum" class="col-sm-3 control-label">{:lang('maximum')}</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" min="1" class="form-control" id="maximum" name="maximum" value="{$data.maximum|default='1'}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="quantity" class="col-sm-3 control-label">{:lang('Goods_Quantity')}</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" min="1" id="quantity" disabled value="{$data.quantity}" class="form-control" name="quantity" style="width:70%;display: inline-block">
+                                            <input type="text" class="form-control" value="{$blocked_quantity|default=0}" disabled style="width:24%;display: inline-block">
+                                            <a style="color: black;" title="{:lang('Goods_Quantity tip')}"><i class="fa fa-commenting-o"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="quantity" class="col-sm-3 control-label">{:lang('offline_quantity')}</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" min="1" id="offline_quantity" disabled value="{$data.offline_quantity}" class="form-control" name="quantity" >
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="sales_volume" class="col-sm-3 control-label">{:lang('Sales')}</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" min="0" class="form-control" id="sales_volume" name="sales_volume" value="{$data.sales_volume|default='0'}" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label  class="col-sm-3 control-label">{:lang('goods_service')}</label>
+                                        <div class="col-sm-9">
+                                            <div class="checkbox">
+                                                {foreach $arr_promise as $name}
+                                                <label><input type="checkbox" name="promise[]" value="{$name}" {if condition="in_array($name,$promise)"}checked="checked"{/if}>{$name}</label>
+                                                {/foreach}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix">
+                                <h3 class="box-title">{:lang('goods_sku_name')}</h3>
+                                <hr class="m-t-0 m-b-40">
+                                <div class="col-md-9" id="option-value">
+                                
+                                </div>
+                                <div class="col-md-12">
+                                    <!-- /.box-header -->
+                                    <div class="box-body table-responsive no-padding">
+                                        <table class="table table-hover" id="sku-table">
+                                            <thead>
+                                            <tr>
+                                                <th id="sku-name" {if condition='($action_name == "add") OR (empty($v.name))'}style="display: none;"{/if}>{:lang('sku_name')}</th>
+                                                <th>SKU</th>
+                                                <th>{:lang('Goods_Market_Price')}</th>
+                                                <th>{:lang('Goods_Sale_Price')}</th>
+                                                <th>{:lang('Goods_Cost_Price')}</th>
+                                                <th>{:lang('Goods_Good_Batch')}</th>
+                                                <th>{:lang('Goods_Good_Barcode')}</th>
+                                                <th>{:lang('Goods_Hs_Record')}</th>
+                                                <th>{:lang('Goods_Hs_National_Record')}</th>
+                                                <th>{:lang('Goods_Quantity')}</th>
+                                                <th>{:lang('offline_quantity')}</th>
+                                                <th style="min-width: 45px">{:lang('operation')}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {php} $row_num=0;{/php}
+                                            {foreach $arr_sku as $k=>$v}
+                                            <tr>
+                                                <td {if condition='($action_name == "add") OR (empty($v.name))'}style="display: none;"{/if}>{$v.name}</td>
+                                                <td>
+                                                    <div class="col-xs-12">
+                                                        <input type="text" class="form-control input-sm" name='sku[{$row_num}][sku]' value="{$v.sku}">
+                                                    </div>
+                                                </td>
+    
+                                                
+                                                <td>
+                                                    <div class="col-xs-12">
+                                                        <input type="text" class="form-control input-sm" name='sku[{$row_num}][market_price]' value="{$v.market_price}">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="col-xs-12">
+                                                        <input type="text" class="form-control input-sm" name='sku[{$row_num}][sale_price]' value="{$v.sale_price}">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="col-xs-12">
+                                                        <input type="text" class="form-control input-sm" name='sku[{$row_num}][cost_price]' value="{$v.cost_price}">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="col-xs-12">
+                                                        <input type="text" class="form-control input-sm" name='sku[{$row_num}][good_batch]' value="{$v.good_batch}">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="col-xs-12">
+                                                        <input type="text" class="form-control input-sm" name='sku[{$row_num}][good_barcode]' value="{$v.good_barcode}">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="col-xs-12">
+                                                        <input type="text" class="form-control input-sm" name='sku[{$row_num}][hs_record]' value="{$v.hs_record}">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="col-xs-12">
+                                                        <input type="text" class="form-control input-sm" name='sku[{$row_num}][hs_national_record]' value="{$v.hs_national_record}">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="col-xs-12">
+                                                        <input type="text" class="form-control input-sm" readonly='readonly' name='sku[{$row_num}][quantity]' value="{$v.quantity}">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="col-xs-12">
+                                                        <input type="text" class="form-control input-sm" readonly='readonly' name='sku[{$row_num}][offline_quantity]' value="{$v.offline_quantity}">
+                                                    </div>
+                                                </td>
+                                                <td class="remove"><a href="javascript:void(0);"><i class="fa fa-times-circle-o"></i></a></td>
+                                            </tr>
+                                            {php}$row_num++;{/php}
+                                            {/foreach}
+                                            </tbody>
+                                            
+                                        </table>
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                            </div>
+                            <div class="clearfix">
+                                <h3 class="box-title">{:lang('Goods_Attribute')}</h3>
+                                <hr class="m-t-0 m-b-40">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <div class="col-sm-5">
+                                            <select name="" id="attr_type" class="form-control">
+                                                <option value="0">{:lang('Attribute_Group_Choose')}</option>
+                                                {volist name='arr_attribute_group' id='vo'}
+                                                <option value="{$vo.attribute_group_id}">{$vo.name}</option>
+                                                {/volist}
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <button type="button" class="btn btn-block btn-primary btn-sm" onclick="getAttributeTable(0)">{:lang('add')}</button>
+                                        </div>
+            
+                                    </div>
+                                </div>
+                                <div class="col-md-12" id="attribute-table">
+                                    {eq name='action_name' value='edit'}
+                                        {foreach $goods_attribute as $k=>$v}
+                                    <fieldset class="clearfix" id="attribute-group-{$k}">
+                                        <legend>{$v['attribute_group_name']}&nbsp;<i class="fa fa-close"></i></legend>
+                                        {foreach $v as $key2 => $arr2}
+                                        {if condition="$key2 !=='attribute_group_name'"}
+                                        <div class="form-group">
+                                            <label for="package_num" class="col-sm-1 control-label">{$arr2['attribute_name']}</label>
+                                            <div class="col-sm-5">
+                                                {empty name="$arr2['option']"}
+                                                <input type="text" name="attribute[{$key}][{$key2}]" value="{$arr2['value']}"/>
+                                                {else /}
+                                                123
+                                                {foreach $arr2['option'] as $key3=>$arr}
+                                                <input type="checkbox" name="attribute[{$key}][{$key2}][]" value="{$arr['value']}" {eq name="$arr['checked']" value="1"} checked="checked" {/eq} >{$arr['value']}<span style="white-space:pre;"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                {/foreach}
+                                                {/empty}
+                                            </div>
+                                        </div>
+                                        {/if}
+                                        {/foreach}
+                                    </fieldset>
+                                        {/foreach}
+                                    {/eq}
+                                </div>
+                            </div>
+                            <div class="clearfix" style="margin-top: 10px">
+                                <h3 class="box-title">{:lang('Goods_Description')}</h3>
+                                <hr class="m-t-0 m-b-40">
+                                <div class="col-xs-6">
+                                    <div class="form-group">
+                                        <label for="" class="control-label col-sm-3">{:lang('Goods_Description')}</label>
+                                        <div class="col-sm-9">
+                                            <div class="btn-group col-sm-8">
+                                                <button type="button" data-param="pc_desc" class="btn btn-info col-sm-6">{:lang('Goods_Pc_Description')}</button>
+                                                <button type="button" data-param="wap_desc" class="btn btn-default col-sm-6">{:lang('Goods_Wap_Description')}</button>
+                                            </div>
+                                            <button type="button" class="btn col-sm-2" data-toggle="tooltip" data-placement="top" title="{:lang('desc_copy_tips')}" id="copypc2wap">{:lang('copy')}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="form-group" id="pc_desc">
+                                        <label for="pc_description" class="control-label col-sm-1" style="width: 12.666%">{:lang('Goods_Pc_Description')}</label>
+                                        <div class="col-sm-10">
+                                            <textarea url="{:url('seller/goods/img',array('m' => $controller_name,'input' => 'pc_description', 'image_list' => 'preview', 'more' => '1','to_des' => 1))}" data-upload="__UPLOADS__" data-title="{:lang('Goods_Pc_Description')}" class="form-control ckeditor textarea_des col-sm-12" id="pc_description" name="pc_description" title="">{$data.pc_description}</textarea>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="form-group hide" id="wap_desc">
+                                        <label for="wap_description" class="control-label col-sm-1" style="width: 12.666%">{:lang('Goods_Wap_Description')}</label>
+                                        <div class="col-sm-10">
+                                            <textarea url="{:url('seller/goods/img',array('m' => $controller_name,'input' => 'wap_description', 'image_list' => 'preview', 'more' => '1','to_des' => 1))}" data-upload="__UPLOADS__" data-title="{:lang('Goods_Pc_Description')}"  class="form-control ckeditor textarea_des" id="wap_description" name="wap_description"  style="width: 100%">{$data.wap_description}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="form-group">
+                                        <label for="meta_title" class="col-sm-3 control-label">{:lang('SEO_Meta_Title')}</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="meta_title" value="{$data.meta_title}" id="meta_title">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="video" class="col-sm-3 control-label">{:lang('Tags')}</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="tags" value="{$data.tags}" id="tags">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="form-group">
+                                        <label for="meta_description" class="col-sm-3 control-label">{:lang('SEO_Meta_Description')}</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="meta_description" value="{$data.meta_description}" id="meta_description">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="video" class="col-sm-3 control-label">{:lang('Goods_video')}</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="video" value="{$data.video}" id="video">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix">
+                                <h3 class="box-title">{:lang('Sku_warehouse_quantity')}</h3>
+                                <hr class="m-t-0 m-b-40">
+                                {eq name="action_name" value="add"}
+                                <p style="color: #c50f0f;margin-left: 1%;">{:lang('pleace create goods to edit quantity')}</p>
+                                {else /}
+                                <div class="col-xs-12">
+                                    <table class="table table-bordered sku_quantity">
+                                        <tr>
+                                            <th class="col-xs-2">SKU</th>
+                                            <th class="col-xs-6">{:lang('Goods_Crossware')} ({:lang('Goods_Crossware_Code')})</th>
+                                            <th class="col-xs-2">{:lang('Goods_Quantity')}</th>
+                                            <th class="col-xs-2">{:lang('offline_quantity')}</th>
+                                        </tr>
+                                        {eq name='action_name' value='edit'}
+                                        {php}$key=0;{/php}
+                                        {php}$key2=0;{/php}
+                                        {foreach $arr_sku as $arr}
+                                        <tr>
+                                            <td>
+                                                {$arr['sku']}<br/>{$arr['name']}
+                                            </td>
+                                            <td style='padding: 0' class="ware">
+                                                {if condition="$seller_warehouse"}
+                                                {foreach $seller_warehouse as $arr2}
+                                                {present name="$arr_warehouse[$arr2]"}
+                                                <p>{$arr_warehouse[$arr2]} ({$arr2})</p>
+                                                {/present}
+                                                {/foreach}
+                                                {else /}
+                                                <p>{:lang('Empty_Warehouse')} </p>&nbsp;&nbsp;
+                                                {/if}
+                                            </td>
+                                            <td>
+                                                {if condition="$seller_warehouse"}
+                                                {foreach $seller_warehouse as $arr2}
+                                                {present name="$arr_warehouse[$arr2]"}
+                                                <p><input type="number" name="sku_quantity[{$key}][crossware_sku_quantity]" value="{$arr_sku_quantity[$arr['sku']][$arr2]['quantity']|default=0}" class="form-control" min="0"/></p>
+    
+                                                <input name="sku_quantity[{$key}][crossware_code]"  value="{$arr2}" hidden />
+                                                <input name="sku_quantity[{$key}][sku]" value="{$arr['sku']}" hidden />
+                                                {/present}
+                                                {php}$key++;{/php}
+                                                {/foreach}
+                                                {else /}
+                                                <!--无仓库情况下强制更新库存表
+                                                <input type="number" style="width:60px;" name="sku_all_quantity[{$arr['sku']}][quantity]" value="{$arr_sku_quantity[$arr['sku']]['quantity']|default=0}" min="0"/>
+                                                -->
+                                                {/if}
+                                            </td>
+                                            <td>
+                                                {if condition="$seller_warehouse"}
+                                                {foreach $seller_warehouse as $arr2}
+                                                {present name="$arr_warehouse[$arr2]"}
+                                                <p><input type="number" name="sku_quantity[{$key2}][crossware_sku_offline_quantity]" class="form-control" value="{$arr_sku_quantity[$arr['sku']][$arr2]['offline_quantity']|default=0}" min="0"/></p>                          {/present}
+                                                {php}$key2++;{/php}
+                                                {/foreach}
+                                                {else /}
+                                                <!--无仓库情况下强制更新库存表
+                                                <input type="number" style="width:60px;" name="sku_all_quantity[{$arr['sku']}][offline_quantity]" value="{$arr_sku_quantity[$arr['sku']]['offline_quantity']|default=0}" min="0"/>
+                                                -->
+                                                {/if}
+                                            </td>
+                                        </tr>
+                                        {/foreach}
+                                        {/eq}
+                                    </table>
+                                </div>
+                                {/eq}
+                            </div>
+                        </div>
+                        <div class="box-footer center">
+                            {eq name='action_name' value='edit'}
+                            <input type="hidden" name="id" value="{$data.id}">
+                            {/eq}
+                            <input type="submit" name="submit" value="{:lang('save')}" class="btn btn-info" url="{:url('seller/goods/save')}">
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{/block}
+{block name='js'}
+<link rel="stylesheet" type="text/css" href="__STATIC__/inputTag/jquery.tagsinput.css" />
+<script type="text/javascript" src="__STATIC__/inputTag/jquery.tagsinput.js"></script>
+<script>
+    $(function () {
+        $("[data-toggle='tooltip']").tooltip();
+        //富文本编辑器
+        var editor_content;
+        KindEditor.ready(function(K) {
+            editor_content = K.create('.textarea_des', {
+                resizeType : 1,
+                allowPreviewEmoticons : true,
+                allowImageUpload : true,
+                minWidth : 700,
+                minHeight : 400,
+                langType : '{:jsup(LANG)}',
+                items: ["source", "|", "undo", "redo", "|", "preview", "print", "template", "code", "cut", "copy", "paste", "plainpaste", "wordpaste", "|", "justifyleft", "justifycenter", "justifyright", "justifyfull", "insertorderedlist", "insertunorderedlist", "indent", "outdent", "subscript", "superscript", "clearhtml", "quickformat", "selectall", "/", "fullscreen", "|", "formatblock", "fontname", "fontsize", "|", "forecolor", "hilitecolor", "bold", "italic", "underline", "strikethrough", "lineheight", "removeformat", "|", "image", "multiimage", "flash", "media", "insertfile", "table", "hr", "emoticons", "baidumap", "pagebreak", "anchor", "link", "unlink"],
+                afterBlur: function () { this.sync(); }
+            });
+        });
+        //标签
+        $('#tags').tagsInput({
+            width: '100%',
+            height: '47px',
+            //autocomplete_url: './fake_json.html',
+            autocomplete:{selectFirst:true,width:'100px',autoFill:true},
+            defaultText:'{:lang("Add new tags")}'
+        });
+    });
+    $('body').on('click', '#image-list li', function () {
+        var that = $(this);
+        if(that.attr('id') == 'filePickerBlock') return false;
+        that.addClass('selected').siblings().removeClass('selected');
+    })
+    $('#image-list').on('click','.cancel',function(){
+        var that = $(this);
+        var imgList = $('input[name=image_list]').val().split(',');
+        var img     = (function () {
+            var src = that.closest('li').find('img').attr('src');
+            if(src.indexOf('__UPLOADS__/') >= 0)
+            {
+                return src.replace('__UPLOADS__/', '');
+            }
+            return src;
+        })();
+
+        var i = $.inArray(img, imgList);
+        if(i!=-1) imgList.splice(i,1);
+        imgList[0]||imgList.shift();
+        $('input[name=image_list]').val(imgList);
+        $(this).closest('li').remove();
+    });
+    // 商品主图选取
+    $(document).on('click','#image-list li',function(){
+        var _sort_html = '<ul>';
+        var that = $(this);
+        
+        $('#image-list li').each(function(k,v){
+            if($(this).hasClass('selected')){
+                _html = '<input type="hidden" name="selected_thumb" value="'+that.children('img').attr('src')+'" />';
+                $('#selected-thumb').html(_html);
+            }
+            if(!$(this).hasClass('upload'))
+            {
+                _sort_html += '<li><input type="text" value="'+k+'" name="image_list_sort[]"/></li>';
+            }
+            
+        });
+        _sort_html += '</ul>';
+        if(!$('#image-sort ul').length){
+            $('#image-sort').parent().show();
+            $('#image-sort').html(_sort_html);
+        }else {
+            if (($('#image-sort li').length !== ($('#image-list li').length - 1))) {
+                $('#image-sort').parent().show();
+                $('#image-sort').html(_sort_html);
+            } else {
+                $('#image-sort').parent().show();
+            }
+        }
+        })
+    //商品描述选项按钮切换
+    $('.btn-group .btn').click(function() {
+        $('.btn-group').find('button').removeClass('btn-info').addClass('btn-default');
+        $(this).addClass('btn-info');
+        $('#'+$(this).data('param')).siblings().removeClass('show').addClass('hide');
+        $('#'+$(this).data('param')).removeClass('hide').addClass('show');
+    });
+    //商品描述复制
+    $('#copypc2wap').click(function () {
+        _html = $("iframe.ke-edit-iframe").contents().find("body.ke-content").eq(0).html();
+        $("iframe.ke-edit-iframe").contents().find("body.ke-content").eq(1).html(_html);
+        $('#wap_description').html(_html);
+        $('.btn-group button').eq(1).trigger('click');
+    });
+    //添加产品参数
+    var stop = false;
+    function getAttributeTable(id) {
+        var validate = true;
+        if(id){
+            var attr_table_id = id;
+        }else{
+            var attr_table_id = $('#attr_type').val();
+        }
+        var name = $('#attr_type option[value='+attr_table_id+']').text();
+        if(attr_table_id == 0){
+            validate = false;
+            layer.msg('{:lang(\'Attribute_Group_No_Choose\')}',{icon:2, time: 2000 ,shade: 0.3});
+        }
+        // 验证是否有重复的参数组
+        if($("#attribute-table").children("#attribute-group-"+attr_table_id).length>0){
+            layer.msg('{:lang(\'AttributeGroup_Exist\')}',{icon:2, time: 2000 ,shade: 0.3});
+            validate = false;
+        }
+
+        if (!stop && validate) {
+            $.ajax({
+                url:"{:url('getattribute')}",
+                type:"post",
+                data:{'attribute_group_id': attr_table_id},
+                dataType:"json",
+                cache: false,
+                time:3000,
+                before:function(){
+                    stop = true;
+                },
+                success:function(result){
+                    var _html=attribute_html(name,result,attr_table_id);
+                    $('#attribute-table').append(_html);
+                    stop = false;
+                },
+                error:function(){
+                    console.log('{:lang("Ver_err")}');
+                }
+            });
+        }
+    }
+    //拼接产品参数html
+    function attribute_html(name,result,attr_table_id) {
+        var _html = '<fieldset class="clearfix" id="attribute-group-'+attr_table_id+'">';
+        _html += '<legend>'+name+'&nbsp;<i class="fa fa-close"></i></legend>';
+        $.each(result,function (i,e) {
+            _html += '<div class="form-group">';
+            _html += '<label for="package_num" class="col-sm-1 control-label">'+e.name+'</label>';
+            _html += '<div class="col-sm-5">';
+            if(e.option === false){
+                _html += "<input type=\"text\" name=\"attribute["+e.attribute_group_id+"]["+e.attribute_id+"]\" value=''/>";
+            }else{
+                $.each(e.option,function(k,v){
+                    _html += '<input type="checkbox" name="attribute['+e.attribute_group_id+']['+e.attribute_id+'][]" value="'+v+'">'+v+'<span style="white-space:pre;"></span>&nbsp;&nbsp;&nbsp;&nbsp;';
+                });
+            }
+            _html += '</div></div>';
+        });
+        _html += '</fieldset>';
+        return _html;
+    }
+    //删除产品参数
+    $('#attribute-table').on('click','.fa-close',function () {
+        $(this).parent().parent().remove();
+    });
+    //商品分类js
+    $("#parent-category").on('change',function () {
+        var parentid = $(this).val();
+        if (!parentid) {
+            return false;
+        }
+        $.ajax({
+            url:"{:url('seller/goods/getcategories')}",
+            type:'post',
+            dataType:'json',
+            data:{
+                pid:parentid
+            },
+            success:function (re) {
+                var _html = '';
+                $.each(re,function (i,e) {
+                    _html += "<option value='"+e.id+"'>"+e.title+"</option>"
+                });
+                $("#child-category").html(_html);
+                $('#child-category').trigger('change');
+                $("#child-category").show();
+            },
+            error:function () {
+                console.log("{:lang('service_buzy')}");
+            }
+        })
+    });
+    $("#child-category").on('change',function () {
+        var parentid = $(this).val();
+        if (!parentid) {return false;}
+        $.ajax({
+            url:"{:url('seller/goods/getcategories')}",
+            type:'post',
+            dataType:'json',
+            data:{
+                pid:parentid
+            },
+            success:function (re) {
+                var _html = '';
+                $.each(re,function (i,e) {
+                    _html += "<option value='"+e.id+"'>"+e.title+"</option>"
+                });
+                $("#grandchild-category").html(_html);
+                $('#grandchild-category').trigger('change');
+                $("#grandchild-category").show();
+            },
+            error:function () {
+                console.log("{:lang('service_buzy')}");
+            }
+        })
+    });
+    $('#grandchild-category').on('change',function () {
+        var cat_id = $(this).val();
+        $('#cat_id').val(cat_id);
+        //加载当前分类规格
+        $.ajax({
+            url: "{:url('seller/goods/getCategoryOptionIds')}",
+            type: 'post',
+            data: {cat_id:cat_id},
+            dataType: 'json',
+            success: function (data) {
+                //$("#option-value").empty();
+                if(data){
+                    $.each(data, function (k, arr) {
+                        var _html = '<div class="form-group arr-option">';
+                        _html +='<label class="col-md-2 control-label option-name"  data-id="' + arr.option_id + '">'+arr.name+'</label>';
+                        $.each(arr.option_value,function (i,e) {
+                            _html +='<div class="col-md-2" style="padding-top: 7px">';
+                            _html +='<div id="option-'+e.option_value_id+'">' +
+                                    '<div style="float: left;margin-bottom: 3px">'+
+                                '<input type="checkbox" name="option_value[]"  data-type="'+arr.type+'" value="'+e.option_value_id+'" class="option-value" /></div>';
+                            _html += '<label for="" class="col-md-10">'+e.name+'</label></div>';
+                            _html +='</div>';
+                        });
+                        _html +='</div>';
+                        $('#option-value').append(_html);
+                    });
+                }
+            }
+        });
+        /* 加载当前分类的参数组 */
+        $.ajax({
+            url: "{:url('seller/goods/getCategoryAttributeGroupIds')}",
+            type: 'post',
+            data: {cat_id:cat_id},
+            dataType: 'json',
+            success: function (data) {
+                $("#attribute-table").empty();
+                if(data){
+                    $.each(data, function (n, value) {
+                        getAttributeTable(value);
+                    });
+                }
+            }
+        });
+
+    });
+    // 增加选项
+    $('#option-value').on('click','.option-value',function (){
+        var op_array= [];
+        var op_id = [];
+        $('.arr-option').each(function(k,v){
+            var option_name = $(this).find('.option-name').text();
+            //var option_id = $(this).find('.option-name').data('id');
+            op_array[k] = [];
+            op_id[k] = [];
+            $(this).find('.option-value:checked').each(function(k1,v1){
+                op_array[k][k1] = option_name + ':' + $.trim($(this).parent().parent().find('label').text());
+                op_id[k][k1] = $(this).val();
+            });
+        });
+        
+        op_array = dk(op_array);
+        op_id = dk(op_id);
+        
+        var op_sku = [];
+        $.each(op_array,function(k,v){
+            var sepc_name = [];
+            var sepc_id = [];
+            $.each(v,function(k1,v1){
+                sepc_name.push(v1);
+                sepc_id.push(op_id[k][k1]);
+            });
+            op_sku.push({
+                name:sepc_name.join(';'),
+                id:sepc_id.join(',')
+            });
+        });
+        
+        // 多规格选项，2个以上
+        if(op_sku.length != 0) {
+            $('#sku-table tbody').empty();
+            $('#sku-name').show().text('{:lang("sku_name")}');
+            $.each(op_sku, function (k, arr) {
+                //console.log(arr.id);
+                addSku(arr.id,arr.name);
+            });
+        }else{
+            // 单规格选项
+            $('#option-value').find('.option-value:checked').each(function(k,v){
+                op_sku[k] = {
+                    name:$(this).parents('.arr-option').find('.option-name').text() + ':' + $.trim($(this).parent().parent().find('label').text()),
+                    id: $(this).val()
+                }
+            });
+            if(op_sku.length != 0) {
+                $('#sku-table tbody').empty();
+                $('#sku-name').show().text('{:lang("sku_name")}');
+                $.each(op_sku, function (k, arr) {
+                    addSku(arr.id,arr.name);
+                });
+            }else{
+                $('.sku_name').empty();
+                $('#sku-name').text('').hide();
+            }
+
+        }
+        if($(this).data('type') == 'image') {
+            $('#option-'+$(this).val()).siblings().remove();
+            if ($(this).is(':checked')) {
+                var _html ='<div class="img">';
+                _html += '<img src="__PUBLIC__/admin/images/image.png" alt="" class="img-rounded" style="width: 50px;height: 50px">';
+                _html += '</div>';
+                _html += '<input type="hidden" name="sku_images['+$(this).val()+'][image]">';
+                _html += '<input type="hidden" name="sku_images['+$(this).val()+'][option_value_id]" value="'+$(this).val()+'">';
+                $('#option-'+$(this).val()).after(_html);
+            }
+            
+        }
+    });
+    // 笛卡尔乘积
+    function dk(arr) {
+        var r = [];
+        (function f(t, a, n) {
+            if (n == 0) return r.push(t);
+            for (var i = 0; i < a[n-1].length; i++) {
+                f(t.concat(a[n-1][i]), a, n - 1);
+            }
+        })([], arr, arr.length);
+        return r;
+    }
+    //添加sku
+    var row_sku = 0;
+    function addSku(id,name) {
+        var market_price = $("input[name='market_price']").val();
+        var sale_price = $("input[name='sale_price']").val();
+        var cost_price = $("input[name='cost_price']").val();
+        _html = '<tr id="row'+row_sku+'">';
+
+        _html += '<td class="sku_name">';
+        _html +=  name;
+        _html += '<input type="hidden" name="sku['+row_sku+'][merge_option_value_id]" value="'+id+'">';
+        _html += '<input type="hidden" name="sku['+row_sku+'][name]" value="'+name+'">';
+        _html += '</td>';
+
+        _html += '<td><div class="col-xs-12"><input type="text"  name="sku['+row_sku+'][sku]" class="form-control input-sm" value=""></div></div></td>';
+        _html += '<td><div class="col-xs-12"><input type="text" class="form-control input-sm" name="sku['+row_sku+'][market_price]" value="'+market_price+'"></div></td>';
+        _html += '<td><div class="col-xs-12"><input type="text" class="form-control input-sm" name="sku['+row_sku+'][sale_price]" value="'+sale_price+'"></div></td>';
+        _html += '<td><div class="col-xs-12"><input type="text" class="form-control input-sm" name="sku['+row_sku+'][cost_price]" value="'+cost_price+'"></div></td>';
+        _html += '<td><div class="col-xs-12"><input type="text" class="form-control input-sm" name="sku['+row_sku+'][good_batch]" value="" ></div></td>';
+        _html += '<td><div class="col-xs-12"><input type="text" class="form-control input-sm" name="sku['+row_sku+'][good_barcode]" value="" ></div></td>';
+        _html += '<td ><div class="col-xs-12"><input type="text" class="form-control input-sm" name="sku['+row_sku+'][hs_record]" value="" ></div></td>';
+        _html += '<td ><div class="col-xs-12"><input type="text" class="form-control input-sm" name="sku['+row_sku+'][hs_national_record]" value="" ></div></td>';
+        _html += '<td ><div class="col-xs-12"><input type="text" class="form-control input-sm" name="sku['+row_sku+'][quantity]" value="" disabled  /></div></td>';
+        _html += '<td ><div class="col-xs-12"><input type="text" class="form-control input-sm" name="sku['+row_sku+'][offline_quantity]" value="" disabled  ></div></td>';
+        _html += '<td class="remove"><a href="javascript:void(0);"><i class="fa fa-times-circle-o"></i></a></td>';
+        _html += '</tr>';
+
+        $('#sku-table tbody').append(_html);
+        //$('#row'+row_sku+' select').change();
+        row_sku ++;
+    }
+    //删除sku
+    $('#sku-table tbody').on('click','.fa-times-circle-o',function () {
+        console.log(123123);
+        $(this).parent().parent().parent().remove();
+    })
+    // 品牌关联国家
+    $('#brand_id').change(function(){
+        var country_id = $('#brand_id').children("option:selected").data('country_id');
+        if(country_id !==0) {
+            $('#country_id').children('option[value="' + country_id + '"]').attr('selected', true);
+        }
+    });
+    $('#now_category_name').click(function () {
+        $('#edit_categoty').show();
+    })
+    $('#has_en_name').click(function () {
+        if ($(this).is(':checked')) {
+            $('#en_name').show();
+        } else {
+            $('#en_name').hide();
+        }
+    })
+    if($('select[name=type]').val()=='bonded'){
+        $('.hs').show();
+    }
+    $('select[name=type]').on('change',function(){
+        if($('select[name=type]').val()=='bonded'){
+            $('.hs').show();
+        }else{
+            $('.hs').hide();
+        }
+    });
+</script>
+
+{/block}

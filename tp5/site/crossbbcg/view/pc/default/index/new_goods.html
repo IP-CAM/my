@@ -1,0 +1,36 @@
+{notempty name=":widget('Ad/get_goods_ad',array('id'=>16,'limit'=>5))"}
+<div class="ly-new-goods">
+	<div class="index-title">
+		<h3><span>新品上市</span><em>NEW PRODUCT</em> </h3>
+		<a class="more" target="_blank"  href="#" title="进入新品频道">进入新品频道 <i>></i></a>
+	</div>
+	<ul class="goods-list clearfix">
+        {foreach :widget('Ad/get_goods_ad',array('id'=>16,'limit'=>5)) as $v}
+		<li class="goods-item">
+			<div class="goods-pic">
+				<a href="{:url('crossbbcg/goods/index').'?item_id='.$v.id}" target="_blank" title="{$v.name}" >
+                    {empty name='$v.thumb'}
+					<img width="205" height="205" class="lazy"  src="__PUBLIC__/{$img_path}/tm.gif"  data-original="__PUBLIC__/{$img_path}/no-image.png" alt="{$v.name}" />
+                    {else /}
+                    {if condition="substr($v.thumb,0,4)=='http'"}
+                    <img width="205" height="205" class="lazy"  src="__PUBLIC__/{$img_path}/tm.gif"  data-original="{$v.thumb}" alt="{$v.name}" />
+                    {else /}
+                    <img width="205" height="205" class="lazy"  src="__PUBLIC__/{$img_path}/tm.gif"  data-original="__UPLOADS__/{$v.thumb}" alt="{$v.name}" />
+                    {/if}
+                    {/empty}
+				</a>
+			</div>
+			<div class="goods-info">
+				<div class="goods-name">
+					<a href="{:url('crossbbcg/goods/index').'?item_id='.$v.id}" target="_blank">{$v.name}</a>
+				</div>
+				<div class="price-box">
+					<span class="price">{$v.sale_price}</span>
+					<span class="mkt-price">{$v.market_price}</span>
+				</div>
+			</div>
+		</li>
+		{/foreach}
+	</ul>
+</div>
+{/notempty}

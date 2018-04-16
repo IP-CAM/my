@@ -1,0 +1,109 @@
+    {extend name='common/base'}
+    
+    {block name='css'}
+    <link href="__PUBLIC__/{$css_path}/daterangepicker.css" rel="stylesheet">
+    {/block}
+    
+    {block name="breadcrumb"}
+    <li>{:lang('sAccount')}</li>
+    <li class="active">{$meta_title|default=''}</li>
+    {/block}
+    
+    {block name='body'}
+    <section class="content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <div class="row">
+                            <div class="page-header-top">
+                                
+                                {:getSellerButton()}
+                                
+                                <a href="javascript:showAdvSearch();" class="btn-etshop icon">
+                                    <i class="fa fa-search"></i>
+                                </a>
+                                
+                                <a href="javascript:location.reload();" class="btn-etshop icon">
+                                    <i class="fa fa-refresh"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <table id="demo-foo-addrow" class="table table-bordered table-striped" data-page-size="10">
+                            <thead>
+                            <tr>
+                                <th style="width: 25px;">
+                                    <input type="checkbox" class="check-all">
+                                </th>
+                                <th>ID</th>
+                                <th>{:lang('Account_name')}</th>
+                                <th>{:lang('role_name')}</th>
+                                <th>{:lang('tel')}</th>
+                                <th>{:lang('email')}</th>
+                                <th>{:lang('status')}</th>
+                                <th class="center">{:lang('opreration')}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {foreach $list as $vo}
+                            <tr>
+                                <td>
+                                    <input class="ids" type="checkbox" value="{$vo['id']}" name="ids[]">
+                                </td>
+                                <td>{$vo.id}</td>
+                                
+                                <td>
+                                    <a class="tooltip-link ajax-get" data-showbar="1" title="{:lang('edit_son_account')}" data-title="{:lang('edit_son_account')}" data-height="460" data-width="580" href="{:url('edit',array('id'=>$vo.id))}">{$vo.nickname}</a>
+                                </td>
+                                <td>{$vo.rolename}</td>
+                                <td>{$vo.mobile}</td>
+                                <td>
+                                    {$vo.email}
+                                </td>
+                                <td>
+                                    {eq name='$vo.status' value='1'}
+                                    <a href="{:url('seller/account/disable',array('pk'=>'status','ids'=>$vo.id))}" class="ajax-able" title="{:lang('disable')}" ><span class="yes"><img src="__PUBLIC__/admin/images/enabled.png" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png"  alt=""></span></a>
+                                    {else /}
+                                    <a href="{:url('seller/account/enable',array('pk'=>'status','ids'=>$vo.id))}" class="ajax-able" title="{:lang('enable')}" ><span class="no"><img src="__PUBLIC__/admin/images/disabled.png" data-enabled="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png"   alt=""></span></a>
+                                    {/eq}
+                                </td>
+                                <td class="center">
+                                    <a class="tooltip-link ajax-get f18" href="{:url('edit_pwd',array('id'=>$vo.id))}" data-showbar="1" data-width="500" data-height="290" title="{:lang('edit_password')}" data-title="{:lang('edit_password')}"><i class="fa fa-pencil-square-o"></i></a>
+                                    <a class="tooltip-link ajax-get confirm f18" data-layer="{:lang('Want_delete')}" title="{:lang('Delete_this_record')}" href="{:url('delete',array('id'=>$vo['id']))}" data-title="{:lang('Delete')}"><i class="fa fa-trash-o"></i></a>
+                                </td>
+                            </tr>
+                            {/foreach}
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td colspan="10">
+                                    <div class="text-right pagination" >
+                                    
+                                    </div>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="row">
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {/block}
+    
+    {block name='js'}
+    <script src="__PUBLIC__/{$js_path}/moment.min.js"></script>
+    <script src="__PUBLIC__/{$js_path}/daterangepicker.js"></script>
+    
+    <script type="text/javascript">
+        //Date range picker
+        $('#reservation').daterangepicker({
+            autoUpdateInput: false
+        });
+    </script>
+    {/block}

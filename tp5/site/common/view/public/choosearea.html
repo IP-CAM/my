@@ -1,0 +1,147 @@
+    <select name="country" id="country" style="width:120px;">
+        <option value="_NULL_">-{:lang('Please_choose')}-</option>
+    </select>
+
+    <select name="province" id="province" style="width:110px;display: none;">
+        <option value="_NULL_">-{:lang('Please_choose')}-</option>
+    </select>
+
+    <select name="city" id="city" style="width:100px; display: none;">
+        <option value="_NULL_">-{:lang('Please_choose')}-</option>
+    </select>
+
+    <select name="district" id="district" style="width:80px; display: none;">
+        <option value="_NULL_">-{:lang('Please_choose')}-</option>
+    </select>
+    
+    <script>
+        $(function () {
+            var country  = '{$country}';
+            var province = '{$province}';
+            var city     = '{$city}';
+            var district = '{$district}';
+            var target   = '{:url("index/index/getarea")}';
+            $.get(target, {attr:'country'}).success(function (data) {
+                if (data.code == 1) {
+                    var opt = '';
+                    $.each(data.msg, function (i, val) {
+                        opt += '<option value="'+val.id+'" data-value="'+val.name+'">'+val.name+'</option>'
+                    })
+                    $("#country").append(opt);
+                    if(country != '')
+                    {
+                        //选中国家
+                        $("#country option[data-value="+country+"]").attr("selected", true);
+                        var selectCountry = $("#country").val();
+                        //填充省份选择下拉
+                        $.get(target, {attr: 'province', pid:selectCountry}).success(function (pdata) {
+                            if (pdata.code == 1) {
+                                var popt = '';
+                                $.each(pdata.msg, function (pi, pval) {
+                                    popt += '<option value="'+pval.id+'" data-value="'+pval.name+'">'+pval.name+'</option>'
+                                })
+                                $("#province").show().append(popt);
+                                //省份有值时进行选中
+                                if(province != '')
+                                {
+                                    $("#province option[data-value="+province+"]").attr("selected", true);
+                                    var selectProvince = $("#province").val();
+                                    $.get(target, {attr: 'city', pid:selectProvince}).success(function (cdata) {
+                                        if (cdata.code == 1) {
+                                            var copt = '';
+                                            $.each(cdata.msg, function (ci, cval) {
+                                                copt += '<option value="'+cval.id+'" data-value="'+cval.name+'">'+cval.name+'</option>'
+                                            })
+                                            $("#city").show().append(copt);
+                                            //城市不为空时
+                                            if(city != '')
+                                            {
+                                                $("#city option[data-value="+city+"]").attr("selected", true);
+                                                var selectCity = $("#city").val();
+
+                                                $.get(target, {attr: 'district', pid:selectCity}).success(function (adata) {
+                                                    if (adata.code == 1) {
+                                                        var aopt = '';
+                                                        $.each(adata.msg, function (ai, aval) {
+                                                            aopt += '<option value="'+aval.id+'" data-value="'+aval.name+'">'+aval.name+'</option>'
+                                                        })
+                                                        $("#district").show().append(aopt);
+                                                        //城市不为空时
+                                                        if(district != '')
+                                                        {
+                                                            $("#district option[data-value="+district+"]").attr("selected", true);
+                                                        }
+                                                    } else {
+                                                        $("#city").empty().hide();
+                                                    }
+                                                });
+                                            }
+                                        } else {
+                                            $("#city").empty().hide();
+                                        }
+                                    });
+                                    
+                                }
+                            } else {
+                                $("#province").show().hide();
+                            }
+                        });
+                    }
+                } else {
+                    $("#country").empty().append('<option value="_NULL_">{:lang("Load area fail")}</option>');
+                }
+            });
+
+            $('#country').on('change', function () {
+                var select   = $(this).val();
+                $.get(target, {attr: 'province', pid:select}).success(function (data) {
+                    if (data.code == 1) {
+                        var opt = '';
+                        $.each(data.msg, function (i, val) {
+                            opt += '<option value="'+val.id+'" data-value="'+val.name+'">'+val.name+'</option>'
+                        })
+                        $("#province").empty().append('<option value="_NULL_">{:lang("Please_choose")}</option>');
+                        $("#province").append(opt).show();
+                    } else {
+                        $("#province").empty().hide();
+                    }
+                    $("#city, #district").empty().hide();
+                });
+            })
+            
+            $('#province').on('change', function () {
+                var select   = $(this).val();
+                $.get(target, {attr: 'city', pid:select}).success(function (data) {
+                    if (data.code == 1) {
+                        var opt = '';
+                        $.each(data.msg, function (i, val) {
+                            opt += '<option value="'+val.id+'" data-value="'+val.name+'">'+val.name+'</option>'
+                        })
+                        $("#city").empty().append('<option value="_NULL_">{:lang("Please_choose")}</option>');
+                        $("#city").append(opt).show();
+                    } else {
+                        $("#city").empty().hide();
+                    }
+                    $("#district").empty().hide();
+                });
+            })
+
+            $('#city').on('change', function () {
+                var select   = $(this).val();
+                $.get(target, {attr: 'district', pid:select}).success(function (data) {
+                    if (data.code == 1) {
+                        var opt = '';
+                        $.each(data.msg, function (i, val) {
+                            opt += '<option value="'+val.id+'" data-value="'+val.name+'">'+val.name+'</option>'
+                        })
+                        $("#district").empty().append('<option value="_NULL_">{:lang("Please_choose")}</option>');
+                        $("#district").append(opt).show();
+                    } else {
+                        $("#district").empty().hide();
+                    }
+                });
+            })
+
+        })
+    </script>
+    

@@ -1,0 +1,162 @@
+    {extend name="admin@public/poupbase"/}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+        <div id="content" style="margin:0px 10px 5px 8px;">
+            <div class="bloc" style="margin:10px 0px 0px;">
+                <div class="content">
+                    <form id="myform" method="post" style="margin-top:5px;" class="">
+                        <fieldset>
+                            <legend>{$meta_title|default=''}</legend>
+                            <div class="row">
+                                <label for="title" class="w140">{:lang('Silder_img_title')}: <span class="required">*</span></label>
+                                <input  id="title" type="text" value="{$data.title}" name="title" style="width:280px;"/>
+                                <a class="tooltip-icon" title="{:lang('Silder_title_tip')}"></a>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="sid" class="w140">{:lang('Silder_item')}: </label>
+                                <select name="sid" id="sid" style="width:290px;">
+                                    <option value="0"></option>
+                                    {for start="1" end="10"}
+                                    <option value="{$i}" {eq name="data['position']" value="$i"}selected{/eq}>{$i}</option>
+                                    {/for}
+                                </select>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="thumb" class="w140">{:lang('Silder_thumb')}: </label>
+                                <input  id="thumb" type="text" value="{$data.thumb}" name="thumb" style="width:280px;" class="onlyletter" />
+                                <input class="button white upload" value="{:lang('Selectoruploadimg')}" type="button" title="{:lang('Upload img and file')}" url="{:url('img',array('m' => CONTROLLER_NAME,'input' => 'thumb'))}" data-upload="__UPLOADS__" />
+                                <input class="button white prview" value="{:lang('Preview')}" type="button" />
+                            </div>
+                            
+                            <div class="row">
+                                <label for="image" class="w140">{:lang('Silder_image')}: </label>
+                                <input  id="image" type="text" value="{$data.image}" name="image" style="width:300px;" class="onlyletter" />
+                                <input class="button white upload" value="{:lang('Selectoruploadimg')}" type="button" title="{:lang('Upload img and file')}" url="{:url('img',array('m' => CONTROLLER_NAME,'input' => 'image'))}" />
+                                <input class="button white prview" value="{:lang('Preview')}" type="button" />
+                            </div>
+                            
+                            <div class="row">
+                                <label for="remark" class="w140">{:lang('Silder_remark')}: </label>
+                                <input id="remark" type="text" value="{$data.remark}" name="remark"  style="width:350px;"/>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="url" class="w140">{:lang('Silder_url')}: </label>
+                                <input id="url" type="text" value="{$data.url}" name="url"  style="width:350px;" placeholder="http://" />
+                                <a class="tooltip-icon" title="{:lang('Silder_url_tip')}"></a>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="param" class="w140">{:lang('Silder_param')}: </label>
+                                <input id="param" type="text" value="{$data.param}" name="param"  style="width:350px;"/>
+                            </div>
+    
+                            <div class="row">
+                                <div style="float:left;">
+                                    <label for="start" class="w140">{:lang('Time_slot')}: </label>
+                                    <input id="start" type="text" value="{eq name=" ACTION_NAME" value="edit"}{$data.begin_time|time_format}{else
+                                    /}{:time_format()}{/eq}" name="begin_time" class="w120l green datainput"/>
+                                </div>
+                                <div style="overflow:hidden;">
+                                    ~
+                                    {eq name="ACTION_NAME" value="edit"}
+                                    <input id="end" value='{eq name="data.end_time" value="9"}9{else /}{$data.end_time|time_format}{/eq}'
+                                           type="text" name="end_time" class="w120l blue datainput"/>
+                                    {else /}
+                                    <input id="end" value="{:date('Y-m-d H:i:s', strtotime('+1 week'))}" type="text" name="end_time" class="w120l blue datainput"/>
+                                    {/eq}
+            
+                                    <input class="button white" value="{:lang('Forever')}" type="button" id="forever" onClick="$('#end').val(9);"/>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div style="float:left;">
+                                    <label for="status" class="w140">{:lang('Status')}:</label>
+                                    <div class="slideBox">
+                                        {eq name="ACTION_NAME" value="edit"}
+                                            <input id="status" value="1" type="checkbox" name="status"  {eq name="data['status']" value="1"}checked{/eq}/>
+                                        {else /}
+                                            <input id="status" value="1" type="checkbox" name="status" checked />
+                                        {/eq}
+                                        <label for="status"></label>
+                                    </div>
+                                </div>
+                                <div style="float:left;">
+                                    <label for="langid" class="w140">{:lang('Global_silder')}:</label>
+                                    <div class="slideBox">
+                                        {eq name="ACTION_NAME" value="edit"}
+                                            <input id="langid" value="0" type="checkbox" name="langid"  {eq name="data['langid']" value="0"}checked{/eq}/>
+                                        {else /}
+                                            <input id="langid" value="0" type="checkbox" name="langid" />
+                                        {/eq}
+                                        <label for="langid"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="sort" class="w140">{:lang('Sort')}: </label>
+                                <input type="number" class="input litle" min="0" name="sort" maxlength="5" id="sort" value='{$data.sort|default=0}'>
+                            </div>
+                            
+                            <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                                {eq name="ACTION_NAME" value="edit"}
+                                    <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('savedata')}">
+                                    <input type="hidden" name="id" value="{$data.id}" />
+                                {else /}
+                                    <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}">
+                                {/eq}
+                                <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {/block}
+    
+    {block name="js"}
+        <script>
+            $(function(){
+                $("#start").datetimepicker({
+                    dateFormat: "{:config('kernel.timeformat')}",
+                    minDate:new Date(),
+                    onSelect:function(dateText,inst){
+                        $.datepicker.regional[ "{:config('kernel.localdate')}" ];
+                        $("#end").datepicker("option","minDate",dateText);
+                    }
+                });
+                
+                $("#end").datetimepicker({
+                    dateFormat: "{:config('kernel.timeformat')}",
+                    onSelect:function(dateText,inst){
+                        $.datepicker.regional[ "{:config('kernel.localdate')}" ];
+                        $("#start").datepicker("option","maxDate",dateText);
+                    }
+                });
+                
+                $('#end').blur(function(){
+                    if($('#end').val() == ''){
+                        $('#end').val(9);
+                    }
+                })
+                
+                $(".prview").click(function(){
+                    var img = $(this).closest("div").find("input[type=text]").val();
+                    layer.open({
+                        type: 1,
+                        shade: false,
+                        title: false, //不显示标题
+                        content: '<div><img src='+img+' /></div>',
+                        cancel: function(index){
+                            layer.close(index);
+                        }
+                    });
+                })
+            })
+        </script>
+    {/block}

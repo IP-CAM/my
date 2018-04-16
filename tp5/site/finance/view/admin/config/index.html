@@ -1,0 +1,663 @@
+    {extend name="admin@public/base" /}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content">
+        <div class="breadcrumbs">
+            {:lang('Finance')} : &nbsp;&nbsp; {:lang('Financeconf')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+        </div>
+        
+        <div class="bloc">
+            <div class="title">
+                <div class="tabs" id="navs">
+                    {include file="admin@public/navs" /}
+                </div>
+                
+                {include file="admin@public/lang" /}
+            </div>
+            
+            <form name="setting" id="myform" method="post" style="margin-top:5px;">
+                <div class="alert alert-warning">
+                    <button class="close" type="button">&times;</button>
+                    <span class="alert-content">{:lang('Global config tip')}</span>
+                </div>
+                
+                <div class="bloc" id="blocStatistics">
+                    <!--<div class="title collapsible">-->
+                    <div class="title">
+                        <div class="tabs static pot" id="blockStatistics">
+                            <ul>
+                                <a id="tabStat1_link" href="#tabStat1">
+                                    <li>{:lang('Siteopt')}</li>
+                                </a>
+                                <a id="tabStat2_link" href="#tabStat2">
+                                    <li>{:lang('Attopt')}</li>
+                                </a>
+                                <a id="tabStat3_link" href="#tabStat3">
+                                    <li>{:lang('Securityopt')}</li>
+                                </a>
+                                <a id="tabStat4_link" href="#tabStat4">
+                                    <li>{:lang('Mailconf')}</li>
+                                </a>
+                                <a id="tabStat5_link" href="#tabStat5">
+                                    <li>{:lang('Msgkey')}</li>
+                                </a>
+                                <a id="tabStat6_link" href="#tabStat6">
+                                    <li>{:lang('Watermark')}</li>
+                                </a>
+                            </ul>
+                        
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div id="tabStat1" style="display:block;">
+                            <table class="table kright">
+                                <tbody>
+                                <tr>
+                                    <td>{:lang('Sitestatus')}: </td>
+                                    <td>
+                                        <div class="slideBox" >
+                                            <input id="sitestatus" value="1" type="checkbox" name="sitestatus"  {eq name="data.sitestatus" value="1"}checked{/eq} {notpresent name="data.sitestatus"}checked{/notpresent} />
+                                            <label for="sitestatus"></label>
+                                        </div> &nbsp;&nbsp;&nbsp;
+                                        <a class="tooltip-icon" title="{:lang('Sitestatus_tip')}"></a>
+                                    </td>
+                                </tr>
+                                
+                                <tr class="row bset">
+                                    <td>{:lang('Site run as')}: </td>
+                                    <td>
+                                        <div class="row bset">
+                                            <input name="runas" type="radio" value="1" id="runas_1" {eq name="data.runas" value="1"}checked{/eq} {notpresent name="data.runas"}checked{/notpresent} />
+                                            <label for="runas_1" class="w150_r_0">{:lang('Debug')}</label>
+                                            <input name="runas" type="radio" value="0" id="runas_0" {eq name="data.runas" value="0"}checked{/eq} />
+                                            <label for="runas_0" class="w150_r_0">{:lang('Onlines')}</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>{:lang('Timezone')}: </td>
+                                    <td>
+                                        <select name="timezone">
+                                            {include file="admin@public/timezone" /}
+                                        </select>
+                                        <a class="tooltip-icon" title="{:lang('Cookiescope_tip')}"></a>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>{:lang('Site_default_lang')}: </td>
+                                    <td>
+                                        <select id="lang" name="lang">
+                                            {notempty name="langs"}
+                                            {volist name="langs" id="lang"}
+                                            <option value="{$key}" {if condition="$key eq LANG "}selected{/if}>{$lang[0]} ( {$lang[1]} )</option>
+                                            
+                                            {/volist}
+                                            {else/}
+                                            <option value="0">{:lang('No_record')}</option>
+                                            {/notempty}
+                                        </select>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>{:lang('Default option time format')}: </td>
+                                    <td>
+                                        <select name="timeformat" style="width: 120px;">
+                                            <option value="yy-mm-dd">yy-mm-dd</option>
+                                            <option value="yy/mm/dd">yy/mm/dd</option>
+                                        </select>
+                                        
+                                        {:lang('Default option time format tip')}
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>{:lang('Default time lang')}: </td>
+                                    <td>
+                                        <select name="localdate" style="width: 240px;">
+                                            <option value="zh-CN">Simplified Chinese</option>
+                                            <option value="zh-HK">Traditional_Chinese</option>
+                                            <option value="zh-TW">Hongkong_Chinese</option>
+                                            <option value="vi">Vietnamese</option>
+                                            <option value="uk">Ukrainian</option>
+                                            <option value="tr">Turkish</option>
+                                            <option value="tj">Tajiki</option>
+                                            <option value="th">Thai</option>
+                                            <option value="ta">Thai</option>
+                                            <option value="sv">Swedish</option>
+                                            <option value="sr-SR">Serbian</option>
+                                            <option value="sr">Serbian</option>
+                                            <option value="sq">Albanian</option>
+                                            <option value="sl">Slovenian</option>
+                                            <option value="sk">Slovak</option>
+                                            <option value="ru">Russian</option>
+                                            <option value="ro">Romanian</option>
+                                            <option value="rm">Romansh</option>
+                                            <option value="pt-BR">Brazilian</option>
+                                            <option value="pt">Portuguese</option>
+                                            <option value="pl">Polish</option>
+                                            <option value="no">Norwegian</option>
+                                            <option value="nn">Norwegian</option>
+                                            <option value="nl-BE">Dutch</option>
+                                            <option value="nl">Dutch</option>
+                                            <option value="nb">Norwegian</option>
+                                            <option value="ms">Malaysian</option>
+                                            <option value="ml">Malayalam</option>
+                                            <option value="mk">Macedonian</option>
+                                            <option value="lv">Latvian</option>
+                                            <option value="lt">Lithuanian</option>
+                                            <option value="lb">Luxembourgish</option>
+                                            <option value="ky">Kyrgyz</option>
+                                            <option value="ko">Korean</option>
+                                            <option value="km">Khmer</option>
+                                            <option value="kk">Kazakh</option>
+                                            <option value="ka">Georgian</option>
+                                            <option value="ja">Japanese</option>
+                                            <option value="it">Italian</option>
+                                            <option value="is">Icelandic</option>
+                                            <option value="id">Indonesian</option>
+                                            <option value="hy">Armenian</option>
+                                            <option value="hu">Hungarian</option>
+                                            <option value="ht">Croatian</option>
+                                            <option value="hi">Hindi</option>
+                                            <option value="he">Hebrew</option>
+                                            <option value="gl">Galician</option>
+                                            <option value="fr">French</option>
+                                            <option value="fo">Faroese</option>
+                                            <option value="fi">Finnish</option>
+                                            <option value="fa">Persian</option>
+                                            <option value="eu">Karrikas-ek</option>
+                                            <option value="et">Estonian</option>
+                                            <option value="es">Inicialización</option>
+                                            <option value="eo">Esperanto</option>
+                                            <option value="en-GB">English/UK</option>
+                                            <option value="el">Greek</option>
+                                            <option value="de">German</option>
+                                            <option value="da">Danish</option>
+                                            <option value="cy">Czech</option>
+                                            <option value="ca">Inicialització</option>
+                                            <option value="bs">Bosnian</option>
+                                            <option value="bg">Bulgarian</option>
+                                            <option value="be">Belarusian</option>
+                                            <option value="az">Azerbaijani</option>
+                                            <option value="ar">Arabic</option>
+                                            <option value="af">Afrikaans</option>
+                                        </select>
+                                        
+                                        {:lang('Default option time format tip')}
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>{:lang('Admin_list_select')}: </td>
+                                    <td>
+                                        <input value="{$data.listlimit|default='30,50,100,200,300,400,500,600,800'}" type="text" name="listlimit" placeholder="30,50,100,200,300,400,500,600,800" />
+                                        {:lang('Admin_list_select_tip')}
+                                    </td>
+                                </tr>
+                                
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div id="tabStat2">
+                            <table class="table kright">
+                                <tbody>
+                                <tr>
+                                    <td>{:lang('Attpath')}: </td>
+                                    <td>
+                                        <input value="{$data.attpath|default='uploads'}" type="text" name="attpath" placeholder="uploads" />
+                                        
+                                        {:lang('Attpath_tip')}
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>{:lang('Atttypes')}: </td>
+                                    <td>
+                                        <input value="{$data.atttypes|default='png,gif,jpg,doc.xls,zip'}" type="text" name="atttypes" placeholder="png,gif,jpg,doc.xls,zip" />
+                                        {:lang('Atttypes_tip')}
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>{:lang('Attsize')}: </td>
+                                    <td>
+                                        <input value="{$data.attsize|default='10'}" type="number" name="attsize" placeholder="10" maxlength="2" style="width: 60px; text-align: center;" /> M &nbsp; &nbsp;
+                                        {:lang('Attsize_tip')}
+                                    </td>
+                                </tr>
+                                
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div id="tabStat3">
+                            <table class="table kright">
+                                <tbody>
+                                <tr>
+                                    <td>{:lang('Admin_allow_more_addr')}: {$data.morelogin}</td>
+                                    <td>
+                                        <div class="row bset" style="float: left;">
+                                            <input name="morelogin" type="radio" value="1" id="morelogin_1" {eq name="data.morelogin" value="1"}checked{/eq} {notpresent name="data.morelogin"}checked{/notpresent} />
+                                            <label for="morelogin_1" class="w105_r_0">{:lang('Allow')}</label>
+                                            <input name="morelogin" type="radio" value="0" id="morelogin_0" {eq name="data.morelogin" value="0"}checked{/eq} />
+                                            <label for="morelogin_0" class="w105_r_0">{:lang('Unallow')}</label>
+                                        </div>
+                                        
+                                        <span style="display: inline-block; line-height: 3; margin-left: 15px;">
+                                                    {:lang('Admin_allow_more_addr_tip')}
+                                                </span>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>{:lang('Admin_allow_ip')}: </td>
+                                    <td>
+                                        <input value="{$data.allowip|default=''}" type="text" name="allowip" placeholder="192.168.*.*" style="width: 550px;" />
+                                        
+                                        {:lang('Admin_allow_ip_tip')}
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>{:lang('Cantnotvisitpage')}: </td>
+                                    <td>
+                                        <select name="cantnotvisitpage" style="width: 100px;">
+                                            <option value="403">{:lang('Errpage', array('type'=> '404'))}</option>
+                                            <option value="403">{:lang('Errpage', array('type'=> '403'))}</option>
+                                        </select>
+                                        {:lang('Cantnotvisitpage_tip')}
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td style="vertical-align:top; padding: 8px 15px;">{:lang('Public_act')}: </td>
+                                    <td style="vertical-align:top; padding: 8px 0;">
+                                        <textarea name="public_act_list" rows="5" style="width: 450px; display: inline-block; float: left;"></textarea>
+                                        {:lang('Atttypes_tip')}
+                                    </td>
+                                </tr>
+                                
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div id="tabStat4">
+                            <table class="table kright">
+                                <tbody>
+                                <tr class="row bset">
+                                    <td>{:lang('Email_send_type')}: </td>
+                                    <td>
+                                        <div class="row bset">
+                                            <input name="sendtype" type="radio" value="0" id="sendtype_0" {eq name="data.sendtype" value="0"}checked{/eq} {notpresent name="data.sendtype"}checked{/notpresent} />
+                                            <label for="sendtype_0" class="w150_r_0">{:lang('Email_send_type_1')}</label>
+                                            <input name="sendtype" type="radio" value="1" id="sendtype_1" {eq name="data.sendtype" value="1"}checked{/eq} />
+                                            <label for="sendtype_1" class="w150_r_0">{:lang('Email_send_type_0')}</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>{:lang('Email_send_addr')}: </td>
+                                    <td>
+                                        <input value="{$data.sendaddr|default='runtuer@126.com'}" type="text" name="sendaddr" />
+                                        
+                                        {:lang('Email_send_addr_tip')}
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>{:lang('Email_safe')}:  </td>
+                                    <td>
+                                        <div class="row bset">
+                                            <input name="email_safe" type="radio" value="0" id="email_safe_0" {eq name="data.email_safe" value="0"}checked {/eq} {notpresent name="data.email_safe"}checked{/notpresent} />
+                                            <label for="email_safe_0" class="w95_r_0">{:lang('Default')}</label>
+                                            <input name="email_safe" type="radio" value="SSL" id="email_safe_1" {eq name="data.email_safe" value="SSL"}checked{/eq} />
+                                            <label for="email_safe_1" class="w95_r_0">SSL</label>
+                                            
+                                            <input name="email_safe" type="radio" value="TLS" id="email_safe_2" {eq name="data.email_safe" value="TLS"}checked{/eq} />
+                                            <label for="email_safe_2" class="w95_r_0">TLS</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                
+                                <tr class="safebox">
+                                    <td>{:lang('Email_smtp_addr')}: </td>
+                                    <td>
+                                        <input value="{$data.smtpaddr|default='smtp.exmail.qq.com'}" type="text" name="smtpaddr" placeholder="smtp.qq.com" />
+                                    </td>
+                                </tr>
+                                
+                                <tr class="safebox">
+                                    <td>{:lang('Email_username')}: </td>
+                                    <td>
+                                        <input value="{$data.emailusername|default='runtuer@126.com'}" type="text" name="emailusername" />
+                                    
+                                    </td>
+                                </tr>
+                                
+                                <tr class="safebox">
+                                    <td>{:lang('Email_pwd')}: </td>
+                                    <td>
+                                        <input value="{$data.emailpwd}" type="password" name="emailpwd" placeholder="passwords" />
+                                    </td>
+                                </tr>
+                                
+                                <tr class="safebox">
+                                    <td>{:lang('Email_port')}: </td>
+                                    <td>
+                                        <input value="{$data.emailport|default=25}" type="number" name="emailport" placeholder="25" maxlength="4" style="width: 60px; text-align: center;" />
+                                        {:lang('Email_port_tip')}
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>{:lang('Email_send_test')}: </td>
+                                    <td>
+                                        <input type="text" id="sendtest" />
+                                        
+                                        <input type="button" id="send" value="{:lang('Test_send')}" class="button white" />
+                                    </td>
+                                </tr>
+                                
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div id="tabStat5">
+                            <table class="table kright">
+                                <tbody>
+                                <tr>
+                                    <td>{:lang('Msgstatus')}: </td>
+                                    <td>
+                                        <div class="slideBox" >
+                                            <input id="msgstatus" value="1" type="checkbox" name="msgstatus" {eq name="data.msgstatus" value="1"}checked{/eq} {notpresent name="ata.msgstatus"}checked{/notpresent} />
+                                            <label for="msgstatus"></label>
+                                        </div> &nbsp;&nbsp;&nbsp;
+                                        <span  class="slideBoxafter">
+                                                    {:lang('Msgstatus_tip')}
+                                                </span>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>{:lang('Msgopt')}: </td>
+                                    <td>
+                                        <select id="sms" name="sms">
+                                            {foreach :get_extend_type('sms') as $vo}
+                                            <option value="{$vo.code}" data-tip="{:lang($vo.description)}" {eq name="data.sms" value="$vo.code"}selected{/eq}>{:lang($vo.name)}</option>
+                                            {/foreach}
+                                        </select>
+                                        <span id="desc"></span>
+                                        <script>
+                                            $(function () {
+                                                $('#desc').text($('#sms option:selected').attr('data-tip'));
+                                                $('#sms').change(function () {
+                                                    $('#desc').text($('#sms option:selected').attr('data-tip'));
+                                                })
+                                            })
+                                        </script>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>{:lang('Msgsign')}: </td>
+                                    <td>
+                                        <input value="{$data.msgsign|default=lang('Msgsign_pla')}" type="text" name="msgsign" maxlength="16" placeholder="{:lang('Msgsign_pla')}" />
+                                        
+                                        {:lang('Msgsign_tip')}
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>{:lang('Msgexpire')}: </td>
+                                    <td>
+                                        <input value="{$data.msgexpire|default='10'}" type="number" name="msgexpire" placeholder="10" style="width: 60px; text-align: center;" />
+                                        {:lang('Msgexpireunit')}
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>{:lang('Msgparentid')}: </td>
+                                    <td>
+                                        <input value="{$data.msgparentid|default=''}" type="text" name="msgparentid" />  &nbsp;
+                                        {:lang('Msgparentid_tip')}
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>{:lang('Msgkeys')}: </td>
+                                    <td>
+                                        <input value="{$data.msgkeys|default=''}" type="text" name="msgkeys" /> &nbsp;
+                                        {:lang('Msgkeys_tip')}
+                                    </td>
+                                </tr>
+                                
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div id="tabStat6">
+                            <table class="table kright">
+                                <tbody>
+                                <tr>
+                                    <td>{:lang('Waterstatus')}: </td>
+                                    <td>
+                                        <div class="slideBox" >
+                                            <input id="waterstatus" value="1" type="checkbox" name="waterstatus"  {eq name="data.waterstatus" value="1"}checked{/eq} {notpresent name="data.waterstatus"}checked{/notpresent} />
+                                            <label for="waterstatus"></label>
+                                        </div> &nbsp;&nbsp;&nbsp;
+                                        <span  class="slideBoxafter">
+                                                    {:lang('Waterstatus_tip')}
+                                                </span>
+                                    </td>
+                                </tr>
+                                
+                                <tr class="row bset">
+                                    <td>{:lang('Watertype')}: </td>
+                                    <td>
+                                        <div class="row bset">
+                                            <input name="watertype" type="radio" value="text" id="watertype_0" {eq name="data.watertype" value="text"}checked{/eq} {notpresent name="data.watertype"}checked{/notpresent} />
+                                            <label for="watertype_0" class="w110_r_0">{:lang('Text')}</label>
+                                            <input name="watertype" type="radio" value="image" id="watertype_1" {eq name="data.watertype" value="image"}checked{/eq} />
+                                            <label for="watertype_1" class="w110_r_0">{:lang('Image')}</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td id="watertypebox_text">
+                                        {notpresent name="data.watertype"}
+                                        {:lang('Text')}
+                                        {else /}
+                                        {eq name="data.watertype" value="text"}
+                                        {:lang('Text')}
+                                        {else /}
+                                        {:lang('Image')}
+                                        {/eq}
+                                        {/notpresent}
+                                        :
+                                    </td>
+                                    <td id="watertypebox_input">
+                                        <input value="{$data.watertype_txt}" type="text" name="watertype_txt" placeholder="{:lang('Watertype_txt_pla')}" />
+                                        
+                                        <input class="button white upload" value="{:lang('Selectimg')}" id="watertypebox_upload" type="button" title="{:lang('Upload img and file')}" url="{:url('img',array('input' => 'watertype_txt'))}" data-upload="__UPLOADS__" {notempty name="data"}{eq name="data.watertype" value="text"}style="display: none;"{/eq}{else /}style="display: none;"{/notempty}>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>{:lang('Waterrule')}: </td>
+                                    <td>
+                                        {:lang('Width')}
+                                        <input value="{$data.waterwidth|default='200'}" type="number" name="waterwidth" placeholder="200" style="width: 60px; text-align: center;" />
+                                        <span  class="slideBoxafter">px {:lang('Height')}</span>
+                                        <input value="{$data.waterheight|default='200'}" type="number" name="waterheight" placeholder="200" style="width: 60px; text-align: center;" />
+                                        <span  class="slideBoxafter">px</span>
+                                        
+                                        &nbsp;&nbsp;
+                                        {:lang('Waterrule_tip')}
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>{:lang('Watertransparency')}: </td>
+                                    <td>
+                                        <input value="{$data.watertransparency|default=75}" type="hidden" name="watertransparency" />
+                                        <div style="float: left; margin-right: 50px;">
+                                            <div id="slider" style="width: 300px;">
+                                                <div id="custom-handle" class="ui-slider-handle"></div>
+                                            </div>
+                                        </div>
+                                        
+                                        {:lang('Watertransparency_tip')}
+                                    
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>{:lang('Watermarkquality')}: </td>
+                                    <td>
+                                        <input value="{$data.watermarkquality|default=60}" type="hidden" name="watermarkquality" />
+                                        <div style="float: left; margin-right: 50px;">
+                                            <div id="slider0" style="width: 300px;">
+                                                <div id="custom-handle0" class="ui-slider-handle"></div>
+                                            </div>
+                                        </div>
+                                        
+                                        {:lang('Watermarkquality_tip')}
+                                    
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>{:lang('Waterpostion')}: </td>
+                                    <td>
+                                        <div class="row bset" style="width: 290px;">
+                                            <input name="waterpostion" type="radio" value="1" id="waterpostion_1" {eq name="data.waterpostion" value="1"}checked{/eq} {notpresent name="data.waterpostion"}checked{/notpresent} />
+                                            <label for="waterpostion_1" class="w95_r_0">{:lang('Waterpostion_1')}</label>
+                                            <input name="waterpostion" type="radio" value="2" id="waterpostion_2" {eq name="data.waterpostion" value="2"}checked{/eq} />
+                                            <label for="waterpostion_2" class="w95_r_0">{:lang('Waterpostion_2')}</label>
+                                            <input name="waterpostion" type="radio" value="3" id="waterpostion_3" {eq name="data.waterpostion" value="3"}checked{/eq} />
+                                            <label for="waterpostion_3" class="w95_r_0">{:lang('Waterpostion_3')}</label>
+                                            
+                                            <input name="waterpostion" type="radio" value="4" id="waterpostion_4" {eq name="data.waterpostion" value="4"}checked{/eq} />
+                                            <label for="waterpostion_4" class="w95_r_0">{:lang('Waterpostion_4')}</label>
+                                            <input name="waterpostion" type="radio" value="5" id="waterpostion_5" {eq name="data.waterpostion" value="5"}checked{/eq} />
+                                            <label for="waterpostion_5" class="w95_r_0">{:lang('Waterpostion_5')}</label>
+                                            <input name="waterpostion" type="radio" value="6" id="waterpostion_6" {eq name="data.waterpostion" value="6"}checked{/eq} />
+                                            <label for="waterpostion_6" class="w95_r_0">{:lang('Waterpostion_6')}</label>
+                                            
+                                            <input name="waterpostion" type="radio" value="7" id="waterpostion_7" {eq name="data.waterpostion" value="7"}checked{/eq} />
+                                            <label for="waterpostion_7" class="w95_r_0">{:lang('Waterpostion_7')}</label>
+                                            <input name="waterpostion" type="radio" value="8" id="waterpostion_8" {eq name="data.waterpostion" value="8"}checked{/eq} />
+                                            <label for="waterpostion_8" class="w95_r_0">{:lang('Waterpostion_8')}</label>
+                                            <input name="waterpostion" type="radio" value="9" id="waterpostion_9" {eq name="data.waterpostion" value="9"}checked{/eq} />
+                                            <label for="waterpostion_9" class="w95_r_0">{:lang('Waterpostion_9')}</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="buttons-wrapper" style="margin:15px 0 30px; padding:0 0 0 18%;">
+                        <input name="submit" value="{:lang('Saveshopconf')}" type="submit" url="{:url('save', array('act'=>ACTION_NAME))}" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    {/block}
+    
+    {block name="style"}
+    <style>
+        #custom-handle, #custom-handle0 {
+            width: 3em;
+            height: 1.6em;
+            top: 50%;
+            margin-top: -.8em;
+            text-align: center;
+            line-height: 1.6em;
+            cursor: pointer;
+        }
+    </style>
+    {/block}
+    
+    {block name="js"}
+    <script>
+        $(function(){
+            $(".bset").buttonset();
+    
+            //邮件设置
+            /*{eq name="data.sendtype" value="1"}$('.safebox').hide();{/eq}
+             $('input[name=sendtype]').click(function(){
+             var ischecked = $(this).val();
+             if(ischecked == '1'){
+             $('.safebox').hide().find('input').attr('disabled', true);
+             }else{
+             $('.safebox').show().find('input').attr('disabled', false);
+             }
+             })*/
+    
+            {eq name="data.watertype" value="image"}
+            $('#watertypebox_upload').show();
+            $('input[name=watertype_txt]').attr('placeholder', '{:lang('Watertype_img_pla')}');
+            {/eq}
+            $('input[name=watertype]').click(function () {
+                if($(this).val() == 'text') {
+                    $("#watertypebox_text").text('{:lang('Text')}');
+                    $('input[name=watertype_txt]').attr('placeholder', '{:lang('Watertype_txt_pla')}');
+                    $('#watertypebox_upload').hide();
+                }else{
+                    $("#watertypebox_text").text('{:lang('Image')}');
+                    $('input[name=watertype_txt]').attr('placeholder', '{:lang('Watertype_img_pla')}');
+                    $('#watertypebox_upload').show();
+                }
+            });
+    
+            //发送测试
+            $('#send').click(function () {
+                var that = $(this);
+                var test_send_mail = $('#sendtest').val();
+                var emal_smtp = $('input[name=smtpaddr]').val();
+                var emal_port = $('input[name=emailport]').val();
+                var emal_send = $('input[name=sendaddr]').val();
+                var emal_sslstatus = $('input[name=sslstatus]').val();
+                var emal_ssluse = $('input[name=sslusername]').val();
+                var emal_sslpwd = $('input[name=passwords]').val();
+                alert('测试未完成');
+            })
+    
+            //透明度拖动条
+            var handle = $( "#custom-handle" );
+            $( "#slider" ).slider({
+                    value: {$data.watertransparency|default=75},
+                create: function() {
+                handle.text( $( this ).slider( "value" ) );
+            },
+            slide: function( event, ui ) {
+                handle.text( ui.value );
+                $('input[name=watertransparency]').val(ui.value);
+            }
+        });
+    
+            var handle0 = $( "#custom-handle0" );
+            $( "#slider0" ).slider({
+                    value: {$data.watermarkquality|default=60},
+                create: function() {
+                handle0.text( $( this ).slider( "value" ) );
+            },
+            slide: function( event, ui ) {
+                handle0.text( ui.value );
+                $('input[name=watermarkquality]').val(ui.value);
+            }
+        });
+        })
+    </script>
+    {/block}

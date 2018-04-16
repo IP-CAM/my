@@ -1,0 +1,12 @@
+.login-main-box *{font-family:mcirosoft yahei;}
+.login-main-box{width: 100%;overflow: hidden;background:#1989eb;position: relative;padding-top: 30px;padding-bottom: 30px;background-color: #f5f5f5;}
+.wraper{width: 1000px;margin: 0 auto;}
+.brand-box{position: absolute; top: 0; right: 0; bottom: 0; left: 0; min-height: 480px; background-color: #4dc6f8;}
+.ly-search{display: none;}
+/*.ly-top,.ly-head{width: 1000px;}*/
+.steps{margin-bottom: 30px;}
+.ly-footer-ad, .ly-nav-box{display: none;}
+.brand-box .wraper{height:100%;line-height: 560px;}
+.brand-box img{display: inline-block; vertical-align: middle;}
+.catbg{display: none;}
+.form-box{position: relative;z-index: 2;float: right;/* width: 386px; */margin-top: 40px;margin-bottom: 40px;background: #fff;border-radius: 5px;box-shadow: 5px 5px 5px rgba(0,0,0,.1);overflow: hidden;}

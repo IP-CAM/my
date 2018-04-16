@@ -1,0 +1,271 @@
+	{extend name="admin@public/base"/}
+                
+    <!-- CONTENT --> 
+    {block name="body"}
+    <div id="content">
+        <div class="breadcrumbs">
+            {:lang('Finance')} : &nbsp;&nbsp; {:lang('Finordersys')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+    	</div>
+
+        <div class="bloc">
+            <div class="title">
+                <div class="tabs" id="navs">
+                    {include file="admin@public/navs" /}
+                </div>
+
+                {include file="admin@public/lang" /}
+            </div>
+            <div class="content">
+                
+                <dl class="gzzt clearfix mtb10">
+                    <dd>
+                        <div class="boxr">
+                            <?php 
+                                $item = input('item');
+                                $prom = input('prom');
+                            ?>
+                            {include file="admin@public/button" /}
+                            <select id="option" style="height:25px; width:80px; margin-right:4px;">
+                                <option value="0" url="{:url()}">{:lang('Allorders')}</option>
+                                <!--{volist name="option" id="op"}
+                                <option value="{$key}" url="{:url('',array('item'=>$key))}" {eq name="key" value="$key"}selected{/eq}>
+                                {  :lang($op['langstr'])  }
+                                </option>
+                                {/volist}-->
+                                <option value="99" url="{:url()}">{:lang('Testorders')}</option>
+                            </select>
+                            <?php
+                                $inputarr = is_array(input('param')) ?  input('param') : array();
+                            ?>
+                            <select id="item" style="height:25px; width:60px; margin-right:4px;">
+                            	<option value="0" url="{:url('',array_merge($inputarr,array('item'=>'all')))}" {eq name="item" value="all"}selected{/eq}>{:lang('Whole_platform')}</option>
+                                <option value="pc" url="{:url('',array_merge($inputarr,array('item'=>'pc')))}" {eq name="item" value="pc"}selected{/eq}>{:lang('PC')}</option>
+                                <option value="phone" url="{:url('',array_merge($inputarr,array('item'=>'phone')))}" {eq name="item" value="phone"}selected{/eq}>{:lang('Phone')}</option>
+                                <option value="wechat" url="{:url('',array_merge($inputarr,array('item'=>'wechat')))}" {eq name="item" value="wechat"}selected{/eq}>{:lang('Wechat')}</option>
+                                <option value="tablet" url="{:url('',array_merge($inputarr,array('item'=>'tablet')))}" {eq name="item" value="tablet"}selected{/eq}>{:lang('Tablet')}</option>
+                                <option value="other" url="{:url('',array_merge($inputarr,array('item'=>'other')))}" {eq name="item" value="other"}selected{/eq}>{:lang('Other')}</option>
+                            </select>
+                            
+                            <select id="promotion" style="height:25px; width:80px; margin-right:4px;">
+                            	<option value="0" url="{:url('',array_merge($inputarr,array('prom'=>'all')))}" {eq name="prom" value="all"}selected{/eq}>{:lang('All_activity')}</option>
+                                <option value="group" url="{:url('',array_merge($inputarr,array('prom'=>'group')))}" {eq name="prom" value="group"}selected{/eq}>{:lang('Group_purchase')}</option>
+                                <option value="prom" url="{:url('',array_merge($inputarr,array('prom'=>'promotion')))}" {eq name="prom" value="promotion"}selected{/eq}>{:lang('Prom')}</option>
+                                <option value="order" url="{:url('',array_merge($inputarr,array('prom'=>'order')))}" {eq name="prom" value="order"}selected{/eq}>{:lang('Order')}</option>
+                                <option value="timer" url="{:url('',array_merge($inputarr,array('prom'=>'timer')))}" {eq name="prom" value="timer"}selected{/eq}>{:lang('Timer')}</option>
+                                <option value="exchange_goods" url="{:url('',array_merge($inputarr,array('prom'=>'exchange_goods')))}" {eq name="prom" value="exchange_goods"}selected{/eq}>{:lang('Exchange_goods')}</option>
+                            </select>
+                            <script>
+							$(function(){
+							$("#option, #item, #promotion").change(function(){
+									var gotu_url = $(this).find('option:selected').attr('url');
+									eval("self.location='"+gotu_url+"'")
+								})
+							})
+							</script>
+                        </div>
+                    </dd>
+                    
+                    <form style="margin-top:0;" class="search-form">
+                    <dd>
+                        <div class="boxr ovh">
+                        <style>
+                        .w120{ width:120px !important; }
+						.L40{ width:48px !important; overflow:hidden; display:inline-block}
+						.layui-layer-tips .layui-layer-content{ padding:2px 8px !important;line-height: 18px !important;}
+                        </style>
+
+                          <label for="start" style="margin:10px 10px 0 0; width:156px;">
+                             <input type="text" id="start" value="{:input('start_time')}" name="start_time" placeholder="{:lang('Begin_time')}" class="w130 input_img" />
+                          </label>
+                          <label style="width:10px;line-height:32px; margin-right:2px;">~</label>
+                          <label for="end" style="margin:10px 10px 0 0; width:150px;">
+                             <input type="text" id="end" value="{:input('end_time')}" name="end_time" placeholder="{:lang('End_time')}" class="w130 input_img" />
+                          </label>
+                        </div>
+                    <dd>
+
+                    <dd>
+                        <div class="boxr ovh">
+                          <label for="name" style="margin:10px 10px 0 0; width:120px;">
+                            <input type="text" class="searchinput" name="name" id="name" value="{:input('name')}" placeholder="{:lang('Order_sn_tip')}" style="width:90px;"/>
+                          </label>
+                            <input type="button" name="search" id="sch-search" class="button white" value="{:lang('Search')}" url="{:url('',input(''))}" />
+                            <input type="button" id="adv-search" class="button white" value="{:lang('Advsearch')}" url="{:url('',input(''))}" />
+                        </div>
+                    <dd>
+                    </form>
+                	<!--<a href="javascript:" class="btn-refresh">{:lang('Exportexecel')}</a>--><dd style="float: right !important;">
+                    <div class="boxl">
+                        <span>
+                            <a href="javascript:location.reload();" class="refresh tooltip-link" title="{:lang('Refresh')}">
+                                <em>{:lang('Refresh')}</em>
+                            </a>
+                        </span>
+                        <span>
+                            <a href="javascript:void(0);" class="ajax-get setting tooltip-link colum" title="{:lang('Showlum')}" data-title="{:lang('Showlum')}">
+                                <em>{:lang('Showlum')}</em>
+                            </a>
+                        </span>
+                    </div>
+                </dd>
+                </dl>
+
+                {notempty name="list"}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="center" width="30"><input class="check-all" type="checkbox"></th>
+                            <th class="left" style="width:100px;"><a href="{:getUrlbyOrder('order_sn')}">{:lang('Order_sn')}</a></th>
+                            <th class="left" style="width:100px;"><a href="{:getUrlbyOrder('add_time')}">{:lang('Single_time')}</a></th>
+                            <th class="left" style="width:155px;"><a href="{:getUrlbyOrder('consignee')}">{:lang('Consignee')}</a></th>
+                            <th class="left" style="width:65px;"><a href="{:getUrlbyOrder('total_fee')}">{:lang('Total_amount')}</a></th>
+                            <th class="center" style="width:50px;"><a href="{:getUrlbyOrder('integral')}">{:lang('Integral')}</a></th>
+                            <th class="center" style="width:50px;"><a href="{:getUrlbyOrder('bonus')}">{:lang('Bonus')}</a></th>
+                            <th class="left" style="width:70px;"><a href="{:getUrlbyOrder('order_amount')}">{:lang('Amount_payable')}</a></th>
+                            <th class="center" style="width:60px;"><a href="{:getUrlbyOrder('pay_name')}">{:lang('Payment_type')}</a></th>
+                            <th class="center" style="width:60px;"><a href="{:getUrlbyOrder('platform_type')}">{:lang('Platform')}</a></th>
+                            <th class="left" style="width:140px;">{:lang('Order_status')}</th>
+                            <th class="actions" style="width:46px;">{:lang('Actions')}</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        {volist name="list" id="vo"}
+                        <tr>
+                            <td class="center"><input class="ids" type="checkbox" value="{$vo['order_id']}" name="ids[]"></td>
+                            <td class="left">
+                            <?php $extension_code = strtolower($vo["extension_code"]); ?>
+                            {switch name="extension_code"}
+                            	{case value="group"}
+                                <a class="ajax-get tip" data-tip="{:lang('Group_purchase')}" data-color="red" href="{:url('view',array('ordersn'=>$vo['order_sn']))}" data-title="{:lang('View_order')}" data-width="1024">
+                                <span class="red">{$vo['order_sn']}</span>
+                                </a>
+                                {/case}
+                                {case value="promotion"}
+                                 <a class="ajax-get tip" data-tip="{:lang('Prom')}" data-color="green" href="{:url('view',array('ordersn'=>$vo['order_sn']))}" data-title="{:lang('View_order')}"  data-width="1024">
+                                <span class="green">{$vo['order_sn']} </span>
+                                </a>
+                                {/case}
+                                {case value="order"}
+                                <a class="ajax-get tip" data-tip="{:lang('Order')}" data-color="red" href="{:url('view',array('ordersn'=>$vo['order_sn']))}" data-title="{:lang('View_order')}"  data-width="1024">
+                                <span class="red">{$vo['order_sn']} </span>
+                                </a>
+                                {/case}
+                                {case value="timer"}
+                                <a class="ajax-get tip" data-tip="{:lang('Timer')}" data-color="orange" href="{:url('view',array('ordersn'=>$vo['order_sn']))}" data-title="{:lang('View_order')}"  data-width="1024">
+                                <span class="orange">{$vo['order_sn']} </span>
+                                </a>
+                                {/case}
+                                {case value="exchange_goods"}
+                                <a class="ajax-get tip" data-tip="{:lang('Exchange_goods')}" data-color="blue" href="{:url('view',array('ordersn'=>$vo['order_sn']))}" data-title="{:lang('View_order')}"  data-width="1024">
+                                <span class="blue">{$vo['order_sn']} </span>
+                                </a>
+                                {/case}
+                                {default /}
+                                <a class="ajax-get tip" data-tip="" href="{:url('view',array('ordersn'=>$vo['order_sn']))}" data-title="{:lang('View_order')}"  data-width="1024">
+                                {$vo['order_sn']}
+                                </a>
+                            {/switch}
+                            </td>
+                            <td class="left">{:time_format($vo["add_time"],"Y-m-d H:i")}</td>
+                            <td class="left">
+                            {$vo['consignee']} 
+                            [Tel:{empty name="vo.mobile"}{$vo['tel']}{else /}{$vo['mobile']}{/empty}]
+                            <a class="tooltip-icon" title="{$vo['address']}, Tel: {empty name='vo.tel'}{$vo['mobile']}{else /}{$vo['tel']}{/empty}"}</a>
+                            </td>
+                            
+                            <td class="left">
+                            {:number_format($vo['goods_amount']+$vo['shipping_fee']+$vo['insure_fee']+$vo['pack_fee'],2)} {:lang('Yuan')}
+                            </td>    
+                            
+                            <td class="center">{$vo['integral_money']}</td>
+                            <td class="center">{$vo['bonus']}</td>
+                            
+                            <td class="left">
+                            {:number_format($vo['goods_amount']+$vo['shipping_fee']+$vo['insure_fee']+$vo['pack_fee']-$vo['surplus']-$vo['order_amount']-$vo['bonus'],2)} {:lang('Yuan')}
+                            </td>
+                            
+                            <td class="center">{$vo['pay_name']}</td>
+                            <td class="center">
+                            {switch name="vo.platform_type"}
+                            	{case value="pc"}
+                                <a href="{:url('',array_merge($inputarr,array('item'=>'pc')))}">
+                                [ {:lang('PC')} ]</case>
+                                </a>
+                                {case value="phone"}
+                                <a href="{:url('',array_merge($inputarr,array('item'=>'phone')))}">
+                                	<span class="green">[ {:lang('Phone')} ]</span>
+                                </a>
+                                {/case}
+                                {case value="wechat"}
+                                <a href="{:url('',array_merge($inputarr,array('item'=>'wechat')))}">
+                                	<span class="blue">[ {:lang('Wechat')} ]</span>
+                                </a>
+                                {/case}
+                                {case value="tablet"}
+                                <a href="{:url('',array_merge($inputarr,array('item'=>'tablet')))}">
+                                	<span class="violet">[ {:lang('Tablet')} ]</span>
+                                </a>
+                                {/case}
+                                {case value="other"}
+                                <a href="{:url('',array_merge($inputarr,array('item'=>'other')))}">
+                                	<span class="red">[ {:lang('Other')} ]</span>
+                                </a>
+                                {/case}
+                                {default /}
+                            {/switch}
+                            </td>
+                            <td class="left">
+                            {switch name="vo.order_status"}
+                            	{case value="0"}<span class="red L40">{:lang('To_be_confirmed')} ,</span>{/case}
+                                {case value="1"}<span class="green L40">{:lang('Confirmed')} ,</span>{/case}
+                                {case value="2"}<span class="orange L40">{:lang('Cancelled')} ,</span>{/case}
+                                {case value="3"}<span class="orange L40">{:lang('Invalid')},</span> {/case}
+                                {case value="4"}<span class="red L40">{:lang('Return_goods')} ,</span>{/case}
+                                {default /}
+                            {/switch}
+                            
+                            {switch name="vo.pay_status"}
+                            	{case value="0"}<span class="L40">{:lang('Unpaid')} ,</span>{/case}
+                                {case value="1"}<span class="violet L40">{:lang('Paymenting')},</span>{/case}
+                                {case value="2"}<span class="L40">{:lang('Paid')} ,</span>{/case}
+                                {default /}
+                            {/switch} 
+                            
+                            {switch name="vo.shipping_status">
+                                {case value="0"}<span class="red L40"> {:lang('Non_delivery')}</span>{/case}
+                                {case value="1"}<span class="blue L40">{:lang('Delivered')}</span>{/case}
+                                {case value="2"}<span class="green L40">{:lang('Receipt_confirmation')}</span>{/case}
+                                {case value="3"}<span class="violet L40">{:lang('Distribution')}</span>{/case}
+                                {case value="4"}<span class="L40">{:lang('Already_hair_part')}</span>{/case}
+                                {case value="5"}<span class="L40">{:lang('Deliverying')}</span>{/case}
+                                {default /}
+                            {/switch} 
+                            </td>
+                            <td class="actions">
+                                {if condition="$vo.order_status == 2 || $vo.order_status == 3 "}
+                                <a class="tooltip-link ajax-get confirm" data-layer="{:lang('Want_delete')}" title="{:lang('Delete_this_record')}" href="{:url('delete',array('ids'=>$vo['id']))}" data-title="{:lang('Delete')}" >
+                                    <img src="__PUBLIC__/admin/images/uninstall.png" alt="{:lang('Delete')}"  />
+                                </a> 
+                                {/if}
+                                <a class="tooltip-link ajax-get" title="{:lang('View_this_order')}" href="{:url('view',array('ordersn'=>$vo['order_sn']))}" data-title="{:lang('View')}">
+                                    <img src="__PUBLIC__/admin/images/search.png" alt="{:lang('View_this_order')}" />
+                                </a> 
+                            </td>
+                        </tr>
+                        {/volist}
+                    </tbody>
+                </table>
+                <div class="pagination-wrapper">
+                <div class="results-part"><span>{$_total}</span></div>
+            	<div class="links-part">{$page}</div>
+                </div>
+                {else /}
+                   <div class="alert alert-warning">{:lang('No_record')}</div>
+                {/notempty}
+            </div>
+        </div>
+    </div>
+    
+    {include file="admin@public/time_for_search" /}
+    {/block}

@@ -1,0 +1,53 @@
+    {extend name="admin@public/poupbase" /}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+        <div id="content" style="margin:0px 10px 5px 8px;">
+            <div class="bloc" style="margin:10px 0px 0px;">
+                <div class="content">
+                    <form id="myform" method="post" style="margin-top:5px;" class="">
+                        <fieldset>
+                            <legend>{$meta_title}</legend>
+                            <div class="row">
+                                <label for="rule" class="w100">{:lang('Message_rule')}: <span class="required">*</span></label>
+                                <input id="rule" type="text" value="{$data.rule}" name="rule" placeholder="{:lang('Message_rule')}" />
+                            </div>
+                            
+                            <div class="row">
+                                <label for="message" class="w100">{:lang('Message')}: <span class="required">*</span></label>
+                                <textarea style="width:200px; height:65px;resize: none;" id="message" name="message" placeholder="{:lang('Message_tip')}">{$data.message}</textarea>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="status" class="w100">{:lang('Status')}:</label>
+                                {eq name="ACTION_NAME" value="edit"}
+                                    <div class="slideBox">
+                                        <input id="status" value="1" type="checkbox" name="status" {eq name="data['status']" value="1"}checked{/eq} />
+                                        <label for="status"></label>
+                                    </div>
+                                {else /}
+                                    <div class="slideBox">
+                                        <input id="status" value="1" type="checkbox" name="status" checked />
+                                        <label for="status"></label>
+                                    </div>
+                                {/eq}
+                            </div>
+                            
+                            <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                                {eq name="ACTION_NAME" value="edit"}
+                                    <input name="submit" value="{:lang('Save')}" type="submit" url="{:url('savedata')}">
+                                    <input type="hidden" name="id" value="{$data.id}" />
+                                {else /}
+                                    <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}">
+                                {/eq}
+                                <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {/block}
+    
+    {block name="js"}
+    {/block}

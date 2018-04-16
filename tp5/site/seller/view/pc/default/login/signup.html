@@ -1,0 +1,340 @@
+{extend name="login/base" /}
+{block name='title'}
+<title>{:lang('register_seller')}</title>
+{/block}
+{block name='css'}
+
+{/block}
+{block name="body"}
+<div class="shop-login-box yahei">
+	<div class="form-body">
+		<div class="title">
+			<div class="t">{:lang('register_seller')}</div>
+			<div class="steps  enter-steps">
+			<table width="100%">
+				<tbody>
+
+					<tr>
+						<td class="step-item step-1 active"><span><q class="icon">●</q><i>1</i>入驻须知</span>
+							<div class="stepdiv">1</div>
+						</td>
+						<td class="step-item step-2 ">
+							<span><q class="icon">●</q><i>2</i>公司信息</span>
+							<div class="stepdiv">2</div>
+						</td>
+						<td class="step-item step-3"><span><q class="icon">●</q><i>3</i>店铺信息</span>
+							<div class="stepdiv">3</div>
+						</td>
+						<td class="step-item step-4 last"><span><q class="icon">●</q><i>3</i>入驻审核</span>
+							<div class="stepdiv">4</div>
+						</td>
+						<td class="step-item step-5 last"><span><q class="icon">●</q><i>3</i>店铺上线</span>
+							<div class="stepdiv">5</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		</div>
+		<div class="content" style="height: 600px">
+			<div class="tips-info">
+				用于入驻过程中接受平台审核结果、开店账号密码信息，请务必正确填写。
+			</div>
+			<br />
+			<form action="" id="pwd_form">
+                    <ul style="float: left;">
+                        <li class="form-row">
+                            <label class="form-label">
+                                <em> * </em> {:lang('username')}： </label>
+                            <span class="form-act">
+                                <input placeholder="{:lang('username')}" name="nickname" datatype="s5-16"  class="input-ln" type="text"  value="" />
+                            </span>
+                        </li>
+                        
+                        <li class="form-row">
+                            <label class="form-label">
+                                <em> * </em> {:lang('password')}： </label>
+                            <div class="form-act">
+                                <input type="password" value="" name="password" class="input-ln" datatype="*6-16" nullmsg="{:lang('pleace_set_password')}" errormsg="{:lang('password_range')}" />
+                        </div>
+                        
+                        </li>
+                        <li class="form-row">
+                            <label class="form-label">
+                                <em> * </em> {:lang('repassword')}： </label>
+                            <div class="form-act">
+                            <input type="password" value="" name="repassword" tip="test" class="input-ln" datatype="*" recheck="password" nullmsg="{:lang('pleace_input_password_again')}" errormsg="{:lang('password_not_same')}！" />
+                            </div>
+                        </li>
+                        <li class="form-row">
+                            <label class="form-label">
+                                <em> * </em> {:lang('realname')}： </label>
+                            <div class="form-act">
+                            <input placeholder="{:lang('realname')}" nullmsg="{:lang('pleace input realname')}" datatype="*" name="realname"  class="input-ln" type="text"  value="" />
+                        </div>
+                        <li class="form-row">
+                            <label class="form-label">
+                                <em> * </em> {:lang('email')}： </label>
+                            <div class="form-act">
+                            <input placeholder="{:lang('email')}" datatype="e" name="email"  class="input-ln" type="text"  value="" />
+                        </div>
+                        
+                        </li>
+                        <li class="form-row">
+                            <label class="form-label">
+                                <em> * </em> {:lang('mobile')}： </label>
+                            <div class="form-act">
+                                <input placeholder="{:lang('mobile')}" id="mobile" datatype="/^1[3,4,5,7,8]\d{9}$/" nullmsg="{:lang('pleace input mobile')}" errormsg="{:lang('mobile_format_error')}" name="mobile" class="input-ln" type="text"  value="" />
+                            </div>
+                        </li>
+                        <li class="form-row">
+                            <div style="width: 362px;float: left;margin-left: 210px">
+                                <div id="embed-captcha" data-url="{:url('/member/passport/gt_login')}"></div>
+                                <div id="wait" style="height: 42px;text-align: center;line-height: 42px;border: 1px solid #ccc;border-radius: 2px;background-color: #f3f3f3"><img src="__ROOT__/loading.gif" alt=""></div>
+                                <span id="notice" style="color: red;display: none;" class="Validform_checktip">{:lang('please_verify')}</span>
+                            </div>
+                        </li>
+                        <li class="form-row" id="sendcode" style="display: none;">
+                            <label class="form-label">
+                                <em> * </em> {:lang('mobile_captcha')}： </label>
+                            <div class="form-act">
+                            <input placeholder="{:lang('pleace_input_mobile_captcha')}" datatype="*" name="mobile_captcha"  class="input-ln" type="text"  value="" nullmsg="{:lang('pleace_input_mobile_captcha')}" />
+                            <a data-url="{:url('sendsms')}" id="get_code">{:lang('send_captcha')}</a>
+                            </div>
+                        </li>
+                        
+                        
+                        <li class="form-row" style="padding-top:20px">
+                            <label for="" class="form-label">&nbsp;</label> <span class="form-act">
+                        	<a href="#" class="btn btn-import save">上一步</a>
+                        	&nbsp;&nbsp;
+                        	 	<button type="button"  class="btn btn-import save" rel="_request">                               <span>下一步，完善公司信息</span>
+						</button>
+						</span>
+                        </li>
+                    </ul>
+                    <!--<ul style="float: right;margin:10px 60px 10px 0px;width: 300px;">-->
+                        <!--<fieldset style="border:1px solid  #ccc;height: 421px;border-radius: 5px;overflow-y: auto">-->
+                            <!--<legend style="margin: 0 8px;padding: 0 5px;">{:lang('Goods_Crossware')}</legend>-->
+                            <!--{ foreach $warehouse as $k=>$v }-->
+                            <!--<li class="ware">-->
+                                <!--<input type="checkbox" name="housecode[]" value="{ $k }"/>-->
+                                <!--<span>{ $v }</span>-->
+                            <!--</li>-->
+                            <!--{ /foreach }-->
+                        <!--</fieldset>-->
+                    <!--</ul>-->
+			</form>
+		</div>
+	</div>
+</div>
+
+{/block} {block name="footer_js"}
+
+<script src="__PUBLIC__/crossbbcg/pc/default/js/gt.js"></script>
+<script type="text/javascript">
+    $(function () {
+        /* 极验证 star */
+        var handlerEmbed = function (captchaObj) {
+            //captchaObj.bindForm('.login_form');
+            // 将验证码加到id为captcha的元素里，同时会有三个input的值：geetest_challenge, geetest_validate, geetest_seccode
+            captchaObj.appendTo("#embed-captcha");
+            captchaObj.onReady(function () {
+                $("#wait").hide();
+            });
+            captchaObj.onSuccess(function () {
+                $('#sendcode').show();
+                //点击发送验证码
+                $('#get_code').click(function() {
+                    if(!$(this).hasClass('disabled')) {
+                        var obj = {};
+                        var mobile = $('[name=mobile]').val();;
+                        if(mobile) {
+                            sendVerify(this, {
+                                username: mobile
+                            })
+                        }
+                    }
+                });
+                //保存
+                $('.save').click(function () {
+                    var validate = captchaObj.getValidate();
+                    var geetest_challenge=$('input[name="geetest_challenge"]').val();
+                    var geetest_validate=$('input[name="geetest_validate"]').val();
+                    var geetest_seccode=$('input[name="geetest_seccode"]').val();
+                    var flag = $("#pwd_form").Validform().check() ;
+                    if (flag == true && validate) {
+                        var data = $("#pwd_form").serialize();
+                        $.ajax({
+                            url:"{:url('save')}",
+                            dataType:'json',
+                            type:'post',
+                            data:data,
+                            success:function (re) {
+                                if (re.code == 1) {
+                                    location.href=re.url;
+                                } else {
+                                    layer.msg(re.msg,{'icon':5,'time':3000});
+                                }
+                            }
+                        })
+                    }
+
+
+                })
+            });
+        };
+        $.ajax({
+            // 获取id，challenge，success（是否启用failback）
+            url: "{:url('/member/passport/gt_login')}", // 加随机数防止缓存
+            type: "get",
+            data: {'t':(new Date()).getTime()},
+            dataType: "json",
+            success: function (data) {
+                // 使用initGeetest接口
+                // 参数1：配置参数
+                // 参数2：回调，回调的第一个参数验证码对象，之后可以使用它做appendTo之类的事件
+                initGeetest({
+                    width:'100%',
+                    gt: data.gt,
+                    challenge: data.challenge,
+                    new_captcha: data.new_captcha,
+                    product: "float", // 产品形式，包括：float，embed，popup。注意只对PC版验证码有效
+                    offline: !data.success, // 表示用户后台检测极验服务器是否宕机，一般不需要关注
+                    lang:data.lang,
+                    // 更多配置参数请参见：http://www.geetest.com/install/sections/idx-client-sdk.html#config
+                }, handlerEmbed);
+            }
+        });
+        /* 极验证 end */
+        
+    })
+	// 通用倒计时，包括倒计时所在容器，倒数秒数，显示方式，回调。
+	function countdown(element, options) {
+		var self = this;
+		options = $.extend({
+			start: 60,
+			secondOnly: false,
+			callback: null
+		}, options || {});
+		var t = options.start;
+		var sec = options.secondOnly;
+		var fn = options.callback;
+		var d = +new Date();
+		var diff = Math.round((d + t * 1000) / 1000);
+		this.timer = timeout(element, diff, fn);
+		this.stop = function() {
+			clearTimeout(self.timer);
+		};
+
+		function timeout(element, until, fn) {
+			var str = '',
+				started = false,
+				left = {
+					d: 0,
+					h: 0,
+					m: 0,
+					s: 0,
+					t: 0
+				},
+				current = Math.round(+new Date() / 1000),
+				data = {
+					d: '天',
+					h: '时',
+					m: '分',
+					s: 's'
+				};
+
+			left.s = until - current;
+
+			if(left.s < 0) {
+				return;
+			} else if(left.s == 0) {
+				fn && fn();
+			}
+			if(!sec) {
+				if(Math.floor(left.s / 86400) > 0) {
+					left.d = Math.floor(left.s / 86400);
+					left.s = left.s % 86400;
+					str += left.d + data.d;
+					started = true;
+				}
+				if(Math.floor(left.s / 3600) > 0) {
+					left.h = Math.floor(left.s / 3600);
+					left.s = left.s % 3600;
+					started = true;
+				}
+			}
+			if(started) {
+				str += ' ' + left.h + data.h;
+				started = true;
+			}
+			if(!sec) {
+				if(Math.floor(left.s / 60) > 0) {
+					left.m = Math.floor(left.s / 60);
+					left.s = left.s % 60;
+					started = true;
+				}
+			}
+			if(started) {
+				str += ' ' + left.m + data.m;
+				started = true;
+			}
+			if(Math.floor(left.s) > 0) {
+				started = true;
+			}
+			if(started) {
+				str += ' ' + left.s + data.s;
+				started = true;
+			}
+
+			$(element).html(str);
+			return setTimeout(function() {
+				timeout(element, until, fn);
+			}, 1000);
+		}
+	}
+
+    $("#pwd_form").Validform({
+        tiptype: 3,
+        showAllError: true
+    });
+    
+	
+
+	function sendVerify(el, data) {
+		var url = $(el).data('url');
+		var textCont = $(el);
+		$(el).addClass('disabled');
+		textCont.html('(<i class="red">0</i>)');
+		var cd = new countdown(textCont.find('i'), {
+			start: 59, //等待时间
+			secondOnly: false,
+			callback: function(e) {
+				$(el).removeClass('disabled');
+				textCont.html("{:lang('send_captcha_again')}");
+			}
+		});
+		$.post(url, data, function(rs) {
+			if(rs.code == 0) {
+				cd.stop();
+				$(el).removeClass('disabled');
+				textCont.html("{:lang('send_captcha_again')}");
+			} else {
+			    layer.msg("{:lang('send_captcha_success')}")
+            }
+		});
+	}
+
+	function showdemo(title, img_src, area) {
+		layer.open({
+			"title": title,
+			'skin': 'layer-ext-blue',
+			type: 1,
+			area: area,
+			shadeClose: true,
+			content: "<img style='display:block;margin:0 auto;padding-top:15px' src=" + img_src + ">"
+		})
+	}
+</script>
+{/block}

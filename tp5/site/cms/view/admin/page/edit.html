@@ -1,0 +1,75 @@
+{extend name="admin@public/poupbase" /}
+
+<!-- CONTENT -->
+
+{block name="body"}
+<div id="content" style="margin:0px 10px 5px 8px;">
+    <div class="bloc" style="margin:10px 0px 0px;">
+        <div class="content">
+            <form id="myform" method="post" style="margin-top:5px;" class="">
+                <fieldset>
+                    <legend>{$meta_title|default=''}</legend>
+                    <div class="thumb_box" style="right:40px;">
+                        <div class="thumb" style="width:90px; height:75px;">
+                            <div class="upimg_tip">{:lang('Thumb')}</div>
+                            <div class="upimg_cancel" title="{:lang('Cancel')}">x</div>
+                            <img
+                                src="{notempty name='data.page_img'>{$data.page_img}{else /}__PUBLIC__/admin/images/upload-pic.gif{/notempty}"
+                                id="preview" class="upload" width="83" height="66"
+                                no-image="__PUBLIC__/admin/images/upload-pic.gif"
+                                url="{:url('public/img',array('m' => CONTROLLER_NAME,'input' => 'icon','thumb' => 'preview'))}"/>
+                            <input type="hidden" name="page_img" id="page_img" value="{$data.page_img}"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label for="name" class="w100">{:lang('Template Name')}: <span class="required">*</span></label>
+                        <input type="text" polarchart="Template Name" class="input fu onlyletter to_" style="width: 150px" name="name" id="name"  value="{$data.name}">
+                    </div>
+    
+                    <div class="row">
+                        <label for="theme" class="w100">{:lang('Theme')}: <span class="required">*</span></label>
+                        <input type="text" class="input fu onlyletter to_" style="width: 150px" name="theme" id="theme" pagination="Children"  value="{$data.theme}">
+                        <a class="tooltip-icon" title="{:lang('Theme tip')}"></a>
+                    </div>
+                    <div class="row">
+        
+                        <div style="float: left">
+                            <label for="status" class="w100">{:lang('Status')}:</label>
+                            <div class="slideBox">
+                                {eq name="ACTION_NAME" value="edit"}
+                                <input id="status" value="1" type="checkbox" name="status" {eq name="data['status']"
+                                       value="1" }checked{/eq} />
+                                {else /}
+                                <input id="status" value="1" type="checkbox" name="status" checked/>
+                                {/eq}
+                                <label for="status"></label>
+                            </div>
+                        </div>
+                        <div style="float:left;">
+                            <label for="sort" class="w120">{:lang('Sort')}: </label>
+                            <input type="number" class="input litle" name="sort" maxlength="5" id="sort"
+                                   value='{$data.sort|default=0}'/>
+                        </div>
+    
+                    </div>
+                    <div class="row">
+                        <label for="description" style="width: 90px"  class="w70">{:lang('Description page')}: <span class="required">*</span></label>
+                        <textarea id="description" style="width: 280px; height: 60px;" name="description" placeholder="">{$data.description}</textarea>
+                    </div>
+                    <div class="clear"></div>
+                    
+                    <div class="buttons-wrapper bw-bottom" style="margin:10px auto 20px; text-align:center;">
+                        {eq name="ACTION_NAME" value="edit"}
+                        <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('savedata')}">
+                        <input type="hidden" name="id" value="{$data.id}"/>
+                        {else /}
+                        <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}">
+                        {/eq}
+                        <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+{/block}

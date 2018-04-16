@@ -1,0 +1,98 @@
+<div class="par-table">
+	<table>
+		<tbody>
+            <tr>
+                <td class="col_1" colspan="2">{:lang('Goods_Base')}</td>
+            </tr>
+			<tr>
+				<td class="col_1">{:lang('Goods_Name')}</td>
+                <td class="col_2">{$data['name']}</td>
+			</tr>
+            {if condition="$data['en_name']"}
+            <tr>
+                <td class="col_1">{:lang('Goods_En_Name')}</td>
+                <td class="col_2">{$data['en_name']}</td>
+            </tr>
+            {/if}
+            <tr>
+                <td class="col_1">{:lang('Goods_sn')}</td>
+                <td class="col_2">{$data['good_code']}</td>
+            </tr>
+            
+            
+            {if condition="$data['package_num']"}
+            <tr>
+                <td class="col_1">{:lang('Goods_Package_Num')}</td>
+                <td class="col_2">{$data['package_num']}</td>
+            </tr>
+            {/if}
+            {if condition="$data['package_unit']"}
+            <tr>
+                <td class="col_1">{:lang('Goods_Package_Unit')}</td>
+                <td class="col_2">{$data['package_unit']}</td>
+            </tr>
+            {/if}
+            {if condition="$data['weight']!=0"}
+            <tr>
+                <td class="col_1">{:lang('Goods_Weight')} ({$data['weight_class_id']})</td>
+                <td class="col_2">{$data['weight']}{$data['weight_class_id']}</td>
+            </tr>
+            {/if}
+            {if condition="$data['clear_weight']!=0"}
+            <tr>
+                <td class="col_1">{:lang('Goods_Clear_Weight')} ({$data['weight_class_id']})</td>
+                <td class="col_2">{$data['clear_weight']}{$data['weight_class_id']}</td>
+            </tr>
+            {/if}
+            
+            {if condition="$data['hs_code']"}
+            <tr>
+                <td colspan="2" class="col_1">{:lang('Hs_Record')}</td>
+            </tr>
+			<tr>
+				<td class="col_1">{:lang('Goods_Hs_Code')}</td>
+				<td class="col_2">{$data['hs_code']}</td>
+			</tr>
+            
+            {if condition="$data['hs_model']"}
+            <tr>
+                <td class="col_1">{:lang('Goods_Hs_Model')}</td>
+                <td class="col_2">{$data['hs_model']}</td>
+            </tr>
+            {/if}
+            
+            {if condition="$data['hs_quarantine_model']"}
+            <tr>
+                <td class="col_1">{:lang('Goods_Hs_Quarantine_Model')}</td>
+                <td class="col_2">{$data['hs_quarantine_model']}</td>
+            </tr>
+            {/if}
+            {if condition="$data['hs_unit']"}
+            <tr>
+                <td class="col_1">{:lang('Goods_Hs_Unit')}</td>
+                <td class="col_2">{$data['hs_unit']}</td>
+            </tr>
+            {/if}
+            {if condition="$data['country_id']"}
+            <tr>
+                <td class="col_1">{:lang('Goods_Country_Id')}</td>
+                <td class="col_2">{$data['country_name']}</td>
+            </tr>
+            {/if}
+            {/if}
+            
+            <!--  产品参数-->
+            {notempty name="$goods_attribute"}
+            {foreach $goods_attribute as $key => $arr}
+                {foreach $arr as $key2 => $value2}
+            <tr>
+                <td class="col_1">{$key2}</td>
+                <td class="col_2">{$value2}</td>
+            </tr>
+                {/foreach}
+            {/foreach}
+            {/notempty}
+			
+		</tbody>
+	</table>
+</div>

@@ -1,0 +1,104 @@
+    {extend name="admin@public/poupbase"/}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content" style="margin:0px 10px 5px 8px;">
+        <div class="bloc" style="margin:10px 0px 0px;">
+            <div class="content">
+                <form id="myform" method="post" style="margin-top:5px;" class="" >
+                    <fieldset>
+                        <legend>{$meta_title|default=''}</legend>
+                        <div class="row">
+                            <label for="roleid" class="w100">{:lang('Rolegroup')}: <span class="required">*</span></label>
+                            <select id="roleid" name="roleid" style="width:190px;">
+                                {notempty name="role"}
+                                <option value="">{:lang('Select role')}</option>
+                                {volist name="role" id="ro"}
+                                <option value="{$ro.id}" {eq name="$data.roleid" value="$ro.id"}selected{/eq}>{$ro.char} {$ro.name} ({$ro.alias})</option>
+                                {/volist}
+                                {else /}
+                                <option value="">{:lang('Add role before')}</option>
+                                {/notempty}
+                            </select>
+                        </div>
+                        
+                        <div class="row">
+                            <label for="username" class="w100">{:lang('Admin Account')}: <span class="required">*</span></label>
+                            <input id="username" type="text" value="{$data['username']}" name="username" placeholder="{:lang('Account_tip')}" {eq name="ACTION_NAME" value="edit"}readonly{/eq} />
+                        </div>
+                        
+                        {eq name="ACTION_NAME" value="add"}
+                        <div class="row">
+                            <label for="password" class="w100">{:lang('Password')}: <span class="required">*</span></label>
+                            <input id="password" type="text" value="" name="password" placeholder="{:lang('Password_tip')}" />
+                        </div>
+                        
+                        <div class="row">
+                            <label for="repassword" class="w100">{:lang('Repassword')}: <span class="required">*</span></label>
+                            <input id="repassword" type="text" name="repassword" placeholder="{:lang('Password_tip')}" />
+                        </div>
+                        {/eq}
+                        
+                        <div class="row">
+                            <label for="email" class="w100">{:lang('Email')}: <span class="required">*</span></label>
+                            <input id="email" type="text" value="{$data['email']}" name="email" placeholder="example@gmail.com" />
+                            <a class="tooltip-icon" title="{:lang('Email_tip')}"></a>
+                        </div>
+                        
+                        <div class="row">
+                            <label for="mobile" class="w100">{:lang('Mobile')}: <span class="required">*</span></label>
+                            <input id="mobile" type="text" value="{$data['mobile']}" name="mobile" placeholder="13800138000"/>
+                        </div>
+                        
+                        <div class="row">
+                            <label for="nickname" class="w100">{:lang('Nicename')}: </label>
+                            <input id="nickname" type="text" value="{$data['nickname']}" name="nickname" placeholder="first + last name" />
+                        </div>
+                        
+                        <div class="row bset">
+                            <label class="w100">{:lang('Sex')}:</label>
+                            <input name="sex" type="radio" value="1" id="sex_1" {eq name="data.sex" value="1"}checked{/eq} />
+                            <label for="sex_1" class="w80l_r_0">{:lang('Male')}</label>
+                            <input name="sex" type="radio" value="0" id="sex_0" {eq name="data.sex" value="0"}checked{/eq} />
+                            <label for="sex_0" class="w80l_r_0">{:lang('Female')}</label>
+                            <input name="sex" type="radio" value="2" id="sex_2" {eq name="data.sex" value="2"}checked{/eq} {eq name="ACTION_NAME" value="add"}checked{/eq} />
+                            <label for="sex_2" class="w80l_r_0">{:lang('Secrecy')}</label>
+                        </div>
+                        
+                        <div class="row">
+                            <label for="status" class="w100">{:lang('Status')}:</label>
+                            <div class="slideBox">
+                                {eq name="ACTION_NAME" value="edit"}
+                                <input id="status" value="1" type="checkbox" name="status"  {eq name="data['status']" value="1"}checked{/eq} />
+                                {else /}
+                                <input id="status" value="1" type="checkbox" name="status" checked />
+                                {/eq}
+                                <label for="status"></label>
+                            </div>
+                        </div>
+                        
+                        <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                            {eq name="ACTION_NAME" value="edit"}
+                            <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('savedata')}">
+                            <input type="hidden" name="id" value="{$data.id}" />
+                            <input type="hidden" name="scene" value="edit" />
+                            {else /}
+                            <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}">
+                            <input type="hidden" name="scene" value="add" />
+                            {/eq}
+                            <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    {/block}
+    
+    {block name="js"}
+    <script>
+        $(function(){
+            $(".bset").buttonset();
+        })
+    </script>
+    {/block}

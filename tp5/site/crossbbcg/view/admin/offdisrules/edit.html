@@ -1,0 +1,239 @@
+    {extend name="admin@public/poupbase"/}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <style>
+        .mlr_10 {
+            margin-left: 10px !important;
+            margin-right: 5px !important;
+        }
+        
+        .content_attr {
+            border: 1px solid #CCC;
+            padding: 5px;
+            background: #FFC;
+            overflow: hidden;
+        }
+        
+        .morebtset {
+            padding: 3px 0 0 0;
+        }
+        
+        .morebtset label {
+            margin: 0 auto 5px auto;
+        }
+    </style>
+    <div id="content" style="margin:0px 10px 5px 8px;">
+        <div class="bloc" style="margin:10px 0px 0px;">
+            <div class="content">
+                <form id="myform" method="post" style="margin-top:5px;" class="">
+                    <fieldset>
+                        <legend>{$meta_title|default=''}</legend>
+                        <div class="thumb_box" style="right: 100px;">
+                            <div class="thumb">
+                                <div class="upimg_tip">{:lang('Thumb')}</div>
+                                <div class="upimg_cancel" title="{:lang('Cancel')}">x</div>
+                                <img src="{notempty name='data.logo'}{$data.logo}{else /}__PUBLIC__/admin/images/upload-pic.gif{/notempty}" id="preview" class="upload" width="110" height="100" no-image="__PUBLIC__/admin/images/upload-pic.gif" title="{:lang('Upload img and file')}" url="{:url('img',array('m' => $controller_name,'input' => 'logo','thumb' => 'preview'))}" data-upload="__UPLOADS__" />
+                                <input type="hidden" name="logo" id="logo" value="{$data.logo}" />
+                            </div>
+                        </div>
+    
+                        <div style="float:left; width:640px; padding-right:15px; border-right:1px dashed #000;">
+                            <div class="row">
+                                <div style="float:left;">
+                                    <label for="title" class="w120">{:lang('Offline shoptitle')}: <span
+                                        class="required">*</span></label>
+                                    <input id="title" type="text" value="{$data.title}" name="title" style="width:180px;"/>
+                                </div>
+                                <div style="float:left;">
+                                    <label for="type" class="w80" style="width: 90px;">{:lang('Offline type')}: </label>
+                                    <select id="type" name="type" style="width: 120px;">
+                                        <option value="0" {eq name="data.type" value="0"}selected{/eq}>{:lang('Selfshop')}</option>
+                                        <option value="1" {eq name="data.type" value="1"}selected{/eq}>{:lang('Affiliate shop')}</option>
+                                        <option value="2" {eq name="data.type" value="2"}selected{/eq}>{:lang('Cooperate shop')}</option>
+                                        <option value="3" {eq name="data.type" value="3"}selected{/eq}>{:lang('Contract with shop')}</option>
+                                        <option value="4" {eq name="data.type" value="4"}selected{/eq}>{:lang('Other type shop')}</option>
+                                    </select>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <div style="float:left;">
+                                    <label for="tel" class="w120">{:lang('Tel')}: </label>
+                                    <input id="tel" type="text" value="{$data.tel}" name="tel" style="width:120px;"
+                                           placeholder="0755-12345678"/>
+                                </div>
+    
+                                <div style="float:left;">
+                                    <label for="opentime" class="w140">{:lang('Open time')}: </label>
+                                    <input type="text" value="{$data.opentime|time_format='Y-m-d'}" id="opentime" name="opentime" placeholder="{:lang('Open time')}" class="datainput green w80c" value="{$data.opentime}"/>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div style="float:left;">
+                                    <label for="contact" class="w120">{:lang('Offline contact')} : </label>
+                                    <input id="contact" type="text" value="{$data.contact}" name="contact" class="input"
+                                           style="width:140px;" placeholder="Jock"/>
+                                </div>
+                                
+                                <div style="float:left;">
+                                    <label for="num" class="w120">{:lang('Offline number')} : </label>
+                                    <input id="num" type="text" value="{$data.num}" name="num"
+                                           class="input" style="width:120px;" placeholder="No.0001" />
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <div style="float:left;">
+                                    <label for="country_id" class="w120">{:lang('Country name')}: </label>
+                                    <select name="country_id" id="country_id" class="sel_w150">
+                                        <option value="0">----{:lang('Please_choose')}----</option>
+                                        <volist name="country" id="in">
+                                            <option value=""></option>
+                                        </volist>
+                                    </select>
+                                </div>
+    
+                                <div style="float:left;">
+                                    <label for="shoping" class="w120">{:lang('Offline shoping')} : </label>
+                                    <input id="shoping" type="text" value="{$data.shoping|default='AM 9:00~PM 22:00'}" name="shoping"
+                                           class="input" style="width:140px;" placeholder="AM 9:00~PM 22:00" />
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="province" class="w120">{:lang('Offline Area')}: </label>
+                                <select name="province" id="province" class="sel_w150">
+                                    <option value="0">----{:lang('Please_choose')}----</option>
+                                </select>
+                                <select name="city" id="city" class="sel_w150">
+                                    <option value="0">----{:lang('Please_choose')}----</option>
+                                </select>
+                                <select name="area" id="area" class="sel_w150">
+                                    <option value="0">----{:lang('Please_choose')}----</option>
+                                </select>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="address" class="w120">{:lang('Address')}: </label>
+                                <input id="address" type="text" value="{$data.address}" name="address"
+                                       style="width:460px;"/>
+                            </div>
+    
+                            <div class="row">
+                                <label for="description" class="w120">{:lang('Offline description')}: </label>
+                                <textarea id="description" name="description"
+                                          style="width:460px; height:30px; resize:none;" placeholder="{:lang('Offline description pla')}">{$data.description}</textarea>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="clear"></div>
+                                <label for="contents" class="w120">{:lang('Offline contents')}: </label>
+                                <textarea id="contents" name="contents">{$data.contents}</textarea>
+                                <script charset="utf-8" src="__STATIC__/kindeditor/kindeditor-all-min.js"></script>
+                                <script>
+                                    KindEditor.ready(function (K) {
+                                        editor = K.create('#contents', {
+                                            resizeType: 1,
+                                            allowPreviewEmoticons: false,
+                                            allowImageUpload: false,
+                                            minWidth: 470,
+                                            minHeight: 185,
+                                            langType: '{:jsup(config('default_lang'))}',
+                                            items: [
+                                                'undo', 'redo', '|', 'bold', 'italic', 'underline',
+                                                'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                                                'insertunorderedlist', '|', 'image', 'media'],
+                                            afterBlur: function () {
+                                                this.sync();
+                                            }
+                                        });
+                                    });
+                                </script>
+                            </div>
+                        </div>
+                        
+                        <div style="float:left; width:280px; padding-top:110px;">
+                            <div class="row">
+                                <label for="sort" class="w120">{:lang('Sort')}:</label>
+                                <input type="number" class="input litle" min="0" name="sort" maxlength="5" id="sort" value='{$data.sort|default=0}'>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="isrecommend" class="w120">{:lang('Isrecommend')}:</label>
+                                <div class="slideBox">
+                                    {eq name="ACTION_NAME" value="edit"}
+                                    <input id="isrecommend" value="1" type="checkbox" name="isrecommend" {eq
+                                           name="data['isrecommend']" value="1" }checked{/eq} />
+                                    {else /}
+                                    <input id="isrecommend" value="1" type="checkbox" name="isrecommend"/>
+                                    {/eq}
+                                    <label for="isrecommend"></label>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="status" class="w120">{:lang('Status')}:</label>
+                                <div class="slideBox">
+                                    {eq name="ACTION_NAME" value="edit"}
+                                    <input id="status" value="1" type="checkbox" name="status" {eq name="data['status']"
+                                           value="1" }checked{/eq} />
+                                    {else /}
+                                    <input id="status" value="1" type="checkbox" name="status" checked/>
+                                    {/eq}
+                                    <label for="status"></label>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <label for="xposition" class="w120">{:lang('X gaode')}:</label>
+                                <input type="text" class="input" name="xposition" id="xposition" value='{$data.xposition|default=0}' style="width: 80px;">
+                            </div>
+    
+                            <div class="row">
+                                <label for="yposition" class="w120">{:lang('Y gaode')}:</label>
+                                <input type="text" class="input" name="yposition" id="yposition" value='{$data.yposition|default=0}' style="width: 80px;">
+                            </div>
+                            
+                            <div class="row" style="margin-left:10px;">
+                                <iframe width="290" height="215" src="http://ditu.amap.com/" scrolling="no"></iframe>
+                                <input type="hidden" id="position_x" value="{$data.xposition}"/>
+                                <input type="hidden" id="position_y" value="{$data.yposition}"/>
+                            </div>
+                        
+                        </div>
+                        
+                        <div class="clear"></div>
+                        
+                        <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                            {eq name="ACTION_NAME" value="edit"}
+                            <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('savedata')}"/>
+                            <input name="id" type="hidden" value="{$data.id}"/>
+                            {else /}
+                            <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}"/>
+                            {/eq}
+                            <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    {/block}
+    
+    {block name="js"}
+    <script>
+        $(function () {
+            $(".bset").buttonset();
+
+            $("#opentime").datepicker({
+                dateFormat: "{:config('kernel.timeformat')}",
+                maxDate: new Date(),
+                onSelect: function(dateText, inst) {
+                    $.datepicker.regional["{:config('kernel.localdate')}"];
+                }
+            });
+        })
+    </script>
+    {/block}

@@ -1,0 +1,24 @@
+    <script>
+        $(function() {
+            $("#start").datetimepicker({
+                dateFormat: "{:config('kernel.timeformat')}",
+                timeFormat: 'HH:mm:ss',
+                maxDate: new Date(),
+                onSelect: function(dateText, inst) {
+                    $.datepicker.regional["{:config('kernel.localdate')}"];
+                    $("#end").datepicker("option", "minDate", dateText);
+                    $("#end").focus();
+                }
+            });
+            
+            $("#end").datetimepicker({
+                dateFormat: "{:config('kernel.timeformat')}",
+                timeFormat: 'HH:mm:ss',
+                maxDate: new Date(),
+                onSelect: function(dateText, inst) {
+                    $.datepicker.regional["{:config('kernel.localdate')}"];
+                    $("#start").datepicker("option", "maxDate", dateText);
+                }
+            });
+        })
+    </script>

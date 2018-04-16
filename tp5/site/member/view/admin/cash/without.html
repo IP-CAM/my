@@ -1,0 +1,138 @@
+    {extend name="admin@public/base"/}
+
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content">
+        <div class="breadcrumbs">
+            {:lang('Member')} : &nbsp;&nbsp; {:lang('Deposit_experi')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+        </div>
+
+        <div class="bloc">
+            <div class="title">
+                <div class="tabs" id="navs">
+                    {include file="admin@public/navs" /}
+                </div>
+
+                {include file="admin@public/lang" /}
+            </div>
+            <div class="content">
+                
+                <dl class="gzzt clearfix mtb10">
+                    <dd>
+                        <div class="boxr">
+                            {include file="admin@public/button" /}
+                        </div>
+                    </dd>
+
+                    <form style="margin-top:0;" class="search-form">
+                        <dd>
+                            <div class="boxr ovh">
+                                <label for="start" style="margin:10px 10px 0 0; width:156px;">
+                                        <input type="text" id="start" value="{:input('start_time')}" name="start_time" placeholder="{:lang('Begin_time')}" class="w130 input_img" />
+                                    </label>
+                                    <label style="width:10px;line-height:32px; margin-right:2px;">~</label>
+                                    <label for="end" style="margin:10px 10px 0 0; width:150px;">
+                                        <input type="text" id="end" value="{:input('end_time')}" name="end_time" placeholder="{:lang('End_time')}" class="w130 input_img" />
+                                    </label>
+                            </div>
+                        <dd>
+
+                        <dd>
+                            <div class="boxr ovh">
+                                <label for="name" style="margin:10px 10px 0 0; width:230px;">
+                                    <input type="text" id="name" class="searchinput" name="name" value="{:input('name')}" placeholder="{:lang('Search_member_tip')}" style="width:200px;"/>
+                                </label>
+                                <input type="button" name="search" id="sch-search" class="button white" value="{:lang('Search')}" url="{:url('', input('name'))}"/>
+                            </div>
+                        <dd>
+                    </form>
+
+                    <dd>
+                        <div class="boxl fl">
+                            <span>{:lang('Count_all')}：<b>{$_total}</b></span>
+                        </div>
+                    </dd>
+                    <dd style="float: right !important;">
+                        <div class="boxl">
+                            <span>
+                                <a href="javascript:location.reload();" class="refresh tooltip-link" title="{:lang('Refresh')}">
+                                    <em>{:lang('Refresh')}</em>
+                                </a>
+                            </span>
+                            <span>
+                                <a href="javascript:void(0);" class="ajax-get setting tooltip-link colum" title="{:lang('Showlum')}" data-title="{:lang('Showlum')}">
+                                    <em>{:lang('Showlum')}</em>
+                                </a>
+                            </span>
+                        </div>
+                    </dd>
+                </dl>
+
+                {notempty name="list"}
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="center" width="30"><input class="check-all" type="checkbox"></th>
+                        <th class="left" style="width:80px;"><a href="{:getUrlbyOrder('id')}">ID</a></th>
+                        <th class="left" style="width:170px;"><a href="{:getUrlbyOrder('id')}">{:lang('Withouter')}</a></th>
+                        <th class="left" style="width:170px;"><a href="{:getUrlbyOrder('id')}">{:lang('Without_money')}</a></th>
+                        <th class="left"><a href="{:getUrlbyOrder('id')}">{:lang('Without_time')}</a></th>
+                        <th class="left"><a href="{:getUrlbyOrder('id')}">{:lang('Without_from')}</a></th>
+                        <th class="center"  style="width:90px;"><a href="{:getUrlbyOrder('id')}">{:lang('Status')}</a></th>
+
+                        <th class="actions">{:lang('Actions')}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {volist name="list" id="vo"}
+                    <tr>
+                        <td class="center"><input class="ids" type="checkbox" value="{$vo['id']}" name="ids[]"></td>
+                        <td class="left">{$vo['id']}</td>
+                        <td class="left">{$vo['account']['nickname']}</td>
+                        <td class="left">{$vo['money']}</td>
+                        <td class="left">{$vo['create_time']}</td>
+                        <td class="left">{$vo['from']}</td>
+
+                        <td class="center">
+                            <a class="tooltip-link ajax-get edit" title="{:lang('Edit_this_record')}" href="{:url('edit',array('ids'=>$vo['id']))}" data-title="{:lang('Edit')}">
+                            {if condition="$vo['status'] eq 0"}
+
+                                {:lang('Panding')}
+
+                            {elseif condition="$vo['status'] eq 2" /}
+
+                                {:lang('Fail')}
+                            {else /}
+
+                                {:lang('Successful')}
+                            {/if}
+                            </a>
+                        </td>
+                        <td class="actions">
+                            <a class="tooltip-link ajax-get edit" title="{:lang('Edit_this_record')}" href="{:url('edit',array('ids'=>$vo['id']))}" data-title="{:lang('Edit')}">
+                                <img src="__PUBLIC__/admin/images/edit.png" alt="{:lang('Edit')}" />
+                            </a>
+                            <a class="tooltip-link ajax-get confirm" title="{:lang('Delete_this_record')}" data-layer="{:lang('Want_delete')}" href="{:url('deleteaction',array('ids'=>$vo['id']))}" data-title="{:lang('Delete')}">
+                                <img src="__PUBLIC__/admin/images/delete.png" alt="{:lang('Delete')}" />
+                            </a>
+                        </td>
+                    </tr>
+                    {/volist}
+                    </tbody>
+                </table>
+                <div class="pagination-wrapper">
+                    <div class="results-part"><span>{$_total}</span></div>
+                    <div class="links-part">{$page}</div>
+                </div>
+
+                {else/}
+                <div class="alert alert-warning">{:lang('No_record')}</div>
+                {/notempty}
+            </div>
+        </div>
+
+    </div>
+
+    {include file="admin@public/time_for_search" /}
+    
+    {/block}

@@ -1,0 +1,208 @@
+{extend name="store/base" /} 
+{block name="body"}
+		<div class="shop-login-box yahei">
+			<div class="form-body">
+				<div class="title">
+					<div class="t">店铺信息</div>
+				</div>
+				<div class="content">
+
+					<form action="" id="pwd_form">
+						<ul>
+							
+							<li class="form-row">
+								<label class="form-label">
+                            <em> * </em> 店铺类型： </label>
+								<span class="form-act">
+                           <select name="" datafld="*">
+                           	<option value="">请选择</option>
+                           </select>
+                        </span>
+
+							</li>
+							<li class="form-row">
+								<label class="form-label">
+                            <em> * </em> 店铺经营类目： </label>
+								<span class="form-act">
+                           <select name="" datafld="*">
+                           	<option value="">请选择</option>
+                           </select>
+                        </span>
+
+							</li>
+							<li class="form-row">
+								<label class="form-label">
+                             经营品牌： </label>
+								<span class="form-act">
+                           <select name="" datafld="*" style="width: 100px;">
+                           	<option value="">请选择</option>
+                           </select>
+                           或 <input style="width: 100px;" type="text" placeholder="新增品牌" class="input-ln" name="" id="" />
+                        </span>
+
+							</li>
+
+							<li class="form-row">
+								<label for="" class="form-label"> <em> * </em> 品牌授权书电子版： </label>
+								<span class="form-act">
+                            <ul class="images-upload clearfix">
+                                <li class="handle img-thumbnail" >
+                                    <i class="icon-close-b action-remove">
+                                        &times;
+                                    </i>
+                                    <img src="/site/crossbbcg/pc/default/ad/od1.jpg" />
+                                    <input datatype="*" type="hidden" name="img[]" />
+                                </li>
+                                <li class="img-thumbnail action-upload" style="display: none;">
+                                    <input type="file" class="action-file-input" />
+                                    <span class="icon-add">
+                                        +
+                                    </span>
+							</li>
+						</ul>
+						</span>
+						<div class="form-tips">文件不能大于2MB </div>
+						</li>
+
+						<li class="form-row">
+							<label class="form-label">
+                            <em> * </em> 店铺名称： </label>
+							<span class="form-act">
+                            <input datatype="s5-50" placeholder="店铺名称" class="input-ln" type="text"  value="" />
+                        </span>
+
+						</li>
+						<li class="form-row">
+							<label class="form-label">
+                           店铺描述： </label>
+							<span class="form-act">
+                            <input  placeholder="店铺描述" class="input-ln" type="text"  value="" />
+                        </span>
+
+						</li>
+						<li class="form-row">
+							<label class="form-label">
+                            <em> * </em> 店主姓名： </label>
+							<span class="form-act">
+                            <input datatype="s5-50" placeholder="店主姓名" class="input-ln" type="text"  value="" />
+                        </span>
+
+						</li>
+						<li class="form-row">
+								<label for="" class="form-label"> <em> * </em> 店主身份证电子版正面： </label>
+								<span class="form-act">
+                            <ul class="images-upload clearfix">
+                                <li class="handle img-thumbnail" >
+                                    <i class="icon-close-b action-remove">
+                                        &times;
+                                    </i>
+                                    <img src="/site/crossbbcg/pc/default/ad/od1.jpg" />
+                                    <input datatype="*" type="hidden" name="img[]" />
+                                </li>
+                                <li class="img-thumbnail action-upload" style="display: none;">
+                                    <input type="file" class="action-file-input" />
+                                    <span class="icon-add">
+                                        +
+                                    </span>
+							</li>
+						</ul>
+						</span>
+						
+						</li>
+						<li class="form-row">
+								<label for="" class="form-label"> <em> * </em> 店主身份证电子版反面： </label>
+								<span class="form-act">
+                            <ul class="images-upload clearfix">
+                                <li class="handle img-thumbnail" >
+                                    <i class="icon-close-b action-remove">
+                                        &times;
+                                    </i>
+                                    <img src="/site/crossbbcg/pc/default/ad/od1.jpg" />
+                                    <input datatype="*" type="hidden" name="img[]" />
+                                </li>
+                                <li class="img-thumbnail action-upload" style="display: none;">
+                                    <input type="file" class="action-file-input" />
+                                    <span class="icon-add">
+                                        +
+                                    </span>
+							</li>
+						</ul>
+						</span>
+						
+						</li>
+						<li class="form-row">
+							<label class="form-label">
+                            <em> * </em> 地址： </label>
+							<span class="form-act">
+                            <input datatype="s5-50" placeholder="地址" class="input-ln" type="text"  value="" />
+                        </span>
+
+						</li>
+						<li class="form-row">
+							<label class="form-label">
+                            <em> * </em> 手机号码： </label>
+							<span class="form-act">
+                            <input datatype="s5-50" placeholder="手机号码" class="input-ln" type="text"  value="" />
+                        </span>
+
+						</li>
+						<li class="form-row">
+							<label class="form-label">
+                           邮箱： </label>
+							<span class="form-act">
+                            <input placeholder="邮箱" class="input-ln" type="text"  value="" />
+                        </span>
+
+						</li>
+						<li class="form-row last">
+							<label for="" class="form-label">&nbsp;</label> <span class="form-act">
+								<a class="btn btn-back" href="{url('store/pwdfindOne')}">返回上一步</a>
+                        	<button type="submit" class="btn btn-import" rel="_request">保存</button>
+							</span>
+						</li>
+						</ul>
+					</form>
+				</div>
+			</div>
+		</div>
+		{/block} {block name="footer_js"}
+		<script type="text/javascript">
+			$(function() {
+//				laydate({
+//					elem: '#cl_riqi',
+//					event: 'click',
+//					choose: function(datas) {
+//						$('#cl_riqi').html(datas);
+//						$('#cl_riqi_input').val(datas).blur()
+//					}
+//
+//				});
+//
+//				laydate({
+//					elem: '#cl_riqi2',
+//					event: 'click',
+//					choose: function(datas) {
+//						$('#cl_riqi2').html(datas);
+//						$('#cl_riqi_input2').val(datas).blur()
+//					}
+//
+//				});
+
+				$("#pwd_form").Validform({
+					tiptype: 3,
+					showAllError: true
+				});
+			})
+
+			function showdemo(title, img_src, area) {
+				layer.open({
+					"title": title,
+					'skin': 'layer-ext-blue',
+					type: 1,
+					area: area,
+					shadeClose: true,
+					content: "<img style='display:block;margin:0 auto;padding-top:15px' src=" + img_src + ">"
+				})
+			}
+		</script>
+{/block} 

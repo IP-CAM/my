@@ -1,0 +1,65 @@
+<!--推荐商品-->
+{notempty name=":widget('crossbbcg/Ad/get_goods_ad',['id'=>21,'limit'=>10])"}
+<div class="gallery-fot-goods" data-type="group" data-carouFredSel='{
+				items:5,
+				circular:false,
+				infinite:false,
+				width:1160,
+				direction:"left",
+				scroll:{
+					items:4,
+					easing:"swing"
+				}
+					}'>
+	<dl class="goods-ly-list">
+		<dt class="ly-title">
+		<h3>{:lang('hot_sole')}</h3>		<div class="page-btn">
+			<a class="slider-btn prev "href="javascript:void(0)" title="" style="display: none">{:lang('Previous_Page')}</a>
+			<a class="slider-btn next "href="javascript:void(0)" title="" style="display: none">{:lang('Next_Page')}</a>
+		</div>
+				<!-- morelink -->
+				<!-- morelinkEND -->
+	</dt>
+		<!-- tupian -->
+		<!-- tupianend -->
+		<!-- goods -->
+		<dd class="slide-goods">
+			<div class="w" style="position: relative;overflow: hidden;margin:0 auto;height:325px;width:1160px">
+				<ul class="goods-list clearfix slide-content">
+                    {foreach :widget('crossbbcg/Ad/get_goods_ad',['id'=>21,'limit'=>10]) as $v}
+					<li class="goods-item slide-item">
+						<div class="item">
+							<div class="goods-pic">
+							<a href="{:url('crossbbcg/goods/index').'?item_id='.$v['id']}" target="_blank" title="{$v['name']}">
+                                {notempty name="$v['thumb']"}
+                                {if condition="substr($v['thumb'],0,4)=='http'"}
+                                <img width="204" height="204" class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="{$v['thumb']}" alt="{$v['name']}" />
+                                {else /}
+                                <img width="204" height="204" class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__UPLOADS__/{$v['thumb']}" alt="{$v['name']}" />
+                                {/if}
+                                {else /}
+                                <img width="204" height="204" class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__PUBLIC__/{$img_path}/no-image.png" alt="{$v['name']}" />
+                                {/notempty}
+							</a>
+						</div>
+						<div class="goods-info">
+							<div class="goods-name">
+								<a href="{:url('crossbbcg/goods/index').'?item_id='.$v['id']}" target="_blank">{$v['name']}</a>
+							</div>
+							<div class="price-box">
+								<span class="price">{$v['sale_price']}</span>
+								<span class="mkt-price">{$v['market_price']}</span>
+							</div>
+						</div>
+						</div>
+					</li>
+					{/foreach}
+				</ul>
+			</div>
+
+		</dd>
+		<!-- doodsEND -->
+	</dl>
+
+</div>
+{/notempty}

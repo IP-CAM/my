@@ -1,0 +1,79 @@
+    {extend name="admin@public/poupbase"/}
+    
+    {block name="style"}
+    <style>
+        #ovh{padding: 0 !important;overflow-x: hidden;overflow-y: auto;position: relative;height: 360px;
+        }
+        #ovh::-webkit-scrollbar{width: 8px;background-color: #F5F5F5;}
+    
+        /*定义滚动条轨道 内阴影+圆角*/
+        #ovh::-webkit-scrollbar-track{-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); background-color: #F5F5F5;}
+    
+        /*定义滑块 内阴影+圆角*/
+        #ovh::-webkit-scrollbar-thumb {border-radius: 10px;-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3); background-color: #555;}
+
+        .grippy{
+            float: left;
+            display: inline-block;
+            padding: 0 5px 0 3px;
+            zoom: 1;
+            vertical-align: middle;
+            cursor: pointer;
+        }
+        
+    </style>
+    {/block}
+
+    {block name="body"}
+    <div id="content" style="margin:0px 10px 5px 8px;">
+        <div class="bloc" style="margin:10px 0px 0px;">
+            <div class="content">
+                <form id="myform" method="post" action="{:url()}" style="height: 415px; margin:0 !important;" class="">
+                    <fieldset>
+                        {eq name="column" value="option"}
+                        <legend>{:lang('Option_Ids')}</legend>
+                        {/eq}
+                        {eq name="column" value="brand"}
+                        <legend>{:lang('Brand_Ids')}</legend>
+                        {/eq}
+                        {eq name="column" value="country"}
+                        <legend>{:lang('Country_Ids')}</legend>
+                        {/eq}
+                        <!-- Multiple Checkboxes -->
+                        <div id="ovh">
+                        {volist name="list" id="arr"}
+                            <div style="height: 17px; line-height: 17px; display: block;margin: 0; clear: both;">
+                                <label class="checkbox" style="margin-top: 2px; line-height: 16px;">
+                                    <input type="checkbox" name="column[{$arr['id']}]" value="1" {eq name="arr['selected']" value="1"}checked{/eq}>
+                                    {$arr['name']}
+                                </label>
+                            </div>
+                        {/volist}
+                        </div>
+                    </fieldset>
+                
+                
+                    <div class="buttons-wrapper bw-bottom clear" style="margin:10px auto 2px; text-align:center; position:fixed; width:auto; height:50px; bottom:0px; right:30px;">
+                        
+                        {eq name="column" value="option"}
+                        <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('optionIdsSave')}" class="button"/>
+                        {/eq}
+                        {eq name="column" value="brand"}
+                        <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('brandIdsSave')}" class="button"/>
+                        {/eq}
+                        {eq name="column" value="country"}
+                        <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('countryIdsSave')}" class="button"/>
+                        {/eq}
+                        <input name="ids" hidden value="{$ids}" />
+                        <input name="reset" class="button white" value="{:lang('Goods_Cancel')}" type="reset">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {/block}
+
+    {block name="js"}
+    
+    
+    {/block}

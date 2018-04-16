@@ -1,0 +1,89 @@
+{extend name="common/base" /}
+
+{block name="title"}
+<title>ETshop-首页</title>
+{/block}
+
+{block name="css"}
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/member.css" />
+{/block}
+
+{block name="body"}
+<!--面包屑-->
+<div class="ly-path">
+	<ul class="clearfix">
+		<li class="home">
+			<a href="/index.php/crossbbcg/index/index.html" title="前往主页">首页</a>
+			<span>&gt;&nbsp;</span>
+		</li>
+		<li>
+			<a href="/index.php/crossbbcg/index/index.html" title="">会员中心</a>
+			<span>&gt;&nbsp;</span>
+		</li>
+		<li>
+			<h1>我的返利</h1>
+		</li>
+	</ul>
+</div>
+<div class="ly-main member-main clearfix">
+	{include file="index/left_menu"}
+	<div class="member-right">
+		<div class="member-content">
+			<div class="title member-title member-max-title">
+				<div class="t">我的返利</div>
+			</div>
+			<div class="body pb15 mh600 member-point">
+				<div class="point-top">
+					<div class="points-left">
+						<h3>已返利</h3>
+						<p class="points-have">1947</p>
+					</div>
+					<div class="points-right">
+						<h3>待返利</h3>
+						<div class="points-past">0 </div>
+					</div>
+				</div>
+				<div class="point-body">
+					<table class="item-table public-table">
+						<colgroup>
+							<col width="15%">
+							<col width="15%">
+							<col width="15%">
+							<col width="20%">
+							<col width="30%">
+						</colgroup>
+						<thead>
+							<tr>
+								<td>下单用户</td>
+								<td>返利金额</td>
+								<td>状态</td>
+								<td>日期</td>
+								<td>备注</td>
+							</tr>
+						</thead>
+						
+						<tbody>
+							<tr>
+								<td> dd18785589878 </td>
+								<td class="center"><span class="points-add">50</span></td>
+								<td class="center">已返利</td>
+								<td class="center">	2017-07-12 15:19:29</td>
+								<td class="center">二级分销提成,订单号:170515103099903</td>
+							</tr>
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{/block}
+
+<!--此板块为页面单独js加载-->
+{block name="footer_js"}
+<script type="text/javascript">
+	//需要加载的js文件
+	//Private_Script = ['memberComment'];
+</script>
+{/block}

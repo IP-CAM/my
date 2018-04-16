@@ -1,0 +1,93 @@
+    {extend name="admin@public/poupbase"/}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content" style="margin:0px 10px 5px 8px;">
+        <div class="bloc" style="margin:10px 0px 0px;">
+            <div class="content">
+                <form id="myform" method="post" style="margin-top:5px;" class="">
+                    <fieldset>
+                        <legend>{$meta_title|default=''}</legend>
+    
+                        <div class="row">
+                            <label for="title" class="w140">{:lang('Takeself title')}: <span class="required">*</span></label>
+                            <input id="title" type="text" value="{$data.title}" name="title" style="width:200px;" />
+                        </div>
+    
+                        <div class="row">
+                            <label for="name" class="w140">{:lang('Takeself name')}: </label>
+                            <input id="name" type="text" value="{$data.name}" name="name" />
+                        </div>
+    
+                        <div class="row">
+                            <label for="mobile" class="w140">{:lang('Mobile')}: </label>
+                            <input id="mobile" type="text" value="{$data.mobile}" name="mobile"  placeholder="13800138000" style="width: 90px;"/>
+                            <input id="tel" type="text" value="{$data.tel}" name="tel"  placeholder="{:lang('tel')} 0755-81234567" style="width: 120px;" />
+                        </div>
+    
+                        <div class="row">
+                            <label for="country_id" class="w140">{:lang('Country name')}: </label>
+                            <select name="country_id" id="country_id" class="sel_w150">
+                                <option value="0">----{:lang('Please_choose')}----</option>
+                                <volist name="investor" id="in">
+                                    <option value=""></option>
+                                </volist>
+                            </select>
+                        </div>
+    
+                        <div class="row">
+                            <label for="province" class="w140">{:lang('Send area')}: </label>
+                            <select name="province" id="province" class="sel_w150">
+                                <option value="0">----{:lang('Please_choose')}----</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <label for="city" class="w140"> &nbsp;</label>
+                            <select name="city" id="city" class="sel_w150">
+                                <option value="0">----{:lang('Please_choose')}----</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <label for="area" class="w140"> &nbsp; </label>
+                            <select name="area" id="area" class="sel_w150">
+                                <option value="0">----{:lang('Please_choose')}----</option>
+                            </select>
+                        </div>
+    
+                        <div class="row">
+                            <label for="address" class="w140">{:lang('Takeself address')}: <span class="required">*</span></label>
+                            <input id="address" type="text" value="{$data.address}" name="address" style="width:300px;" />
+                        </div>
+    
+                        <div class="row">
+                            <label for="status" class="w140">{:lang('Status')}:</label>
+                            <div class="slideBox">
+                                {eq name="ACTION_NAME" value="edit"}
+                                <input id="status" value="1" type="checkbox" name="status"  {eq name="data['status']" value="1"}checked{/eq} />
+                                {else /}
+                                <input id="status" value="1" type="checkbox" name="status" checked />
+                                {/eq}
+                                <label for="status"></label>
+                            </div>
+                        </div>
+                        
+                        <div class="clear"></div>
+                        
+                        <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                            {eq name="ACTION_NAME" value="edit"}
+                            <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('savedata')}" />
+                            <input name="id" type="hidden"  value="{$data.id}" />
+                            {else /}
+                            <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}" />
+                            {/eq}
+                            <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    {/block}
+    
+    {block name="js"}
+    {/block}

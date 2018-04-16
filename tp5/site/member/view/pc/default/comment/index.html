@@ -1,0 +1,146 @@
+    {extend name="common/base" /}
+    
+    {block name="title"}
+    <title>ETshop-{:lang('After_sales_apply')}</title>
+    {/block}
+    
+    {block name="css"}
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/member.css" />
+    {/block}
+    
+    {block name="body"}
+    <!--面包屑-->
+    <div class="ly-path">
+        <ul class="clearfix">
+            <li class="home">
+                <a href="{:url('crossbbcg/index/index')}" title="{:lang('go_min')}">{:lang('Home')}</a>
+                <span>&gt;&nbsp;</span>
+            </li>
+            <li>
+                <a href="{:url('member/index/index')}" title="">{:lang('Member')}</a>
+                <span>&gt;&nbsp;</span>
+            </li>
+            <li>
+                <h1>{:lang('After_sales_apply')}</h1>
+            </li>
+        </ul>
+    </div>
+    <div class="ly-main member-main clearfix">
+        {include file="index/left_menu"}
+	<div class="member-right">
+		<div class="member-content">
+   
+			<div class="title member-title member-max-title">
+				<div class="t">{:lang('my_commnet')}</div>
+				<ul class="tabs member-comment-tabs">
+                    <li {eq name=":input('get.condition')" value="" }class="active"{/eq}>
+                        <a href="{:url('index')}">{:lang('all_commnet')}<em>({$total})</em></a>
+                    </li>
+                    <li {eq name=":input('get.condition')" value="is_img" }class="active"{/eq}>
+                        <a href="{:url('index',['condition'=>'is_img'])}">{:lang('all_commnet_img')}<em>({$show_img_num})</em></a>
+                    </li>
+                    <li {eq name=":input('get.condition')" value="reply" }class="active"{/eq}>
+                        <a href="{:url('index',['condition'=>'reply'])}">{:lang('all_commnet_return')}<em>({$reply_num})</em></a>
+                    </li>
+               </ul>
+			</div>
+            {empty name='$data'}
+            <div class="ly-no-data" style="background: #fff;border: 1px solid #e6e6e6;">
+                <div class="icon iconfont icon-zanwujilu"></div>
+                <div class="text">{:lang('empty_record')}</div>
+            </div>
+            {else /}
+			<div class="body pb15 mh600 member-comment-list">
+				<div class="order-item">
+					<table class="order-table comment-table">
+						<tbody>
+							<tr>
+								<td style="width: 30%;" colspan="2" class="order-summary align-center">
+									<span class="order-status ">{:lang('good_information')}  </span>
+									
+								</td>
+								<td  style="width: 50%;" class="order-summary  align-center" >
+									<span class="order-status ">{:lang('goods_comment_info')}  </span>
+									
+								</td>
+								<td style="width: 20%;" class="order-summary  align-center">
+									<span class="order-status ">{:lang('goods_comment_time')}  </span>
+									
+								</td>
+							</tr>
+                            {foreach $data as $k=>$v}
+							<tr>
+                                <td>
+                                    {if condition='empty($v.thumb)'}
+                                    <img src="__PUBLIC__/{$img_path}/no-image.png" width="58" height="58">
+                                    {elseif condition='substr($v.thumb,0,4) == "http"'}
+                                    <img src="$v.thumb" width="58" height="58">
+                                    {else /}
+                                    <img src="__UPLOADS__/{$v.thumb}" width="58" height="58">
+                                    {/if}
+                                    </td>
+								<td  class="name" style="padding:10px">
+									<a href="{:url('crossbbcg/goods/index',['item_id'=>$v.goods_id])}" target="_blank">{$v.goods_name}{notempty name="$v.sku_name"}【{$v.sku_name}】{/notempty}</a>
+								</td>
+								<td class="name" style="padding:10px">
+									<div class="count-grade">
+										<div class="t">{:lang('goods comment score')}:</div>
+										<div class="xing-box">
+											<span class="act"><i class="iconfont icon-xingact"></i></span>
+											<span {egt name="$v.score" value='2'}class="act"{/egt}><i class="iconfont icon-xingact"></i></span>
+											<span {egt name="$v.score" value='3'}class="act"{/egt}><i class="iconfont icon-xingact"></i></span>
+											<span {egt name="$v.score" value='4'}class="act"{/egt}><i class="iconfont icon-xingact"></i></span>
+											<span {egt name="$v.score" value='5'}class="act"{/egt}><i class="iconfont icon-xingact"></i></span>
+											<em>{$v.score}{:lang('goods score')}</em>
+										</div>
+									</div>
+									<div class="row clearfix">
+										<div class="left">{:lang('goods_comment_content')}:</div>
+										<div class="right">{$v.comment_content}</div>
+									</div>
+                                    {notempty name="$v.image"}
+									<div class="row clearfix">
+										<div class="left">{:lang('show img')}:</div>
+										<div class="right" id="{$k}">
+                                            {foreach $v.image as $im}
+                                            {if condition="empty($im)"}
+                                            <img class="comment_img" src="__PUBLIC__/{$img_path}/no-image.png" width="40" height="40" alt="" />
+                                            {elseif condition="substr($im,0,4) == 'http'"}
+                                            <img class="comment_img" src="{$im}" alt="" />
+                                            {else /}
+                                            <img class="comment_img" src="__UPLOADS__/{$im}" alt="" />
+                                            {/if}
+                                            {/foreach}
+                                        </div>
+									</div>
+                                    {/notempty}
+                                    {notempty name='$v.reply'}
+									<div class="row clearfix">
+										<div class="left">{:lang('seller_reply')}:</div>
+										<div class="right">{$v.reply}</div>
+									</div>
+									{/notempty}
+								</td>
+								<td class="name align-center">{$v.create_time}</td>
+							</tr>
+							{/foreach}
+						</tbody>
+					</table>
+				</div>
+				<div class="pagenavi">
+                    {$data->render()}
+                </div>
+			</div>
+            {/empty}
+		</div>
+	</div>
+</div>
+
+{/block}
+<!--此板块为页面单独js加载-->
+{block name="footer_js"}
+<script type="text/javascript">
+	//需要加载的js文件
+	Private_Script = ['memberComment'];
+</script>
+{/block}

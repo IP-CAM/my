@@ -1,0 +1,151 @@
+{extend name='public/layout'}
+
+{block name='body'}
+<div id="toolTipLayer" style="position: absolute; z-index: 9999; display: none; visibility: visible; left: 95px; top: 573px;"></div>
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+    <div class="fixed-bar">
+        <div class="item-title">
+            <div class="subject">
+                <h3>{:lang('shop_manage')} - {:lang('offshop')}</h3>
+            </div>
+        </div>
+    </div>
+    {empty name='$list'}
+    <div class="explanation">
+        <div class="title">
+            <p style="margin-top:10px "><a class="ncap-btn-big ncap-btn-red tooltip-link ajax-get" data-height="496" data-width="800" data-showbar="1" data-title="{:lang('immediately')}{:lang('apply')}" href="{:url('applyoff')}">{:lang('immediately')}{:lang('apply')}</a></p>
+        </div>
+    </div>
+    {else /}
+    <form class="form-horizontal" id="form" method="post" style="border-bottom: 2px dashed #dacdcd ">
+        <input type="hidden" name="id" value="{$list.id}"/>
+        <div class="ncap-form-default">
+            <dl class="row">
+                <dt class="tit">
+                    <label>{:lang('shop_name')}</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" class="input-txt" value="{$list.seller_name}" name="seller_name"/>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label>{:lang('seller_logo')}</label>
+                </dt>
+                <dd class="opt">
+                    <input name="logo" type="text" class="input" value="{$list.logo}" id="logo" placeholder="image/logo.png" />
+                    <input class="button white upload" value="{:lang('Selectimg')}" title="{:lang('Selectimg')}" type="button" title="{:lang('Upload img and file')}" url="{:url('img',array('input' => 'logo'))}" data-upload="__UPLOADS__" />
+                    <a href="javascript:void(0)" class="preview" data-src="logo" data-width="200" data-height="200" data-area="200">{:lang('Preview')}</a>
+                </dd>
+            </dl>
+            <dl class="row">
+                    <dt class="tit" >
+                        <label for="name">{:lang('lat')}:</label>
+                    </dt>
+                    <dd class="opt">
+                        <input type="text" value="{$list.lat}" name="lat"/>
+                    </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="name">{:lang('lng')}:</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" value="{$list.lng}" name="lng"/>
+                    <a href="http://lbs.amap.com/console/show/picker" target="_blank"><span>{:lang('ibsmap')}</span></a>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="name">{:lang('shop_address')}:</label>
+                </dt>
+                <dd class="opt">
+                    <select name="country"  class="country w150">
+                        {foreach $arr_country as $v}
+                        <option value="{$v.id}">{$v.name}</option>
+                        {/foreach}
+                    </select>
+                    <select name="province" class="province w150">
+                        {notempty name='$province'}
+                        <option value="{$province.id}">{$province.name}</option>
+                        {/notempty}
+                    </select>
+                    <select name="city" class="city w150">
+                        {notempty name='$city'}
+                        <option value="{$city.id}">{$city.name}</option>
+                        {/notempty}
+                    </select>
+                    <select name="area" class="area w150">
+                        {notempty name='$area'}
+                        <option value="{$area.id}">{$area.name}</option>
+                        {/notempty}
+                    </select>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="name">{:lang('address')}:</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="address" value="{$list.address}" class="input-txt"/>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label>{:lang('description')}</label>
+                </dt>
+                <dd class="opt">
+                    <textarea name="description" id="" cols="44" rows="10">{$list.description}</textarea>
+                </dd>
+            </dl>
+            
+            <div class="bot"><input class="btns blue" type="submit" value="{:lang('submit')}" name="submit" url="{:url('edit_shop_off')}"></div>
+        </div>
+    </form>
+    {/empty}
+    
+</div>
+<script>
+    //获取省级列表
+    $(document).on('change', '.country', function () {
+        var country = $(this).val();
+        $('.province , .city , .area').html('');
+        $.post("{:url('member/person/get_province')}", {'country': country}, function (data) {
+            var _html = '';
+            if (data.code == 1) {
+                $.each(data.data,function (i,e) {
+                    _html += '<option value="'+e.code+'">'+e.name+'</option>';
+                });
+                console.log(data);
+                $('.province').html(_html);
+            }
+        },'json');
+    });
+    //获取市级列表
+    $(document).on('change', '.province', function () {
+        var province = $(this).val();
+        $.post("{:url('member/person/get_city')}", {'province': province}, function (data) {
+            var _html = '';
+            $.each(data.data,function (i,e) {
+                _html += '<option value="'+e.code+'">'+e.name+'</option>';
+            });
+            console.log(data);
+            $('.city').html(_html);
+        },'json');
+    });
+    //获取区级列表
+    $(document).on('change', '.city', function () {
+        var district = $(this).val();
+        $.post("{:url('member/person/get_district')}", {'district': district}, function (data) {
+            var _html = '';
+            $.each(data.data,function (i,e) {
+                _html += '<option value="'+e.code+'">'+e.name+'</option>';
+            });
+            console.log(data);
+            $('.area').html(_html);
+        },'json');
+    });
+</script>
+{/block}

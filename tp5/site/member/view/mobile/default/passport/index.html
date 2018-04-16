@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no, email=no"/>
+    <link rel="shortcut icon" href="/favicon.ico?v=2"/>
+    <title>Etshop-登录</title>
+    <link rel="stylesheet" href="__PUBLIC__/{$css_path}/common.css"/>
+    <style type="text/css">
+        .u-iconlogin, .m-zfbtip .icon {
+            display: inline-block;
+            background: url(__PUBLIC__/{$img_path}/loginicon.png) -999px -999px no-repeat;
+            background-size: 175px;
+        }
+        
+        .u-iconlogin1 {
+            width: 31px;
+            height: 31px;
+            background-position: 0 0;
+        }
+        
+        .u-iconlogin1-1 {
+            background-position: -36px 0;
+        }
+        
+        .u-iconlogin1-2 {
+            background-position: -72px 0;
+        }
+        
+        .u-iconlogin1-3 {
+            background-position: -108px 0;
+        }
+        
+        .u-iconlogin1-4 {
+            background-position: -144px 0;
+        }
+        
+        .u-iconlogin2 {
+            width: 18px;
+            height: 15px;
+            background-position: 0 -42px;
+        }
+        
+        .u-iconlogin2-1 {
+            margin-right: 3px;
+            background-position: -23px -41px;
+        }
+        
+        .u-iconlogin2-2 {
+            margin-right: 5px;
+            background-position: -54px -44px;
+        }
+        
+        .m-logo {
+            text-align: center;
+            padding: 130px 0 0;
+        }
+        
+        .m-logo img {
+            width: 151px;
+        }
+        
+        .m-thirdpart {
+            padding: 40px 15px 50px;
+        }
+        
+        .m-thirdpart .tit {
+            position: relative;
+            width: 215px;
+            margin: 0 auto;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .m-thirdpart .tit .txt {
+            position: absolute;
+            left: 50%;
+            top: -12px;
+            margin: 0 0 0 -57px;
+            width: 114px;
+            background: #fff;
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+            line-height: 26px;
+        }
+        
+        .m-thirdpart .lnk {
+            position: relative;
+            padding: 27px 0 0;
+            width: 280px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .m-thirdpart .lnk a {
+            margin: 0 21px;
+        }
+        
+        .m-thirdpart .lnk .mgl0 {
+            margin-left: 0px;
+        }
+        
+        .m-thirdpart .lnk .mgr0 {
+            margin-right: 0px;
+        }
+        
+        .m-thirdpart .lnk .lastlogintext {
+            position: absolute;
+            left: -999px;
+            bottom: -17px;
+            width: 50px;
+            font-size: 10px;
+        }
+        
+        .m-thirdpart .lnk .lastlogintext-1 {
+            width: 64px;
+            left: -7px;
+        }
+        
+        .m-thirdpart .lnk .pos4 {
+            left: 1px;
+        }
+        
+        .m-thirdpart .lnk .pos5 {
+            left: 77px;
+        }
+        
+        .m-thirdpart .lnk .pos6 {
+            left: 153px;
+        }
+        
+        .m-thirdpart .lnk .pos7 {
+            left: 229px;
+        }
+        
+        @media all and (max-device-height: 480px) {
+            .m-logo {
+                margin: 15px 0;
+            }
+            
+            .m-thirdpart {
+                padding: 40px 20px 50px;
+            }
+        }
+        
+        @media (max-width: 320px) {
+            .m-weixin p.logintip {
+                width: 274px;
+            }
+        }
+        
+        .m-loginshow .forgetpwd {
+            display: none;
+            position: absolute;
+            left: 0;
+            bottom: 30px;
+            width: 100%;
+            margin-top: 320px;
+            color: #999;
+            text-align: center;
+        }
+        
+        .m-loginshow .urswarp, .m-loginshow .selectlogintype {
+            display: none;
+        }
+        
+        .m-loginshow .urswarp {
+            margin-top: 10px;
+        }
+        
+        .m-loginshow-1 .loginbox, .m-loginshow-1 .forgetpwd {
+            display: block;
+        }
+        
+        .m-loginshow-2 .loginbox2 {
+            display: block;
+        }
+        
+        .m-loginshow-3 .loginbox3 {
+            display: block;
+        }
+        
+        .m-loginshow-select .selectlogintype {
+            display: block;
+        }
+        
+        .m-loginshow-select .loginwrap {
+            display: none;
+        }
+        
+        .m-loginshow .loginwrap {
+            position: relative;
+            z-index: 10;
+        }
+        
+        .m-loginshow .selectbox {
+            width: 300px;
+            margin: 0 auto;
+        }
+        
+        .m-loginshow .selectbox li {
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+            width: 300px;
+            height: 42px;
+            padding: 13px 0;
+            margin-bottom: 15px;
+            border: 1px solid #666;
+            border-radius: 3px;
+            font-size: 14px;
+            line-height: 16px;
+            text-align: center;
+        }
+        
+        .m-loginshow .selectbox .wx {
+            border-color: #12b401;
+            background: #12b401;
+            color: #fff;
+        }
+        
+        .m-loginshow .selectbox .phonereg {
+            background: #000;
+            color: #fff;
+            font-weight: bold;
+        }
+        
+        .g-bd, .m-loginshow {
+            height: 100%;
+        }
+        
+        .m-zfbtip {
+            padding: 100px 0 0;
+            font-size: 15px;
+            line-height: 22px;
+        }
+        
+        .m-zfbtip .arrow {
+            display: block;
+            position: absolute;
+            top: 13px;
+            right: 24px;
+            width: 76px;
+            height: 111px;
+            background-position: -98px -73px;
+        }
+        
+        .m-zfbtip .safari {
+            display: block;
+            width: 60px;
+            height: 60px;
+            margin: 0 auto;
+            background-position: 0 -73px;
+        }
+        
+        .m-zfbtip .text {
+            margin-top: 20px;
+            color: #fff;
+        }
+        
+        .m-topnavbar .lefttip {
+            position: absolute;
+            left: 10px;
+            padding-left: 5px;
+        }
+        
+        .m-topnavbar .arrow {
+            display: inline-block;
+            position: absolute;
+            top: 0;
+            left: -10px;
+            width: 10px;
+            height: 45px;
+            background: url(//haitao.nos.netease.com/d058b790-5066-4eb8-b0c6-d030a40d70d2.png) no-repeat -2px 11px;
+            background-size: 20px;
+        }
+    </style>
+    <style>
+        .m-loginshow-2 .showtip {
+            display: none;
+        }
+        
+        body .m-dialog .confirm .txt {
+            padding: 20px 15px;
+        }
+    </style>
+    <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+</head>
+<body id="index-netease-com">
+<div class="g-bd" id="loginwrap">
+    <div class="orignpage">
+        <div class="m-loginshow m-loginshow-select j-tag">
+            <div class="selectlogintype">
+                <div class="m-logo"
+                     style="background:url(//haitao.nos.netease.com/3dd4a583394a4dfa8548d4f8892f339e.png) center 73px no-repeat;background-size:161px;"></div>
+                <ul class="selectbox">
+                    <li class="j-tag" data-select_id="1"><span class="u-iconlogin u-iconlogin2">&nbsp;</span>手机号登录</li>
+                    <li class="phonereg j-tag" data-select_id="3">手机号一键注册</li>
+                </ul>
+                <div class="m-thirdpart">
+                    <p class="tit"><span class="txt">或用以下方式登录</span></p>
+                    <div class="lnk">
+                        <a id="wxtoast" class="u-iconlogin u-iconlogin1 u-iconlogin1-2 mgl0"
+                           href="javascript:;">&nbsp;</a>
+                        <a class="u-iconlogin u-iconlogin1 u-iconlogin1-1 j-third" data-type="wb" href="javascript:;">&nbsp;</a>
+                        <a class="u-iconlogin u-iconlogin1 j-third" data-type="qq" href="javascript:;">&nbsp;</a>
+                        <a class="u-iconlogin u-iconlogin1 u-iconlogin1-4 j-third mgr0" data-type="zfb"
+                           href="javascript:;">&nbsp;</a>
+                    </div>
+                </div>
+            </div>
+            <div class="loginwrap">
+                <header class="g-hd m-topnav-space" id="g-hd">
+                    <div class="m-topnav-wrap">
+                        <div class=" m-topnav" id="topbar-box">
+                            <div class="m-topnavbar">
+                                <span class="lefttip j-tag"><span class="arrow"></span>其他登录方式</span>
+                                <span class="tit j-tag">登录</span>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+                <div style="background:url(//haitao.nos.netease.com/3dd4a583394a4dfa8548d4f8892f339e.png) center 18px no-repeat;background-size:161px;">
+                    <div id="loginbox" class="u-bgloading urswarp loginbox" style="height:324px;">
+                        <iframe name='login' frameborder="0" src="{:url('member/passport/login')}" scrolling="no" style="width: 100%; height: 100%; border: none; background: none;">
+    
+                        </iframe>
+                </div>
+                    <div id="loginbox3" class="u-bgloading urswarp loginbox3" style="height:408px;">
+                        <iframe name='register' frameborder="0" scrolling="no" src="{:url('member/passport/signup')}" style="width: 100%; height: 100%; border: none; background: none;">
+    
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="redirectUrl" value="https://m.kaola.com/"/>
+<script>
+    $(function () {
+        $('.selectbox li').on('click',function () {
+            var tar = $('.m-loginshow-select');
+            var clas = $(this).data('select_id');
+            tar.removeClass('m-loginshow-select').addClass('m-loginshow-'+clas);
+            $('.lefttip').attr('data-param','m-loginshow-'+clas);
+        })
+        $('.lefttip').on('click',function () {
+            var tar = $('.'+$(this).data('param'));
+            tar.removeClass($(this).data('param')).addClass('m-loginshow-select')
+        })
+    })
+</script>
+</body>
+</html>

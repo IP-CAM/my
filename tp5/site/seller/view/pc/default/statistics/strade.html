@@ -1,0 +1,182 @@
+    {extend name='common/base'}
+
+    {block name='css'}
+    <link href="__PUBLIC__/{$css_path}/daterangepicker.css" rel="stylesheet">
+    {/block}
+    
+    {block name="breadcrumb"}
+    <li>{:lang('sStatistics')}</li>
+    <li class="active">{$meta_title|default=''}</li>
+    {/block}
+    
+    {block name='body'}
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab_1" data-toggle="tab">{:lang('goods_sale_rank')}</a></li>
+                        <li><a href="#tab_2" data-toggle="tab">{:lang('goods_saleroom_rank')}</a></li>
+                        <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
+                    </ul>
+                    <div class="tab-content clearfix">
+                        <div class="tab-pane active" id="tab_1">
+                            <div class="box">
+                                <div class="box-header with-border">
+                                    <div class="row">
+                                        <form action="{:url('seller/statistics/strade')}">
+                                            <div class="page-header-top">
+                                                <a class="btn btn-etshop addnew" href="{:url('seller/statistics/strade')}">
+                                                    <i class="fa fa-feed"></i> {:lang('All')}
+                                                </a>
+                                                {:getSellerButton()}
+                                                <div class="time"
+                                                     style="width: 200px; position: relative;display: inline-block;vertical-align: middle; margin-right: 6px">
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </div>
+                                
+                                                        <input type="text" class="form-control pull-left" id="reservation" name="time" placeholder="{:lang('choose_order_time')}" value="{$time}" style="padding: 4px 12px; height: 30px">
+                                                    </div>
+                                                </div>
+                                                <input type="submit" value="{:lang('search')}" class="btn btn-info etbtn">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <table  class="table table-bordered table-striped" data-page-size="10">
+                                        <thead>
+                                        <tr>
+                                            <th style="width: 25px;">
+                                                <input type="checkbox" class="check-all">
+                                            </th>
+                                            <th class="center">{:lang('rank')}</th>
+                                            <th>{:lang('Goods_sn')}</th>
+                                            <th>{:lang('Goods_Name')}</th>
+                                            <th class="center">{:lang('Sales')}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {foreach $goods_num as $k=>$v}
+                                        <tr>
+                                            <td>
+                                                <input class="ids" type="checkbox" value="{$v.goods_id}" name="ids[]">
+                                            </td>
+                                            <td class="center">{$k+1+($goods_money->currentPage()-1)*$pages}</td>
+                                            <td>{$v.sku_code}</td>
+                                            <td>
+                                                {$v.goods_name}
+                                            </td>
+                                            <td class="center">{$v.num}</td>
+                                        </tr>
+                                        {/foreach}
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <td colspan="10">
+                                                <div class="text-right pagination" >
+                                                    {$goods_num->appends(input())->render()}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab_2">
+                            <div class="box">
+                                <div class="box-header with-border">
+                                    <div class="row">
+                                        <form action="{:url('seller/statistics/strade')}">
+                                            <div class="page-header-top">
+                                                <a class="btn btn-etshop addnew" href="{:url('seller/statistics/strade')}">
+                                                    <i class="fa fa-feed"></i> {:lang('All')}
+                                                </a>
+                                                {:getSellerButton()}
+                                                <div class="time"
+                                                     style="width: 200px; position: relative;display: inline-block;vertical-align: middle; margin-right: 6px">
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </div>
+                                
+                                                        <input type="text" class="form-control pull-left" id="reservation2" name="time" placeholder="{:lang('choose_order_time')}" value="{$time}" style="padding: 4px 12px; height: 30px">
+                                                    </div>
+                                                </div>
+                                                <input type="submit" value="{:lang('search')}" class="btn btn-info etbtn">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <table  class="table table-bordered table-striped" data-page-size="10">
+                                        <thead>
+                                        <tr>
+                                            <th style="width: 25px;">
+                                                <input type="checkbox" class="check-all">
+                                            </th>
+                                            <th class="center">{:lang('rank')}</th>
+                                            <th>{:lang('Goods_sn')}</th>
+                                            <th>{:lang('Goods_Name')}</th>
+                                            <th class="center">{:lang('saleroom')}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {foreach $goods_money as $k=>$v}
+                                        <tr>
+                                            <td>
+                                                <input class="ids" type="checkbox" value="{$v.goods_id}" name="ids[]">
+                                            </td>
+                                            <td class="center">{$k+1+($goods_money->currentPage()-1)*$pages}</td>
+                                            <td>{$v.sku_code}</td>
+                                            <td>
+                                                {$v.goods_name}
+                                            </td>
+                                            <td class="center">{$v.money}</td>
+                                        </tr>
+                                        {/foreach}
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <td colspan="10">
+                                                <div class="text-right pagination" >
+                                                    {$goods_money->appends(input())->render()}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+    {/block}
+
+    {block name='js'}
+    <script src="__PUBLIC__/{$js_path}/moment.min.js"></script>
+    <script src="__PUBLIC__/{$js_path}/daterangepicker.js"></script>
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //Date range picker
+            $('#reservation').daterangepicker({
+                autoUpdateInput: false
+            });
+            $('#reservation2').daterangepicker({
+                autoUpdateInput: false
+            });
+        });
+    </script>
+    {/block}

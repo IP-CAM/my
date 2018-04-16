@@ -1,0 +1,180 @@
+    {extend name="public/base"/}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+        
+        <div id="content">
+            <div class="breadcrumbs">
+                {:lang('General')} : &nbsp;&nbsp; {:lang('DbModel')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+            </div>
+            
+            <div class="bloc">
+                <div class="title">
+                    <div class="tabs" id="navs">
+                        {include file="public/navs" /}
+                    </div>
+    
+                    {include file="public/lang" /}
+                </div>
+                
+                <div class="content">
+                    <div class="alert" style="display:none;"><button class="close" type="button">&times;</button><span class="alert-content">This is Contents</span></div>
+                    <div class="cb"></div>
+    
+                    <dl class="gzzt clearfix mtb10">
+                        <dd>
+                            <div class="boxr">
+                                {include file="public/button" /}
+                            </div>
+                        </dd>
+                    <dd style="float: right !important;">
+                        <div class="boxl">
+                            <span>
+                                <a href="javascript:location.reload();" class="refresh tooltip-link" title="{:lang('Refresh')}">
+                                    <em>{:lang('Refresh')}</em>
+                                </a>
+                            </span>
+                            <span>
+                                <a href="javascript:void(0);" class="ajax-get setting tooltip-link colum" title="{:lang('Showlum')}" data-title="{:lang('Showlum')}">
+                                    <em>{:lang('Showlum')}</em>
+                                </a>
+                            </span>
+                        </div>
+                    </dd>
+                    </dl>
+    
+                    {notempty name="list"}
+                        <table class="table">
+                            <form id="export-form" method="post" action="{:url('export')}">
+                                <thead>
+                                <tr>
+                                    <th class="center" width="30"><input class="check-all" type="checkbox" checked="chedked"></th>
+                                    <th class="left" style="width:35px;">ID</th>
+                                    <th>{:lang('Tablename')}</th>
+                                    <th>{:lang('Tablecomment')}</th>
+                                    <th class="left">{:lang('Type')}</th>
+                                    <th class="left">{:lang('Charset')}</th>
+                                    <th class="left">{:lang('Amount')}</th>
+                                    <th class="left">{:lang('Size')}</th>
+                                    <th class="center" style="width:80px;">{:lang('Fragment')}</th>
+                                    <th class="left">{:lang('Createtime')}</th>
+                                    <th class="left" style="width:80px;">{:lang('Backstatus')}</th>
+                                    <th class="actions" style="width:100px;">{:lang('Actions')}</th>
+                                </tr>
+                                </thead>
+                    
+                    <tbody>
+                                {volist name="list" id="vo"}
+                                    <tr>
+                                        <td class="center"><input class="ids" checked="chedked" type="checkbox" name="tables[]" value="{$vo.name}"></td>
+                                        <td class="left" style="width:35px;">{$key+1}</td>
+                                        <td class="left">{$vo['name']}</td>
+                                        <td class="left" style="width:100px;">{$vo['comment']}</td>
+                                        <td class="left">{$vo['engine']}</td>
+                                        <td class="left">{$vo['collation']}</td>
+                                        <td class="left">{$vo['rows']}</td>
+                                        <td class="left">{$vo.data_length|format_bytes}</td>
+                                        <td class="center">{$vo.data_free|format_bytes}</td>
+                                        <td class="left">{$vo.create_time}</td>
+                                        <td class="left" id="info_{$key}">{:lang('Noback')}</td>
+                                        <td class="actions">
+                                            <a class="ajax-clear no-refresh" href="{:url('optimize?tables='.$vo['name'])}">{:lang('Optimizetable')}</a>&nbsp;
+                                            <a class="ajax-clear no-refresh" href="{:url('repair?tables='.$vo['name'])}">{:lang('Repairtable')}</a>
+                                        </td>
+                                    </tr>
+                                {/volist}
+                                </tbody>
+                            </form>
+                        </table>
+                        <div class="pagination-wrapper">
+                        
+                        </div>
+                        {else/}
+                        <div class="alert alert-warning">{:lang('No_record')}</div>
+                    {/notempty}
+                </div>
+            </div>
+        
+        </div>
+        
+        <script type="text/javascript">
+            (function($){
+                var $form = $("#export-form"), $export = $(".export"), tables
+                $optimize = $(".optimize"), $repair = $(".repair");that = this;
+                
+                $optimize.add($repair).click(function(){
+                    $.post(this.href, $form.serialize(), function(data){
+                        $('.alert').show();
+                        if(data.status){
+                            updateAlert(data.info,'alert-success');
+                        } else {
+                            updateAlert(data.info,'alert-error');
+                        }
+                        setTimeout(function(){
+                            $('.alert').find('button').click();
+                            $(that).removeClass('disabled').prop('disabled',false);
+                        },1500);
+                    }, "json");
+                    return false;
+                });
+                
+                $export.click(function(){
+                    $export.parent().children().addClass("disabled");
+                    $export.html("{:lang('Sending_requests')}");
+                    $.post(
+                        $form.attr("action"),
+                        $form.serialize(),
+                        function(data){
+                            if(data.status){
+                                tables = data.tables;
+                                $export.html(data.info + "{:lang('Begin_donot_close')}");
+                                backup(data.tab);
+                                window.onbeforeunload = function(){ return "{:lang('Backuping_donot_close')}" }
+                            } else {
+                                updateAlert(data.info,'alert-error');
+                                $('.alert').show();
+                                $export.parent().children().removeClass("disabled");
+                                $export.html("{:lang('Backnow')}");
+                                setTimeout(function(){
+                                    $('.alert').find('button').click();
+                                    $(that).removeClass('disabled').prop('disabled',false);
+                                },1500);
+                            }
+                        },
+                        "json"
+                    );
+                    return false;
+                });
+                
+                function backup(tab, status){
+                    status && showmsg(tab.id, "<span class='red'>{:lang('Begining_0')}</span>");
+                    $.get($form.attr("action"), tab, function(data){
+                        if(data.status){
+                            showmsg(tab.id, data.info);
+                            
+                            if(!$.isPlainObject(data.tab)){
+                                $export.parent().children().removeClass("disabled");
+                                $export.html("{:lang('Begining_ok_reback')}");
+                                window.onbeforeunload = function(){ return null }
+                                return;
+                            }
+                            backup(data.tab, tab.id != data.tab.id);
+                        } else {
+                            updateAlert(data.info,'alert-error');
+                            $export.parent().children().removeClass("disabled");
+                            $export.html("{:lang('Backnow')}");
+                            setTimeout(function(){
+                                $('.alert').find('button').click();
+                                $(that).removeClass('disabled').prop('disabled',false);
+                            },1500);
+                        }
+                    }, "json");
+                    
+                }
+                
+                function showmsg(id, msg){
+                    $("#info_"+id).html(msg)
+                }
+            })(jQuery);
+        </script>
+    {/block}}

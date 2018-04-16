@@ -1,0 +1,81 @@
+{extend name='common/base'}
+{block name="breadcrumb"}
+<li>{:lang('sStore')}</li>
+<li class="active">{$meta_title|default=''}</li>
+{/block}
+{block name='body'}
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box" style="border-top: 0">
+                <div class="box-header with-border">
+                    <div class="row">
+                        <div class="page-header-top">
+                            {:getSellerButton()}
+                            <a href="javascript:showAdvSearch();" class="btn-etshop icon">
+                                <i class="fa fa-search"></i>
+                            </a>
+    
+                            <a href="javascript:location.reload();" class="btn-etshop icon">
+                                <i class="fa fa-refresh"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-body" >
+                    <div class="table-responsive">
+                        <table id="demo-foo-addrow" class="table m-t-30 table-hover contact-list" data-page-size="10">
+                            <thead>
+                            <tr>
+                                <th style="width: 25px;">
+                                    <input type="checkbox" class="check-all">
+                                </th>
+                                <th>ID</th>
+                                <th>{:lang('detail_cate')}</th>
+                                <th>{:lang('goods_kckback')}</th>
+                                <th>{:lang('status')}</th>
+                                <th class="center">{:lang('operation')}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {foreach $list as $vo}
+                            <tr>
+                                
+                                <td>
+                                    {neq name='$cate_status[$vo.id]' value='1'}
+                                    <input class="ids" type="checkbox" value="{$vo['id']}" name="ids[]">
+                                    {/neq}
+                                </td>
+                                
+                                <td>{$vo.id}</td>
+                                <td><a data-title="{:lang('edit_category')}" href="{:url('seller/shop/edit_cat',array('id'=>$vo['id']))}" class="tooltip-link ajax-get" data-showbar="1" data-width="494" data-height="380">{$vo['sort_name']}</a></td>
+                                <td>{$vo['kickback']}%</td>
+                                <td>
+                                    {switch name='$cate_status[$vo.id]'}
+                                    {case value='-1'}<span>{:lang('checked_fail')}</span>{/case}
+                                    {case value='0'}<span>{:lang('store_checking')}</span>{/case}
+                                    {case value='1'}<span>{:lang('had_passed')}</span>{/case}
+                                    {/switch}
+                                </td>
+                                <td class="center">
+                                    {neq name='$cate_status[$vo.id]' value='1'}
+                                    <a class="tooltip-link ajax-get confirm f18" title="{:lang('del_cate')}"  data-title="{:lang('del_cate')}" data-layer="{:lang('confirm_del_this_category')}" href="{:url('seller/shop/del_cat',array('ids'=>$vo['id']))}"><i class="fa fa-trash-o"></i></a>
+                                    {/neq}
+                                </td>
+                            </tr>
+                            {/foreach}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{/block}
+{block name='js'}
+<script>
+
+
+</script>
+{/block}

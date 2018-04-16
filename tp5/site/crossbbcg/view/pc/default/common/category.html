@@ -1,0 +1,60 @@
+{notempty name="arr_header_category"}
+<ul class="public-category">
+    {foreach arr_header_category as $key => $arr}
+	<li>
+		<div class="item">
+			<h4><a href="{$arr['href']}">{$arr['title']}<i>></i></a></h4>
+            {present name="$arr['child']"}
+			<div class="sub">
+                {foreach $arr['child'] as $key2 => $arr2}
+                {php} if($key2 >= 4){break;} {/php}
+				<span><a href="{$arr2['href']}">{$arr2['title']}</a></span>
+                {/foreach}
+			</div>
+            {/present}
+		</div>
+		<div class="child">
+			<div class="box">
+				<div class="left cat-items">
+                    {present name="$arr['child']"}
+                    {foreach $arr['child'] as $key2 => $arr2}
+                    {php} if($key2 >= 8){break;} {/php}
+					<div class="two-line">
+                        <dl>
+                            <dt><a href="{$arr2['href']}">{$arr2['title']}</a></dt>
+                            {present name="$arr2['child']"}
+                            <dd>
+                                {foreach $arr2['child'] as $key3 => $arr3}
+                                <a href="{$arr3['href']}">{$arr3['title']}</a>
+                                {/foreach}
+                            </dd>
+                            {/present}
+                        </dl>
+					</div>
+                    {/foreach}
+                    {/present}
+				</div>
+				<!--品牌-->
+				<div class="cat-brand">
+                    {notempty name="$arr['brands']"}
+					<div class="title">{:lang('brands')}</div>
+					<div class="clearfix">
+                        {foreach $arr['brands'] as $arr4}
+						<a class="left" href="{:url('/crossbbcg/search/index','brand_id='.$arr4['id'])}" target="_blank">
+                            {if condition="substr($arr4['logo'],0,4)=='http'"}
+                            <img src="{$arr4['logo']}" alt="{$arr4['name']}" />
+                            {else /}
+                            <img src="__UPLOADS__/{$arr4['logo']}" alt="{$arr4['name']}" />
+                            {/if}
+                        </a>
+                        {/foreach}
+					</div>
+                    {/notempty}
+				</div>
+				<!--品牌end-->
+			</div>
+		</div>
+	</li>
+    {/foreach}
+</ul>
+{/notempty}

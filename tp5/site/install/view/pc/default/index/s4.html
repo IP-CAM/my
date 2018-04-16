@@ -1,0 +1,52 @@
+{extend name='index/header'}
+{block name='body'}
+<script language="javascript" type="text/javascript">
+	$(document).ready(function(){
+		$(".table tr").each(function(){ $(this).children("td").eq(0).addClass("on");});
+		$("input[type='text']").addClass("input_blur").mouseover(function(){ $(this).addClass("input_focus");}).mouseout(function(){$(this).removeClass("input_focus");});
+		$(".table tr").mouseover(function(){ $(this).addClass("mouseover");}).mouseout(function(){$(this).removeClass("mouseover");	});
+	});
+    var n=0;
+    var data = {:json_encode($param)};
+    $.ajaxSetup ({ cache: false });
+    function reloads(n) {
+        var url =  "{:url('create_databases')}"+'?n='+n;
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: data,
+            dataType: 'json',
+            beforeSend:function(){
+            },
+            success: function(msg){
+                if(msg.n=='999999'){
+                    $('#setupinfo').prepend(msg.msg);
+                    $('#dosubmit').attr("disabled",false);
+                    $('#dosubmit').removeAttr("disabled");
+                    $('#dosubmit').removeClass("nonext");
+                    setTimeout('gonext()',2000);
+                    return false;
+                }
+                if(msg.n || msg.n==0){
+                    $('#setupinfo').prepend(msg.msg);
+                    reloads(msg.n);
+                }else{
+                    //alert('指定的数据库不存在，系统也无法创建，请先通过其他方式建立好数据库！');
+                    alert(msg.msg);
+                }
+            }
+        });
+    }
+    function gonext(){
+        window.location.href='{:url("s5",["step"=>5])}';
+    }
+    $(document).ready(function(){
+        reloads(n);
+    })
+</script>
+	<div class="right">
+		<h2>Step <?php echo $step;?> of 5 </h2>
+		<h1>正在安装</h1>
+		<div id="setupinfo">正在开始安装...<br></div>
+	</div>
+{/block}

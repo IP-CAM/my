@@ -1,0 +1,141 @@
+    {extend name="admin@public/base" /}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+        <div id="content">
+            <div class="breadcrumbs">
+                {:lang('Member')} : &nbsp;&nbsp; {:lang('Usercontent')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+            </div>
+
+            <div class="bloc">
+                <div class="title">
+                    <div class="tabs" id="navs">
+                        {include file="admin@public/navs" /}
+                    </div>
+
+                    {include file="admin@public/lang" /}
+                </div>
+                <div class="content">
+                
+                <dl class="gzzt clearfix mtb10">
+                        <dd>
+                            <div class="boxr">
+                                {include file="admin@public/button" /}
+                            </div>
+                        </dd>
+
+                        <form style="margin-top:0;" class="search-form">
+                            <dd>
+                                <div class="boxr ovh">
+                                    <style>
+                                        .w120{ width:120px !important; }
+                                        .layui-layer-tips .layui-layer-content{ padding:2px 8px !important;line-height: 18px !important;}
+                                    </style>
+
+                                    <label for="start" style="margin:10px 10px 0 0; width:156px;">
+                                        <input type="text" id="start" value="{:input('start_time')}" name="start_time" placeholder="{:lang('Begin_time')}" class="w130 input_img" />
+                                    </label>
+                                    <label style="width:10px;line-height:32px; margin-right:2px;">~</label>
+                                    <label for="end" style="margin:10px 10px 0 0; width:150px;">
+                                        <input type="text" id="end" value="{:input('end_time')}" name="end_time" placeholder="{:lang('End_time')}" class="w130 input_img" />
+                                    </label>
+                                </div>
+                            <dd>
+
+                            <dd>
+                                <div class="boxr ovh">
+                                    <label for="search" style="margin:10px 10px 0 0; width:230px;">
+                                        <input type="text" class="searchinput" name="name" value="{:input('name')}" placeholder="{:lang('Search_refer_info')}" style="width:200px;"/>
+                                    </label>
+                                    <input type="button" name="search" id="sch-search" class="button white" value="{:lang('Search')}" url="{:url('', input('name'))}"/>
+                                </div>
+                            <dd>
+                        </form>
+
+                        <dd>
+                            <div class="boxl fl">
+                                <span>{:lang('Count_all')}：<b>{$_total}</b></span>
+                            </div>
+                        </dd>
+                    <dd style="float: right !important;">
+                        <div class="boxl">
+                            <span>
+                                <a href="javascript:location.reload();" class="refresh tooltip-link" title="{:lang('Refresh')}">
+                                    <em>{:lang('Refresh')}</em>
+                                </a>
+                            </span>
+                            <span>
+                                <a href="javascript:void(0);" class="ajax-get setting tooltip-link colum" title="{:lang('Showlum')}" data-title="{:lang('Showlum')}">
+                                    <em>{:lang('Showlum')}</em>
+                                </a>
+                            </span>
+                        </div>
+                    </dd>
+                    </dl>
+
+                    {notempty name="list"}
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="center" width="30"><input class="check-all" type="checkbox"></th>
+                                    <th class="center" ><a href="{:getUrlbyOrder('id')}">ID</a></th>
+                                    <th class="center" >{:lang('Refer Name')}</th>
+                                    <th class="center" >{:lang('Refer question')}</th>
+                                    <th class="center" >{:lang('Goods name')}</th>
+                                    <th class="center" >{:lang('Goods Pic')}</th>
+                                    <th class="center" ><a href="{:getUrlbyOrder('time')}">{:lang('Refer Time')}</a></th>
+                                    <th class="center" ><a href="{:getUrlbyOrder('status')}">{:lang('Refer Num')}</a></th>
+                                    <th class="actions" >{:lang('Actions')}</th>
+                                </tr>
+                            </thead>
+                    
+                    <tbody>
+                        {volist name="list" id="vo"}
+                            <tr>
+                                <td class="center">
+                                    <input class="ids" type="checkbox" value="{$vo['id']}" name="ids[]">
+                                </td>
+                                <td class="center">{$vo['id']}</td>
+                                <td class="center">{$vo['nickname']}</td>
+                                <td class="center">{$vo['question']}</td>
+                                <td class="center">{$vo['goods_name']}</td>
+                                <td class="center">
+                                    <a class="tooltip-link ajax-get edit" title="{:lang('See Pic')}" data-title="{:lang('Goods Pic')}" href="__PUBLIC__/{$vo.goods_logo_url}" data-showbar="1" data-height="600" data-width="600">
+                                        <img src="__PUBLIC__/{$vo.goods_logo_url}" alt="{:lang('Goods Pic')}" style="width: 50px;height: 50px;">
+                                    </a>
+                                </td>
+                                <td class="center">{$vo.create_time}</td>
+                                <td class="center">
+                                    {if condition="$vo['status'] eq 0"}
+                                        {:lang('no_reply')}
+                                    {else /}
+                                        {$vo.status}
+                                    {/if}
+                                </td>
+                                <td class="actions">
+                                    <a class="tooltip-link ajax-get edit" title="{:lang('Look detail')}" data-title="{:lang('Look detail')}" href="{:url('view',array('id'=>$vo['id']))}"  data-showbar="1" data-width="650" data-height="600">
+                                        <img src="__PUBLIC__/member/admin/image/see.png" alt="{:lang('Look detail')}" />
+                                    </a>
+                                    <a class="tooltip-link ajax-get confirm" data-layer="{:lang('Want_delete')}" title="{:lang('Delete_this_record')}" href="{:url('delete',array('ids'=>$vo['id']))}" data-title="{:lang('Delete')}" >
+                                        <img src="__PUBLIC__/admin/images/delete.png" alt="{:lang('Delete')}" />
+                                    </a>
+                                </td>
+                            </tr>
+                        {/volist}
+                        </tbody>
+                        </table>
+                        <div class="pagination-wrapper">
+                                {$page}
+                        </div>
+
+                        {else/}
+                        <div class="alert alert-warning">{:lang('No_record')}</div>
+                    {/notempty}
+                </div>
+            </div>
+        </div>
+
+    {include file="admin@public/time_for_search" /}
+    
+    {/block}

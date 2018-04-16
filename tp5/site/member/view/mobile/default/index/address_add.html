@@ -1,0 +1,155 @@
+{extend name='public/base' /}
+
+{block name='css'}
+<link rel="stylesheet" href="__PUBLIC__/{$css_path}/addresslist.css">
+{/block}
+{block name='body'}
+<div id="app">
+    <!--Regular if0-->
+    <div class="u-topbar">
+        <div class="u-topbar-inner">
+            <div class="u-topbar-arrow-wrapper">
+                <div class="u-topbar-arrow"></div>
+            </div>
+            <div class="u-topbar-title">
+                新建收货地址<!--inlcude-->
+            </div>
+        </div>
+    </div>
+    <!--Regular if766-->
+    <form class="m-address-form m-form-addr j-flag" style="min-height: 622px;">
+        <div class="m-addresslist m-addresslist-1">
+            <ul class="addressiptbox addressiptbox-1">
+                <li>
+                    <div class="u-cell">
+                        <div class="label">收货人</div>
+                        <div class="u-input  ">
+                            <input type="text" placeholder="真实姓名">
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="u-cell">
+                        <div class="label">手机号码</div>
+                        <div class="u-input  ">
+                            <input type="number" placeholder="11位手机号">
+                        </div>
+                    </div>
+                </li>
+                <li class="address">
+                    <div class="m-slideAddress">
+                        <div class="addKeyValue">
+                            <span class="addKey">所在地区</span>
+                            <span class="addValue">
+                                <span class="forwardIcon"></span>
+                                <input class="addValue f-els-1" data-type="regular" placeholder="所在地区" readonly="readonly">
+                            </span>
+                        </div>
+                        <div class="selectPage">
+                            <div class="resultWrap">
+                                <div class="title"><span class="backIcon"></span>
+                                    <p>所在地区</p></div>
+                                <div class="result">
+                                    <span class="f-els-1" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">北京市</span>
+                                    <span class="f-els-1" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">北京市</span>
+                                    <span class="f-els-1 active highlight" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">东城区</span>
+                                </div>
+                            </div>
+                            <div class="location showArea">
+                                <div class="level" style="height: 800px;">
+                                    <ul>
+                                        <li class="item selected"><span class="selectedIcon"></span><span>北京市</span>
+                                        </li>
+                                        <li class="item"><!--Regular if775--><span>天津市</span></li>
+                                        <li class="item"><!--Regular if776--><span>河北省</span></li>
+                                        <li class="item"><!--Regular if777--><span>山西省</span></li>
+                                        <li class="item"><!--Regular if778--><span>内蒙古自治区</span></li>
+                                        <li class="item"><!--Regular if779--><span>辽宁省</span></li>
+                                        <li class="item"><!--Regular if780--><span>吉林省</span></li>
+                                        <li class="item"><!--Regular if781--><span>黑龙江省</span></li>
+                                        <li class="item"><!--Regular if782--><span>上海市</span></li>
+                                        <li class="item"><!--Regular if783--><span>江苏省</span></li>
+                                        <li class="item"><!--Regular if784--><span>浙江省</span></li>
+                                        <li class="item"><!--Regular if785--><span>安徽省</span></li>
+                                        <li class="item"><!--Regular if786--><span>福建省</span></li>
+                                        <li class="item"><!--Regular if787--><span>江西省</span></li>
+                                        <li class="item"><!--Regular if788--><span>山东省</span></li>
+                                        <li class="item"><!--Regular if789--><span>河南省</span></li>
+                                        <li class="item"><!--Regular if790--><span>湖北省</span></li>
+                                        <li class="item"><!--Regular if791--><span>湖南省</span></li>
+                                        <li class="item"><!--Regular if792--><span>广东省</span></li>
+                                        <li class="item"><!--Regular if793--><span>广西壮族自治区</span></li>
+                                        <li class="item"><!--Regular if794--><span>海南省</span></li>
+                                        <li class="item"><!--Regular if795--><span>重庆市</span></li>
+                                        <li class="item"><!--Regular if796--><span>四川省</span></li>
+                                        <li class="item"><!--Regular if797--><span>贵州省</span></li>
+                                        <li class="item"><!--Regular if798--><span>云南省</span></li>
+                                        <li class="item"><!--Regular if799--><span>西藏自治区</span></li>
+                                        <li class="item"><!--Regular if800--><span>陕西省</span></li>
+                                        <li class="item"><!--Regular if801--><span>甘肃省</span></li>
+                                        <li class="item"><!--Regular if802--><span>青海省</span></li>
+                                        <li class="item"><!--Regular if803--><span>宁夏回族自治区</span></li>
+                                        <li class="item"><!--Regular if804--><span>新疆维吾尔自治区</span></li>
+                                    </ul>
+                                </div>
+                                <div class="level" style="height: 800px;">
+                                    <ul>
+                                        <li class="item selected">
+                                            <span class="selectedIcon"></span>
+                                            <span>北京市</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="level" style="height: 800px;">
+                                    <ul>
+                                        <li class="item selected">
+                                            <span class="selectedIcon"></span><span>东城区</span>
+                                        </li>
+                                        <li class="item"><span>西城区</span></li>
+                                        <li class="item"><span>朝阳区</span></li>
+                                        <li class="item"><span>丰台区</span></li>
+                                        <li class="item"><span>石景山区</span></li>
+                                        <li class="item"><!--Regular if816--><span>海淀区</span></li>
+                                        <li class="item"><!--Regular if817--><span>门头沟区</span></li>
+                                        <li class="item"><!--Regular if818--><span>房山区</span></li>
+                                        <li class="item"><!--Regular if819--><span>通州区</span></li>
+                                        <li class="item"><!--Regular if820--><span>顺义区</span></li>
+                                        <li class="item"><!--Regular if821--><span>昌平区</span></li>
+                                        <li class="item"><!--Regular if822--><span>大兴区</span></li>
+                                        <li class="item"><!--Regular if823--><span>怀柔区</span></li>
+                                        <li class="item"><!--Regular if824--><span>平谷区</span></li>
+                                        <li class="item"><!--Regular if825--><span>密云县</span></li>
+                                        <li class="item"><!--Regular if826--><span>延庆县</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                
+                <li>
+                    <div class="u-cell">
+                        <div class="label">详细地址</div>
+                        <!--inlcude-->
+                        <div class="u-input  ">
+                            <input type="text" placeholder="街道、小区门牌等，不超过40个字">
+                            <!--inlcude-->
+                            
+                            <!--Regular if772-->
+                        </div>
+                    
+                    </div>
+                </li>
+                
+                <!--Regular if773-->
+                
+                <li class="save iptitm-2 ">
+                    <div class="m-savebtn j-flag">保 存</div>
+                </li>
+            
+            </ul>
+        </div>
+    </form>
+</div>
+{/block}
+

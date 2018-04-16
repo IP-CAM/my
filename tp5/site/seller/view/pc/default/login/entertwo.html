@@ -1,0 +1,367 @@
+{extend name="login/base" /} {block name='title'}
+<title>{:lang('register_seller')}</title>
+{/block} {block name='css'} {/block} {block name="body"}
+<div class="shop-login-box yahei">
+	<div class="form-body">
+		<div class="title">
+			<div class="t">{:lang('register_seller')}</div>
+			<div class="steps enter-steps">
+				<table width="100%">
+					<tbody>
+						<tr>
+							<td class="step-item step-1 active"><span><q class="icon">●</q><i>1</i>{:lang('Settled_notice')}</span>
+								<div class="stepdiv">1</div>
+							</td>
+							<td class="step-item step-2 active">
+								<span><q class="icon">●</q><i>2</i>{:lang('Company_info')}</span>
+								<div class="stepdiv">2</div>
+							</td>
+							<td class="step-item step-3"><span><q class="icon">●</q><i>3</i>{:lang('Store_info')}</span>
+								<div class="stepdiv">3</div>
+							</td>
+							<td class="step-item step-4 last"><span><q class="icon">●</q><i>3</i>{:lang('Settled_check')}</span>
+								<div class="stepdiv">4</div>
+							</td>
+							<td class="step-item step-5 last"><span><q class="icon">●</q><i>3</i>{:lang('Store_to_online')}</span>
+								<div class="stepdiv">5</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="content">
+			<div class="tips-info">
+				{:lang('tips-info')}
+			</div>
+			<br />
+			<form action="{:url('enterthree')}" method="post" id="form" onsubmit="return FormSubmit()">
+				<ul>
+					<li class="legend ">{:lang('Company_info_submit')}</li>
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em> {:lang('business_license_type')}： </label>
+						<div class="form-act">
+							<select datatype="*" name="business_license_type">
+                                {foreach $business_license_type as $k=>$v}
+								<option value="{$k}">{$v}</option>
+								{/foreach}
+							</select>
+							<span class="Validform_checktip"></span>
+						</div>
+					</li>
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em> {:lang('Company_name')}： </label>
+						<div class="form-act">
+							<input datatype="s2-20" class="input-ln" name="company" type="text" value="">
+							<span class="Validform_checktip"></span>
+							<div class="tishi">{:lang('Company_name_tips')}</div>
+						</div>
+					</li>
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em> {:lang('business_license_no')} </label>
+						<div class="form-act">
+							<input datatype="*" class="input-ln" name="license_no" type="text" value="">
+							<span class="Validform_checktip"></span>
+						</div>
+					</li>
+
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em> {:lang('corporate')} </label>
+						<div class="form-act">
+							<input datatype="s2-10" name="corporate" class="input-ln" type="text" value="">
+							<span class="Validform_checktip"></span>
+						</div>
+					</li>
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em>{:lang('build_time')}： </label>
+						<div class="form-act">
+							<div id="cl_riqi" class="inline laydate-icon"></div>
+							<input datatype="*" id="cl_riqi_input" name="build_time" class="input-ln" type="hidden" value="">
+							<span class="Validform_checktip"></span>
+						</div>
+					</li>
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em> {:lang('registered_assets')} </label>
+						<div class="form-act">
+							<input datatype="*" name="registered_assets" class="input-ln" type="text" value=""> &#12288;{:lang('wan_yuan')}
+							<span class="Validform_checktip"></span>
+						</div>
+					</li>
+					
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em> {:lang('Taxpayer_type')} </label>
+						<div class="form-act">
+							<select name="taxpayer_type">
+                                {foreach $taxpayer_type as $k=>$v}
+								<option value="{$k}">{$v}</option>
+                                {/foreach}
+							</select>
+							<span class="Validform_checktip"></span>
+						</div>
+					</li>
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em> {:lang('Tax_type_tax_code')} </label>
+						<div class="form-act">
+							<select name="tax_code_type">
+                                {foreach $tax_type_tax_code as $v}
+								<option value="{$v}">{$v}%</option>
+                                {/foreach}
+							</select>
+							<span class="Validform_checktip"></span>
+
+						</div>
+
+					</li>
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em>{:lang('company_address')}： </label>
+						<div class="form-act">
+                            {:widget('common/Area/choosearea', ['country' => $data.country, 'province' => $data.province, 'city' => $data.city, 'district' => $data.district])}
+						</div>
+					</li>
+
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em>{:lang('company_detail_address')}： </label>
+						<div class="form-act">
+							<input datatype="s5-50" name="address" class="input-ln" type="text" value="">
+							<span class="Validform_checktip"></span>
+						</div>
+					</li>
+
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em>{:lang('linkman')}： </label>
+						<div class="form-act">
+							<input datatype="s2-10" name="linkname" class="input-ln" type="text" value="">
+							<span class="Validform_checktip"></span>
+						</div>
+					</li>
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em>{:lang('linkman_mobile')}： </label>
+						<div class="form-act">
+							<input datatype="m" name="mobile" class="input-ln" type="text" value="">
+							<span class="Validform_checktip"></span>
+						</div>
+					</li>
+					<li class="form-row">
+						<label for="" class="form-label"> <em> * </em> {:lang('corporate_card_true')}： </label>
+						<div class="form-act">
+							<ul class="images-upload clearfix">
+								<li class="img-thumbnail action-upload" data-name="corporate_card_true">
+									<input type="file" class="action-file-input">
+									<span class="icon-add">
+                                        +
+                                    </span>
+								</li>
+							</ul>
+							<div class="form-tips">{:lang('corporate_card_true')}{:lang('img_size_limit')} <em onclick="showdemo('{:lang(\'corporate_card_true\')}','/logo.png',['450px', '340px'])">{:lang('look_demo')}<i class="iconfont icon-help identity-helper"></i></em></div>
+						</div>
+					</li>
+					<li class="form-row">
+						<label for="" class="form-label"> <em> * </em> {:lang('corporate_card_false')}： </label>
+						<div class="form-act">
+							<ul class="images-upload clearfix">
+								<li class="img-thumbnail action-upload" data-name="corporate_card_false">
+									<input type="file" class="action-file-input">
+									<span class="icon-add">
+		                        +
+		                    </span>
+								</li>
+							</ul>
+							<div class="form-tips">{:lang('corporate_card_false')}{:lang('img_size_limit')} <em onclick="showdemo('{:lang(\'corporate_card_false\')}','/logo.png',['450px', '340px'])">{:lang('look_demo')}<i class="iconfont icon-help identity-helper"></i></em></div>
+
+						</div>
+					</li>
+					<li class="form-row">
+						<label for="" class="form-label"> <em> * </em> {:lang('paper_img')}： </label>
+						<div class="form-act">
+							<ul class="images-upload clearfix" >
+								<li class="img-thumbnail action-upload" data-name="business_license">
+									<input type="file" class="action-file-input" >
+									<span class="icon-add">+</span>
+								</li>
+							</ul>
+							<div class="form-tips">{:lang('paper_img')}{:lang('img_size_limit')} <em onclick="showdemo('{:lang(\'paper_img\')}','/logo.png',['550px', '440px'])">{:lang('look_demo')}<i class="iconfont icon-help identity-helper"></i></em></div>
+						</div>
+					</li>
+                    <li class="form-row">
+                        <label for="" class="form-label"> <em> * </em> {:lang('tax_certificate')}： </label>
+                        <div class="form-act">
+                            <ul class="images-upload clearfix">
+                                <li class="img-thumbnail action-upload" data-name="tax_registration_certificate">
+                                    <input type="file" class="action-file-input">
+                                    <span class="icon-add">+</span>
+                                </li>
+                            </ul>
+                            <div class="form-tips">{:lang('tax_certificate')}{:lang('img_size_limit')} <em onclick="showdemo('{:lang(\'tax_certificate\')}','/logo.png',['550px', '440px'])">{:lang('look_demo')}<i class="iconfont icon-help identity-helper"></i></em></div>
+                        </div>
+                    </li>
+					<li class="legend ">{:lang('Organization_Code_Certificate')}</li>
+					<li class="form-row">
+						<label for="" class="form-label"> <em> * </em> {:lang('organization_code')}： </label>
+						<div class="form-act">
+							<input class="input-ln" name="organization_code" datatype="*" type="text" maxlength="100">
+							<span class="Validform_checktip"></span>
+						</div>
+					</li>
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em>{:lang('organization_code_validity')}： </label>
+						<div class="form-act">
+							<div style="width: 143px;" id="zz_riqi_start" class="inline laydate-icon left"></div>
+							<div class="left">　-　</div>
+							<div style="width: 143px;" id="zz_riqi_end" class="inline laydate-icon left"></div>
+							<input datatype="*" id="zz_riqi_start_input" name="organization_code_date_start" class="input-ln" type="hidden" value="">
+							<input datatype="*" id="zz_riqi_end_input" name="organization_code_date_end" class="input-ln" type="hidden" value="">
+							<span class="Validform_checktip"></span>
+						</div>
+					</li>
+					<li class="form-row">
+						<label for="" class="form-label"> <em> * </em> {:lang('organization_code_img')}： </label>
+						<div class="form-act">
+							<ul class="images-upload clearfix">
+								<li class="img-thumbnail action-upload" data-name="organization_code_img">
+									<input type="file" class="action-file-input">
+									<span class="icon-add">+</span>
+								</li>
+							</ul>
+							<div class="form-tips">{:lang('organization_code_img')}{:lang('img_size_limit')} <em onclick="showdemo('{:lang(\'organization_code_img\')}','/logo.png',['800px', '620px'])">{:lang('look_demo')}<i class="iconfont icon-help identity-helper" id="show_tips"></i></em></div>
+						</div>
+					</li>
+					<li class="form-row last">
+						<label for="" class="form-label">&nbsp;</label>
+						<div class="form-act">
+							<a href="javascript:history.back(-1);" class="btn">{:lang('prev_step')}</a>
+						&#12288;
+							<button type="submit" class="btn btn-import" rel="_request">
+                                <span>{:lang('next_step')}</span>
+					        </button>
+						</div>
+					</li>
+				</ul>
+			</form>
+		</div>
+	</div>
+</div>
+
+{/block} {block name="footer_js"}
+<script type="text/javascript">
+	$(function() {
+		laydate({
+			elem: '#cl_riqi',
+			event: 'click',
+			choose: function(datas) {
+				$('#cl_riqi').html(datas);
+				$('#cl_riqi_input').val(datas).blur()
+			}
+
+		});
+		laydate({
+			elem: '#zz_riqi_start',
+			event: 'click',
+			choose: function(datas) {
+				$('#zz_riqi_start').html(datas);
+				$('#zz_riqi_start_input').val(datas).blur()
+				$('#zz_riqi_end_input').blur()
+			}
+
+		});
+		laydate({
+			elem: '#zz_riqi_end',
+			event: 'click',
+			choose: function(datas) {
+				$('#zz_riqi_end').html(datas);
+				$('#zz_riqi_end_input').val(datas).blur()
+				$('#zz_riqi_start_input').blur()
+			}
+
+		});
+  
+		$("#form").Validform({
+			tiptype: 3,
+			showAllError: true
+		});
+	})
+
+	function showdemo(title, img_src, area) {
+		layer.open({
+			"title": title,
+			'skin': 'layer-ext-blue',
+			type: 1,
+			area: area,
+			shadeClose: true,
+			content: "<img style='display:block;margin:0 auto;padding-top:15px' src=" + img_src + ">"
+		})
+	}
+	$('.images-upload').each(function () {
+        var _that = $(this);
+        var url = "{:url('ajax_upload')}";
+        var upload = _that.find('.action-upload');
+        var name = upload.data('name');
+        _that.parent().on('click', '.action-remove', function() {
+            $(this).parent().remove();
+            upload.show();
+        });
+        new AjaxUpload(upload,{
+            action: url,
+            name: 'file',
+            data:{},
+            autoSubmit: true,
+            dataType:'json',
+            responseType:'json',
+            onComplete: function(file, response) {
+                var  data=response;
+                if(!data.code){
+                    layer.msg(data.msg);return false;
+                }
+                var _html = '<li class="handle img-thumbnail">'+
+                    '<i class="icon-close-b action-remove">×</i>';
+                _html +='<img src="'+data.url+'" alt="" width="80" height="80"/><input type="hidden" name="'+name+'" value="'+data.url+'"/>';
+                _html +='<span class="Validform_checktip"></span>'+
+                    '</li>';
+                upload.hide();
+                upload.nextAll().remove();
+                upload.after(_html);
+            }
+        })
+    })
+    
+    function FormSubmit() {
+        var error_num = $('.Validform_wrong').length;
+        if (error_num != 0) {
+            layer.msg($('.Validform_wrong').eq(0).text(),{icon:2,time:2000});
+            return false;
+        }
+        var status = 0;
+        $.ajax({
+            url:"{:url('')}",
+            type:'post',
+            data:$('#form').serialize(),
+            async: false,
+            success:function (re) {
+                if (re.code != 1) {
+                    layer.msg(re.msg,{icon:2,time:2000});
+                } else {
+                    status = 1;
+                }
+            }
+        });
+        if (status) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
+
+{/block}

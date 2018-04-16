@@ -1,0 +1,146 @@
+    {extend name="admin@public/base" /}
+
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content">
+        <div class="breadcrumbs">
+            {:lang('Promotion')} : &nbsp;&nbsp; {:lang('Adsandlinks')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+        </div>
+
+        <div class="bloc">
+            <div class="title">
+                <div class="tabs" id="navs">
+                    {include file="admin@public/navs" /}
+                </div>
+
+                {include file="admin@public/lang" /}
+            </div>
+            <div class="content">
+                
+                <dl class="gzzt clearfix mtb10">
+                    <dd>
+                        <div class="boxr">
+                            {include file="admin@public/button" /}
+                        </div>
+                    </dd>
+                    <dd>
+                        <div class="boxr ovh">
+                            <select id="adpostion" style="height:27px; width:120px;">
+                                {empty name="adpostion"}
+                                <option>{:lang('Not found adpos')}</option>
+                                {else /}
+                                <option url="{:url()}">{:lang('Show All')}</option>
+                                {volist name="adpostion" id="ps"}
+                                <option value="{$ps.id}" url="{:url('', array('adpos'=> $ps.id))}" {eq name="adpos" value="$ps.id"}selected{/eq}>
+                                {$ps.title}
+                                </option>
+                                {/volist}
+                                {/empty}
+                            </select>
+                            <script>
+                                $(function(){
+                                    $("#adpostion").change(function(){
+                                        var gotu_url = $(this).find('option:selected').attr('url');
+                                        eval("self.location='"+gotu_url+"'")
+                                    })
+                                })
+                            </script>
+                        </div>
+                    </dd>
+                    
+                    <form style="margin-top:0;" class="search-form">
+                        <dd>
+                            <div class="boxr ovh">
+                                <label for="start" style="margin:10px 10px 0 0; width:156px;">
+                                    <input type="text" id="start" value="{:input('start_time')}" name="start_time"
+                                           placeholder="{:lang('Begin_time')}" class="w130 input_img"/>
+                                </label>
+                                <label style="width:10px;line-height:32px; margin-right:2px;">~</label>
+                                <label for="end" style="margin:10px 10px 0 0; width:150px;">
+                                    <input type="text" id="end" value="{:input('end_time')}" name="end_time"
+                                           placeholder="{:lang('End_time')}" class="w130 input_img"/>
+                                </label>
+                            </div>
+                        <dd>
+        
+                        <dd>
+                            <div class="boxr ovh">
+                                <label for="name" style="margin:10px 10px 0 0; width:156px;">
+                                    <input type="text" class="searchinput" name="name" id="name" value="{:input('name')}" placeholder="{:lang('Adsense search tip')}" style="width:110px;"/>
+                                </label>
+                                <input type="button" name="search" id="sch-search" class="button white" value="{:lang('Search')}" url="{:url('', input('name'))}"/>
+                            </div>
+                        <dd>
+                    </form>
+                </dl>
+
+                {notempty name="list"}
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="center" width="30"><input class="check-all" type="checkbox"></th>
+                        <th class="left" style="width:35px;"><a href="{:getUrlbyOrder('id')}">ID</a></th>
+                        <th class="left" style="width:40px;">{:lang('Image')}</th>
+                        <th class="left"><a href="{:getUrlbyOrder('title')}">{:lang('Category_Title')}</a></th>
+                        <th class="left" style="width:80px;"><a href="{:getUrlbyOrder('name')}">{:lang('Category_name')}</a></th>
+                        <th class="left" style="width:80px;"><a href="{:getUrlbyOrder('models')}">{:lang('Category_module')}</a></th>
+                        <th class="left"><a href="{:getUrlbyOrder('groups')}">{:lang('Group')}</a></th>
+                        <th class="center" style="width:40px;"><a href="{:getUrlbyOrder('status')}">{:lang('Status')}</a></th>
+                        <th class="center" style="width:40px;"><a href="{:getUrlbyOrder('allow_publish')}">{:lang('Allow_publish')}</a></th>
+                        <th class="center" style="width:30px;"><a href="{:getUrlbyOrder('pc_status')}">{:lang('Pc_on')}</a></th>
+                        <th class="center" style="width:40px;"><a href="{:getUrlbyOrder('phone_status')}">{:lang('Phone_on')}</a></th>
+                        <!--<th class="center" style="width:40px;"><a href="{:getUrlbyOrder('tablet_status')}">{:lang('Tablet_on')}</a></th>-->
+                        <th class="center" style="width:40px;"><a href="{:getUrlbyOrder('weixin_status')}">{:lang('Weixin_on')}</a></th>
+                        <th class="center" style="width:30px;"><a href="{:getUrlbyOrder('name')}">{:lang('Api_on')}</a></th>
+                        <th class="center" style="width:30px;"><a href="{:getUrlbyOrder('name')}">{:lang('App_on')}</a></th>
+                        <th class="center" style="width:40px;"><a href="{:getUrlbyOrder('name')}">{:lang('Is_replay_s')}</a></th>
+                        <th class="center" style="width:30px;"><a href="{:getUrlbyOrder('name')}">{:lang('Is_check')}</a></th>
+                        <th class="center" style="width:70px;"><a href="{:getUrlbyOrder('sort')}">{:lang('Sort')}</a></th>
+                        <th class="actions" style="width:50px;">{:lang('Actions')}</th>
+                    </tr>
+                    </thead>
+                    
+                    <tbody>
+                    
+
+                    </tbody>
+                </table>
+                <div class="pagination-wrapper">
+                    <div class="results-part"><span>{$_total}</span></div>
+                    <div class="links-part">{$page}</div>
+                </div>
+
+                {else/}
+                <div class="alert alert-warning">{:lang('No_record')}</div>
+                {/notempty}
+            </div>
+        </div>
+    </div>
+    {/block}
+    
+    {block name="js"}
+    <script>
+        $(function() {
+            $("#start").datetimepicker({
+                dateFormat: "{:config('kernel.timeformat')}",
+                timeFormat: 'HH:mm:ss',
+                //maxDate: new Date(),
+                onSelect: function(dateText, inst) {
+                    $.datepicker.regional["{:config('kernel.localdate')}"];
+                    $("#end").datepicker("option", "minDate", dateText);
+                    $("#end").focus();
+                }
+            });
+
+            $("#end").datetimepicker({
+                dateFormat: "{:config('kernel.timeformat')}",
+                timeFormat: 'HH:mm:ss',
+                //maxDate: new Date(),
+                onSelect: function(dateText, inst) {
+                    $.datepicker.regional["{:config('kernel.localdate')}"];
+                    $("#start").datepicker("option", "maxDate", dateText);
+                }
+            });
+        })
+    </script>
+    {/block}

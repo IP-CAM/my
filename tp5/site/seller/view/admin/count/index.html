@@ -1,0 +1,158 @@
+    {extend name="admin@public/base" /}
+
+    {block name="style"}
+    <style>
+        .w120{ width:120px !important; }
+        .layui-layer-tips .layui-layer-content{ padding:2px 8px !important;line-height: 18px !important;}
+    </style>
+    {/block}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content">
+        <div class="breadcrumbs">
+            {:lang('Seller')} : &nbsp;&nbsp; {:lang('Settlement')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+        </div>
+        
+        <div class="bloc">
+            <div class="title">
+                <div class="tabs" id="navs">
+                    {include file="admin@public/navs" /}
+                </div>
+                
+                {include file="admin@public/lang" /}
+            </div>
+            <div class="content">
+                
+                <dl class="gzzt clearfix mtb10">
+                    <dd>
+                        <div class="boxr">
+                            {include file="admin@public/button" /}
+                        </div>
+                    </dd>
+                    
+                    <form style="margin-top:0;" class="search-form">
+                        <dd>
+                            <div class="boxr ovh">
+                                <select name="status" id="status" class="w120">
+                                    <option value="all" url="{:url('',array_merge($inputarr,array('status'=>'all')))}" {eq name="status" value="all" }selected{/eq}>选择状态</option>
+                                    <option value="1" url="{:url('',array_merge($inputarr,array('status'=>'1')))}" {eq name="status" value="1" }selected{/eq}>{:lang('Applying')}</option>
+                                    <option value="2" url="{:url('',array_merge($inputarr,array('status'=>'2')))}" {eq name="status" value="2" }selected{/eq}>{:lang('is_settlement')}</option>
+                                </select>
+                            </div>
+                        </dd>
+                        <script>
+                            $(function () {
+                                $("#status").change(function () {
+                                    var gotu_url = $(this).find('option:selected').attr('url');
+                                    eval("self.location='" + gotu_url + "'")
+                                })
+                            })
+                        </script>
+                        <dd>
+                            <div class="boxr ovh">
+                                <label for="search" style="margin:10px 10px 0 0; width:146px;">
+                                    <input type="text" id="start" value="{:input('get.start_time')}" name="start_time" placeholder="{:lang('Begin_time')}" class="w130 input_img" />
+                                </label>
+                                <label style="width:10px;line-height:32px; margin-right:2px;">~</label>
+                                <label for="search" style="margin:10px 10px 0 0; width:156px;">
+                                    <input type="text" id="end" value="{:input('get.end_time')}" name="end_time" placeholder="{:lang('End_time')}" class="w130 input_img" />
+                                </label>
+                            </div>
+                        <dd>
+        
+                        <dd>
+                            <div class="boxr ovh">
+                                <label for="search" style="margin:10px 10px 0 0; width:180px;">
+                                    <input type="text" class="searchinput" name="name" value="{:input('name')}" placeholder="{:lang('sellerName')}" style="width:150px;"/>
+                                </label>
+                                <input type="button" name="search" id="sch-search" class="button white" value="{:lang('Search')}" url="{:url('', input('name'))}"/>
+                            </div>
+                        <dd>
+                    </form><dd style="float: right !important;">
+                    <div class="boxl">
+                        <span>
+                            <a href="javascript:location.reload();" class="refresh tooltip-link" title="{:lang('Refresh')}">
+                                <em>{:lang('Refresh')}</em>
+                            </a>
+                        </span>
+                        <span>
+                            <a href="javascript:void(0);" class="ajax-get setting tooltip-link colum" title="{:lang('Showlum')}" data-title="{:lang('Showlum')}">
+                                <em>{:lang('Showlum')}</em>
+                            </a>
+                        </span>
+                    </div>
+                </dd>
+                </dl>
+                
+                {notempty name="list"}
+                
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="center" ><input class="check-all" type="checkbox" name="ids[]"></th>
+                        <th class="left" ><a href="{:getUrlbyOrder('id')}">ID</a></th>
+                        <th class="left" >{:lang('seller_id')}</th>
+                        <th class="left">{:lang('sellerName')}</th>
+                        <th class="left" >{:lang('start_time')}</th>
+                        <th class="left" >{:lang('end_time')}</th>
+                        <th class="left"><a href="{:getUrlbyOrder('order_num')}">{:lang('order_num')}</a></th>
+                        <th class="left"><a href="{:getUrlbyOrder('goods_total_money')}">{:lang('order_money')}</a></th>
+                        <th class="left" ><a href="{:getUrlbyOrder('freight')}">{:lang('freight')}</a></th>
+                        <th class="left" ><a href="{:getUrlbyOrder('platform_commission')}">{:lang('commission')}</a></th>
+                        <th class="left" ><a href="{:getUrlbyOrder('integral_money')}">{:lang('integral_money')}</a></th>
+                        <th class="left" ><a href="{:getUrlbyOrder('money')}">{:lang('Settlement')}</a></th>
+                        <th class="left" ><a href="{:getUrlbyOrder('money')}">{:lang('status')}</a></th>
+                        <th class="actions" style="width:50px;">{:lang('Actions')}</th>
+                    </tr>
+                    </thead>
+                    
+                    <tbody>
+                        {volist name="list" id="vo"}
+                            <tr>
+                                <td class="center">
+                                    <input class="ids" type="checkbox" value="{$vo['id']}" name="ids[]">
+                                </td>
+                                <td class="left">{$vo['id']}</td>
+                                <td class="left">{$vo['seller_id']}</td>
+                                <td class="left">{$vo['seller_name']}</td>
+                                <td class="left">{:time_format($vo['start_time'],'Y-m-d H:i:s')}</td>
+                                <td class="left">{:time_format($vo['end_time'],'Y-m-d H:i:s')}</td>
+                                <td class="left">{$vo['order_num']}</td>
+                                <td class="left">{$vo['goods_total_money']}</td>
+                                <td class="left">{$vo['freight']}</td>
+                                <td class="left">{$vo['platform_commission']}</td>
+                                <td class="left">{$vo['integral_money']}</td>
+                                <td class="left">{$vo['money']}</td>
+                                <td class="left">
+                                    {switch name='vo.status'}
+                                    {case value='1'}<span class="red">{:lang('Applying')}</span>{/case}
+                                    {case value='2'}<span class="green">{:lang('is_settlement')}</span>{/case}
+                                    {/switch}
+                                </td>
+                                <td class="actions">
+                                    {eq name='vo.status' value='1'}
+                                    <a class="tooltip-link ajax-get edit confirm" title="{:lang('confirm_settle')}" data-title="{:lang('confirm_settle')}" href="{:url('confirm',array('ids'=>$vo['id']))}" data-layer="{:lang('confirm_settle')}?" data-showbar="1">
+                                        <img src="__PUBLIC__/admin/images/edit.png" alt="{:lang('Edit')}" />
+                                    </a>
+                                    {/eq}
+                                </td>
+                            </tr>
+                        {/volist}
+                        </tbody>
+                </table>
+                <div class="pagination-wrapper">
+                    <div class="results-part"><span>{$_total}</span></div>
+                    <div class="links-part">{$list->render()}</div>
+                </div>
+                
+                {else/}
+                <div class="alert alert-warning">{:lang('No_record')}</div>
+                {/notempty}
+            </div>
+        </div>
+    </div>
+
+    {include file="admin@public/time_for_search" /}
+    
+    {/block}

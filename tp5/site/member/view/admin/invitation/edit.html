@@ -1,0 +1,47 @@
+{extend name="admin@public/poupbase"/}
+
+<!-- CONTENT -->
+{block name="body"}
+<div id="content" style="margin:0px 10px 5px 8px;">
+    <div class="bloc" style="margin:10px 0px 0px;">
+        <div class="content">
+            <form id="myform"  method="post" style="margin-top:5px;" class="">
+                <fieldset>
+                    <legend>{$meta_title|default=''}</legend>
+                    <div class="row">
+                        <label for="rang" class="w100">{:lang('Rang')}: <span class="required">*</span></label>
+                        <input id="rang" style="width:45px; text-align: center;" type="number" value="{$data.rang}" name="rang" placeholder="{:lang('Rang_tip')}" />
+                        {:lang('Times')}
+                    </div>
+                
+                    <div class="row">
+                        <label for="forinv" class="w100">{:lang('Invlist')}: <span class="required">*</span></label>
+                        <textarea id="forinv" style="width: 280px; height: 60px;" name="forinv" placeholder="{:lang('Invtext_tip')}">{$data.forinv}</textarea>
+                
+                    </div>
+                
+                    <div class="row">
+                        <label for="welcome" class="w100">{:lang('Invwelcome')}: <span class="required">*</span></label>
+                        <input id="welcome" type="text" name="welcome" data-showbar="1" value="{$data.welcome}" placeholder="{:lang('Welcome')}"  />
+                        <a class="tooltip-icon" title="{:lang('Welcome_tip')}"></a>
+                    </div>
+                
+                    <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                        <input name="submit" value="{:lang('Createinv')}" type="submit" url="{:url('savedata')}" />
+                        <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="js"}
+<script type="text/javascript" src="__PUBLIC__/admin/js/autosize.js"></script>
+<script>
+    $(function(){
+        $(".bset").buttonset();
+    })
+</script>
+{/block}

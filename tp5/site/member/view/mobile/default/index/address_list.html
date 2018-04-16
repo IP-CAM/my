@@ -1,0 +1,54 @@
+{extend name='public/base'}
+{block name='css'}
+<link rel="stylesheet" href="__PUBLIC__/{$css_path}/addresslist.css">
+{/block}
+{block name='body'}
+<div id="app">
+    <div class="u-topbar">
+        <div class="u-topbar-inner">
+            <div class="u-topbar-arrow-wrapper">
+                <div class="u-topbar-arrow"></div>
+            </div>
+            <div class="u-topbar-title">
+                <!--inlcude-->收货地址选择
+            </div>
+        </div>
+    </div>
+    <div class="m-addresslist m-addresslist-1">
+        <span class="newbtn">新建</span>
+        <ul class="addressiptbox">
+            <!--Regular list-->
+            <li class="addritm">
+                <div class="operate f-cb">
+                    <div class="edit f-fl"><b class="u-icn-pen"></b>编辑</div>
+                    <div class="delete f-fr"><b class="u-icn-garbage"></b>删除</div>
+                </div>
+                <div>
+                    {volist name="list" id="vo"}
+                    <label>
+                        <div class="f-cb user">
+                            <div class="name f-toe">{$vo.consignee}</div>
+                            <div class="mobile">{$vo.mobile}</div>
+                        </div>
+                        <div class="address">
+                            <label>
+                                <div class="checked u-checked">
+                                    <span class="u-radiobox f-fr">
+                                        <input type="radio" value="b0" name="group2" {if condition="$vo.is_default eq 1"}checked="checked"{/if} style="-webkit-appearance: none; border: none;">
+                                    </span>
+                                </div>
+                                <div class="detail">
+                                    <span class="dft">{if condition="$vo.is_default eq 1"}【默认】{/if}</span>
+                                    {$vo.country}  {$vo.province}  {$vo.city}  {$vo.district} {$vo.address}
+                                </div>
+                            </label>
+                        </div>
+                    </label>
+                    {/volist}
+                </div>
+            </li>
+        
+        </ul>
+    </div>
+</div>
+{/block}

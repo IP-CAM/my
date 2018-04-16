@@ -1,0 +1,385 @@
+   <div class="order-head">
+   	<table class="order-table">
+   		<tr class="">
+   			<td class="text-center" style="width: 332px; text-align: center;"><span>{:lang('order_good')}</span></td>
+   			<td class="item-price"><span>{:lang('order_good_price')}</span></td>
+   			<td class="item-amount"><span>{:lang('order_num')}</span></td>
+   			<td class="item-shouhou"><span>{:lang('order_good_action')}</span></td>
+   			<td class="item-total-price"><span>{:lang('order_pay')}</span></td>
+   			<td class="item-freight"><span>{:lang('order_trade_status')}</span></td>
+   			<td class="item-links"><span>{:lang('order_action')}</span></td>
+   		</tr>
+   	</table>
+   </div>
+    {notempty name="order_list"}
+    {foreach $order_list as $key => $arr}
+    <div class="order-item">
+        <table class="order-table">
+            <tbody>
+            <tr>
+                <td colspan="8" class="order-summary">
+                    <span class="order-number">{:lang('order_sn')}：{$arr['order_sn']}</span>
+                    <span class="exchange-time">{:lang('trading_time')}：
+                        {$arr['create_time']}
+                        </span>
+                        <span class="dp right">
+                            <a href="{:url('seller/store/index','seller_id='.$arr['seller_id'])}" target="_blank"><i class="iconfont icon-ruzhu"></i> {$arr['store']['seller_name']}</a>
+    
+                            <!-- 删除订单到回收站 -->
+                             {if condition="($arr['status'] == 'TRADE_FINISHED'||$arr['status'] == 'TRADE_CLOSED'||$arr['status'] == 'TRADE_CLOSED_BY_SYSTEM')&& $arr['display']==1"}
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                    <a target="_blank" class="blue delete-order" title="{:lang('do_order_recycle')}" data-order_id="{$arr['order_id']}" data-display="0">
+                        <i class="iconfont icon-remove" style="color:#9e9e9e;"></i>
+                    </a>
+                            {/if}
+                            
+                        </span>
+                </td>
+            </tr>
+            {notempty name="arr['goods']"}
+            {php} $count_goods = count($arr['goods']); {/php}
+            {foreach $arr['goods'] as $key2 => $arr2}
+            <tr>
+                <td class="item-image">
+                    <!--商品主图-->
+                    {if condition="substr($arr2['sku_thumb'],0,4)=='http'"}
+                    <img src="{$arr2['sku_thumb']}" width="58" height="58">
+                    {else /}
+                    <img src="{:resizeImage($arr2['sku_thumb'],'small',true)}" width="58" height="58">
+                    {/if}
+                    
+                </td>
+                <td class="item-name">
+                    <a target="_blank" href="{:url('crossbbcg/goods/index','item_id='.$arr2['goods_id'])}">
+                        {$arr2['goods_name']}
+                    </a>
+                    {if condition="$arr2['sku_array']"}
+                    <br/><span style="color:#9e9e9e">{$arr2['sku_array']}</span>
+                    {/if}
+                    <div class="icon-box">
+                        {eq name="$arr2['goods_type']" value="direct_mail"}
+                        <span class="zhiyou"><i class="iconfont icon-quanqiu"></i>{:lang('direct_mail')}</span>
+                        {/eq}
+                        {eq name="$arr2['goods_type']" value="bonded"}
+                        <span class="baoshui"><i class="iconfont icon-quanqiu"></i>{:lang('bonded')}</span>
+                        {/eq}
+                        {eq name="$arr2['goods_type']" value="pay_taxes"}
+                        <span class="wanshui"><i class="iconfont icon-quanqiu"></i>{:lang('pay_taxes')}</span>
+                        {/eq}
+                    	
+                    	<span class="guojia">
+                            {notempty name="$arr2['country_code']"}
+                            <img src="__PUBLIC__/crossbbcg/pc/default/image/flags/{:strtolower($arr2['country_code'])}.png"/>
+                            {$arr2['country_name']}
+                            {/notempty}
+                        </span>
+                    </div>
+                </td>
+                 <td class="item-price"> {$arr['symbol']}{$arr2['sku_price']}</td>
+                <td class="item-amount"> × {$arr2['sku_number']}</td>
+                
+                <td class="item-shouhou">
+                    <!--收货前可以申请售后 -->
+                    {eq name="$arr['status']" value="WAIT_BUYER_CONFIRM_GOODS"}
+                    
+                    <!--判断商品的售后状态-->
+                        {if condition="$arr2['afterservice']['status'] !== null"}
+                    {if condition="$arr2['afterservice']['status'] === 3 && $arr2['afterservice']['rtype']!==0"}
+                    <p class="item-links" style="border-left:0;">
+                        {notempty name="$arr['store']['after_sale_address']"}
+                        <a class="blue-button" id="show-logistics" data-title="{:lang('input_express')}" data-button_yes="{:lang('yes')}" data-button_no="{:lang('cancel')}" data-after_sn="{$arr2['afterservice']['after_sn']}" style="color:#fff;" data-address="{$arr['store']['after_sale_address']}">{:lang('after_express')}</a>
+                        {else /}
+                        <a class="blue-button" id="show-logistics" data-title="{:lang('input_express')}" data-button_yes="{:lang('yes')}" data-button_no="{:lang('cancel')}" data-after_sn="{$arr2['afterservice']['after_sn']}" style="color:#fff;" data-address="{:lang('please_contact_seller')}">{:lang('after_express')}</a>
+                        {/notempty}
+                    </p>
+                    
+                    {/if}
+                    
+                        {if condition="$arr2['afterservice']['status'] === 1"}
+                    <a href="{:url('member/index/aftersalesDetail','after_sn='.$arr2['afterservice']['after_sn'])}">{:lang('after_sale_success')}</a>
+                        {elseif condition="$arr2['afterservice']['status'] === 3 && $arr2['afterservice']['rtype']!==0"}
+                    <a href="{:url('member/index/aftersalesDetail','after_sn='.$arr2['afterservice']['after_sn'])}">{:lang('after_sale_shipping')}</a>
+                        {else /}
+                    <a href="{:url('member/index/aftersalesDetail','after_sn='.$arr2['afterservice']['after_sn'])}">{:lang('after_sale_pending')}</a>
+                        {/if}
+                    
+                        {else /}
+                    <a href="{:url('member/index/aftersalesApply',['order_sn'=>$arr['order_sn'],'rec_id'=>$arr2['rec_id']])}">{:lang('after_sale')}</a>
+                        {/if}
+                    {/eq}
+                </td>
+                {if condition="$key2==0"}
+                <td class="item-total-price" rowspan="{$count_goods}">
+                    <span class="price">{$arr['symbol']}{$arr['order_amount']}</span>
+                        <br/>
+                       {:lang('shipping_fee')}：{$arr['symbol']}{$arr['shipping_fee']}
+                    <br/>
+                    {if condition="$arr['order_tax']!=0"}
+                    {:lang('tax')}：{$arr['symbol']}{$arr['order_tax']}
+                    {/if}
+                </td>
+                 <td class="item-freight" rowspan="{$count_goods}">
+                    <span class="order-status ">{:lang(strtolower($arr['status']))}</span>
+                </td>
+                <td class="item-links" rowspan="{$count_goods}">
+                    <!--去付款-->
+                    {eq name="$arr['status']" value="WAIT_BUYER_PAY"}
+                    <!--剩余关闭时间-->
+                        {php}
+                        $surplus = $expire_time - (time()-strtotime($arr['create_time']));
+                        if($surplus > 0){
+                            $day = floor($surplus/86400);
+                            $hour = floor(($surplus % 86400)/3600);
+                            if($day > 0){
+                                echo '<span class="time-out"><i class="icon-time iconfont"></i>'.lang('surplus') . $day . lang('day') .$hour . lang('hour');
+                            }else{
+                                if($hour > 0){
+                                echo '<span class="time-out"><i class="icon-time iconfont"></i>'.lang('surplus') . $hour . lang('hour');
+                                }else{
+                                $minute = floor($surplus/60);
+                                $second = floor($surplus%60);
+                                
+                                echo '<span class="time-out"><i class="icon-time iconfont"></i>'.lang('surplus') . $minute . lang('minute') . $second . lang('second');
+                                }
+                                
+                            }
+                        }
+                        {/php}
+                        
+                    </span>
+                    <br />
+                    <a href="{:url('crossbbcg/carts/paycenter','order_sn='.$arr['order_sn'])}" target="_blank" class="pay-button ">{:lang('pay_order')}</a>
+                    {/eq}
+                    
+                    <!--取消订单 -->
+                    {if condition="$arr['status'] == 'WAIT_BUYER_PAY'||$arr['status'] == 'WAIT_SELLER_SEND_GOODS'"}
+                        
+                          {if condition="$arr['cancel_status']=='NO_APPLY'"}
+                    <a target="_blank" class="cancel-order white-button" data-order_id="{$arr['order_id']}">{:lang('cancel_order_status')}</a>
+                          {/if}
+                        
+                    {/if}
+                    
+    
+                    <!--确认收货 -->
+                    {if condition="$arr['status'] == 'WAIT_BUYER_CONFIRM_GOODS'"}
+                    <a target="_blank" class="finish-order blue-button" data-order_id="{$arr['order_id']}">{:lang('confirm_order')}</a>
+                    {/if}
+                    
+                    <!--还原订单-->
+                    {if condition="$arr['display'] == 0"}
+                    <a target="_blank" class="blue delete-order" data-order_id="{$arr['order_id']}" data-display="1">{:lang('order_display_show')}</a>
+                    {/if}
+                    <!--订单详情-->
+                    <a href="{:url('member/index/orderdetail','order_sn='.$arr['order_sn'])}" class="blank">{:lang('order_detail')}</a>
+                    <!--完成的订单才能评价 -->
+                    {eq name="$arr['status']" value="TRADE_FINISHED"}
+                    {eq name="$arr['is_evaluate']" value="0"}
+                    <a href="{:url('member/comment/add','order_sn='.$arr['order_sn'])}" class="blue">{:lang('comment_order')}</a>
+                    {else /}
+                        <a href="{:url('member/comment/index')}" class="blue"/>{:lang('see_comment')}</span>
+                    {/eq}
+                    {/eq}
+                </td>
+                {/if}
+            </tr>
+            {/foreach}
+            {/notempty}
+            </tbody>
+        </table>
+    </div>
+    
+    {/foreach}
+    <div class="pagenavi">
+    {$page}
+    </div>
+    {else /}
+    <div class="ly-no-data" style="background: #fff;border: 1px solid #e6e6e6;">
+        <div class="icon iconfont icon-zanwujilu"></div>
+        <div class="text">{:lang('empty_record')}</div>
+    </div>
+    {/notempty}
+    
+<script type="text/html" id="cancel-html">
+    <div style="padding:20px;">
+        <p style="margin-bottom:10px;">{:lang('choose_cancel_reason')}</p>
+        <select name="cancel_reason" style="width:120px;" id="cancel_reason">
+            <option value="0">{:lang('choose_cancel_option')}</option>
+            {foreach $arr_cancel_reason as $key => $value}
+                <option value="{$value}">{$value}</option>
+            {/foreach}
+        </select>
+    </div>
+    
+</script>
+   
+   <div id="logistics_content" data-url="{:url('member/index/return_express')}" style="display:none;">
+       <form action="" class="common-form">
+           <div class="form-inline">
+               <div class="input-label">{:lang('sale_after_address')}</div>
+               <div class="input-line empty address"></div>
+           </div>
+           <div class="form-inline">
+               <div class="input-label"><em>*</em>{:lang('express_company')}</div>
+               <div class="input-line error-triggered empty">
+                   <select name="companys" data-empty="{:lang('express_company_not_null')}" required="" id="companys">
+                       <option value="">{:lang('please_choose')}</option>
+                       {notempty name="arr_express"}
+                       {foreach $arr_express as $value}
+                       <option value="{$value}">{$value}</option>
+                       {/foreach}
+                       {/notempty}
+                       <option value="{:lang('other')}">{:lang('other')}</option>
+                   </select>
+                   <span class="input-error"></span>
+               </div>
+           </div>
+           <div class="form-inline">
+               <div class="input-label"><em>*</em>{:lang('tracking_number')}</div>
+               <div class="input-line error-triggered empty">
+                   <input type="text" id="tracking_number" class="input-text" data-empty="{:lang('tracking_number_not_null')}" required="" name="tracking_number" value="">
+                   <span class="input-error"></span>
+               </div>
+           </div>
+    
+       </form>
+   </div>
+    
+    
+    <script type="text/javascript">
+        // 弹窗取消订单
+        function open_cancel(order_id){
+            layer.open({
+                'skin': 'layer-ext-blue',
+                area: ['400px', '280px'],
+                scrollbar: false,
+                title: "{:lang('cancel_order_title')}",
+                maxmin: false,
+                type: 1,
+                anim: 0,
+                shade: [0.3, '#333333'],
+                content: $('#cancel-html').html(),
+                btn: ["{:lang('yes')}", "{:lang('no')}"],
+                yes: function(index,item){
+                    var reason = $('#cancel_reason').val();
+                    if(reason == 0){
+                        layer.msg("{:lang('choose_cancel_reason')}", {skin:'layer-ext-blue',icon:0, time: 2000 ,shade: 0.3}, function(){});
+                    }else{
+                        var request_data = {
+                            order_id: order_id,
+                            reason : reason
+                        };
+                            $.ajax({
+                                type: 'post',
+                                url: "{:url('member/index/cancelorder')}",
+                                data: request_data,
+                                dataType: 'json',
+                                success: function (data) {
+                                    if(data.code){
+                                        layer.msg(data.msg, {skin:'layer-ext-blue',icon:0, time: 2000 ,shade: 0.3}, function(){
+                                            layer.close(index);
+                                            window.location.reload();
+                                        });
+                                        
+                                    }else{
+                                        layer.msg(data.msg, {skin:'layer-ext-blue',icon:0, time: 2000 ,shade: 0.3}, function(){});
+                                    }
+                                }
+                            });
+                    }
+                }
+            });
+        }
+        
+        // 确认收货
+        function finish_order(order_id){
+            var request_data = {
+                order_id: order_id
+            };
+            $.ajax({
+                type: 'post',
+                url: "{:url('member/index/finishorder')}",
+                data: request_data,
+                dataType: 'json',
+                success: function (data) {
+                    if(data.code){
+                        layer.msg(data.msg, {skin:'layer-ext-blue',icon:0, time: 2000 ,shade: 0.3}, function(){
+                            layer.close();
+                            window.location.reload();
+                        });
+
+                    }else{
+                        layer.msg(data.msg, {skin:'layer-ext-blue',icon:0, time: 2000 ,shade: 0.3}, function(){});
+                    }
+                }
+            });
+        }
+        
+        // 删除订单
+        function delete_order(order_id,display){
+            
+            if(display){
+                var request_data = {
+                    order_id: order_id,
+                    display:display
+                };
+                $.ajax({
+                    type: 'post',
+                    url: "{:url('member/index/delete_order')}",
+                    data: request_data,
+                    dataType: 'json',
+                    success: function (data) {
+                        if(data.code){
+                            layer.msg(data.msg, {skin:'layer-ext-blue',icon:0, time: 2000 ,shade: 0.3}, function(){
+                                layer.close();
+                                window.location.reload();
+                            });
+                        }else{
+                            layer.msg(data.msg, {skin:'layer-ext-blue',icon:0, time: 2000 ,shade: 0.3}, function(){
+                                layer.close();
+                                window.location.reload();
+                            });
+                        }
+                    }
+                });
+            }else{
+                
+            
+            layer.msg('{:lang("order_recycle_info")}', {
+                skin: 'layer-ext-blue', icon: 0,
+                time: 0,
+                btn: ['{:lang("js_ok")}', '{:lang("js_no")}'],
+                yes: function (index) {
+                    
+                    var request_data = {
+                        order_id: order_id,
+                        display:display
+                    };
+                    $.ajax({
+                        type: 'post',
+                        url: "{:url('member/index/delete_order')}",
+                        data: request_data,
+                        dataType: 'json',
+                        success: function (data) {
+                            if(data.code){
+                                layer.msg(data.msg, {skin:'layer-ext-blue',icon:0, time: 2000 ,shade: 0.3}, function(){
+                                    layer.close();
+                                    window.location.reload();
+                                });
+                            }else{
+                                layer.msg(data.msg, {skin:'layer-ext-blue',icon:0, time: 2000 ,shade: 0.3}, function(){
+                                    layer.close();
+                                    window.location.reload();
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+            }
+        }
+        
+    </script>
+    
+    
+    

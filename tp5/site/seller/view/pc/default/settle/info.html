@@ -1,0 +1,117 @@
+{extend name='common/base'}
+{block name='css'}
+<link href="__PUBLIC__/{$css_path}/daterangepicker.css" rel="stylesheet">
+
+{/block}
+{block name="breadcrumb"}
+<li>{:lang('order_settle')}</li>
+<li class="active">{$meta_title|default=''}</li>
+{/block}
+{block name='body'}
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <div class="row">
+                        <div class="page-header-top">
+                            <form action="">
+                                <a class="btn btn-etshop addnew" href="{:url('seller/settle/index')}">
+                                    <i class="fa fa-feed"></i> {:lang('All')}
+                                </a>
+                                {:getSellerButton()}
+                                <div class="time"
+                                     style="width: 200px; position: relative;display: inline-block;vertical-align: middle; margin-right: 6px">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                    
+                                        <input type="text" class="form-control pull-left" id="reservation" name="time" placeholder="{:lang('choose_bill_time')}" value="{$time}" style="padding: 4px 12px; height: 30px">
+                                    </div>
+                                </div>
+                                <input type="submit" value="{:lang('search')}" class="btn btn-info etbtn">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <table id="demo-foo-addrow" class="table table-bordered table-striped" data-page-size="10">
+                        <thead>
+                        <tr>
+                            <th>订单号</th>
+                            <th>订单商品金额</th>
+                            <th>运费</th>
+                            <th>积分抵扣</th>
+                            <th>红包抵扣金额</th>
+                            <th>折扣金额</th>
+                            <th>订单税费</th>
+                            <th>结算状态</th>
+                            <th class="center">{:lang('operation')}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach $list as $v}
+                        <tr>
+                            <td>{$v.order_sn}</td>
+                            <td>{$v.goods_amount}</td>
+                            
+                            <td>
+                                {$v.shipping_fee}
+                            </td>
+                            <td>
+                            {$v.integral}
+                            </td>
+                            <td>
+                            {$v.bonus}
+                            </td>
+                            <td>{$v.discount}</td>
+                            <td>{$v.order_tax}</td>
+                            <td>
+                                {eq name='$v.is_checkout' value='1'}
+                                <span>{:lang('had_settle')}</span>
+                                {else /}
+                                <span>{:lang('no_settle')}</span>
+                                {/eq}
+                            </td>
+                            <td class="center">
+                                <a class="tooltip-link ajax-get btn btn-primary btn-sm"  title="{:lang('View')}" data-width="900" data-height="700" data-showbar="1" data-title="{:lang('settle_info')}" data-skin="skin-blue" href="{:url('seller/settle/detail',array('order_sn'=>$v.order_sn))}"><i class="fa fa-eye"></i></a>
+                                <a class="tooltip-link ajax-get btn btn-primary btn-sm"
+                                   data-original-title="{:lang('show_customer_id')}" data-toggle="tooltip"
+                                   data-placement='top' data-width="700" data-height="700" data-showbar="1"
+                                   data-title="" data-skin="skin-blue"
+                                   href="{:url('seller/order/idnumber',array('order_sn'=>$v.id))}"><i class="fa fa-user-secret"></i></a>
+                            </td>
+                        </tr>
+                        {/foreach}
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="12">
+                                <div class="text-right pagination" >
+                                    {$list->appends(input())->render()}
+                                </div>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{/block}
+{block name='js'}
+<script src="__PUBLIC__/{$js_path}/moment.min.js"></script>
+<script src="__PUBLIC__/{$js_path}/daterangepicker.js"></script>
+<script>
+    $(function () {
+        $('#end_time').daterangepicker({
+            autoUpdateInput:false
+        });
+        $('#reservation').daterangepicker({
+            autoUpdateInput: false
+        });
+    })
+</script>
+{/block}

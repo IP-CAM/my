@@ -1,0 +1,75 @@
+{extend name='public/base'}
+{block name='css'}
+<style type="text/css">
+    .m-qrcodebox{margin-left:-30px;margin-right:0;padding-left:15px;}.m-qrcodebox .boxheader{height:35px;display:-webkit-box;display:-webkit-flex;display:flex;-webkit-box-pack:center;-webkit-justify-content:center;justify-content:center;-webkit-box-align:center;-webkit-align-items:center;align-items:center;background-color:#f2f0f0;}.m-qrcodebox .boxbody{margin:25px 125px;}.m-qrcodebox .qrcode{width:120px;height:120px;}.m-qrcodebox .qrcode img{width:100%;height:100%;display:block;-webkit-user-select:none;}.g-bd{height:90%;background-color:#f2f0f0;}.m-orderinfo{margin-bottom:10px;text-align:center;background-color:#fff;}.m-orderinfo .ordersuc{padding:8px 0 8px;font-size:18px;}.m-orderinfo .ordersuc b{position:relative;top:7px;margin-right:3px;}.m-orderinfo .lefttime{margin:0 15px;padding-bottom:10px;border-bottom:1px dashed #cbcbcb;font-size:14px;color:#656565;}.m-orderinfo .lefttime b{color:#333;}.m-orderinfo .payamount{padding:10px 0;font-size:12px;}.m-orderinfo .payamount b{padding-left:8px;font-weight:bold;font-size:18px;color:#d22147;}.m-payway{background-color:#fff;}.m-payway .title{padding:15px;font-size:14px;line-height:14px;border-bottom:1px solid #ddd;}.m-payway .detail .v-paymethod-disabled{color:#999;}.m-payway .detail .v-paymethod-disabled input{display:none;}.m-payway .detail li{margin-left:15px;border-bottom:1px solid #ddd;font-size:16px;}.m-payway .detail li .u-radiobox{position:relative;min-height:55px;display:-webkit-box;display:-webkit-flex;display:flex;}.m-payway .detail li .u-radiobox .v-paymethod-image img{position:absolute;top:50%;-webkit-transform:translate3d(0,-50%,0);transform:translate3d(0,-50%,0);height:30px;}.m-payway .detail li .u-radiobox .v-paymethod-text{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;flex-direction:column;-webkit-box-flex:1;-webkit-flex:1;flex:1;margin-left:100px;min-height:55px;-webkit-box-align:start;-webkit-align-items:flex-start;align-items:flex-start;-webkit-box-pack:center;-webkit-justify-content:center;justify-content:center;}.m-payway .detail li .u-radiobox .v-paymethod-error,.m-payway .detail li .u-radiobox .v-paymethod-tip{display:block;font-size:11px;}.m-payway .detail li .u-radiobox .v-paymethod-tip{color:#e21435;}.m-payway .detail li .u-radiobox input{margin:14px 15px 0 0;}.m-payway .detail li:last-child{border-bottom:none;}.m-payway .detail .bbnone{border-bottom:none;}.m-blank{height:60px;background-color:#f2f0f0;}.m-confirm{position:fixed;left:0;bottom:0;width:100%;height:60px;border-top:1px solid #ddd;background-color:#fff;}.m-confirm .confirm{display:inline-block;width:290px;height:40px;line-height:40px;position:absolute;top:50%;margin-top:-20px;left:50%;margin-left:-145px;text-align:center;background-color:#d22147;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;font-size:16px;color:#fff;}.m-backDialog .confirm{width:270px;height:129px;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;text-align:center;z-index:999;}.m-backDialog .confirm .txt{padding:20px 0 10px;font-size:14px;color:#333;}.m-backDialog .confirm .btns{height:38px;line-height:38px;border-top:1px solid #ddd;}.m-backDialog .confirm .btns .btn{height:38px;line-height:38px;font-size:16px;}.pay-loading{position:absolute;top:0;left:0;width:100%;height:100%;z-index:101;}.pay-loading img{position:absolute;top:50%;left:50%;margin:-0.333333rem 0 0 -0.333333rem;width:0.666667rem;height:0.666667rem;}.u-redtip{color:#e31436;margin-top:10px;}.v-dialog-pay_waptoapp .v-dialog-button{font-size:0.373333rem;}
+</style>
+{/block}
+{block name='body'}
+<header class="g-hd">
+    <div class="f-dn" id="j-headInOtherApp">
+        <div class="m-topnav">
+            <div class="m-topnavbar">
+                <span class="tit">选择支付方式</span>
+            </div>
+        </div>
+    </div>
+</header>
+<header class="g-hd m-topnav-space" id="g-hd">
+    <div class="m-topnav-wrap">
+        <div class=" m-topnav" id="topbar-box">
+            <div class="m-topnavbar">
+                <span class="tit" id="toptitle">选择支付方式</span>
+                <div class="btns">
+                    <a href="{:url('crossbbcg/index/index')}" title="回首页" class="u-topbaridx"></a>
+                    {empty name="user"}
+                    <a href="{:url('member/passport/index')}" class="u-topbarlogin">登录</a>
+                    {else /}
+                    <a href="{:url('member/index/index')}" id="j-gousrcenter" title="个人中心" class="u-topbaruser usr"></a>
+                    {/empty}
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="g-bd">
+    <section class="m-orderinfo">
+        <div id="orderStatus" class="ordersuc"><b class="u-icn29"></b>
+            订单已提交
+        </div>
+        <div class="lefttime">(请在<b id="leftTime" lefttime="6744">0小时00分钟00秒</b>内完成支付)</div>
+        <div class="payamount">{:lang('order_payment')}<b>{:$symbol . $order_amount}</b></div>
+    </section>
+    <section class="m-payway">
+        <div class="title">
+            {:lang('choose_payment_method')}
+        </div>
+        <ul id="payMethod" class="detail">
+            {notempty name="arr_payments"}
+            {foreach $arr_payments as $payment}
+            <li class="">
+                <div class="u-radiobox f-cb">
+                    <div class="v-paymethod-image">
+                        <img src="{$payment['logo']}" alt="">
+                    </div>
+                    <div class="v-paymethod-text">
+                        <div>{$payment['title']}</div>
+                    </div>
+                    <input class="paymethod f-fr" value="{$payment['code']}" name="payment_method" {eq name="payment['default']" value="1" }checked="checked" {/eq} type="radio">
+                </div>
+            </li>
+            {/foreach}
+            {else /}
+            <dd>
+                {:lang('payment_null')}
+            </dd>
+            {/notempty}
+        </ul>
+    </section>
+    <section class="m-blank"></section>
+    <section class="m-confirm">
+        <span id="payNow" class="confirm" data-order_sn="{$order_sn}">立即支付</span>
+    </section>
+    <div id="payFormWrap" class="f-dn"></div>
+    <input type="hidden" value="334278" class="goodsId">
+</div>
+{/block}

@@ -1,0 +1,112 @@
+{extend name='common/poupbase'}
+{block name='css'}
+<style>
+    label{font-weight: 400;!important;}
+    .input-group{margin: 10px;}
+    .form-control {
+        display: block;
+        width: 100%;
+        height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;}
+</style>
+{/block}
+
+{block name='body'}
+<section class="content">
+    <div class="col-md-12">
+    
+    
+    <div class="row">
+        <form action="#" class="form-horizontal">
+            <div class="box" style="border: 0;min-height: 345px;margin-bottom: 0">
+                <div class="box-body" style="padding-right: 15px;padding-top: 35px">
+                    <div class="form-group">
+                        <label for="img" class="col-sm-3 control-label">图片</label>
+                        <div class="col-sm-6">
+                            <input type="hidden" name="img" id="img" value="{$data.img}">
+                            {eq name='action_name' value='edit'}
+                            {if condition="empty($data.img)"}
+                            <img src="__PUBLIC__/admin/images/image.png" id="imgs" class="upload img-rounded"  no-image="__PUBLIC__/admin/images/image.png" title="{:lang('Upload img and file')}" url="{:url('seller/shop/img',array('input' => 'img','thumb' => 'imgs'))}" data-upload="__UPLOADS__" alt="" width="80" style="border:1px solid #e4e4e4"  />
+                            {elseif condition="substr($data.img,0,4)=='http'" /}
+                            <img src="{$data.img}" id="imgs" class="upload img-rounded"  no-image="__PUBLIC__/admin/images/image.png" title="{:lang('Upload img and file')}" url="{:url('seller/shop/img',array('input' => 'img','thumb' => 'imgs'))}" data-upload="__UPLOADS__" alt="" width="80" style="border:1px solid #e4e4e4" />
+                            {else /}
+                            <img src="{:resizeImage($data.img,'thumb',true)}" id="imgs" class="upload img-rounded"  no-image="__PUBLIC__/admin/images/image.png" title="{:lang('Upload img and file')}" url="{:url('seller/shop/img',array('input' => 'img','thumb' => 'imgs'))}" data-upload="__UPLOADS__" alt="" width="80" style="border:1px solid #e4e4e4"  />
+                            {/if}
+                            {else /}
+                            <img src="__PUBLIC__/admin/images/image.png" id="imgs" class="upload img-rounded"  no-image="__PUBLIC__/admin/images/image.png" title="{:lang('Upload img and file')}" url="{:url('seller/shop/img',array('input' => 'img','thumb' => 'imgs'))}" data-upload="__UPLOADS__" alt="" width="80" style="border:1px solid #e4e4e4" >
+                            {/eq}
+                            
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="url" class="col-sm-3 control-label">{:lang('url_link')}</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="url" name="url"  value="{$data.url}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="type" class="col-sm-3 control-label">{:lang('platform')}</label>
+                        <div class="col-sm-6">
+                            <select name="type" id="type" class="form-control">
+                                <option value="PC" {eq name="$data.type" value="PC"}selected{/eq}>PC</option>
+                                <option value="WAP" {eq name="$data.type" value="WAP"}selected{/eq}>WAP</option>
+                                <option value="APP" {eq name="$data.type" value="APP"}selected{/eq}>APP</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">{:lang('sort')}</label>
+                        <div class="col-sm-6">
+                            <input type="number" name="sort" value="{$data.sort}" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">{:lang('status')}</label>
+                        <div class="col-sm-6">
+                            <div class="btn-group" >
+                                <input type="radio" name="status" id="status1" checked value="1" class="hide">
+                                <input type="radio" name="status" id="status2" value="0" class="hide">
+                                <button type="button" data-id="status1"  class="btn btn-info col-sm-6 radio">ON</button>
+                                <button type="button" data-id="status2" class="btn btn-default col-sm-6 radio">OFF</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-foot" style="text-align: center;padding-bottom: 10px">
+                    {eq name='$action_name' value='edit'}
+                    <input type="hidden" name="id" value="{$data.id}">
+                    {/eq}
+                    <input type="submit" value="{:lang('save')}" url="{:url('seller/shideshow/savedata')}" name="submit" class="btn btn-info"/>
+                </div>
+            </div>
+        </form>
+    </div>
+    </div>
+</section>
+{/block}
+
+{block name='js'}
+<script>
+    $(function () {
+        $('.radio').click(function () {
+            $(this).removeClass('btn-default').addClass('btn-info');
+            $('#'+$(this).data('id')).attr('checked',true);
+
+            $('#'+$(this).data('id')).siblings("input[type='radio']").attr('checked',false).removeClass('btn-info').addClass('btn-default');
+            $(this).siblings('button').removeClass('btn-info').addClass('btn-default');
+        })
+    })
+</script>
+{/block}

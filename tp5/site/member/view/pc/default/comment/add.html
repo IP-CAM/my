@@ -1,0 +1,161 @@
+    {extend name="common/base" /}
+    
+    {block name="title"}
+    <title>ETshop-{:lang('After_sales_apply')}</title>
+    {/block}
+    
+    {block name="css"}
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/member.css" />
+    {/block}
+    
+    {block name="body"}
+    <!--面包屑-->
+    <div class="ly-path">
+        <ul class="clearfix">
+            <li class="home">
+                <a href="{:url('crossbbcg/index/index')}" title="{:lang('go_min')}">{:lang('Home')}</a>
+                <span>&gt;&nbsp;</span>
+            </li>
+            <li>
+                <a href="{:url('member/index/index')}" title="">{:lang('Member')}</a>
+                <span>&gt;&nbsp;</span>
+            </li>
+            <li>
+                <h1>{:lang('After_sales_apply')}</h1>
+            </li>
+        </ul>
+    </div>
+    <div class="ly-main member-main clearfix">
+        {include file="index/left_menu"}
+	<div class="member-right">
+		<div class="member-content">
+			<div class="title member-title member-max-title">
+				<div class="t">{:lang('goods comment')}</div>
+			</div>
+			<div class="body pb15 mh600 member-comment more-comment">
+				<form action="" id="ccomment_form" data-url="{:url('save')}">
+					<!--<div class="orderdtl-box">-->
+						<!--<div class="member-sub-title clearfix"><span>店铺评分</span></div>-->
+						<!--<div class="orderdtl-bd">-->
+							<!--<div class="count-grade">-->
+								<!--<input id="goods" type="hidden" name="tally_score" value="0" data-empty="{:lang('goods and description not empty')}">-->
+								<!--<div class="t">商品与描述相符</div>-->
+								<!--<div class="xing-box">-->
+									<!--<span><i class="iconfont icon-xingact"></i></span>-->
+									<!--<span><i class="iconfont icon-xingact"></i></span>-->
+									<!--<span><i class="iconfont icon-xingact"></i></span>-->
+									<!--<span><i class="iconfont icon-xingact"></i></span>-->
+									<!--<span><i class="iconfont icon-xingact"></i></span>-->
+									<!--<em>0分</em>-->
+								<!--</div>-->
+							<!--</div>-->
+							<!--<div class="count-grade">-->
+								<!--<input id="server" type="hidden" name="attitude_score" value="0">-->
+								<!--<div class="t">商家的服务态度</div>-->
+								<!--<div class="xing-box">-->
+									<!--<span><i class="iconfont icon-xingact"></i></span>-->
+									<!--<span><i class="iconfont icon-xingact"></i></span>-->
+									<!--<span><i class="iconfont icon-xingact"></i></span>-->
+									<!--<span><i class="iconfont icon-xingact"></i></span>-->
+									<!--<span><i class="iconfont icon-xingact"></i></span>-->
+									<!--<em>0分</em>-->
+								<!--</div>-->
+							<!--</div>-->
+							<!--<div class="count-grade">-->
+								<!--<div class="t">商家的发货速度</div>-->
+								<!--<input id="send" type="hidden" name="delivery_speed_score" value="0">-->
+								<!--<div class="xing-box">-->
+									<!--<span><i class="iconfont icon-xingact"></i></span>-->
+									<!--<span><i class="iconfont icon-xingact"></i></span>-->
+									<!--<span><i class="iconfont icon-xingact"></i></span>-->
+									<!--<span><i class="iconfont icon-xingact"></i></span>-->
+									<!--<span><i class="iconfont icon-xingact"></i></span>-->
+									<!--<em>0分</em>-->
+								<!--</div>-->
+							<!--</div>-->
+
+						<!--</div>-->
+					<!--</div>-->
+					<!--订单信息-->
+					<div class="orderdtl-box">
+						<!--<div class="member-sub-title clearfix"><span>{:lang('goods comment')}</span></div>-->
+                        {foreach $data as $k=>$v}
+						<div class="comment-item">
+							<div class="clearfix">
+								<div class="left">
+									<div class="goods-pic">
+                                    {if condition="empty($v.sku_thumb)"}
+                                        <img src="__PUBLIC__/{$img_path}/no-image.png" alt="{$v.goods_name}" width="160" height="160"/>
+                                    {elseif condition="substr($v.sku_thumb,0,4) == 'http'"}
+                                        <img src="{$v.sku_thumb}" alt="{$v.goods_name}" width="160" height="160"/>
+                                    {else /}
+                                        <img src="__UPLOADS__/{$v.sku_thumb}" alt="{$v.goods_name}" width="160" height="160"/>
+                                    {/if}
+									
+									</div>
+									<div class="goods-name"><a href="{:url('crossbbcg/goods/index').'?item_id='.$v.goods_id}" title="{$v.goods_name}">{$v.goods_name}</a> </div>
+									<div class="goods-spec">
+										{$v.sku_array}
+									</div>
+									
+								</div>
+								<div class="right">
+									<div class="count-grade">
+										<div class="letter-limit">{:lang('it can input')}<span></span>{:lang('character')}</div>
+										<input id="goods_grade" type="hidden"  name="comment[{$v.goods_id}][{$v.sku}][score]" value="5">
+										<div class="t">{:lang('goods comment score')}</div>
+										<div class="xing-box" data-lang="{:lang('goods score')}">
+											<span class="act"><i class="iconfont icon-xingact"></i></span>
+											<span class="act"><i class="iconfont icon-xingact"></i></span>
+											<span class="act"><i class="iconfont icon-xingact"></i></span>
+											<span class="act"><i class="iconfont icon-xingact"></i></span>
+											<span class="act"><i class="iconfont icon-xingact"></i></span>
+											<em>5{:lang('goods score')}</em>
+										</div>
+									</div>
+									<div class="text-box">
+										<textarea name="comment[{$v.goods_id}][{$v.sku}][comment_content]" maxlength="150" rows="" cols="" placeholder="{:lang('goods comment tips')}"></textarea>
+									</div>
+									<div class="upload-box">
+										<div class="text">{:lang('show img')}:</div>
+										<ul class="images-upload clearfix" data-url="{:url('ajax_upload')}" data-maxlength="6" data-goods_id="{$v.goods_id}" data-goods_sku="{$v.sku}">
+											<li class="img-thumbnail action-upload">
+												<input type="file" class="action-file-input upload-input">
+												<span class="icon-add" style="line-height: 28px;height: 32px;">+</span>
+											</li>
+										</ul>
+										<div class="right-check">
+                                            <label><input type="checkbox" name="comment[{$v.goods_id}][{$v.sku}][isanonymity]" id="isanonymity" value="1" checked/> {:lang('isanonymous')}</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+                        {/foreach}
+					</div>
+					<!--订单信息END	-->
+					<div class="orderdtl-box">
+						<br />
+						<br />
+						<div class="orderdtl-bd">
+                            <input type="hidden" name="order_sn" value="{$order_info.order_sn}"/>
+							<div class="submit-box">
+                                <button style="margin: 0 auto;" type="submit" class="btn-submit">提交</button>
+                            </div>
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+{/block}
+<!--此板块为页面单独js加载-->
+{block name="footer_js"}
+<script type="text/javascript">
+	//需要加载的js文件
+	Private_Script = ['memberComment'];
+</script>
+{/block}

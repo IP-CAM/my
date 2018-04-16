@@ -1,0 +1,472 @@
+    {extend name="admin@public/poupbase"/}
+
+    {block name="style"}
+    <style>
+        form .row{ min-height:26px !important;margin: 3px 0px 0px;}
+        .sfz img{ border: 2px solid #00a0e9; border-radius: 6px; width: 140px; max-height: 89px; display: inline-block; margin-right: 20px; cursor: pointer; }
+        .sfz img:hover{border: 2px solid #f77c52;}
+        .org{ text-align: right; padding-right: 15px;}
+        .font15{font-size:15px; font-weight: bold;}
+        .font16{font-size:16px; font-weight: bold;}
+        .btbor{ border-bottom: 1px solid #d6d6d6; margin: 20px 30px 0;}
+    </style>
+    {/block}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content" style="margin:0px 10px 5px 8px;">
+        <div class="bloc" style="margin:10px 0px 0px;">
+            <div class="title">
+                <div class="tabs static">
+                    <a href="#Basic" class="up-icon norember">{:lang('Basic_info')}</a>
+                    <a href="#Idnumberbox" class="sms-icon norember">{:lang('Idnumber')}</a>
+                    <a href="#refund" class="curr-icon norember">{:lang('Receive and refund')}</a>
+                    <a href="#Delivery" class="logistics-icon norember">{:lang('Delivery')}</a>
+                    <a href="#logs" class="log-icon norember">{:lang('Order logs')}</a>
+                </div>
+            </div>
+            
+            <div class="content">
+                <div id="Basic" style="display:block; height: 480px;">
+                    <form method="post" style="margin-top:5px;" class="">
+                        <fieldset style="height:450px;">
+                            <legend>{:lang('Order_info')}</legend>
+    
+                            <div class="row">
+                                <div class="fl">
+                                    <label class="w120">{:lang('Order_sn')} : </label>
+                                    <label>{$data.order_sn}</label>
+                                </div>
+    
+                                <div class="fl">
+                                    <label class="w80">{:lang('Order_status')} : </label>
+                                    <label>
+                                        {switch name="data.status"}
+                                            {case value="WAIT_BUYER_PAY"}{:lang('WAIT_BUYER_PAY')}{/case}
+                                            {case value="WAIT_SELLER_SEND_GOODS"}{:lang('WAIT_SELLER_SEND_GOODS')}{/case}
+                                            {case value="WAIT_BUYER_CONFIRM_GOODS"}{:lang('WAIT_BUYER_CONFIRM_GOODS')}{/case}
+                                            {case value="TRADE_FINISHED"}{:lang('TRADE_FINISHED')}{/case}
+                                            {case value="TRADE_CLOSED"}{:lang('TRADE_CLOSED')}{/case}
+                                            {case value="TRADE_CLOSED_BY_SYSTEM"}{:lang('TRADE_CLOSED_BY_SYSTEM')}{/case}
+                                            {default /}
+                                        {/switch}
+                                    </label>
+                                </div>
+    
+                                <div class="fl">
+                                    <label class="w80">{:lang('Docancel')} : </label>
+                                    <label>
+                                        {switch name="data.cancel_status"}
+                                            {case value="NO_APPLY"}{:lang('Noapply')}{/case}
+                                            {case value="WAIT_PROCESS"}{:lang('Wait_process')}{/case}
+                                            {case value="REFUND_PROCESS"}{:lang('Refund_process')}{/case}
+                                            {case value="SUCCESS"}{:lang('Cancel_succ')}{/case}
+                                            {case value="FAILS"}{:lang('Cancel_fail')}{/case}
+                                            {default /}
+                                        {/switch}
+                                    </label>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <div class="fl">
+                                    <label class="w120">{:lang('Orderprice')} : </label>
+                                    <label>{$data.order_amount}</label>
+                                </div>
+    
+                                <div class="fl">
+                                    <label class="w80">{:lang('Single_time')} : </label>
+                                    <label>
+                                        {notempty name="data.create_time" value="0"}{$data.create_time}{/notempty}
+                                    </label>
+                                </div>
+    
+                                <div class="fl">
+                                    <label class="w80">{:lang('Time_payment')} : </label>
+                                    <label>
+                                        {notempty name="data.pay_time"}{$data.pay_time|time_format}{/notempty}
+                                    </label>
+                                </div>
+                            </div>
+    
+                            <div class="row green">
+                                <div class="fl">
+                                    <label class="w120">{:lang('Goods_amount')} : </label>
+                                    <label>{$data.symbol} {$data.goods_amount}</label>
+                                </div>
+        
+                                <div class="fl">
+                                    <label class="w80">{:lang('Shipping_amount')} : </label>
+                                    <label>{$data.symbol} {$data.shipping_fee}</label>
+                                </div>
+        
+                                <div class="fl">
+                                    <label class="w80">{:lang('Goods_tax')} : </label>
+                                    <label>{$data.symbol} {$data.order_tax}</label>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <div class="fl">
+                                    <label class="w120">{:lang('Want invoice')} : </label>
+                                    <label>
+                                        {notempty name="data.inv_type"}
+                                            <span class="badge-green">{:lang('Yes')}</span>
+                                        {else /}
+                                            <span class="badge-gray">{:lang('No')}</span>
+                                        {/notempty}
+                                    </label>
+                                </div>
+    
+                                {notempty name="data.inv_type"}
+                                <div class="fl">
+                                    <label class="w80">{:lang('Invoice_type')} : </label>
+                                    <label>
+                                        {switch name="data.inv_type"}
+                                            {case value="1"}
+                                                {:lang('Personal')}
+                                            {/case}
+                                            {case value="2"}
+                                                {:lang('Company')}
+                                            {/case}
+                                            {default /}
+                                        {/switch}
+                                    </label>
+                                </div>
+        
+                                <div class="fl">
+                                    <label class="w80">{:lang('Invoice_title')} : </label>
+                                    <label>{$data.inv_payee}</label>
+                                </div>
+                                {/notempty}
+                            </div>
+    
+                            {notempty name="data.inv_type"}
+                            <div class="row">
+                                <div class="fl">
+                                    <label class="w120">{:lang('Invoice_tax')} : </label>
+                                    <label>{$data.order_amount}</label>
+                                </div>
+        
+                                <div class="fl">
+                                    <label class="w80">{:lang('Invoice_number')} : </label>
+                                    <label>{$data.inv_number}</label>
+                                </div>
+                            </div>
+                            {/notempty}
+                            
+                            <div class="row">
+                                <label class="w120">{:lang('Order postscript')} : </label>
+                                <label style="width: 500px;">
+                                    {eq name="data.postscript" value=""}
+                                    {$data.postscript}
+                                    {else /}
+                                    {:lang('Nothing')}
+                                    {/eq}
+                                </label>
+                            </div>
+                            
+                            <div style="border-bottom: 1px solid #d6cccc; width: 98%; margin: 5px auto;"></div>
+                            
+                            <div class="row">
+                                <label class="w120l" style="padding-left: 8px; font-weight: bold;">
+                                    {:lang('Commodity_info')}
+                                </label>
+                            </div>
+                            
+                            <div class="row scrollbar" style="height: {notempty name='data.inv_type'}250px !important;{else /}260px !important;{/notempty} overflow-y: scroll; overflow-x: hidden; ">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th class="center" style="width: 4%">
+                                            <input type="checkbox" disabled checked />
+                                        </th>
+                                        <th class="left" style="width: 8%">{:lang('Goods_id')}</th>
+                                        <th class="left" style="width: 13%">{:lang('Goods_sn')}</th>
+                                        <th class="left" style="width: 13%">{:lang('Goods_code')}</th>
+                                        <th class="left" style="width: 34%; padding-right: 10px;">{:lang('Goods_title')}</th>
+                                        <th class="left" style="width: 10%">{:lang('Unit_price')}</th>
+                                        <th class="left" style="width: 9%">{:lang('Goods_umn')}</th>
+                                        <th class="right" style="width:9%; padding-right: 16px;">{:lang('Total_fee')}</th>
+                                    </tr>
+                                    </thead>
+        
+                                    <tbody>
+                                    {notempty name="goods['list']"}
+                                        {volist name="goods['list']" id="vo"}
+                                        <tr>
+                                            <td class="center">
+                                                <input type="checkbox" checked disabled>
+                                            </td>
+                                            <td class="left">{$vo.goods_id}</td>
+                                            <td class="left">{$vo.sku_code}</td>
+                                            <td class="left">{$vo.sku_barcode}</td>
+                                            <td class="left slh tooltip-link" style="max-width: 160px;padding-right: 10px;" title="{$vo.goods_name} [{$vo.sku_array}]">
+                                                {$vo.goods_name} [{$vo.sku_array}]
+                                            </td>
+                                            <td class="left">{$vo.sku_price}</td>
+                                            <td class="left">{$vo.sku_number}</td>
+                                            <td class="right" style="padding-right: 16px;">{:number_format($vo['sku_number'] * ( $vo['sku_tax'] + $vo['sku_price']), 2)}</td>
+                                        </tr>
+                                        {/volist}
+                                    {else /}
+                                        
+                                    {/notempty}
+                                    </tbody>
+                                </table>
+                            </div>
+    
+                        </fieldset>
+    
+                    </form>
+                </div>
+    
+                <div id="Idnumberbox" style="display:block; height: 480px;">
+                    <form method="post" style="margin-top:5px;" class="">
+                        <fieldset style="height:450px;">
+                            <legend>{:lang('Idnumber')}</legend>
+                
+                            <div class="row">
+                                <label for="idnumber" class="w120">{:lang('IdNo.')}</label>
+                                <input type="text" id="idnumber" value="{$data.idnumber}" readonly />
+                            </div>
+    
+                            <div class="row sfz" style="height: 100px; margin-top: 15px;">
+                                <label class="w120">{:lang('Idnumberimg')}</label>
+                                {notempty name = "data.sfzzm"}
+                                <img src="__UPLOADS__/{$data.sfzzm}" class="sfzpreview" />
+                                {/notempty}
+                                {notempty name = "data.sfzfm"}
+                                <img src="__UPLOADS__/{$data.sfzfm}" class="sfzpreview"  />
+                                {/notempty}
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                
+                <div id="refund" style="display:block; height: 480px;">
+                    <form method="post" style="margin-top:5px;" class="">
+                        <fieldset style="height:450px;">
+                            <legend>{:lang('Receive and refund')}</legend>
+    
+                            <div class="fl" style="width: 48%; margin-right: 2%">
+                                <div class="row">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2" class="left green" style="padding-left: 20px;">{:lang('Receipt')}</th>
+                                            </tr>
+                                        </thead>
+                                        
+                                        <tbody>
+                                        {eq name = "data.pay_status" value = '1'}
+                                            <tr>
+                                                <td class="org" style="width: 24%">{:lang('Time_payment')}</td>
+                                                <td>
+                                                    {notempty name="data.pay_time"}{$data.pay_time|time_format}{/notempty}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="org">{:lang('Total_amount')}</td>
+                                                <td class="red">{$data['symbol']}{$data.order_amount}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="org">{:lang('Pay anmont')}</td>
+                                                <td>
+                                                    {eq name = "data.pay_status" value = '1'}
+                                                    {$data['symbol']}{$data['order_amount']}
+                                                    {else /}
+                                                    {$data['symbol']}0.00
+                                                    {/eq}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="org">{:lang('Payment_type')}</td>
+                                                <td>
+                                                    {empty name="data.pay_name"}
+                                                    <span style="color: #a2aec7">{:lang('Wait_pay')}</span>
+                                                    {else /}
+                                                    {:lang($data['pay_name'])}
+                                                    {/empty}
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td class="org">{:lang('Status')}</td>
+                                                <td>
+                                                    {switch name="data.status"}
+                                                    {case value="WAIT_BUYER_PAY"}
+                                                    <span class="red L40">{:lang('WAIT_BUYER_PAY')}</span>
+                                                    {/case}
+                                                    {case value="WAIT_SELLER_SEND_GOODS"}
+                                                    <span class="green L40">{:lang('WAIT_SELLER_SEND_GOODS')}</span>
+                                                    {/case}
+                                                    {case value="WAIT_BUYER_CONFIRM_GOODS"}
+                                                    <span class="L40">{:lang('WAIT_BUYER_CONFIRM_GOODS')}</span>
+                                                    {/case}
+                                                    {case value="TRADE_FINISHED"}
+                                                    <span class="green L40">{:lang('TRADE_FINISHED')}</span>
+                                                    {/case}
+                                                    {case value="TRADE_CLOSED"}
+                                                    <span class=" L40">{:lang('TRADE_CLOSED')}</span>
+                                                    {/case}
+                                                    {case value="TRADE_CLOSED_BY_SYSTEM"}
+                                                    <span class=" L40">{:lang('TRADE_CLOSED_BY_SYSTEM')}</span>
+                                                    {/case}
+                                                    {default /}
+                                                    {/switch}
+                                                </td>
+
+                                                <tr>
+                                                    <td class="org">{:lang('Pay remark')}</td>
+                                                    <td>
+            
+                                                    </td>
+                                                </tr>
+                                            </tr>
+                                        {/eq}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+    
+                            <div class="fl" style="width: 48%;">
+                                <div class="row">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2" class="left red" style="padding-left: 20px;">{:lang('Refund doc')}</th>
+                                            </tr>
+                                        </thead>
+        
+                                        <tbody>
+                                        
+                                            <tr>
+                                                <td class="org" style="width: 24%">付款时间</td>
+                                                <td>2017-06-30  15:14:16</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="org">付款金额</td>
+                                                <td>￥120.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="org">付款金额</td>
+                                                <td>￥120.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="org">支付方式</td>
+                                                <td>支付宝支付</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="org">状态</td>
+                                                <td>支付宝支付</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="org">付款备注</td>
+                                                <td>支付宝支付</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                        </fieldset>
+                    </form>
+                </div>
+                
+                <div id="Delivery" style="display:block; height: 480px;">
+                    <form method="post" style="margin-top:5px;" class="">
+                        <fieldset style="height:450px;">
+                            <legend>{:lang('Delivery')}</legend>
+    
+                            <div class="row">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th class="left" style="width: 15%">配送时间</th>
+                                        <th class="left" style="width: 15%">发货方式</th>
+                                        <th class="left" style="width: 25%">物流公司</th>
+                                        <th class="left" style="width: 15%">物流单号</th>
+                                        <th class="left" style="width: 15%">收件人</th>
+                                        <th class="left" style="width:15%;">备注</th>
+                                    </tr>
+                                    </thead>
+            
+                                    <tbody>
+                                    <tr>
+                                        <td class="left">1</td>
+                                        <td class="left">GX0021252154</td>
+                                        <td class="left">物流公司名称</td>
+                                        <td class="left">100.00</td>
+                                        <td class="left">20</td>
+                                        <td class="left">2000.00</td>
+                                    </tr>
+            
+                                    </tbody>
+                                </table>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+    
+                <div id="logs" style="display:block; height: 480px;">
+                    <form method="post" style="margin-top:5px;" class="">
+                        <fieldset style="height:450px;">
+                            <legend>{:lang('Order logs')}</legend>
+    
+                            <div class="row">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th class="left" style="width: 15%">时间</th>
+                                        <th class="left" style="width: 10%">操作人</th>
+                                        <th class="left" style="width: 35%">动作</th>
+                                        <th class="left" style="width: 5%">结果</th>
+                                        <th class="left" style="width: 15%">备注</th>
+                                    </tr>
+                                    </thead>
+            
+                                    <tbody>
+                                    {notempty name = "logs['list']"}
+                                    {volist name="logs['list']" id="lg"}
+                                    <tr>
+                                        <td class="left">{$lg.create_time}</td>
+                                        <td class="left">{$lg.user}</td>
+                                        <td class="left">{$lg.action}</td>
+                                        <td class="left">{$lg.result}</td>
+                                        <td class="left">{$lg.remark}</td>
+                                    </tr>
+                                    {/volist}
+                                    {else /}
+                                    
+                                    {/notempty}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+    {/block}
+    
+    {block name="js"}
+    <script>
+        $(function () {
+            $('.sfzpreview').on('click', function () {
+                var that = $(this);
+                var img  = that.attr('src');
+                layer.open({
+                    type: 1,
+                    title: false,
+                    closeBtn: 1,
+                    skin: 'layui-layer', //没有背景色
+                    shadeClose: true,
+                    content: '<div style="height:300px; text-align: center"><img src="' + img + '"></div>'
+                });
+            })
+        })
+    </script>
+    {/block}

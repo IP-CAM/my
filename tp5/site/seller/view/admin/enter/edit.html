@@ -1,0 +1,202 @@
+{extend name="admin@public/poupbase"/}
+
+<!-- CONTENT -->
+{block name="body"}
+<div id="content" style="margin:0px 10px 5px 8px;">
+    <div class="bloc" style="margin:10px 0px 0px;">
+        <div class="content">
+            <form id="myform" method="post" action="{:url('savedata')}" style="margin-top:5px;" class="" enctype="multipart/form-data">
+                <fieldset>
+                    <legend>{$meta_title|default=''}</legend>
+                    <div class="row">
+                        <div style="float: left">
+                            <label for="username" class="w140">{:lang('seller_name')}: <span class="required">*</span></label>
+                            <input id="username" type="text" value="{$data['seller_name']}" name="seller_name" placeholder="{:lang('Account_tip')}" readonly />
+                        </div>
+                        <div style="float: left">
+                            <label for="email" class="w140">{:lang('Email')}: <span class="required">*</span></label>
+                            <input id="email" type="text" value="{$data['email']}" name="email" placeholder="example@gmail.com" readonly/>
+                            <a class="tooltip-icon" title="{:lang('Email_tip')}"></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div style="float: left">
+                            <label for="mobile" class="w140">{:lang('tel')}: <span class="required">*</span></label>
+                            <input id="mobile" type="text" value="{$data['mobile']}" name="mobile" placeholder="" readonly/>
+                        </div>
+                        <div style="float: left">
+                            <label for="phone" class="w140">{:lang('Telephone')}: </label>
+                            <input id="phone" type="text" value="{$data['phone']}" name="phone" placeholder="" readonly/>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div style="float: left">
+                            <label  class="w140">{:lang('company_name')}: <span class="required">*</span></label>
+                            <input  type="text" value="{$data['company']}" name="company" placeholder="" readonly/>
+                        </div>
+                        <div style="float: left">
+                            <label  class="w140">{:lang('corporate')}: <span class="required">*</span></label>
+                            <input  type="text" value="{$data['corporate']}" name="corporate" placeholder="" readonly/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div style="float: left">
+                            <label  class="w140">{:lang('organization_code')}: <span class="required">*</span></label>
+                            <input  type="text" value="{$data['organization_code']}" name="organization_code" placeholder="" readonly/>
+                        </div>
+                        <div style="float: left">
+                            <label  class="w140">{:lang('corporate_card')}: <span class="required">*</span></label>
+                            {eq name="ACTION_NAME" value="edit"}
+                            {defined  name="data.corporate_card"}
+                            <?php $arr=explode(',',$data.corporate_card);?>
+                            <a href="__PUBLIC__/{$arr[0]}">
+                                <img src="__PUBLIC__/{$arr[0]}" alt="" style="width: 50px;height: 50px;"/>
+                            </a>
+                            <a href="__PUBLIC__/{$arr[1]}">
+                                <img src="__PUBLIC__/{$arr[1]}" alt="" style="width: 50px;height: 50px;"/>
+                            </a>
+                            {else /}
+                            {:lang('no_upload')}
+                            {/defined}
+                            {else /}
+                            <input  type="file"  name="corporate_card"  />
+                            {/eq}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div style="float: left">
+                            <label  class="w140">{:lang('license_no')}: <span class="required">*</span></label>
+                            <input  type="text" value="{$data['license_no']}" name="license_no"  readonly/>
+                        </div>
+                        <div style="float: left">
+                            <label  class="w140">{:lang('paper_img')}: <span class="required">*</span></label>
+                            {eq name="ACTION_NAME" value="edit"}
+                            {defined  name="data.business_license"}
+                            <a href="__PUBLIC__/{$data.business_license}">
+                                <img src="__PUBLIC__/{$data.business_license}" alt="" style="width: 50px;height: 50px;"/>
+                            </a>
+                            {else /}
+                            {:lang('no_upload')}
+                            {/defined}
+                            {else /}
+                            <input class="button white upload" value="{:lang('Selectimg')}" title="{:lang('Selectimg')}" type="button" title="{:lang('Upload img and file')}" url="{:url('img',array('input' => 'shoplogo'))}" data-upload="__UPLOADS__" />
+                            <a href="javascript:void(0)" class="preview" data-src="business_license" data-width="200" data-height="200" data-area="200">{:lang('Preview')}</a>
+                            {/eq}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div style="float: left">
+                            <label  class="w140">{:lang('build_time')}: <span class="required">*</span></label>
+                            <input  type="text" value="{$data['build_time']}" name="build_time" placeholder="" readonly/>
+                        </div>
+                        <div style="float: left">
+                            <label  class="w140">{:lang('seller_logo')}: <span class="required">*</span></label>
+                            {eq name="ACTION_NAME" value="edit"}
+                            {defined  name="data.logo"}
+                            <a href="__PUBLIC__/{$data.logo}">
+                                <img src="__PUBLIC__/{$data.logo}" alt="" style="width: 50px;height: 50px;"/>
+                            </a>
+                            {else /}
+                            {:lang('no_upload')}
+                            {/defined}
+                            {else /}
+                            <input  type="file"  name="logo"  />
+                            {/eq}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div style="float: left">
+                            <label  class="w140">{:lang('Cash deposit')}: </label>
+                            <input  type="text" value="{$data['cash']}" name="cash"  readonly/>
+                        </div>
+                        <div style="float: left">
+                            <div style="float: left">
+                                <label  class="w140">{:lang('website')}: </label>
+                                <input  type="text" value="{$data['home_url']}" name="home_url"  readonly/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div style="float: left">
+                            <label  class="w140">{:lang('QQ')}: </label>
+                            <input  type="text" value="{$data['qq']}" name="qq"  readonly/>
+                        </div>
+                        <div style="float: left">
+                            <label  class="w140">{:lang('tax_certificate')}: <span class="required">*</span></label>
+                            {eq name="ACTION_NAME" value="edit"}
+                            {defined  name="data.logo"}
+                            <a href="__PUBLIC__/{$data.tax_registration_certificate}">
+                                <img src="__PUBLIC__/{$data.tax_registration_certificate}" alt="" style="width: 50px;height: 50px;"/>
+                            </a>
+                            {else /}
+                            {:lang('no_upload')}
+                            {/defined}
+                            {else /}
+                            <input  type="file"  name="logo"  />
+                            {/eq}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div style="float: left">
+                            <label  class="w140">{:lang('gathering_info')}: <span class="required">*</span></label>
+                            <input  type="text" value="{$data['bank']}" name="bank" placeholder="{:lang('bank')}" readonly/>
+                        </div>
+                        <div style="float: left">
+                            <input  type="text" value="{$data['bank_no']}" name="bank_no" placeholder="{:lang('bank_no')}" readonly/>
+                        </div>
+                        <div style="float: left">
+                            <input  type="text" value="{$data['bank_name']}" name="bank_name" placeholder="{:lang('bank_name')}" readonly/>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="row">
+                            <label  class="w140">{:lang('shop_description')}:</label>
+                            <textarea  type="text" cols="83" rows="5" name="shop_description" readonly>{$data.shop_description}</textarea>
+                        </div>
+                    </div>
+                    <div class="row bset">
+                        <div style="float: left">
+                            <label  class="w140"></label>
+                            <input name="status" type="radio" value="1" id="morelogin_1" checked />
+                            <label for="morelogin_1" class="w105_r_0">{:lang('Pass')}</label>
+                            <input name="status" type="radio" value="-1" id="morelogin_0"  />
+                            <label for="morelogin_0" class="w105_r_0" style="margin-right: 20px;">{:lang('check_reject')}</label>
+                        </div>
+                        <div style="float: left;display: none;" class="areas">
+                            <label  class="w140">{:lang('reject_reason')}: <span class="required">*</span></label>
+                            <textarea  type="text" name="reject_reason" style="margin-right: 60px;">{$data.reject_reason}</textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                        {eq name="ACTION_NAME" value="edit"}
+                        <input name="submit" value="{:lang('Submit')}" type="submit" url="{:url('savedata')}">
+                        <input type="hidden" name="id" value="{$data.id}" />
+                        {else /}
+                        <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}">
+                        {/eq}
+                        <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="js"}
+<script>
+    $(function(){
+        $(".bset").buttonset();
+        $('#morelogin_0').click(function () {
+            $('.areas').show();
+        });
+        $('#morelogin_1').click(function () {
+            $('.areas').hide();
+        });
+        
+    })
+</script>
+{/block}

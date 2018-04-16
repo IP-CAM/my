@@ -1,0 +1,48 @@
+{
+    "name": "runtuer/shopcmf",
+    "description": "etshop",
+    "type": "shopcmf",
+    "keywords": [
+      "b2b2c",
+      "b2c",
+      "shopcmf",
+      "CMF"
+    ],
+    "homepage": "http://www.runtuer.com/",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Runtuer",
+            "email": "service@runtuer.com"
+        }
+    ],
+    "minimum-stability": "beta",
+    "require": {
+        "php": ">=5.4.0",
+        "endroid/qrcode": "^1.7",
+        "topthink/think-captcha": "^1.0",
+        "topthink/think-angular": "^1.0",
+        "topthink/think-helper": "^1.0",
+        "topthink/think-migration": "^1.0",
+        "topthink/think-sae": "^1.0",
+        "topthink/think-installer": "^1.0",
+        "topthink/think-queue": "dev-master",
+        "topthink/think-mongo": "^1.0",
+        "os/php-excel": "^2.1",
+        "topthink/think-image": "^1.0",
+        "overtrue/wechat": "^2.1",
+        "phpmailer/phpmailer": "^5.2",
+        "phpdocumentor/reflection-docblock": "^2.0",
+        "lilwil/geetest": "^1.0",
+        "phpoffice/phpexcel": "^1.8"
+    },
+    "extra": {
+      "core-path": "core"
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.phpcomposer.com"
+        }
+    }
+}

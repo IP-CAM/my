@@ -1,0 +1,193 @@
+{extend name='public/layout'}
+
+{block name='body'}
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+    <div class="flexigrid">
+        <div class="mDiv">
+            <div class="ftitle">
+                <h3>{:lang('Goods')}</h3>
+                <h5></h5>
+            </div>
+            <form action=""  class="navbar-form form-inline" method="post">
+                <div class="sDiv">
+                    <div class="sDiv2">
+                        <select name="cat_id" id="cat_id" class="select">
+                            <option value="all">{:lang('all_category')}</option>
+                            {foreach $category_list as $v}
+                            <option value="{$v.id}" {eq name="$cat_id" value="$v.id"}selected{/eq}>{$v.sort_name}</option>
+                            {/foreach}
+                        </select>
+                        <select name="status" id="status" class="select">
+                            <option value="all">{:lang('all')}</option>
+                            {foreach $arr_status as $k=>$v}
+                            <option value="$k" {eq name="$status" value="$k"}selected{/eq}>{:lang($v)}</option>
+                            {/foreach}
+                        </select>
+                        <select name="condition" id="condition" class="select">
+                            <option value="name">{:lang('Goods_name')}</option>
+                            <option value="good_code" {eq name="$condition" value="good_code"}selected{/eq}>{:lang('Goods_sn')}</option>
+                        </select>
+                        <!--排序规则-->
+                        <input type="text" value="{$key_words}" size="30" name="key_words" class="qsbox" placeholder="{:lang('key_words')}">
+                        <input type="submit"  class="btn" value="{:lang('search')}">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="tDiv">
+            <div class="tDiv2">
+                <div class="fbutton">
+                    <a href="{:url('add')}" class="add-new ajax-get add" data-title="{:lang('Gadd')}"  data-showbar="1">
+                        <div class="add" title="{:lang('Gadd')}">
+                            <span><i class="fa fa-plus"></i>{:lang('Gadd')}</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+        <div class="bDiv" style="height: auto;">
+            <!--ajax 返回 -->
+            <div id="ajax_return" cellpadding="0" cellspacing="0" border="0">
+                
+                <table  id="dataTable"  cellpadding="0" cellspacing="0" style="table-layout:fixed;border-collapse:collapse;">
+                    <tbody>
+                    <colgroup>
+                        
+                        <col style="width:50px;" />
+                        <col style="width:120px;" />
+                        <col style="width:60px;" />
+                        <col style="width:60px;" />
+                        <col style="width:60px;" />
+                        <col style="width:60px;" />
+                        <col style="width:60px;" />
+                        <col style="width:60px;" />
+                        <col style="width:60px;" />
+                        <col style="width:50px;" />
+                    </colgroup>
+                    <tr style="background-color: #f5f5f5;cursor: e-resize">
+                        
+                        <td align="center" abbr="article_title" axis="col6" class="">
+                            <div style="text-align: center;" class="">id</div>
+                        </td>
+                        <td align="left" abbr="ac_id" axis="col4" class="">
+                            <div style="text-align: center;" class="">{:lang('Goods_name')}</div>
+                        </td>
+                        <td align="center" abbr="article_show" axis="col6" class="">
+                            <div style="text-align: center;" class="" >{:lang('Goods_sn')}</div>
+                        </td>
+                        <td align="center" abbr="article_time" axis="col6" class="">
+                            <div style="text-align: center; " class="" >{:lang('thumb')}</div>
+                        </td>
+                        <td align="center" abbr="article_time" axis="col6" class="">
+                            <div style="text-align: center;" class="">{:lang('price')}</div>
+                        </td>
+                        <td align="center" abbr="article_time" axis="col6" class="">
+                            <div style="text-align: center;" class="" >PC</div>
+                        </td>
+                        <td align="center" abbr="article_time" axis="col6" class="">
+                            <div style="text-align: center;" class="">Wap</div>
+                        </td>
+                        <td align="center" abbr="article_time" axis="col6" class="">
+                            <div style="text-align: center;" class="" >API</div>
+                        </td>
+                        <td align="center" abbr="article_time" axis="col6" class="">
+                            <div style="text-align: center;" class="" onClick="sort('store_count');">库存</div>
+                        </td>
+                        <td align="center" abbr="article_title" axis="col6" class="">
+                            <div style="text-align: center;" class="">{:lang('operation')}</div>
+                        </td>
+                    </tr>
+                    {volist name='list' id='vo'}
+                    <tr>
+                        <td align="center" axis="col0">
+                            {$vo.id}
+                        </td>
+                        <td align="center" axis="col0">
+                            {$vo.name}
+                        </td>
+                        <td align="center" axis="col0">
+                            {$vo.good_code}
+                        </td>
+                        <td align="center" axis="col0">
+                            <img src="__PUBLIC__/{$vo.thumb}" alt="" style="width: 50px;height: 37px;">
+                        </td>
+                        <td align="center" axis="col0">
+                            {$vo.sale_price}
+                        </td>
+                        <td align="center" axis="col0">
+                            {eq name='$vo.pc_status' value='1'}
+                            <a href="{:url('crossbbcg/admin.index/disable',array('pk'=>'pc_status','ids'=>$vo.id))}" class="ajax-able tooltip-link"><span class="yes"><img src="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png" data-enabled="__PUBLIC__/admin/images/enabled.png" alt=""></span></a>
+                            {else/}
+                            <a href="{:url('crossbbcg/admin.index/enable',array('pk'=>'pc_status','ids'=>$vo.id))}" class="ajax-able tooltip-link"><span class="no"><img src="__PUBLIC__/admin/images/disabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png" data-enabled="__PUBLIC__/admin/images/enabled.png" alt=""></span></a>
+                            {/eq}
+                        <td align="center" axis="col0">
+                            {eq name='$vo.wap_status' value='1'}
+                            <a href="{:url('crossbbcg/admin.index/disable',array('pk'=>'wap_status','ids'=>$vo.id))}" class="ajax-able tooltip-link"><span class="yes"><img src="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png" data-enabled="__PUBLIC__/admin/images/enabled.png" alt=""></span></a>
+                            {else/}
+                            <a href="{:url('crossbbcg/admin.index/enable',array('pk'=>'wap_status','ids'=>$vo.id))}" class="ajax-able tooltip-link"><span class="no"><img src="__PUBLIC__/admin/images/disabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png" data-enabled="__PUBLIC__/admin/images/enabled.png" alt=""></span></a>
+                            {/eq}
+                        </td>
+                        <td align="center" axis="col0">
+                            {eq name='$vo.api_status' value='1'}
+                            <a href="{:url('crossbbcg/admin.index/disable',array('pk'=>'api_status','ids'=>$vo.id))}" class="ajax-able tooltip-link"><span class="yes"><img src="__PUBLIC__/admin/images/enabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png" data-enabled="__PUBLIC__/admin/images/enabled.png" alt=""></span></a>
+                            {else/}
+                            <a href="{:url('crossbbcg/admin.index/enable',array('pk'=>'api_status','ids'=>$vo.id))}" class="ajax-able tooltip-link"><span class="no"><img src="__PUBLIC__/admin/images/disabled.png" data-disabled="__PUBLIC__/admin/images/disabled.png" data-enabled="__PUBLIC__/admin/images/enabled.png" alt=""></span></a>
+                            {/eq}
+                        </td>
+                        <td align="center" axis="col0" {if condition="$vo.quantity < $stockwarming"}style="font-size:23px;font-weight:bold;color:#d60000"{/if}>
+                        {$vo.quantity}
+                        </td>
+                        <td class="handle" >
+                            <div style="text-align:center;width: 96%">
+                                <a href="{:url('edit',['id'=>$vo.id])}" class="btn green ajax-get tooltip-link">{:lang('View')}</a>
+                                <a href="{:url('recycle_recover',['id'=>$vo.id])}" class="btn green ajax-get tooltip-link confirm" data-layer="{:lang('confirm_goods_recover')}" data-title="{:lang('goods_recover')}">{:lang('recover')}</a>
+                                <a href="{:url('recycle_del',['id'=>$vo.id])}" class="btn green ajax-get tooltip-link confirm" data-title="{:lang('del_goods')}" data-layer="{:lang('completely_delete')}">{:lang('del')}</a>
+                            </div>
+                        </td>
+                    </tr>
+                    {/volist}
+                    </tbody>
+                </table>
+                <!--分页位置-->
+                <div class='digg'>
+                    {$list->appends(input())->render()}
+                </div>
+            </div>
+        </div>
+    
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+        // 刷选条件 鼠标 移动进去 移出 样式
+        $(".hDivBox > table > thead > tr > th").mousemove(function(){
+            $(this).addClass('thOver');
+        }).mouseout(function(){
+            $(this).removeClass('thOver');
+        });
+    });
+</script>
+<script>
+    function changeTableVal(sort,id) {
+        $.ajax({
+            url:"{:url('edit_goods_sort')}",
+            type:'post',
+            dataType:'json',
+            data:{
+                sort:sort,
+                id:id
+            },
+            success:function (re) {
+                if (re.code < 1) {
+                    layer.msg("{:lang('fail')}",{icon: 6, time: 1000});
+                }
+            }
+        })
+    }
+</script>
+
+<script type="text/javascript" src="__PUBLIC__/{$module_path}js/drag.js"></script>
+{/block}

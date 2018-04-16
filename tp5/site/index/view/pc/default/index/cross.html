@@ -1,0 +1,343 @@
+    {extend name='common/base'}
+    
+    {block name='seo'}
+    <title>跨境通 - 首款进口跨境电商系统，进口跨境电商解决方案，进口跨境电商系统源码，跨境ERP，润土科技出品</title>
+    <meta name="Keywords" content="跨境通,跨境电商,跨境平台,跨境电商源码,跨境电商解决方案,跨境B2C,跨境B2B2C,ETshop源码,源码,源码授权,授权."/>
+    <meta name="Description"
+          content="ecshop跨境通是一款跨境电商系统,为商家提供整套跨境电商解决方案,帮助商家快速搭建跨境电商平台.系统支持国内商品,自贸区商品,海外直邮商品三种模式,轻松无缝对接各地自贸区,迅速抢占跨境电商风口."/>
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/{$css_path}/iconfont.css"/>
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/{$css_path}/tese.css"/>
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/{$css_path}/style.css"/>
+    <script src="https://cdn.bootcss.com/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
+    <script src="__PUBLIC__/{$js_path}/jquery.SuperSlide.js" type="text/javascript"></script>
+    {/block}
+    
+    {block name='body'}
+    <div class="index_pc">
+        {include file='common/header' /}
+        <div class="secNav secNav-top" id="secNav">
+            <div class="secNav-items">
+                <div class="item"><a href="saas.html">SAAS版</a></div>
+                <div class="item"><a href="bigdata.html">大数据版</a></div>
+                <div class="item current"><a href="kuajing.html">跨境版</a></div>
+                <div class="item"><a href="gjb.html">国际版</a></div>
+            </div>
+        </div>
+        <div id="kuajing-page" class="con">
+            <div class="kuajing-banner"></div>
+            <!-- floor-1 -->
+            <div class="kuajing-floor-1 module-word">
+                <div class="container">
+                    <div class="sc-title" data-sr="over 1s, enter top">完美融合ETshop</div>
+                    <div class="sc-subtitle" data-sr="over 1s, enter top">全新推出针对B2B2C2C定制的ETshop跨境电商解决方案，在保留其全部功能的基础上，我们针对跨境电商的<br>
+                        经营特点与最新政策改革，融入了强大的跨境电商功能模块。
+                    </div>
+                    <div class="img" data-sr="over 1s, enter bottom"></div>
+                </div>
+            </div>
+            <!-- floor-2 -->
+            <div class="kuajing-floor-2 module-word">
+                <div class="container">
+                    <div class="sc-title" data-sr="over 1s, enter top">超强视觉盛宴-PC端</div>
+                    <div class="sc-subtitle" data-sr="over 1s, enter top">
+                        ETshop跨境B2B2C2C传承了ETshop的原创界面设计，界面设计美观大气，同时网站也兼顾了实用性，以用户为中心，<br>带来更加便捷完善的使用体验，稳步提升成交率。让你轻松拥有一流商城系统体验。
+                    </div>
+                    <div class="floor-slide" data-sr="over 1s, enter bottom">
+                        <div class="hd">
+                            <ul>
+                                <li>跨境首页</li>
+                                <li>商品详情页</li>
+                                <li>会员中心</li>
+                                <li>购物车</li>
+                                <li>结算页</li>
+                            </ul>
+                        </div>
+                        <div class="bd">
+                            <ul>
+                                <li><img src="__PUBLIC__/{$img_path}/kuajing/f2_1.png" alt=""/></li>
+                                <li><img src="__PUBLIC__/{$img_path}/kuajing/f2_2.png" alt=""/></li>
+                                <li><img src="__PUBLIC__/{$img_path}/kuajing/f2_3.png" alt=""/></li>
+                                <li><img src="__PUBLIC__/{$img_path}/kuajing/f2_4.png" alt=""/></li>
+                                <li><img src="__PUBLIC__/{$img_path}/kuajing/f2_5.png" alt=""/></li>
+                            </ul>
+                            <div class="tip-img"></div>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        $(function () {
+                            $(".kuajing-floor-2 .floor-slide").slide({
+                                mainCell: '.bd ul'
+                            });
+                        });
+                    </script>
+                </div>
+            </div>
+            <!-- floor-3 -->
+            <div class="kuajing-floor-3 module-word">
+                <div class="container">
+                    <div class="sc-title" data-sr="over 1s, enter top">搭配超强移动端兼容，数据同步</div>
+                    <div class="img" data-sr="over 1s, enter bottom"></div>
+                </div>
+            </div>
+            <!-- floor-4 -->
+            <div class="kuajing-floor-4 module-word">
+                <div class="container">
+                    <div class="sc-title white" data-sr="over 1s, enter top">商品类型</div>
+                    <div class="sc-subtitle white" data-sr="over 1s, enter top">针对不同渠道，推出三种商品类型</div>
+                    <ul class="clearfix" data-sr="over 1s, enter bottom">
+                        <li>
+                            <i></i>
+                            <h4>国内商品</h4>
+                            <p>免税费</p>
+                        </li>
+                        <li>
+                            <i></i>
+                            <h4>自贸区商品</h4>
+                            <p>征收综合税</p>
+                        </li>
+                        <li>
+                            <i></i>
+                            <h4>海外直邮商品</h4>
+                            <p>后台先添加好国家列表，海外直邮商品可以选择国家；征收综合税</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- floor-5 -->
+            <div class="kuajing-floor-5 module-word">
+                <div class="container">
+                    <div class="sc-title" data-sr="over 1s, enter top">商家入驻申请商品类型</div>
+                    <div class="sc-subtitle" data-sr="over 1s, enter top">商家入驻的时候先要选择好商品类型（只能选择一种）</div>
+                    <div class="img" data-sr="over 1s, enter bottom"></div>
+                </div>
+            </div>
+            <!-- floor-6 -->
+            <div class="kuajing-floor-6 module-word">
+                <div class="container">
+                    <div class="sc-title" data-sr="over 1s, enter top">购物车智能分单机制</div>
+                    <div class="sc-subtitle" data-sr="over 1s, enter top">1. 可根据不同入驻商家进行分单&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.
+                        可根据不同地区仓库进行分单
+                    </div>
+                    <div class="img" data-sr="over 1s, enter bottom"></div>
+                </div>
+            </div>
+            <!-- floor-7 -->
+            <div class="kuajing-floor-7 module-word">
+                <div class="container">
+                    <div class="sc-title" data-sr="over 1s, enter top">跨境电商特色功能</div>
+                    <div class="clearfix">
+                        <div class="kj-fl" data-sr="over 1s, enter left">
+                            <div class="sc-title2">A、智能限购</div>
+                            <div class="sc-subtitle">
+                                1.【自贸区商品类型】：商家购物车内每单商品金额总价不得超过2000元<br>
+                                2.【自贸区商品类型】：商家购物车内只有一件商品的时候可以提交订单<br>
+                                3.【海外直邮商品类型】：商家购物车内每单商品金额总价不得超过2000元<br>
+                                4.【海外直邮商品】：商家购物车内只有一件商品的时候可以提交订单<br>
+                                5.【国内商品类型】：商家不限购不收税费<br>
+                            </div>
+                        </div>
+                        <div class="fr img" data-sr="over 1s, enter right"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- floor-8 -->
+            <div class="kuajing-floor-8 module-word">
+                <div class="container">
+                    <div class="clearfix">
+                        <div class="kj-fl" data-sr="over 1s, enter left">
+                            <div class="sc-title2">B、智能税费计算</div>
+                            <div class="sc-subtitle">综合税税率按照商品分类客户来设置，默认11.9%。<br>
+                                自贸区的商品及海外直邮的各个国家的商品的税额自动计算税额，十分智能；<br>
+                                国内商品无税费。
+                            </div>
+                        </div>
+                        <div class="fr img" data-sr="over 1s, enter right"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- floor-9 -->
+            <div class="kuajing-floor-9 module-word">
+                <div class="container">
+                    <div class="clearfix">
+                        <div class="kj-fl" data-sr="over 1s, enter left">
+                            <div class="sc-title2">C、双平台退换货</div>
+                            <div class="sc-subtitle">1.退换货升级后台独立管理，前台简洁美观，管理方便<br>
+                                2.双平台数据互通，共同管理
+                            </div>
+                        </div>
+                        <div class="fr img" data-sr="over 1s, enter right"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- floor-10 -->
+            <div class="kuajing-floor-10 module-word">
+                <div class="container">
+                    <div class="clearfix">
+                        <div class="kj-fl" data-sr="over 1s, enter left">
+                            <div class="sc-title2">D、实名认证</div>
+                            <div class="sc-subtitle">会员中心更新提示身份证所属性别，以及出生年月,<br>
+                                当购物车内商品有自贸区或者海外直邮商品的时候提交订单需要验证身份证信息
+                            </div>
+                        </div>
+                        <div class="fr img" data-sr="over 1s, enter right"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- floor-11 -->
+        </div>
+        <!-- 底部 -->
+        {include file='common/footer' /}
+    </div>
+    
+    <div class="index_mobile pink_bg">
+        <div class="header_warp">
+            <div class="header">
+                <div class="sj_logo"><a href="index.html"><img src="__PUBLIC__/{$img_path}/mobile/sj_logo.png"/></a></div>
+                <div class="reorder"><a href="javascript:void(0);"></a></div>
+            </div>
+            <div class="js_nav">
+                <div class="item"><a href="index.html">首页</a></div>
+                <div class="item"><a href="commerce.html">系统特色</a></div>
+                <div class="item"><a href="pc.html">产品终端</a></div>
+                <div class="item"><a href="platform.html">强大后台</a></div>
+                <div class="item"><a href="core.html">功能亮点</a></div>
+                <div class="item"><a class="active" href="kuajing.html">特色版本</a></div>
+                <div class="item drop-down">
+                    <span>服务中心<i class="m-icon-angle-down"></i></span>
+                    <ul>
+                        <li><a href="empower.html">商业授权</a></li>
+                        <li><a href="update.html">更新日志</a></li>
+                        <li><a href="course.html">常见问题</a></li>
+                        <li><a href="resource.html">资源区</a></li>
+                    </ul>
+                </div>
+                <div class="item"><a href="waptest.html">产品演示</a></div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="mobile-banner"><img src="__PUBLIC__/{$img_path}/mobile/kj_banner.jpg"/></div>
+            <div class="section_kj section_kj_1" data-sr="move 200px, over 1s, enter bottom">
+                <div class="left"><img src="__PUBLIC__/{$img_path}/mobile/section_kj_1_left.png"/></div>
+                <div class="right">
+                    <div class="warp">
+                        <div class="tit">一、独立部署版</div>
+                        <div class="txt">通过本地安装部署，商家自己配置服务器、域名等信息即可上线</div>
+                        <ul class="kj_items">
+                            <li>
+                                <div class="img"><img src="__PUBLIC__/{$img_path}/mobile/section_kj_1_1.png"/></div>
+                                <div class="span">可定制</div>
+                            </li>
+                            <li>
+                                <div class="img"><img src="__PUBLIC__/{$img_path}/mobile/section_kj_1_2.png"/></div>
+                                <div class="span">自主权</div>
+                            </li>
+                            <li>
+                                <div class="img"><img src="__PUBLIC__/{$img_path}/mobile/section_kj_1_3.png"/></div>
+                                <div class="span">可修改</div>
+                            </li>
+                            <li>
+                                <div class="img"><img src="__PUBLIC__/{$img_path}/mobile/section_kj_1_4.png"/></div>
+                                <div class="span">私有化</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="section_kj section_kj_2" data-sr="move 200px, over 1s, enter bottom">
+                <div class="left"><img src="__PUBLIC__/{$img_path}/mobile/section_kj_2_left.png"/></div>
+                <div class="right">
+                    <div class="warp">
+                        <div class="tit">二、SAAS云端版</div>
+                        <div class="txt">通过线上注册开通即可云心，无需购买服务器，省心省力</div>
+                        <ul class="kj_items">
+                            <li>
+                                <div class="img"><img src="__PUBLIC__/{$img_path}/mobile/section_kj_2_1.png"/></div>
+                                <div class="span">一键开通</div>
+                            </li>
+                            <li>
+                                <div class="img"><img src="__PUBLIC__/{$img_path}/mobile/section_kj_2_2.png"/></div>
+                                <div class="span">无需技术</div>
+                            </li>
+                            <li>
+                                <div class="img"><img src="__PUBLIC__/{$img_path}/mobile/section_kj_2_3.png"/></div>
+                                <div class="span">无需运维</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="section_kj section_kj_3" data-sr="move 200px, over 1s, enter bottom">
+                <div class="left"><img src="__PUBLIC__/{$img_path}/mobile/section_kj_3_left.png"/></div>
+                <div class="right">
+                    <div class="warp">
+                        <div class="tit">三、大数据版</div>
+                        <div class="txt">通过多台服务器运用OSS等功能，使较大访问时也能保持商城流畅运行</div>
+                        <ul class="kj_items">
+                            <li>
+                                <div class="img"><img src="__PUBLIC__/{$img_path}/mobile/section_kj_3_1.png"/></div>
+                                <div class="span">OSS存储</div>
+                            </li>
+                            <li>
+                                <div class="img"><img src="__PUBLIC__/{$img_path}/mobile/section_kj_3_2.png"/></div>
+                                <div class="span">ROS数据库</div>
+                            </li>
+                            <li>
+                                <div class="img"><img src="__PUBLIC__/{$img_path}/mobile/section_kj_3_3.png"/></div>
+                                <div class="span">Memcached缓存</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="section_kj section_kj_4" data-sr="move 200px, over 1s, enter bottom">
+                <div class="left"><img src="__PUBLIC__/{$img_path}/mobile/section_kj_4_left.png"/></div>
+                <div class="right">
+                    <div class="warp">
+                        <div class="tit">四、跨境版</div>
+                        <div class="txt">为需要从事跨境行业商家打造，集合商品税率、国家添加等模块</div>
+                        <ul class="kj_items">
+                            <li>
+                                <div class="img"><img src="__PUBLIC__/{$img_path}/mobile/section_kj_4_1.png"/></div>
+                                <div class="span">海外直邮</div>
+                            </li>
+                            <li>
+                                <div class="img"><img src="__PUBLIC__/{$img_path}/mobile/section_kj_4_2.png"/></div>
+                                <div class="span">智能限购</div>
+                            </li>
+                            <li>
+                                <div class="img"><img src="__PUBLIC__/{$img_path}/mobile/section_kj_4_3.png"/></div>
+                                <div class="span">实名认证</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mobile_footer">
+            <div class="footer_top">
+                <h4>深圳市润土信息技术有限公司 版权所有</h4>
+                <p class="text">PC端访问：www.runtuer.com</p>
+            </div>
+        </div>
+        <div class="mobile_back">
+            <div class="zx_top"><a href="http://q.url.cn/s/pEVfxXm"><img src="__PUBLIC__/{$img_path}/mobile/zx_top.png"></a></div>
+            <div class="tel_top"><a href="tel://13322936015"><img src="__PUBLIC__/{$img_path}/mobile/tel_top.png"></a></div>
+            <div class="back_top"><img src="__PUBLIC__/{$img_path}/mobile/back_top.png"></div>
+        </div>
+        <footer class="mobile_footer_fixed">
+            <!--<a class=" mobile_left_btn" href="http://q.url.cn/s/pEVfxXm"><span class=" btn-left"><img
+                src="__PUBLIC__/{$img_path}/mobile/footer_down.png">免费下载</span></a>-->
+            <a class="mobile_center_btn" href="tel://13322936015" target="_blank"><span class=" btn-right"><img
+                src="__PUBLIC__/{$img_path}/mobile/section_5_item_tel.png">咨询热线</span></a>
+        </footer>
+    </div>
+    {/block}
+    
+    {block name='js'}
+    <script src="__PUBLIC__/{$js_path}/all.js" type="text/javascript"></script>
+    <script type="text/javascript" src="__PUBLIC__/{$js_path}/suspension-two.js"></script>
+    <!--<script type="text/javascript" src="__PUBLIC__/{$js_path}/scrollReveal.min.js"></script>-->
+    <script type="text/javascript" src="__PUBLIC__/{$js_path}/TouchSlide.1.1.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/{$js_path}/et_mobile.js"></script>
+    <!--<script type="text/javascript" src="__PUBLIC__/{$js_path}/common.js"></script>-->
+    {/block}

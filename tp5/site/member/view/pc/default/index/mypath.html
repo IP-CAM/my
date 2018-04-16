@@ -1,0 +1,119 @@
+{extend name="common/base" /} {block name="title"}
+<title>ETshop-{:lang('Goods_favor')}</title>
+{/block} {block name="css"}
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/member.css" /> {/block} {block name="body"}
+<!--面包屑-->
+<div class="ly-path">
+	<ul class="clearfix">
+		<li class="home">
+			<a href="{:url('crossbbcg/index/index')}" title="{:lang('Home')}">{:lang('Home')}</a>
+			<span>&gt;&nbsp;</span>
+		</li>
+		<li>
+			<a href="{:url('member/index/index')}" title="{:lang('Member')}">{:lang('Member')}</a>
+			<span>&gt;&nbsp;</span>
+		</li>
+		<li>
+			<h1>{:lang('Goods_favor')}</h1>
+		</li>
+	</ul>
+</div>
+<div class="ly-main member-main clearfix">
+	{include file="index/left_menu"}
+	<div class="member-right">
+		<div class="member-content history-content">
+			<div class="title member-title member-max-title">
+				<div class="t">{:lang('mypath_record')}</div>
+				<div class="right">
+					<a href="javascript:void(0)" data-url="{:url('crossbbcg/goods/deleteAllMyPath')}" class="btn btn-cut empty" style="color:#fff;">
+                        {:lang('empty_mypath')}
+                    </a>
+				</div>
+			</div>
+            {notempty name="$arr_collect"}
+			<div class="body pb15 mh600 favor yahei">
+				<div class="goods-grid">
+					<ul class="clearfix">
+                        <!--最后一条加class last-->
+                        {php} $before_day = $now_day + 30;{/php}
+                        {foreach $arr_collect as $key => $vo}
+						<li class="goods-item  addcat-item">
+							<div class="goods-date top-time">
+                                {php}
+                                if($vo['day'] != $before_day){
+                                $before_day = $vo['day'];
+                                {/php}
+								<span>
+                                    <i class="month-lite">{$vo['month']}</i> .
+                                    <i class="day-lite">{$vo['day']}</i>
+                                    {if condition="$vo['today']"}
+                                    <i class="date-desc">{$vo['today']}</i>
+                                    {/if}
+                                    <!--<i class="count">5</i>{:lang('total_good')}-->
+                                </span>
+                                {php}  }  {/php}
+                                <s class="line"></s>
+                            </div>
+							<div class="item">
+								<div class="goods-pic ">
+									<a href="{:url('crossbbcg/goods/index','item_id='.$vo['goods']['id'])}" target="_blank" title="{$vo['goods']['name']}">
+                                        
+                                        {if condition="empty($vo['goods']['thumb'])"}
+                                        <img width="200" height="200" class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__PUBLIC__/{$img_path}/no-image.png">
+                                        {elseif condition="substr($vo['goods']['thumb'],0,4)=='http'"}
+                                        <img width="200" height="200" class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="{$vo['goods']['thumb']}" >
+                                        {else /}
+                                        <img width="200" height="200" class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="{:resizeImage($vo['goods']['thumb'],'thumb',true)}" >
+                                        {/if}
+									</a>
+								</div>
+                                {if condition="$vo['today']"}
+								<div class="time">
+                                    {$vo['today']}{:lang('browse')}
+								</div>
+                                {/if}
+								<div class="goods-info">
+									<div class="price-box">
+										<span class="price">{$vo['goods']['sale_price']}</span>
+										<span class="mkt-price">{$vo['goods']['market_price']}</span>
+									</div>
+									<div class="goods-name">
+										<a href="{:url('crossbbcg/goods/index','item_id='.$vo['goods']['id'])}" target="_blank">{$vo['goods']['name']}</a>
+									</div>
+								</div>
+								<div class="button-box">
+									<div class="item" style="display: none;">
+										<input type="hidden" name="item[quantity]" min="{$vo['goods']['minimum']}" max="{$vo['goods']['maximum']}" itemid="{$vo['goods']['id']}" value="{$vo['goods']['minimum']}" class="action-quantity-input">
+									</div>
+									<div class="item item-1">
+										<button class="btn-addcart" data-url="{:url('crossbbcg/carts/addcart')}">{:lang('add_cart')}</button>
+									</div>
+									<div class="item item-2">
+										<button class="btn-off" data-url="{:url('member/index/del_mypath',array('id'=>$vo['id']))}">{:lang('remove_record')}</button>
+									</div>
+								</div>
+							</div>
+						</li>
+                        {/foreach}
+                        
+					</ul>
+				</div>
+			</div>
+            {else /}
+            <div class="ly-no-data" style="background: #fff;border: 1px solid #e6e6e6;">
+                <div class="icon iconfont icon-zanwujilu"></div>
+                <div class="text">{:lang('empty_record')}</div>
+            </div>
+            {/notempty}
+		</div>
+	</div>
+</div>
+</div>
+{/block}
+
+<!--此板块为页面单独js加载-->
+{block name="footer_js"}
+<script type="text/javascript">
+	Private_Script = ['favor'];
+</script>
+{/block}

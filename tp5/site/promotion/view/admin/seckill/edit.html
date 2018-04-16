@@ -1,0 +1,268 @@
+    {extend name="admin@public/poupbase"/}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+        <div id="content" style="margin:0px 10px 5px 8px;">
+            <div class="bloc" style="margin:10px 0px 0px;">
+                <div class="content">
+                    <form id="myform" method="post" style="margin-top:5px;" class="">
+                        <fieldset>
+                            <legend>{$meta_title|default=''}</legend>
+                            <div class="row">
+                                <div style="float:left;">
+                                    <label for="name" class="w140">{:lang('Promotion_name')}: <span class="required">*</span></label>
+                                    <input id="name" type="text" value="{$data.name}" name="name" style="width:340px;" maxlength="50" />
+                                </div>
+                                
+                                <div style="float:left;">
+                                    <div class="slideBox">
+                                        {eq name="ACTION_NAME" value="edit"}
+                                            <input id="status" value="1" type="checkbox" name="status" {eq name="data['status']" value="1"}checked{/eq} />
+                                        {else /}
+                                            <input id="status" value="1" type="checkbox" name="status" checked />
+                                        {/eq}
+                                        <label for="status"></label>
+                                    </div>
+                                    <div style="float:left; margin-left:10px;">
+                                        <a class="tooltip-icon" title="{:lang('Status_tip')}"></a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="description" class="w140">{:lang('Promotion_desc')}: </label>
+                                <textarea name="description" style="width:440px; height:30px;" id="description">{$data.description}</textarea>
+                            </div>
+                            
+                            <div class="row">
+                                <div style="float:left;">
+                                    <label for="start" class="w140">{:lang('Begin_time')}: <span class="required">*</span></label>
+                                    <input id="start" type="text" name="start_time" class="w140c green datainput" value="{eq name="ACTION_NAME" value="edit"}{$data.start_time|time_format}{else /}{:time_format()}{/eq}" />
+                                </div>
+                                <div style="overflow:hidden;">
+                                    <label for="end" class="w80">{:lang('End_time')}: <span class="required">*</span></label>
+                                    {eq name="ACTION_NAME" value="edit"}
+                                        <input id="end" value='{eq name="data.end_time" value="9"}9{else /}{$data.end_time|time_format}{/eq}' type="text" name="end_time" class="w140l blue datainput"  />
+                                    {else /}
+                                        <input id="end" value="{:time_format()}" type="text" name="end_time" class="w140l blue datainput" />
+                                    {/eq}
+                                    
+                                    <input class="button white" value="{:lang('Forever')}" type="button" id="forever" onClick="$('#end').val(9);" />
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div style="float:left;">
+                                    <label for="award_type" class="w140">{:lang('Favorable_type')}: <span class="required">*</span></label>
+                                    <select id="award_type" name="award_type" style="width:150px;">
+                                        <option value="1" {eq name="data.award_type" value="1"}selected{/eq}>{:lang('Direct_discount')}</option>
+                                        <option value="2" {eq name="data.award_type" value="2"}selected{/eq}>{:lang('Discount')}</option>
+                                        <option value="3" {eq name="data.award_type" value="3"}selected{/eq}>{:lang('Buy_coupons')}</option>
+                                    </select>
+                                </div>
+                                
+                                <div style="float:left;">
+                                    <label for="money" class="w140">{:lang('Satisfied_amount')}: <span class="required">*</span></label>
+                                    <input id="money" type="text" value="{eq name="ACTION_NAME" value="edit"}{$data.money}{else /}100.00{/eq}" name="money" class="w80c red onlynumber"/>
+                                    <select id="money_unit" name="money_unit" style="width:80px;">
+                                        {notempty name="money_unit"}
+                                        {volist name="money_unit" id="unit"}
+                                            <option value="{$unit.code}" {eq name="data.money_unit" value="$unit.code"}selected{/eq}>{$unit.code}</option>
+                                        {/volist}
+                                        {/notempty}
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div style="float:left;">
+                                    <label for="award_value" class="w140">{:lang('Favorable_rules')}: <span class="required">*</span></label>
+                                    <span id="expression"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="actual_collection" class="w140">{:lang('Favorable_goods')}: <span class="required">*</span></label>
+                                <input class="button white choose" value="{:lang('Promotion_choose_btn')} " type="button" url="{:url('admin.adsense/choose',array_merge(input(''),array('type'=>'Promotion')))}" style="margin-right:10px;">
+                                <input class="button remove" value="{:lang('Remove_choose')}"  style="height:20px; line-height:20px; width:100px; text-align:center;" />
+                            </div>
+                            
+                            <div class="row">
+                                <label class="w140">&nbsp;&nbsp;</label>
+                                <input type="hidden" name="goods_id" value="{$data.goods_id}" />
+                                {eq name="ACTION_NAME" value="edit"}
+                                    <input type="hidden" name="old_goods_id" value="{$data.goods_id}" />
+                                {/eq}
+                                <style>
+                                    #goodslist{ padding:0 !important; margin:0 !important}
+                                    #goodslist li{ list-style:none;height: 24px;margin-top: 8px;}
+                                    #goodslist li span{ display:inline-block;}
+                                    #attrheader span{ display:inline-block;line-height: 20px;;}
+                                    .span_w250{ width:250px;}
+                                    .span_w200{ width:200px;}
+                                    .span_w90{ width:90px;}
+                                    .span_w80{ width:80px;}
+                                    .span_w70{ width:70px;}
+                                    .span_w60{ width:60px;}
+                                    .span_w50{ width:50px;}
+                                    .cen{ text-align:center}
+                                    .rig{ text-align:right;}
+                                    .lef{ text-align:left;}
+                                    .h18{ height:18px;}
+                                </style>
+                                <div style="height:195px; overflow-y:scroll;" id="attrheader">
+                                    <div style="list-style:none;">
+                                        <input type='checkbox' class="check-all" />
+                                        <span class="span_w250">{:lang('Title')}</span>
+                                        <span class="span_w70 cen">{:lang('Promotional_price')}</span>
+                                        <span class="span_w90 cen">{:lang('Selling_price')}</span>
+                                        <span class="span_w70 cen">{:lang('Stock')}</span>
+                                        <span class="span_w50 rig">{:lang('Actions')}</span>
+                                    </div>
+                                    
+                                    <ul id="goodslist">
+                                        {notempty name="goods_list"}
+                                            {volist name="goods_list" id="vo"}
+                                                <li id="tr{$vo.id}">
+                                                    <input class="ids" type="checkbox" value="{$vo.id}" checked />
+                                                    <span class="span_w250">{$vo.name}</span>
+                                                    <span class="span_w70 cen"><input class="small h18" name="timed_price[]" value="{$vo.id}"></span>
+                                                    <span class="span_w90 cen">{$vo.min_shop_price}~{$vo.max_shop_price}</span>
+                                                    <span class="span_w70 cen">{$vo.id}</span>
+                                                    <span class="span_w50 rig"><a href="javascript:void(0);" class="del"> {:lang('Remove')} </a></span>
+                                                </li>
+                                            {/volist}
+                                        
+                                        {/notempty}
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                                {eq name="ACTION_NAME" value="edit"}
+                                    <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('savedata')}" />
+                                    <input name="id" type="hidden"  value="{$data.id}" />
+                                    <input name="langid" type="hidden" value="{$data.langid}" />
+                               {else /}
+                                    <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}" />
+                                    <input name="langid" type="hidden"  value="{php}echo LANG{/php}" />
+                                {/eq}
+                                <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {/block}
+    
+    {block name="js"}
+        <script>
+            $(function() {
+                $("#start").datetimepicker({
+                    dateFormat: "{:config('kernel.timeformat')}",
+                    minDate: new Date(),
+                    onSelect: function(dateText, inst) {
+                        $.datepicker.regional["{:config('kernel.localdate')}"];
+                        $("#end").datepicker("option", "minDate", dateText);
+                        $("#end").focus();
+                    }
+                });
+                $("#end").datetimepicker({
+                    dateFormat: "{:config('kernel.timeformat')}",
+                    minDate: +1,
+                    onSelect: function(dateText, inst) {
+                        $.datepicker.regional["{:config('kernel.localdate')}"];
+                        $("#start").datepicker("option", "maxDate", dateText);
+                    }
+                });
+
+                var coupons_list = {notempty name="coupons_list"}{:json_encode($coupons_list)}{else /}null{/notempty};
+                var award_type = {$data['award_type'] ? $data['award_type'] : 1};
+                var award_value = {$data['award_value'] ? $data['award_value'] : 1};
+                $("#award_type").change(function(){
+                    var type = parseInt($(this).val());
+                    var expression = '';
+                    switch (type){
+                        case 1:
+                            expression = '{:lang("Discount_zk")} <input name="award_value" type="text" class="small onlynumber"  value="{eq name="data.award_type" value="1"}{$data.award_value}{/eq}" min="1"  max="99" maxlength="2" /> % {:lang("Discount_zk_tip")}';
+                            break;
+                        case 2:
+                            expression = '{:lang("Discount_amount")} <input name="award_value" type="text" class="small onlynumber"  value="{eq name="data.award_type" value="2"}{$data.award_value}{/eq}" maxlength="2" /> {:lang("Discount_amount_tip")}  ';
+                            break;
+                        case 3:
+                            _html='';
+                            $.each(coupons_list,function(index,item){
+                                _html+='<option value="'+item.id+'">'+item.name+'('+item.num+')</option>'
+                            });
+                            expression = '{:lang("Coupons")} <select name="award_value" style="margin-left:10px;margin-right:10px; width:200px;">'+ _html +'</option></select>';
+                            break;
+                    }
+                    $("#expression").html(expression);
+                })
+    
+                $("#award_type").attr("value",award_type).trigger("change");
+                $("[name='award_value']").val(award_value);
+    
+                $(".choose").click(function(){
+                    var title = $(this).val();
+                    var url = $(this).attr("url");
+                    var w = '500px';
+                    var h = '500px';
+    
+                    layer.open({
+                        type: 2,
+                        /*title:false,*/
+                        title: [
+                            title,
+                            "border:none; background:#333;font-size: 15px;font-weight:bold;color:#fff;"
+                        ],
+                        //skin: 'layui-layer-rim',
+                        //shadeClose: false,
+                        offset: 'rb',
+                        shade: [0.2, '#000'],
+                        area: [w, h],
+                        content: url,
+                        //可实现多个层叠，点击标题栏后显示到前面
+                        /*zIndex: layer.zIndex,
+                        success: function(layero){
+                            layer.setTop(layero);
+                        }*/
+                    });
+                })
+    
+                $(".remove").click(function(){
+                    var checkbox = $("#goodslist").find(':checkbox[type="checkbox"]');
+                    var checkbox_chk = $("#goodslist").find(':checkbox[type="checkbox"]:checked');
+                    if(checkbox.length < 1){
+                        layer.msg('{:lang("First_addnew")}');
+                        return false
+                    }
+                    if(checkbox_chk.length > 0){
+                        $(':checkbox[type="checkbox"]:checked').each(function() {
+                            $(this).closest("li").remove();
+                        });
+                    }else{
+                        layer.msg('{:lang("First_choose")}');
+                    }
+    
+                    var ids 	= new Array;
+                    $('.ids').each(function() {
+                        ids.push($(this).val());
+                    });
+                    $('input[name="goods_id"]').val(ids);
+                })
+    
+                $("#goodslist").on("click",".del",function(){
+                    var totalpage = $('input[name="goods_id"]');
+                    var vs = totalpage.val().split(',');
+                    var value = $(this).closest("li").find(".ids").val();
+                    var i=$.inArray(value,vs);
+                    if(i!=-1)vs.splice(i,1);
+                    vs[0]||vs.shift();
+                    totalpage.val(vs);
+                    $(this).closest("li").remove();
+                })
+            })
+        </script>
+    {/block}

@@ -1,0 +1,1087 @@
+    {extend name="admin@public/base" /}
+
+    {block name="style"}
+    <style>
+        .apppush, .dis{display: none;}
+    </style>
+    {/block}
+
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content">
+        <div class="breadcrumbs">
+            {:lang('Crossbbcg')} : &nbsp;&nbsp; {:lang('Crossbbset')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+        </div>
+
+        <div class="bloc">
+            <div class="title">
+                <div class="tabs" id="navs">
+                    {include file="admin@public/navs" /}
+                </div>
+
+                {include file="admin@public/lang" /}
+            </div>
+    
+            <form name="frmShopSettingsEdit" method="post" style="margin-top:5px;">
+                
+                <div class="alert alert-warning">
+                    <button class="close" type="button">&times;</button>
+                    <span class="alert-content">{:lang('Shopconfmark')}</span>
+                </div>
+                
+                <div class="bloc" id="blocStatistics">
+                    <!--<div class="title collapsible">-->
+                    <div class="title">
+                        <div class="tabs static pot" id="blockStatistics">
+                            <ul>
+                                <a id="tabStat1_link" href="#tabStat1">
+                                    <li>{:lang('Shopconf')}</li>
+                                </a>
+                                <a id="tabStat2_link" href="#tabStat2">
+                                    <li>{:lang('Tradeconf')}</li>
+                                </a>
+                                <a id="tabStat3_link" href="#tabStat3">
+                                    <li>{:lang('Distribconf')}</li>
+                                </a>
+                                <a id="tabStat4_link" href="#tabStat4">
+                                     <li>{:lang('Pointconf')}</li>
+                                </a>
+                                <a id="tabStat5_link" href="#tabStat5">
+                                    <li>{:lang('Baseconf')}</li>
+                                </a>
+                                <a id="tabStat6_link" href="#tabStat6">
+                                    <li>{:lang('Shopappconf')}</li>
+                                </a>
+                                <a id="tabStat7_link" href="#tabStat7">
+                                    <li>{:lang('Shopmobconf')}</li>
+                                </a>
+                                <a id="tabStat8_link" href="#tabStat8">
+                                    <li>{:lang('Licenseinfo')}</li>
+                                </a>
+                                <a id="tabStat9_link" href="#tabStat9">
+                                    <li>{:lang('protocol')}</li>
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="content" style="padding-bottom: 20px;">
+                        <div id="tabStat1" style="display:block;">
+                            <table class="table kright">
+                                <tbody>
+                                <tr>
+                                    <td>{:lang('Shopname')}: </td>
+                                    <td class="left">
+                                        <input name="shopname" type="text" placeholder="{:lang('Shopname_pla')}" style="width: 300px;" value="{$data.shopname}" />
+                                        <a class="tooltip-icon" title="{:lang('Shopname_tip')}"></a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>{:lang('Shopurl')}: </td>
+                                    <td class="left">
+                                        <input name="shopurl" type="text" placeholder="//www.shop.com" style="width: 300px;" value="{$data.shopurl|default=''}" />
+                                        <a class="tooltip-icon" title="//www.shop.com"></a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>{:lang('Shoplogo')}:  </td>
+                                    <td>
+                                        <input name="shoplogo" type="text" class="input" value="{$data.shoplogo}" id="shoplogo" style="width: 300px;" placeholder="image/logo.png" />
+                                        <input class="button white upload" value="{:lang('Selectimg')}" title="{:lang('Selectimg')}" type="button" title="{:lang('Upload img and file')}" url="{:url('img', ['input' => 'shoplogo'])}" data-upload="__UPLOADS__" />
+                                        <a href="javascript:void(0)" class="preview" data-src="shoplogo" data-width="200" data-height="200" data-area="200">{:lang('Preview')}</a>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>{:lang('Shoptitle')}:  </td>
+                                    <td>
+                                        <input name="shoptitle" type="text" placeholder="{:lang('Shoptitle_pla')}" style="width: 500px;" value="{$data.shoptitle|default=''}" maxlength="100"/>
+                                        <a class="tooltip-icon" title="{:lang('Shoptitle_tip')}"></a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>{:lang('Shopkeywords')}:  </td>
+                                    <td>
+                                        <input name="shopkeywords" type="text" placeholder="{:lang('Shopkeywords_pla')}" style="width: 500px;" value="{$data.shopkeywords|default=''}" maxlength="100"/>
+                                        <a class="tooltip-icon" title="{:lang('Shopkeywords_tip')}"></a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>{:lang('Shopdescription')}:  </td>
+                                    <td>
+                                        <input name="shopdescription" type="text" placeholder="{:lang('Shopdescription_pla')}" style="width: 500px;" maxlength="200" value="{$data.shopdescription|default=''}" />
+                                        <a class="tooltip-icon" title="{:lang('Shopdescription_tip')}"></a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>{:lang('Shopcontanter')}: </td>
+                                    <td class="left">
+                                        <input name="shopcontanter" type="text" placeholder="{:lang('Shopcontanter_pla')}" style="width: 300px;" value="{$data.shopcontanter|default=''}" />
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>{:lang('Shopemail')}: </td>
+                                    <td class="left">
+                                        <input name="shopemail" type="text" placeholder="{:lang('Shopemail_pla')}" style="width: 300px;" value="{$data.shopemail|default='@'}" />
+                                        <a class="tooltip-icon" title="{:lang('Shopemail_tip')}"></a>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>{:lang('kefu_tel')}:</td>
+                                    <td>
+                                        <input type="text" name="kefu_tel" placeholder="4000000000" value="{$data.kefu_tel}"/>
+                                        <a class="tooltip-icon" title="{:lang('Shoptel_tip')}"></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{:lang('kefu_qq')}:</td>
+                                    <td>
+                                        <input type="text" name="kefu_qq" value="{$data.kefu_qq}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{:lang('Shopaddr')}: </td>
+                                    <td class="left">
+                                        <input name="shopaddr" type="text" placeholder="{:lang('Shopaddr_pla')}" style="width: 300px;" value="{$data.shopaddr|default=''}" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{:lang('kefu_time')}:</td>
+                                    <td>
+                                        <select name="kefu_start_week">
+                                            <option value="Monday" {eq name="$data.kefu_start_week" value="Monday"}selected{/eq}>{:lang('Monday')}</option>
+                                            <option value="Tuesday" {eq name="$data.kefu_start_week" value="Tuesday"}selected{/eq}>{:lang('Tuesday')}</option>
+                                            <option value="Wednesday" {eq name="$data.kefu_start_week" value="Wednesday"}selected{/eq}>{:lang('Wednesday')}</option>
+                                            <option value="Thursday" {eq name="$data.kefu_start_week" value="Thursday"}selected{/eq}>{:lang('Thursday')}</option>
+                                            <option value="Friday" {eq name="$data.kefu_start_week" value="Friday"}selected{/eq}>{:lang('Friday')}</option>
+                                            <option value="Saturday" {eq name="$data.kefu_start_week" value="Saturday"}selected{/eq}>{:lang('Saturday')}</option>
+                                            <option value="Sunday" {eq name="$data.kefu_start_week" value="Sunday"}selected{/eq}>{:lang('Sunday')}</option>
+                                        </select>~
+                                        <select name="kefu_end_week">
+                                            <option value="Monday" {eq name="$data.kefu_end_week" value="Monday"}selected{/eq}>{:lang('Monday')}</option>
+                                            <option value="Tuesday" {eq name="$data.kefu_end_week" value="Tuesday"}selected{/eq}>{:lang('Tuesday')}</option>
+                                            <option value="Wednesday" {eq name="$data.kefu_end_week" value="Wednesday"}selected{/eq}>{:lang('Wednesday')}</option>
+                                            <option value="Thursday" {eq name="$data.kefu_end_week" value="Thursday"}selected{/eq}>{:lang('Thursday')}</option>
+                                            <option value="Friday" {eq name="$data.kefu_end_week" value="Friday"}selected{/eq}>{:lang('Friday')}</option>
+                                            <option value="Saturday" {eq name="$data.kefu_end_week" value="Saturday"}selected{/eq}>{:lang('Saturday')}</option>
+                                            <option value="Sunday" {eq name="$data.kefu_end_week" value="Sunday"}selected{/eq}>{:lang('Sunday')}</option>
+                                        </select>
+                                        <input type="text" name="kefu_start_time" id="start_time" value="{$data.kefu_start_time}" placeholder="09:00" class="input_img w50"/>~
+                                        <input type="text" name="kefu_end_time" id="end_time" value="{$data.kefu_end_time}" placeholder="18:00" class="input_img w50"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{:lang('app_down_qrcode')}:</td>
+                                    <td><input name="app_down_qrcode" type="text" class="input" value="{$data.app_down_qrcode}" id="app_down_qrcode" style="width: 180px;margin-left: 4px;" placeholder="image/logo.png" />
+                                        <input class="button white upload" value="{:lang('Selectimg')}" title="{:lang('Selectimg')}" type="button" title="{:lang('Upload img and file')}" url="{:url('img',array('input' => 'app_down_qrcode'))}" data-upload="__UPLOADS__" />
+                                        <a href="javascript:void(0)" class="preview" data-src="app_down_qrcode" data-width="200" data-height="200" data-area="200">{:lang('Preview')}</a></td>
+                                </tr>
+                                <tr>
+                                    <td>{:lang('weixin_attention_qrcode')}:</td>
+                                    <td>
+                                        <input name="weixin_attention_qrcode" type="text" class="input" value="{$data.weixin_attention_qrcode}" id="weixin_attention_qrcode" style="width: 180px;margin-left: 4px;" placeholder="image/logo.png" />
+                                        <input class="button white upload" value="{:lang('Selectimg')}" title="{:lang('Selectimg')}" type="button" title="{:lang('Upload img and file')}" url="{:url('img',array('input' => 'weixin_attention_qrcode'))}" data-upload="__UPLOADS__" />
+                                        <a href="javascript:void(0)" class="preview" data-src="weixin_attention_qrcode" data-width="200" data-height="200" data-area="200">{:lang('Preview')}</a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>{:lang('tax_img')}:</td>
+                                    <td>
+                                        <input name="tax_img" type="text" class="input" value="{$data.tax_img}" id="tax_img" style="width: 180px;margin-left: 4px;" placeholder="image/logo.png" />
+                                        
+                                        <input class="button white upload" value="{:lang('Selectimg')}" title="{:lang('Selectimg')}" type="button" url="{:url('img',array('input' => 'tax_img'))}" data-upload="__UPLOADS__" />
+                                        <a href="javascript:void(0)" class="preview" data-src="tax_img" data-width="200" data-height="200" data-area="200">{:lang('Preview')}</a>
+                                        
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td style="vertical-align:top; padding: 8px 15px;">{:lang('Shopstatistical')}:  </td>
+                                    <td style="vertical-align:top; padding: 8px 0;">
+                                        <textarea name="shopstatistical" rows="3" style="width: 450px;resize: none;">{$data.shopstatistical|default=''}</textarea>
+                                        <a class="tooltip-icon" title="{:lang('Shopstatistical_tip')}" style="vertical-align: top;"></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align:top; padding: 8px 15px;">{:lang('site_footer_info')}:  </td>
+                                    <td style="vertical-align:top; padding: 8px 0;">
+                                        <textarea name="site_footer_info" class="site_info" rows="3" style="width: 500px;resize: none;">{:html_entity_decode($data.site_footer_info)}</textarea>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+    
+                        <div id="tabStat2">
+                            <table class="table kright">
+                                <tbody>
+
+                                <!--<tr class="row bset">
+                                    <td>{:lang('Stockdowntime')}: </td>
+                                    <td>
+                                        <div class="row bset">
+                                            <input name="stockdowntime" type="radio" value="0" id="stockdowntime_0" {eq name="data.stockdowntime" value="0"}checked{/eq} {notpresent name="data.stockdowntime"}checked{/notpresent} />
+                                            <label for="stockdowntime_0" class="w150_r_0">{:lang('Stockdownbypay')}</label>
+                                            <input name="stockdowntime" type="radio" value="1" id="stockdowntime_1" {eq name="data.stockdowntime" value="1"}checked{/eq} />
+                                            <label for="stockdowntime_1" class="w150_r_0">{:lang('Stockdownbydelivery')}</label>
+                                        </div>
+                                    </td>
+                                </tr>-->
+                                <tr>
+                                    <td>{:lang('Certificationstatus')}: </td>
+                                    <td>
+                                        <div class="slideBox" >
+                                            <input id="realname" value="1" type="checkbox" name="realname" {eq name="data.realname" value="1"}checked{/eq} {notpresent name="data.realname"}checked{/notpresent} />
+                                            <label for="realname"></label>
+                                        </div> &nbsp;&nbsp;&nbsp;
+                                        <span class="slideBoxafter">
+                                                {:lang('Certificationstatus_tip')}
+                                        </span>
+                                    </td>
+                                </tr>
+
+                                <tr class="realname">
+                                    <td>{:lang('Certificationopt')}: </td>
+                                    <td>
+                                        <select id="realnameclass" name="realnameclass">
+                                            {foreach :get_extend_type('realname') as $vo}
+                                            <option value="{$vo.code}" data-tip="{:lang($vo.description)}" {eq name="data.realnameclass" value="$vo.code"}selected{/eq}>{:lang($vo.name)}</option>
+                                            {/foreach}
+                                        </select>
+                                        <span id="realdesc"></span>
+                                        <script>
+                                            $(function () {
+                                                $('#realdesc').text($('#realnameclass option:selected').attr('data-tip'));
+                                                $('#realnameclass').change(function () {
+                                                    $('#realdesc').text($('#realnameclass option:selected').attr('data-tip'));
+                                                })
+                                            })
+                                        </script>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>{:lang('Invoicestatus')}:  </td>
+                                    <td>
+                                        <div class="slideBox" >
+                                            <input id="invoicestatus" value="1" type="checkbox" name="invoicestatus" {eq name="data.invoicestatus" value="1"}checked{/eq} />
+                                            <label for="invoicestatus"></label>
+                                        </div> &nbsp; &nbsp;
+                                        <span class="slideBoxafter">
+                                                {:lang('Invoicestatus_tip')}
+                                        </span>
+    
+                                        <span class="slideBoxafter" id="invoice" style="display: none;">&nbsp;&nbsp;
+                                            {:lang('Invoice_tip')}
+                                            <input name="invoicescale" type="number" placeholder="8" style="width: 50px; text-align: center;" value="{$data.invoicescale|default='8' }" />
+                                            %
+                                        </span>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>{:lang('Tradeclose')}:  </td>
+                                    <td>
+                                        <input name="tradeclose" type="number" placeholder="72" style="width: 60px; text-align: center;" value="{$data.tradeclose|default=72}" min="2" max="720" />
+                                        {:lang('Unitehours')} &nbsp; &nbsp;
+                                        <a class="tooltip-icon" title="{:lang('Tradeclose_tip')}"></a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>{:lang('Tradefinish')}:  </td>
+                                    <td>
+                                        <input name="tradefinish" type="number" placeholder="15" style="width: 60px; text-align: center;" value="{$data.tradefinish|default=15}" min="7" max="180"/>
+                                        {:lang('Unitedays')} &nbsp; &nbsp;
+                                        <a class="tooltip-icon" title="{:lang('Tradefinish_tip')}"></a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>{:lang('Directtradefinish')}:  </td>
+                                    <td>
+                                        <input name="directtradefinish" type="number" placeholder="24" style="width: 60px; text-align: center;" value="{$data.directtradefinish|default=24}" min="15" max="180" />
+                                        {:lang('Unitedays')} &nbsp; &nbsp;
+                                        <a class="tooltip-icon" title="{:lang('Directtradefinish_tip')}"></a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>{:lang('Bondedtradefinish')}:  </td>
+                                    <td>
+                                        <input name="bondedtradefinish" type="number" placeholder="72" style="width: 60px; text-align: center;" value="{$data.bondedtradefinish|default=72}" min="15" max="180" />
+                                        {:lang('Unitedays')} &nbsp; &nbsp;
+                                        <a class="tooltip-icon" title="{:lang('Bondedtradefinish_tip')}"></a>
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div id="tabStat3">
+                            <table class="table kright">
+                                <tbody>
+                                <tr>
+                                    <td>{:lang('Disstatus')}: </td>
+                                    <td>
+                                        <div class="slideBox" >
+                                            <input id="disstatus" value="1" type="checkbox" name="disstatus" {eq name="data.disstatus" value="1"}checked{/eq} />
+                                            <label for="disstatus"></label>
+                                        </div> &nbsp; &nbsp;
+                                        <span class="slideBoxafter">
+                                            {:lang('Disstatus_tip')}
+                                        </span>
+                                    </td>
+                                </tr>
+
+                                <tr class="row bset dis">
+                                    <td>{:lang('Disrule')}: </td>
+                                    <td>
+                                        <div class="row bset">
+                                            <input name="dis" type="radio" value="0" id="dis_0" {eq name="data.dis" value="0"}checked{/eq} {notpresent name="data.dis"}checked{/notpresent} />
+                                            <label for="dis_0" class="w150_r_0">{:lang('Disrule_1')}</label>
+                                            <input name="dis" type="radio" value="1" id="dis_1" {eq name="data.dis" value="1"}checked{/eq} />
+                                            <label for="dis_1" class="w150_r_0">{:lang('Disrule_2')}</label>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr class="dis">
+                                    <td>{:lang('Rebatefinish')}:  </td>
+                                    <td>
+                                        <input name="rebatefinish" type="number" placeholder="7" style="width: 60px; text-align: center;" value="{$data.rebatefinish|default=7}" min="3" max="180" />
+                                        {:lang('Unitedays')} &nbsp;
+                                        <a class="tooltip-icon" title="{:lang('Rebatefinish_tip')}"></a>
+                                    </td>
+                                </tr>
+
+                                <tr class="dis">
+                                    <td>{:lang('Disname')}:  </td>
+                                    <td>
+                                        <input name="disname" type="text" placeholder="{:lang('Disname_pla')}" value="{$data.disname|default=''}" /> &nbsp;
+                                        <a class="tooltip-icon" title="{:lang('Disname_tip')}"></a>
+                                    </td>
+                                </tr>
+
+                                <tr class="row bset dis">
+                                    <td>{:lang('Dismodel')}: </td>
+                                    <td>
+                                        <div class="row bset">
+                                            <input name="dismodel" type="radio" value="0" id="dismodel_0" {eq name="data.dismodel" value="0"}checked {/eq} {notpresent name="data.dismodel"}checked{/notpresent} />
+                                            <label for="dismodel_0" class="w180_r_0">{:lang('Dismodel_1')}</label>
+                                            <input name="dismodel" type="radio" value="1" id="dismodel_1" {eq name="data.dismodel" value="1"}checked{/eq} />
+                                            <label for="dismodel_1" class="w180_r_0">{:lang('Dismodel_2')}</label>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr id="disscale" class="dis" {empty name="data.dismodel"}style="display: none ;"{/empty}>
+                                    <td>{:lang('Disscale')}:  </td>
+                                    <td>
+                                        <input name="disscale" type="number" placeholder="15" style="width: 50px; text-align: center;" value="{$data.disscale|default=15}" /> % &nbsp;
+                                        <a class="tooltip-icon" title="{:lang('Disscale_tip')}"></a>
+                                    </td>
+                                </tr>
+
+                                <tr class="dis">
+                                    <td>{:lang('Dislevel')}:  </td>
+                                    <td>
+                                        <input name="dislevel" type="number" placeholder="15" style="width: 50px; text-align: center;" value="{$data.dislevel|default=3}" min="2" max="99" /> {:lang('Disscale_pla')} &nbsp;&nbsp;
+                                        <a href="javascript:void(0);" id="levelcreate">
+                                            {:lang('Create')}
+                                        </a>
+                                        &nbsp;&nbsp;
+                                        <a class="tooltip-icon" title="{:lang('Dislevel_tip')}"></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+    
+                        <div id="tabStat4">
+                            <table class="table kright">
+                                <tbody>
+                                <tr>
+                                    <td>{:lang('Pointstatus')}: </td>
+                                    <td>
+                                        <div class="slideBox" >
+                                            <input id="pointstatus" value="1" type="checkbox" name="pointstatus"  {eq name="data.pointstatus" value="1"}checked{/eq} />
+                                            <label for="pointstatus"></label>
+                                        </div> &nbsp;
+                                        &nbsp;&nbsp;
+                                        <span class="slideBoxafter">
+                                            {:lang('Pointstatus_tip')}
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr class="Point">
+                                    <td>{:lang('Conversion_ratio')}: </td>
+                                    <td>
+                                        <input name="ratio" type="number" class="input" placeholder="1" value="{$data.ratio|default=1}" min='0' max="99" style="width: 60px; text-align: center;" />
+                                        {:lang('Conversion_ratio_tip')}
+                                        &nbsp;&nbsp;
+                                        <a class="tooltip-icon" title="{:lang('Conversion_ratio_tip_2')}"></a>
+                                    </td>
+                                </tr>
+                                <tr class="Point">
+                                    <td>{:lang('Expired_month')}: </td>
+                                    <td>
+                                        <input name="point_expired_month" type="number" class="input" placeholder="12" value="{$data.point_expired_month|default=12}" min="1" max="12" style="width: 60px; text-align: center;" />
+                                        {:lang('Expired_month_tip')}
+                                        &nbsp;&nbsp;
+                                        <a class="tooltip-icon" title="{:lang('Expired_month_tip_2')}"></a>
+                                    </td>
+                                </tr>
+
+                                <tr class="Point">
+                                    <td>{:lang('Msg_point_set')}: </td>
+                                    <td>
+                                        <a class="tooltip-icon" title="{:lang('Msg_point_set_tip')}"></a>&nbsp;&nbsp;&nbsp;
+                                        <input name="point_limit" type="number" class="input" placeholder="12" value="{$data.point_limit|default=100}" min="5" style="width: 60px; text-align: center;" />
+                                        
+                                        {:lang('Howlong_login')}
+                                        <input name="howlong_login" type="number" class="input" placeholder="12" value="{$data.howlong_login|default=90}" min="10" max="360" style="width: 60px; text-align: center;" />
+                                        {:lang('Howlong_login_2')}
+                                    </td>
+                                </tr>
+ 
+                                <tr class="Point">
+                                    <td>{:lang('Deductionstatus')}: </td>
+                                    <td>
+                                        <div class="slideBox" >
+                                            <input id="deductionstatus" value="1" type="checkbox" name="deductionstatus"  {eq name="data.deductionstatus" value="1"}checked{/eq} />
+                                            <label for="deductionstatus"></label>
+                                        </div> &nbsp;&nbsp;&nbsp;
+                                        <span class="slideBoxafter">
+                                            {:lang('Deductionstatus_tip')}
+                                        </span>
+                                    </td>
+                                </tr>
+                                
+                                </tbody>
+                            </table>
+                        </div>
+    
+                        <div id="tabStat5">
+                            <table class="table kright">
+                                <tbody>
+                                <tr class="row bset">
+                                    <td>{:lang('Goodsorts')}: </td>
+                                    <td>
+                                        <div class="row bset">
+                                            <input name="sorts" type="radio" value="sort" id="sorts_0" {eq name="data.sorts" value="sort"}checked{/eq} {notpresent name="data.sorts"}checked{/notpresent} />
+                                            <label for="sorts_0" class="w105_r_0">{:lang('Default')}</label>
+                                            <input name="sorts" type="radio" value="sale" id="sorts_1" {eq name="data.sorts" value="sale"}checked{/eq} />
+                                            <label for="sorts_1" class="w105_r_0">{:lang('Sale')}</label>
+                                            <input name="sorts" type="radio" value="cpoint" id="cpoint_1" {eq name="data.sorts" value="cpoint"}checked{/eq} />
+                                            <label for="cpoint_1" class="w105_r_0">{:lang('Cpoint')}</label>
+                                            <input name="sorts" type="radio" value="price" id="price_1" {eq name="data.sorts" value="price"}checked{/eq} />
+                                            <label for="price_1" class="w105_r_0">{:lang('Cprice')}</label>
+                                            <input name="sorts" type="radio" value="new" id="new_1" {eq name="data.sorts" value="new"}checked{/eq} />
+                                            <label for="new_1" class="w105_r_0">{:lang('Lastnew')}</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>{:lang('Stockwarming')}: </td>
+                                    <td>
+                                        <input name="stockwarming" type="number" class="input" placeholder="90" value="{$data.stockwarming|default=10}" min="1" max="300" style="width: 60px; text-align: center;" />
+                                        {:lang('Stockwarming_tip')}
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>{:lang('Deposit_pwd_err_num')}: </td>
+                                    <td>
+                                        <input name="deposit_pwd_err_num" type="number" class="input" placeholder="3" value="{$data.deposit_pwd_err_num|default=5}" min="3" max="99" style="width: 60px; text-align: center;" />
+                                        {:lang('Deposit_pwd_err_num_2')}
+                                        &nbsp;
+                                        <input name="deposit_pwd_err_time" type="number" class="input" placeholder="3" value="{$data.deposit_pwd_err_time|default=3}" min="3" max="99" style="width: 60px; text-align: center;" />
+                                        {:lang('Unitehours')}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{:lang('Shopid_log_del_by')}: </td>
+                                    <td>
+                                        <input name="shopid_log_del_by" type="number" class="input" placeholder="30" value="{$data.shopid_log_del_by|default=30}" min="3" max="180" style="width: 60px; text-align: center;" />
+                                        {:lang('Shopid_log_del_by_tip')}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{:lang('Site_log_del_by')}: </td>
+                                    <td>
+                                        <input name="site_log_del_by" type="number" class="input" placeholder="30" value="{$data.site_log_del_by|default=30}" min="3" max="180" style="width: 60px; text-align: center;" />
+                                        {:lang('Site_log_del_by_tip')}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{:lang('Api_log_del_by')}: </td>
+                                    <td>
+                                        <input name="api_log_del_by" type="number" class="input" placeholder="90" value="{$data.api_log_del_by|default=90}" min="60" max="300" style="width: 60px; text-align: center;" />
+                                        {:lang('Api_log_del_by_tip')}
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>{:lang('Default_List_Rows')}</td>
+                                    <td>
+                                        <input name="list_rows" type="number" class="input" value="{$data.list_rows|default=20}" style="width:60px;text-align: center;"/>
+                                        <span class="slideBoxafter">
+                                            {:lang('Default_List_Rows_Description')}                                        </span>
+                                    </td>
+                                </tr>
+
+                                <tr class="row bset">
+                                    <td>{:lang('Default_Good_Status')}</td>
+                                    <td>
+                                        <div class="row bset">
+                                            <input name="good_status_id" type="radio" value="enabled" id="good_status_id_1" {eq name="data.good_status_id" value="enabled"}checked{/eq} {notpresent name="data.good_status_id"}checked{/notpresent} />
+                                            <label for="good_status_id_1" class="w105_r_0">{:lang('Good_Up')}</label>
+            
+                                            <input name="good_status_id" type="radio" value="disabled" id="good_status_id_0" {eq name="data.good_status_id" value="disabled"}checked{/eq} />
+                                            <label for="good_status_id_0" class="w105_r_0">{:lang('Good_Down')}</label>
+            
+                                            <input name="good_status_id" type="radio" value="pending_review" id="good_status_id_2" {eq name="data.good_status_id" value="pending_review"}checked{/eq} />
+                                            <label for="good_status_id_2" class="w105_r_0">{:lang('Good_Wait')}</label>
+            
+            
+                                            <input name="good_status_id" type="radio" value="pending_modify" id="good_status_id_3" {eq name="data.good_status_id" value="pending_modify"}checked{/eq} />
+                                            <label for="good_status_id_3" class="w105_r_0">{:lang('Good_Modify')}</label>
+        
+                                        </div>
+                                    </td>
+                                </tr>
+                                
+                                <!--服务承诺-->
+                                <tr>
+                                    <td>{:lang('goods_service')}</td>
+                                    <td>
+                                        <input type="text" value="{$data.goods_service|default=''}" name="goods_service" style="width:410px"/>
+                                        <a class="tooltip-icon" title="{:lang('goods_service_tips')}"></a>
+                                    </td>
+                                </tr>
+                                
+
+                                <!--税收类别-->
+                                <tr>
+                                    <td>
+                                        {:lang('Default_Tax_Class')}
+                                    </td>
+                                    <td>
+                                        <select name="default_tax_class_id" id="tax_class_id" >
+                                            <option value="0">{:lang('Goods_Null')}</option>
+                                            {present name="data.tax_class"}
+                                            {foreach $data.tax_class as $key=> $value}
+                                            <option value="{$key}" {eq name="data.default_tax_class_id" value="$key"}selected="selected"{/eq}>{$value}</option>
+                                            {/foreach}
+                                            {/present}
+                                        </select>
+        
+                                        <span class="slideBoxafter">
+                                            {:lang('Tax_Rate')}
+                                            <span id="tax_rate">
+                                            
+                                            </span>
+                                        </span>
+                                        <a class="tooltip-icon" title="{:lang('Tax_Not_Repeat')}"></a>
+        
+                                        <a href="javascript:void(0)" id="delete_tax_class" style="margin:5px 20px 5px 0;display:none;">
+                                            {:lang('Tax_Class_Delete')}
+                                        </a>
+                                        <a href="javascript:void(0)" id="add_tax_class" style="margin:5px 0;">
+                                            {:lang('Tax_Class_Add')}
+                                        </a>
+        
+                                        <!--保存税收类别-->
+                                        <span id="tax_class">
+                                            
+                                        </span>
+    
+    
+                                    </td>
+                                </tr>
+                                <!--默认运费模板-->
+                                <tr>
+                                    <td>
+                                        {:lang('Default_shipping_template')}
+                                    </td>
+                                    <td>
+                                        <span>{:lang('Default_freight')}(￥)</span>
+                                        <input type="number" min="0.00" class="w80" name="default_shipping_freight" value="{$data.default_shipping_freight|default=0.00}" />
+                                        <span>{:lang('enough')}(￥)</span>
+                                        <input type="number" min="0.00" class="w80" name="default_free_money" id="default_free_money" value="{$data.default_free_money|default=0.00}"/>
+                                        <span>{:lang('free_freight')}</span>
+                                        <a class="tooltip-icon" title="{:lang('freight_shipping_tips')}"></a>
+                                    </td>
+                                </tr>
+                                <tr class="realname">
+                                    <td>{:lang('Cart_type')}: </td>
+                                    <td>
+                                        <select id="split" name="splitclass">
+                                            {foreach :get_extend_type('split') as $vo}
+                                            <option value="{$vo.code}" data-tip="{:lang($vo.description)}" {eq name="data.realnameclass" value="$vo.code"}selected{/eq}>{:lang($vo.name)}</option>
+                                            {/foreach}
+                                        </select>
+                                        <span id="splitdesc"></span>
+                                        <script>
+                                            $(function () {
+                                                $('#splitdesc').text($('#split option:selected').attr('data-tip'));
+                                                $('#split').change(function () {
+                                                    $('#splitdesc').text($('#split option:selected').attr('data-tip'));
+                                                })
+                                            })
+                                        </script>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+    
+                        <div id="tabStat6">
+                            <table class="table kright">
+                                <tbody>
+
+                                <tr>
+                                    <td>{:lang('Androidset')}: </td>
+                                    <td>
+                                        <div class="slideBox" >
+                                            <input id="androidstatus" value="1" type="checkbox" name="androidstatus"  {eq name="data.androidstatus" value="1"}checked{/eq} />
+                                            <label for="androidstatus"></label>
+                                        </div> &nbsp;
+                                        &nbsp;&nbsp;
+                                        <input name="androidversion" id="androidversion" type="text" class="input" value="{$data.androidversion|default=''}" style="width: 60px; display: none;" placeholder="1.0.0.1" />
+                                        &nbsp;&nbsp;
+                                        <input name="androidurl" id="androidurl" type="text" class="input" value="{$data.androidurl|default=''}" style="width: 260px; display: none;" placeholder="{:lang('Androidurl')}" />
+                                        
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>{:lang('IOSset')}: </td>
+                                    <td>
+                                        <div class="slideBox" >
+                                            <input id="iosstatus" value="1" type="checkbox" name="iosstatus"  {eq name="data.iosstatus" value="1"}checked{/eq} />
+                                            <label for="iosstatus"></label>
+                                        </div> &nbsp;
+                                        &nbsp;&nbsp;
+                                        <input name="iosversion" id="iosversion" type="text" class="input" value="{$data.iosversion|default=''}" style="width: 60px; display: none;" placeholder="1.0.0.1" />
+                                        &nbsp;&nbsp;
+                                        <input name="iosurl" id="iosurl" type="text" class="input" value="{$data.iosurl|default=''}" style="width: 260px; display: none;" placeholder="{:lang('Iosurl')}" />
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>{:lang('App push')}: </td>
+                                    <td>
+                                        <div class="slideBox" >
+                                            <input id="apppush" value="1" type="checkbox" name="apppush"  {eq name="data.apppush" value="1"}checked{/eq} />
+                                            <label for="apppush"></label>
+                                        </div> &nbsp;
+                                        &nbsp;&nbsp;
+                                        <span class="slideBoxafter">
+                                            {:lang('App push tip')}
+                                        </span>
+                                    </td>
+                                </tr>
+
+                                <tr class="apppush">
+                                    <td>{:lang('Pushopt')}: </td>
+                                    <td>
+                                        <select id="pushapp" name="pushapp">
+                                            {foreach :get_extend_type('pushapp') as $vo}
+                                            <option value="{$vo.code}" data-tip="{:lang($vo.description)}" {eq name="data.sms" value="$vo.code"}selected{/eq}>{:lang($vo.name)}</option>
+                                            {/foreach}
+                                        </select>
+                                        <span id="pusdesc"></span>
+                                        <script>
+                                            $(function () {
+                                                $('#pusdesc').text($('#pushapp option:selected').attr('data-tip'));
+                                                $('#pushapp').change(function () {
+                                                    $('#pusdesc').text($('#pushapp option:selected').attr('data-tip'));
+                                                })
+                                            })
+                                        </script>
+                                    </td>
+                                </tr>
+                                
+                                </tbody>
+                            </table>
+                        </div>
+    
+                        <div id="tabStat7">
+                            <table class="table kright">
+                                <tbody>
+                                
+                                <tr>
+                                    <td>{:lang('Wechat user auto reg')}: </td>
+                                    <td>
+                                        <div class="slideBox" >
+                                            <input id="wechatautoreg" value="1" type="checkbox" name="wechatautoreg"  {eq name="data.wechatautoreg" value="1"}checked{/eq} />
+                                            <label for="wechatautoreg"></label>
+                                        </div> &nbsp;
+                                        &nbsp;&nbsp;
+                                        <span class="slideBoxafter">
+                                            {:lang('Wechat user auto reg tip')}
+                                        </span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>{:lang('Wechat js-sdk')}: </td>
+                                    <td>
+                                        <div class="slideBox" >
+                                            <input id="wechatjssdk" value="1" type="checkbox" name="wechatjssdk"  {eq name="data.wechatjssdk" value="1"}checked{/eq} />
+                                            <label for="wechatjssdk"></label>
+                                        </div> &nbsp;
+                                        &nbsp;&nbsp;
+                                        <span class="slideBoxafter">
+                                            {:lang('Wechat js-sdk tip')}
+                                        </span>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>{:lang('Token')}: </td>
+                                    <td>
+                                        <input name="token" type="text" class="input" value="{$data.token|default=''}" style="width: 260px;" placeholder="Token" />
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>{:lang('AppID')}: </td>
+                                    <td>
+                                        <input name="appid" type="text" class="input" value="{$data.appid|default=''}" style="width: 260px;" placeholder="AppID" />
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>{:lang('AppSecret')}: </td>
+                                    <td>
+                                        <input name="appsecret" type="text" class="input" value="{$data.appsecret|default=''}" style="width: 260px;" placeholder="AppSecret" />
+                                    </td>
+                                </tr>
+                                
+                                </tbody>
+                            </table>
+                        </div>
+    
+                        <div id="tabStat8">
+                            <table class="table kright">
+                                <tbody>
+                                <tr>
+                                    <td>{:lang('Licensecode')}: </td>
+                                    <td>
+                                        <input name="licensecode" type="text" class="input" value="{$licensecode|default=''}" style="width: 260px;" readonly />
+                                        {:lang('Licensecode_tip')}
+                                        
+                                        {empty name="data.licensecode"}
+                                            <a href="//www.runtuer.com/buy" target="_blank">{:lang('Clickbuy')}</a>
+                                        {else /}
+                                            <a href="//www.runtuer.com/search/{$data.licensecode}" target="_blank">{:lang('Clicksearch')}</a>
+                                        {/empty}
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>{:lang('Licensecompany')}: </td>
+                                    <td>
+                                        <input id="licensename" type="text" class="input" value="{$licensename|default=''}" style="width: 260px;" readonly />
+                                    </td>
+                                </tr>
+                                
+                                </tbody>
+                            </table>
+                        </div>
+    
+                        <div id="tabStat9">
+                            <table class="table kright">
+                                <tbody>
+                                <tr>
+                                    <td>{:lang('show_top_protocol')}</td>
+                                    <td>
+                                        <div class="slideBox">
+                                            <input id="top_protocol_status" value="1" type="checkbox" name="top_protocol_status" {eq name="data.top_protocol_status" value="1"}checked{/eq}>
+                                            <label for="top_protocol_status"></label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>{:lang('top_protocol_info')}</td>
+                                    <td>
+                                     
+                                    <select name="top_protocol_id">
+                                        <option value="0">{:lang('choose_top_protocol')}</option>
+                                        {foreach $arr_info as $key => $arr}
+                                        <option value="{$arr['id']}" {eq name="$data['top_protocol_id']" value="$arr['id']"}selected="selected"{/eq}>{$arr['title']}</option>
+                                        {/foreach}
+                                        
+                                    </select>
+                                        
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>{:lang('protocol_status')}</td>
+                                    <td>
+                                        <div class="slideBox">
+                                            <input id="protocol_status" value="1" type="checkbox" name="protocol_status" {eq name="data.protocol_status" value="1"}checked{/eq}>
+                                            <label for="protocol_status"></label>
+                                        </div>
+                                        &nbsp;&nbsp;
+                                        <span class="slideBoxafter">
+                                                {:lang('protocol_tips')}
+                                        </span>
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        {:lang('protocol_title')}
+                                    </td>
+                                    <td>
+                                        <input type="text" name="protocol_title" value="{$data.protocol_title|default=''}" />
+                                    </td>
+                                </tr>
+                                
+                                
+                                <tr>
+                                    <td style="vertical-align:top; padding: 8px 15px;">{:lang('protocol_info')}:  </td>
+                                    <td style="vertical-align:top; padding: 8px 0;">
+                                        <textarea name="checkout_protocol" rows="3" class="site_info" style="width: 500px">{notempty name="$data.checkout_protocol"}{:html_entity_decode($data.checkout_protocol)}{/notempty}</textarea>
+                                    </td>
+                                </tr>
+            
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                    </div>
+                        
+                    <div class="buttons-wrapper" style="margin:0 0 30px; padding:0 0 0 18%;">
+                        <input name="submit" value="{:lang('Saveshopconf')}" type="submit" url="{:url('save', array('act' => ACTION_NAME))}" />
+                    </div>
+                    
+                </div>
+            </form>
+            
+        </div>
+    </div>
+    {/block}
+
+    {block name="js"}
+    <script charset="utf-8" src="__STATIC__/kindeditor/kindeditor-all-min.js"></script>
+    <script>
+        $(function(){
+            KindEditor.ready(function(K) {
+                editor = K.create('.site_info', {
+                    resizeType : 1,
+                    allowPreviewEmoticons : false,
+                    allowImageUpload : false,
+                    minWidth : 450,
+                    minHeight : 150,
+                    langType : "{:jsup(config('default_lang'))}",
+                    items : [
+                        'source', '|','undo', 'redo', '|','bold', 'italic', 'underline',
+                        'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                        'insertunorderedlist', '|', 'link', 'unlink'],
+                    afterBlur: function () { this.sync(); }
+                });
+            });
+            $('#start_time').timepicker();
+            $('#end_time').timepicker();
+            $(".bset").buttonset();
+            $('input[name=dismodel]').click(function () {
+                if($(this).val() == 1) {
+                    $("#disscale").show();
+                    $('input[name=disscale]').attr('disabled', false);
+                }else{
+                    $("#disscale").hide();
+                    $('input[name=disscale]').attr('disabled', true);
+                }
+            });
+
+            //实名认证开关
+            {eq name="data.realname" value="0"}$('.realname').hide();{/eq}
+            $('input[name=realname]').click(function(){
+                var ischecked = $(this).is(":checked");
+                if(ischecked){
+                    $('.realname').show().find('input').attr('disabled', false);
+                }else{
+                    $('.realname').hide().find('input').attr('disabled', true);
+                }
+            })
+            
+            //OMS接口
+            {notempty name="data.omsstatus"}$('#omsbox').show();{/notempty}
+            $('#omsstatus').click(function(){
+                var ischecked = $(this).is(":checked");
+                if(ischecked){
+                    $('#omsbox').show();
+                    $('input[name=omsclass]').attr('disabled', false);
+                }else{
+                    $('#omsbox').hide();
+                    $('input[name=omsclass]').attr('disabled', true);
+                }
+            })
+
+            //发票
+            {notempty name="data.invoicestatus"}$('#invoice').show();{/notempty}
+            $('#invoicestatus').click(function(){
+                var ischecked = $(this).is(":checked");
+                if(ischecked){
+                    $('#invoice').show();
+                    $('input[name=invoicescale]').attr('disabled', false);
+                }else{
+                    $('#invoice').hide();
+                    $('input[name=invoicescale]').attr('disabled', true);
+                }
+            })
+
+            //安卓设置
+            {notempty name="data.androidstatus"}$('#androidversion, #androidurl').show();{/notempty}
+            $('#androidstatus').click(function(){
+                var ischecked = $(this).is(":checked");
+                if(ischecked){
+                    $('#androidversion, #androidurl').show();
+                    $('input[name=androidversion], input[name=androidurl]').attr('disabled', false);
+                }else{
+                    $('#androidversion, #androidurl').hide();
+                    $('input[name=androidversion], input[name=androidurl]').attr('disabled', true);
+                }
+            })
+
+            //IOS设置
+            {notempty name="data.iosstatus"}$('#iosversion, #iosurl').show();{/notempty}
+            $('#iosstatus').click(function(){
+                var ischecked = $(this).is(":checked");
+                if(ischecked){
+                    $('#iosversion, #iosurl').show();
+                    $('input[name=iosversion], input[name=iosurl]').attr('disabled', false);
+                }else{
+                    $('#iosversion, #iosurl').hide();
+                    $('input[name=iosversion], input[name=iosurl]').attr('disabled', true);
+                }
+            })
+
+            //APP推送配置
+            {empty name="data.apppush"}$('.apppush').hide();{/empty}
+            $('#apppush').click(function(){
+                var ischecked = $(this).is(":checked");
+                if(ischecked){
+                    $('.apppush').show();
+                    $('.apppush').find('input').attr('disabled', false);
+                }else{
+                    $('.apppush').hide();
+                    $('.apppush').find('input').attr('disabled', true);
+                }
+            })
+
+            //分销功能设置
+            {eq name="data.disstatus" value="1"}$('.dis').show();{/eq}
+            $('input[name=disstatus]').click(function(){
+                var ischecked = $(this).is(":checked");
+                if(ischecked){
+                    $('.dis').show().find('input').attr('disabled', false);
+                }else{
+                    $('.dis').hide().find('input').attr('disabled', true);
+                }
+            })
+
+            //分销功能设置
+            {eq name="data.pointstatus" value="1"}$('.Point').show();{/eq}
+            $('input[name=pointstatus]').click(function(){
+                var ischecked = $(this).is(":checked");
+                if(ischecked){
+                    $('.Point').show().find('input').attr('disabled', false);
+                }else{
+                    $('.Point').hide().find('input').attr('disabled', true);
+                }
+            })
+            
+            // 税率
+            $('#tax_rate').text($('#tax_class_id').val());
+            $('#tax_class_id').on('change',function(){
+                $('#tax_rate').text($(this).val());
+            });
+            
+            // 税收类别，新增，保存，删掉
+            var taxes_html = '';
+            $("#tax_class_id option").each(function () {
+                if($(this).val() != 0) {
+                    taxes_html += '<input type="text" name="tax_class['+$(this).val()+']" value="'+$(this).text()+'" hidden/>';
+                }
+            });
+            $('#tax_class').html(taxes_html);
+            
+            $("#delete_tax_class").on('click',function(){
+                layer.confirm('{:lang(\'Confirm_Delete_Tax_Class\')}',
+                    {
+                        icon: 3,
+                        title:[
+                            "{:lang('Weight_Class_Delete')}",
+                            "border:none; background:rgb(202, 134, 64);font-size: 15px;font-weight:bold;color:#fff;"],
+                        btnAlign: 'c',
+                        btn: ['Ok','Cancel']
+                    }, function(index){
+                        $('#tax_class').empty();
+                        $('#tax_class_id').empty();
+                        $('#tax_class_id').append('<option value="0">'+'{:lang(\'Goods_Null\')}'+'</option>');
+                        $('#tax_rate').text();
+                        layer.close(index);
+                    }, function(index){
+                        layer.close(index);
+                    });
+                
+            });
+            
+            var add_click = 0;
+            $("#add_tax_class").on('click',function(){
+                $("#delete_tax_class").show();
+                if(add_click === 0) {
+                    var _html = '<div id="add_tax_class_div" style="margin:5px 0;">';
+                    _html += '{:lang(\'Tax_Rate\')}' + ' <input type="text" name="tax_class_key" style="width:60px;"/>';
+                    _html += '{:lang(\'Tax_Name\')}' + ' <input type="text" name="tax_class_value"/>';
+                    _html += '<input class="button white upload" value="'+'{:lang(\'Goods_Add\')}'+'" type="button" id="save_tax_class"> &nbsp;&nbsp; <input class="button white" value="'+'{:lang(\'Goods_Close\')}'+'" type="button" id="close_tax_class">';
+                    _html += '</div>';
+                    $(this).after(_html);
+                }
+                add_click ++;
+            });
+            
+            $(document).on( "click", "#save_tax_class", function() {
+                var key = Number($.trim($("input[name='tax_class_key']").val()));
+                var value = $.trim($("input[name='tax_class_value']").val());
+                if(key === '' || value === ''){
+                    layer.msg('{:lang(\'Tax_Name_Rate_Null\')}',{icon:2, time: 2000 ,shade: 0.3});
+                }else if(key>100||key<0){
+                    layer.msg('{:lang(\'Tax_Rate_Error\')}',{icon:2, time: 2000 ,shade: 0.3});
+                }else {
+                    $('#tax_class_id').append('<option value="' + key + '">' + value + '</option>');
+                    $('#tax_class').append('<input type="text" name="tax_class['+key+']" value="'+value+'" hidden/>');
+                    
+                    layer.msg('{:lang(\'Save_Tax_Success\')}',{icon:1, time: 1000 ,shade: 0.3});
+                    $("#add_tax_class_div").remove();$("#delete_tax_class").hide();
+                    add_click = 0;
+                    $("#tax_class_id").val(key);
+                    $('#tax_rate').text(key);
+                }
+            });
+            
+            $(document).on( "click", "#close_tax_class", function() {
+                $('#add_tax_class_div').remove();$("#delete_tax_class").hide();
+                add_click = 0;
+            });
+        });
+    </script>
+    {/block}

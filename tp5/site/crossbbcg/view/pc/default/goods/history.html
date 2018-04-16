@@ -1,0 +1,56 @@
+{notempty name="collect"}
+<dl class="goods-ly-list" >
+
+	<dt class="ly-title">
+		<h3 class="left">{:lang('goods_my_path')}</h3>
+		<a href="javascript:void(0);" class="right empty" data-url="{:url('crossbbcg/goods/deleteAllMyPath')}">{:lang('clear_record')}</a>
+	</dt>
+
+	<dd class="left-goods">
+		<ul class="goods-list clearfix">
+            {volist name="collect" id="vo"}
+			<li class="goods-item clearfix">
+
+				<div class="item">
+					<div class="goods-pic">
+						<a target="_blank" href="{:url('crossbbcg/goods/index','item_id='.$vo['goods']['id'])}">
+                            {if condition="empty($vo['goods']['thumb'])"}
+                            <img width="80" height="80" class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__PUBLIC__/{$img_path}/no-image.png">
+                            {elseif condition="substr($vo['goods']['thumb'],0,4)=='http'"}
+                            <img width="80" height="80" class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="{$vo['goods']['thumb']}" alt="{$vo['goods']['name']}"/>
+                            {else /}
+                            <img src="__PUBLIC__/{$img_path}/tm.gif" width="80" height="80" class="lazy" data-original="{:resizeImage($vo['goods']['thumb'],'thumb',true)}" alt="{$vo['goods']['name']}"/>
+                            {/if}
+                        
+                        </a>
+					</div>
+					<div class="goods-info">
+						<h6 class="goods-name">
+					  <a href="{:url('crossbbcg/goods/index','item_id='.$vo['goods']['id'])}" target="_blank" title="{$vo['goods']['name']}">{$vo['goods']['name']}</a>
+					</h6>
+
+						<ul class="clearfix">
+
+							<li class="price">
+
+								<i>{$vo['goods']['sale_price']}</i>
+							</li>
+
+							<li class="mk-price">
+
+								<i>{$vo['goods']['market_price']}</i>
+							</li>
+
+						</ul>
+
+					</div>
+
+				</div>
+			</li>
+            {/volist}
+			
+		</ul>
+	</dd>
+
+</dl>
+{/notempty}

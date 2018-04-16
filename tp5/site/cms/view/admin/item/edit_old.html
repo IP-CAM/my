@@ -1,0 +1,185 @@
+{extend name="admin@public/poupbase" /}
+
+<!-- CONTENT -->
+
+{block name="body"}
+<div id="content" style="margin:0px 10px 5px 8px;">
+    <div class="bloc" style="margin:10px 0px 0px;">
+        <div class="content">
+            <form id="myform" method="post" style="margin-top:5px;" class="">
+                <fieldset>
+                    <legend>{$meta_title|default=''}</legend>
+                    <div class="thumb_box" style="right:40px;">
+                        <div class="thumb" style="width:90px; height:75px;">
+                            <div class="upimg_tip">{:lang('Thumb')}</div>
+                            <div class="upimg_cancel" title="{:lang('Cancel')}">x</div>
+                            <img
+                                src="{notempty name='data.icon'>{$data.icon}{else /}__PUBLIC__/admin/images/upload-pic.gif{/notempty}"
+                                id="preview" class="upload" width="83" height="66"
+                                no-image="__PUBLIC__/admin/images/upload-pic.gif"
+                                title="{:lang('Upload img and file')}" url="{:url('img',array('m' => CONTROLLER_NAME,'input' => 'icon','thumb' => 'preview'))}" data-upload="__UPLOADS__"/>
+                            <input type="hidden" name="icon" id="icon" value="{$data.icon}"/>
+                        </div>
+                    </div>
+                    
+                    <div style="float:left; width:380px; padding-right:15px; border-right:1px dashed #000;">
+                        <div class="row">
+                            <label for="pid" class="w100">{:lang('Uplevel')}: </label>
+                            <select name="pid" id="pid" class="sel_w170">
+                                <option value="0" {eq name="data.pid" value="0" }selected{
+                                /eq}>{:lang('Asfirstlevel')}</option>
+                            
+                            </select>
+                        </div>
+                        
+                        <div class="row">
+                            <label for="model_id" class="w100">{:lang('Belong_model')}: </label>
+                            <select name="model_id" id="model_id" class="sel_w170">
+                                <option value="" {eq name="data.model_id" value="" }selected{
+                                /eq}>--{:lang('Please_choose')}--</option>
+                            </select>
+                        </div>
+                        
+                        
+                        
+                        <div class="row">
+                            <label for="name" class="w100">{:lang('Items_name')}: </label>
+                            <input id="name" type="text" value="{$data.name}" name="name" class=""
+                                   style="width:160px; margin-right:0;"/>
+                        </div>
+                        
+                        <div class="row">
+                            <label for="dir" class="w100">{:lang('Dir')}: </label>
+                            <input type="text" name="dir" id="dir" style="width:190px;" value="{$data.dir}"
+                                   placeholder="{:lang('Items_dir_tip')}"/>
+                        </div>
+                        
+                        <div class="row">
+                            <label for="keywords" class="w100">{:lang('Keywords')}: </label>
+                            <input type="text" name="keywords" id="keywords" style="width:220px;"
+                                   value="{$data.keywords}" placeholder="{:lang('Items_keyword_tip')}"/>
+                        </div>
+                        
+                        <div class="row">
+                            <label for="description" class="w100">{:lang('Description')}: </label>
+                            <textarea id="description" name="description" style="width:220px; height:30px;resize: none;"
+                                      placeholder="{:lang('Description_lenght_100')}">{$data.description}</textarea>
+                        </div>
+                        <div class="row">
+                            <label for="tags" class="w100">{:lang('Tags')}:</label>
+                            <textarea name="tags" id="tags" style="resize: none; width: 220px; height: 30px;">{$data.tags|default=''}</textarea>
+                        </div>
+                        <div class="row">
+                            <label for="cn_remark" class="w100">{:lang('Cn_remark')}: </label>
+                            <input type="text" name="cn_remark" id="cn_remark" style="width:150px; color:#F00;"
+                                   value="{$data.cn_remark}" placeholder="{:lang('Items_cn_remark_tip')}"/>
+                            <input class="button white" value="{:lang('Copy')}" type="button"
+                                   style="margin-left:5px; margin-right:5px;"
+                                   onClick="$('#cn_remark').val($('#name').val());">
+                        </div>
+                    </div>
+                    
+                    <div style="float:left; width:200px; padding-top:75px;">
+                        <div class="row">
+                            <label for="is_nav" class="w80">{:lang('Nav_show')}</label>
+                            <div class="slideBox">
+                                {eq name="ACTION_NAME" value="edit"}
+                                <input id="is_nav" value="1" type="checkbox" name="is_nav" {eq name="data['is_nav']"
+                                       value="1" }checked{/eq}/>
+                                {else /}
+                                <input id="is_nav" value="1" type="checkbox" name="is_nav" checked/>
+                                {/eq}
+                                <label for="is_nav"></label>
+                            </div>
+                            <div style="float:left; margin:1px 10px;">
+                                <a class="tooltip-icon" title="{:lang('Nav_show_tip')}"></a>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <label for="langid" class="w80">{:lang('Ls_langs')}:</label>
+                            <div class="slideBox">
+                                <input id="langid" value="{php}echo LANG{/php}" type="checkbox" name="langid" {eq
+                                       name="ACTION_NAME" value="edit" }{eq name="data['langid']" value="" }checked{/eq}
+                                {/eq} />
+                                <label for="langid"></label>
+                            </div>
+                            <div style="float:left; margin-left:10px;">
+                                <a class="tooltip-icon" title="{:lang('All_langid_tip')}"></a>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <label for="status" class="w80">{:lang('Status')}:</label>
+                            <div class="slideBox">
+                                {eq name="ACTION_NAME" value="edit"}
+                                <input id="status" value="1" type="checkbox" name="status" {eq name="data['status']"
+                                       value="1" }checked{/eq}/>
+                                {else /}
+                                <input id="status" value="1" type="checkbox" name="status" checked/>
+                                {/eq}
+                                <label for="status"></label>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <label for="sort" class="w80">{:lang('Sort')}: </label>
+                            <input type="number" class="input litle" name="sort" maxlength="5" id="sort"
+                                   value='{$data.sort|default=0}'/>
+                        </div>
+                        
+                        <div class="row">
+                            <label for="level" class="w80">{:lang('Item Level')}: </label>
+                            <select id="level" name="level">
+                                {for start="1" end="10"}
+                                <option value="{$i}" {eq name="data.level" value="$i"}selected{/eq}>{$i}</option>
+                                {/for}
+                            </select>
+                            <a class="tooltip-icon" title="{:lang('Level_tip')}"></a>
+                        </div>
+                    </div>
+                    
+                    <div class="clear"></div>
+                    
+                    <div class="buttons-wrapper bw-bottom" style="margin:10px auto 20px; text-align:center;">
+                        {eq name="ACTION_NAME" value="edit"}
+                        <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('savedata')}">
+                        <input type="hidden" name="id" value="{$data.id}"/>
+                        {else /}
+                        <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}">
+                        {/eq}
+                        <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="js"}
+<link rel="stylesheet" type="text/css" href="__STATIC__/inputTag/jquery.tagsinput.css" />
+<style>
+    div.tagsinput span.tag{
+        border: 1px solid #d3d3d3;
+        color: #126105;
+        background: #d3d3d3;
+        border-radius: 10px;
+        font-weight: bolder;
+    }
+</style>
+<script type="text/javascript" src="__STATIC__/inputTag/jquery.tagsinput.js"></script>
+<script>
+$(function () {
+    var data = [
+        { "id": "a", "label": "one" },
+        { "id": "b", "label": "two" },
+        { "id": "c", "label": "three" }
+    ];
+    $('#tags').tagsInput({
+        width: '220px',
+        height: '40px',
+        defaultText:'{:lang("Add new tags")}',
+    });
+})
+</script>
+{/block}

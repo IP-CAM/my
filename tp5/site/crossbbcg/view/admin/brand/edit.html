@@ -1,0 +1,185 @@
+    {extend name="admin@public/poupbase"/}
+    
+    {block name="style"}
+    <style type="text/css">
+        .banner_upimg_cancel{ position: absolute; top: 96px;right:0; color: #F00; font-weight: bold; width: 20px; height: 16px; text-align: center; line-height: 16px;background: url(__PUBLIC__/admin/images/uninstall.png) no-repeat center center; }
+    </style>
+    {/block}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+        <div id="content" style="margin:0px 10px 5px 8px;">
+            <div class="bloc" style="margin:10px 0px 0px;">
+                <div class="content">
+                    <form id="myform" method="post" style="margin-top:5px;" class="" >
+                        <fieldset>
+                            <legend>{$meta_title|default=''}</legend>
+                            <div class="thumb_box" style="right:60px;">
+                                <div class="thumb" style="width:90px; height:95px;">
+                                    <div class="upimg_cancel" title="{:lang('Cancel')}">&nbsp;</div>
+                                    <img src="{empty name='data.logo'}__PUBLIC__/admin/images/upload-pic.gif{elseif condition="substr($data['logo'],0,4)=='http'"}{$data.logo}{else /}__UPLOADS__/{$data.logo}{/empty}" id="preview" class="upload" width="83" height="66" no-image="__PUBLIC__/admin/images/upload-pic.gif" title="{:lang('Upload img and file')}" url="{:url('img',array('m' => CONTROLLER_NAME,'input' => 'logo','thumb' => 'preview'))}" data-upload="__UPLOADS__" />
+                                    <input type="hidden" name="logo" id="logo" value="{$data.logo}" />
+                                    <p style="text-align:center;">logo</p>
+                                </div>
+    
+                                <div class="thumb" style="width:90px; height:95px;">
+                                    <div class="upimg_cancel" title="{:lang('Cancel')}" style="top: 96px;right:0;">&nbsp;</div>
+                                    <img src="{empty name='data.banner_image'}__PUBLIC__/admin/images/upload-pic.gif{elseif condition="substr($data['banner_image'],0,4)=='http'"}{$data.banner_image}{else /}__UPLOADS__/{$data.banner_image}{/empty}" id="preview1" class="upload" width="83" height="66" no-image="__PUBLIC__/admin/images/upload-pic.gif" title="{:lang('Upload img and file')}" url="{:url('img',array('m' => CONTROLLER_NAME,'input' => 'banner_image','thumb' => 'preview1'))}" data-upload="__UPLOADS__" />
+                                    <input type="hidden" name="banner_image" id="banner_image" value="{$data.banner_image}" />
+                                    <p style="text-align:center;">{:lang('banner_image')}(240*240)</p>
+                                </div>
+                            </div>
+                            
+                            <div style="float:left; width:550px; padding-right:15px; border-right:1px dashed #000;">
+                                <div class="row">
+                                    <div class="fl">
+                                        <label for="name" class="w100">{:lang('Brand_name')}: <span class="required">*</span></label>
+                                        <input  id="name" type="text" value="{$data.name}" name="name" style="width:120px;" />
+                                    </div>
+                                    
+                                    <div class="fl">
+                                        <label for="country_id" class="w80" >{:lang('Goods_Country_Id')}</label>
+                                        <select data-placeholder="{:lang('Goods_Country_Choose')}" class="chosen-select" tabindex="2" name="country_id" id="country_id" style="width:150px;">
+                                            <option value="0"></option>
+        
+                                            {eq name="action_name" value="edit"}
+                                            {foreach $arr_country as $arr}
+                                            <option value="{$arr['id']}" {eq name="data.country_id" value="$arr['id']"}selected="selected"{/eq}>{$arr['name']}</option>
+                                            {/foreach}
+                                            {else /}
+                                            {foreach $arr_country as $arr}
+                                            <option value="{$arr['id']}">{$arr['name']}</option>
+                                            {/foreach}
+                                            {/eq}
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="fl">
+                                        <label for="alias" class="w100">{:lang('Brand_alias')}: </label>
+                                        <input  id="alias" type="text" value='{$data.alias}' name="alias" style="width:120px;" />
+                                    </div>
+                                    
+                                    <div class="fl">
+                                        <label for="url" class="w80">{:lang('Website')}: </label>
+                                        <input id="url" type="text" value='{$data.url}' name="url" placeholder="http://" style="width:180px;" />
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="clear"></div>
+                                    <label for="description" class="w100">{:lang('Description')}: </label>
+                                    <textarea id="description" name="description">{$data.description}</textarea>
+                                    <script charset="utf-8" src="__STATIC__/kindeditor/kindeditor-all-min.js"></script>
+                                    <script>
+                                        var editor_content;
+                                        KindEditor.ready(function(K) {
+                                            editor_content = K.create('#description', {
+                                                resizeType : 1,
+                                                allowPreviewEmoticons : false,
+                                                allowImageUpload : false,
+                                                minWidth : 420,
+                                                minHeight : 150,
+                                                langType : 'zh-CN',
+                                                items : [
+                                                    'source', '|','bold', 'italic', 'underline',
+                                                    'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                                                    'insertunorderedlist'],
+                                                afterBlur: function () { this.sync(); }
+                                            });
+                                        });
+                                    </script>
+                                </div>
+    
+                                <div class="buttons-wrapper bw-bottom" style="margin:50px auto 2px; padding-left:300px;">
+                                    {eq name="ACTION_NAME" value="edit"}
+                                    <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('savedata')}">
+                                    <input type="hidden" name="id" value="{$data.id}" />
+                                    <input type="hidden" name="action_name" value="edit" />
+                                    {else /}
+                                    <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}">
+                                    <input type="hidden" name="action_name" value="add" />
+                                    {/eq}
+                                    <input type="hidden" name="langid" value="{:LANG}" />
+                                    <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                                </div>
+                            
+                            </div>
+                            
+                            <div style="float:left; width:200px; padding-top:200px;">
+                                <div class="row">
+                                    <label for="firstchar" class="w80">{:lang('Firstchar')}</label>
+                                    <input type="text" class="input litle fu onlyletter" name="firstchar" maxlength="2" id="firstchar" placeholder="A" value="{$data.firstchar|default=''}" />
+                                    <a class="tooltip-icon" title="{:lang('Firstchar_Description')}"></a>
+                                </div>
+                                
+                                <div class="row">
+                                    <label for="sort" class="w80">{:lang('Sort')}: </label>
+                                    <input type="text" class="input litle" name="sort" maxlength="5" id="sort" value='{eq name="ACTION_NAME" value="edit"}{$data.sort}{else /}0{/eq}'>
+                                </div>
+                                
+                                <div class="row">
+                                    <label for="isrecommend" class="w80">{:lang('Isrecommend')}:</label>
+                                    <div class="slideBox">
+                                        {eq name="ACTION_NAME" value="edit"}
+                                            <input id="isrecommend" value="1" type="checkbox" name="isrecommend" {eq name="data['isrecommend']" value="1"}checked{/eq}/>
+                                        {else /}
+                                            <input id="isrecommend" value="1" type="checkbox" name="isrecommend" checked/>
+                                        {/eq}
+                                        <label for="isrecommend"></label>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <label for="istop" class="w80">{:lang('Top')}:</label>
+                                    <div class="slideBox">
+                                        {eq name="ACTION_NAME" value="edit"}
+                                            <input id="istop" value="1" type="checkbox" name="istop" {eq name="data['istop']" value="1"}checked{/eq} />
+                                        {else /}
+                                            <input id="istop" value="1" type="checkbox" name="istop" checked/>
+                                        {/eq}
+                                        <label for="istop"></label>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <label for="status" class="w80">{:lang('Status')}:</label>
+                                    <div class="slideBox">
+                                        {eq name="ACTION_NAME" value="edit"}
+                                            <input id="status" value="1" type="checkbox" name="status"  {eq name="data['status']" value="1"}checked{/eq}/>
+                                        {else /}
+                                            <input id="status" value="1" type="checkbox" name="status" checked />
+                                        {/eq}
+                                        <label for="status"></label>
+                                    </div>
+                                </div>
+                            
+                            </div>
+                            
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {/block}
+
+    {block name="js"}
+    <script type="text/javascript">
+    <!--
+    $(function () {
+        <!--添加 Chosen 的选择框样式-->
+        var config = {
+            '.chosen-select': {},
+            '.chosen-select-deselect': {allow_single_deselect: true},
+            '.chosen-select-no-single': {disable_search_threshold: 10},
+            '.chosen-select-no-results': {no_results_text: '{:lang(\'Goods_Brand_Null\')}'},
+            '.chosen-select-rtl': {rtl: true},
+            '.chosen-select-width': {width: '95%'}
+        };
+        for (var selector in config) {
+            $(selector).chosen(config[selector]);
+        }
+    });
+    --></script>
+    {/block}

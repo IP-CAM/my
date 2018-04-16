@@ -1,0 +1,59 @@
+{extend name='public/mini_layout'}
+
+{block name='body'}
+<div class="page" style="margin-bottom: 0px">
+    <form class="form-horizontal" id="handleposition" method="post">
+        <div class="ncap-form-default">
+            <dl class="row">
+                <dt class="tit">
+                    <label><em>*</em>{:lang('username')}</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="nickname" value="{$info.nickname}" class="input-txt">
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label><em>*</em>{:lang('realname')}</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="realname"  value="{$info.realname}" class="input-txt">
+                </dd>
+            </dl>
+            
+            <dl class="row">
+                <dt class="tit">
+                    <label><em>*</em>{:lang('tel')}</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="mobile"  value="{$info.mobile}" class="input-txt">
+                </dd>
+            </dl>
+            
+            <dl class="row">
+                <dt class="tit">
+                    <label><em>*</em>{:lang('email')}</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="email"  value="{$info.email}" class="input-txt">
+                </dd>
+            </dl>
+            
+            <dl class="row">
+                <dt class="tit">
+                    <label><em>*</em>{:lang('select_role')}</label>
+                </dt>
+                <dd class="opt">
+                    <select name="role_id" id="" class="w230">
+                        {volist name='rolelist' id='vo'}
+                        <option value="{$vo.id}" {eq name="$vo.id" value="$info.role_id"}selected{/eq}>{$vo.name}</option>
+                        {/volist}
+                    </select>
+                </dd>
+            </dl>
+            <div class="bot"><input type="submit" value="{:lang('submit')}" name="submit" class="btns blue" url="{:url('')}"></div>
+        </div>
+    </form>
+</div>
+
+{/block}

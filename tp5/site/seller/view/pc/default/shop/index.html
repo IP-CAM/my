@@ -1,0 +1,189 @@
+{extend name='common/base' /}
+
+{block name='css'}
+<style>
+    label{font-weight: 400;!important;}
+    .input-group{margin: 10px;}
+</style>
+{/block}
+{block name="breadcrumb"}
+<li>{:lang('sStore')}</li>
+<li class="active">{$meta_title|default=''}</li>
+{/block}
+{block name='body'}
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Custom Tabs -->
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab_1" data-toggle="tab">店铺信息</a></li>
+                    <li><a href="#tab_2" data-toggle="tab">首页幻灯片</a></li>
+                    <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
+                </ul>
+                <div class="tab-content clearfix">
+                    <div class="tab-pane active" id="tab_1">
+                        <div class="col-md-6">
+                                <form action="" class="form-horizontal">
+                                    <div class="input-group col-xs-12">
+                                        <label for="" class="control-label col-md-3">{:lang('Store_level')}：</label>
+                                        <div class="col-md-9">
+                                            <label for="" class="control-label">普通店铺</label>
+                                        </div>
+                                    </div>
+                                    <div class="input-group col-xs-12">
+                                        <label for="" class="control-label col-md-3">
+                                            {:lang('seller_name')}：</label>
+                                        <div class="col-md-9">
+                                            <label for="" class="control-label">{$info.seller_name}</label>
+                                        </div>
+                                    </div>
+                                    <div class="input-group col-xs-12">
+                                        <label for="" class="control-label col-md-3">
+                                            logo：</label>
+                                        <div class="col-md-9">
+                                            <input type="hidden" name="logo" id="logo" value="{$info.logo}">
+                                            {if condition="empty($info.logo)"}
+                                            <img src="__PUBLIC__/admin/images/up_thumb.png" alt="user"   id="imgs" class="upload img-rounded"  no-image="__PUBLIC__/admin/images/image.png" title="{:lang('Upload img and file')}" url="{:url('seller/shop/img',array('input' => 'logo','thumb' => 'imgs'))}" data-upload="__UPLOADS__"  width="80" style="border:1px solid #e4e4e4"/>
+                                            {elseif condition="substr($info.logo,0,4)=='http'" /}
+                                            <img src="{$info.logo}" alt="user" id="imgs" class="upload img-rounded"  no-image="__PUBLIC__/admin/images/image.png" title="{:lang('Upload img and file')}" url="{:url('seller/shop/img',array('input' => 'logo','thumb' => 'imgs'))}" data-upload="__UPLOADS__"  width="80" style="border:1px solid #e4e4e4"/>
+                                            {else /}
+                                            <img src="__UPLOADS__/{$info.logo}" alt="user" id="imgs" class="upload img-rounded"  no-image="__PUBLIC__/admin/images/image.png" title="{:lang('Upload img and file')}" url="{:url('seller/shop/img',array('input' => 'logo','thumb' => 'imgs'))}" data-upload="__UPLOADS__"  width="80" style="border:1px solid #e4e4e4" />
+                                            {/if}
+                                        </div>
+                                    </div>
+                                    <div class="input-group col-xs-12">
+                                        <label for="" class="control-label col-md-3">
+                                            {:lang('kefu_qq')}：</label>
+                                        <div class="col-md-9 ">
+                                            <input type="text" class="form-control" name="qq" value="{$info.qq}">
+                                        </div>
+                                    </div>
+                                    <div class="input-group col-xs-12">
+                                        <label for="" class="control-label col-md-3">
+                                            {:lang('mobile')}：</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="mobile" value="{$info.mobile}">
+                                        </div>
+                                    </div>
+                                    <div class="input-group col-xs-12">
+                                        <label for="" class="control-label col-md-3">
+                                            {:lang('service_phone')}：</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="phone" value="{$info.phone}">
+                                        </div>
+                                    </div>
+                                    <div class="input-group col-xs-12">
+                                        <label for="" class="control-label col-md-3">
+                                            {:lang('stockwaiming')}：</label>
+                                        <div class="col-md-9">
+                                            <input type="text" name="warning_quantity" value="{$info.warning_quantity}" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="input-group col-xs-12">
+                                        <label for="" class="control-label col-md-3">
+                                            {:lang('after_sale_address')}：</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="after_sale_address" value="{$info.after_sale_address}">
+                                        </div>
+                                    </div>
+                                    <div class="input-group col-xs-12">
+                                        <label for="" class="control-label col-md-3">
+                                            {:lang('SEO_keys')}：</label>
+                                        <div class="col-md-9">
+                                            <input type="text" name="seo_keywords" class="form-control" placeholder="多个关键字用,隔开" value="{$info.seo_keywords}">
+                                        </div>
+                                    </div>
+                                    <div style="text-align: center">
+                                        <input type="hidden" name="id" value="{$info.id}">
+                                        <input type="submit" name="submit" value="{:lang('save')}" url="{:url('seller/shop/savedata')}" class="btn btn-info" url="http://seller.shop.com/goods/save.html">
+                                    </div>
+                                </form>
+                        </div>
+                    </div>
+                    <!-- /.tab-pane -->
+                    <div class="tab-pane" id="tab_2">
+                        <div class="box">
+                            <div class="box-header with-border">
+                                <div class="row">
+                                    <div class="page-header-top">
+                                        {:getSellerButton()}
+                                    </div>
+                                </div>
+                            </div>
+                        <div class="row">
+                            <div class="table-responsive" style="padding: 0 10px">
+                                <table id="demo-foo-addrow" class="table m-t-30 table-hover contact-list" data-page-size="10">
+                                    <thead>
+                                    <tr>
+                                        <th style="width: 25px;">
+                                            <input type="checkbox" class="check-all">
+                                        </th>
+                                        <th>ID</th>
+                                        <th>{:lang('shideshow')}</th>
+                                        <th>{:lang('url_link')}</th>
+                                        <th>{:lang('platform')}</th>
+                                        <th class="center">{:lang('sort')}</th>
+                                        <th class="center">{:lang('opreration')}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {foreach $list as $vo}
+                                    <tr>
+                                        <td>
+                                            <input class="ids" type="checkbox" value="{$vo.id}" name="ids[]">
+                                        </td>
+                                        <td>{$vo.id}</td>
+                                        <td>
+                                            {if condition="empty($vo.img)"}
+                                            <img src="__PUBLIC__/admin/images/up_thumb.png" alt="user" class="img-circle" width="50"/>
+                    
+                                            {elseif condition="substr($vo.img,0,4)=='http'" /}
+                                            <img src="{$vo.img}" alt="user" class="img-circle" width="50"/>
+                                            {else /}
+                                            <img src="{:resizeImage($vo.img,'thumb',true)}" alt="user" class="img-circle" width="50"/>
+                                            {/if}
+                                        <td>
+                                            {$vo.url}
+                                        </td>
+                                        
+                                        <td>
+                                            {$vo.type}
+                                        </td>
+                                        <td class="center">
+                                            <input type="text" value="{$vo.sort}" data-id="{$vo.id}" class="sort" style="width: 80px">
+                                        </td>
+                                        <td class="center">
+                                            <a href="{:url('seller/shideshow/edit',array('ids'=>$vo.id))}" class="tooltip-link ajax-get f18" title="{:lang('edit')}" data-showbar="1" data-title="{:lang('edit')}" data-width="770" data-height="410"><i class=" fa fa-pencil-square-o f18"></i></a>
+                                            <a  class="tooltip-link ajax-get confirm f18" data-showbar="1" data-title="{:lang('del_shideshow')}" data-layer="{:lang('del_shideshow')}" title="{:lang('del_shideshow')}" href="{:url('seller/shideshow/del',array('ids'=>$vo.id))}"><i class="fa fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                    {/foreach}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.tab-content -->
+            </div>
+            <!-- nav-tabs-custom -->
+        </div>
+        <!-- /.col -->
+    </div>
+</section>
+
+{/block}
+
+{block name='js'}
+<script>
+    $(function () {
+        $('.sort').blur(function () {
+            var url = "{:url('seller/shop/index')}";
+            var data = {sort:$(this).val(),id:$(this).data('id')};
+            $.post(url,data);
+        })
+    })
+</script>
+{/block}

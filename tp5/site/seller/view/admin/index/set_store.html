@@ -1,0 +1,81 @@
+{extend name="admin@public/poupbase" /}
+{block name="body"}
+
+<div id="content" style="margin:0px 10px 5px 8px;">
+    <div class="bloc">
+        <div class="content">
+            <div style="display:block; /*height: 420px;*/">
+                <div class="extbody">
+                    <form id="myform" method="post" style="margin-top:5px;" class="">
+                        <fieldset>
+                            <legend>{:lang('edit_store_info')}</legend>
+                            <div class="row">
+                                <label class="w100">{:lang('shop_account')}:</label>
+                                <label class="w160l">{:getShopAccount($data.seller_id)['nickname']}</label>
+                            </div>
+                            <div class="row">
+                                <label class="w100">{:lang('register_time')}:</label>
+                                <label class="w160l">{$data.create_time}</label>
+                            </div>
+                            <div class="row">
+                                <label class="w100">{:lang('seller_name')}:</label>
+                                <label class="w160l">{$data.seller_name}</label>
+                            </div>
+                            <div class="row">
+                                <label class="w100">{:lang('shopcat')}:</label>
+                                <select name="cat_id" id="">
+                                    {foreach $option as $v}
+                                    <option value="{$v.id}" {eq name="$data.cat_id" value="$v.id"}selected{/eq}>{$v.name}</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                            <div class="row">
+                                <label class="w100">{:lang('store_grade')}:</label>
+                                <select name="" id="">
+                                    {foreach $option as $v}
+                                    <option value="{$v.id}" {eq name="$data.cat_id" value="$v.id"}selected{/eq}>{$v.name}</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                            <div class="row">
+                                <label class="w100">{:lang('Cash deposit')}:</label>
+                                <input type="text" name="cash" value="{$data.cash}">{:lang('wan_yuan')}
+                            </div>
+                            
+                            <div class="row">
+                                <label class="w100">{:lang('show_customer_id')}:</label>
+                                <div class="slideBox">
+                                    
+                                    <input value="1" id="show_customer_id" type="checkbox" name="show_customer_id" {eq name="data['show_customer_id']" value="1"}checked{/eq}/>
+                                    
+                                    
+                                    
+                                    <label for="show_customer_id"></label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="w100">{:lang('status')}:</label>
+                                <div class="slideBox">
+                                    <input  value="1" id="status" type="checkbox" name="status"  {eq name="data['status']" value="1"}checked{/eq} />
+                                    <label for="status"></label>
+                                </div>
+                            </div>
+                            <div class="buttons-wrapper bw-bottom" style="margin:20px auto 2px; text-align:center;">
+                                <input type="hidden" name="id" value="{$data.id}" />
+                                <input name="submit" value="{:lang('submit')}" type="submit"  url="{:url('save')}" />
+                                <input name="reset" class="button white" value="{:lang('cancel')}" type="reset">
+                            </div>
+                        
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $(".bset").buttonset();
+    });
+</script>
+{/block}

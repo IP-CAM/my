@@ -1,0 +1,1973 @@
+---------------------------------------------------------------
+[ 2018-04-16T15:55:52+08:00 ] 127.0.0.1 127.0.0.1 GET /
+[ info ] tp5shop.localweb.com/ [运行时间：0.615036s][吞吐率：1.63req/s] [内存消耗：1,723.81kb] [文件加载：60]
+[ info ] [ BEHAVIOR ] Run \app\common\libs\Hook @app_init [ RunTime:0.083004s ]
+[ info ] [ LANG ] D:\git\my\tp5shop\core\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'cookie' => '_ga=GA1.2.698488944.1490627618; _gid=GA1.2.439709786.1523863179',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0',
+  'host' => 'tp5shop.localweb.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LANG ] D:\git\my\tp5shop\public/../site/index\lang\zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Regconf @module_init [ RunTime:0.045003s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-04-16T15:56:01+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php
+[ info ] tp5shop.localweb.com/index.php [运行时间：0.078005s][吞吐率：12.82req/s] [内存消耗：1,723.53kb] [文件加载：60]
+[ info ] [ BEHAVIOR ] Run \app\common\libs\Hook @app_init [ RunTime:0.037002s ]
+[ info ] [ LANG ] D:\git\my\tp5shop\core\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'cookie' => '_ga=GA1.2.698488944.1490627618; _gid=GA1.2.439709786.1523863179',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0',
+  'host' => 'tp5shop.localweb.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LANG ] D:\git\my\tp5shop\public/../site/index\lang\zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Regconf @module_init [ RunTime:0.006000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-04-16T15:56:01+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php/install/index/index
+[ info ] tp5shop.localweb.com/index.php/install/index/index [运行时间：0.146008s][吞吐率：6.85req/s] [内存消耗：1,775.80kb] [文件加载：59]
+[ info ] [ BEHAVIOR ] Run \app\common\libs\Hook @app_init [ RunTime:0.035002s ]
+[ info ] [ LANG ] D:\git\my\tp5shop\core\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'install',
+    1 => 'index',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'cookie' => '_ga=GA1.2.698488944.1490627618; _gid=GA1.2.439709786.1523863179',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0',
+  'host' => 'tp5shop.localweb.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Regconf @module_init [ RunTime:0.005000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-04-16T16:00:10+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php/install/index/index
+[ info ] tp5shop.localweb.com/index.php/install/index/index [运行时间：0.160009s][吞吐率：6.25req/s] [内存消耗：1,923.17kb] [文件加载：59]
+[ info ] [ BEHAVIOR ] Run \app\common\libs\Hook @app_init [ RunTime:0.035002s ]
+[ info ] [ LANG ] D:\git\my\tp5shop\core\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'install',
+    1 => 'index',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'cookie' => '_ga=GA1.2.698488944.1490627618; _gid=GA1.2.439709786.1523863179',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0',
+  'host' => 'tp5shop.localweb.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Regconf @module_init [ RunTime:0.004000s ]
+[ info ] [ RUN ] app\install\controller\Index->index[ D:\git\my\tp5shop\site\install\controller\Index.php ]
+[ info ] [ VIEW ] D:\git\my\tp5shop\public/../site/install/view/pc/default/index\s1.html [ array (
+  0 => 'steps',
+  1 => 'step',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-04-16T16:00:23+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php/install/index/s2/step/2
+[ info ] tp5shop.localweb.com/index.php/install/index/s2/step/2 [运行时间：0.107007s][吞吐率：9.35req/s] [内存消耗：1,968.66kb] [文件加载：62]
+[ info ] [ BEHAVIOR ] Run \app\common\libs\Hook @app_init [ RunTime:0.032001s ]
+[ info ] [ LANG ] D:\git\my\tp5shop\core\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'install',
+    1 => 'index',
+    2 => 's2',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'cookie' => '_ga=GA1.2.698488944.1490627618; _gid=GA1.2.439709786.1523863179',
+  'referer' => 'http://tp5shop.localweb.com/index.php/install/index/index',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0',
+  'host' => 'tp5shop.localweb.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'step' => '2',
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Regconf @module_init [ RunTime:0.003000s ]
+[ info ] [ RUN ] app\install\controller\Index->s2[ D:\git\my\tp5shop\site\install\controller\Index.php ]
+[ info ] [ VIEW ] D:\git\my\tp5shop\public/../site/install/view/pc/default/index\s2.html [ array (
+  0 => 'steps',
+  1 => 'step',
+  2 => 'phpv',
+  3 => 'os',
+  4 => 'server',
+  5 => 'host',
+  6 => 'name',
+  7 => 'max_execution_time',
+  8 => 'allow_reference',
+  9 => 'allow_url_fopen',
+  10 => 'safe_mode',
+  11 => 'gd',
+  12 => 'mysql',
+  13 => 'uploadSize',
+  14 => 'err',
+  15 => 'session',
+  16 => 'folder',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-04-16T16:00:30+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php/install/index/s3/step/3
+[ info ] tp5shop.localweb.com/index.php/install/index/s3/step/3 [运行时间：0.085005s][吞吐率：11.76req/s] [内存消耗：1,931.23kb] [文件加载：59]
+[ info ] [ BEHAVIOR ] Run \app\common\libs\Hook @app_init [ RunTime:0.039002s ]
+[ info ] [ LANG ] D:\git\my\tp5shop\core\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'install',
+    1 => 'index',
+    2 => 's3',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'cookie' => '_ga=GA1.2.698488944.1490627618; _gid=GA1.2.439709786.1523863179',
+  'referer' => 'http://tp5shop.localweb.com/index.php/install/index/s2/step/2',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0',
+  'host' => 'tp5shop.localweb.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'step' => '3',
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Regconf @module_init [ RunTime:0.006001s ]
+[ info ] [ RUN ] app\install\controller\Index->s3[ D:\git\my\tp5shop\site\install\controller\Index.php ]
+[ info ] [ VIEW ] D:\git\my\tp5shop\public/../site/install/view/pc/default/index\s3.html [ array (
+  0 => 'steps',
+  1 => 'step',
+  2 => 'domain',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-04-16T16:00:31+08:00 ] 127.0.0.1 127.0.0.1 POST /index.php/install/index/s3/step/3/testdbpwd/1
+[ info ] tp5shop.localweb.com/index.php/install/index/s3/step/3/testdbpwd/1 [运行时间：0.075004s][吞吐率：13.33req/s] [内存消耗：1,746.16kb] [文件加载：56]
+[ info ] [ BEHAVIOR ] Run \app\common\libs\Hook @app_init [ RunTime:0.038002s ]
+[ info ] [ LANG ] D:\git\my\tp5shop\core\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'install',
+    1 => 'index',
+    2 => 's3',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'connection' => 'keep-alive',
+  'cookie' => '_ga=GA1.2.698488944.1490627618; _gid=GA1.2.439709786.1523863179',
+  'x-requested-with' => 'XMLHttpRequest',
+  'referer' => 'http://tp5shop.localweb.com/index.php/install/index/s3/step/3',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0',
+  'host' => 'tp5shop.localweb.com',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'step' => '3',
+  'testdbpwd' => '1',
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Regconf @module_init [ RunTime:0.007000s ]
+[ info ] [ RUN ] app\install\controller\Index->s3[ D:\git\my\tp5shop\site\install\controller\Index.php ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-04-16T16:00:31+08:00 ] 127.0.0.1 127.0.0.1 POST /index.php/install/index/s3/step/3/testdbpwd/1
+[ info ] tp5shop.localweb.com/index.php/install/index/s3/step/3/testdbpwd/1 [运行时间：0.120007s][吞吐率：8.33req/s] [内存消耗：1,696.80kb] [文件加载：53]
+[ info ] [ BEHAVIOR ] Run \app\common\libs\Hook @app_init [ RunTime:0.047002s ]
+[ info ] [ LANG ] D:\git\my\tp5shop\core\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'install',
+    1 => 'index',
+    2 => 's3',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'keep-alive',
+  'cookie' => '_ga=GA1.2.698488944.1490627618; _gid=GA1.2.439709786.1523863179',
+  'content-length' => '66',
+  'x-requested-with' => 'XMLHttpRequest',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'referer' => 'http://tp5shop.localweb.com/index.php/install/index/s3/step/3',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0',
+  'host' => 'tp5shop.localweb.com',
+)
+[ info ] [ PARAM ] array (
+  'dbHost' => 'localhost',
+  'dbUser' => 'root',
+  'dbPwd' => 'root',
+  'dbName' => 'runtuer',
+  'dbPort' => '3306',
+  'step' => '3',
+  'testdbpwd' => '1',
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Regconf @module_init [ RunTime:0.004001s ]
+[ info ] [ RUN ] app\install\controller\Index->s3[ D:\git\my\tp5shop\site\install\controller\Index.php ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-04-16T16:00:31+08:00 ] 127.0.0.1 127.0.0.1 POST /index.php/install/index/s3/step/3/testdbpwd/1
+[ info ] tp5shop.localweb.com/index.php/install/index/s3/step/3/testdbpwd/1 [运行时间：0.068004s][吞吐率：14.71req/s] [内存消耗：1,696.80kb] [文件加载：53]
+[ info ] [ BEHAVIOR ] Run \app\common\libs\Hook @app_init [ RunTime:0.030001s ]
+[ info ] [ LANG ] D:\git\my\tp5shop\core\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'install',
+    1 => 'index',
+    2 => 's3',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'keep-alive',
+  'cookie' => '_ga=GA1.2.698488944.1490627618; _gid=GA1.2.439709786.1523863179',
+  'content-length' => '66',
+  'x-requested-with' => 'XMLHttpRequest',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'referer' => 'http://tp5shop.localweb.com/index.php/install/index/s3/step/3',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0',
+  'host' => 'tp5shop.localweb.com',
+)
+[ info ] [ PARAM ] array (
+  'dbHost' => 'localhost',
+  'dbUser' => 'root',
+  'dbPwd' => 'root',
+  'dbName' => 'runtuer',
+  'dbPort' => '3306',
+  'step' => '3',
+  'testdbpwd' => '1',
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Regconf @module_init [ RunTime:0.005000s ]
+[ info ] [ RUN ] app\install\controller\Index->s3[ D:\git\my\tp5shop\site\install\controller\Index.php ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-04-16T16:00:52+08:00 ] 127.0.0.1 127.0.0.1 POST /index.php/install/index/s3/step/3/testdbpwd/1
+[ info ] tp5shop.localweb.com/index.php/install/index/s3/step/3/testdbpwd/1 [运行时间：0.062003s][吞吐率：16.13req/s] [内存消耗：1,696.80kb] [文件加载：53]
+[ info ] [ BEHAVIOR ] Run \app\common\libs\Hook @app_init [ RunTime:0.029001s ]
+[ info ] [ LANG ] D:\git\my\tp5shop\core\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'install',
+    1 => 'index',
+    2 => 's3',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'keep-alive',
+  'cookie' => '_ga=GA1.2.698488944.1490627618; _gid=GA1.2.439709786.1523863179',
+  'content-length' => '66',
+  'x-requested-with' => 'XMLHttpRequest',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'referer' => 'http://tp5shop.localweb.com/index.php/install/index/s3/step/3',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0',
+  'host' => 'tp5shop.localweb.com',
+)
+[ info ] [ PARAM ] array (
+  'dbHost' => 'localhost',
+  'dbUser' => 'root',
+  'dbPwd' => 'root',
+  'dbName' => 'runtuer',
+  'dbPort' => '3306',
+  'step' => '3',
+  'testdbpwd' => '1',
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Regconf @module_init [ RunTime:0.005001s ]
+[ info ] [ RUN ] app\install\controller\Index->s3[ D:\git\my\tp5shop\site\install\controller\Index.php ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-04-16T16:03:37+08:00 ] 127.0.0.1 127.0.0.1 GET /
+[ info ] tp5shop.localweb.com/ [运行时间：0.068004s][吞吐率：14.70req/s] [内存消耗：1,723.52kb] [文件加载：60]
+[ info ] [ BEHAVIOR ] Run \app\common\libs\Hook @app_init [ RunTime:0.033002s ]
+[ info ] [ LANG ] D:\git\my\tp5shop\core\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'cookie' => '_ga=GA1.2.698488944.1490627618; _gid=GA1.2.439709786.1523863179',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0',
+  'host' => 'tp5shop.localweb.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LANG ] D:\git\my\tp5shop\public/../site/index\lang\zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Regconf @module_init [ RunTime:0.004000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-04-16T16:03:49+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php
+[ info ] tp5shop.localweb.com/index.php [运行时间：0.062004s][吞吐率：16.13req/s] [内存消耗：1,723.53kb] [文件加载：60]
+[ info ] [ BEHAVIOR ] Run \app\common\libs\Hook @app_init [ RunTime:0.031002s ]
+[ info ] [ LANG ] D:\git\my\tp5shop\core\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'cookie' => '_ga=GA1.2.698488944.1490627618; _gid=GA1.2.439709786.1523863179',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0',
+  'host' => 'tp5shop.localweb.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LANG ] D:\git\my\tp5shop\public/../site/index\lang\zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Regconf @module_init [ RunTime:0.005000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-04-16T16:03:49+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php/install/index/index
+[ info ] tp5shop.localweb.com/index.php/install/index/index [运行时间：0.062003s][吞吐率：16.13req/s] [内存消耗：1,790.21kb] [文件加载：57]
+[ info ] [ BEHAVIOR ] Run \app\common\libs\Hook @app_init [ RunTime:0.029001s ]
+[ info ] [ LANG ] D:\git\my\tp5shop\core\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'install',
+    1 => 'index',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'cookie' => '_ga=GA1.2.698488944.1490627618; _gid=GA1.2.439709786.1523863179',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0',
+  'host' => 'tp5shop.localweb.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Regconf @module_init [ RunTime:0.003001s ]
+[ info ] [ RUN ] app\install\controller\Index->index[ D:\git\my\tp5shop\site\install\controller\Index.php ]
+[ info ] [ VIEW ] D:\git\my\tp5shop\public/../site/install/view/pc/default/index\s1.html [ array (
+  0 => 'steps',
+  1 => 'step',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-04-16T16:03:56+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php
+[ info ] tp5shop.localweb.com/index.php [运行时间：0.062004s][吞吐率：16.13req/s] [内存消耗：1,723.53kb] [文件加载：60]
+[ info ] [ BEHAVIOR ] Run \app\common\libs\Hook @app_init [ RunTime:0.029002s ]
+[ info ] [ LANG ] D:\git\my\tp5shop\core\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'cookie' => '_ga=GA1.2.698488944.1490627618; _gid=GA1.2.439709786.1523863179',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0',
+  'host' => 'tp5shop.localweb.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LANG ] D:\git\my\tp5shop\public/../site/index\lang\zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Regconf @module_init [ RunTime:0.004001s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-04-16T16:03:56+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php/install/index/index
+[ info ] tp5shop.localweb.com/index.php/install/index/index [运行时间：0.064003s][吞吐率：15.62req/s] [内存消耗：1,790.21kb] [文件加载：57]
+[ info ] [ BEHAVIOR ] Run \app\common\libs\Hook @app_init [ RunTime:0.030001s ]
+[ info ] [ LANG ] D:\git\my\tp5shop\core\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'install',
+    1 => 'index',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'cookie' => '_ga=GA1.2.698488944.1490627618; _gid=GA1.2.439709786.1523863179',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0',
+  'host' => 'tp5shop.localweb.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Regconf @module_init [ RunTime:0.005000s ]
+[ info ] [ RUN ] app\install\controller\Index->index[ D:\git\my\tp5shop\site\install\controller\Index.php ]
+[ info ] [ VIEW ] D:\git\my\tp5shop\public/../site/install/view/pc/default/index\s1.html [ array (
+  0 => 'steps',
+  1 => 'step',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-04-16T16:06:50+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php
+[ info ] tp5shop.localweb.com/index.php [运行时间：0.067004s][吞吐率：14.92req/s] [内存消耗：1,723.53kb] [文件加载：60]
+[ info ] [ BEHAVIOR ] Run \app\common\libs\Hook @app_init [ RunTime:0.034002s ]
+[ info ] [ LANG ] D:\git\my\tp5shop\core\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'cookie' => '_ga=GA1.2.698488944.1490627618; _gid=GA1.2.439709786.1523863179',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0',
+  'host' => 'tp5shop.localweb.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LANG ] D:\git\my\tp5shop\public/../site/index\lang\zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Regconf @module_init [ RunTime:0.005000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-04-16T16:06:50+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php/install/index/index
+[ info ] tp5shop.localweb.com/index.php/install/index/index [运行时间：0.060004s][吞吐率：16.67req/s] [内存消耗：1,790.21kb] [文件加载：57]
+[ info ] [ BEHAVIOR ] Run \app\common\libs\Hook @app_init [ RunTime:0.029002s ]
+[ info ] [ LANG ] D:\git\my\tp5shop\core\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'install',
+    1 => 'index',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'cookie' => '_ga=GA1.2.698488944.1490627618; _gid=GA1.2.439709786.1523863179',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0',
+  'host' => 'tp5shop.localweb.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Regconf @module_init [ RunTime:0.005000s ]
+[ info ] [ RUN ] app\install\controller\Index->index[ D:\git\my\tp5shop\site\install\controller\Index.php ]
+[ info ] [ VIEW ] D:\git\my\tp5shop\public/../site/install/view/pc/default/index\s1.html [ array (
+  0 => 'steps',
+  1 => 'step',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-04-16T16:11:33+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php/install/index/index
+[ info ] tp5shop.localweb.com/index.php/install/index/index [运行时间：0.066003s][吞吐率：15.15req/s] [内存消耗：1,686.76kb] [文件加载：53]
+[ info ] [ BEHAVIOR ] Run \app\common\libs\Hook @app_init [ RunTime:0.032001s ]
+[ info ] [ LANG ] D:\git\my\tp5shop\core\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'install',
+    1 => 'index',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'cookie' => '_ga=GA1.2.698488944.1490627618; _gid=GA1.2.439709786.1523863179',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0',
+  'host' => 'tp5shop.localweb.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Regconf @module_init [ RunTime:0.004000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-04-16T16:11:39+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php
+[ info ] tp5shop.localweb.com/index.php [运行时间：0.121007s][吞吐率：8.26req/s] [内存消耗：2,335.64kb] [文件加载：70]
+[ info ] [ BEHAVIOR ] Run \app\common\libs\Hook @app_init [ RunTime:0.025001s ]
+[ info ] [ LANG ] D:\git\my\tp5shop\core\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'cookie' => '_ga=GA1.2.698488944.1490627618; _gid=GA1.2.439709786.1523863179',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0',
+  'host' => 'tp5shop.localweb.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LANG ] D:\git\my\tp5shop\public/../site/index\lang\zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Regconf @module_init [ RunTime:0.004001s ]
+[ info ] [ LANG ] D:\git\my\tp5shop\site\common\lang\zh-cn.php
+[ info ] [ CACHE ] INIT File
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-04-16T16:16:05+08:00 ] 127.0.0.1 127.0.0.1 GET /
+[ info ] tp5.localweb.com/ [运行时间：0.358020s][吞吐率：2.79req/s] [内存消耗：3,113.84kb] [文件加载：204]
+[ info ] [ BEHAVIOR ] Run \app\common\libs\Hook @app_init [ RunTime:0.035002s ]
+[ info ] [ LANG ] D:\git\my\tp5\core\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'cookie' => '_ga=GA1.2.698488944.1490627618; _gid=GA1.2.439709786.1523863179',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0',
+  'host' => 'tp5.localweb.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LANG ] D:\git\my\tp5\public/../site/index\lang\zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Regconf @module_init [ RunTime:0.004000s ]
+[ info ] [ LANG ] D:\git\my\tp5\site\common\lang\zh-cn.php
+[ info ] [ CACHE ] INIT File
+[ info ] [ DB ] INIT mysql
+[ info ] [ LANG ] D:\git\my\tp5\runtime\lang\ui_zh-cn.php
+[ info ] [ RUN ] app\index\controller\Index->_empty[ D:\git\my\tp5\site\index\controller\Index.php ]
+[ info ] [ VIEW ] D:\git\my\tp5\public/../site/index/view/pc/default/index\index.html [ array (
+  0 => 'module_name',
+  1 => 'controller_name',
+  2 => 'action_name',
+  3 => 'path',
+  4 => 'css_path',
+  5 => 'js_path',
+  6 => 'img_path',
+  7 => 'module_path',
+  8 => 'applist',
+  9 => 'meta_title',
+) ]
+[ info ] [ LOG ] INIT File
+[ warn ] SQL:SELECT `name` FROM `rt_admin_module` WHERE  `status` = :where_status  AND `is_del` = :where_is_del ORDER BY sort asc [Using where; Using filesort]
+[ warn ] SQL:SELECT `name` FROM `rt_admin_module` WHERE  `status` = :where_status  AND `is_del` = :where_is_del ORDER BY sort asc [Using where; Using filesort]
+---------------------------------------------------------------
+[ 2018-04-16T16:16:51+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php/crossbbcg/
+[ info ] tp5.localweb.com/index.php/crossbbcg/ [运行时间：0.820047s][吞吐率：1.22req/s] [内存消耗：5,062.77kb] [文件加载：126]
+[ info ] [ BEHAVIOR ] Run \app\common\libs\Hook @app_init [ RunTime:0.031001s ]
+[ info ] [ LANG ] D:\git\my\tp5\core\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'crossbbcg',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'cookie' => '_ga=GA1.2.698488944.1490627618; _gid=GA1.2.439709786.1523863179; Qs_lvt_194025=1523866567; Qs_pv_194025=1313944749954555000%2C3515722764292672000%2C4163177577645791000; Hm_lvt_0311ccb4961223ed160802660045048d=1523866569; Hm_lpvt_0311ccb4961223ed160802660045048d=1523866598',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0',
+  'host' => 'tp5.localweb.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LANG ] D:\git\my\tp5\public/../site/crossbbcg\lang\zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Regconf @module_init [ RunTime:0.005000s ]
+[ info ] [ LANG ] D:\git\my\tp5\site\common\lang\zh-cn.php
+[ info ] [ CACHE ] INIT File
+[ info ] [ LANG ] D:\git\my\tp5\runtime\/lang/ui_zh-cn.php
+[ info ] [ LANG ] D:\git\my\tp5\runtime\lang\ui_zh-cn.php
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'FwpFMKbA',
+  'type' => '',
+  'auto_start' => true,
+  'domain' => 'localhost.com',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\crossbbcg\controller\Index->index[ D:\git\my\tp5\site\crossbbcg\controller\Index.php ]
+[ info ] [ VIEW ] D:\git\my\tp5\public/../site/crossbbcg/view/pc/default/index\index.html [ array (
+  0 => 'module_name',
+  1 => 'controller_name',
+  2 => 'action_name',
+  3 => 'path',
+  4 => 'css_path',
+  5 => 'js_path',
+  6 => 'img_path',
+  7 => 'module_path',
+  8 => 'applist',
+  9 => 'shopname',
+  10 => 'shoplogo',
+  11 => 'cart_num',
+  12 => 'user',
+  13 => 'weixin_img',
+  14 => 'kefu_qq',
+  15 => 'now_url',
+  16 => 'now_url_false',
+  17 => 'sub_domain_status',
+  18 => 'is_home',
+  19 => 'meta_title',
+  20 => 'meta_keyword',
+  21 => 'meta_description',
+) ]
+[ info ] [ RUN ] app\crossbbcg\widget\Common->header[ D:\git\my\tp5\site\crossbbcg\widget\Common.php ]
+[ info ] [ VIEW ] D:\git\my\tp5\public/../site/crossbbcg/view/pc/default/common/header.html [ array (
+  0 => 'module_name',
+  1 => 'controller_name',
+  2 => 'action_name',
+  3 => 'path',
+  4 => 'css_path',
+  5 => 'js_path',
+  6 => 'img_path',
+  7 => 'module_path',
+  8 => 'applist',
+  9 => 'shopname',
+  10 => 'shoplogo',
+  11 => 'cart_num',
+  12 => 'user',
+  13 => 'weixin_img',
+  14 => 'kefu_qq',
+  15 => 'now_url',
+  16 => 'now_url_false',
+  17 => 'sub_domain_status',
+  18 => 'is_home',
+  19 => 'meta_title',
+  20 => 'meta_keyword',
+  21 => 'meta_description',
+  22 => 'search_history',
+  23 => 'like',
+  24 => 'arr_header_category',
+  25 => 'arr_header_nav',
+  26 => 'catalog_search',
+  27 => 'top_protocol_title',
+  28 => 'top_protocol_id',
+) ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Column->national_pavilion[ D:\git\my\tp5\site\crossbbcg\widget\Column.php ]
+[ info ] [ VIEW ] D:\git\my\tp5\public/../site/crossbbcg/view/pc/default/column/national_pavilion.html [ array (
+  0 => 'module_name',
+  1 => 'controller_name',
+  2 => 'action_name',
+  3 => 'path',
+  4 => 'css_path',
+  5 => 'js_path',
+  6 => 'img_path',
+  7 => 'module_path',
+  8 => 'applist',
+  9 => 'shopname',
+  10 => 'shoplogo',
+  11 => 'cart_num',
+  12 => 'user',
+  13 => 'weixin_img',
+  14 => 'kefu_qq',
+  15 => 'now_url',
+  16 => 'now_url_false',
+  17 => 'sub_domain_status',
+  18 => 'is_home',
+  19 => 'meta_title',
+  20 => 'meta_keyword',
+  21 => 'meta_description',
+  22 => 'search_history',
+  23 => 'like',
+  24 => 'arr_header_category',
+  25 => 'arr_header_nav',
+  26 => 'catalog_search',
+  27 => 'top_protocol_title',
+  28 => 'top_protocol_id',
+  29 => 'arr_np',
+  30 => 'arr_brand',
+) ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Common->toolbar[ D:\git\my\tp5\site\crossbbcg\widget\Common.php ]
+[ info ] [ VIEW ] D:\git\my\tp5\public/../site/crossbbcg/view/pc/default/common/toolbar.html [ array (
+  0 => 'module_name',
+  1 => 'controller_name',
+  2 => 'action_name',
+  3 => 'path',
+  4 => 'css_path',
+  5 => 'js_path',
+  6 => 'img_path',
+  7 => 'module_path',
+  8 => 'applist',
+  9 => 'shopname',
+  10 => 'shoplogo',
+  11 => 'cart_num',
+  12 => 'user',
+  13 => 'weixin_img',
+  14 => 'kefu_qq',
+  15 => 'now_url',
+  16 => 'now_url_false',
+  17 => 'sub_domain_status',
+  18 => 'is_home',
+  19 => 'meta_title',
+  20 => 'meta_keyword',
+  21 => 'meta_description',
+  22 => 'search_history',
+  23 => 'like',
+  24 => 'arr_header_category',
+  25 => 'arr_header_nav',
+  26 => 'catalog_search',
+  27 => 'top_protocol_title',
+  28 => 'top_protocol_id',
+  29 => 'arr_np',
+  30 => 'arr_brand',
+) ]
+[ info ] [ RUN ] app\crossbbcg\widget\Common->footer[ D:\git\my\tp5\site\crossbbcg\widget\Common.php ]
+[ info ] [ VIEW ] D:\git\my\tp5\public/../site/crossbbcg/view/pc/default/common/footer.html [ array (
+  0 => 'module_name',
+  1 => 'controller_name',
+  2 => 'action_name',
+  3 => 'path',
+  4 => 'css_path',
+  5 => 'js_path',
+  6 => 'img_path',
+  7 => 'module_path',
+  8 => 'applist',
+  9 => 'shopname',
+  10 => 'shoplogo',
+  11 => 'cart_num',
+  12 => 'user',
+  13 => 'weixin_img',
+  14 => 'kefu_qq',
+  15 => 'now_url',
+  16 => 'now_url_false',
+  17 => 'sub_domain_status',
+  18 => 'is_home',
+  19 => 'meta_title',
+  20 => 'meta_keyword',
+  21 => 'meta_description',
+  22 => 'search_history',
+  23 => 'like',
+  24 => 'arr_header_category',
+  25 => 'arr_header_nav',
+  26 => 'catalog_search',
+  27 => 'top_protocol_title',
+  28 => 'top_protocol_id',
+  29 => 'arr_np',
+  30 => 'arr_brand',
+  31 => 'article',
+  32 => 'data',
+) ]
+[ info ] [ LOG ] INIT File
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`name`,`logo` FROM `rt_crossbbcg_brand` WHERE  `id` IN (:where_id_in_1,:where_id_in_2,:where_id_in_3,:where_id_in_4,:where_id_in_5,:where_id_in_6,:where_id_in_7,:where_id_in_8,:where_id_in_9,:where_id_in_10,:where_id_in_11,:where_id_in_12,:where_id_in_13,:where_id_in_14,:where_id_in_15,:where_id_in_16,:where_id_in_17,:where_id_in_18,:where_id_in_19,:where_id_in_20,:where_id_in_21,:where_id_in_22,:where_id_in_23,:where_id_in_24,:where_id_in_25,:where_id_in_26,:where_id_in_27,:where_id_in_28,:where_id_in_29,:where_id_in_30,:where_id_in_31,:where_id_in_32,:where_id_in_33,:where_id_in_34,:where_id_in_35,:where_id_in_36,:where_id_in_37)  AND `isrecommend` = :where_isrecommend  AND `status` = :where_status ORDER BY `sort`  ASC LIMIT 10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`name`,`logo` FROM `rt_crossbbcg_brand` WHERE  `id` IN (:where_id_in_1,:where_id_in_2,:where_id_in_3,:where_id_in_4,:where_id_in_5,:where_id_in_6,:where_id_in_7,:where_id_in_8,:where_id_in_9,:where_id_in_10,:where_id_in_11,:where_id_in_12,:where_id_in_13,:where_id_in_14,:where_id_in_15)  AND `isrecommend` = :where_isrecommend  AND `status` = :where_status ORDER BY `sort`  ASC LIMIT 10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`name`,`logo` FROM `rt_crossbbcg_brand` WHERE  `id` IN (:where_id_in_1,:where_id_in_2,:where_id_in_3,:where_id_in_4,:where_id_in_5,:where_id_in_6,:where_id_in_7,:where_id_in_8,:where_id_in_9,:where_id_in_10,:where_id_in_11,:where_id_in_12,:where_id_in_13)  AND `isrecommend` = :where_isrecommend  AND `status` = :where_status ORDER BY `sort`  ASC LIMIT 10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`name`,`logo` FROM `rt_crossbbcg_brand` WHERE  `id` IN (:where_id_in_1,:where_id_in_2,:where_id_in_3,:where_id_in_4,:where_id_in_5,:where_id_in_6,:where_id_in_7,:where_id_in_8,:where_id_in_9,:where_id_in_10)  AND `isrecommend` = :where_isrecommend  AND `status` = :where_status ORDER BY `sort`  ASC LIMIT 10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`name`,`logo` FROM `rt_crossbbcg_brand` WHERE  `id` IN (:where_id_in_1,:where_id_in_2,:where_id_in_3,:where_id_in_4,:where_id_in_5,:where_id_in_6,:where_id_in_7,:where_id_in_8,:where_id_in_9,:where_id_in_10,:where_id_in_11,:where_id_in_12,:where_id_in_13,:where_id_in_14,:where_id_in_15,:where_id_in_16,:where_id_in_17,:where_id_in_18)  AND `isrecommend` = :where_isrecommend  AND `status` = :where_status ORDER BY `sort`  ASC LIMIT 10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`name`,`logo` FROM `rt_crossbbcg_brand` WHERE  `id` IN (:where_id_in_1,:where_id_in_2,:where_id_in_3,:where_id_in_4,:where_id_in_5,:where_id_in_6,:where_id_in_7,:where_id_in_8,:where_id_in_9,:where_id_in_10)  AND `isrecommend` = :where_isrecommend  AND `status` = :where_status ORDER BY `sort`  ASC LIMIT 10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`url`,`title` FROM `rt_crossbbcg_nav` WHERE  `status` = :where_status  AND `type` = :where_type ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`url`,`title` FROM `rt_crossbbcg_nav` WHERE  `status` = :where_status  AND `type` = :where_type ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 5  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 5  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 3  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 5  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_national_pavilion` WHERE  `status` = :where_status  AND `is_home` = :where_is_home  AND `langid` = :where_langid ORDER BY `sort`  ASC [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_brand` WHERE  `country_id` = :where_country_id  AND `status` = :where_status  AND `langid` = :where_langid  AND `isrecommend` = :where_isrecommend ORDER BY `sort`  asc LIMIT 4  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_brand` WHERE  `country_id` = :where_country_id  AND `status` = :where_status  AND `langid` = :where_langid  AND `isrecommend` = :where_isrecommend ORDER BY `sort`  asc LIMIT 4  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_brand` WHERE  `country_id` = :where_country_id  AND `status` = :where_status  AND `langid` = :where_langid  AND `isrecommend` = :where_isrecommend ORDER BY `sort`  asc LIMIT 4  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 16  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,5  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 16  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,5  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 16  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,5  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 16  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,5  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 16  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,5  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 14  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 14  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 14  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 14  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 17  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 17  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 17  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 17  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,10  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 9  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 6  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 1  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 17  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 18  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 18  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 18  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 18  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,10  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 9  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 6  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 1  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 18  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 19  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,35  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 19  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,35  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 19  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,35  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 19  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,35  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 9  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 6  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 1  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 19  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,10  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_cms_articlecat` WHERE  `show_in_nav` = :where_show_in_nav  AND `pid` = :where_pid ORDER BY sort asc LIMIT 1  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_cms_articlecat` WHERE  `show_in_nav` = :where_show_in_nav  AND `pid` = :where_pid ORDER BY sort asc LIMIT 4  [Using where; Using filesort]
+---------------------------------------------------------------
+[ 2018-04-16T16:17:15+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php/crossbbcg/
+[ info ] tp5.localweb.com/index.php/crossbbcg/ [运行时间：0.547031s][吞吐率：1.83req/s] [内存消耗：4,593.51kb] [文件加载：124]
+[ info ] [ BEHAVIOR ] Run \app\common\libs\Hook @app_init [ RunTime:0.034002s ]
+[ info ] [ LANG ] D:\git\my\tp5\core\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'crossbbcg',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'cookie' => '_ga=GA1.2.698488944.1490627618; _gid=GA1.2.439709786.1523863179; Qs_lvt_194025=1523866567; Qs_pv_194025=1313944749954555000%2C3515722764292672000%2C4163177577645791000; Hm_lvt_0311ccb4961223ed160802660045048d=1523866569; Hm_lpvt_0311ccb4961223ed160802660045048d=1523866598',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0',
+  'host' => 'tp5.localweb.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LANG ] D:\git\my\tp5\public/../site/crossbbcg\lang\zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Regconf @module_init [ RunTime:0.004000s ]
+[ info ] [ LANG ] D:\git\my\tp5\site\common\lang\zh-cn.php
+[ info ] [ CACHE ] INIT File
+[ info ] [ LANG ] D:\git\my\tp5\runtime\/lang/ui_zh-cn.php
+[ info ] [ LANG ] D:\git\my\tp5\runtime\lang\ui_zh-cn.php
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'FwpFMKbA',
+  'type' => '',
+  'auto_start' => true,
+  'domain' => 'localhost.com',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\crossbbcg\controller\Index->index[ D:\git\my\tp5\site\crossbbcg\controller\Index.php ]
+[ info ] [ VIEW ] D:\git\my\tp5\public/../site/crossbbcg/view/pc/default/index\index.html [ array (
+  0 => 'module_name',
+  1 => 'controller_name',
+  2 => 'action_name',
+  3 => 'path',
+  4 => 'css_path',
+  5 => 'js_path',
+  6 => 'img_path',
+  7 => 'module_path',
+  8 => 'applist',
+  9 => 'shopname',
+  10 => 'shoplogo',
+  11 => 'cart_num',
+  12 => 'user',
+  13 => 'weixin_img',
+  14 => 'kefu_qq',
+  15 => 'now_url',
+  16 => 'now_url_false',
+  17 => 'sub_domain_status',
+  18 => 'is_home',
+  19 => 'meta_title',
+  20 => 'meta_keyword',
+  21 => 'meta_description',
+) ]
+[ info ] [ RUN ] app\crossbbcg\widget\Common->header[ D:\git\my\tp5\site\crossbbcg\widget\Common.php ]
+[ info ] [ VIEW ] D:\git\my\tp5\public/../site/crossbbcg/view/pc/default/common/header.html [ array (
+  0 => 'module_name',
+  1 => 'controller_name',
+  2 => 'action_name',
+  3 => 'path',
+  4 => 'css_path',
+  5 => 'js_path',
+  6 => 'img_path',
+  7 => 'module_path',
+  8 => 'applist',
+  9 => 'shopname',
+  10 => 'shoplogo',
+  11 => 'cart_num',
+  12 => 'user',
+  13 => 'weixin_img',
+  14 => 'kefu_qq',
+  15 => 'now_url',
+  16 => 'now_url_false',
+  17 => 'sub_domain_status',
+  18 => 'is_home',
+  19 => 'meta_title',
+  20 => 'meta_keyword',
+  21 => 'meta_description',
+  22 => 'search_history',
+  23 => 'like',
+  24 => 'arr_header_category',
+  25 => 'arr_header_nav',
+  26 => 'catalog_search',
+  27 => 'top_protocol_title',
+  28 => 'top_protocol_id',
+) ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Column->national_pavilion[ D:\git\my\tp5\site\crossbbcg\widget\Column.php ]
+[ info ] [ VIEW ] D:\git\my\tp5\public/../site/crossbbcg/view/pc/default/column/national_pavilion.html [ array (
+  0 => 'module_name',
+  1 => 'controller_name',
+  2 => 'action_name',
+  3 => 'path',
+  4 => 'css_path',
+  5 => 'js_path',
+  6 => 'img_path',
+  7 => 'module_path',
+  8 => 'applist',
+  9 => 'shopname',
+  10 => 'shoplogo',
+  11 => 'cart_num',
+  12 => 'user',
+  13 => 'weixin_img',
+  14 => 'kefu_qq',
+  15 => 'now_url',
+  16 => 'now_url_false',
+  17 => 'sub_domain_status',
+  18 => 'is_home',
+  19 => 'meta_title',
+  20 => 'meta_keyword',
+  21 => 'meta_description',
+  22 => 'search_history',
+  23 => 'like',
+  24 => 'arr_header_category',
+  25 => 'arr_header_nav',
+  26 => 'catalog_search',
+  27 => 'top_protocol_title',
+  28 => 'top_protocol_id',
+  29 => 'arr_np',
+  30 => 'arr_brand',
+) ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Common->toolbar[ D:\git\my\tp5\site\crossbbcg\widget\Common.php ]
+[ info ] [ VIEW ] D:\git\my\tp5\public/../site/crossbbcg/view/pc/default/common/toolbar.html [ array (
+  0 => 'module_name',
+  1 => 'controller_name',
+  2 => 'action_name',
+  3 => 'path',
+  4 => 'css_path',
+  5 => 'js_path',
+  6 => 'img_path',
+  7 => 'module_path',
+  8 => 'applist',
+  9 => 'shopname',
+  10 => 'shoplogo',
+  11 => 'cart_num',
+  12 => 'user',
+  13 => 'weixin_img',
+  14 => 'kefu_qq',
+  15 => 'now_url',
+  16 => 'now_url_false',
+  17 => 'sub_domain_status',
+  18 => 'is_home',
+  19 => 'meta_title',
+  20 => 'meta_keyword',
+  21 => 'meta_description',
+  22 => 'search_history',
+  23 => 'like',
+  24 => 'arr_header_category',
+  25 => 'arr_header_nav',
+  26 => 'catalog_search',
+  27 => 'top_protocol_title',
+  28 => 'top_protocol_id',
+  29 => 'arr_np',
+  30 => 'arr_brand',
+) ]
+[ info ] [ RUN ] app\crossbbcg\widget\Common->footer[ D:\git\my\tp5\site\crossbbcg\widget\Common.php ]
+[ info ] [ VIEW ] D:\git\my\tp5\public/../site/crossbbcg/view/pc/default/common/footer.html [ array (
+  0 => 'module_name',
+  1 => 'controller_name',
+  2 => 'action_name',
+  3 => 'path',
+  4 => 'css_path',
+  5 => 'js_path',
+  6 => 'img_path',
+  7 => 'module_path',
+  8 => 'applist',
+  9 => 'shopname',
+  10 => 'shoplogo',
+  11 => 'cart_num',
+  12 => 'user',
+  13 => 'weixin_img',
+  14 => 'kefu_qq',
+  15 => 'now_url',
+  16 => 'now_url_false',
+  17 => 'sub_domain_status',
+  18 => 'is_home',
+  19 => 'meta_title',
+  20 => 'meta_keyword',
+  21 => 'meta_description',
+  22 => 'search_history',
+  23 => 'like',
+  24 => 'arr_header_category',
+  25 => 'arr_header_nav',
+  26 => 'catalog_search',
+  27 => 'top_protocol_title',
+  28 => 'top_protocol_id',
+  29 => 'arr_np',
+  30 => 'arr_brand',
+  31 => 'article',
+  32 => 'data',
+) ]
+[ info ] [ LOG ] INIT File
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`name`,`logo` FROM `rt_crossbbcg_brand` WHERE  `id` IN (:where_id_in_1,:where_id_in_2,:where_id_in_3,:where_id_in_4,:where_id_in_5,:where_id_in_6,:where_id_in_7,:where_id_in_8,:where_id_in_9,:where_id_in_10,:where_id_in_11,:where_id_in_12,:where_id_in_13,:where_id_in_14,:where_id_in_15,:where_id_in_16,:where_id_in_17,:where_id_in_18,:where_id_in_19,:where_id_in_20,:where_id_in_21,:where_id_in_22,:where_id_in_23,:where_id_in_24,:where_id_in_25,:where_id_in_26,:where_id_in_27,:where_id_in_28,:where_id_in_29,:where_id_in_30,:where_id_in_31,:where_id_in_32,:where_id_in_33,:where_id_in_34,:where_id_in_35,:where_id_in_36,:where_id_in_37)  AND `isrecommend` = :where_isrecommend  AND `status` = :where_status ORDER BY `sort`  ASC LIMIT 10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`name`,`logo` FROM `rt_crossbbcg_brand` WHERE  `id` IN (:where_id_in_1,:where_id_in_2,:where_id_in_3,:where_id_in_4,:where_id_in_5,:where_id_in_6,:where_id_in_7,:where_id_in_8,:where_id_in_9,:where_id_in_10,:where_id_in_11,:where_id_in_12,:where_id_in_13,:where_id_in_14,:where_id_in_15)  AND `isrecommend` = :where_isrecommend  AND `status` = :where_status ORDER BY `sort`  ASC LIMIT 10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`name`,`logo` FROM `rt_crossbbcg_brand` WHERE  `id` IN (:where_id_in_1,:where_id_in_2,:where_id_in_3,:where_id_in_4,:where_id_in_5,:where_id_in_6,:where_id_in_7,:where_id_in_8,:where_id_in_9,:where_id_in_10,:where_id_in_11,:where_id_in_12,:where_id_in_13)  AND `isrecommend` = :where_isrecommend  AND `status` = :where_status ORDER BY `sort`  ASC LIMIT 10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`name`,`logo` FROM `rt_crossbbcg_brand` WHERE  `id` IN (:where_id_in_1,:where_id_in_2,:where_id_in_3,:where_id_in_4,:where_id_in_5,:where_id_in_6,:where_id_in_7,:where_id_in_8,:where_id_in_9,:where_id_in_10)  AND `isrecommend` = :where_isrecommend  AND `status` = :where_status ORDER BY `sort`  ASC LIMIT 10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`name`,`logo` FROM `rt_crossbbcg_brand` WHERE  `id` IN (:where_id_in_1,:where_id_in_2,:where_id_in_3,:where_id_in_4,:where_id_in_5,:where_id_in_6,:where_id_in_7,:where_id_in_8,:where_id_in_9,:where_id_in_10,:where_id_in_11,:where_id_in_12,:where_id_in_13,:where_id_in_14,:where_id_in_15,:where_id_in_16,:where_id_in_17,:where_id_in_18)  AND `isrecommend` = :where_isrecommend  AND `status` = :where_status ORDER BY `sort`  ASC LIMIT 10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`name`,`logo` FROM `rt_crossbbcg_brand` WHERE  `id` IN (:where_id_in_1,:where_id_in_2,:where_id_in_3,:where_id_in_4,:where_id_in_5,:where_id_in_6,:where_id_in_7,:where_id_in_8,:where_id_in_9,:where_id_in_10)  AND `isrecommend` = :where_isrecommend  AND `status` = :where_status ORDER BY `sort`  ASC LIMIT 10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`url`,`title` FROM `rt_crossbbcg_nav` WHERE  `status` = :where_status  AND `type` = :where_type ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`url`,`title` FROM `rt_crossbbcg_nav` WHERE  `status` = :where_status  AND `type` = :where_type ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 5  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 5  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 3  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 5  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_national_pavilion` WHERE  `status` = :where_status  AND `is_home` = :where_is_home  AND `langid` = :where_langid ORDER BY `sort`  ASC [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_brand` WHERE  `country_id` = :where_country_id  AND `status` = :where_status  AND `langid` = :where_langid  AND `isrecommend` = :where_isrecommend ORDER BY `sort`  asc LIMIT 4  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_brand` WHERE  `country_id` = :where_country_id  AND `status` = :where_status  AND `langid` = :where_langid  AND `isrecommend` = :where_isrecommend ORDER BY `sort`  asc LIMIT 4  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_brand` WHERE  `country_id` = :where_country_id  AND `status` = :where_status  AND `langid` = :where_langid  AND `isrecommend` = :where_isrecommend ORDER BY `sort`  asc LIMIT 4  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 16  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,5  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 16  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,5  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 16  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,5  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 16  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,5  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 16  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,5  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 14  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 14  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 14  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 14  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 17  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 17  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 17  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 17  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,10  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 9  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 6  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 1  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 17  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 18  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 18  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 18  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 18  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,10  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 9  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 6  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 1  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 18  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 19  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,35  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 19  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,35  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 19  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,35  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 19  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,35  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 9  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 6  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 1  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 19  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,10  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_cms_articlecat` WHERE  `show_in_nav` = :where_show_in_nav  AND `pid` = :where_pid ORDER BY sort asc LIMIT 1  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_cms_articlecat` WHERE  `show_in_nav` = :where_show_in_nav  AND `pid` = :where_pid ORDER BY sort asc LIMIT 4  [Using where; Using filesort]
+---------------------------------------------------------------
+[ 2018-04-16T16:17:32+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php/admin
+[ info ] tp5.localweb.com/index.php/admin [运行时间：0.091005s][吞吐率：10.99req/s] [内存消耗：1,976.30kb] [文件加载：78]
+[ info ] [ BEHAVIOR ] Run \app\common\libs\Hook @app_init [ RunTime:0.032002s ]
+[ info ] [ LANG ] D:\git\my\tp5\core\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'cookie' => '_ga=GA1.2.698488944.1490627618; _gid=GA1.2.439709786.1523863179; Qs_lvt_194025=1523866567; Qs_pv_194025=1313944749954555000%2C3515722764292672000%2C4163177577645791000; Hm_lvt_0311ccb4961223ed160802660045048d=1523866569; Hm_lpvt_0311ccb4961223ed160802660045048d=1523866598',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0',
+  'host' => 'tp5.localweb.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LANG ] D:\git\my\tp5\public/../site/admin\lang\zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Regconf @module_init [ RunTime:0.006000s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'FwpFMKbA',
+  'type' => '',
+  'auto_start' => true,
+  'domain' => 'localhost.com',
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-04-16T16:17:32+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php/admin/passport/login
+[ info ] tp5.localweb.com/index.php/admin/passport/login [运行时间：0.083005s][吞吐率：12.05req/s] [内存消耗：2,049.84kb] [文件加载：82]
+[ info ] [ BEHAVIOR ] Run \app\common\libs\Hook @app_init [ RunTime:0.031002s ]
+[ info ] [ LANG ] D:\git\my\tp5\core\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'passport',
+    2 => 'login',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'cookie' => '_ga=GA1.2.698488944.1490627618; _gid=GA1.2.439709786.1523863179; Qs_lvt_194025=1523866567; Qs_pv_194025=1313944749954555000%2C3515722764292672000%2C4163177577645791000; Hm_lvt_0311ccb4961223ed160802660045048d=1523866569; Hm_lpvt_0311ccb4961223ed160802660045048d=1523866598',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0',
+  'host' => 'tp5.localweb.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'c' => 'passport',
+  'a' => 'login',
+)
+[ info ] [ LANG ] D:\git\my\tp5\public/../site/admin\lang\zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Regconf @module_init [ RunTime:0.004000s ]
+[ info ] [ LANG ] D:\git\my\tp5\site\common\lang\zh-cn.php
+[ info ] [ CACHE ] INIT File
+[ info ] [ RUN ] app\admin\controller\Passport->login[ D:\git\my\tp5\site\admin\controller\Passport.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'FwpFMKbA',
+  'type' => '',
+  'auto_start' => true,
+  'domain' => 'localhost.com',
+)
+[ info ] [ VIEW ] D:\git\my\tp5\public/../site/admin/view/passport\login.html [ array (
+  0 => 'module_name',
+  1 => 'controller_name',
+  2 => 'action_name',
+  3 => 'path',
+  4 => 'css_path',
+  5 => 'js_path',
+  6 => 'img_path',
+  7 => 'module_path',
+  8 => 'applist',
+  9 => 'verify',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-04-16T16:17:32+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php/admin/passport/gt?t=1523866652462
+[ info ] tp5.localweb.com/index.php/admin/passport/gt?t=1523866652462 [运行时间：0.115007s][吞吐率：8.70req/s] [内存消耗：1,915.08kb] [文件加载：84]
+[ info ] [ BEHAVIOR ] Run \app\common\libs\Hook @app_init [ RunTime:0.052003s ]
+[ info ] [ LANG ] D:\git\my\tp5\core\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'passport',
+    2 => 'gt',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'keep-alive',
+  'cookie' => '_ga=GA1.2.698488944.1490627618; _gid=GA1.2.439709786.1523863179; Qs_lvt_194025=1523866567; Qs_pv_194025=1313944749954555000%2C3515722764292672000%2C4163177577645791000; Hm_lvt_0311ccb4961223ed160802660045048d=1523866569; Hm_lpvt_0311ccb4961223ed160802660045048d=1523866598',
+  'x-requested-with' => 'XMLHttpRequest',
+  'referer' => 'http://tp5.localweb.com/index.php/admin/passport/login',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => 'application/json, text/javascript, */*; q=0.01',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0',
+  'host' => 'tp5.localweb.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  't' => '1523866652462',
+  'c' => 'passport',
+  'a' => 'gt ',
+)
+[ info ] [ LANG ] D:\git\my\tp5\public/../site/admin\lang\zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Regconf @module_init [ RunTime:0.007000s ]
+[ info ] [ LANG ] D:\git\my\tp5\site\common\lang\zh-cn.php
+[ info ] [ CACHE ] INIT File
+[ info ] [ RUN ] app\admin\controller\Passport->gt[ D:\git\my\tp5\site\admin\controller\Passport.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'FwpFMKbA',
+  'type' => '',
+  'auto_start' => true,
+  'domain' => 'localhost.com',
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-04-16T16:26:49+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php/admin/passport/login
+[ info ] tp5.localweb.com/index.php/admin/passport/login [运行时间：0.130007s][吞吐率：7.69req/s] [内存消耗：1,919.31kb] [文件加载：80]
+[ info ] [ BEHAVIOR ] Run \app\common\libs\Hook @app_init [ RunTime:0.053003s ]
+[ info ] [ LANG ] D:\git\my\tp5\core\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'passport',
+    2 => 'login',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'cookie' => '_ga=GA1.2.698488944.1490627618; _gid=GA1.2.439709786.1523863179; Qs_lvt_194025=1523866567; Qs_pv_194025=1313944749954555000%2C3515722764292672000%2C4163177577645791000; Hm_lvt_0311ccb4961223ed160802660045048d=1523866569; Hm_lpvt_0311ccb4961223ed160802660045048d=1523866598',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0',
+  'host' => 'tp5.localweb.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'c' => 'passport',
+  'a' => 'login',
+)
+[ info ] [ LANG ] D:\git\my\tp5\public/../site/admin\lang\zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Regconf @module_init [ RunTime:0.005000s ]
+[ info ] [ LANG ] D:\git\my\tp5\site\common\lang\zh-cn.php
+[ info ] [ CACHE ] INIT File
+[ info ] [ RUN ] app\admin\controller\Passport->login[ D:\git\my\tp5\site\admin\controller\Passport.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'FwpFMKbA',
+  'type' => '',
+  'auto_start' => true,
+  'domain' => 'localhost.com',
+)
+[ info ] [ VIEW ] D:\git\my\tp5\public/../site/admin/view/passport\login.html [ array (
+  0 => 'module_name',
+  1 => 'controller_name',
+  2 => 'action_name',
+  3 => 'path',
+  4 => 'css_path',
+  5 => 'js_path',
+  6 => 'img_path',
+  7 => 'module_path',
+  8 => 'applist',
+  9 => 'verify',
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-04-16T16:26:50+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php/admin/passport/gt?t=1523867210696
+[ info ] tp5.localweb.com/index.php/admin/passport/gt?t=1523867210696 [运行时间：0.121007s][吞吐率：8.26req/s] [内存消耗：1,915.08kb] [文件加载：84]
+[ info ] [ BEHAVIOR ] Run \app\common\libs\Hook @app_init [ RunTime:0.042003s ]
+[ info ] [ LANG ] D:\git\my\tp5\core\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'passport',
+    2 => 'gt',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'keep-alive',
+  'cookie' => '_ga=GA1.2.698488944.1490627618; _gid=GA1.2.439709786.1523863179; Qs_lvt_194025=1523866567; Qs_pv_194025=1313944749954555000%2C3515722764292672000%2C4163177577645791000; Hm_lvt_0311ccb4961223ed160802660045048d=1523866569; Hm_lpvt_0311ccb4961223ed160802660045048d=1523866598',
+  'x-requested-with' => 'XMLHttpRequest',
+  'referer' => 'http://tp5.localweb.com/index.php/admin/passport/login',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => 'application/json, text/javascript, */*; q=0.01',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0',
+  'host' => 'tp5.localweb.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  't' => '1523867210696',
+  'c' => 'passport',
+  'a' => 'gt ',
+)
+[ info ] [ LANG ] D:\git\my\tp5\public/../site/admin\lang\zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Regconf @module_init [ RunTime:0.010000s ]
+[ info ] [ LANG ] D:\git\my\tp5\site\common\lang\zh-cn.php
+[ info ] [ CACHE ] INIT File
+[ info ] [ RUN ] app\admin\controller\Passport->gt[ D:\git\my\tp5\site\admin\controller\Passport.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'FwpFMKbA',
+  'type' => '',
+  'auto_start' => true,
+  'domain' => 'localhost.com',
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-04-16T16:29:33+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php/crossbbcg/
+[ info ] tp5.localweb.com/index.php/crossbbcg/ [运行时间：0.513029s][吞吐率：1.95req/s] [内存消耗：4,593.51kb] [文件加载：124]
+[ info ] [ BEHAVIOR ] Run \app\common\libs\Hook @app_init [ RunTime:0.034002s ]
+[ info ] [ LANG ] D:\git\my\tp5\core\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'crossbbcg',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'cookie' => '_ga=GA1.2.698488944.1490627618; _gid=GA1.2.439709786.1523863179; Qs_lvt_194025=1523866567; Qs_pv_194025=1313944749954555000%2C3515722764292672000%2C4163177577645791000; Hm_lvt_0311ccb4961223ed160802660045048d=1523866569; Hm_lpvt_0311ccb4961223ed160802660045048d=1523866598',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0',
+  'host' => 'tp5.localweb.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LANG ] D:\git\my\tp5\public/../site/crossbbcg\lang\zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Regconf @module_init [ RunTime:0.005000s ]
+[ info ] [ LANG ] D:\git\my\tp5\site\common\lang\zh-cn.php
+[ info ] [ CACHE ] INIT File
+[ info ] [ LANG ] D:\git\my\tp5\runtime\/lang/ui_zh-cn.php
+[ info ] [ LANG ] D:\git\my\tp5\runtime\lang\ui_zh-cn.php
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'FwpFMKbA',
+  'type' => '',
+  'auto_start' => true,
+  'domain' => 'localhost.com',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\crossbbcg\controller\Index->index[ D:\git\my\tp5\site\crossbbcg\controller\Index.php ]
+[ info ] [ VIEW ] D:\git\my\tp5\public/../site/crossbbcg/view/pc/default/index\index.html [ array (
+  0 => 'module_name',
+  1 => 'controller_name',
+  2 => 'action_name',
+  3 => 'path',
+  4 => 'css_path',
+  5 => 'js_path',
+  6 => 'img_path',
+  7 => 'module_path',
+  8 => 'applist',
+  9 => 'shopname',
+  10 => 'shoplogo',
+  11 => 'cart_num',
+  12 => 'user',
+  13 => 'weixin_img',
+  14 => 'kefu_qq',
+  15 => 'now_url',
+  16 => 'now_url_false',
+  17 => 'sub_domain_status',
+  18 => 'is_home',
+  19 => 'meta_title',
+  20 => 'meta_keyword',
+  21 => 'meta_description',
+) ]
+[ info ] [ RUN ] app\crossbbcg\widget\Common->header[ D:\git\my\tp5\site\crossbbcg\widget\Common.php ]
+[ info ] [ VIEW ] D:\git\my\tp5\public/../site/crossbbcg/view/pc/default/common/header.html [ array (
+  0 => 'module_name',
+  1 => 'controller_name',
+  2 => 'action_name',
+  3 => 'path',
+  4 => 'css_path',
+  5 => 'js_path',
+  6 => 'img_path',
+  7 => 'module_path',
+  8 => 'applist',
+  9 => 'shopname',
+  10 => 'shoplogo',
+  11 => 'cart_num',
+  12 => 'user',
+  13 => 'weixin_img',
+  14 => 'kefu_qq',
+  15 => 'now_url',
+  16 => 'now_url_false',
+  17 => 'sub_domain_status',
+  18 => 'is_home',
+  19 => 'meta_title',
+  20 => 'meta_keyword',
+  21 => 'meta_description',
+  22 => 'search_history',
+  23 => 'like',
+  24 => 'arr_header_category',
+  25 => 'arr_header_nav',
+  26 => 'catalog_search',
+  27 => 'top_protocol_title',
+  28 => 'top_protocol_id',
+) ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Column->national_pavilion[ D:\git\my\tp5\site\crossbbcg\widget\Column.php ]
+[ info ] [ VIEW ] D:\git\my\tp5\public/../site/crossbbcg/view/pc/default/column/national_pavilion.html [ array (
+  0 => 'module_name',
+  1 => 'controller_name',
+  2 => 'action_name',
+  3 => 'path',
+  4 => 'css_path',
+  5 => 'js_path',
+  6 => 'img_path',
+  7 => 'module_path',
+  8 => 'applist',
+  9 => 'shopname',
+  10 => 'shoplogo',
+  11 => 'cart_num',
+  12 => 'user',
+  13 => 'weixin_img',
+  14 => 'kefu_qq',
+  15 => 'now_url',
+  16 => 'now_url_false',
+  17 => 'sub_domain_status',
+  18 => 'is_home',
+  19 => 'meta_title',
+  20 => 'meta_keyword',
+  21 => 'meta_description',
+  22 => 'search_history',
+  23 => 'like',
+  24 => 'arr_header_category',
+  25 => 'arr_header_nav',
+  26 => 'catalog_search',
+  27 => 'top_protocol_title',
+  28 => 'top_protocol_id',
+  29 => 'arr_np',
+  30 => 'arr_brand',
+) ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Ad->get_goods_ad[ D:\git\my\tp5\site\crossbbcg\widget\Ad.php ]
+[ info ] [ RUN ] app\crossbbcg\widget\Common->toolbar[ D:\git\my\tp5\site\crossbbcg\widget\Common.php ]
+[ info ] [ VIEW ] D:\git\my\tp5\public/../site/crossbbcg/view/pc/default/common/toolbar.html [ array (
+  0 => 'module_name',
+  1 => 'controller_name',
+  2 => 'action_name',
+  3 => 'path',
+  4 => 'css_path',
+  5 => 'js_path',
+  6 => 'img_path',
+  7 => 'module_path',
+  8 => 'applist',
+  9 => 'shopname',
+  10 => 'shoplogo',
+  11 => 'cart_num',
+  12 => 'user',
+  13 => 'weixin_img',
+  14 => 'kefu_qq',
+  15 => 'now_url',
+  16 => 'now_url_false',
+  17 => 'sub_domain_status',
+  18 => 'is_home',
+  19 => 'meta_title',
+  20 => 'meta_keyword',
+  21 => 'meta_description',
+  22 => 'search_history',
+  23 => 'like',
+  24 => 'arr_header_category',
+  25 => 'arr_header_nav',
+  26 => 'catalog_search',
+  27 => 'top_protocol_title',
+  28 => 'top_protocol_id',
+  29 => 'arr_np',
+  30 => 'arr_brand',
+) ]
+[ info ] [ RUN ] app\crossbbcg\widget\Common->footer[ D:\git\my\tp5\site\crossbbcg\widget\Common.php ]
+[ info ] [ VIEW ] D:\git\my\tp5\public/../site/crossbbcg/view/pc/default/common/footer.html [ array (
+  0 => 'module_name',
+  1 => 'controller_name',
+  2 => 'action_name',
+  3 => 'path',
+  4 => 'css_path',
+  5 => 'js_path',
+  6 => 'img_path',
+  7 => 'module_path',
+  8 => 'applist',
+  9 => 'shopname',
+  10 => 'shoplogo',
+  11 => 'cart_num',
+  12 => 'user',
+  13 => 'weixin_img',
+  14 => 'kefu_qq',
+  15 => 'now_url',
+  16 => 'now_url_false',
+  17 => 'sub_domain_status',
+  18 => 'is_home',
+  19 => 'meta_title',
+  20 => 'meta_keyword',
+  21 => 'meta_description',
+  22 => 'search_history',
+  23 => 'like',
+  24 => 'arr_header_category',
+  25 => 'arr_header_nav',
+  26 => 'catalog_search',
+  27 => 'top_protocol_title',
+  28 => 'top_protocol_id',
+  29 => 'arr_np',
+  30 => 'arr_brand',
+  31 => 'article',
+  32 => 'data',
+) ]
+[ info ] [ LOG ] INIT File
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`name`,`logo` FROM `rt_crossbbcg_brand` WHERE  `id` IN (:where_id_in_1,:where_id_in_2,:where_id_in_3,:where_id_in_4,:where_id_in_5,:where_id_in_6,:where_id_in_7,:where_id_in_8,:where_id_in_9,:where_id_in_10,:where_id_in_11,:where_id_in_12,:where_id_in_13,:where_id_in_14,:where_id_in_15,:where_id_in_16,:where_id_in_17,:where_id_in_18,:where_id_in_19,:where_id_in_20,:where_id_in_21,:where_id_in_22,:where_id_in_23,:where_id_in_24,:where_id_in_25,:where_id_in_26,:where_id_in_27,:where_id_in_28,:where_id_in_29,:where_id_in_30,:where_id_in_31,:where_id_in_32,:where_id_in_33,:where_id_in_34,:where_id_in_35,:where_id_in_36,:where_id_in_37)  AND `isrecommend` = :where_isrecommend  AND `status` = :where_status ORDER BY `sort`  ASC LIMIT 10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`name`,`logo` FROM `rt_crossbbcg_brand` WHERE  `id` IN (:where_id_in_1,:where_id_in_2,:where_id_in_3,:where_id_in_4,:where_id_in_5,:where_id_in_6,:where_id_in_7,:where_id_in_8,:where_id_in_9,:where_id_in_10,:where_id_in_11,:where_id_in_12,:where_id_in_13,:where_id_in_14,:where_id_in_15)  AND `isrecommend` = :where_isrecommend  AND `status` = :where_status ORDER BY `sort`  ASC LIMIT 10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`name`,`logo` FROM `rt_crossbbcg_brand` WHERE  `id` IN (:where_id_in_1,:where_id_in_2,:where_id_in_3,:where_id_in_4,:where_id_in_5,:where_id_in_6,:where_id_in_7,:where_id_in_8,:where_id_in_9,:where_id_in_10,:where_id_in_11,:where_id_in_12,:where_id_in_13)  AND `isrecommend` = :where_isrecommend  AND `status` = :where_status ORDER BY `sort`  ASC LIMIT 10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`name`,`logo` FROM `rt_crossbbcg_brand` WHERE  `id` IN (:where_id_in_1,:where_id_in_2,:where_id_in_3,:where_id_in_4,:where_id_in_5,:where_id_in_6,:where_id_in_7,:where_id_in_8,:where_id_in_9,:where_id_in_10)  AND `isrecommend` = :where_isrecommend  AND `status` = :where_status ORDER BY `sort`  ASC LIMIT 10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`name`,`logo` FROM `rt_crossbbcg_brand` WHERE  `id` IN (:where_id_in_1,:where_id_in_2,:where_id_in_3,:where_id_in_4,:where_id_in_5,:where_id_in_6,:where_id_in_7,:where_id_in_8,:where_id_in_9,:where_id_in_10,:where_id_in_11,:where_id_in_12,:where_id_in_13,:where_id_in_14,:where_id_in_15,:where_id_in_16,:where_id_in_17,:where_id_in_18)  AND `isrecommend` = :where_isrecommend  AND `status` = :where_status ORDER BY `sort`  ASC LIMIT 10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`name`,`logo` FROM `rt_crossbbcg_brand` WHERE  `id` IN (:where_id_in_1,:where_id_in_2,:where_id_in_3,:where_id_in_4,:where_id_in_5,:where_id_in_6,:where_id_in_7,:where_id_in_8,:where_id_in_9,:where_id_in_10)  AND `isrecommend` = :where_isrecommend  AND `status` = :where_status ORDER BY `sort`  ASC LIMIT 10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`pid`,`title`,`is_recom`,`brand_ids` FROM `rt_crossbbcg_category` WHERE  `pid` = :where_pid  AND `is_recom` = :where_is_recom  AND `pc_status` = :where_pc_status ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`url`,`title` FROM `rt_crossbbcg_nav` WHERE  `status` = :where_status  AND `type` = :where_type ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT `id`,`url`,`title` FROM `rt_crossbbcg_nav` WHERE  `status` = :where_status  AND `type` = :where_type ORDER BY `sort`  ASC LIMIT 7  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 5  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 5  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 3  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 5  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_national_pavilion` WHERE  `status` = :where_status  AND `is_home` = :where_is_home  AND `langid` = :where_langid ORDER BY `sort`  ASC [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_brand` WHERE  `country_id` = :where_country_id  AND `status` = :where_status  AND `langid` = :where_langid  AND `isrecommend` = :where_isrecommend ORDER BY `sort`  asc LIMIT 4  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_brand` WHERE  `country_id` = :where_country_id  AND `status` = :where_status  AND `langid` = :where_langid  AND `isrecommend` = :where_isrecommend ORDER BY `sort`  asc LIMIT 4  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_brand` WHERE  `country_id` = :where_country_id  AND `status` = :where_status  AND `langid` = :where_langid  AND `isrecommend` = :where_isrecommend ORDER BY `sort`  asc LIMIT 4  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 16  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,5  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 16  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,5  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 16  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,5  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 16  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,5  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 16  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,5  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 14  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 14  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 14  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 14  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 17  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 17  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 17  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 17  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,10  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 9  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 6  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 1  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 17  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 18  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 18  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 18  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 18  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,10  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 9  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 6  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 1  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 18  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,10  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 19  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,35  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 19  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,35  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 19  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,35  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 19  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,35  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 9  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 6  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_crossbbcg_advertising` WHERE  `langid` = :where_langid  AND `ad_position` = :where_ad_position  AND `status` = :where_status ORDER BY sort asc LIMIT 1  [Using where; Using filesort]
+[ warn ] SQL:SELECT `g`.`name`,`g`.`thumb`,`g`.`sale_price`,`g`.`id`,`g`.`market_price` FROM `rt_crossbbcg_advertising` `a` LEFT JOIN `rt_crossbbcg_goods` `g` ON `a`.`goods_id`=`g`.`id` WHERE  `a`.`langid` = 'zh-cn'  AND `a`.`ad_position` = 19  AND `a`.`status` = 1 ORDER BY a.sort asc LIMIT 0,10  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_cms_articlecat` WHERE  `show_in_nav` = :where_show_in_nav  AND `pid` = :where_pid ORDER BY sort asc LIMIT 1  [Using where; Using filesort]
+[ warn ] SQL:SELECT * FROM `rt_cms_articlecat` WHERE  `show_in_nav` = :where_show_in_nav  AND `pid` = :where_pid ORDER BY sort asc LIMIT 4  [Using where; Using filesort]

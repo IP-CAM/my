@@ -1,0 +1,163 @@
+{extend name='public/layout'}
+
+{block name='body'}
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+    <div class="fixed-bar">
+        <div class="item-title">
+            <div class="subject">
+                <h3>销售明细</h3>
+                <h5>网站系统销售明细</h5>
+            </div>
+        </div>
+    </div>
+    <div class="flexigrid">
+        <div class="mDiv">
+            <div class="ftitle">
+                <h3>明细列表</h3>
+                <h5>(共条记录)</h5>
+            </div>
+            <div title="刷新数据" class="pReload"><i class="fa fa-refresh"></i></div>
+            <form class="navbar-form form-inline" id="search-form" method="get" action="/index.php/admin/Report/saleList.html" onsubmit="return check_form();">
+                <input type="hidden" name="timegap" id="timegap" value="2016-06-06 - 2017-06-06">
+                <div class="sDiv">
+                    <div class="sDiv2" style="margin-right: 10px;">
+                        <input type="text" size="30" id="start_time" value="2016-06-06" placeholder="起始时间" class="qsbox">
+                        <input type="button" class="btn" value="起始时间">
+                    </div>
+                    <div class="sDiv2" style="margin-right: 10px;">
+                        <input type="text" size="30" id="end_time" value="2017-06-06" placeholder="截止时间" class="qsbox">
+                        <input type="button" class="btn" value="截止时间">
+                    </div>
+                    <div class="sDiv2" style="margin-right: 10px;border: none;">
+                        <select  name="cat_id" id="cat_id" class="form-control">
+                            <option value="0">所有分类</option>
+                            <option value="779" >  0-2岁</option>
+                            <option value="784" >  11-14岁</option>
+                            <option value="781" >  3-6岁</option>
+                            <option value="159" >  3G/4G/5G上网</option>
+                            <option value="783" >  7-10岁</option>
+                            <option value="402" >  沐浴</option>
+                        </select>
+                    </div>
+                    <div class="sDiv2" style="margin-right: 1px;border: none;">
+                        <select name="brand_id" id="brand_id" class="">
+                            <option value="0">所有品牌</option>
+                            <option value="350" >  --   </option>
+                            <option value="224" >  --   361°</option>
+                            <option value="80" >  --   倩碧/CLINIQUE</option>
+                            <option value="194" >  --   宏碁/acer</option>
+                            <option value="27" >  --   怡达/yida</option>
+                        </select>
+                    </div>
+                    <div class="sDiv2">
+                        <input class="btn" value="搜索" type="submit">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="bDiv" style="height: auto;">
+            <div id="flexigrid" cellpadding="0" cellspacing="0" border="0">
+                <table id="dataTable"  cellpadding="0" cellspacing="0" style="table-layout:fixed;border-collapse:collapse;">
+                    <tbody>
+                    <colgroup>
+                        <col style="width:24px;" />
+                        <col style="width:50px;" />
+                        <col style="width:500px;" />
+                        <col style="width:100px;" />
+                        <col style="width:50px;" />
+                        <col style="width:100px;" />
+                        <col style="width:120px;" />
+                    </colgroup>
+                    <tr style="background-color: #f5f5f5;cursor: e-resize">
+                        <td class="sign" axis="col0">
+                            <div style="width: 24px;"><i class="ico-check"></i></div>
+                        </td>
+                        <td align="center" abbr="article_title" axis="col3" class="">
+                            <div style="text-align: center; " class="">ID</div>
+                        </td>
+                        <td align="left" abbr="article_title" axis="col3" class="">
+                            <div style="text-align: left; " class="">商品名称</div>
+                        </td>
+                        <td align="center" abbr="ac_id" axis="col4" class="">
+                            <div style="text-align: center;" class="">商品货号</div>
+                        </td>
+                        <td align="center" abbr="article_show" axis="col5" class="">
+                            <div style="text-align: center;" class="">数量</div>
+                        </td>
+                        <td align="center" abbr="article_time" axis="col6" class="">
+                            <div style="text-align: center;" class="">售价</div>
+                        </td>
+                        <td align="center" abbr="article_time" axis="col6" class="">
+                            <div style="text-align: center;" class="">出售日期</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="sign">
+                            <div style="width: 24px;"><i class="ico-check"></i></div>
+                        </td>
+                        <td align="center" class="">
+                            1500
+                        </td>
+                        <td align="left" class="">
+                            小米手机5,十余项黑科技，很轻狠快
+                        </td>
+                        <td align="center" class="">
+                            TP0000104
+                        </td>
+                        <td align="center" class="">
+                            1
+                        </td>
+                        <td align="center" class="">
+                            6000.00
+                        </td>
+                        <td align="center" class="">
+                            2017-05-28
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="iDiv" style="display: none;"></div>
+        </div>
+        <!--分页位置-->
+        <div class='dataTables_paginate paging_simple_numbers'>
+        
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+        // 表格行点击选中切换
+        $('#flexigrid > table>tbody >tr').click(function(){
+            $(this).toggleClass('trSelected');
+        });
+
+        // 点击刷新数据
+        $('.fa-refresh').click(function(){
+            location.href = location.href;
+        });
+
+        $('#start_time').layDate();
+        $('#end_time').layDate();
+    });
+
+    function check_form(){
+        var start_time = $.trim($('#start_time').val());
+        var end_time =  $.trim($('#end_time').val());
+        if(start_time == '' ^ end_time == ''){
+            layer.alert('请选择完整的时间间隔', {icon: 2});
+            return false;
+        }
+        if(start_time !== '' && end_time !== ''){
+            $('#timegap').val(start_time+" - "+end_time);
+        }
+        if(start_time == '' && end_time == ''){
+            $('#timegap').val('');
+        }
+        return true;
+    }
+</script>
+<script type="text/javascript" src="__PUBLIC__/{$module_path}js/drag.js"></script>
+{/block}

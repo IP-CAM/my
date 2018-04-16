@@ -1,0 +1,115 @@
+        {extend name="public/base"/}
+        
+        <!------ CONTENT ------>
+        {block name="body"}
+        <div id="content">
+            <div class="breadcrumbs">
+                {:lang('General')} : &nbsp;&nbsp; {:lang('Noitfly')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+            </div>
+            
+            <div class="bloc">
+                <div class="title">
+                    <div class="tabs" id="navs">
+                        {include file="public/navs" /}
+                    </div>
+    
+                    {include file="public/lang" /}
+                </div>
+                
+                <div class="content">
+                    <form id="myform" method="post" style="margin-top:5px;" class="">
+                    {notempty name="list"}
+                    <div class="alert alert-info">{:lang('Messager tip')}</div>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th class="left" style="width:35px;">ID</th>
+                            <th class="left" >{:lang('Msglabel')}</th>
+                            <th class="left">{:lang('Appmsg')}</th>
+                            <th class="left">{:lang('Emailmsg')}</th>
+                            <th class="left">{:lang('Smsmsg')}</th>
+                            <th class="left">{:lang('Wechatmsg')}</th>
+                            <th class="left">{:lang('Whatisapp')}</th>
+                            <th class="left">{:lang('Message')}</th>
+                            <th class="actions">{:lang('Appname')}</th>
+                        </tr>
+                        </thead>
+                    
+                    <tbody>
+                        {volist name="list" id="vo"}
+                        <tr>
+                            <td class="left">{$key + 1}</td>
+                            <td class="left">{$vo['label']}</td>
+                            <td class="left">
+                                {eq name="vo.app[0]" value="1"}
+                                <input type="checkbox" class="select" value="1" name="msg[{$vo['appid']}][{$vo['msgid']}][app]" >
+                                <a class="tooltip-link ajax-get edit" title="{:lang('Edit_app_tpl')}" href="{:url('editapp',['type'=>'app', 'msgid'=>$vo['msgid'], 'appid'=>$vo['appid']])}" data-title="{:lang('Edit_app_tpl')} : {$vo['label']}" data-height="470" data-width="700" data-showbar="1">
+                                    {:lang('Edit_msg_tpl')}
+                                </a>
+                                {else /} ------ {/eq}
+                            </td>
+                            <td class="left">
+                                {eq name="vo.email[0]" value="1"}
+                                <input type="checkbox" class="select" value="1" name="msg[{$vo['appid']}][{$vo['msgid']}][email]" >
+                                <a class="tooltip-link ajax-get edit" title="{:lang('Edit_email_tpl')}" href="{:url('editemail',['type'=>'email', 'msgid'=>$vo['msgid'], 'appid'=>$vo['appid']])}" data-title="{:lang('Edit_email_tpl')} : {$vo['label']}" data-height="500" data-width="720" data-showbar="1">
+                                    {:lang('Edit_email_tpl')}
+                                </a>
+                                {else /} ------ {/eq}
+                            </td>
+                            <td class="left">
+                                {eq name="vo.sms[0]" value="1"}
+                                <input type="checkbox" class="select" value="1" name="msg[{$vo['appid']}][{$vo['msgid']}][sms]" >
+                                <a class="tooltip-link ajax-get edit" title="{:lang('Edit_sms_tpl')}" href="{:url('editsms',['type'=>'sms', 'msgid'=>$vo['msgid'], 'appid'=>$vo['appid']])}" data-title="{:lang('Edit_sms_tpl')} : {$vo['label']}" data-height="330" data-width="660" data-showbar="1">
+                                    {:lang('Edit_msg_tpl')}
+                                </a>
+                                {else /} ------ {/eq}
+                            </td>
+    
+                            <td class="left">
+                                {eq name="vo.wechat[0]" value="1"}
+                                <input type="checkbox" class="select" value="1" name="msg[{$vo['appid']}][{$vo['msgid']}][wechat]" >
+                                <a class="tooltip-link ajax-get edit" title="{:lang('Edit_wechat_tpl')}" href="{:url('editwechat',['type'=>'wechat', 'msgid'=>$vo['msgid'], 'appid'=>$vo['appid']])}" data-title="{:lang('Edit_wechat_tpl')} : {$vo['label']}" data-height="500" data-width="720" data-showbar="1">
+                                    {:lang('Edit_msg_tpl')}
+                                </a>
+                                {else /} ------ {/eq}
+                            </td>
+    
+                            <td class="left">
+                                {eq name="vo.whatisapp[0]" value="1"}
+                                <input type="checkbox" class="select" value="1" name="msg[{$vo['appid']}][{$vo['msgid']}][whatisapp]" >
+                                <a class="tooltip-link ajax-get edit" title="{:lang('Edit_whatisapp_tpl')}" href="{:url('editwhatisapp',['type'=>'whatisapp', 'msgid'=>$vo['msgid'], 'appid'=>$vo['appid']])}" data-title="{:lang('Edit_whatisapp_tpl')} : {$vo['label']}" data-height="500" data-width="720"  data-showbar="1">
+                                    {:lang('Edit_msg_tpl')}
+                                </a>
+                                {else /} ------ {/eq}
+                            </td>
+                            
+                            <td class="left">
+                                {eq name="vo.messager[0]" value="1"}
+                                <input type="checkbox" class="select" value="1" name="msg[{$vo['appid']}][{$vo['msgid']}][messager]" >
+                                <a class="tooltip-link ajax-get edit" title="{:lang('Edit_messager_tpl')}" href="{:url('editmessager',['type'=>'messager', 'msgid'=>$vo['msgid'], 'appid'=>$vo['appid']])}" data-title="{:lang('Edit_messager_tpl')} : {$vo['label']}" data-height="500" data-width="720"  data-showbar="1">
+                                    {:lang('Edit_msg_tpl')}
+                                </a>
+                                {else /} ------ {/eq}
+                            </td>
+                            <td class="actions">{$vo['appid']}</td>
+                        </tr>
+                        {/volist}
+                        </tbody>
+                    </table>
+                    
+                    <div class="buttons-wrapper" style="margin:35px 0 5px; padding:0 0 0 38%;">
+                        <input name="submit" value="{:lang('Savesmsconf')}" type="submit" url="{:url('save')}" />
+                    </div>
+                    <div class="pagination-wrapper">
+                        
+                        
+                    </div>
+                    </form>
+                    {else /}
+                    <div class="alert alert-warning">{:lang('No_record')}</div>
+                    {/notempty}
+                </div>
+            
+            </div>
+        </div>
+        {/block}

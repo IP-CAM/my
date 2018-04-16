@@ -1,0 +1,468 @@
+{extend name="admin@public/poupbase"/}
+
+{block name="style"}
+<style type="text/css">
+    .box { width:100%; text-align:left; }
+    .box th{ border-bottom:1px solid #BDBDBD; line-height:26px;border-top: solid 1px #D6DDE4;}
+    
+</style>
+{/block}
+<!-- CONTENT -->
+{block name="body"}
+<div id="content" style="margin:0px 10px 5px 8px;">
+    <div class="bloc" style="margin:10px 0px 0px;">
+        
+        <div class="content">
+            <form id="myform" method="post" style="margin-top:5px;" class="">
+                <fieldset>
+                    <legend>{:lang('after_sale_info')}</legend>
+    
+                    <div class="row">
+                        <div class="fl">
+                            <label class="w120">{:lang('after_sale_id')} : </label>
+                            <label>{$info.after_sn}</label>
+                        </div>
+        
+                        <div class="fl">
+                            <label class="w80">{:lang('apply_time')} : </label>
+                            <label>
+                                {$info.create_time}
+                            </label>
+                        </div>
+        
+                        <div class="fl">
+                            <label class="w80">{:lang('after_status')} : </label>
+                            <label class="red">
+                                {:lang('after_status_'.$info.status)}
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="fl">
+                            <label class="w120">{:lang('after_rtype')} : </label>
+                            <label>
+                                {:lang('after_type_'.$info.rtype)}
+                            </label>
+                        </div>
+                        <div class="fl">
+                            <label class="w80">{:lang('order_amount')} : </label>
+                            <label>
+                                {$order.symbol}{$order.order_amount}
+                            </label>
+                        </div>
+                    </div>
+                    <h5 style="font-size:12px;margin: 10px 5px;border-bottom: 1px solid #ddd;color:#000;">{:lang('order_info')}</h5>
+                    
+                    <div class="row">
+                        <div class="fl">
+                            <label class="w120">{:lang('order_sn')} :</label>
+                            <label>
+                                {$info.order_sn}
+                            </label>
+                        </div>
+                        <div class="fl">
+                            <label class="w80">{:lang('order_time')} :</label>
+                            <label>
+                                {$order['create_time']}
+                            </label>
+                        </div>
+                        <div class="fl">
+                            <label class="w80">{:lang('order_status')} :</label>
+                            <label>
+                                {:lang(strtolower($order['status']))}
+                            </label>
+                        </div>
+                        
+                    </div>
+    
+                    <div class="row">
+                        <div class="fl">
+                            <label class="w120">{:lang('order_customer')} :</label>
+                            <label>
+                                {$member}
+                            </label>
+                        </div>
+                        <div class="fl">
+                            <label class="w80">{:lang('order_store')} :</label>
+                            <label>
+                                {$store['seller_name']}
+                            </label>
+                        </div>
+                        <div class="fl">
+                            <label class="w80">{:lang('order_seller')} :</label>
+                            <label>
+                                {$info['sellerAccount']['nickname']}
+                            </label>
+                        </div>
+                    </div>
+    
+                    <div class="row">
+                        <div class="fl">
+                            <label class="w120">{:lang('order_shipping_address')} :</label>
+                            <label style="width:700px;">
+                                {$info['getorder']['consignee']} &nbsp;&nbsp; {$info['getorder']['mobile']}  &nbsp;&nbsp;
+                                {$info['getorder']['country']} {$info['getorder']['province']} {$info['getorder']['city']} {$info['getorder']['district']} {$info['getorder']['address']}
+                            </label>
+                        </div>
+                        
+                    </div>
+    
+                    <h5 style="font-size:12px;margin: 10px 5px;border-bottom: 0px solid #ddd;color:#000;">{:lang('apply_good')}</h5>
+                    <table class="box table">
+                        
+                        <tr>
+                            <th> sku</th>
+                            <th colspan="2">{:lang('good_name')}</th>
+                            <th>{:lang('good_num')}</th>
+                            <th>{:lang('good_price')}</th>
+                            <th>{:lang('good_price_total')}</th>
+                        </tr>
+                        
+                        <tr>
+                            <td>{$good.sku}</td>
+                            <td class="text-center">
+                                <a href="{:url('crossbbcg/goods/index').'?item_id='.$good.goods_id}" target="_blank">
+                                    {if condition="substr($good.sku_thumb,0,4) == 'http'"}
+                                    <img src="{:resizeImage($good.sku_thumb)}"/>
+                                    {else /}
+                                    <img src="__UPLOADS__/{:resizeImage($good.sku_thumb,'small')}"/>
+                                    {/if}
+                                </a>
+    
+                            </td>
+                            <td>
+                                <a href="{:url('crossbbcg/goods/index').'?item_id='.$good.goods_id}" target="_blank">{$good.goods_name}</a>
+                                {if condition="$good['sku_array']"}
+                                <br/><span style="color:#9e9e9e">{$good['sku_array']}</span>
+                                {/if}
+    
+                            </td>
+                            <td>
+                                 {$good.sku_number}
+                            </td>
+                            <td>
+                                {$order.symbol}{$good.sku_price}
+                            </td>
+                            <td>
+                                {$order.symbol}{$good.sku_price*$good.sku_number}
+                            </td>
+                        </tr>
+                    </table>
+    
+                    <h5 style="font-size:12px;margin: 20px 5px 10px;border-bottom: 1px solid #ddd;color:#000;">{:lang('apply_info')}</h5>
+                    <div class="row">
+                        <div class="fl">
+                            <label class="w120">{:lang('apply_reason')} :</label>
+                            <label style="width:700px">
+                                {$info.return_reason}
+                            </label>
+                        </div>
+                    </div>
+    
+                    {notempty name="$images"}
+                    <div class="row" style="height:120px;">
+                        <div class="fl">
+                            <label class="w120">{:lang('apply_reason_img')} :</label>
+                            <label style="width:700px" id="photos">
+                                
+                                {foreach $images as $img}
+                                <img src="__UPLOADS__/{$img}" class="img-thumbnail" layer-src="__UPLOADS__/{$img}" alt="{:lang('apply_reason_img')}" style="max-height:100px;"/>
+                                {/foreach}
+                                
+                            </label>
+                        </div>
+                    </div>
+                    {/notempty}
+                    <div class="row">
+                        <div class="fl">
+                            <label class="w120">{:lang('apply_reason_info')} :</label>
+                            <label style="width:700px">
+                                {$info.return_description}
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!--未审核状态-->
+                    {if condition="$info['status'] === 0"}
+                    <div class="row">
+                        <div class="fl">
+                            <label class="w120">{:lang('apply_result')} :</label>
+                            
+                                
+                                <!-- 同意 -->
+                                <label class="w80" style="text-align:left;">
+                                    <input type="radio" class="minimal-red" name="agree" value="1" checked>
+                                    {:lang('agree')}
+                                </label>
+                                &nbsp;&nbsp;
+                                <label class="w80" style="text-align:left;">
+                                    <input type="radio" class="minimal-red" name="agree" value="0">
+                                    {:lang('disagree')}
+                                </label>
+                            
+                        </div>
+                    </div>
+                    {/if}
+                    
+                    <div class="row">
+                        <div class="fl">
+                            <label class="w120">{:lang('return_address')}  :</label>
+                            <label style="width:700px;">
+                                {$after_sale_address}
+                            </label>
+                        </div>
+                    </div>
+    
+                    <!--退货退款，已完成退货，等待财务退款-->
+                    {if condition="$info['status']==6 && $info['rtype']==2"}
+                    <div class="row">
+                        <div class="fl">
+                            <label class="w120">{:lang('shipping_no')} :</label>
+                            <label style="width:700px">
+                                {if condition="$info['shipping_no']!=''"}
+                                {$info.shipping_no} &nbsp;&nbsp; {$info.shipping_name}
+                                {else /}
+                                {:lang('empty_shipping_no')}
+                                {/if}
+                            </label>
+                        </div>
+                    </div>
+                    {if condition="$info['rtype']!=2"}
+                    <div class="row">
+                        <label class="w120">
+                            {:lang('order_lock')} :
+                        </label>
+                        <label class="red">
+                            {:lang('after_sale_returning')}
+                        </label>
+                    </div>
+                    {/if}
+                    {/if}
+    
+                    <!--换货，已通过审核-->
+                    {if condition="($info['status']==3||$info['status']==5) && $info['rtype']==2"}
+                    
+                    <div class="row">
+                        <div class="fl">
+                            <label class="w120">{:lang('shipping_no')} :</label>
+                            <label style="width:700px">
+                                {if condition="$info['shipping_no']!=''"}
+                                {$info.shipping_no} &nbsp;&nbsp; {$info.shipping_name}
+                                {else /}
+                                {:lang('empty_shipping_no')}
+                                {/if}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="fl">
+                            <label class="w120">{:lang('is_receive_and_shipping')} :</label>
+                            <label class="w80" style="text-align:left;">
+                                <input type="radio" class="minimal-red" name="agree" value="1" checked>
+                                {:lang('is_confirm')}
+                            </label>
+                            &nbsp;&nbsp;
+                            <label class="w80" style="text-align:left;">
+                                <input type="radio" class="minimal-red" name="agree" value="0">
+                                <strong>{:lang('is_reject')}</strong>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    {/if}
+    
+                    <!--退货退款 已通过审核-->
+                    {if condition="($info['status']==3||$info['status']==5) && $info['rtype']==1"}
+                    <div class="row">
+                        <div class="fl">
+                            <label class="w120">{:lang('shipping_no')} :</label>
+                            <label style="width:700px">
+                                {if condition="$info['shipping_no']!=''"}
+                                {$info.shipping_no} &nbsp;&nbsp; {$info.shipping_name}
+                                {else /}
+                                {:lang('empty_shipping_no')}
+                                {/if}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="fl">
+                            <label class="w120">{:lang('is_agree_return')} :</label>
+                            <label class="w80" style="text-align:left;">
+                                <input type="radio" class="minimal-red" name="agree" value="1" checked>
+                                {:lang('is_confirm')}
+                            </label>
+                            &nbsp;&nbsp;
+                            <label class="w80" style="text-align:left;">
+                                <input type="radio" class="minimal-red" name="agree" value="0">
+                                <strong>{:lang('disagree')}</strong>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    {/if}
+                    
+                    
+                    
+                    {if condition="$info['rtype']!==2"}
+                    <div class="row">
+                        <div class="fl">
+                            <label class="w120">{:lang('return_money')}  :</label>
+                            <label style="width:700px">
+                            {$order.symbol}
+                                
+                            {if condition="$info['status'] === 0"}
+                            <input type="number" min="0" max="{$order.order_amount}" value="" name="applyprice" style="width:100px;"/>
+                            ({:lang('max_return_money')}:{$order.symbol}{$order.order_amount})
+    
+                            {elseif condition="($info['status']==3||$info['status']==5) && $info['rtype']==1"}
+                                <input type="number" min="0" max="{$order.order_amount}" value="{$info['applyprice']}" name="applyprice" style="width:100px;"/>
+                                ({:lang('max_return_money')}:{$order.symbol}{$order.order_amount})
+                            {else /}
+                            {$info['applyprice']}
+                            {/if}
+                            </label>
+                        </div>
+                    </div>
+                    {/if}
+                    
+                    
+                    <!--仅退款，已同意-->
+                    {if condition="$info['status']==3 && $info['rtype']==0"}
+                    <div class="row">
+                        <label class="w120">
+                            {:lang('order_lock')} :
+                        </label>
+                        <label class="red">
+                            {:lang('after_sale_returning')}
+                        </label>
+                    </div>
+                    {/if}
+    
+                    <!--退货退款 已驳回-->
+                    {if condition="$info['status']==2 && $info['rtype']==1"}
+                    <div class="row">
+                        <div class="fl">
+                            <label class="w120">{:lang('shipping_no')} :</label>
+                            <label style="width:700px">
+                                {if condition="$info['shipping_no']!=''"}
+                                {$info.shipping_no} &nbsp;&nbsp; {$info.shipping_name}
+                                {else /}
+                                {:lang('empty_shipping_no')}
+                                {/if}
+                            </label>
+                        </div>
+                    </div>
+                    {/if}
+    
+                    <!--退货退款，已完成退货，等待财务退款-->
+                    {if condition="$info['status']==6 && $info['rtype']==1"}
+                    <div class="row">
+                        <div class="fl">
+                            <label class="w120">{:lang('shipping_no')} :</label>
+                            <label style="width:700px">
+                                {if condition="$info['shipping_no']!=''"}
+                                {$info.shipping_no} &nbsp;&nbsp; {$info.shipping_name}
+                                {else /}
+                                {:lang('empty_shipping_no')}
+                                {/if}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="w120">
+                            {:lang('order_lock')} :
+                        </label>
+                        <label class="red">
+                            {:lang('after_sale_returning')}
+                        </label>
+                    </div>
+                    
+                    {/if}
+                    
+                    <!--拒绝理由-->
+                    <div class="row disagree-reason" style="display:none;">
+                        <label class="w120">
+                            {:lang('disagree_reason')} :
+                        </label>
+                        <label>
+                            <textarea rows="3" name="disagree_reason" ></textarea>
+                        </label>
+                    </div>
+                    
+                    
+                    {if condition="$info['status'] === 0"}
+                    <div class="row buttons-wrapper bw-bottom" style="margin:20px auto 20px;">
+                        <div class="fl">
+                            <label class="w120"> &nbsp; </label>
+                            <label style="width:700px;">
+                                <input name="submit" value="{:lang('Save')}" type="submit" url="{:url('save_modify')}">
+                                <input name="id" value="{$info.id}" hidden />
+                                <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                            </label>
+                        </div>
+                    </div>
+                    {/if}
+    
+                    <!--换货，已通过审核-->
+                    {if condition="($info['status']==3||$info['status']==5) && $info['rtype']==2"}
+                    <input type="hidden" name="agree_exchange" value="1" />
+                    <div class="row buttons-wrapper bw-bottom" style="margin:20px auto 20px;">
+                        <div class="fl">
+                            <label class="w120"> &nbsp; </label>
+                            <label style="width:700px;">
+                                <input name="submit" value="{:lang('Save')}" type="submit" url="{:url('save_modify')}">
+                                <input name="id" value="{$info.id}" hidden />
+                                <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                            </label>
+                        </div>
+                    </div>
+                    {/if}
+    
+                    <!--退货退款 已通过审核-->
+                    {if condition="($info['status']==3||$info['status']==5) && $info['rtype']==1"}
+                    <input type="hidden" name="agree_return" value="1" />
+                    <div class="row buttons-wrapper bw-bottom" style="margin:20px auto 20px;">
+                        <div class="fl">
+                            <label class="w120"> &nbsp; </label>
+                            <label style="width:700px;">
+                                <input name="submit" value="{:lang('Save')}" type="submit" url="{:url('save_modify')}">
+                                <input name="id" value="{$info.id}" hidden />
+                                <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                            </label>
+                        </div>
+                    </div>
+                    {/if}
+                    
+                </fieldset>
+            
+            </form>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="js"}
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        layer.photos({
+            photos: '#photos'
+            ,anim: 0 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+        });
+        
+        // 拒绝理由
+        $('input[name="agree"]').click(function(){
+            if($(this).val()==0){
+                $('.disagree-reason').show();
+            }else{
+                $('.disagree-reason').hide();
+            }
+        });
+
+    });
+
+
+</script>
+{/block}

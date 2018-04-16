@@ -1,0 +1,302 @@
+    {extend name="common/base" /}
+    
+    {block name="title"}
+    <title>{:lang('After_sales_detail')}</title>
+    {/block}
+    
+    {block name="css"}
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/member.css" />
+    {/block}
+    
+    {block name="body"}
+    <!--面包屑-->
+    <div class="ly-path">
+        <ul class="clearfix">
+            <li class="home">
+                <a href="{:url('crossbbcg/index/index')}" title="{:lang('go_min')}">{:lang('Home')}</a>
+                <span>&gt;&nbsp;</span>
+            </li>
+            <li>
+                <a href="{:url('member/index/index')}" title="{:lang('Member')}">{:lang('Member')}</a>
+                <span>&gt;&nbsp;</span>
+            </li>
+            <li>
+                <h1>{:lang('After_sales_detail')}</h1>
+            </li>
+        </ul>
+    </div>
+    <div class="ly-main member-main clearfix">
+        {include file="index/left_menu"}
+        <div class="member-right">
+            <div class="member-content">
+                <div class="title member-title member-max-title">
+                    <div class="t">{:lang('return_information')}</div>
+                </div>
+                <div class="body pb15 mh600 aftersales aftersales-detail">
+                    <div class="aftersales-steps-box">
+                        <div id="aftersales_steps" class="steps steps-five">
+                            <table width="100%">
+                                <tbody>
+                                {if condition="$data['status'] == 2||$data['status'] == 7||$data['status'] == 8||$data['status'] == 4"}
+                                <tr>
+                                    <td class="step-item step-5 last"><span><q class="icon">●</q><i>1</i>{:lang('return_status_'.$data['status'])}</span>
+                                        <div class="stepdiv">1</div>
+                                    </td>
+                                </tr>
+                                {else /}
+                                    {eq name="rtype" value="1"}
+                                    <tr>
+                                        <td class="step-item step-1 {if condition='$step1'}active{/if}"><span><q class="icon">●</q><i>1</i>{:lang('return_step1')}</span>
+                                            <div class="stepdiv">1</div>
+                                        </td>
+                                        <td class="step-item step-2 {if condition='$step2'}active{/if}">
+                                            <span><q class="icon">●</q><i>2</i>{:lang('return_step2')}</span>
+                                            <div class="stepdiv">2</div>
+                                        </td>
+                                        <td class="step-item step-3 {if condition='$step3'}active{/if}"><span><q class="icon">●</q><i>3</i>{:lang('return_step3')}</span>
+                                            <div class="stepdiv">3</div>
+                                        </td>
+                                        <td class="step-item step-4 last {if condition='$step4'}active{/if}"><span><q class="icon">●</q><i>4</i>{:lang('return_step4')}</span>
+                                            <div class="stepdiv">4</div>
+                                        </td>
+                                        <td class="step-item step-5 last {if condition='$step5'}active{/if}"><span><q class="icon">●</q><i>5</i>{:lang('return_step5')}</span>
+                                            <div class="stepdiv">5</div>
+                                        </td>
+                                    </tr>
+                                    {/eq}
+                                {eq name="rtype" value="0"}
+                                    <tr>
+                                        <td class="step-item step-1 {if condition='$step1'}active{/if}"><span><q class="icon">●</q><i>1</i>{:lang('return_step6')}</span>
+                                            <div class="stepdiv">1</div>
+                                        </td>
+                                        <td class="step-item step-2 {if condition='$step2'}active{/if}">
+                                            <span><q class="icon">●</q><i>2</i>{:lang('return_step7')}</span>
+                                            <div class="stepdiv">2</div>
+                                        </td>
+                                        <td class="step-item step-3 {if condition='$step3'}active{/if}"><span><q class="icon">●</q><i>3</i>{:lang('return_step5')}</span>
+                                            <div class="stepdiv">3</div>
+                                        </td>
+                                        
+                                    </tr>
+                                {/eq}
+                                
+                                {eq name="rtype" value="2"}
+                                    <tr>
+                                        <td class="step-item step-1 {if condition='$step1'}active{/if}"><span><q class="icon">●</q><i>1</i>{:lang('return_step9')}</span>
+                                            <div class="stepdiv">1</div>
+                                        </td>
+                                        <td class="step-item step-2 {if condition='$step2'}active{/if}">
+                                            <span><q class="icon">●</q><i>2</i>{:lang('return_step10')}</span>
+                                            <div class="stepdiv">2</div>
+                                        </td>
+                                        <td class="step-item step-3 {if condition='$step3'}active{/if}"><span><q class="icon">●</q><i>3</i>{:lang('return_step11')}</span>
+                                            <div class="stepdiv">3</div>
+                                        </td>
+                                        <td class="step-item step-4 last {if condition='$step4'}active{/if}"><span><q class="icon">●</q><i>4</i>{:lang('return_step12')}</span>
+                                            <div class="stepdiv">4</div>
+                                        </td>
+                                        <td class="step-item step-5 last {if condition='$step5'}active{/if}"><span><q class="icon">●</q><i>5</i>{:lang('return_step5')}</span>
+                                            <div class="stepdiv">5</div>
+                                        </td>
+                                    </tr>
+                                {/eq}
+                                
+                                {/if}
+                                
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <!--订单信息-->
+                    <div class="orderdtl-box">
+                        <div class="orderdtl-bd">
+                            <div class="clearfix">
+                                <div class="row">
+                                <div class="col-1">{:lang('order_sn')} </div>
+                                <div class="col-2">{$data['order_sn']}</div>
+                            </div>
+                                <div class="row">
+                                    <div class="col-1">{:lang('after_sn')} </div>
+                                    <div class="col-2">{$data['after_sn']}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-1">{:lang('return_action_status')} </div>
+                                    <div class="col-2">{:lang('return_status_'.$data['status'])}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-1">{:lang('return_money')} </div>
+                                    <div class="col-2">{$applyprice}</div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-1">{:lang('apply_tiem')}</div>
+                                    <div class="col-2">{$data.create_time} </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-1">{:lang('return_rtype')}</div>
+                                    <div class="col-2">{:lang('return_type_'.$data['rtype'])} </div>
+                                </div>
+    
+                            </div>
+                        </div>
+                    </div>
+                    <!--订单信息END	-->
+                    <!--商品信息-->
+                    <table class="order-table">
+                        <tbody>
+                            <tr>
+                                <td class="center order-summary" colspan="2"> {:lang('good_information')} </td>
+                                <td class="center order-summary">{:lang('buy_num')} </td>
+                                <td class="center order-summary">{:lang('good_price')}</td>
+                                <td class="center order-summary">{:lang('good_total')}</td>
+                                <td class="center order-summary">{:lang('return_money')}</td>
+                                
+                            </tr>
+    
+                            <tr>
+                                <td class="item-image">
+                                    {if condition="substr($data['goods']['sku_thumb'],0,4)=='http'"}
+                                    <img src="{$data['goods']['sku_thumb']}" width="58" height="58">
+                                    {else /}
+                                    <img src="{:resizeImage($data['goods']['sku_thumb'],'small',true)}" width="58" height="58">
+                                    {/if}
+                                </td>
+                                <td class="item-name">
+                                    <a target="_blank" href="{:url('crossbbcg/goods/index','item_id='.$data['goods']['goods_id'])}">{$data['goods']['goods_name']}</a>
+                                    {if condition="$data['goods']['sku_array']"}
+                                    <br/>{$data['goods']['sku_array']}
+                                    {/if}
+                                </td>
+                                <td class="item-amount"> x{$data['goods']['sku_number']} </td>
+                                
+                                <td class="item-price"> {$sku_price} </td>
+                                <td class="std"> {$sku_amount} </td>
+                                <td class="std"> {$applyprice} </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <!--商品信息-->
+                    <div class="orderdtl-box">
+                        <div class="member-sub-title clearfix"><span>{:lang('return_description')}</span></div>
+                        <div class="orderdtl-bd">
+                            <div class="row w ptb-10">
+                                <div class="col-1"><em class="red">*</em>{:lang('choose_reason')}</div>
+                                <div class="col-2">
+                                    {$data.return_reason}
+                                </div>
+    
+                            </div>
+                            {notempty name="data['return_description']"}
+                            <div class="row w ptb-10">
+                                <div class="col-1">{:lang('return_description')}</div>
+                                <div class="col-2">
+                                    {$data['return_description']}
+                                </div>
+                            </div>
+                            {/notempty}
+    
+                            {notempty name="data['return_images']"}
+                            {php} $images = explode(',',$data['return_images']) {/php}
+                            <div class="row w ptb-10">
+                                <div class="col-1">{:lang('return_image')}</div>
+                                <div class="col-2">
+                                    <ul class="images-upload clearfix">
+                                        {foreach $images as $value}
+                                        <li class="handle img-thumbnail">
+                                            <img src="__UPLOADS__/{$value}">
+                                        </li>
+                                        {/foreach}
+                                    </ul>
+                                </div>
+                            </div>
+                            {/notempty}
+    
+                            {notempty name="data['shipping_company']"}
+                            <div class="row w ">
+                                <div class="col-1">{:lang('express_company')}</div>
+                                <div class="col-2">
+                                    {$data.shipping_company}
+                                </div>
+                            </div>
+                            {/notempty}
+                            
+                            {notempty name="data['shipping_no']"}
+                            <div class="row w ">
+                                <div class="col-1">{:lang('tracking_number')}</div>
+                                <div class="col-2">
+                                    {$data.shipping_no}
+                                </div>
+                            </div>
+                            {/notempty}
+    
+                            <div class="row w ">
+                                <div class="col-1">&nbsp;</div>
+                                <div class="col-2">
+    
+                                    {eq name="rtype" value="1"}
+                                        {eq name="data['status']" value="3"}
+                                    <button type="button" class="submit-blue" id="show-logistics" data-title="{:lang('input_express')}" data-button_yes="{:lang('yes')}" data-button_no="{:lang('cancel')}" data-after_sn="{$data['after_sn']}" data-address="{$after_sale_address}">{:lang('input_express')}</button>
+                                        {/eq}
+                                    {/eq}
+                                    
+                                    {eq name="rtype" value="2"}
+                                        {eq name="data['status']" value="3"}
+                                    <button type="button" class="submit-blue" id="show-logistics" data-title="{:lang('input_express')}" data-button_yes="{:lang('yes')}" data-button_no="{:lang('cancel')}" data-after_sn="{$data['after_sn']}" data-address="{$after_sale_address}">{:lang('input_express')}</button>
+                                        {/eq}
+                                    {/eq}
+                                    
+                                    
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="logistics_content" data-url="{:url('member/index/return_express')}" style="display:none;">
+        <form action="" class="common-form">
+            <div class="form-inline">
+                <div class="input-label">{:lang('sale_after_address')}</div>
+                <div class="input-line empty address"></div>
+            </div>
+            <div class="form-inline">
+                <div class="input-label"><em>*</em>{:lang('express_company')}</div>
+                <div class="input-line error-triggered empty">
+                    <select name="companys" data-empty="{:lang('express_company_not_null')}" required="" id="companys">
+                        <option value="">{:lang('please_choose')}</option>
+                        {notempty name="arr_express"}
+                        {foreach $arr_express as $value}
+                            <option value="{$value}">{$value}</option>
+                        {/foreach}
+                        {/notempty}
+                        <option value="{:lang('other')}">{:lang('other')}</option>
+                    </select>
+                    <span class="input-error"></span>
+                </div>
+            </div>
+            <div class="form-inline">
+                <div class="input-label"><em>*</em>{:lang('tracking_number')}</div>
+                <div class="input-line error-triggered empty">
+                    <input type="text" id="tracking_number" class="input-text" data-empty="{:lang('tracking_number_not_null')}" required="" name="tracking_number" value="">
+                    <span class="input-error"></span>
+                </div>
+            </div>
+            
+        </form>
+    </div>
+    {/block}
+    
+    <!--此板块为页面单独js加载-->
+    {block name="footer_js"}
+    <script type="text/javascript">
+        
+        
+        //需要加载的js文件
+        Private_Script = ['aftersalesDetail'];
+    </script>
+    {/block}

@@ -1,0 +1,560 @@
+    {extend name="admin@public/poupbase" /}
+    <!-- CONTENT -->
+    {block name="body"}
+    <style>
+        .area{
+            cursor: pointer;
+        }
+    </style>
+    <div id="content" style="margin:0px 10px 5px 8px;">
+        <div class="bloc" style="margin:10px 0px 0px;">
+            <div class="content">
+                <form id="myform" method="post" style="margin-top:5px;" class="">
+                    <fieldset style="min-height: 563px">
+                        <legend>{$meta_title|default=''}</legend>
+                        <div class="row">
+                            <div style="float:left;">
+                                <label for="name" class="w130">{:lang('expresstpl_name')}: </label>
+                                <input type="text" name="name" id="name" value="{$data.name}"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div style="float: left">
+                                <label for="status" class="w130">{:lang('is_open')}: </label>
+                                <div class="slideBox">
+                                    <input type="checkbox" value="1" name="status" id="status" {eq name="$data.status"
+                                           value="1" }checked{/eq} {eq name='$action_name' value='add'}checked{/eq}>
+                                    <label for="status"></label>
+                                </div>
+                            </div>
+                            <div style="float: left">
+                                <label for="is_free" class="w130">{:lang('Is free shipping')} : </label>
+                                <div class="slideBox">
+                                    <input type="checkbox" value="1" name="is_free" id="is_free" {eq name="$data.is_free"
+                                           value="1" }checked{/eq}>
+                                    <label for="is_free"></label>
+                                </div>
+                            </div>
+                            <div style="float: left">
+                                <label for="open_freerule" class="w130" style="padding-right: 10px"> {:lang('Designated area post')}: </label>
+                                <div class="slideBox">
+                                    <input type="checkbox" value="1" name="open_freerule" id="open_freerule" {eq name="$data.open_freerule" value="1" }checked{/eq} {eq name='$action_name' value='add'}checked{/eq}>
+                                    <label for="open_freerule"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="valuation" value="weight"/>
+                        <div class="row">
+                            <label for="is_free" class="w130">选择快递公司 : </label>
+                            <select name="express_ids[]" id="express_ids" class="chosen-select" style="width: 390px" multiple="multiple">
+                                {foreach $express_list as $v}
+                                <option value="{$v.id}" {in name="$v.id" value="$data.express_ids"}selected{/in}>{$v.title}</option>
+                                {/foreach}
+                            </select>
+                        </div>
+                        <!--计价方式，暂时只有按重计价-->
+                        <!--<div id='valuation' class="row bset ui-buttonset">-->
+                        <!--<label for="" class="w80">计价方式</label>-->
+                        <!--<input type="radio" value="1" name="valuation" checked  class="ui-helper-hidden-accessible">-->
+                        <!--<label data-param="weight" class="w150_r_0 ui-state-active ui-button ui-widget ui-state-default ui-button-text-only ui-corner-left" role="button" aria-pressed="true">-->
+                        <!--<span class="ui-button-text">按重计价</span>-->
+                        <!--</label>-->
+                        <!--<input type="radio" value="2" name="valuation"  class="ui-helper-hidden-accessible">-->
+                        <!--<label data-param="quantity" class="w150_r_0 ui-button ui-widget ui-state-default ui-button-text-only" role="button" aria-pressed="false">-->
+                        <!--<span class="ui-button-text">按件计价</span>-->
+                        <!--</label>-->
+                        <!--<input type="radio" name="valuation" value="3"  class="ui-helper-hidden-accessible">-->
+                        <!--<label data-param="money" class="w150_r_0 ui-button ui-widget ui-state-default ui-button-text-only ui-corner-right" role="button" aria-pressed="false">-->
+                        <!--<span class="ui-button-text">按金额计价</span>-->
+                        <!--</label>-->
+                        <!--</div>-->
+                        {php}$w_k=$q_k=$m_k=$f_q_k=$f_q_k=0;{/php}
+                        <!--按重计价-->
+                        <div id="weight" class="tpl" {eq name="$data.is_free" value="1"}style="display:none;"{/eq}>
+                            <div class="row">
+                                <label class="w130">{:lang('default_freight_cal')}: </label>
+                                <div style="display: inline-block;">
+                                    
+                                    <span>{:lang('start_standard_weight')}((kg){:lang('within')}):</span>
+                                    <input type="number" min="1" name="fee_conf[0][start_standard]"
+                                           value="{$data.fee_conf[0]['start_standard']|default=1}" class="w80"/>
+                                    <span>{:lang('freight')}(￥):</span>
+                                    <input type="text" name="fee_conf[0][start_fee]"
+                                           value="{$data.fee_conf[0]['start_fee']}" class="w60"/>
+                                    <span>{:lang('add_standard')}((kg){:lang('within')}):</span>
+                                    <input type="number" min="1" name="fee_conf[0][add_standard]"
+                                           value="{$data.fee_conf[0]['add_standard']|default=1}" class="w80"/>
+
+                                    <span>{:lang('add_fee')}(￥):</span>
+                                    <input type="text" name="fee_conf[0][add_fee]" value="{$data.fee_conf[0]['add_fee']}"
+                                           class="w60"/>
+                                    <input type="hidden" name="fee_conf[0][country_id]" value="0">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="w130">{:lang('post_set_for_area')}: </label>
+                                <div style="display: inline-block;width: 800px;">
+                                    <table class="table" style="width:100%;">
+                                        <thead>
+                                        <tr>
+                                            <th style="width: 150px">{:lang('area')}</th>
+                                            <th style="text-align: center">{:lang('first_weight')}</th>
+                                            <th style="text-align: center">{:lang('first_fee')}</th>
+                                            <th style="text-align: center">{:lang('second_weight')}</th>
+                                            <th style="text-align: center">{:lang('second_fee')}</th>
+                                            <th style="text-align: center">{:lang('operation')}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {eq name='$action_name' value='edit'}
+                                        {foreach $data.fee_conf as $k=>$v}
+                                        {gt name='$k' value='0'}
+                                        <tr>
+                                            {php}$w_k=$k{/php}
+                                            <td style="width: 150px;">
+                                                <input type="hidden" name="fee_conf[{$k}][country_id]"
+                                                       value="{$v['country_id']}">
+                                                <p class="area" data-country_id="{$v['country_id']}">{$v.area_names}</p>
+                                            </td>
+                                            <td style="text-align: center">
+                                                <input class="w50" type="number" min="1" name="fee_conf[{$k}][start_standard]"
+                                                       value="{$v['start_standard']|default=1}"/>
+                                            </td>
+                                            <td style="text-align: center">
+                                                <input class="w50" type="text" name="fee_conf[{$k}][start_fee]"
+                                                       value="{$v['start_fee']}"/>
+                                            </td>
+                                            <td style="text-align: center">
+                                                <input class="w50" type="number" min="1" name="fee_conf[{$k}][add_standard]"
+                                                       value="{$v['add_standard']|default=1}"/>
+                                            </td>
+                                            <td style="text-align: center">
+                                                <input class="w50" type="text" name="fee_conf[{$k}][add_fee]"
+                                                       value="{$v['add_fee']}"/>
+                                            </td>
+                                            <td style="text-align: center">
+                                                <button class="white td-remove remove" type="button">
+                                                    {:lang('remove')}
+                                                </button>
+                                            </td>
+                                            <input type="hidden" name="fee_conf[{$k}][area_names]" class="area_group_name"
+                                                   value="{$v.area_names}"/>
+                                            <input type="hidden" name="fee_conf[{$k}][area_ids]" class="area_group_ids"
+                                                   value="{$v.area_ids}"/>
+                                        </tr>
+                                        {/gt}
+                                        {/foreach}
+                                        {/eq}
+                                        <tr>
+                                            <td colspan="6" style="text-align: center"><span id="add_weight_conf"
+                                                                                             style="cursor: pointer">+</span>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row weight_free" {eq name="$data.open_freerule" value="0" }style="display:none;" {/eq}>
+                                <label class="w130">{:lang('free_for_area')}: </label>
+                                <div style="display: inline-block;width: 800px;">
+                                    <table class="table" style="width:100%;">
+                                        <thead>
+                                        <tr>
+                                            <th style="width: 150px">{:lang('area')}</th>
+                                            <th style="text-align: center">{:lang('free_condition')}</th>
+                                            <th style="text-align: center">{:lang('operation')}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td style="width: 150px">
+                                                <p>{:lang('default')}</p>
+                                                <input type="hidden" name="free_conf[0][country_id]" value="0"/>
+                                            </td>
+                                            <td style="text-align: center">
+                                                <select name="free_conf[0][freetype]" class="freetype">
+                                                    <option value="1" {eq name="$data.free_conf[0]['freetype']" value="1" }selected{/eq}>{:lang('start_standard_weight')}</option>
+                                                    <option value="2" {eq name="$data.free_conf[0]['freetype']" value="2" }selected{/eq}>{:lang('money')}</option>
+                                                    <option value="3" {eq name="$data.free_conf[0]['freetype']" value="3" }selected{/eq}>{:lang('start_standard_weight')}+{:lang('money')}</option>
+                                                </select>
+                                                <span {eq name="$data.free_conf[0]['freetype']" value="2" }style="display:none;"
+                                                      {/eq}><input type="text" class="w50"
+                                                                   value="{$data.free_conf[0]['inweight']}"
+                                                                   name="free_conf[0][inweight]"/>(kg){:lang('within')}</span>
+                                                <span {eq name="$data.free_conf[0]['freetype']" value="1" }style="display:none;"
+                                                      {/eq}{eq name='$action_name' value='add'}style='display:none'{/eq}><input
+                                                type="text" class="w50" name="free_conf[0][upmoney]"
+                                                value="{$data.free_conf[0]['upmoney']}"/>(￥){:lang('without')}</span>
+                                                <span>{:lang('free_freight')}</span>
+                                            </td>
+                                            <td style="text-align: center">
+                                                <button type="button" class="white td-remove">{:lang('remove')}</button>
+                                            </td>
+                                        </tr>
+                                        {eq name='$action_name' value='edit'}
+                                        {foreach $data.free_conf as $k=>$v}
+                                        {gt name='$k' value='0'}
+                                        <tr>
+                                            {php}$f_w_k=$k;{/php}
+                                            <td style="width: 150px">
+                                                <input type="hidden" name="free_conf[{$k}][country_id]" value="{$v.country_id}">
+                                                <p class="area" data-country_id="{$v.country_id}">{$v.area_names}</p>
+                                            </td>
+                                            <td style="text-align: center">
+                                                <select name="free_conf[{$k}][freetype]" class="freetype">
+                                                    <option value="1" {eq name="$v.freetype" value="1" }selected{/eq}>{:lang('start_standard_weight')}</option>
+                                                    <option value="2" {eq name="$v.freetype" value="2" }selected{/eq}>{:lang('money')}</option>
+                                                    <option value="3" {eq name="$v.freetype" value="3" }selected{/eq}>{:lang('start_standard_weight')}+{:lang('money')}</option>
+                                                </select>
+                                                <span {eq name="$v.freetype" value="2" }style="display:none;" {/eq}><input
+                                                type="text" class="w50" value="{$v['inweight']}"
+                                                name="free_conf[{$k}][inweight]"/>(kg){:lang('within')}</span>
+                                                <span {eq name="$v.freetype" value="1" }style="display:none;" {/eq}><input
+                                                type="text" class="w50" name="free_conf[{$k}][upmoney]"
+                                                value="{$v['upmoney']}"/>(￥){:lang('without')}</span>
+                                                <span>{:lang('free_freight')}</span>
+                                            </td>
+                                            <td style="text-align: center">
+                                                <button class="white td-remove remove" type="button">{:lang('remove')}</button>
+                                            </td>
+                                            <input type="hidden" name="free_conf[{$k}][area_names]" value="{$v.area_names}"
+                                                   class="area_group_name"/>
+                                            <input type="hidden" name="free_conf[{$k}][area_ids]" value="{$v.area_ids}"
+                                                   class="area_group_ids"/>
+                                        </tr>
+                                        {/gt}
+                                        {/foreach}
+                                        {/eq}
+                                        <tr>
+                                            <td colspan="6" style="text-align: center"><span id="add_weight_free"
+                                                                                             style="cursor: pointer">+</span>
+                                            </td>
+                                        
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+            <!--按件数-->
+            <!--<div id="quantity" class="tpl" style="display: none;">-->
+            <!--<div class="row">-->
+            <!--<label class="w80">默认运费计算: </label>-->
+            <!--<div style="display: inline-block;">-->
+            <!--<span >件数(以内):</span>-->
+            <!--<input type="text" name="fee_number_conf[0][start_standard]" class="w80"/>-->
+            <!--<span>运费(￥):</span>-->
+            <!--<input type="text" name="fee_number_conf[0][start_fee]" class="w80"/>-->
+            <!--<span>每增加(件):</span>-->
+            <!--<input type="text" name="fee_number_conf[0][add_standard]" class="w80"/>-->
+            <!--<span>增加(￥):</span>-->
+            <!--<input type="text" name="fee_number_conf[0][add_fee]" class="w80"/>-->
+            <!--<input type="hidden" name="fee_number_conf[0][country_id]" value="0">-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="row">-->
+            <!--<label class="w80">为指定地区配置邮费: </label>-->
+            <!--<div style="display: inline-block;width: 865px;">-->
+            <!--<table class="table" style="width:100%;">-->
+            <!--<thead>-->
+            <!--<tr>-->
+            <!--<th style="width: 150px">地区</th>-->
+            <!--<th style="text-align: center">首件</th>-->
+            <!--<th style="text-align: center">首费</th>-->
+            <!--<th style="text-align: center">续件</th>-->
+            <!--<th style="text-align: center">续费</th>-->
+            <!--<th style="text-align: center">操作</th>-->
+            <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody>-->
+            <!--<tr>-->
+            <!--<td colspan="6" style="text-align: center"><span id="add_number_conf">+</span></td>-->
+            <!--</tr>-->
+            <!--</tbody>-->
+            <!--</table>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="row weight_free">-->
+            <!--<label class="w80">为指定地区免邮: </label>-->
+            <!--<div style="display: inline-block;width: 865px;">-->
+            <!--<table class="table" style="width:100%;">-->
+            <!--<thead>-->
+            <!--<tr>-->
+            <!--<th style="width: 150px">地区</th>-->
+            <!--<th style="text-align: center">包邮条件</th>-->
+            <!--<th style="text-align: center">操作</th>-->
+            <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody>-->
+            <!--<tr>-->
+            <!--<td style="width: 150px">-->
+            <!--<p>默认</p>-->
+            <!--<input type="hidden" name="free_number_conf[0][country_id]" value="0"/>-->
+            <!--</td>-->
+            <!--<td style="text-align: center">-->
+            <!--<select name="free_number_conf[0][freetype]" class="freetype">-->
+            <!--<option value="1">件数</option>-->
+            <!--<option value="2">金额</option>-->
+            <!--<option value="3">件数+金额</option>-->
+            <!--</select>-->
+            <!--<span><input type="text" class="w50" name="free_number_conf[0][quantity]" />(件)以内</span>-->
+            <!--<span style="display: none"><input type="text" class="w50" name="free_number_conf[0][upmoney]"/>(￥)以上</span>-->
+            <!--<span>包邮</span>-->
+            <!--</td>-->
+            <!--<td style="text-align: center">-->
+            <!--<button type="button" class="white td-remove">移除</button>-->
+            <!--</td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+            <!--<td colspan="6" style="text-align: center"><span id="add_number_free">+</span></td>-->
+            <!--</tr>-->
+            <!--</tbody>-->
+            <!--</table>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--按金额-->
+            <!--<div id="money" class="tpl" style="display: none;">-->
+            <!---->
+            <!--</div>-->
+            <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                <input name="shop_id" type="hidden" value="0"/>
+                {eq name="ACTION_NAME" value="edit"}
+                <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('savedata')}"/>
+                <input name="id" type="hidden" value="{$data.id}"/>
+                {else /}
+                <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}"/>
+                {/eq}
+                <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+            </div>
+            </fieldset>
+            </form>
+        </div>
+    </div>
+    </div>
+    <div style="display: none" id="country">
+        {foreach $country_list as $v}
+        <option value="{$v.id}">{$v.name}</option>
+        {/foreach}
+    </div>
+    {/block}
+    
+    {block name="js"}
+    <link rel="stylesheet" href="__STATIC__/jQuery-dqxz/css.css"/>
+    <script charset="utf-8" src="__STATIC__/jQuery-dqxz/RegionalChoice.js"></script>
+    <script>
+        $(function () {
+            $('#express_ids').chosen({placeholder_text_multiple:'{:lang("Select express")}'});
+            $('#express_ids').trigger('chosen:updated');
+        })
+        //点击国家选择地区
+        $(document).on('change', '.country', function () {
+            
+            var country = $(this).val();
+            var that = $(this);
+            $.post("{:url('bcwareexp/admin.zone/add')}", {'country': country}, function (data) {
+                if (data.code == 1) {
+                    layer.open({
+                        type: 1
+                        , content: "<div id='test-div'></div>"
+                        , btn: '{:lang("confirm")}'
+                        , title: '{:lang("choose_area")}'
+                        , area: ['865px', '580px'] //宽高
+                        , btnAlign: 'c' //按钮居中
+                        , shade: 0 //不显示遮罩
+                        , yes: function () {
+                            layer.closeAll();
+                            var ids_name = GetBidCityChecked();
+                            var ids = GetChecked();
+                            if (ids_name.length) {
+                                that.parent().find('p').attr('data-country_id', country);
+                                that.parent().find('p').html(ids_name.join(",")).show();
+                                that.hide();
+                                that.parent().parent().find('.area_group_name').val(ids_name.join(","));
+                                that.parent().parent().find('.area_group_ids').val(ids);
+                            } else {
+                                that.show();
+                                that.parent().find('p').hide();
+                            }
+                        }
+                    });
+                    GetRegionPlug('#test-div', data.data);
+                }
+            });
+        });
+        function GetBidCityChecked() {
+            var Checked = [];//先清空数组
+            var n = $(".place-div").find(".place");
+            n.each(function (index, a) {
+                var m = $(this).find(".smallplace");
+                m.each(function (index, a) {
+                    var p = $(this).find(".bigcity");
+                    p.each(function (index, a) {
+                        if ($(this).prop("checked")) {
+                            Checked.push($(this).parent().html().replace(/<[\S\s]*>[\S\s]*<\/[\S\s]*>|<[\S\s]*>/, ''));
+                        }
+                    })
+                })
+            });
+            return Checked;
+        }
+        //修改已选地区
+        $(document).on('click', '.area', function () {
+            var country = $(this).data('country_id');
+            var that = $(this);
+            $.post("{:url('bcwareexp/admin.zone/add')}", {'country': country}, function (data) {
+                if (data.code == 1) {
+                    layer.open({
+                        type: 1
+                        , content: "<div id='test-div'></div>"
+                        ,skin:'layui-layer-molv'
+                        , btn: '{:lang("confirm")}'
+                        , title: '{:lang("choose_area")}'
+                        , area: ['865px', '580px'] //宽高
+                        , btnAlign: 'c' //按钮居中
+                        , shade: 0 //不显示遮罩
+                        , yes: function () {
+                            layer.closeAll();
+                            var ids_name = GetBidCityChecked();
+                            var ids = GetChecked();
+                            if (ids_name.length) {
+                                that.attr('data-country_id', country);
+                                that.html(ids_name.join(","));
+                                that.parent().parent().find('.area_group_name').val(ids_name.join(","));
+                                that.parent().parent().find('.area_group_ids').val(ids);
+                            }
+                        }
+                    });
+                    var old_ids = that.parent().parent().find('.area_group_ids').val();
+                    GetRegionPlug('#test-div', data.data);
+                    SetChecked(old_ids.split(','));
+                }
+            });
+        });
+        //计价方式切换
+        $('.w150_r_0').click(function () {
+            $(this).siblings().removeClass('ui-state-active');
+            $(this).addClass('ui-state-active');
+            $('.tpl').hide();
+            $('#' + $(this).data('param')).show();
+        });
+        //移除当前列表
+        $(document).on('click', '.remove', function () {
+            $(this).parent().parent().remove();
+        });
+        //按重--指定地区邮费配置
+        var w_k = "{++$w_k}";
+        $('#add_weight_conf').click(function () {
+            var _html = '<tr>';
+            _html += '<td style="style="width: 150px">';
+            _html += '<select name="fee_conf[' + w_k + '][country_id]" class="country">';
+            _html += $('#country').html();
+            _html += '</select>';
+            _html += '<p class="area" style="display: none;"></p></td>';
+            _html += '<td style="text-align: center"><input class="w50" type="text" name="fee_conf[' + w_k + '][start_standard]" value=""/></td>';
+            _html += '<td style="text-align: center"><input class="w50" type="text" name="fee_conf[' + w_k + '][start_fee]" value=""/></td>';
+            _html += '<td style="text-align: center"><input class="w50" type="text" name="fee_conf[' + w_k + '][add_standard]" value=""/></td>';
+            _html += '<td style="text-align: center"><input class="w50" type="text" name="fee_conf[' + w_k + '][add_fee]" value=""/></td>';
+            _html += '<td style="text-align: center"><button class="white td-remove remove" type="button">' + "{:lang('remove')}" + '</button></td>';
+            _html += '<input type="hidden" name="fee_conf[' + w_k + '][area_names]" class="area_group_name"/>';
+            _html += '<input type="hidden" name="fee_conf[' + w_k + '][area_ids]" class="area_group_ids"/></tr>';
+            $(this).parent().parent().before(_html);
+            w_k++;
+        });
+        //按重--指定地区包邮配置
+        var f_q_k = "{++$f_q_k}";
+        $('#add_weight_free').click(function () {
+            var _html = '<tr>';
+            _html += '<td style="width: 150px">';
+            _html += '<select name="free_conf[' + f_q_k + '][country_id]"  class="country w200">';
+            _html += $('#country').html();
+            _html += '</select>';
+            _html += '<p class="area" style="display: none"></p></td>';
+            _html += '<td style="text-align: center">';
+            _html += '<select name="free_conf[' + f_q_k + '][freetype]" class="freetype">';
+            _html += '<option value="1">{:lang("start_standard_weight")}</option><option value="2">{:lang("money")}</option><option value="3">{:lang("start_standard_weight")}+{:lang("money")}</option>';
+            _html += '</select>';
+            _html += '<span><input type="text" name="free_conf[' + f_q_k + '][inweight]" class="w50"/>(kg){:lang("within")}</span>';
+            _html += '<span style="display: none"><input type="text" name="free_conf[' + f_q_k + '][upmoney]" class="w50 onlycurrency"/>(￥){:lang("without")}</span> ';
+            _html += '<span>{:lang("free_freight")}</span>';
+            _html += '</td><td style="text-align: center"><button class="white td-remove remove" type="button">' + "{:lang('remove')}" + '</button></td>';
+            _html += '<input type="hidden" name="free_conf[' + f_q_k + '][area_names]" class="area_group_name"/>';
+            _html += '<input type="hidden" name="free_conf[' + f_q_k + '][area_ids]" class="area_group_ids"/></tr>';
+            $(this).parent().parent().before(_html);
+            f_q_k++;
+        });
+        //按重--免邮条件切换
+        $(document).on('change', '.freetype', function () {
+            var val = $(this).val();
+            var obj = $(this).parent().find('span');
+            if (val == 1) {
+                obj.eq(0).show();
+                obj.eq(1).hide();
+            } else if (val == 2) {
+                obj.eq(0).hide();
+                obj.eq(1).show();
+            } else {
+                obj.eq(0).show();
+                obj.eq(1).show();
+            }
+        });
+        //全场包邮---隐藏所有配置项
+        $('#is_free').click(function () {
+            console.log(123);
+            if ($(this).is(':checked')) {
+                $('#weight,#quantity,#money,#valuation').hide();
+            } else {
+                $('#weight,#quantity,#money,#valuation').show();
+            }
+        });
+        //按件--指定地区邮费配置
+        var q_k = '{++$q_k}';
+        $('#add_number_conf').click(function () {
+            var _html = '<tr>';
+            _html += '<td style="style="width: 150px">';
+            _html += '<select name="fee_number_conf[' + q_k + '][country_id]" class="country">';
+            _html += $('#country').html();
+            _html += '</select>';
+            _html += '<p class="area" style="display: none;"></p></td>';
+            _html += '<td style="text-align: center"><input class="w50" type="text" name="fee_number_conf[' + q_k + '][start_standard]" value=""/></td>';
+            _html += '<td style="text-align: center"><input class="w50" type="text" name="fee_number_conf[' + q_k + '][start_fee]" value=""/></td>';
+            _html += '<td style="text-align: center"><input class="w50" type="text" name="fee_number_conf[' + q_k + '][add_standard]" value=""/></td>';
+            _html += '<td style="text-align: center"><input class="w50" type="text" name="fee_number_conf[' + q_k + '][add_fee]" value=""/></td>';
+            _html += '<td style="text-align: center"><button class="white td-remove remove" type="button">' + "{:lang('remove')}" + '</button></td>';
+            _html += '<input type="hidden" name="fee_number_conf[' + q_k + '][area_names]" class="area_group_name"/>';
+            _html += '<input type="hidden" name="fee_number_conf[' + q_k + '][area_ids]" class="area_group_ids"/></tr>';
+            $(this).parent().parent().before(_html);
+            w_k++;
+        })
+        //按件--指定地区包邮配置
+        var f_q_k = "{$f_q_k}";
+        $('#add_number_free').click(function () {
+            var _html = '<tr>';
+            _html += '<td style="width: 150px">';
+            _html += '<select name="fee_number_conf[' + f_q_k + '][country_id]"  class="country w200">';
+            _html += $('#country').html();
+            _html += '</select>';
+            _html += '<p class="area" style="display: none"></p></td>';
+            _html += '<td style="text-align: center">';
+            _html += '<select name="fee_number_conf[' + f_q_k + '][freetype]" class="freetype">';
+            _html += '<option value="1">件数</option><option value="2">金额</option><option value="3">件数+金额</option>';
+            _html += '</select>';
+            _html += '<span><input type="text" name="fee_number_conf[' + f_q_k + '][quantity]" class="w50"/>(件)以内</span>';
+            _html += '<span style="display: none"><input type="text" name="fee_number_conf[' + f_q_k + '][upmoney]" class="w50 onlycurrency"/>(￥)以上</span> ';
+            _html += ' <span>包邮</span>';
+            _html += '</td><td style="text-align: center"><button class="white td-remove remove" type="button">' + "{:lang('remove')}" + '</button></td>';
+            _html += '<input type="hidden" name="fee_number_conf[' + f_q_k + '][area_names]" class="area_group_name"/>';
+            _html += '<input type="hidden" name="fee_number_conf[' + f_q_k + '][area_ids]" class="area_group_ids"/></tr>';
+            $(this).parent().parent().before(_html);
+            f_q_k++;
+        })
+        //指定地区免邮开关
+        $('#open_freerule').click(function () {
+            if ($(this).is(':checked')) {
+                $('.weight_free').show();
+            } else {
+                $('.weight_free').hide();
+            }
+        })
+    </script>
+    {/block}

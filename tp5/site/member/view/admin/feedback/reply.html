@@ -1,0 +1,36 @@
+{extend name="admin@public/poupbase" /}
+
+<!-- CONTENT -->
+
+{block name="body"}
+	<div id="content" style="margin:0px 10px 5px 8px;">
+		<div class="bloc" style="margin:10px 0px 0px;">
+			<div class="content">
+				<form id="myform" method="post" style="margin-top:5px;" class="">
+                <fieldset>
+                    <legend>{$meta_title|default=''}</legend>
+                    <div class="row">
+                        <label for="forinv" class="w100">{:lang('Reply')}:</label>
+                        <textarea id="forinv" style="width: 280px; height: 60px;" name="content"></textarea>
+                    </div>
+                    <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;border-bottom: dashed 0.5px #c2c2c2;padding-bottom: 20px">
+
+                          <input name="id" type="hidden"  value="{$id}" />
+                          <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('reply')}" />
+
+                        <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                    </div>
+                    {volist name='data' id='vo'}
+                    <div class="row">
+                        <label for="" class="w100">{:lang('Replyhistory')}:</label>
+                        <div style="line-height: 26px">{$vo.content}<span style="margin-left: 30px">{:lang('ReplyTime')}:{$vo.create_time}</span></div>
+
+
+                    </div>
+                    {/volist}
+                </fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+{/block}

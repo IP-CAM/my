@@ -1,0 +1,204 @@
+{notempty name=":widget('Ad/get_goods_ad',array('id'=>17,'limit'=>10))"}
+<dl class="ly-index-goods-list f1" data-title="母婴用品">
+	<dt class="index-title">
+		<h3><div class="shu"></div><span>母婴用品</span><em>GROCERY & HEALTH</em></h3>
+		<div class="more-keys">
+			<ul>
+                {foreach :widget('Ad/get_ad',array('id'=>9,'limit'=>9)) as $v}
+				<li><a href="{$v.ad_link}">{$v.name}</a></li>
+				{/foreach}
+			</ul>
+		</div>
+	</dt>
+	<dd>
+		<!--左侧广告-->
+		<div class="index-goods-left">
+			<div class="hot-keys">
+				<div class="hot-title"> 最热HOT </div>
+				<div class="links">
+                    {foreach :widget('Ad/get_ad',array('id'=>8,'limit'=>6)) as $v}
+					<span><a href="{$v.ad_link}">{$v.name}</a></span>
+					{/foreach}
+				</div>
+			</div>
+            {foreach :widget('Ad/get_ad',array('id'=>7,'limit'=>1)) as $v}
+            <a href="{$v.ad_link}">
+                {if condition="empty($v.ad_thumb) "}
+                <img class="img-bg" src="__PUBLIC__/{$img_path}/no-image.png" alt="" />
+                {elseif condition="substr($v.ad_thumb,0,4)=='http'"}
+                <img class="img-bg" src="{$v.ad_thumb}" alt="" />
+                {else/}
+                <img class="img-bg" src="__UPLOADS__/{$v.ad_thumb}" alt="" />
+                {/if}
+            </a>
+            {/foreach}
+		</div>
+		<!--左侧广告END-->
+		<div class="index-goods-right">
+			<ul class="clearfix goods-list">
+                {foreach :widget('Ad/get_goods_ad',array('id'=>17,'limit'=>10)) as $v}
+				<li class="goods-item">
+					<div class="goods-pic">
+						<a class="hover_solid" href="{:url('crossbbcg/goods/index').'?item_id='.$v.id}" target="_blank" title="{$v.name}" >
+                            {if condition="empty($v.thumb) "}
+                            <img width="170" height="170" class="lazy"  src="__PUBLIC__/{$img_path}/tm.gif"  data-original="__PUBLIC__/{$img_path}/no-image.png" alt="{$v.name}" />
+                            {elseif condition="substr($v.thumb,0,4)=='http'"}
+                            <img width="170" height="170" class="lazy"  src="__PUBLIC__/{$img_path}/tm.gif"  data-original="{$v.thumb}" alt="{$v.name}" />
+                            {else /}
+                            <img width="170" height="170" class="lazy"  src="__PUBLIC__/{$img_path}/tm.gif"  data-original="__UPLOADS__/{$v.thumb}" alt="{$v.name}" />
+                            {/if}
+						</a>
+					</div>
+					<div class="goods-info">
+						<div class="goods-name">
+							<a href="{:url('crossbbcg/goods/index').'?item_id='.$v.id}" target="_blank">{$v.name}</a>
+						</div>
+						<div class="price-box">
+							<span class="price">{$v.sale_price}</span>
+							<span class="mkt-price">{$v.market_price}</span>
+						</div>
+					</div>
+				</li>
+				{/foreach}
+			</ul>
+		</div>
+	</dd>
+</dl>
+{/notempty}
+<!--f2-->
+{notempty name=":widget('Ad/get_goods_ad',array('id'=>18,'limit'=>10))"}
+<dl class="ly-index-goods-list f2" data-title="母婴用品">
+	<dt class="index-title">
+		<h3><div class="shu"></div><span>母婴用品</span><em>GROCERY & HEALTH</em></h3>
+		<div class="more-keys">
+			<ul>
+                {foreach :widget('Ad/get_ad',array('id'=>12,'limit'=>9)) as $v}
+				<li><a href="{$v.ad_link}">{$v.name}</a></li>
+				{/foreach}
+			</ul>
+		</div>
+	</dt>
+	<dd>
+		<!--左侧广告-->
+		<div class="index-goods-left">
+			<div class="hot-keys">
+				<div class="hot-title"> 最热HOT </div>
+				<div class="links">
+                    {foreach :widget('Ad/get_ad',array('id'=>11,'limit'=>6)) as $v}
+					<span><a href="{$v.ad_link}">{$v.name}</a></span>
+					{/foreach}
+				</div>
+			</div>
+            {foreach :widget('Ad/get_ad',array('id'=>10,'limit'=>1)) as $v}
+            <a href="{$v.ad_link}">
+                {if condition="empty($v.ad_thumb) "}
+                <img class="img-bg" src="__PUBLIC__/{$img_path}/no-image.png" alt="" />
+                {elseif condition="substr($v.ad_thumb,0,4)=='http'"}
+                <img class="img-bg" src="{$v.ad_thumb}" alt="" />
+                {else/}
+                <img class="img-bg" src="__UPLOADS__/{$v.ad_thumb}" alt="" />
+                {/if}
+            </a>
+            {/foreach}
+		</div>
+		<!--左侧广告END-->
+		<div class="index-goods-right">
+			<ul class="clearfix goods-list">
+                {foreach :widget('Ad/get_goods_ad',array('id'=>18,'limit'=>10)) as $v}
+				<li class="goods-item">
+					<div class="goods-pic">
+						<a class="hover_solid" href="{:url('crossbbcg/goods/index').'?item_id='.$v.id}" target="_blank" title="{$v.name}" >
+                            {if condition="empty($v.thumb) "}
+                            <img width="170" height="170" class="lazy"  src="__PUBLIC__/{$img_path}/tm.gif"  data-original="__PUBLIC__/{$img_path}/no-image.png" alt="{$v.name}" />
+                            {elseif condition="substr($v.thumb,0,4)=='http'"}
+                            <img width="170" height="170" class="lazy"  src="__PUBLIC__/{$img_path}/tm.gif"  data-original="{$v.thumb}" alt="{$v.name}" />
+                            {else /}
+                            <img width="170" height="170" class="lazy"  src="__PUBLIC__/{$img_path}/tm.gif"  data-original="__UPLOADS__/{$v.thumb}" alt="{$v.name}" />
+                            {/if}
+						</a>
+					</div>
+					<div class="goods-info">
+						<div class="goods-name">
+							<a href="{:url('crossbbcg/goods/index').'?item_id='.$v.id}" target="_blank">{$v.name}</a>
+						</div>
+						<div class="price-box">
+							<span class="price">{$v.sale_price}</span>
+							<span class="mkt-price">{$v.market_price}</span>
+						</div>
+					</div>
+				</li>
+				{/foreach}
+			</ul>
+		</div>
+	</dd>
+</dl>
+{/notempty}
+<!--f3-->
+{notempty name=":widget('Ad/get_goods_ad',['id'=>19,'limit'])"}
+<dl class="ly-index-goods-list f3" data-title="母婴用品">
+	<dt class="index-title">
+		<h3><div class="shu"></div><span>母婴用品</span><em>GROCERY & HEALTH</em></h3>
+		<div class="more-keys">
+			<ul>
+                {foreach :widget('Ad/get_ad',array('id'=>15,'limit'=>9)) as $v}
+				<li><a href="{$v.ad_link}">{$v.name}</a></li>
+                {/foreach}
+			</ul>
+		</div>
+	</dt>
+	<dd>
+		<!--左侧广告-->
+		<div class="index-goods-left">
+			<div class="hot-keys">
+				<div class="hot-title"> 最热HOT </div>
+				<div class="links">
+                    {foreach :widget('Ad/get_ad',array('id'=>14,'limit'=>6)) as $v}
+					<span><a href="{$v.ad_link}">{$v.name}</a></span>
+					{/foreach}
+				</div>
+			</div>
+            {foreach :widget('Ad/get_ad',['id'=>13,'limit'=>1]) as $v}
+            <a href="{$v.ad_link}">
+                {if condition="empty($v.ad_thumb) "}
+                <img class="img-bg" src="__PUBLIC__/{$img_path}/no-image.png" alt="" />
+                {elseif condition="substr($v.ad_thumb,0,4)=='http'"}
+                <img class="img-bg" src="{$v.ad_thumb}" alt="" />
+                {else /}
+                <img class="img-bg" src="__UPLOADS__/{$v.ad_thumb}" alt="" />
+                {/if}
+            </a>
+			
+            {/foreach}
+		</div>
+		<!--左侧广告END-->
+		<div class="index-goods-right">
+			<ul class="clearfix goods-list">
+                {foreach :widget('Ad/get_goods_ad',['id'=>19,'limit'=>10]) as $v}
+				<li class="goods-item">
+					<div class="goods-pic">
+						<a class="hover_solid" href="{:url('crossbbcg/goods/index').'?item_id='.$v.id}" target="_blank" title="{$v.name}" >
+                            {if condition="empty($v.thumb) "}
+                            <img width="170" height="170" class="lazy"  src="__PUBLIC__/{$img_path}/tm.gif"  data-original="__PUBLIC__/{$img_path}/no-image.png" alt="{$v.name}" />
+                            {elseif condition="substr($v.thumb,0,4)=='http'"}
+                            <img width="170" height="170" class="lazy"  src="__PUBLIC__/{$img_path}/tm.gif"  data-original="{$v.thumb}" alt="{$v.name}" />
+                            {else /}
+                            <img width="170" height="170" class="lazy"  src="__PUBLIC__/{$img_path}/tm.gif"  data-original="__UPLOADS__/{$v.thumb}" alt="{$v.name}" />
+                            {/if}
+						</a>
+					</div>
+					<div class="goods-info">
+						<div class="goods-name">
+							<a href="{:url('crossbbcg/goods/index').'?item_id='.$v.id}" target="_blank">{$v.name}</a>
+						</div>
+						<div class="price-box">
+							<span class="price">{$v.sale_price}</span>
+							<span class="mkt-price">{$v.market_price}</span>
+						</div>
+					</div>
+				</li>
+				{/foreach}
+			</ul>
+		</div>
+	</dd>
+</dl>
+{/notempty}

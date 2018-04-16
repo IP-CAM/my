@@ -1,0 +1,68 @@
+{extend name="common/base" /}
+{block name='css'}
+<style>
+    .cat_title{
+        background-color: #0099e6;
+        color: #fff;
+        font-size: 20px;
+        height: 42px;
+        line-height: 42px;
+        padding-left: 10px;
+    }
+</style>
+{/block}
+{block name="title"}
+<title>{$category_title}-{$mata_title}</title>
+{/block} {block name="body"}
+<div class="ly-path">
+	<ul class="clearfix">
+		<li class="home">
+			<a href="{:url('crossbbcg/index/index')}" title="{:lang('index')}">{:lang('index')}</a>
+			<span>&gt;&nbsp;</span>
+		</li>
+		<li>
+			<em>{$category_title}</em>
+			<span>&gt;&nbsp;</span>
+		</li>
+		<li>
+			<h1>{$mata_title}</h1>
+		</li>
+	</ul>
+</div>
+<div class="ly-main help-main clearfix">
+	<div class="ly-main-left"  id="help-fixed">
+        {foreach $list as $v}
+		<div class="fixed-n">
+            <div class="cat_title">{$v.title}</div>
+			<div class="ly-help-left">
+                {foreach $v['category'] as $vo}
+				<dl {eq name=":input('cat')" value="$vo.id"}class="active"{/eq}>
+					<dt class="hd"><em>{$vo.title}</em><span></span></dt>
+					<dd class="bd" {eq name=":input('cat')" value="$vo.id"}style="display:block"{else /}style="display:none;"{/eq}>
+						<div class="n">
+                            {foreach $vo.article as $io}
+							<a {eq name=":input('id')" value='$io.id'}class="current"{/eq} href="{:url('crossbbcg/help/index',array('id'=>$io.id,'cat'=>$io.category_id))}" title="{$io.title}">{$io.title}</a>
+                            {/foreach}
+						</div>
+					</dd>
+				</dl>
+				{/foreach}
+			</div>
+		</div>
+        {/foreach}
+	</div>
+	<div class="ly-help-right">
+		<div class="title"><span>{$data.title}</span></div>
+		<div class="help-content">
+		{:html_entity_decode($data.contents)}
+	    </div>
+	</div>
+</div>
+{/block}
+<!--此板块为页面单独js加载-->
+{block name="footer_js"}
+<script type="text/javascript">
+	//需要加载的js文件
+	Private_Script = ['help'];
+</script>
+{/block}

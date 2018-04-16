@@ -1,0 +1,88 @@
+.country-title{text-align: center; padding-bottom: 20px;}
+.ly-Allwrap{margin-bottom:30px}
+.country-title span{display: inline-block; padding: 0 20px; height: 40px; line-height: 40px; border: 1px solid #ddd; font-size: 16px; border: 1px dotted #ff5555; color: #ff5555;}
+.country-link{margin-bottom: 30px;overflow: hidden;}
+.country-link ul{width: 104%;}
+.country-link li img{width: 60px; vertical-align: middle; height: 60px; padding-right: 10px;}
+.country-nav-w{background: #fff; height: 52px; border-top: 1px solid #e6e6e6; border-bottom: 1px solid #e6e6e6;}
+.country-nav-w .country-nav{border-left: 1px solid #fff;border-left: 1px solid #e6e6e6;}
+.country-nav-w .country-nav ul{}
+.country-nav-w .country-nav li{position:relative;float: left;text-align: center;line-height: 32px;width: 129px;border-right: 1px solid #ededed;height: 32px;padding: 10px;font-size: 14px;cursor: pointer;color: #333;}
+.country-nav-w .country-nav li a{}
+.country-nav-w .country-nav li img{vertical-align: middle;}
+.country-nav-right .go-top{
+    line-height: 34px;
+    background: #0099e6;
+    color: #fff;
+}
+.country-nav-right .go-cart i{font-size:20px;vertical-align:middle;position:relative;top:-1px}
+.country-nav-right .go-cart{
+    line-height: 34px;
+    background: #0099e6;
+    color: #fff;
+}
+.country-nav-right li.active{background: #ddd;/* color: #fff; */border-color: #ddd;}
+.country-nav-right li{height: 30px; line-height: 30px; background: #fff; border: 1px solid #ddd; margin-top: -1px; white-space: normal; overflow: hidden; text-overflow: ellipsis;}
+.country-nav-w .country-nav li.active{background:#0099e6;color:#fff;overflow: visible;}
+.country-nav-w .country-nav li.active:after{content: ""; position: absolute; bottom: -10px; display:block; left: 50%; margin-left: -10px; border: 10px solid transparent; border-top: 10px solid #fff; border-top-color: inherit; border-bottom: none; border-top-color: #0099e6;}
+.country-nav-w .country-nav li span{}
+.country-nav-right{width: 121px;left: 50%;margin-left: 609px;position: fixed;display: block;bottom: 10px;z-index: 1000;text-align: center;}
+.country-link ul li{float: left;width: 296px;background: #fff;margin-bottom: 4px;margin-right: 5px;}
+.country-link ul li a{display:block;padding: 20px 0;text-align: center;}
+.country_info{width:1100px; padding:5px 50px 20px 50px; font-size:16px; text-align:left; position:relative;}
+.country_info i{width:40px;height:40px;font-size: 21px;display:block;position:absolute;font-weight:100;text-align: center;color:#999;}
+.country_info i.l{top: -4px;left:0px;}
+.country_info i.r{right:0px; bottom:0px;}
+.country_info h2{width:100%;height:35px;font-size:18px;display:block;font-weight:600;font-family: mcirosoft yahei;}
+.country_info p{color:#666;line-height:28px;font-size: 14px;}
+.country_prd{width: 1200px;padding-top: 30px;overflow: hidden;}
+.country_prd .title{
+    text-align: center;
+    margin-bottom: 10px;
+    line-height: 50px;
+    /* color: #fff; */
+}
+.country_prd .title .t-l{
+    background: url(../image/t_l.png) right center;
+}
+.country_prd .title .t-r{background: url(../image/t_r.png) 0 center;}
+.country_prd em{
+    display: inline-block;
+    width: 200px;
+    height: 7px;
+    vertical-align: middle;
+    position: relative;
+    top: 2px;
+}
+.country_prd .title span{
+    font-size: 24px;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 10px;
+}
+.country_prd .cpic_b .txt .desc{width:210px; height:20px; margin:0 auto; color:#999; line-height:20px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; text-overflow:ellipsis; -ms-text-overflow:ellipsis; -o-text-overflow:ellipsis; -moz-binding: url("ellipsis.xml#ellipsis");}
+.country_prd .country_products{width: 101%;}
+.country_prd .country_products ul li{width: 236px;height: 350px;float:left;margin-right: 5px;background: #fff;margin-bottom: 5px;}
+.brand-prd .country_products ul li{
+    height: auto;
+}
+.country_prd .country_products ul li .txt{width: 210px;margin:0 auto;text-align:left;}
+.country_prd .country_products ul li .txt .tit{height:38px; line-height:20px; padding-top:15px; overflow:hidden;}
+.country_prd .country_products ul li .txt .tit a{color:#666;}
+.country_prd .country_products ul li .price{height:40px;padding-top:20px;position:relative;margin: 0;}
+.country_prd .country_products ul li .price .item1{font-size:22px;color: #ff5555;}
+.country_prd .country_products ul li .price .item2{color:#999;padding-left:5px;font-size: 12px;text-decoration: line-through;}
+.country_prd .country_products ul li .price .item3{height:26px; position:absolute; right:0px; bottom:10px;}
+.country_prd .country_products ul li .price .item3 a{height:24px;line-height:24px;display:block;padding:0 5px;border: 1px dotted #ff5555;color: #ff5555;font-size: 12px;font-weight: normal;}
+.country_prd .country_products ul li .price .item3 a:hover{background: #ff5555;color:#fff;}
+
+.country_prd .brandWrap{position:relative;height: 340px;overflow:hidden;font-size:14px;background-color:#fff;}
+.country_prd .brandWrap .brandImgLink{display:block;overflow:hidden;}
+.country_prd .brandWrap .brandImg{display: block;width: 236px;height: 236px;}
+.country_prd .brandWrap .brandDesc{display:block;position:relative;top:0;height:152px;text-decoration:none;color:#333;background: #fff;}
+.country_prd .brandWrap .brandDesc .brandLogo{position:absolute;top:-40px;left:50%;margin-left:-40px;width:80px;height:80px;border:1px solid #ddd;-moz-border-radius:50%;-webkit-border-radius:50%;border-radius:50%;}
+.country_prd .brandWrap .brandDesc .brandName{padding-top:49px;text-align:center;font-weight:bold;}
+.country_prd .brandWrap .brandDesc .brandBenefit{min-height:19px;font-size:13px;overflow:hidden;text-align:center;color:#E31436;}
+.country_prd .brandWrap .brandDesc .brandBtn{display:block;margin:16px auto 0;width:124px;height:28px;line-height:28px;text-align:center;text-decoration:none;cursor:pointer;background-color: #ff5555;color:#fff;}
+.country_prd .brandWrap .brandDesc .brandTime{margin-top:15px;text-align:center;font-size:12px;}
+.country-cat{margin-top: 30px;}

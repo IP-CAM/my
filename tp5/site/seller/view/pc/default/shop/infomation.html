@@ -1,0 +1,123 @@
+{extend name='common/base'}
+{block name='css'}
+<style>
+    .table-bordered{
+        border: 1px solid #000000;!important;
+    }
+</style>
+{/block}
+{block name="breadcrumb"}
+<li>{:lang('sStore')}</li>
+<li class="active">{$meta_title|default=''}</li>
+{/block}
+{block name='body'}
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+        <div class="box">
+            <div class="box-header">
+                <h3>店铺信息</h3>
+            </div>
+            <div class="box-body">
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                    <tr>
+                        <td colspan="6" style="background-color: #efefef">基本信息</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right;background-color: #efefef">店铺名称：</td>
+                        <td colspan="5">深圳润土信息技术有限公司</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right;background-color: #efefef">店铺类型：</td>
+                        <td>Pune</td>
+                        <td style="text-align: right;background-color: #efefef"> 保证金：</td>
+                        <td> {$data.cash}</td>
+                        <td style="text-align: right;background-color: #efefef">  常用快递：</td>
+                        <td>{$data.common_express}</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right;background-color: #efefef">可售商品数量：</td>
+                        <td>{$data.sale_goods_num}</td>
+                        <td style="text-align: right;background-color: #efefef"> 平均客单价：</td>
+                        <td colspan="3">{$data.average_sale_price}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="box-body">
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                    <tr>
+                        <td colspan="6" style="background-color: #efefef">公司及联系人信息</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right;background-color: #efefef">公司名称：</td>
+                        <td colspan="5">{$data.company}</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right;background-color: #efefef">公司联系人：</td>
+                        <td>{$data.linkname}</td>
+                        <td style="text-align: right;background-color: #efefef"> 公司联系人手机：</td>
+                        <td> {$data.mobile}</td>
+                        <td style="text-align: right;background-color: #efefef">  公司电话：</td>
+                        <td>{$data.phone}</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right;background-color: #efefef">公司所在地：</td>
+                        <td>广东省深圳市南山区</td>
+                        <td style="text-align: right;background-color: #efefef"> 公司详细地址：</td>
+                        <td colspan="3">{$data.address}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="box-body">
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                    <tr>
+                        <td colspan="6" style="background-color: #efefef">营业执照信息</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right;background-color: #efefef">执照类型：</td>
+                        <td colspan="5">营业执照</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right;background-color: #efefef">法定代表人姓名：</td>
+                        <td>{$data.corporate}</td>
+                        <td style="text-align: right;background-color: #efefef"> 营业执照注册号：</td>
+                        <td>152451784596352148</td>
+                        <td style="text-align: right;background-color: #efefef">  注册资本：</td>
+                        <td>{$data.registered_assets}{:lang('wanyuan')}</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right;background-color: #efefef"> 组织机构代码：：</td>
+                        <td>{$data.organization_code}</td>
+                        <td style="text-align: right;background-color: #efefef">纳税类型税码：</td>
+                        <td >{$data.tax_code_type}%</td>
+                        <td style="text-align: right;background-color: #efefef"> 成立时间：</td>
+                        <td>{:time_format($data.build_time,'Y-m-d')}</td>
+                    </tr>
+                    <tr>
+                       
+                        <td style="text-align: right;background-color: #efefef"> 组织机构代码有效期</td>
+                        <td >{$data.organization_code_date_start} - {$data.organization_code_date_end}</td>
+                        <td style="text-align: right;background-color: #efefef">纳税人类型：</td>
+                        <td colspan="3">
+                            {switch name='$data.taxpayer_type'}
+                            {case value='1'} {:lang('general_taxpayer')}{/case}
+                            {case value='2'} {:lang('small-scale_taxpayer')}{/case}
+                            {case value='3'} {:lang('Non-vat taxpayer')}{/case}
+                            {default /}{:lang('general_taxpayer')}
+                            {/switch}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+        </div>
+    </div>
+</section>
+{/block}

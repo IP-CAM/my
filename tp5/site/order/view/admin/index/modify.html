@@ -1,0 +1,158 @@
+    {extend name="admin@public/poupbase"/}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content" style="margin:0px 10px 5px 8px;">
+        <div class="bloc" style="margin:10px 0px 0px;">
+            
+            <div class="content">
+                <form id="myform" method="post" style="margin-top:5px;" class="">
+                    <fieldset>
+                        <legend>{:lang('Order_info')}</legend>
+    
+                        <div class="row">
+                            <label class="w120">{:lang('Order_sn')} : </label>
+                            <label style="font-size: 15px; font-weight: bold;">{$data.order_sn}</label>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="fl">
+                                <label class="w120">{:lang('Total_amount')} : </label>
+                                <input type="text" name="order_amount" id="order_amount" value="{$data.order_amount}" class="w100l" />
+                            </div>
+                            <div class="fl">
+                                <label class="w100">{:lang('freight')} : </label>
+                                <input type="text" name="shipping_fee" id="shipping_fee" value="{$data.shipping_fee}" class="w80l"  />
+                            </div>
+                        </div>
+    
+                        <div class="row">
+                            <div class="fl">
+                                <label class="w120">{:lang('Payment_type')} : </label>
+                                <select name="pay_name" id="pay_name" style="width: 140px;">
+                                    <option value="">{:lang('Wait payment')}</option>
+                                    {notempty name="payments"}
+                                    {volist name="payments" id="vo"}
+                                    <option value="{$vo.code}_{$vo.subjection}">
+                                        {php}
+                                        $code = $vo['code']; $subjection = $vo['subjection'];
+                                        echo lang($code .'_'. $subjection);
+                                        {/php}
+                                    </option>
+                                    {/volist}
+                                    {else /}
+                                    <option value="">{:lang('No install payment')}</option>
+                                    {/notempty}
+                                </select>
+                            </div>
+                            
+                            <div class="fl tradebox" style="display: none;">
+                                <label class="w100">{:lang('Payment_type')} : </label>
+                                <input type="text" name="trade_no" id="trade_no" value="{$data.trade_no}" class="w180l" placeholder="abcdefg88551254822158"  />
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="fl">
+                                <label class="w120">{:lang('Consignee')} : </label>
+                                <input type="text" name="consignee" id="consignee" value="{$data.consignee}" class="w100l" />
+    
+                            </div>
+                            
+                            <div class="fl">
+                                <label class="w100" for="mobile">{:lang('Phone')} : </label>
+                                <input type="text" name="mobile" id="mobile" value="{$data.mobile}" style="width: 120px;" />
+                            </div>
+                        </div>
+    
+                        <div class="row">
+                            <label class="w120" for="idnumber">{:lang('Idnumber')} : </label>
+                            <input type="text" name="idnumber" id="idnumber" value="{$data.idnumber}" style="width: 260px; font-weight: bolder; font-size: 16px; letter-spacing: 2px;" />
+                        </div>
+                        
+                        <div class="row">
+                            <label class="w120">{:lang('Delivery address')} : </label>
+                            {:widget('common/Area/choosearea', ['country' => $data.country, 'province' => $data.province, 'city' => $data.city, 'district' => $data.district])}
+                        </div>
+    
+                        <div class="row">
+                            <label class="w120">&nbsp;&nbsp;</label>
+                            <input type="text" name="address" id="address" value="{$data.address}" style="width: 435px;" />
+                        </div>
+    
+                        <div class="row">
+                            <label for="postscript" class="w120">{:lang('Order postscript')} : </label>
+                            <textarea id="postscript" name="postscript" style="width: 340px; height: 60px;">{$data.postscript}</textarea>
+                        </div>
+                        
+                        <div class="buttons-wrapper bw-bottom" style="margin:30px auto 2px; text-align:center;">
+                            <input name="submit1" value="{:lang('Save edit')}" type="submit" url="{:url()}">
+                            <input name="order_id" id="order_id" type="hidden" value="{$data.order_id}"/>
+                            <input name="reset" class="button white" value="{:lang('Cancel edit')}" type="reset">
+                        </div>
+                    </fieldset>
+    
+                </form>
+            </div>
+        </div>
+    </div>
+    {/block}
+    
+    {block name="js"}
+    <script>
+        $(function () {
+            $(".bset").buttonset();
+            
+            $('#pay_name').on('change', function () {
+               var val = $(this).val();
+               if(val == '')
+               {
+                   $('.tradebox').hide().find('input').attr('disabled', true);
+               }else{
+                   $('.tradebox').show().find('input').attr('disabled', false);
+               }
+            });
+
+            $('input[name="submit1"]').click(function(){
+                var that = this;
+                var form = $(that).closest('form');
+                var target = $(that).attr('url');
+                var query = {
+                    consignee: form.find('#consignee').val(),
+                    order_amount: form.find('#order_amount').val(),
+                    shipping_fee: form.find('#shipping_fee').val(),
+                    country: form.find('#country option:selected').text(),
+                    province: form.find('#province option:selected').text(),
+                    city: form.find('#city option:selected').text(),
+                    district: form.find('#district option:selected').text(),
+                    recode: form.find('#province').val() +'/'+form.find('#city').val()+'/'+form.find('#district').val(),
+                    pay_name: form.find('#pay_name').val(),
+                    trade_no: form.find('#trade_no').val(),
+                    address: form.find('#address').val(),
+                    mobile: form.find('#mobile').val(),
+                    postscript: form.find('#postscript').val(),
+                    order_id: form.find('#order_id').val()
+                };
+
+                $.post(target, query).success(function(data){
+                    if (data.code==1) {
+                        parent.layer.msg(data.msg, {icon:1, time: 2000 ,shade: 0.3}, function(){
+                            if(data.url){
+                                parent.location.href=data.url;
+                            }else{
+                                parent.location.reload();
+                            }
+                        });
+                    }else{
+                        parent.layer.msg(data.msg, {icon:2, time: 2000 ,shade: 0.3}, function(){
+                            if(data.url){
+                                parent.location.href=data.url;
+                            }
+                        });
+                    }
+                });
+                return false;
+            })
+        })
+    </script>
+    {/block}

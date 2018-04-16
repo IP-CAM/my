@@ -1,0 +1,100 @@
+/*index ad group*/
+.public-category{display: block}
+.ly-Allwrap{margin-bottom: 20px;}
+.ly-ad-group{width: 1200px; margin: 0 auto 20px;}
+.ly-ad-group ul{width: 102%;}
+.ly-ad-group li{float: left;margin-right: 10px;}
+/*index-new-goods*/
+.ly-new-goods{width: 1200px;margin: 0 auto 10px;}
+.ly-new-goods .goods-list{ overflow: hidden; width: 102%; }
+.index-title{font-family:"microsoft yahei";line-height: 40px;position: relative;}
+.index-title h3{font-size: 16px;font-weight: bold;}
+.index-title .more{position:absolute;right:0;color: #999;top:0;}
+.index-title .more:hover{color: #009bde;}
+.index-title .more i{ font-style: normal; font-family: simsun; }
+.index-title h3 span{padding-right:10px}
+.index-title h3 em{ font-weight: normal; font-size: 12px; color: #aaa; }
+.ly-new-goods .goods-item{width: 232px;background: #fff;margin-right: 10px;margin-bottom: 10px;padding-bottom: 10px;}
+.ly-new-goods .goods-pic{text-align: center;line-height: 205px;font-size: 184px;padding: 14px;height: 205px;padding-bottom: 5px;}
+.ly-new-goods .goods-pic img{max-width: 205px;max-height: 205px;/* vertical-align: middle; */}
+.ly-new-goods .goods-info{ padding: 0 14px; }
+.ly-new-goods .goods-name{height: 36px;overflow: hidden;line-height: 18px;margin-bottom: 5px;}
+.ly-new-goods .goods-name a{color: #666}
+.ly-new-goods .price-box{}
+.ly-new-goods .price{}
+.ly-new-goods .mkt-price{}
+.ly-index-brand{width: 1200px;margin: 0 auto 20px; }
+.ly-index-brand dd{width: 1200px;overflow: hidden;border-left: 1px solid #ededed;border-top: 1px solid #ededed;}
+.ly-index-brand li{float: left;width: 170px;border:1px solid #ededed;background-color: #fff;margin-top: -1px;margin-left: -1px;position: relative;overflow: hidden;}
+.ly-index-brand li a{display:block;}
+.ly-index-brand dd span{text-align: center;display: block;line-height: 80px;font-size: 72px;height: 80px;} 
+.ly-index-brand dd img{ max-width: 100%; max-height: 80px; }
+.ly-index-brand dd em{display: block;color: #666;text-align: center;padding-top: 5px;}
+.ly-index-goods-list{width: 1200px; margin: 0 auto 20px;overflow: hidden;position: relative;}
+.ly-index-goods-list .index-goods-left{float: left;width: 220px;overflow: hidden;position: relative;}
+.ly-index-goods-list .index-goods-left .hot-keys{ position: absolute; top: 20px; left: 14px; right: 14px; height: 200px; /* background: rgba(255, 255, 255, 0.24); */ } 
+.ly-index-goods-list .index-goods-left .hot-keys .hot-title{text-align: center;padding-bottom: 5px;color: #fff;font-family: microsoft yahei;font-size: 14px;}
+.ly-index-goods-list .index-goods-left .hot-keys .links{ overflow: hidden; } 
+.ly-index-goods-list .index-goods-left .hot-keys span{display: block;float: left;width: 86px;padding: 5px;}
+.ly-index-goods-list .index-goods-left .hot-keys a{display: block;padding: 4px 5px;border: 1px dotted #fff;font-size: 12px;color: #fff;text-align: center;background: rgba(255, 255, 255, 0.13);}
+.ly-index-goods-list .index-goods-left .hot-keys a:hover{ background: rgba(255, 255, 255, 0.24); }
+.ly-index-goods-list  .shu{ display: inline-block; width: 10px; height: 16px; margin-right: 6px; background: #ff5556; vertical-align: middle; position: relative; top: -2px; }
+.ly-index-goods-list .index-goods-right{margin-left: 220px;overflow:hidden;border-top: 1px solid #e6e6e6;}
+.ly-index-goods-list .index-goods-right ul{width:101%}
+.ly-index-goods-list .goods-item{width: 195px;background: #fff;border: 1px solid #ededed;margin-left: -1px;margin-top: -1px;position: relative;}
+.ly-index-goods-list .goods-pic{text-align: center;line-height: 170px;font-size: 153px;padding: 10px;height: 170px;padding-bottom: 5px;}
+.ly-index-goods-list .goods-pic a{position:static}
+.ly-index-goods-list .goods-pic img{max-width: 170px;max-height: 170px;/* vertical-align: middle; */}
+.ly-index-goods-list .goods-info{padding: 0 14px;padding-bottom: 5px;}
+.ly-index-goods-list .goods-name{height: 36px;overflow: hidden;line-height: 18px;margin-bottom: 5px;}
+.ly-index-goods-list .goods-name a{color: #666}
+.ly-index-goods-list .goods-name a:hover{color:#ff3333}
+.ly-index-goods-list .price-box{}
+.ly-index-goods-list .price{}
+.ly-index-goods-list .mkt-price{}
+.ly-index-goods-list  .more-keys li{float: left;padding-left: 20px;}
+.ly-index-goods-list  .more-keys{position: absolute;right: 0; top: 0px;}
+
+.f2  .shu{background:#6c3;}
+.f3  .shu{background:#f4a;}
+.f4  .shu{background:#83e;}
+.f5  .shu{background:#fa3;}
+
+.ly_index_title { width:1200px; height:80px; line-height:80px; font-size:24px; color:#444; padding-top:20px; text-align:center; }
+.Pavilion_box {width:100%;height:600px;background: url(../image/bg_global.jpg) no-repeat center top;margin-top:25px;font-family: microsoft yahei;margin-bottom: 20px;}
+.Pavilion_box .Pavilion_title {height:70px;line-height:70px;padding-top:20px;font-size:22px;color: #333;text-align: center;}
+.Pavilion_box .tabContainer {color: #333;text-align:center;}
+.Pavilion_box .tabContainer ul li {height:30px;line-height:30px;padding:0 12px;display:inline-block;cursor:pointer;border: 1px solid transparent;}
+.Pavilion_box .tabContainer ul li.on {background: #fff;color: #FF0036;-webkit-border-radius:18px;border: 1px dashed #FF0036;-moz-border-radius:18px;border-radius: 0;}
+.Pavilion_box .panelContainer { width:1200px; height:359px; padding-top:40px; }
+.Pavilion_box .panelContainer .c_pic { width:239px; height:359px; float:left; margin-right:1px; }
+.Pavilion_box .panelContainer .c_pic_b { width:217px; height:347px; float:left; background:#fff; padding:6px; margin-left:11px; text-align:center; }
+.Pavilion_box .panelContainer .c_pic_b img { width:217px; height:227px; }
+.Pavilion_box .panelContainer .c_pic_b .txt { width:217px; height:120px; position:relative; }
+.Pavilion_box .panelContainer .c_pic_b .tit { height:36px; line-height:40px; font-size:16px; padding-top:10px; }
+.Pavilion_box .panelContainer .c_pic_b .desc { width:217px; height:20px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; text-overflow:ellipsis; -ms-text-overflow:ellipsis; -o-text-overflow:ellipsis; -moz-binding: url("ellipsis.xml#ellipsis"); }
+.Pavilion_box .panelContainer .c_pic_b span { width:215px; height:36px; line-height:34px; display:block; color:#666; border:1px solid #dedede; position:absolute; left:0px; bottom:0px; }
+.Pavilion_box .panelContainer .c_pic_b a:hover span {border: 1px solid #FF0036;color: #FF0036;}
+
+.dingwei.hover .title {display:block}
+.dingwei .title {display:none}
+.dingwei.hover{visibility:visible}
+.dingwei{position:fixed;width: 35px;bottom: 50px;font-family: microsoft yahei;z-index: 99999;background: #fff;right: 0;border: 1px solid #e6e6e6;border-top: 0;visibility: hidden;}
+.dingwei.hover ul{display:block;width: 35px;-webkit-transform:scale(1);opacity:1;border-top: 0;-webkit-transition:all 0.3s ease;transition:all 0.3s ease;border-bottom: 0;overflow: hidden;position: relative;cursor: pointer;}
+.dingwei.hover .title {display:block}
+.dingwei ul{display: none;width:35px;overflow: hidden;-webkit-transform:scale(2);opacity:0;-webkit-transition:all 0.3s ease;transition:all 0.3s ease;}
+.dingwei ul li{float:left;display:block;}
+.dingwei ul li em{display:none;}
+.dingwei ul li.act i{display:none}
+.dingwei ul li span{height: 35px;line-height: 35px;background:#fff;text-decoration:none;display: block;width: 35px;font-size: 12px;text-align: center;}
+.dingwei ul li:hover *,.dingwei ul li.act *{color:#fff}
+.dingwei ul li span i{text-align: center;}
+.dingwei ul li.act span i,.dingwei ul li:hover span i{display:none}
+.dingwei ul li span:hover{}
+.dingwei ul li span{border-top: 1px solid #e6e6e6;position: relative;}
+.dingwei ul li span{}
+.dingwei ul li.act span ,.dingwei ul li span:hover{background-color: #ff3333; color:#fff;webkit-transition:background-color .3s ease-out;-moz-transition:background-color .3s ease-out;-o-transition:background-color .3s ease-out;transition:background-color .3s ease-out;}
+.dingwei ul li.item1 em{line-height: 15px;padding-top: 2px;}
+#gotop{width:35px; height:35px;line-height: 35px;text-align: center;cursor: pointer;border-top: 1px solid #ddd;display: none;}
+.dingwei ul li.act span span,.dingwei ul li a:hover span{display:block;line-height: 15px;padding-top: 2px;}
+.dingwei ul li:hover span em,.dingwei ul li.act span em{display:block;line-height: 16px;      font-size: 12px;      padding-top: 1px;}l li.act span em{display:block;line-height: 16px;      font-size: 12px;      padding-top: 1px;}

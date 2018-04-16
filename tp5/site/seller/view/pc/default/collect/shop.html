@@ -1,0 +1,112 @@
+{extend name='public/layout'}
+
+{block name='body'}
+<div class="page">
+    <div class="flexigrid">
+        <div class="mDiv">
+            <div class="ftitle">
+                <h3>{:lang('store_collect_preview')}</h3>
+                <h5>{:lang('today_collect_total')}:{$today_collect_total}</h5><h5>&nbsp;&nbsp;</h5>
+                <h5>{:lang('collect_total')}:{$collect_total}</h5>
+            </div>
+            <div title="{:lang('refresh_data')}" class="pReload"><i class="fa fa-refresh"></i></div>
+            <form class="navbar-form form-inline" id="search-form" method="get" action="" >
+                <div class="sDiv">
+                    <div class="sDiv2" style="margin-right: 10px;">
+                        <input type="text" size="30" name="start_time" id="start_time" value="{:input('start_time')}" placeholder="{:lang('start_time')}" class="qsbox">
+                        <input type="button" class="btn" value="{:lang('start_time')}">
+                    </div>
+                    <div class="sDiv2" style="margin-right: 10px;">
+                        <input type="text" size="30" name="end_time" id="end_time" value="{:input('end_time')}" placeholder="{:lang('end_time')}" class="qsbox">
+                        <input type="button" class="btn" value="{:lang('end_time')}">
+                    </div>
+                    <div class="sDiv2">
+                        <input class="btn" value="{:lang('search')}" type="submit">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id="statistics" style="height: 400px;"></div>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/echarts/3.6.2/echarts.min.js"></script>
+<script src="__PUBLIC__/{$module_path}js/echart/macarons.js"></script>
+<script type="text/javascript">
+    var res = {$data};
+    var myChart = echarts.init(document.getElementById('statistics'),'macarons');
+    option = {
+        tooltip : {
+            trigger: 'axis'
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                mark : {show: true},
+                dataView : {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        calculable : true,
+        legend: {
+            data:["{:lang('collect_num')}"]
+        },
+        xAxis : [
+            {
+                type : 'category',
+                data : res.day
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value',
+                name : "{:lang('collect_num')}",
+                axisLabel : {
+                    formatter: '{value} '
+                }
+            }
+        ],
+        series : [
+            {
+                name:"{:lang('collect_num')}",
+                type:'line',
+
+                data:res.num
+            }
+        ]
+    };
+    myChart.setOption(option);
+    $(document).ready(function(){
+        // 表格行点击选中切换
+        $('#flexigrid > table>tbody >tr').click(function(){
+            $(this).toggleClass('trSelected');
+        });
+
+        // 点击刷新数据
+        $('.fa-refresh').click(function(){
+            location.href = location.href;
+        });
+
+        $('#start_time').layDate();
+        $('#end_time').layDate();
+    });
+
+    function check_form(){
+        var start_time = $.trim($('#start_time').val());
+        var end_time =  $.trim($('#end_time').val());
+        if(start_time == '' ^ end_time == ''){
+            layer.alert('请选择完整的时间间隔', {icon: 2});
+            return false;
+        }
+        if(start_time !== '' && end_time !== ''){
+            $('#timegap').val(start_time+" - "+end_time);
+        }
+        if(start_time == '' && end_time == ''){
+            $('#timegap').val('');
+        }
+        return true;
+    }
+</script>
+
+{/block}

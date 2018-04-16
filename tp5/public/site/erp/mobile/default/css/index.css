@@ -1,0 +1,44 @@
+body, ul, ol, dl, dd, h1, h2, h3, h4, h5, h6, pre, form, fieldset, legend, input, button, textarea, p, blockquote, th, td {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font: 12px/1.5 arial,\5b8b\4f53,georgia,verdana,helvetica,sans-serif;
+}
+#doc, #doc-view{ min-width:1002px;background: #fff5f5;}
+#doc{background: #fff5f5;}
+#theme-panel {
+  display: none;
+  overflow: hidden;
+  position: relative;
+  margin-top: 0;
+  height: 334px;
+  background: #323232;
+}
+#doc-view {
+  z-index: 1;
+}
+.container {margin: 0 auto; width: 1000px;}
+#doc-hd{ z-index:300; position:relative;background: transparent;border-bottom: 1px solid #d6d6d6;}
+#topbar{ line-height:34px; }
+#topbar .topbar-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 34px;
+  background-color: #eee;
+  opacity: .6;
+  filter: alpha(opacity=60);
+}
+#topbar .topbar-bd{
+  position: relative;
+  margin: 0 auto;
+  width: 1000px;
+}
+#topmenu a{ margin:0 5px;}
+#setHomepage {
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+  background-color: rgba(255,255,255,0.2);
+}

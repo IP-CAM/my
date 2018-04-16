@@ -1,0 +1,321 @@
+    {extend name='common/base'}
+    
+    {block name='css'}
+    <link href="__PUBLIC__/{$css_path}/daterangepicker.css" rel="stylesheet">
+    {/block}
+    
+    {block name="breadcrumb"}
+    <li>{:lang('nav_order')}</li>
+    <li class="active">{$meta_title|default=''}</li>
+    {/block}
+    
+    {block name='body'}
+    <section class="content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <div class="row">
+                            <div class="page-header-top">
+                                <!--<a class="btn btn-etshop addnew">
+                                    <i class="fa fa-plus"></i> {:lang('Addnew')}
+                                </a>
+    
+                                <a class="btn btn-etshop del">
+                                    <i class="fa fa-minus"></i> {:lang('Delete')}
+                                </a>
+    
+                                <a class="btn btn-etshop addnew">
+                                    <i class="fa fa-plus"></i> {:lang('Addnew')}
+                                </a>-->
+                                <a class="btn btn-etshop addnew">
+                                    <i class="fa fa-feed"></i> {:lang('All')}
+                                </a>
+                                
+                                <div class="btn-group" style="display: inline-block; margin-right: 6px;">
+                                    <button type="button" class="btn btn-success etbtn">全部订单</button>
+                                    <button type="button" class="btn btn-success etbtn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        <span class="caret"></span>
+                                        <!--<span class="sr-only"></span>-->
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        {foreach $arr_order_status as $key=>$value}
+                                        <li><a href="#">{:lang($value)}</a></li>
+                                        {/foreach}
+                                    </ul>
+                                </div>
+                                
+                                <div class="btn-group" style="display: inline-block; margin-right: 6px;">
+                                    <button type="button" class="btn btn-navy etbtn">全部平台</button>
+                                    <button type="button" class="btn btn-navy etbtn dropdown-toggle" data-toggle="dropdown"
+                                            aria-expanded="false">
+                                        <span class="caret"></span>
+                                        <!--<span class="sr-only"></span>-->
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        {foreach $arr_order_status as $key=>$value}
+                                        <li><a href="#">{:lang($value)}</a></li>
+                                        {/foreach}
+                                    </ul>
+                                </div>
+                                
+                                <div class="btn-group" style="display: inline-block;margin-right: 6px;">
+                                    <button type="button" class="btn btn-danger etbtn">全部平台</button>
+                                    <button type="button" class="btn btn-danger etbtn dropdown-toggle"
+                                            data-toggle="dropdown" aria-expanded="false">
+                                        <span class="caret"></span>
+                                        <!--<span class="sr-only"></span>-->
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        {foreach $arr_order_status as $key=>$value}
+                                        <li><a href="#">{:lang($value)}</a></li>
+                                        {/foreach}
+                                    </ul>
+                                </div>
+                                
+                                <div class="time"
+                                     style="width: 200px; position: relative;display: inline-block;vertical-align: middle; margin-right: 6px">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        
+                                        <input type="text" class="form-control pull-left" id="reservation" name="time" placeholder="{:lang('choose_order_time')}" value="{$time}" style="padding: 4px 12px; height: 30px">
+                                    </div>
+                                </div>
+                                
+                                <div class="time" style="width: 260px; position: relative;display: inline-block;vertical-align: middle; margin-right: 6px">
+                                    <div class="input-group">
+                                        <div class="input-group-btn">
+                                            <button type="button" class="btn btn-default etbtn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{:lang('Search')} &nbsp;
+                                                <span class="fa fa-caret-down"></span></button>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="#">Action</a></li>
+                                                <li><a href="#">Another action</a></li>
+                                                <li><a href="#">Something else here</a></li>
+                                                <li><a href="#">Separated link</a></li>
+                                            </ul>
+                                        </div>
+                                        <!-- /btn-group -->
+                                        <input type="text" placeholder="{:lang('seller_order_search_tips')}" class="form-control" value="{$search_name}" name="search_name" style="padding: 4px 12px;height: 30px">
+                                    </div>
+                                </div>
+                                
+                                <a href="javascript:showAdvSearch();" class="btn-etshop icon">
+                                    <i class="fa fa-search"></i>
+                                </a>
+                                
+                                <a href="javascript:location.reload();" class="btn-etshop icon">
+                                    <i class="fa fa-refresh"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <table id="demo-foo-addrow" class="table table-bordered table-striped" data-page-size="10">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>{:lang('order_sn')}</th>
+                                <th>{:lang('consignee')}</th>
+                                <th>{:lang('order_total_money')}</th>
+                                <th>{:lang('order_status')}</th>
+                                <th>{:lang('delivery_status')}</th>
+                                <th>{:lang('pay_type')}</th>
+                                <th>{:lang('pay_source')}</th>
+                                <th>{:lang('order_create_time')}</th>
+                                <th>{:lang('opreration')}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {foreach $list as $v}
+                            <tr>
+                                <td>{$v.order_id}</td>
+                                <td>{$v.order_sn}</td>
+                                <td>
+                                    <span data-original-title="{$v.country} {$v.province} {$v.city} {$v.district} {$v.address}" data-toggle="tooltip" data-placement='top'>{$v.consignee} &nbsp;&nbsp; {$v.mobile}</span>
+                                </td>
+                                <td>{$v.symbol}{$v.order_amount}</td>
+                                
+                                <td>
+                                    {switch name="v.status"}
+                                    {case value="WAIT_BUYER_PAY"}
+                                    <span class="red L40">{:lang('WAIT_BUYER_PAY')}</span>
+                                    {/case}
+                                    {case value="WAIT_SELLER_SEND_GOODS"}
+                                    <span class="green L40">{:lang('WAIT_SELLER_SEND_GOODS')}</span>
+                                    {/case}
+                                    {case value="WAIT_BUYER_CONFIRM_GOODS"}
+                                    <span class="L40">{:lang('WAIT_BUYER_CONFIRM_GOODS')}</span>
+                                    {/case}
+                                    {case value="TRADE_FINISHED"}
+                                    <span class="green L40">{:lang('TRADE_FINISHED')}</span>
+                                    {/case}
+                                    {case value="TRADE_CLOSED"}
+                                    <span class=" L40">{:lang('TRADE_CLOSED')}</span>
+                                    {/case}
+                                    {case value="TRADE_CLOSED_BY_SYSTEM"}
+                                    <span class=" L40">{:lang('TRADE_CLOSED_BY_SYSTEM')}</span>
+                                    {/case}
+                                    {default /}
+                                    {/switch}
+                                </td>
+                                <td>
+                                    {switch name='$v.shipping_status'}
+                                    {case value='0'}
+                                        {if condition="$v.status=='WAIT_SELLER_SEND_GOODS' && ($v.cancel_status=='NO_APPLY'||$v.cancel_status=='FAILS')"}
+                                    <a class="tooltip-link ajax-get f18" data-original-title="{:lang('go_truck')}" data-toggle="tooltip" data-placement='top' data-width="1050" data-height="700" data-showbar="1" data-title="{:lang('shipping_information')}" data-skin="skin-blue" href="{:url('deliver', array('order_sn'=>$v.order_sn))}">
+                                        <i class="fa fa-truck"></i>
+                                    </a>
+                                        {/if}
+                                    {/case}
+                                    {case value='1'}
+                                        {:lang('had_delivery')}
+                                    {/case}
+                                    {case value='2'}
+                                        {:lang('had_received')}
+                                    {/case}
+                                    {/switch}
+                                </td>
+                                <td>
+                                    {$v.pay_name}
+                                </td>
+                                <td>
+                                    {$v.platform_type}
+                                </td>
+                                <td>{$v.create_time}</td>
+                                <td class="actions">
+                                    <a class="tooltip-link ajax-get f18" data-original-title="{:lang('View')}" data-toggle="tooltip" data-placement='top' data-width="900" data-height="700" data-showbar="1" data-title="{$v.consignee} - {$v.order_sn}" data-skin="skin-blue" href="{:url('info',array('order_sn'=>$v.order_sn))}"><i class="fa fa-eye"></i></a>
+        
+                                    
+                                    <a class="tooltip-link ajax-get f18" data-original-title="{:lang('show_customer_id')}" data-toggle="tooltip" data-placement='top' data-width="700" data-height="700" data-showbar="1" data-title="{$v.consignee} - {$v.order_sn}" data-skin="skin-blue" href="{:url('idnumber',array('order_sn'=>$v.order_sn))}"><i class="fa fa-user-secret"></i></a>
+                                    
+                                </td>
+                            </tr>
+                            {/foreach}
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td colspan="9">
+                                    <div class="text-right pagination" >
+                                        {$list->appends(input())->render()}
+                                    </div>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    
+                    <!--<div class="row">
+                        <div class="col-xs-12">
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th class="center">
+                                        <label class="pos-rel">
+                                            <input type="checkbox" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </th>
+                                    <th><a href="{:getUrlbyOrder('id')}">ID</a></th>
+                                    <th><a href="{:getUrlbyOrder('username')}">券码编号</a></th>
+                                    <th class="center"><a href="{:getUrlbyOrder('password')}">密码</a></th>
+                                    <th><a href="{:getUrlbyOrder('mobile')}">面额</a></th>
+                                    <th class="hidden-480 center"><a href="{:getUrlbyOrder('start_time')}">起始日期</a></th>
+                                    <th class="hidden-480 center"><a href="{:getUrlbyOrder('end_time')}">过期日期</a></th>
+                                    <th class="hidden-480 center"><a href="{:getUrlbyOrder('status')}">{:lang('Status')}</a>
+                                    </th>
+                                    <th class="text-right" style="width:200px;">{:lang('Actions')}</th>
+                                </tr>
+                                </thead>
+                                
+                                <tbody>
+                                {foreach $list as $vo}
+                                <tr>
+                                    <td class='center'>
+                                        <label class="pos-rel">
+                                            <input type="checkbox" class="ace ids" value="{$vo['order_id']}" name="ids[]"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </td>
+                                    <td>{$vo['order_id']}</td>
+                                    <td></td>
+                                    <td class='center'>
+                                    
+                                    </td>
+                                    <td></td>
+                                    <td class='hidden-480 center'></td>
+                                    <td class='hidden-480 center'>
+                                    
+                                    </td>
+                                    <td class='hidden-480 center'>
+                                    
+                                    </td>
+                                    
+                                    <td class='text-right'>
+                                        <div class="hidden-sm hidden-xs action-buttons">
+                                        
+                                        </div>
+                                        <div class="hidden-md hidden-lg">
+                                            <div class="inline pos-rel">
+                                                <button class="btn btn-minier btn-yellow dropdown-toggle"
+                                                        data-toggle="dropdown" data-position="auto">
+                                                    <i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
+                                                </button>
+                                                <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                                                    <li>
+                                                        <a href="{:url('edit',array('ids'=>$vo['order_id']))}"
+                                                           class="tooltip-success ajax-get edit" data-rel="tooltip"
+                                                           title="发放" data-original-title="发关本优惠券" data-showbar="1"
+                                                           data-width="100%" data-height="90%">
+                                        <span class="green">
+                                            <i class="ace-icon fa fa-reply icon-only bigger-120"></i>
+                                        </span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="{:url('delete',array('ids'=>$vo['order_id']))}"
+                                                           class="tooltip-error ajax-get" data-rel="tooltip" title=""
+                                                           data-original-title="删除" data-layer="{:lang('Want_delete')}"
+                                                           title="删除">
+                                    <span class="red">
+                                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                    </span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {/foreach}
+                                </tbody>
+                            </table>
+                            
+                            <div class="pagination-wrapper">
+                                <div class="results-part"><span></span></div>
+                                <div class="links-part"></div>
+                            </div>
+                        </div>&lt;!&ndash; /.span &ndash;&gt;
+                    </div>-->
+                    
+                    <div class="row">
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {/block}
+    
+    {block name='js'}
+    <script src="__PUBLIC__/{$js_path}/moment.min.js"></script>
+    <script src="__PUBLIC__/{$js_path}/daterangepicker.js"></script>
+    
+    <script type="text/javascript">
+        //Date range picker
+        $('#reservation').daterangepicker({
+            autoUpdateInput: false
+        });
+    </script>
+    {/block}

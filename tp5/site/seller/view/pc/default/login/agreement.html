@@ -1,0 +1,67 @@
+{extend name="login/base" /} {block name='title'}
+<title>{:lang('register_seller')}</title>
+{/block} {block name='css'} {/block} {block name="body"}
+<div class="shop-login-box yahei">
+	<div class="form-body">
+		<div class="title">
+			<div class="t">{:lang('register_seller')}</div>
+			<div class="steps  enter-steps">
+			<table width="100%">
+				<tbody>
+
+					<tr>
+						<td class="step-item step-1 active"><span><q class="icon">●</q><i>1</i>{:lang('Settled_notice')}</span>
+							<div class="stepdiv">1</div>
+						</td>
+						<td class="step-item step-2 ">
+							<span><q class="icon">●</q><i>2</i>{:lang('Company_info')}</span>
+							<div class="stepdiv">2</div>
+						</td>
+						<td class="step-item step-3"><span><q class="icon">●</q><i>3</i>{:lang('Store_info')}</span>
+							<div class="stepdiv">3</div>
+						</td>
+						<td class="step-item step-4 last"><span><q class="icon">●</q><i>3</i>{:lang('Settled_check')}</span>
+							<div class="stepdiv">4</div>
+						</td>
+						<td class="step-item step-5 last"><span><q class="icon">●</q><i>3</i>{:lang('Store_to_online')}</span>
+							<div class="stepdiv">5</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		</div>
+		<div class="content" style="height: 600px">
+			<form action="{:url('seller/login/entertwo')}" method="post">
+                <div style="height:500px;padding:20px; border: 1px solid #ddd; width: 1120px;overflow-y: auto;background-color: #f7f7f7;line-height: 1.7">
+                    {:html_entity_decode($protocol)}
+                </div>
+				<div><br /></div>
+				<div class="btn-box clearfix">
+					<div class="left">
+						<label><input id="xieyi_check" type="checkbox" value="true" />{:lang('Agree_Store_notice')}</label>
+					</div>
+					<div class="right"><button id="affirm" type="submit" disabled="disabled" class="btn btn-import save" rel="_request"> <span>{:lang('Agree_to_continue')}</span></button></div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+{/block} {block name="footer_js"}
+<script type="text/html" id="xieyi">
+	<div style="padding:20px;line-height: 2;">
+
+	</div>
+</script>
+<script src="__PUBLIC__/crossbbcg/pc/default/js/gt.js"></script>
+<script type="text/javascript">
+	$('#xieyi_check').change(function() {
+		if($(this).prop('checked')) {
+			$('#affirm').removeAttr('disabled')
+		} else {
+			$('#affirm').attr('disabled', 'disabled')
+		}
+	});
+</script>
+{/block}

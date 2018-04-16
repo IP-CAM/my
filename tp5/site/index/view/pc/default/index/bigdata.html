@@ -1,0 +1,247 @@
+    {extend name='common/base'}
+    
+    {block name='seo'}
+    <title>大数据 - ETshop-B2B2C商城系统,B2B2C2C新零售生态系统,多用户商城系统</title>
+    <meta name="Keywords" content="大数据 - ETshop,免费商城系统,B2B2C,多用户商城系统,开源网店系统,网上商城系统,免费网店,电商系统,润土科技,ETshop源码,源码,源码授权,授权.">
+    <meta name="Description"
+          content="大数据 - ETshop,是一款功能强大的B2B2C多用户商城系统,支持自营和第三方商家入驻,另外搭配多商户微信,多商户App,打造全渠道生态化电商系统!ETshop,一切为了商家！">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/css.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/header_footer.css">
+    {/block}
+    
+    {block name='body'}
+    <div class="index_pc">
+        {include file='common/header' /}
+        <div class="secNav secNav-top" id="secNav">
+            <div class="secNav-items">
+                <div class="item"><a href="saas.html">SAAS版</a></div>
+                <div class="item current"><a href="bigdata.html">大数据版</a></div>
+                <div class="item"><a href="kuajing.html">跨境版</a></div>
+                <div class="item"><a href="gjb.html">国际版</a></div>
+            </div>
+        </div>
+        <div class="bigdata_banner">
+            <div class="w1200">
+                <div class="list">
+                    <div class="d_title">大数据时代</div>
+                    <div class="x_title">极致才畅快</div>
+                    <div class="desc"><i></i><span>速度越快，人气越火</span></div>
+                </div>
+            </div>
+        </div>
+        <div id="bigdata">
+            <div class="temp bigdata_temp1">
+                <div class="w1200">
+                    <div class="title" data-sr="move 200px, over 1s, enter right">
+                        <h3>传统电商系统的弊端</h3>
+                        <span>当网站做活动，或者流量和并发一下子过多的时候导致网站系统崩溃，尤其是多用户商城，分销系统等，因为你网站火可能是一下子就火的，而且不是由你控制的（入驻商多了之后不火也难）。比如双11，你活动做的好好的时候突然网站奔溃那是很悲剧的事情</span>
+                    </div>
+                    <div class="img" data-sr="move 200px, over 1s, enter left"><img src="__PUBLIC__/{$img_path}/bigdata_temp1.png"></div>
+                </div>
+            </div>
+            <div class="temp bigdata_temp2">
+                <div class="w1200">
+                    <div class="title" data-sr="move 200px, over 1s, enter top">
+                        <h3>大数据版的解决方案</h3>
+                        <span>驾驭大数据不再是一个梦想，欢迎迈进大数据时代</span>
+                    </div>
+                    <div class="content" data-sr="move 200px, over 1s, enter bottom">
+                        <div class="item item_l">
+                            <div class="icons"><img src="__PUBLIC__/{$img_path}/bigdata_temp2_1.png"></div>
+                            <div class="tit">数据层</div>
+                            <div class="desc">我们采用了Memcached 缓存技术，DB数据库用了阿里云rds技术，图片静态缓存用 阿里云oss技术。</div>
+                        </div>
+                        <div class="item item_c">
+                            <div class="icons"><img src="__PUBLIC__/{$img_path}/bigdata_temp2_2.png"></div>
+                            <div class="tit">服务层</div>
+                            <div class="desc">多台服务器支撑系统，用阿里云弹性升级可以随活动自动增减服务器配置，让缓存命中率提升50%。</div>
+                        </div>
+                        <div class="item item_r">
+                            <div class="icons"><img src="__PUBLIC__/{$img_path}/bigdata_temp2_3.png"></div>
+                            <div class="tit">入口</div>
+                            <div class="desc">又称用户接触点方面，我们用了阿里云SLB技术，大大减少服务器负载。</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="temp bigdata_temp3">
+                <div class="w1200">
+                    <div class="title" data-sr="move 200px, over 1s, enter left">
+                        <h3>大数据版解决了哪些问题</h3>
+                        <span>
+                                <p>1，通过多台服务器使用调度器来分发请求，实现分流作用，解决了单台服务器因承载不了大量并发导致访问过慢的问题。</p>
+                                <p>2，运用oss的存储功能，实现超低延时的图片直接下载，解决了图片加载速度缓慢的问题。</p>
+                                <p>3，通过memcached从内存中读取信息，更加快速的反馈给请求所需的信息，分担了数据库查询的压力。</p>
+                            </span>
+                    </div>
+                </div>
+            </div>
+            <div class="temp bigdata_temp8" style="padding-bottom:50px;">
+                <div class="w1200">
+                    <div class="title" data-sr="move 200px, over 1s, enter top">
+                        <h3>ETshop大数据版服务器架构</h3>
+                    </div>
+                    <div class="content" data-sr="move 200px, over 1s, enter bottom"><img src="__PUBLIC__/{$img_path}/bigdata_temp8.png"/>
+                    </div>
+                </div>
+            </div>
+            <div class="temp bigdata_temp4">
+                <div class="w1200">
+                    <div class="title" data-sr="move 200px, over 1s, enter top">
+                        <h3>大数据版运用了怎样的底层框架</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="temp bigdata_temp5">
+                <div class="w1200">
+                    <div class="title" data-sr="move 200px, over 1s, enter top">
+                        <h3>大数据版运用了哪些技术</h3>
+                    </div>
+                </div>
+                <div class="content" data-sr="move 200px, over 1s, enter bottom">
+                    <div class="w1200">
+                        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                            <tbody>
+                            <tr>
+                                <th width="98">序号</th>
+                                <th width="145">名称</th>
+                                <th width="135">图标</th>
+                                <th width="814">说明</th>
+                            </tr>
+                            <tr>
+                                <td>一</td>
+                                <td><strong>RDS数据库</strong></td>
+                                <td><img src="__PUBLIC__/{$img_path}/bigdata_temp5_icon1.png" width="50"></td>
+                                <td class="desc">数据库从原有的结构中分离了出来，单独应用阿里云的RDS云数据库</td>
+                            </tr>
+                            <tr>
+                                <td>二</td>
+                                <td><strong>Memcached</strong></td>
+                                <td><img src="__PUBLIC__/{$img_path}/bigdata_temp5_icon2.png" width="50"></td>
+                                <td class="desc">
+                                    运用缓存技术，减少数据库的压力，对一些页面的请求先查看缓存中是否有该数据信息，然后再去数据库做查询，再大并发时大大减少了对数据库的压力。另session也存在内存中，分担数据库的读写压力。
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>三</td>
+                                <td><strong>OSS存储</strong></td>
+                                <td><img src="__PUBLIC__/{$img_path}/bigdata_temp5_icon3.png" width="50"></td>
+                                <td class="desc">
+                                    用于图片的存储，并提供了图片服务基础功能（获取图片信息；图片格式转换；图片缩放、裁剪、旋转；图片添加图片、文字、图文混合水印；通过管道顺序调用多种图片处理功能）
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="temp bigdata_temp6">
+                <div class="w1200">
+                    <div class="title" data-sr="move 200px, over 1s, enter top">
+                        <h3>大数据版<em>PK</em>普通版</h3>
+                    </div>
+                    <div class="content" data-sr="move 200px, over 1s, enter bottom">
+                        <div class="w1200">
+                            <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                <tbody>
+                                <tr>
+                                    <th width="468" class="left">B2B2C包含项目</th>
+                                    <th width="364">普通版</th>
+                                    <th width="364">大数据版</th>
+                                </tr>
+                                <tr>
+                                    <td class="left">独立数据库</td>
+                                    <td>不可扩展</td>
+                                    <td>可扩展数据库集群</td>
+                                </tr>
+                                <tr>
+                                    <td class="left">数据缓存优化</td>
+                                    <td>缓存命中率低</td>
+                                    <td>缓存命中率提高</td>
+                                </tr>
+                                <tr>
+                                    <td class="left">压力并发负载</td>
+                                    <td>200-300</td>
+                                    <td>每台2000-5000</td>
+                                </tr>
+                                <tr>
+                                    <td class="left">支持服务器台数</td>
+                                    <td>1台</td>
+                                    <td>≥100台</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="temp bigdata_temp7">
+                <div class="w1200">
+                    <div class="title" data-sr="move 200px, over 1s, enter top"><h3>大数据版实施部署费用</h3></div>
+                    <div class="table_con mt50" data-sr="move 200px, over 1s, enter bottom">
+                        <table cellpadding="0" cellspacing="0">
+                            <tbody>
+                            <tr>
+                                <th width="20%">大数据版</th>
+                                <th width="25%">PC+WAP</th>
+                                <th width="25%">ECJia系列</th>
+                                <th width="30%">备注</th>
+                            </tr>
+                            <tr>
+                                <td>首年服务费价格</td>
+                                <td>15000元（10台服务器以下，含10台）</td>
+                                <td>30000元（10台服务器以下，含10台）</td>
+                                <td>还购买ECJia掌柜的也是这个价格，无需额外加钱。微信端不收费，在wap里面已包含了</td>
+                            </tr>
+                            <tr>
+                                <td>服务器超过10台售价</td>
+                                <td>每10台收费50000元</td>
+                                <td>每10台收费50000元</td>
+                                <td>10台为单位购买，比如18台，也是付款5w，如后面再加服务器，就不用付钱了，直到第21台再付5w</td>
+                            </tr>
+                            <tr>
+                                <td>第二年服务费续费</td>
+                                <td>每年按首年费用的30%</td>
+                                <td>每年按首年费用的30%</td>
+                                <td>如未续费发生意外崩溃等情况，可按次收费，价格咨询客服</td>
+                            </tr>
+                            <tr>
+                                <td>是否需要购买ETshop授权</td>
+                                <td>必须ETshop购买高级授权或源码授权</td>
+                                <td>必须ETshop购买高级授权或源码授权及ECJia多商户APP</td>
+                                <td>免费用户或者标准授权用户不享受大数据实施部署服务</td>
+                            </tr>
+                            <tr>
+                                <td>服务内容</td>
+                                <td>*提供OSS配置<br>*提供MemCached缓存配置<br>*提供RDS数据库配置<br>*提供均衡负载的部署<br>*服务器意外崩溃的排查与解决</td>
+                                <td>*提供OSS配置<br>*提供MemCached缓存配置<br>*提供RDS数据库配置<br>*提供均衡负载的部署<br>*服务器意外崩溃的排查与解决</td>
+                                <td>5*8小时运维服务</td>
+                            </tr>
+                            <tr>
+                                <td>其他</td>
+                                <td>负载均衡、数据库、服务器、MemCached、oss存储费用均不包含在内，需自行购买，亦可在润土科技进行购买，详情咨询客服</td>
+                                <td>负载均衡、数据库、服务器、MemCached、oss存储费用均不包含在内，需自行购买，亦可在润土科技进行购买，详情咨询客服</td>
+                                <td>目前仅支持阿里云服务器</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div style="text-align:center; margin:50px 0 20px;"><a
+                            href="http://wpa.b.qq.com/cgi/wpa.php?ln=1&amp;key=XzgwMDAwNzE2N18zNzE0MDFfODAwMDA3MTY3XzJf"
+                            id="webqq" class="btn btn_blue">咨询客服</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {include file='common/footer' /}
+    </div>
+    {/block}
+    
+    {block name='js'}
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <!--<script type="text/javascript" src="__PUBLIC__/{$js_path}/scrollReveal.min.js"></script>-->
+    <script type="text/javascript" src="__PUBLIC__/{$js_path}/suspension-two.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/{$js_path}/ecsc-nav.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/{$js_path}/ecsc_banner.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/{$js_path}/et_mobile.js"></script>
+    {/block}

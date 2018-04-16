@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		{block name="title"}
+		<title>shopcmf</title>
+		{/block}
+		<script type="text/javascript">
+			//模板静态js路径
+			var RequireParam={
+				BaseScriptPath:'/',
+				BaseScript:['jquery','public'],
+				UpdateCartUrl:"{:url('carts/update_num')}"
+			};
+			Private_Script=null
+			
+		</script>
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/crossbbcg/pc/default/css/base.css"/>
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/crossbbcg/pc/default/css/shop.css"/>
+		<link rel="stylesheet" type="text/css" href="/static/layer-v3.0.3/skin/default/layer.css"/>
+		<link rel="stylesheet" type="text/css" href="/static/layer-v3.0.3/skin/blue/style.css"/>
+		<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_kge539i2yfirudi.css"/>
+	{block name="css"}
+	
+	{/block}
+	</head>
+	<body>
+		{include file="shop/header" /}
+		{block name="body"}
+		{/block}
+        {:widget('Common/footer')}
+			{block name="footer_js"}
+			{/block}
+			<script type="text/javascript" data-main="__PUBLIC__/crossbbcg/pc/default/js/main" src="/static/js/require.js" ></script>
+		
+		
+	</body>
+</html>

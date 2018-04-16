@@ -1,0 +1,103 @@
+    {extend name="admin@public/poupbase"/}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+        <div id="content" style="margin:0px 10px 5px 8px;">
+            <div class="bloc" style="margin:10px 0px 0px;">
+                <div class="content">
+                    <form id="myform" method="post" style="margin-top:5px;" class="">
+                        <fieldset>
+                            <legend>{$meta_title|default=''}</legend>
+                            <div class="row">
+                                <label for="title" class="w100">{:lang('Adsenseitem_title')}: <span class="required">*</span></label>
+                                <input  id="title" type="text" value="{$data.title}" name="title" style="width:275px;" />
+                                <a class="tooltip-icon" title="{:lang('Adsense_title_tip')}"></a>
+                            </div>
+                            
+                            <div class="row">
+                                <div style="float:left;">
+                                    <label for="width" class="w100">{:lang('Adsenseitem_width')}: <span class="required">*</span></label>
+                                    <input name="width" type="text" class="input small onlynumber" id="width" value="{$data.width}" maxlength="5" placeholder="1920"/>px
+                                </div>
+                                
+                                <div style="float:left;">
+                                    <label for="height" class="w100">{:lang('Adsenseitem_height')}: <span class="required">*</span></label>
+                                    <input name="height" type="text" class="input small onlynumber" id="height" value="{$data.height}" maxlength="5" placeholder="800" /> px
+                                </div>
+                            </div>
+                            
+                            <!--<div class="row bset">
+                                <label class="w100">{:lang('Type')}:</label>
+                                <input name="type" type="radio" value="1" id="image" {eq name="data.type" value="1"}checked{/eq} {eq name="ACTION_NAME" value="additem"}checked{/eq} />
+                                <label for="image" class="w95_r_0">{:lang('Image')}</label>
+                                <input name="type" type="radio" value="2" id="text" {eq name="data.type" value="2"}checked{/eq} />
+                                <label for="text" class="w95_r_0">{:lang('Text')}</label>
+                                <input name="type" type="radio" value="3" id="flash" {eq name="data.type" value="3"}checked{/eq} />
+                                <label for="flash" class="w95_r_0">{:lang('Flash')}</label>
+                            </div>-->
+                            
+                            <div class="row bset">
+                                <label class="w100">{:lang('Show_types')}:</label>
+                                <input name="show" type="radio" value="1" id="only" {eq name="data.show" value="1"}checked{/eq} {eq name="ACTION_NAME" value="additem"}checked{/eq} />
+                                <label for="only" class="w136">{:lang('Onlypic')}</label>
+                                <input name="show" type="radio" value="0" id="more" {eq name="data.show" value="2"}checked{/eq} />
+                                <label for="more" class="w136">{:lang('Morepic')}</label>
+                            </div>
+                            
+                            <div class="row">
+                                <div style="float:left;">
+                                    <label for="langid" class="w100">{:lang('Global')}:</label>
+                                    <div class="slideBox">
+                                        {eq name="ACTION_NAME" value="edititem"}
+                                            <input id="langid" value="0" type="checkbox" name="langid" {eq name="data['langid']" value="0"}checked{/eq} />
+                                        {else /}
+                                            <input id="langid" value="0" type="checkbox" name="langid" />
+                                        {/eq}
+                                        <label for="langid"></label>
+                                    </div>
+                                    <div style="float:left; margin:1px 10px;">
+                                        <a class="tooltip-icon" title="{:lang('More_langs_tip')}"></a>
+                                    </div>
+                                </div>
+                                
+                                <div style="float:left;">
+                                    <label for="status" class="w100" style="width:90px;">{:lang('Status')}:</label>
+                                    <div class="slideBox">
+                                        {eq name="ACTION_NAME" value="edit"}
+                                            <input id="status" value="1" type="checkbox" name="status"  {eq name="data['status']" value="1"}checked{/eq}/>
+                                        {else /}
+                                            <input id="status" value="1" type="checkbox" name="status" checked />
+                                        {/eq}
+                                        <label for="status"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="sort" class="w100">{:lang('Sort')}: </label>
+                                <input type="number" class="input litle" name="sort" maxlength="5" id="sort" value='{eq name="ACTION_NAME" value="edititem"}{$data.sort}{else /}0{/eq}'>
+                            </div>
+                            
+                            <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                                {eq name="ACTION_NAME" value="edititem"}
+                                    <input name="submit" value="{:lang('Update')}" type="submit" url="{:url()}">
+                                    <input type="hidden" name="id" value="{$data.id}" />
+                                {else /}
+                                    <input name="submit" value="{:lang('Create')}" type="submit" url="{:url()}">
+                                {/eq}
+                                <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {/block}
+    
+    {block name="js"}
+        <script>
+            $(function(){
+                $(".bset").buttonset();
+            })
+        </script>
+    {/block}

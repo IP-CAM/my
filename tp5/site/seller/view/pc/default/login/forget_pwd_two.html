@@ -1,0 +1,247 @@
+{extend name="login/base" /}
+{block name="body"}
+<div class="steps">
+    <table width="100%">
+        <tbody>
+        
+        <tr>
+            <td class="step-item step-1 active"><span><q class="icon">●</q><i>1</i>{:lang('account_info')}</span>
+                <div class="stepdiv">1</div>
+            </td>
+            <td class="step-item step-2 active">
+                <span><q class="icon">●</q><i>2</i>{:lang('check_userinfo')}</span>
+                <div class="stepdiv">2</div>
+            </td>
+            <td class="step-item step-3 "><span><q class="icon">●</q><i>3</i>{:lang('set_new_password')}</span>
+                <div class="stepdiv">3</div>
+            </td>
+        
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="shop-login-box yahei">
+    <div class="form-body">
+        <div class="title">
+            <div class="t">{:lang('find_password')}</div>
+        </div>
+        <div class="content">
+            <div class="seletc-type">
+                <ul>
+                    <li><label><input type="radio" checked="" name="type" id="phone" value="phone" />{:lang('find_password_by_mobile')}</label></li>
+                    <li><label><input type="radio" name="type" id="email" value="email" />{:lang('find_password_by_email')}</label></li>
+                </ul>
+            </div>
+            <form action="{:url('forget_pwd_three')}" id="pwd_form" method="post">
+                <input type="hidden" name="uid" value="{$data.id}" />
+                <ul>
+                    <li class="form-row">
+                        <label class="form-label">
+                            <em> * </em> {:lang('check_mobile')}： </label>
+                        <span class="form-act">
+                         {:substr_replace($data.mobile,'****',3,4)}
+                        </span>
+                    
+                    </li>
+                    <li class="form-row">
+                        <label class="form-label">
+                            <em> * </em> {:lang('mobile_captcha')}： </label>
+                        <span class="form-act">
+                            <input placeholder="{:lang('pleace_input_mobile_captcha')}" name="code" ajaxurl="{:url('forget_pwd_two',array('uid'=>$data.id))}" datatype="*"  class="input-ln" type="text"  value="" />
+                            <a data-url="{:url('sendsms')}" id="get_code">{:lang('send_captcha')}</a>
+                        </span>
+                    </li>
+                    <li class="form-row last">
+                        <label for="" class="form-label">&nbsp;</label>
+                        <span class="form-act">
+                        	<button type="submit"  class="btn btn-import" rel="_request"> {:lang('next_step')} </button>
+						</span>
+                    </li>
+                </ul>
+            </form>
+            <form action="{:url('forget_pwd_three')}" method="post" id="pwd_email_form" style="display: none;">
+                <input type="hidden" name="uid" value="{$data.id}" />
+                <ul>
+                    <li class="form-row">
+                        <label class="form-label">
+                            <em> * </em> {:lang('check_email')}： </label>
+                        <span class="form-act">
+                        {:hideEmail($data.email)}
+                        </span>
+                    </li>
+                    <li class="form-row">
+                        <label class="form-label">
+                            <em> * </em> {:lang('email_captcha')}: </label>
+                        <span class="form-act">
+                            <input placeholder="{:lang('pleace_input_email_captcha')}" name="email_captcha" datatype="n6-6"  class="input-ln"  ajaxurl="{:url('forget_pwd_two',array('uid'=>$data.id))}" sucmsg="{:lang('check_ok')}" type="text"  value="" />
+                            <a data-url="{:url('send_email')}" class="get_code" id="get_email_code">{:lang('send_captcha')}</a>
+                        </span>
+                    </li>
+                    <li class="form-row last">
+                        <label for="" class="form-label">&nbsp;</label>
+                        <span class="form-act">
+                        	<button type="submit"  class="btn btn-import" rel="_request"> {:lang('next_step')} </button>
+						</span>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+</div>
+
+{/block} {block name="footer_js"}
+
+<script type="text/javascript">
+    $('[name=type]').change(function(){
+        if($(this).val()=='phone'){
+            $('#pwd_email_form').hide();
+            $('#pwd_form').show()
+        }else{
+            $('#pwd_email_form').show();
+            $('#pwd_form').hide()
+        }
+    })
+    $("#pwd_form").Validform({
+        tiptype: 3,
+        showAllError: true
+    });
+    $("#pwd_email_form").Validform({
+        tiptype: 3,
+        showAllError: true
+    });
+    // 通用倒计时，包括倒计时所在容器，倒数秒数，显示方式，回调。
+    function countdown(element, options) {
+        var self = this;
+        options = $.extend({
+            start: 60,
+            secondOnly: false,
+            callback: null
+        }, options || {});
+        var t = options.start;
+        var sec = options.secondOnly;
+        var fn = options.callback;
+        var d = +new Date();
+        var diff = Math.round((d + t * 1000) / 1000);
+        this.timer = timeout(element, diff, fn);
+        this.stop = function() {
+            clearTimeout(self.timer);
+        };
+
+        function timeout(element, until, fn) {
+            var str = '',
+                started = false,
+                left = {
+                    d: 0,
+                    h: 0,
+                    m: 0,
+                    s: 0,
+                    t: 0
+                },
+                current = Math.round(+new Date() / 1000),
+                data = {
+                    d: '天',
+                    h: '时',
+                    m: '分',
+                    s: 's'
+                };
+
+            left.s = until - current;
+
+            if(left.s < 0) {
+                return;
+            } else if(left.s == 0) {
+                fn && fn();
+            }
+            if(!sec) {
+                if(Math.floor(left.s / 86400) > 0) {
+                    left.d = Math.floor(left.s / 86400);
+                    left.s = left.s % 86400;
+                    str += left.d + data.d;
+                    started = true;
+                }
+                if(Math.floor(left.s / 3600) > 0) {
+                    left.h = Math.floor(left.s / 3600);
+                    left.s = left.s % 3600;
+                    started = true;
+                }
+            }
+            if(started) {
+                str += ' ' + left.h + data.h;
+                started = true;
+            }
+            if(!sec) {
+                if(Math.floor(left.s / 60) > 0) {
+                    left.m = Math.floor(left.s / 60);
+                    left.s = left.s % 60;
+                    started = true;
+                }
+            }
+            if(started) {
+                str += ' ' + left.m + data.m;
+                started = true;
+            }
+            if(Math.floor(left.s) > 0) {
+                started = true;
+            }
+            if(started) {
+                str += ' ' + left.s + data.s;
+                started = true;
+            }
+
+            $(element).html(str);
+            return setTimeout(function() {
+                timeout(element, until, fn);
+            }, 1000);
+        }
+    }
+
+    //点击发送验证码
+    $('#get_code').click(function() {
+        if(!$(this).hasClass('disabled')) {
+            var obj = {};
+            var mobile = "{$data.mobile}";
+            if(mobile) {
+                sendVerify(this, {
+                    username: mobile
+                })
+            }
+        }
+    });
+    //点击发送邮件
+    $('#get_email_code').click(function () {
+        if (!$(this).hasClass('disabled')) {
+            var email = "{$data.email}";
+            if (email) {
+                sendVerify(this,{
+                    email:email
+                })
+            }
+        }
+    });
+
+    function sendVerify(el, data) {
+        var url = $(el).data('url');
+        var textCont = $(el);
+        $(el).addClass('disabled');
+        textCont.html($(el).text() + '(<i class="red">0</i>)');
+        var cd = new countdown(textCont.find('i'), {
+            start: 59, //等待时间
+            secondOnly: false,
+            callback: function(e) {
+                $(el).removeClass('disabled');
+                textCont.html("{:lang('send_captcha_again')}");
+            }
+        });
+        $.post(url, data, function(rs) {
+            layer.msg("{:lang('send_captcha_success')}");
+            if(rs.code == 0) {
+                cd.stop();
+                $(el).removeClass('disabled');
+                textCont.html("{:lang('send_captcha_again')}");
+            }
+
+        });
+    }
+
+</script>
+{/block}

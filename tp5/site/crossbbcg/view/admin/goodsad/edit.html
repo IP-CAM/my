@@ -1,0 +1,150 @@
+{extend name="admin@public/poupbase" /}
+{block name="style"}
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/crossbbcg/admin/css/style.css" />
+{/block}
+<!-- CONTENT -->
+{block name="body"}
+<style>
+    .goods_td{
+        border-right: 1px solid #ccc;border-bottom: 1px solid #ccc;line-height: 22px;
+        text-align: center;
+    }
+    .goods_sort{
+        width: 20%;
+    }
+</style>
+<div id="content" style="margin:0px 10px 5px 8px;">
+    <div class="bloc" style="margin:10px 0px 0px;">
+        <form id="myform" method="post" style="margin-top:5px;" class="">
+            <div class="content">
+                
+                <fieldset style="min-height: 447px">
+                    <legend>{$meta_title|default=''}</legend>
+                    <div >
+                        <div class="row">
+                            <div style="float:left">
+                                <label for="pid" class="w80">{:lang('ad_position')}</label>
+                                <select name="ad_position" id="ad_position" style="width:190px;">
+                                    {foreach $ad_list as $v}
+                                    <option value="{$v.id}" {eq name="$data.ad_position" value="$v.id"}selected{/eq}>{$v.name}({$v.width}*{$v.height})</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                            <div style="float:left">
+                                <label for="name" class="w70">{:lang('ad_name')}</label>
+                                <input id="name" type="text" value="{$data.name}" name="name" placeholder="" style="width:150px;" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label  class="w80">{:lang('choose_goods')}</label>
+                            <button type="button" class="white" id="choose_goods">{:lang('choose')}</button>
+                        </div>
+                        {eq name='action_name' value='edit'}
+                        <div class="row edit" id="goods_list">
+                            <input type="hidden" name="goods_ids" value="{$data.goods_id}">
+                            <label class="w70" style="margin-right: 10px"></label>
+                            <table style="border-top:1px solid #ccc;border-left:1px solid #ccc;width: 480px" >
+                                <tr id="goodslist">
+                                    <td class="goods_td">{:lang('Goods name')}</td>
+                                    <td class="goods_td goods_sort">{:lang('sort')}</td>
+                                </tr>
+                                <tr>
+                                    <td class="goods_td">{:get_goods_info($data.goods_id)['name']}</td>
+                                    <td class="goods_td goods_sort"><input type="number" min="0" value="{$data.sort|default='0'}" class="number_sort" style="border: 0;width: 88%;text-align: center" name="sort_{$data.goods_id}"/></td>
+                                </tr>
+                            </table>
+                        </div>
+                        {else /}
+                        <div class="row" id="goods_list" style="display: none">
+                            <input type="hidden" name="goods_ids" >
+                            <label class="w70" style="margin-right: 10px"></label>
+                            <table style="border-top:1px solid #ccc;border-left:1px solid #ccc;width: 480px" >
+                                <tr id="goodslist">
+                                    <td class="goods_td">{:lang('Goods name')}</td>
+                                    <td class="goods_td goods_sort">{:lang('sort')}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        {/eq}
+                        <div class="row bset">
+                            <label class="w80">{:lang('Publishing_Platform')}</label>
+        
+                            {eq name="ACTION_NAME" value="edit"}
+                            <input name="pc_status" type="checkbox" value="1" id="pc_status" {eq name="data.pc_status" value="1"}checked{/eq} />
+                            <label for="pc_status" class="w120_r_0">{:lang('Pc_on')}</label>
+        
+                            <input name="wap_status" type="checkbox" value="1" id="wap_status" {eq name="data.wap_status" value="1"}checked{/eq} />
+                            <label for="wap_status" class="w120_r_0">Wechat/Wap</label>
+        
+                            <input name="api_status" type="checkbox" value="1" id="api_status" {eq name="data.api_status" value="1"}checked{/eq} />
+                            <label for="api_status" class="w120_r_0">{:lang('Api_on')}</label>
+                            {else /}
+                            <input name="pc_status" type="checkbox" value="1" id="pc_status" checked />
+                            <label for="pc_status" class="w120_r_0">{:lang('Pc_on')}</label>
+        
+                            <input name="wap_status" type="checkbox" value="1" id="wap_status" checked/>
+                            <label for="wap_status" class="w120_r_0">{:lang('Wap_on')}</label>
+        
+                            <input name="api_status" type="checkbox" value="1" id="api_status" checked />
+                            <label for="api_status" class="w120_r_0">{:lang('Api_on')}</label>
+                            {/eq}
+                        </div>
+                        <div class="row">
+                            <label for="ad_info" class="w80">{:lang('ad_info')}</label>
+                            <textarea id="ad_info" name="ad_info" style="width:470px;height:90px;"></textarea>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="buttons-wrapper bw-bottom" style="margin:10px 10px 0px; text-align:center;">
+                        {eq name="$action_name" value="edit"}
+                        <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('savedata')}" />
+                        <input name="id" type="hidden"  value="{$data.id}" />
+                        {else /}
+                        <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}" />
+                        {/eq}
+                        <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                    </div>
+                </fieldset>
+            </div>
+        </form>
+    </div>
+</div>
+
+{/block}
+
+{block name="js"}
+<script>
+    $(function() {
+        $(".bset").buttonset();
+        $("#start_time").datetimepicker({
+            dateFormat: "yy-mm-dd",
+            timeFormat: 'HH:mm:ss'
+        });
+        $("#end_time").datetimepicker({
+            dateFormat: "yy-mm-dd",
+            timeFormat: 'HH:mm:ss'
+        });
+        $(':input[name="listtype"]').click(function(){
+            var val = $(this).val();
+            if(val==0){
+                $('#template_detail_box').show();
+                $('#template_lists_box label').text("{:lang('List_tpl')}");
+            }else{
+                $('#template_lists_box label').text("{:lang('First_tpl')}");
+                $('#template_detail_box').hide();
+            }
+        })
+        $('#choose_goods').click(function () {
+            var url = "{:url('choose_goods')}";
+            layer.open({
+                type:2
+                , content: url
+                ,skin:'layui-layer-molv'
+                , title: '{:lang("choose_goods")}'
+                , area: ['555px', '380px'] //宽高
+                , shade: 0.1 //不显示遮罩
+            })
+        })
+    })
+</script>
+{/block}

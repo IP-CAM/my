@@ -1,0 +1,56 @@
+{extend name='public/layout'}
+
+{block name='body'}
+<div id="toolTipLayer"
+     style="position: absolute; z-index: 9999; display: none; visibility: visible; left: 95px; top: 573px;"></div>
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+    <div class="fixed-bar">
+        <div class="item-title">
+            <div class="subject">
+                <h3>安全中心 - 手机验证</h3>
+            </div>
+        </div>
+    </div>
+    <form class="form-horizontal" id="handleposition" method="post">
+        <input type="hidden" name="id" value=""/>
+        <div class="ncap-form-default">
+            <dl class="row">
+                <dt class="tit">
+                    <label><em>*</em>图形验证码</label>
+                </dt>
+                <dd class="opt">
+                    <div style="float: left">
+                        <input type="password" class="input-txt"/>
+                        <p class="notic">请输入验证码</p>
+                    </div>
+                    <div style="float: left;margin-left: 10px;">
+                        <img src="__PUBLIC__/{$module_path}image/vcode.gif" alt="" >
+                    </div>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label><em>*</em>手机号码</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" class="input-txt" value="1333333333"/>
+                    <a href="" class="btns orange">获取验证码</a>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label><em>*</em>手机验证码</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text"  class="input-txt"/>
+                    <span class="err" ></span>
+                    <p class="notic">请输入验证码</p>
+                </dd>
+            </dl>
+            <div class="bot"><a class="ncap-btn-big ncap-btn-green" href="{:url('checkphone')}">提交</a></div>
+        </div>
+    </form>
+</div>
+{/block}

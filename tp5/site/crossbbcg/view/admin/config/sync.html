@@ -1,0 +1,187 @@
+    {extend name="admin@public/base" /}
+    
+    {block name="body"}
+    <style>
+        .apppush{display: none;}
+    </style>
+    {/block}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content">
+        <div class="breadcrumbs">
+            {:lang('Crossbbcg')} : &nbsp;&nbsp; {:lang('Crossbbset')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+        </div>
+        
+        <div class="bloc">
+            <div class="title">
+                <div class="tabs" id="navs">
+                    {include file="admin@public/navs" /}
+                </div>
+                
+                {include file="admin@public/lang" /}
+            </div>
+            
+            <form name="frmShopSettingsEdit" method="post" style="margin-top:5px;">
+                
+                <div class="alert alert-success">
+                    <button class="close" type="button">&times;</button>
+                    <span class="alert-content">{:lang('Snycconfig tip')}</span>
+                </div>
+                
+                <div class="bloc" id="blocStatistics">
+                    <!--<div class="title collapsible">-->
+                    <div class="title">
+                        <div class="tabs static pot" id="blockStatistics">
+                            <ul>
+                                <a id="tabStat1_link" href="#tabStat1">
+                                    <li>{:lang('Omssync')}</li>
+                                </a>
+                                <a id="tabStat2_link" href="#tabStat2">
+                                    <li>{:lang('Deliverysync')}</li>
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="content" style="padding-bottom: 20px;">
+                        <div id="tabStat1" style="display:block;">
+                            <table class="table kright">
+                                <tbody>
+                                <tr>
+                                    <td>{:lang('Omsstatus')}: </td>
+                                    <td>
+                                        <div class="slideBox" >
+                                            <input id="omsstatus" value="1" type="checkbox" name="omsstatus"  {eq name="data.omsstatus" value="1"}checked{/eq} />
+                                            <label for="omsstatus"></label>
+                                        </div> &nbsp;
+                                        <span class="slideBoxafter">
+                                            {:lang('Omsstatus tip')}
+                                        </span>
+                                    </td>
+                                </tr>
+
+                                <tr class="omsbox" style="display: none ;">
+                                    <td>{:lang('Omsgeturl')}: </td>
+                                    <td>
+                                        <input name="omsgeturl" value="{$data.omsgeturl|default=url('api.sync.oms/index', '', true, true)}" type="text" class="input" placeholder="http://" style="width: 56%;" />
+                                        {:lang('omsgeturl tip')}
+                                    </td>
+                                </tr>
+
+                                <tr class="row bset omsbox" style="display: none ;">
+                                    <td>{:lang('Oms sync type')}: </td>
+                                    <td>
+                                        <div class="row bset">
+                                            <input name="omsorder" type="radio" value="order" id="omsorder_0" {eq name="data.omsorder" value="1"}checked{/eq} {notpresent name="data.omstype"}checked{/notpresent} />
+                                            <label for="omsorder_0" class="w150_r_0">{:lang('Order to Oms')}</label>
+                                            <input name="omsgoods" type="radio" value="1" id="omsgoods_1" {eq name="data.omsgoods" value="1"}checked{/eq} />
+                                            <label for="omsgoods_1" class="w150_r_0">{:lang('Goods to Oms')}</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                
+                                <tr class="omsbox" style="display: none ;">
+                                    <td>{:lang('Omspushurl')}: </td>
+                                    <td>
+                                        <input name="omspushurl" value="{$data.omspushurl|default=url('oms/api.sync.index/index', '', true, true)}" type="text" class="input" placeholder="http://" style="width: 50%;" />
+                                        {:lang('omspushurl tip')}
+                                    </td>
+                                </tr>
+
+                                <tr class="omsbox" style="display: none ;">
+                                    <td>Appid: </td>
+                                    <td>
+                                        <input name="omsappid" value="{$data.omsappid}" type="text" class="input" placeholder="RT BBC" />
+                                    </td>
+                                </tr>
+
+                                <tr class="omsbox" style="display: none ;">
+                                    <td>Appkey: </td>
+                                    <td>
+                                        <input name="omskey" value="{$data.omskey}" type="text" class="input" placeholder="{:generate_prefix(10)}" />
+                                    </td>
+                                </tr>
+
+                                <tr class="omsbox" style="display: none ;">
+                                    <td>App Secret: </td>
+                                    <td>
+                                        <input name="omssecret" value="{$data.omssecret}" type="text" class="input" placeholder="{:generate_prefix(32)}" />
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+    
+                        <div id="tabStat2">
+                            <table class="table kright">
+                                <tbody>
+                                <tr>
+                                    <td>{:lang('Deliverystatus')}: </td>
+                                    <td>
+                                        <div class="slideBox" >
+                                            <input id="deliverystatus" value="1" type="checkbox" name="deliverystatus"  {eq name="data.deliverystatus" value="1"}checked{/eq} />
+                                            <label for="deliverystatus"></label>
+                                        </div> &nbsp;
+                                    </td>
+                                </tr>
+                                <tr id="deliverybox" style="display: none ;">
+                                    <td>{:lang('Deliveryclass')}: </td>
+                                    <td>
+                                        <input name="deliveryclass" value="{$data.deliveryclass}" type="text" class="input" placeholder="{:lang('Deliveryclass_pla')}" style="width: 60%;" />
+                                        <a class="tooltip-icon" title="{:lang('Deliveryclass_tip')}"></a>
+                                        &nbsp;&nbsp;
+                    
+                                        <select id="omses" style="width: 20%;">
+                                            <option value="">{:lang('Please_choose')}</option>
+                                            {foreach :get_extend_type('deliverys') as $vo}
+                                            <option value="{$vo.code}" data-tip="{:lang($vo.description)}" {eq name="data.vercodeclass" value="$vo.code"}selected{/eq}>{:lang($vo.name)}</option>
+                                            {/foreach}
+                                        </select>
+                                    </td>
+                                </tr>
+            
+                                <tr>
+                                    <td>{:lang('Synctime')}:  </td>
+                                    <td>
+                                        <input name="synctime" type="number" placeholder="3" style="width: 60px; text-align: center;" value="{$data.synctime|default=3}" />
+                                        {:lang('Synctime_tip')}
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="buttons-wrapper" style="margin:0 0 30px; padding:0 0 0 18%;">
+                        <input name="submit" value="{:lang('Saveshopconf')}" type="submit" url="{:url('save', array('act' => ACTION_NAME))}" />
+                    </div>
+                
+                </div>
+            </form>
+        
+        </div>
+    </div>
+    {/block}
+    
+    {block name="js"}
+    <script>
+        $(function(){
+            $(".bset").buttonset();
+    
+            //OMS同步接口
+            {notempty name="data.omsstatus"}$('.omsbox').show();{/notempty}
+            $('#omsstatus').click(function(){
+                var ischecked = $(this).is(":checked");
+                if(ischecked){
+                    $('.omsbox').show();
+                    $('input[name=omsclass]').attr('disabled', false);
+                }else{
+                    $('.omsbox').hide();
+                    $('input[name=omsclass]').attr('disabled', true);
+                }
+            })
+        })
+    </script>
+    {/block}

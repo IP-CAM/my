@@ -1,0 +1,47 @@
+{extend name="admin@public/poupbase"/}
+<!-- CONTENT -->
+
+{block name="body"}
+<style>
+    form .row{
+        min-height: 50px;
+    }
+</style>
+<div id="content" style="margin:0px 10px 5px 8px;">
+    <div class="bloc">
+        <div class="content">
+            <div id="password" style="display:block;">
+                <form id="myform2" method="post" style="margin-top:5px;" class="">
+                    <fieldset style="min-height: 161px">
+                        <legend>{$title}</legend>
+                        <div class="row">
+                            <label for="password" class="w80">{:lang('seller_name')}: <span class="required">*</span></label>
+                            <input  type="text" value="" name="seller_name" maxlength="30" autocomplete="off" disableautocomplete />
+                        </div>
+                        <div class="row">
+                            <label for="shop_account" class="w80">{:lang('shop_account')}: <span class="required">*</span></label>
+                            <input id="shop_account" type="text" value="" name="shop_account" placeholder="{:lang('Account_tip')}" maxlength="30" autocomplete="off" disableautocomplete />
+                        </div>
+                        <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                            <input name="submit" value="{:lang('confirm')}" type="submit" url="{:url('add')}">
+                            <input name="reset2" class="button white" value="{:lang('Cancel')}" type="reset">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="js"}
+<script>
+    $(function(){
+        var topindex = parent.layer.getFrameIndex(window.name); //获取当前窗体索引
+        $('input[name="reset"],input[name="reset2"],input[name="reset3"]').click(function(){
+            parent.layer.close(topindex);
+        });
+
+    })
+</script>
+{/block}

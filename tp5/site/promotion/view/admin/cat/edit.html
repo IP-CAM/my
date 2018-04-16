@@ -1,0 +1,206 @@
+    {extend name="admin@public/poupbase"/}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+        <div id="content" style="margin:0px 10px 5px 8px;">
+            <div class="bloc" style="margin:10px 0px 0px;">
+                <div class="content">
+                    <form id="myform" method="post" style="margin-top:5px;" class="">
+                        <fieldset>
+                            <legend>{$meta_title|default=''}</legend>
+                            <div class="row">
+                                <div style="float:left;">
+                                    <label for="title" class="w140">{:lang('Adsense_title')}: <span class="required">*</span></label>
+                                    <input id="title" type="text" value="{$data.title}" name="title" style="width:330px;" placeholder="{:lang('Adsense_title_tip')}" maxlength="50" />
+                                </div>
+                                <div style="float:left;">
+                                    <div class="slideBox">
+                                        {eq name="ACTION_NAME" value="edit"}
+                                            <input id="status" value="1" type="checkbox" name="status" {eq name="data['status']" value="1"}checked{/eq} />
+                                        {else /}
+                                            <input id="status" value="1" type="checkbox" name="status" checked />
+                                        {/eq}
+                                        <label for="status"></label>
+                                    </div>
+                                    <div style="float:left; margin-left:10px;">
+                                        <a class="tooltip-icon" title="{:lang('Status_tip')}"></a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row bset">
+                                <div style="float:left;">
+                                    <label for="aditem" class="w140">{:lang('Adsense_location')}:<span class="required">*</span></label>
+                                    <select id="aditem" name="aditem" class="sel_w210">
+                                        <option value="">{:lang('Please_choose')}</option>
+                                        <option value="0" {eq name="data.aditem" value="0"}selected{/eq}>{:lang('No_location')}</option>
+                                        {volist name="Adsenseitem" id="item"}
+                                            <option value="{$item.id}" {eq name="data.aditem" value="$item.id"}selected{/eq}>{$item.title} [{$item.width}px x {$item.height}px]</option>
+                                        {/volist}
+                                    </select>
+                                </div>
+                                <div style="float:left">
+                                    <label class="w140">{:lang('Global_adsense')}:</label>
+                                    <div class="slideBox">
+                                        {eq name="ACTION_NAME" value="edit"}
+                                            <input id="langid" value="0" type="checkbox" name="langid" {eq name="data['langid']" value="0"}checked{/eq} />
+                                        {else /}
+                                            <input id="langid" value="0" type="checkbox" name="langid" checked />
+                                        {/eq}
+                                        <label for="langid"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row bset">
+                                <label class="w140">{:lang('Adsense_style')}:<span class="required">*</span></label>
+                                {foreach name="Adsensetype" item="style"}
+                                    <input name="style" type="radio" value="{$key}" id="type_{$key}" {eq name="data.style" value="$key"}checked{/eq}  {eq name="ACTION_NAME" value="add"}{eq name="key" value="1"}checked{/eq}{/eq}/>
+                                    <label for="type_{$key}" class="w105_r_0">{$style}</label>
+                                {/foreach}
+                            </div>
+                            
+                            <div id="ad_image" {neq name="ACTION_NAME" value="add"} {eq name="data.style" value="1"}{else /}style="display:none;"{/eq} {else /}  {/neq}>
+                            <div class="row">
+                                <label for="image" class="w140">{:lang('Adsense_image')}</label>
+                                <input type="text" name="image" id="image" style="width:400px;" value="{$data.image}" placeholder="{:lang('Adsense_image')}" />
+                            </div>
+                            <div class="row">
+                                <label class="w140">&nbsp;&nbsp;</label>
+                                <input class="button white upload" value="{:lang('Selectoruploadimg')}" type="button" url="{:url('public/img',array('m' => CONTROLLER_NAME,'input' => 'image'))}">
+                                <input class="button white" value="{:lang('Clear')}" type="button" onClick="$('#image').val('');" />
+                            </div>
+                </div>
+                
+                <div id="ad_flash" {eq name="data.style" value="2"}{else /}style="display:none;"{/eq}>
+                <div class="row">
+                    <label for="flashurl" class="w140">{:lang('Adsense_flash')}</label>
+                    <input type="text" name="flashurl" id="flashurl" value="{$data.flashurl}" style="width:400px;" placeholder="{:lang('Adsense_flash')}" />
+                </div>
+                <div class="row">
+                    <label class="w140">&nbsp;&nbsp;</label>
+                    <input class="button white upload" value="{:lang('Selectoruploadflash')}" type="button" url="{:url('public/img',array('m' => CONTROLLER_NAME,'input' => 'flashurl'))}">
+                    <input class="button white" value="{:lang("Clear")}" type="button" onClick=$("#flashurl").val(""); />
+                </div>
+            </div>
+            
+            <div id="ad_code" {eq name="data.style" value="3"}{else /}style="display:none;"{/eq}>
+            <div class="row">
+                <label for="code" class="w140">{:lang('Code')}</label>
+                <textarea name="code" id="code" placeholder="{:lang('Code')}" style="width:400px; height:52px;">{$data.code}</textarea>
+            </div>
+        </div>
+        
+        <div id="ad_text" {eq name="data.style" value="4"}{else /}style="display:none;"{/eq}>
+        <div class="row">
+            <label for="flashurl" class="w140">{:lang('Adsense_text')}</label>
+            <input type="text" name="text" id="text" style="width:400px;" placeholder="{:lang('Adsense_text')}" />
+        </div>
+        <div class="row">
+            <label for+"url" class="w140">{:lang('Adsense_url')}</label>
+            <input type="text" name="url" id="url" value="{$data.url}" style="width:400px;" placeholder="{:lang('Adsense_url_tip')}" />
+        </div>
+        </div>
+        
+        <div class="row">
+            <div style="float:left;">
+                <label for="start" class="w140">{:lang('Time_slot')}: </label>
+                <input id="start" type="text" value="{eq name="ACTION_NAME" value="edit"}{$data.begin_time|time_format}{else /}{:time_format()}{/eq}" name="begin_time" class="w140c green datainput"/>
+            </div>
+            <div style="overflow:hidden;">
+                ~
+                {eq name="ACTION_NAME" value="edit"}
+                    <input id="end" value='{eq name="data.end_time" value="9"}9{else /}{$data.end_time|time_format}{/eq}' type="text" name="end_time" class="w140l blue datainput"  />
+                    {else /}
+                    <input id="end" value="{:time_format()}" type="text" name="end_time" class="w140l blue datainput" />
+                {/eq}
+                
+                <input class="button white" value="{:lang('Forever')}" type="button" id="forever" onClick="$('#end').val(9);" />
+            </div>
+        </div>
+        
+        <div class="row">
+            <label class="w140">{:lang('Adsense_client_name')}:<span class="required">*</span></label>
+            <input type="text" value="{$data.client_name}" name="client_name" placeholder="{:lang('Adsense_client_name_tip')}" maxlength="50" /><a class="tooltip-icon" title="{:lang('Adsense_client_name_tip')}"></a>
+        </div>
+        
+        <div class="row">
+            <label class="w140">{:lang('Adsense_client_mobile')}:<span class="required">*</span></label>
+            <input type="text" value="{$data.client_mobile}" name="client_mobile" placeholder="{:lang('Adsense_client_mobile_tip')}" maxlength="50" /><a class="tooltip-icon" title="{:lang('Adsense_client_mobile_tip')}"></a>
+        </div>
+        
+        <div class="row">
+            <label class="w140">{:lang('Adsense_client_mail')}:<span class="required">*</span></label>
+            <input type="text" value="{$data.client_mail}" name="client_mail" placeholder="{:lang('Adsense_client_mail_tip')}" maxlength="50" /><a class="tooltip-icon" title="{:lang('Adsense_client_mail_tip')}"></a>
+        </div>
+        
+        <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+            {eq name="ACTION_NAME" value="edit"}
+                <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('savedata')}">>
+                <input name="id" type="hidden"  value="{$data.id}" />
+            {else /}
+                <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}">>
+            {/eq}
+            <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+        </div>
+        </fieldset>
+        </form>
+        </div>
+        </div>
+        </div>
+    {/block}
+    
+    {block name="js"}
+        <script>
+            $(function() {
+                $(".bset").buttonset();
+                $("#start").datetimepicker({
+                    dateFormat: "{:config('kernel.timeformat')}",
+                    minDate: new Date(),
+                    onSelect: function(dateText, inst) {
+                        $.datepicker.regional["{:config('kernel.localdate')}"];
+                        $("#end").datepicker("option", "minDate", dateText);
+                        $("#end").focus();
+                    }
+                });
+                $("#end").datetimepicker({
+                    dateFormat: "{:config('kernel.timeformat')}",
+                    minDate: +1,
+                    onSelect: function(dateText, inst) {
+                        $.datepicker.regional["{:config('kernel.localdate')}"];
+                        $("#start").datepicker("option", "maxDate", dateText);
+                    }
+                });
+                
+                $(':input[name="style"]').click(function(){
+                    var style = parseInt($(this).val());
+                    switch (style){
+                        case 1:
+                            $("#ad_image").show();
+                            $("#ad_flash").hide();
+                            $("#ad_code").hide();
+                            $("#ad_text").hide();
+                            break;
+                        case 2:
+                            $("#ad_image").hide();
+                            $("#ad_flash").show();
+                            $("#ad_code").hide();
+                            $("#ad_text").hide();
+                            break;
+                        case 3:
+                            $("#ad_image").hide();
+                            $("#ad_flash").hide();
+                            $("#ad_code").show();
+                            $("#ad_text").hide();
+                            break;
+                        case 4:
+                            $("#ad_image").hide();
+                            $("#ad_flash").hide();
+                            $("#ad_code").hide();
+                            $("#ad_text").show();
+                            break;
+                    }
+                })
+            })
+        </script>
+    {/block}

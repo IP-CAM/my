@@ -1,0 +1,7 @@
+.mainimgbox { float: left; position: relative; padding: 0 10px; border: 2px solid #CCC; }
+.mainimgbox:hover { background: #F4FFFF; border: 2px solid #F63; cursor: pointer; }
+.mainimgbox .mainthumb { position: absolute; bottom: 0; left: 0; line-height: 24px; text-align: center; margin: 0 2px; width: 98%; text-align: center; line-height: 24px; background: rgba(64,64,64,.7); background: #333\9; color: #FFF; ; filter: progid:DXImageTransform.Microsoft.Alpha(opacity:70);}
+.img_cancel { position: absolute; top: -6px; right: -6px; color: #F00; font-weight: bold; width: 20px; height: 16px; text-align: center; line-height: 16px; background: url(../images/uninstall.png) no-repeat center center; }
+.subimg { overflow: hidden; padding-left: 10px; }
+.subimg ul { list-style: none; padding: 3px 0 0 0 !important; margin: 0 !important; }
+.subimg ul li { display: block; float: left; margin: 0 3px; position: relative; cursor: pointer; }

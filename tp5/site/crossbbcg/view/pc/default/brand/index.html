@@ -1,0 +1,112 @@
+    {extend name="common/base" /}
+    
+    {block name="title"}
+    <title>{$title}</title>
+    {/block}
+    
+    {block name="css"}
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/brand.css"/>
+    {/block}
+    
+    {block name="body"}
+    {include file="brand/flash"}
+    <div class="brand-nav" id="brand-fixed">
+        <div class="n fixed-n">
+            <dl class="clearfix">
+                {foreach $arr_country as $key => $arr}
+                <dd class="{eq name="country_id" value="$arr['country_id']"}active{/eq}">
+                    <a href="{$arr['href']}" title="{$arr['country_name']}">
+                        <span>{$arr['country_name']}</span>
+                        <em><img src="{$arr['national_flag']}" alt="{$arr['country_name']}"/></em>
+                    </a>
+                </dd>
+                {/foreach}
+            </dl>
+        </div>
+    </div>
+    
+    <div class="ly-main clearfix">
+        
+        <div class="brand-list">
+            {notempty name="arr_brand"}
+            {foreach $arr_brand as $key => $arr}
+            <dl>
+                <dt class="brand-item">
+                <div class="n">
+                    <div class="brand-logo">
+                        <a href="{$arr['href']}" target="_blank">
+                            {if condition="substr($arr['logo'],0,4)=='http'"}
+                            <img class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="{$arr['logo']}" width="124" height="90" alt="{$arr['name']}">
+                            {else /}
+                            <img class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__UPLOADS__/{$arr['logo']}" width="124" height="90" alt="{$arr['name']}">
+                            {/if}
+                            
+                        </a>
+                    </div>
+                    <div class="brand-title">
+                        <a href="{$arr['href']}" target="_blank"> {$arr['name']}</a>
+                    </div>
+                    <div class="brand-info">
+                        {$arr['description']}
+                    </div>
+                
+                </div>
+                </dt>
+                <dd class="brand-goods-list">
+                    <div class="title clearfix"><span class="left">{$arr['name']}{:lang('for_you')}</span><a class="right" href="{$arr['href']}">{:lang('see_all')}</a>
+                    </div>
+                    
+                    <ul class="clearfix goods-list" style="height:262px;">
+                        {notempty name="arr['goods']"}
+                        {foreach $arr['goods'] as $key2 => $arr2}
+                        <li class="goods-item">
+                            <div class="goods-pic">
+                                <a class="hover_solid" href="{:url('crossbbcg/goods/index','item_id='.$arr2['id'])}" target="_blank" title="{$arr2['name']}">
+                                    {if condition="substr($arr2['thumb'],0,4)=='http'"}
+                                    <img width="170" height="170" class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="{$arr2['thumb']}" alt="{$arr2['name']}"/>
+                                    {else /}
+                                    <img width="170" height="170" class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="{:resizeImage($arr2['thumb'],'middle',true)}" alt="{$arr2['name']}"/>
+                                    {/if}
+                                </a>
+                            </div>
+                            <div class="goods-info">
+                                <div class="goods-name">
+                                    <a href="{:url('crossbbcg/goods/index','item_id='.$arr2['id'])}" target="_blank">{$arr2['name']}</a>
+                                </div>
+                                <div class="price-box">
+                                    <span class="price">{$arr2['sale_price']}</span>
+                                    <span class="mkt-price">{$arr2['market_price']}</span>
+                                </div>
+                            </div>
+                        </li>
+                        {/foreach}
+                        {else /}
+                        <div class="ly-no-data" style="background: #fff;">
+                            <div class="icon iconfont icon-zanwujilu"></div>
+                            <div class="text">{:lang('empty_record')}</div>
+                        </div>
+                        {/notempty}
+                    </ul>
+                    
+                </dd>
+            
+            </dl>
+            {/foreach}
+            {else /}
+            <div class="ly-no-data" style="background: #fff;border: 1px solid #e6e6e6;">
+                <div class="icon iconfont icon-zanwujilu"></div>
+                <div class="text">{:lang('empty_record')}</div>
+            </div>
+            {/notempty}
+            
+        </div>
+    
+    </div>
+    {/block}
+    <!--此板块为页面单独js加载-->
+    {block name="footer_js"}
+    <script type="text/javascript">
+        //需要加载的js文件
+        Private_Script = ['brand'];
+    </script>
+    {/block}

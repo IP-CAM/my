@@ -1,0 +1,367 @@
+{extend name='common/base' /}
+{block name='css'}
+<style>
+    .left{text-align: left}
+    .right{text-align: right}
+    .store_info{color: #999999}
+    .box-header .box-title{font-size: 16px;!important;font-weight: 600}
+    .sale_info{font-size: 15px;color: #666666}
+    .sale_info tbody>tr>td{line-height: 45px;!important;}
+    .store_status p{font-size: 14px;#2c9cef}
+    .title_p{font-size: 15px;font-weight: 600}
+</style>
+{/block}
+{block name="breadcrumb"}
+<li>{:lang('sIndex')}</li>
+{/block}
+{block name='body'}
+
+<section class="content">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="box box-info" style="min-height: 230px">
+                <div class="col-md-12 clearfix">
+                    <div class="box-header">
+                        <h4 class="box-title">{:lang('Store_info')}</h4>
+                        <div class="box-tools pull-right">
+                            <button class="btn btn-box-tool" data-widget="collspse" type="button"><i class="fa fa-minus"></i></button>
+                            <button class="btn btn-box-tool" data-widget="remove" type="button"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="col-md-2 clearfix" >
+                            <div>
+                                {if condition='empty($store_info.logo)'}
+                                <img src="__PUBLIC__/admin/images/image.png" alt="" width="77" height="77"  class="img-circle">
+                                {elseif condition='substr($store_info.logo,0,4) == "http"'}
+                                <img src="{$store_info.logo}" alt="" width="77" height="77"  class="img-circle">
+                                {else /}
+                                <img src="__UPLOADS__/{$store_info.logo}" alt="" width="77" height="77"  class="img-circle">
+                                {/if}
+                                
+                            </div>
+                            <div>
+                                <a class="btn btn-etshop addnew"  href="">{:lang('enter_index')}</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 clearfix" >
+                            <table class="table no-border store_info">
+                                <tr>
+                                    <td class="right">{:lang('shop_name')}：</td>
+                                    <td  style="color: #393939">{$store_info.seller_name}</td>
+                                </tr>
+                                <tr>
+                                    <td class="right">{:lang('store_level')}：</td>
+                                    <td class="left" style="color: #393939">{:lang('common_store')}</td>
+                                </tr>
+                                <tr>
+                                    <td class="right">&nbsp;{:lang('store_type')}：</td>
+                                    <td class="left" style="color: #393939">{:getShopCat($store_info.cat_id)['suffix']}</td>
+                                </tr>
+                                <tr>
+                                    <td class="right">{:lang('store_account')}：</td>
+                                    <td class="left" style="color: #393939">admin</td>
+                                </tr>
+                                <tr>
+                                    <!--<td class="right">销售类型：</td>-->
+                                    <!--<td class="left">自营店</td>-->
+                                    <td class="right">{:lang('create_time')}：</td>
+                                    <td class="left" style="color: #393939">{:time_format(strtotime($store_info.create_time),'Y-m-d')}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-2 clearfix" style="float:right;border: 2px dotted #DDDDDD;border-radius: 10px;min-width: 147px;height: 155px;margin-top: 10px">
+                            <table class="table no-border" >
+                                <tr>
+                                    <td colspan="2">{:lang('store_dynamic_scoring')}</td>
+                                </tr>
+                                <tr>
+                                    <td >{:lang('Consistent_description')}</td>
+                                    <td >5分</td>
+                                </tr>
+                                <tr>
+                                    <td>{:lang('service attitude')}</td>
+                                    <td>5分</td>
+                                </tr>
+                                <tr>
+                                    <td>{:lang('delivery speed')}</td>
+                                    <td>5分</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="box box-info">
+                    <div class="box-header">
+                        <h4 class="box-title">{:lang('sale_statistics')}</h4>
+                        <div class="box-tools pull-right">
+                            <button class="btn btn-box-tool" data-widget="collspse" type="button"><i class="fa fa-minus"></i></button>
+                            <button class="btn btn-box-tool" data-widget="remove" type="button"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="col-lg-12" style="height: 185px" id="main2"></div>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h4 class="box-title">{:lang('storeOrorder_status_tips')}</h4>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collspse" type="button"><i class="fa fa-minus"></i></button>
+                        <button class="btn btn-box-tool" data-widget="remove" type="button"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="col-lg-12 store_status" style="margin:10px">
+                            <div class="col-md-4">
+                                <p class="title_p">
+                                    <div style="display:inline-block;font-size: 19px;border-radius: 50%;padding: 5px;width: 36px;height: 36px;background-color: #00a0e9;text-align: center;color: #fff"><i class="fa fa-file-text-o"></i></div>
+                                    {:lang('nav_order')}</p>
+                                <p>{:lang('wait_buyer_pay_order')}	(<a href="{:url('seller/order/index',array('order_status'=>'WAIT_BUYER_PAY'))}">{$wait_buyer_pay}</a>)</p>
+                                <p>{:lang('wait_seller_shipping_order')}	(<a href="{:url('seller/order/index',array('order_status'=>'WAIT_SELLER_SEND_GOODS'))}">{$wait_buyer_send_goods}</a>)</p>
+                                <p>{:lang('cancel_order')} (<a href="{:url('seller/order/cancel')}">{$cancel_order}</a>)</p>
+                            </div>
+                            <div class="col-md-4">
+                                <p class="title_p">
+                                <div style="display:inline-block;font-size: 19px;border-radius: 50%;padding: 5px;width: 36px;height: 36px;background-color: #f39c12;text-align: center;color: #fff"><i class="fa fa-user-md"></i></div> {:lang('afterservice')}</p>
+                                <p>{:lang('refund_goods_order')}	(<a href="{:url('seller/order/after_sale',array('rtype'=>1))}">{$refund_goods}</a>)</p>
+                                <p>{:lang('change_goods_order')}	(<a href="{:url('seller/order/after_sale',array('rtype'=>2))}">{$change_goods}</a>)</p>
+                                <p>{:lang('refund_money_order')}	(<a href="{:url('seller/order/after_sale',array('rtype'=>0))}">{$refund_orders}</a>)</p>
+                            </div>
+                            <div class="col-md-4">
+                                <p class="title_p">
+                                <div style="display:inline-block;font-size: 19px;border-radius: 50%;padding: 5px;width: 36px;height: 36px;background-color: #00a65a;text-align: center;color: #fff"><i class="fa fa-inbox" ></i></div> {:lang('the_goods')}</p>
+                                <p>{:lang('goods_enable')}	(<a href="{:url('seller/goods/index',array('status'=>'enabled'))}">{$enable_goods}</a>)</p>
+                                <p>{:lang('goods_pending_review')}	(<a href="{:url('seller/goods/index',array('status'=>'pending_review'))}">{$pending_review_goods}</a>)</p>
+                                <p>{:lang('goods_disable')}	(<a href="{:url('seller/goods/index',array('status'=>'disabled'))}">{$disable_goods}</a>)</p>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            <div class="box box-info">
+                <div class="box-header">
+                    <h4 class="box-title" style="font-weight: 400;color: #3c8dbc;font-size: 17px">{:lang('order_deal_record')}</h4>
+                    <div class="box-tools" style="right: 45%;top: 10px;"><a href="{:url('seller/index/index',array('search_time'=>1))}">{:lang('today')}</a>&nbsp;&nbsp;<a href="{:url('seller/index/index',array('search_time'=>7))}">{:lang('week')}</a>&nbsp;&nbsp;<a href="{:url('seller/index/index',array('search_time'=>30))}">{:lang('month')}</a></div>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collspse" type="button"><i class="fa fa-minus"></i></button>
+                        <button class="btn btn-box-tool" data-widget="remove" type="button"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div id="main" style="height: 250px" class="col-md-12">
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h4 class="box-title">{:lang('goods_sale_rank')}</h4>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collspse" type="button"><i class="fa fa-minus"></i></button>
+                        <button class="btn btn-box-tool" data-widget="remove" type="button"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th style="min-width: 50px" class="center">{:lang('rank')}</th>
+                            <th>{:lang('Goods_sn')}</th>
+                            <th>{:lang('Goods_Name')}</th>
+                            <th style="min-width: 50px" class="center">{:lang('Sales')}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach $goods_rank as $k=>$v}
+                        <tr>
+                            <td class="center"><a href="javascript:void (0);" class="btn" style="background-color: red;color: #fff;padding:0 5px">{$k+1}</a></td>
+                            <td>{$v.good_code}</td>
+                            <td><a href="{:url('crossbbcg/goods/index','item_id='.$v['id'])}" target="_blank">{$v.name}</a></td>
+                            <td class="center">{$v.sales_volume}</td>
+                        </tr>
+                        {/foreach}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{/block}
+{block name='js'}
+<script src="https://cdn.bootcss.com/echarts/3.7.1/echarts.min.js"></script>
+<script>
+    var myChart1 = echarts.init(document.getElementById('main'));
+    var time = {$statistics['time']};
+    var all = {$statistics['all']};
+    var paid = {$statistics['paid']};
+    var no_paid = {$statistics['no_paid']};
+    var finished = {$statistics['finished']};
+    var option1 = {
+        title : {
+            subtext: '订单交易情况',
+            //subtext: '纯属虚构'
+        },
+        tooltip : {
+            trigger: 'axis'
+        },
+        legend: {
+            data:['所有订单','待付款','已付款','已完成']
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                mark : {show: true},
+                dataView : {show: true, readOnly: false},
+                magicType : {show: true, type: ['line', 'bar']},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        calculable : true,
+        xAxis : [
+            {
+                type : 'category',
+                boundaryGap : false,
+                //data : ['周一','周二','周三','周四','周五','周六','周日']
+                data : time
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value',
+                axisLabel : {
+                    formatter: '{value}'
+                }
+            }
+        ],
+        series : [
+            {
+                name:'所有订单',
+                type:'line',
+                //data:[11, 11, 15, 13, 12, 13, 10]
+                data:all
+//                markPoint : {
+//                    data : [
+//                        {type : 'max', name: '最大值'},
+//                        {type : 'min', name: '最小值'}
+//                    ]
+//                },
+//                markLine : {
+//                    data : [
+//                        {type : 'average', name: '平均值'}
+//                    ]
+//                }
+            },
+            {
+                name:'待付款',
+                type:'line',
+                data:no_paid
+                //data:[1, -2, 2, 5, 3, 2, 0]
+//                markPoint : {
+//                    data : [
+//                        {name : '周最低', value : -2, xAxis: 1, yAxis: -1.5}
+//                    ]
+//                },
+//                markLine : {
+//                    data : [
+//                        {type : 'average', name : '平均值'}
+//                    ]
+//                }
+            },
+            {
+                name:'已付款',
+                type:'line',
+                data:paid
+            },
+            {
+                name:'已完成',
+                type:'line',
+                data:finished
+            }
+        ]
+    };
+    myChart1.setOption(option1);
+
+    var myChart2 = echarts.init(document.getElementById('main2'),'macarons');
+    option2 = {
+        // 默认色板
+        title : {
+            subtext: "{:lang('sale_count')}"
+        },
+        tooltip : {
+            trigger: 'axis'
+        },
+        legend: {
+            data:['{:lang("order_count")}','{:lang("order_money")}']
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                mark : {show: true},
+                dataView : {show: true, readOnly: false},
+                magicType : {show: true, type: ['line', 'bar']},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        calculable : true,
+        xAxis : [
+            {
+                type : 'category',
+                data : ["{:lang('today')}","{:lang('week')}","{:lang('month')}"]
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value'
+            }
+        ],
+        series : [
+            {
+                name:'{:lang("order_count")}',
+                type:'bar',
+                data:[{$yestedayordernum}, {$weekordernum}, {$monthordernum}],
+                markPoint : {
+                    data : [
+                        {type : 'max', name: '最大值'},
+                        {type : 'min', name: '最小值'}
+                    ]
+                },
+                markLine : {
+                    data : [
+                        {type : 'average', name: '平均值'}
+                    ]
+                }
+            },
+            {
+                name:'{:lang("order_money")}',
+                type:'bar',
+                data:[{$yestedayordermoney},{$weekordermoney}, {$monthordermoney}],
+                markPoint : {
+                    data : [
+                        {type : 'max', name: '最大值'},
+                        {type : 'min', name: '最小值'}
+                    ]
+                },
+                markLine : {
+                    data : [
+                        {type : 'average', name : '平均值'}
+                    ]
+                }
+            }
+        ]
+    };
+    myChart2.setOption(option2);
+
+</script>
+{/block}

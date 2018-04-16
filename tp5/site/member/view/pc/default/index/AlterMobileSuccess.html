@@ -1,0 +1,75 @@
+{extend name="common/base" /}
+
+{block name="title"}
+<title>ETshop-{:lang('Alter_mobile')}</title>
+{/block}
+
+{block name="css"}
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/member.css" />
+{/block}
+
+{block name="body"}
+<!--面包屑-->
+<div class="ly-path">
+    <ul class="clearfix">
+        <li class="home">
+            <a href="{:url('crossbbcg/index/index')}" title="{:lang('go_min')}">{:lang('Home')}</a>
+            <span>&gt;&nbsp;</span>
+        </li>
+        <li>
+            <a href="{:url('member/index/index')}" title="">{:lang('Member')}</a>
+            <span>&gt;&nbsp;</span>
+        </li>
+        <li>
+            <h1>{:lang('Alter_mobile')}</h1>
+        </li>
+    </ul>
+</div>
+<div class="ly-main member-main clearfix">
+	{include file="index/left_menu"}
+	<div class="member-right">
+		<div class="member-content">
+			<div class="title member-title member-max-title">
+				<div class="t">{:lang('edit_mobile')}</div>
+			</div>
+			<div class="body pb15 mh600 security yahei">
+				<div class="pwd-box">
+					<div class="member-success">
+						<span class="success-span">
+						<i class="iconfont icon-dui-copy"></i>
+						{:lang('edit_successful')}
+					</span>
+						<div class="success-text">
+							<em id="time">3</em>{:lang('page_auto_skip')}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+{/block}
+
+<!--此板块为页面单独js加载-->
+{block name="footer_js"}
+<script type="text/javascript">
+	delayURL();
+
+	function delayURL() {
+		var delay = document.getElementById("time").innerHTML;
+		var t = setTimeout("delayURL()", 1000);
+		if(delay > 0) {
+			delay--;
+			document.getElementById("time").innerHTML = delay;
+		} else {
+			clearTimeout(t);
+			//跳转地址
+			window.location.href = "{:url('/member/index')}";
+		}
+	}
+</script>
+<script type="text/javascript">
+	//需要加载的js文件
+</script>
+{/block}

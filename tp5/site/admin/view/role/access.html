@@ -1,0 +1,224 @@
+    {extend name="admin@public/poupbase"/}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+        <div id="content" style="margin:0px 10px 15px 8px;">
+            <div class="bloc" style="margin:10px 0px 10px;">
+                
+                <div class="content">
+                    <div class="selectbox">
+                        <label class="w100s">{:lang('Selectgroup')}</label>
+                        <select name="group" style="height:26px; padding:2px 5px; margin-left:10px;">
+                            {volist name="role" id="vo" key="key"}
+                                <option value="{:url('access', array('gid'=>$vo['id']))}" {eq name="vo['id']" value="$group['id']"}selected{/eq} {eq name="key" value="1"}disabled{/eq}> {present name="vo.char"}{$vo['char']}{/present} {$vo['name']} ({$vo.alias})</option>
+                            {/volist}
+                        </select>
+                    </div>
+                    
+                    <div class="navsbar">
+                        <ul>
+                            {foreach name="authapp" item="nvo" key="key"}
+                                <li id="#nav_{$key}" {eq name="key" value="General"}class="active"{/eq}>{:lang($key)}</li>
+                            {/foreach}
+                        </ul>
+                    </div>
+                    
+                    <div class="tab-pane in">
+                        <form enctype="application/x-www-form-urlencoded" method="POST" class="form-horizontal auth-form" style="margin-top:0px;" id="myform">
+                            {foreach name="authapp" id="node" key="key"}
+                                <dl class="checkmod">
+                                    <dt class="hd" id="main_{$key}">
+                                        <label class="checkbox tooltip-link" title="{:lang($key)}"><input class="auth_rules rules_all" type="checkbox" name="rules[]" value="11" level="0" onclick="javascript:checknode(this);">{:lang($key)}</label>
+                                    </dt>
+                                    <dd class="bd">
+                                        {present name="node['son']"}
+                                            {foreach name="node['son']" id="child" key="ke"}
+                                                <div class="rule_check">
+                                                    <div>
+                                                        <label class="checkbox" title='{$ke}' />
+                                                        <input class="auth_rules rules_row son" type="checkbox" name="rules[]" value="" level="1" onclick="javascript:checknode(this);" />
+                                                        {:lang($ke)}
+                                                        </label>
+                                                    </div>
+                                                    
+                                                    {present name="child['son']"}
+                                                        <!--<span class="divsion">&nbsp;</span>-->
+                                                        <div class="child_row">
+                                                         {foreach name="child['son']" id="op" key="k"}
+                                                            {present name="op['button']"}
+                                                            <label class="checkbox" title='' />
+                                                            <input class="auth_rules" type="checkbox" name="rules[]" value="" level="2" onclick="javascript:checknode(this);" />
+                                                                {:lang($k)}
+                                                            </label>
+                                                            {else /}
+                                                            <div class="son_row">
+                                                                <div style="height:28px;">
+                                                                    <label>
+                                                                        <input class="auth_rules over" type="checkbox" name="rules[]" value="" level="2" onclick="javascript:checknode(this);"/>
+                                                                        {:lang($k)}
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            {/present}
+                                                            
+                                                            {present name="op['button']"}
+                                                            <div style="margin-left:20px;" class="over_row">
+                                                                {foreach name="op['button']" id="kk" key="vv"}
+                                                                 <label class="checkbox" >
+                                                                 <input value="" class="auth_rules" type="checkbox" name="rules[]" level="3" onclick="javascript:checknode(this);" />{:lang($vv)}
+                                                                 </label>
+                                                                {/foreach}
+                                                             </div>
+                                                             {/present}
+                                                         {/foreach}
+                                                     </div>
+                                                    {/present}
+                                                </div>
+                                            {/foreach}
+                                        {/present}
+                                    </dd>
+                                </dl>
+                            {/foreach}
+                            
+                            <div class="clear"></div>
+                            <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center; position:fixed; width:auto; height:50px; bottom:0px; right:30px;">
+                                <input name="submit" value="{:lang('Save')}" type="submit" url="{:url('writeGroup')}" >
+                                <input type="hidden" name="id" value="{$group.id}" />
+                                <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {/block}
+    
+    {block name="style"}
+        <style>
+            .content{ min-height:530px; position:relative;}
+            .selectbox{ position:fixed; height:32px;text-align:center; line-height:32px; padding:0 10px;border:1px solid #ccc;overflow:hidden; background:#F2F2F2; right:10px; top:20px;}
+            .w100s{ width:100px;font-weight:bold;}
+            .navsbar{ position:fixed; right:20px; top:78px;font-weight: bold;border:1px solid #C8C3C3;background: #ECECEC; }
+            .navsbar ul { margin-left:0 !important; }
+            .navsbar ul li{ list-style:none;line-height: 29px; height:29px; display:block;padding:0 20px; cursor:pointer;}
+            .navsbar ul li a{ color:#333 !important;}
+            .navsbar ul li:hover, .active{ background:#FFF;}
+            .checkbox{ display:inline; float:none;}
+            .checkmod {margin-bottom: 15px;border: 1px solid #ebebeb;}
+            .checkmod dt {padding-left: 10px;height: 30px;line-height: 30px;font-weight: bold;border-bottom: 1px solid #ebebeb;background: #ECECEC;}
+            .checkmod dd {padding-left: 10px;line-height: 30px;}
+            .checkmod dd .checkbox {margin: 0 15px 0 0;}
+            .checkmod dd .rule_check div:first-child{ background:#F7F4F4; margin-left:0;}
+            .checkmod dd .divsion {/*margin-right: 20px;*/}
+            .checkmod dd div{ line-height:26px;}
+            .checkmod dd .child_row{ margin-left:20px;display:block !important;}
+            .son_row label{ margin:0;}
+        </style>
+        <script>
+            $(function(){
+                var rules = [{$group.menu_auth}];
+                $('.auth_rules').each(function(){
+                    if( $.inArray( parseInt(this.value,10),rules )>-1 ){
+                        $(this).prop('checked',true);
+                    }
+                    if(this.value==''){
+                        $(this).closest('span').remove();
+                    }
+                });
+    
+                //全选节点
+                $('.rules_all').on('change',function(){
+                    $(this).closest('dl').find('dd').find('input').prop('checked',this.checked);
+                });
+                $('.rules_row').on('change',function(){
+                    $(this).closest('.rule_check').find('.child_row').find('input').prop('checked',this.checked);
+                });
+                $('.over').on('change',function(){
+                    $(this).closest('.son_row').find('input').prop('checked',this.checked);
+                });
+    
+                $('select[name=group]').change(function(){
+                    location.href = this.value;
+                });
+    
+                $(".navsbar li").on('click',function(){
+                    var curr_id = $(this).attr('id').replace('#nav_', '');
+                    $('html,body').animate({scrollTop: $('.checkmod #main_'+curr_id).offset().top}, 1500);
+                    $(this).addClass('active').siblings().removeClass('active');
+                })
+    
+                $(window).on("scroll", function(event){
+                    var fold = $(window).scrollTop();
+                    $(".checkmod").each(function(){
+                        var curr = $(this).index();//alert(fold+","+$(this).offset().top);
+                        if( fold > $(this).offset().top - 200 && fold < $(".checkmod").eq(curr).offset().top + 200){
+                            $(".navsbar li").eq(curr).addClass('active').siblings().removeClass('active');
+                        }
+                    });
+                });
+    
+                var topindex = parent.layer.getFrameIndex(window.name); //获取当前窗体索引
+                $('input[name="reset"]').click(function() {
+                    parent.layer.close(topindex);
+                });
+                $('input[name="submit"]').click(function() {
+                    var that = this;
+                    var form = $('#myform');
+                    var target = $(that).attr('url');
+                    var query = form.serialize();
+    
+                    $.post(target, query).success(function(data) {
+                        if (data.status == 1) {
+                            parent.layer.msg(data.info, 2, {type: 1})
+                            setTimeout(function() {
+                                if (data.url) {
+                                    parent.location.href = data.url;
+                                    parent.layer.close(topindex);
+                                }else{
+                                    parent.layer.close(topindex);
+                                }
+                            }, 1500);
+                        } else {
+                            parent.layer.msg(data.info, 2, {type: 5})
+                            setTimeout(function() {
+                                if (data.url) {
+                                    parent.location.href = data.url;
+                                }
+                            }, 1500);
+                        }
+                    });
+                    return false;
+                })
+            })
+    
+            function checknode(obj)
+            {
+                var chk = $("input[type='checkbox']");
+                var count = chk.length;
+                var num = chk.index(obj);
+                var level_top = level_bottom =  chk.eq(num).attr('level');
+                for (var i=num; i>=0; i--)
+                {
+                    var le = chk.eq(i).attr('level');
+                    if(eval(le) < eval(level_top))
+                    {
+                        chk.eq(i).attr("checked",true);
+                        var level_top = level_top-1;
+                    }
+                }
+                for (var j=num+1; j<count; j++)
+                {
+                    var le = chk.eq(j).attr('level');
+                    if(chk.eq(num).attr("checked")=='checked') {
+    
+                        if(eval(le) > eval(level_bottom)) chk.eq(j).attr("checked",true);
+                        else if(eval(le) == eval(level_bottom)) break;
+                    }
+                    else {
+                        if(eval(le) > eval(level_bottom)) chk.eq(j).attr("checked",false);
+                        else if(eval(le) == eval(level_bottom)) break;
+                    }
+                }
+            }
+        </script>
+    {/block}

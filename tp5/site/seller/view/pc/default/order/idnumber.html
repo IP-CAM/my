@@ -1,0 +1,65 @@
+{extend name='common/poupbase'}
+{block name='css'}
+{/block}
+
+{block name='body'}
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                        <span>{:lang('consignee_info')}</span>
+                        
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="javascript:void(0);" class="print" ><i class="fa fa-print"></i>{:lang('print')}</a>
+                    </h3>
+                </div>
+                <div class="box-body">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td width="100" class="text-right">
+                                {:lang('consignee')}
+                            </td>
+                            <td>
+                                {$data.consignee}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="100" class="text-right">{:lang('id_number')}</td>
+                            <td>
+                                {$data.idnumber}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="100" class="text-right">{:lang('sfzzm')}</td>
+                            <td>
+                                {notempty name="$data.sfzzm"}
+                                <img src="{$data.sfzzm}" style="max-width:100%;"/>
+                                {/notempty}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td  width="100" class="text-right">{:lang('sfzfm')}</td>
+                            <td>
+                                {notempty name="$data.sfzfm"}
+                                <img src="{$data.sfzfm}" style="max-width:100%;"/>
+                                {/notempty}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+{/block}
+
+{block name="js"}
+<script type="text/javascript">
+    $('.print').click(function () {
+        window.print();
+    })
+</script>
+{/block}

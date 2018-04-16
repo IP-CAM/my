@@ -1,0 +1,201 @@
+    {extend name="admin@public/poupbase"/}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+        <div id="content" style="margin:0px 10px 5px 8px;">
+            <div class="bloc" style="margin:10px 0px 0px;">
+                <div class="content">
+                    <form id="myform" method="post" style="margin-top:5px;" class="">
+                        <fieldset>
+                            <legend>{$meta_title|default=''}</legend>
+    
+                            <div class="row">
+                                <label for="title" class="w140">{:lang('Coupons title')}: <span class="required">*</span></label>
+                                <input id="title" type="text" value="{$data.title|default=''}" name="title" style="width:350px;" placeholder="{:lang('Coupons title')}" />
+                            </div>
+    
+                            <div class="row">
+                                <label for="image" class="w140">{:lang('Coupons img')}: </label>
+                                <input type="text" id="image" name="image" value="{$data.image|default=''}" style="width:420px;" placeholder="../../image/xxx.png"  />
+                                <input class="button white upload" value="{:lang('Selectimg')}" title="{:lang('Selectimg')}" type="button" title="{:lang('Upload img and file')}" url="{:url('img',array('input' => 'shoplogo'))}" data-upload="__UPLOADS__" /> >
+                                <a href="javascript:void(0)" class="preview" data-src="image" data-width="200" data-height="200" data-area="200">{:lang('Preview')}</a>
+                            </div>
+    
+                            <div class="row">
+                                <label for="remark" class="w140">{:lang('Coupons remark')}: </label>
+                                <input  id="remark" type="text" value="{$data.remark|default=''}" name="remark" style="width:420px;" placeholder="{:lang('Coupons_remark_tip')}" />
+                            </div>
+    
+                            <div class="row">
+                                <div style="float:left;">
+                                    <label for="send_f_time" class="w140">{:lang('Send time slot')}: </label>
+                                    <input id="send_f_time" type="text" name="send_f_time" class="w140l green datainput" value="{eq name="ACTION_NAME" value="edit"}{$data.send_f_time|time_format}{else /}{:time_format()}{/eq}" />
+                                </div>
+                                <div style="overflow:hidden;">
+                                    ~
+                                    {eq name="ACTION_NAME" value="edit"}
+                                    <input id="send_t_time" value='{$data.send_t_time|time_format}' type="text" name="send_t_time" class="w140l blue datainput"/>
+                                    {else /}
+                                    <input id="send_t_time" value="{:date('Y-m-d H:i:s', strtotime('+1 week'))}" type="text" name="send_t_time" class="w140l blue datainput"/>
+                                    {/eq}
+        
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <div style="float:left;">
+                                    <label for="begin_time" class="w140">{:lang('Time_slot')}: </label>
+                                    <input id="begin_time" type="text" name="begin_time" class="w140l green datainput" value="{eq name=" ACTION_NAME" value="edit"}{$data.begin_time|time_format}{else /}{:time_format()}{/eq}" />
+                                </div>
+                                <div style="overflow:hidden;">
+                                    ~
+                                    {eq name="ACTION_NAME" value="edit"}
+                                    <input id="end_time" value='{$data.end_time|time_format}'   type="text" name="end_time" class="w140l blue datainput"/>
+                                    {else /}
+                                    <input id="end_time" value="{:date('Y-m-d H:i:s', strtotime('+1 week'))}" type="text" name="end_time" class="w140l blue datainput"/>
+                                    {/eq}
+                                </div>
+                            </div>
+    
+                            <div class="row bset" style="height: 64px;">
+                                <label class="w140 blue">{:lang('Autosend')}: </label>
+                                <div class="fl" style="width: 450px;">
+                                    <input name="sex" type="radio" value="1" id="sex_1" {eq name="data.sex" value="1"}checked{/eq} />
+                                    <label for="sex_1" class="w150_r_0">{:lang('领取发放')}</label>
+            
+                                    <input name="sex" type="radio" value="0" id="sex_0" {eq name="data.sex" value="0"}checked{/eq} />
+                                    <label for="sex_0" class="w150_r_0">{:lang('新注册发放')}</label>
+            
+                                    <input name="sex" type="radio" value="2" id="sex_2" {eq name="data.sex" value="2"}checked{/eq} {eq name="ACTION_NAME" value="add"}checked{/eq} />
+                                    <label for="sex_2" class="w150_r_0">{:lang('邀请发放')}</label>
+            
+                                    <input name="sex" type="radio" value="3" id="sex_3" {eq name="data.sex" value="3"}checked{/eq} />
+                                    <label for="sex_3" class="w150_r_0">{:lang('按用户发放')}</label>
+            
+                                    <input name="sex" type="radio" value="4" id="sex_4" {eq name="data.sex" value="4"}checked{/eq} />
+                                    <label for="sex_4" class="w150_r_0">{:lang('满足金额发放')}</label>
+            
+                                    <input name="sex" type="radio" value="5" id="sex_5" {eq name="data.sex" value="5"}checked{/eq} />
+                                    <label for="sex_5" class="w150_r_0">{:lang('线下发放')}</label>
+                                </div>
+                            </div>
+    
+                            <div class="clear"></div>
+    
+                            <div class="row">
+                                <label class="w140 blue">{:lang('适用会员组')}: </label>
+                                <input type="text" id="groupid" name="groupid" value="{$data.groupid}" placeholder="{:lang('Unrestricted')}" style="width:420px;"  />
+                            </div>
+    
+                            <div class="row">
+                                <label for="shopid" class="w140">{:lang('适用店铺')}: </label>
+                                <input type="text" id="shopid" name="shopid" value="{$data.shopid}" placeholder="{:lang('Unrestricted')}" style="width:420px;"  />
+                            </div>
+    
+                            <div class="row">
+                                <label for="cats" class="w140">{:lang('限定类目')}: </label>
+                                <input type="text" id="cats" name="cats" value="{$data.cats}" maxlength="8" placeholder="{:lang('Unrestricted')}" style="width:420px;"  />
+                            </div>
+    
+                            <div class="row">
+                                <label for="brand" class="w140">{:lang('限定品牌')}: </label>
+                                <input type="text" id="brand" name="brand" value="{$data.brand}" maxlength="8" placeholder="{:lang('Unrestricted')}" style="width:420px;"  />
+                            </div>
+    
+                            <div class="row">
+                                <label for="limits" class="w140">{:lang('发放数量')}: </label>
+                                <input type="number" id="limits" name="limits" value="{$data.limits|default='1'}" placeholder="1" min="1" style="width:58px; text-align: center;"  />
+                            </div>
+    
+                            <div class="row bset">
+                                <label class="w140">{:lang('Send type')}: </label>
+                                <input name="sendtype" type="radio" value="1" id="sendtype_1" {eq name="data.sex" value="1"}checked{/eq} />
+                                <label for="sendtype_1" class="w165_r_0">{:lang('无门槛')}</label>
+    
+                                {eq name="ACTION_NAME" value="add"}
+                                <input name="sendtype" type="radio" value="0" id="sendtype_0" checked />
+                                <label for="sendtype_0" class="w165_r_0">{:lang('消费满足')}</label>
+                                {else /}
+                                <input name="sendtype" type="radio" value="0" id="sendtype_0" {eq name="data.sex" value="0"}checked{/eq} />
+                                <label for="sendtype_0" class="w165_r_0">{:lang('消费满足')}</label>
+                                {/eq}
+                            </div>
+    
+                            <div class="row">
+                                <label class="w140">{:lang('Preferential amount')}: </label>
+                                {:lang('Full')} <input type="number" id="full" name="full" value="{$data.full|default='0.00'}" maxlength="5" placeholder="100" min="0" style="width:70px; text-align: center;"  />
+                                {:lang('Reduce')}
+                                <input type="number" id="reduce" name="reduce" value="{$data.reduce|default='0.00'}" maxlength="5" placeholder="20" min="0" style="width:70px; text-align: center;"  />
+                                {:lang('Used_for_yuan')}
+                            </div>
+    
+                            <div class="row">
+                                <label for="quantity" class="w140">{:lang('Create quantity')}: </label>
+                                <input type="number" id="quantity" name="quantity" value="{$data.quantity|default=1000}" maxlength="8" min="0" placeholder="100" style="width:80px; text-align: center;"  />
+                            </div>
+                            
+                            <div class="clear"></div>
+                            
+                            <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                                {eq name="ACTION_NAME" value="edit"}
+                                    <input name="submit" value="{:lang('Update')}" type="submit" url="{:url()}" />
+                                    <input name="id" type="hidden"  value="{$data.id}" />
+                                {else /}
+                                    <input name="submit" value="{:lang('Create')}" type="submit" url="{:url()}" />
+                                {/eq}
+                                <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {/block}
+    
+    {block name="js"}
+        <!--<script type="text/javascript" src="__PUBLIC__/admin/js/autosize.js"></script>-->
+        <script>
+            $(function(){
+                $(".bset").buttonset();
+                $("#begin_time").datetimepicker({
+                    dateFormat: "{:config('kernel.timeformat')}",
+                    timeFormat: 'HH:mm:ss',
+                    minDate: new Date(),
+                    onSelect:function(dateText,inst){
+                        $.datepicker.regional[ "{:config('kernel.localdate')}" ];
+                        $("#end_time").datepicker("option", "minDate",dateText);
+                    }
+                });
+                
+                $("#end_time").datetimepicker({
+                    dateFormat: "{:config('kernel.timeformat')}",
+                    timeFormat: 'HH:mm:ss',
+                    minDate: 30,
+                    onSelect:function(dateText,inst){
+                        $.datepicker.regional[ "{:config('kernel.localdate')}" ];
+                        $("#begin_time").datepicker("option","maxDate",dateText);
+                    }
+                });
+
+                $("#send_f_time").datetimepicker({
+                    dateFormat: "{:config('kernel.timeformat')}",
+                    timeFormat: 'HH:mm:ss',
+                    minDate: new Date(),
+                    onSelect:function(dateText,inst){
+                        $.datepicker.regional[ "{:config('kernel.localdate')}" ];
+                        $("#send_t_time").datepicker("option", "minDate",dateText);
+                    }
+                });
+
+                $("#send_t_time").datetimepicker({
+                    dateFormat: "{:config('kernel.timeformat')}",
+                    timeFormat: 'HH:mm:ss',
+                    minDate: 30,
+                    onSelect:function(dateText,inst){
+                        $.datepicker.regional[ "{:config('kernel.localdate')}" ];
+                        $("#send_f_time").datepicker("option","maxDate",dateText);
+                    }
+                });
+            })
+        </script>
+    {/block}

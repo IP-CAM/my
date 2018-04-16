@@ -1,0 +1,81 @@
+    {extend name="admin@public/poupbase" /}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+        <div id="content" style="margin:0px 10px 5px 8px;">
+            <div class="bloc" style="margin:10px 0px 0px;">
+                <div class="content">
+                    <form id="myform" method="post" style="margin-top:5px;" class="">
+                        <fieldset>
+                            <legend>{:lang('Addnew')}{:lang('Rolegroup')}</legend>
+                            <div class="row">
+                                <label for="pid" class="w100">{:lang('Rolegroupname')}: </label>
+                                <select id="pid" name="pid" style="width: 220px; ">
+                                    <option value="0">{:lang('Toprole')}</option>
+                                    {volist name="pidlist" id="po"}
+                                    <option value="{$po.id}" {eq name="data.pid" value="$po.id"}selected{/eq} >
+                                    {$po.char} {$po.name} ({$po.alias})
+                                    </option>
+                                    {/volist}
+                                </select>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="name" class="w100">{:lang('Rolegroupname')}: <span class="required">*</span></label>
+                                <input id="name" type="text" value="{$data.name}" name="name" placeholder="Administrator" class="fu" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')" style="width: 180px;" {eq name="ACTION_NAME" value="edit"}{eq name="data['id']" value="1"}readonly{/eq} {/eq} />
+                                <a class="tooltip-icon" title="{:lang('Rolegroupname tip')}"></a>
+                            </div>
+    
+                            <div class="row">
+                                <label for="alias" class="w100">{:lang('Rolegroupname alias')}: <span class="required">*</span></label>
+                                <input id="alias" type="text" value="{$data.alias}" name="alias" placeholder="{:lang('Groupname alias')}" style="width: 180px;" />
+                                <a class="tooltip-icon" title="{:lang('Rolegroupname tip')}"></a>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="description" class="w100">{:lang('Description')}: <span class="required">*</span></label>
+                                <textarea style="width:240px; height:35px;resize: none;" id="description" name="description" placeholder="{:lang('Description_tip')}">{$data.description}</textarea>
+                            </div>
+    
+                            <div class="row">
+                                <label for="sort" class="w100">{:lang('Sort')}: </label>
+                                <input id="sort" type="number" value="{$data.sort|default=0}" name="sort" placeholder="100" class="input litle" />
+                            </div>
+                            
+                            <div class="row">
+                                <label for="status" class="w100">{:lang('Status')}:</label>
+                                {neq name="data.id" value="1"}
+                                {eq name="ACTION_NAME" value="edit"}
+                                    <div class="slideBox">
+                                        <input id="status" value="1" type="checkbox" name="status" {eq name="data.status" value="1"}checked{/eq} />
+                                        <label for="status"></label>
+                                    </div>
+                                {else /}
+                                    <div class="slideBox">
+                                        <input id="status" value="1" type="checkbox" name="status" checked />
+                                        <label for="status"></label>
+                                    </div>
+                                {/eq}
+                                {else /}
+                                    <label class="red">{:lang('Unallow_status')}</label>
+                                {/neq}
+                            </div>
+                            
+                            <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                                {eq name="ACTION_NAME" value="edit"}
+                                    <input name="submit" value="{:lang('Save')}" type="submit" url="{:url('savedata')}">
+                                    <input type="hidden" name="id" value="{$data.id}" />
+                                {else /}
+                                    <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}">
+                                {/eq}
+                                <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {/block}
+    
+    {block name="js"}
+    {/block}

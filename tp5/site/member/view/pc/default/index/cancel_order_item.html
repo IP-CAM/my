@@ -1,0 +1,266 @@
+   <div class="order-head">
+   	<table class="order-table">
+   		<tr class="">
+   			<td class="text-center" style="width: 332px; text-align: center;"><span>{:lang('order_good')}</span></td>
+   			
+   			<td class="item-total-price"><span>{:lang('order_pay')}</span></td>
+   			<td class="item-freight"><span>{:lang('operate_status')}</span></td>
+   			<td class="item-links"><span>{:lang('order_action')}</span></td>
+   		</tr>
+   	</table>
+   </div>
+    {notempty name="order_list"}
+    {foreach $order_list as $key => $arr}
+    <div class="order-item">
+        <table class="order-table">
+            <tbody>
+            <tr>
+                <td colspan="5" class="order-summary">
+                    <span class="order-number">{:lang('order_sn')}：{$arr['order_sn']}</span>
+                    <span class="exchange-time">{:lang('trading_time')}：
+                        {$arr['create_time']}
+                        </span>
+                        <span class="dp right">
+                            <a href="{:url('seller/store/index','seller_id='.$arr['seller_id'])}" target="_blank"><i class="iconfont icon-ruzhu"></i> {$arr['store']['seller_name']}</a>
+    
+                            <!-- 删除订单到回收站 -->
+                             {if condition="($arr['status'] == 'TRADE_FINISHED'||$arr['status'] == 'TRADE_CLOSED'||$arr['status'] == 'TRADE_CLOSED_BY_SYSTEM')&& $arr['display']==1"}
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="javascript:void(0);" class="blue delete-order" title="{:lang('do_order_recycle')}" data-order_id="{$arr['order_id']}" data-display="0">
+                        <i class="iconfont icon-remove" style="color:#9e9e9e;"></i>
+                    </a>
+                            {/if}
+                            
+                        </span>
+                </td>
+            </tr>
+            {notempty name="arr['goods']"}
+            {php} $count_goods = count($arr['goods']); {/php}
+            {foreach $arr['goods'] as $key2 => $arr2}
+            <tr>
+                <td class="item-image">
+                    <!--商品主图-->
+                    {if condition="substr($arr2['sku_thumb'],0,4)=='http'"}
+                    <img src="{$arr2['sku_thumb']}" width="58" height="58">
+                    {else /}
+                    <img src="{:resizeImage($arr2['sku_thumb'],'small',true)}" width="58" height="58">
+                    {/if}
+                    
+                </td>
+                <td class="item-name">
+                    <a target="_blank" href="{:url('crossbbcg/goods/index','item_id='.$arr2['goods_id'])}">
+                        {$arr2['goods_name']}
+                    </a>
+                    {if condition="$arr2['sku_array']"}
+                    <br/><span style="color:#9e9e9e">{$arr2['sku_array']}</span>
+                    {/if}
+                    <div class="icon-box">
+                        {eq name="$arr2['goods_type']" value="direct_mail"}
+                        <span class="zhiyou"><i class="iconfont icon-quanqiu"></i>{:lang('direct_mail')}</span>
+                        {/eq}
+                        {eq name="$arr2['goods_type']" value="bonded"}
+                        <span class="baoshui"><i class="iconfont icon-quanqiu"></i>{:lang('bonded')}</span>
+                        {/eq}
+                        {eq name="$arr2['goods_type']" value="pay_taxes"}
+                        <span class="wanshui"><i class="iconfont icon-quanqiu"></i>{:lang('pay_taxes')}</span>
+                        {/eq}
+                    	
+                    	<span class="guojia">
+                            {notempty name="$arr2['country_code']"}
+                            <img src="__PUBLIC__/crossbbcg/pc/default/image/flags/{:strtolower($arr2['country_code'])}.png"/>
+                            {$arr2['country_name']}
+                            {/notempty}
+                        </span>
+                    </div>
+                </td>
+                
+                {if condition="$key2==0"}
+                <td class="item-total-price" rowspan="{$count_goods}">
+                    <span class="price">{$arr['symbol']}{$arr['order_amount']}</span>
+                        <br/>
+                       {:lang('shipping_fee')}：{$arr['symbol']}{$arr['shipping_fee']}
+                    <br/>
+                    {if condition="$arr['order_tax']!=0"}
+                    {:lang('tax')}：{$arr['symbol']}{$arr['order_tax']}
+                    {/if}
+                </td>
+                
+                <td class="item-freight" rowspan="{$count_goods}">
+                    <span class="order-status">
+                        {:lang('cancel_status_'.$arr['cancel_status'])}
+                    </span>
+                </td>
+                <td class="item-links" rowspan="{$count_goods}">
+                    <!--订单详情-->
+                    <a href="{:url('member/index/cancel_order_detail','order_sn='.$arr['order_sn'])}" class="blank">{:lang('go_cancel_detail')}</a>
+                </td>
+                {/if}
+            </tr>
+            {/foreach}
+            {/notempty}
+            </tbody>
+        </table>
+    </div>
+    
+    {/foreach}
+    <div class="pagenavi">
+    {$page}
+    </div>
+    {else /}
+    <div class="ly-no-data" style="background: #fff;border: 1px solid #e6e6e6;">
+        <div class="icon iconfont icon-zanwujilu"></div>
+        <div class="text">{:lang('empty_record')}</div>
+    </div>
+    {/notempty}
+    
+<script type="text/html" id="cancel-html">
+    <div style="padding:20px;">
+        <p style="margin-bottom:10px;">{:lang('choose_cancel_reason')}</p>
+        <select name="cancel_reason" style="width:120px;" id="cancel_reason">
+            <option value="0">{:lang('choose_cancel_option')}</option>
+            {foreach $arr_cancel_reason as $key => $value}
+                <option value="{$value}">{$value}</option>
+            {/foreach}
+        </select>
+    </div>
+    
+</script>
+    
+    
+    <script type="text/javascript">
+        // 弹窗取消订单
+        function open_cancel(order_id){
+            layer.open({
+                'skin': 'layer-ext-blue',
+                area: ['400px', '280px'],
+                scrollbar: false,
+                title: "{:lang('cancel_order_title')}",
+                maxmin: false,
+                type: 1,
+                anim: 0,
+                shade: [0.3, '#333333'],
+                content: $('#cancel-html').html(),
+                btn: ["{:lang('yes')}", "{:lang('no')}"],
+                yes: function(index,item){
+                    var reason = $('#cancel_reason').val();
+                    if(reason == 0){
+                        layer.msg("{:lang('choose_cancel_reason')}", {skin:'layer-ext-blue',icon:0, time: 2000 ,shade: 0.3}, function(){});
+                    }else{
+                        var request_data = {
+                            order_id: order_id,
+                            reason : reason
+                        };
+                            $.ajax({
+                                type: 'post',
+                                url: "{:url('member/index/cancelorder')}",
+                                data: request_data,
+                                dataType: 'json',
+                                success: function (data) {
+                                    if(data.code){
+                                        layer.msg(data.msg, {skin:'layer-ext-blue',icon:0, time: 2000 ,shade: 0.3}, function(){
+                                            layer.close(index);
+                                            window.location.reload();
+                                        });
+                                        
+                                    }else{
+                                        layer.msg(data.msg, {skin:'layer-ext-blue',icon:0, time: 2000 ,shade: 0.3}, function(){});
+                                    }
+                                }
+                            });
+                    }
+                }
+            });
+        }
+        
+        // 确认收货
+        function finish_order(order_id){
+            var request_data = {
+                order_id: order_id
+            };
+            $.ajax({
+                type: 'post',
+                url: "{:url('member/index/finishorder')}",
+                data: request_data,
+                dataType: 'json',
+                success: function (data) {
+                    if(data.code){
+                        layer.msg(data.msg, {skin:'layer-ext-blue',icon:0, time: 2000 ,shade: 0.3}, function(){
+                            layer.close();
+                            window.location.reload();
+                        });
+
+                    }else{
+                        layer.msg(data.msg, {skin:'layer-ext-blue',icon:0, time: 2000 ,shade: 0.3}, function(){});
+                    }
+                }
+            });
+        }
+        
+        // 删除订单
+        function delete_order(order_id,display){
+            
+            if(display){
+                var request_data = {
+                    order_id: order_id,
+                    display:display
+                };
+                $.ajax({
+                    type: 'post',
+                    url: "{:url('member/index/delete_order')}",
+                    data: request_data,
+                    dataType: 'json',
+                    success: function (data) {
+                        if(data.code){
+                            layer.msg(data.msg, {skin:'layer-ext-blue',icon:0, time: 2000 ,shade: 0.3}, function(){
+                                layer.close();
+                                window.location.reload();
+                            });
+                        }else{
+                            layer.msg(data.msg, {skin:'layer-ext-blue',icon:0, time: 2000 ,shade: 0.3}, function(){
+                                layer.close();
+                                window.location.reload();
+                            });
+                        }
+                    }
+                });
+            }else{
+                
+            
+            layer.msg('{:lang("order_recycle_info")}', {
+                skin: 'layer-ext-blue', icon: 0,
+                time: 0,
+                btn: ['{:lang("js_ok")}', '{:lang("js_no")}'],
+                yes: function (index) {
+                    
+                    var request_data = {
+                        order_id: order_id,
+                        display:display
+                    };
+                    $.ajax({
+                        type: 'post',
+                        url: "{:url('member/index/delete_order')}",
+                        data: request_data,
+                        dataType: 'json',
+                        success: function (data) {
+                            if(data.code){
+                                layer.msg(data.msg, {skin:'layer-ext-blue',icon:0, time: 2000 ,shade: 0.3}, function(){
+                                    layer.close();
+                                    window.location.reload();
+                                });
+                            }else{
+                                layer.msg(data.msg, {skin:'layer-ext-blue',icon:0, time: 2000 ,shade: 0.3}, function(){
+                                    layer.close();
+                                    window.location.reload();
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+            }
+        }
+        
+    </script>
+    
+    
+    

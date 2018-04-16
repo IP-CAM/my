@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    {block name="title"}
+    <title>{:lang('Crossbbcg_Title')}</title>
+    {/block}
+    <script type="text/javascript">
+        //模板静态js路径
+        var root = '__ROOT__';
+        var RequireParam={
+            BaseScriptPath:(root == '') ? '/' : root,
+            BaseScript:['jquery', 'public'],
+            UpdateCartUrl:"{:url('crossbbcg/carts/update_num')}"
+        };
+        Private_Script=null
+    
+    </script>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/crossbbcg/pc/default/css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/layer-v3.0.3/skin/default/layer.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/layer-v3.0.3/skin/blue/style.css"/>
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_0k10lwbvtok9y66r.css"/>
+    {block name="css"}{/block}
+</head>
+<body>
+
+
+{block name="body"}{/block}
+
+
+{block name="footer_js"}{/block}
+<script type="text/javascript" data-main="__PUBLIC__/crossbbcg/pc/default/js/main" src="__STATIC__/js/require.js" ></script>
+
+</body>
+</html>

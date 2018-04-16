@@ -1,0 +1,74 @@
+{extend name="login/base" /} {block name='title'}
+<title>{:lang('register_seller')}</title>
+{/block} {block name='css'} {/block} {block name="body"}
+<div class="shop-login-box yahei">
+	<div class="form-body">
+		<div class="title">
+			<div class="t">{:lang('register_seller')}</div>
+			<div class="steps enter-steps">
+				<table width="100%">
+					<tbody>
+
+						<tr>
+                            <td class="step-item step-1 active"><span><q class="icon">●</q><i>1</i>{:lang('Settled_notice')}</span>
+                                <div class="stepdiv">1</div>
+                            </td>
+                            <td class="step-item step-2 active">
+                                <span><q class="icon">●</q><i>2</i>{:lang('Company_info')}</span>
+                                <div class="stepdiv">2</div>
+                            </td>
+                            <td class="step-item step-3 active"><span><q class="icon">●</q><i>3</i>{:lang('Store_info')}</span>
+                                <div class="stepdiv">3</div>
+                            </td>
+                            <td class="step-item step-4 active"><span><q class="icon">●</q><i>3</i>{:lang('Settled_check')}</span>
+                                <div class="stepdiv">4</div>
+                            </td>
+							<td class="step-item step-5 last"><span><q class="icon">●</q><i>3</i>{:lang('Store_to_online')}</span>
+								<div class="stepdiv">5</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="content">
+			<div class="waite-content">
+				<i class="iconfont icon-shenhe"></i>
+				<p>{:lang('infomation_submit_success')}</p>
+				<a href="{:url('crossbbcg/index/index')}" class="text-center">&lt;{:lang('back_to_shop_index')}</a>
+			</div>
+			<br>
+			<br>
+			<table class="table public-table">
+				<thead>
+					<tr class="info">
+						<td>{:lang('Settled_proceeding')}</td>
+						<td>{:lang('Date')}</td>
+						<!--<td>{:lang('tips')}</td>-->
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+                            {switch name='$store_info.status'}
+                                {case value='-1'}<span>{:lang('store_forbidden')}</span>{/case}
+                                {case value='0'}<span>{:lang('store_rejected')}</span>{/case}
+                                {case value='1'}<span>{:lang('store_passed')}</span>{/case}
+                                {case value='2'}<span>{:lang('store_checking')}</span>{/case}
+                            {/switch}
+                        </td>
+						<td>{$store_info.create_time}</td>
+						<!--<td>-->
+							<!--<a href="">点此修改您的入驻申请</a>-->
+							<!--&lt;!&ndash;<a href="">查看店铺</a>&ndash;&gt;-->
+						<!--</td>-->
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+{/block} {block name="footer_js"}
+
+{/block}

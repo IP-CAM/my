@@ -1,0 +1,57 @@
+{notempty name="$arr_np"}
+<div class="Pavilion_box">
+	<div class="w1200">
+		<div class="Pavilion_title">{:lang('pavilion_title')}</div>
+		<div class="w1200" id="tab_box">
+            
+			<div class="tabContainer">
+				<ul>
+                    {foreach $arr_np as $key => $arr}
+					<li {if condition="$key==0"}class="on"{/if}>{$arr['country']['name']}</li>
+                    {/foreach}
+				</ul>
+			</div>
+            
+            {notempty name="$arr_brand"}
+			<div class="panelContainer">
+				{foreach $arr_brand as $key => $arr}
+				<div class="box_all" {if condition="$key!=0"}style="display:none"{/if}>
+					<div class="c_pic">
+                        {notempty name="$arr['home_image']"}
+						<a href="{:url('crossbbcg/country/details','item_id='.$arr['id'])}">
+                            {if condition="substr($arr['home_image'],0,4)=='http'"}
+                            <img data-original="{$arr.home_image}" width="239" height="359" class="lazy" src="__PUBLIC__/{$img_path}/tm.gif"/>
+                            {else /}
+                            <img data-original="__UPLOADS__/{$arr.home_image}" width="239" height="359" class="lazy" src="__PUBLIC__/{$img_path}/tm.gif"/>
+                            {/if}
+                        </a>
+                        {/notempty}
+					</div>
+                    {foreach $arr['brand'] as $key2 => $arr2}
+					<div class="c_pic_b">
+						<a href="{:url('crossbbcg/search/index','brand_id='.$arr2['id'])}" target="_blank" title="{$arr2['name']}">
+                            
+                            {if condition="empty($arr2['banner_image'])"}
+                            <img src="__PUBLIC__/{$img_path}/no-image.png" />
+                            {elseif condition="substr($arr2['banner_image'],0,4)=='http'"}
+                            <img data-original="{$arr2['banner_image']}" width="239" height="359" class="lazy" src="__PUBLIC__/{$img_path}/tm.gif"/>
+                            {else /}
+                            <img data-original="__UPLOADS__/{$arr2['banner_image']}" width="239" height="359" class="lazy" src="__PUBLIC__/{$img_path}/tm.gif"/>
+                            {/if}
+                            
+							<div class="txt">
+								<h3 class="tit">{$arr2['name']}</h3>
+								<p class="desc s-fc2">{$arr2['description']}</p>
+								<span>{:lang('to_brand')}</span>
+							</div>
+						</a>
+					</div>
+                    {/foreach}
+				</div>
+                {/foreach}
+			</div>
+            {/notempty}
+		</div>
+	</div>
+</div>
+{/notempty}

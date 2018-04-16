@@ -1,0 +1,153 @@
+{extend name="admin@public/poupbase" /}
+
+<!-- CONTENT -->
+{block name="body"}
+<div id="content" style="margin:0px 10px 5px 8px;">
+    <div class="bloc" style="margin:10px 0px 0px;">
+        <div class="content">
+            <form id="myform" method="post" style="margin-top:5px;" class="">
+                <fieldset>
+                    <legend>{$meta_title|default=''}</legend>
+                    <div class="thumb_box" style="right: 100px;">
+                        <div class="thumb">
+                            <div class="upimg_tip">{:lang('Thumb')}</div>
+                            <div class="upimg_cancel" title="{:lang('Cancel')}">x</div>
+                            <img src="{notempty name='data.logo'}{$data.cover}{else /}__PUBLIC__/admin/images/upload-pic.gif{/notempty}" id="preview" class="upload" width="110" height="100" no-image="__PUBLIC__/admin/images/upload-pic.gif" url="{:url('img',array('m' => $controller_name,'input' => 'cover','thumb' => 'preview'))}" data-upload="__UPLOADS__" />
+                            <input type="hidden" name="cover" id="cover" value="{$data.cover}" />
+                        </div>
+                    </div>
+                    <div style="float:left; width:520px; padding-right:15px; border-right:1px dashed #000;">
+                        <div class="row">
+                            <div style="float:;">
+                                <label for="title" style="width: 90px"  class="w70">{:lang('Title')}: <span
+                                        class="required">*</span></label>
+                                <input id="title" type="text" value="{$data.title}" name="title" style="width:170px;"/>
+                                <a class="tooltip-icon" title="{:lang('Title_max')}"></a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div style="float:;">
+                                <label for="category" class="w70" style="width: 90px;">{:lang('Snscon type')}:<span
+                                        class="required">*</span></label>
+                                <select id="category" name="category" style="width: 120px;">
+                                    {volist name="category" id="vo"}
+                                    <option value="{$vo['id']}" {eq name="data.category" value="$vo['id']"}selected{/eq}>{$vo['title']}</option>
+                                    {/volist}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div style="float:left;">
+                                <label for="dead_line" style="margin-left: 10px" class="w80">{:lang('Dead_line')}: </label>
+                                <input type="text" id="dead_line" name="dead_line" placeholder="{:lang('Dead_line')}" class="datainput" style="width: 130px; text-align: left;padding-left: 10px;" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div style="float:;">
+                                <label for="source" style="width: 90px"  class="w70">{:lang('Source')}: </label>
+                                <input id="source" type="text" value="{$data.source}" name="source" style="width:170px;"/>
+                                <a class="tooltip-icon" title="{:lang('Source tip')}"></a>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-left:40px">
+                            <div class="clear"></div>
+                            <label for="contents" >{:lang('Snscon content')}: </label>
+                            <textarea id="contents" name="contents">{$data.contents}</textarea>
+                            <script charset="utf-8" src="__STATIC__/kindeditor/kindeditor-all-min.js"></script>
+                            <script>
+                                KindEditor.ready(function (K) {
+                                    editor = K.create('#contents', {
+                                        resizeType: 1,
+                                        allowPreviewEmoticons: false,
+                                        allowImageUpload: false,
+                                        minWidth: 470,
+                                        minHeight: 185,
+                                        langType: '{:jsup(config('default_lang'))}',
+                                        items: [
+                                            'undo', 'redo', '|', 'bold', 'italic', 'underline',
+                                            'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                                            'insertunorderedlist', '|', 'image', 'media'],
+                                        afterBlur: function () {
+                                            this.sync();
+                                        }
+                                    });
+                                });
+                            </script>
+                        </div>
+                    </div>
+
+                    <div style="float:left; width:280px; padding-top:110px;">
+                        <div class="row">
+                            <label for="sort" class="w120">{:lang('Sort')}:</label>
+                            <input type="number" class="input litle" min="0" name="sort" maxlength="5" id="sort" value='{$data.sort|default=0}'>
+                        </div>
+                        <div class="row">
+                            <label for="view" class="w120">{:lang('Viewnum')}:</label>
+                            <input type="number" class="input litle" name="view" maxlength="5" id="view" value='{$data.view|default=0}'>
+                        </div>
+                        <div class="row">
+                            <label for="comment" class="w120">{:lang('Commentnum')}:</label>
+                            <input type="number" class="input litle" name="comment" maxlength="5" id="comment" value='{$data.comment|default=0}'>
+                        </div>
+                        <div class="row">
+                            <label for="collection" class="w120">{:lang('Collectionnum')}:</label>
+                            <input type="number" class="input litle" name="collection" maxlength="5" id="collection" value='{$data.collection|default=0}'>
+                        </div>
+                        <div class="row">
+                            <label for="isrecommend" class="w120">{:lang('Isrecommend')}:</label>
+                            <div class="slideBox">
+                                {eq name="ACTION_NAME" value="edit"}
+                                <input id="isrecommend" value="1" type="checkbox" name="isrecommend" {eq
+                                       name="data['isrecommend']" value="1" }checked{/eq} />
+                                {else /}
+                                <input id="isrecommend" value="1" type="checkbox" name="isrecommend"/>
+                                {/eq}
+                                <label for="isrecommend"></label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <label for="status" class="w120">{:lang('Status')}:</label>
+                            <div class="slideBox">
+                                {eq name="ACTION_NAME" value="edit"}
+                                <input id="status" value="1" type="checkbox" name="status" {eq name="data['status']"
+                                       value="1" }checked{/eq} />
+                                {else /}
+                                <input id="status" value="1" type="checkbox" name="status" checked/>
+                                {/eq}
+                                <label for="status"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                        {eq name="$action_name" value="edit"}
+                        <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('savedata')}" />
+                        <input name="id" type="hidden"  value="{$data.id}" />
+
+                        {else /}
+                        <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}" />
+                        <input name="from" type="hidden"  value="admin" />
+                        {/eq}
+                        <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $(".bset").buttonset();
+
+        $("#dead_line").datepicker({
+            dateFormat: "{:config('kernel.timeformat')}",
+            maxDate: new Date(),
+            onSelect: function(dateText, inst) {
+                $.datepicker.regional["{:config('kernel.localdate')}"];
+            }
+        });
+    })
+</script>
+
+
+{/block}

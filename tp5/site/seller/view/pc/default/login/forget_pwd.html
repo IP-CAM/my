@@ -1,0 +1,60 @@
+{extend name="login/base" /}
+{block name="body"}
+<div class="steps">
+    <table width="100%">
+        <tbody>
+        
+        <tr>
+            <td class="step-item step-1 active"><span><q class="icon">●</q><i>1</i>{:lang('account_info')}</span>
+                <div class="stepdiv">1</div>
+            </td>
+            <td class="step-item step-2 ">
+                <span><q class="icon">●</q><i>2</i>{:lang('check_userinfo')}</span>
+                <div class="stepdiv">2</div>
+            </td>
+            <td class="step-item step-3 "><span><q class="icon">●</q><i>3</i>{:lang('set_new_password')}</span>
+                <div class="stepdiv">3</div>
+            </td>
+        
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="shop-login-box yahei">
+    <div class="form-body">
+        <div class="title">
+            <div class="t">{:lang('find_password')}</div>
+        </div>
+        <div class="content">
+            <form action="{:url('forget_pwd_two')}" id="pwd_form" method="post">
+                <ul>
+                    <li class="form-row">
+                        <label class="form-label">
+                            <em> * </em> {:lang('username')}： </label>
+                        <span class="form-act">
+                            <input placeholder="{:lang('username')}" ajaxurl="{:url('forget_pwd')}" sucmsg="{:lang('check_ok')}" name="username" datatype="s4-16"  class="input-ln" type="text"  value="" />
+                        </span>
+                    </li>
+                    
+                    <li class="form-row last">
+                        <label for="" class="form-label">&nbsp;</label>
+                        <span class="form-act">
+                        	<button type="submit"  class="btn btn-import submit" rel="_request"> {:lang('next_step')} </button>
+						</span>
+                    </li>
+                </ul>
+            </form>
+            </div>
+        </form>
+    </div>
+</div>
+
+{/block} {block name="footer_js"}
+<script>
+    $("#pwd_form").Validform({
+        tiptype: 3,
+        showAllError: true
+    });
+</script>
+{/block}

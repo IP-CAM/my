@@ -1,0 +1,155 @@
+    {extend name="public/poupbase"/}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+        <div id="content" style="margin:0px 10px 5px 8px;">
+            <div class="bloc" style="margin:10px 0px 0px;">
+                <div class="content">
+                    <form id="myform" method="post" style="margin-top:5px;" class="">
+                        <fieldset>
+                            <legend>{$data.name} {$meta_title}</legend>
+                            <div class="row">
+                                <div style="float:left;">
+                                    <label for="name" class="w100">{:lang('Field_name')}: <span class="required">*</span></label>
+                                    <input type="text" class="input onlyletter to_" name="name" id="name" value="{$data.name}" placeholder="fieldname" style="width:100px;" />
+                                </div>
+                                <div style="float:left;">
+                                    <label for="title" class="w60">{:lang('Title')}: <span class="required">*</span></label>
+                                    <input type="text" class="input" name="title" id="title" value="{$data.title}" placeholder="Title" style="width:150px;" />
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="data-type" class="w100">{:lang('Field_type')}: </label>
+                                <select name="type" id="data-type" style="width:124px;">
+                                    <option value="">----{:lang('Please_choose')}----</option>
+                                    {foreach $datatype_arr as $k=>$v}
+                                        <option value="{$k}" rule="{$v['type']}" {eq name="data.type" value="$k"}selected{/eq}>{:lang($v['title'])}</option>
+                                    {/foreach}
+                                </select>
+                                <input type="text" class="input normal" name="type_value" id="field" value="{$data.type_value}" placeholder="varchar(255) NOT NULL" />
+                            </div>
+                            
+                            <div class="row">
+                                <label for="extra" class="w100">{:lang('Parameter')}: </label>
+                                <textarea name="extra" id="extra" placeholder="{:lang('Parameter_tip')}" style="width:355px; height:50px; resize:none;">{$data.extra}</textarea>
+                            </div>
+                            
+                            <div class="row">
+                                <div style="float:left;">
+                                    <label for="value" class="w100">{:lang('Default_value')}: </label>
+                                    <input type="text" class="input" name="value" id="value" value="{$data.value}" style="width:100px;" placeholder="0" />
+                                </div>
+                                
+                                <div style="float:left;">
+                                    <label for="remark" class="w80">{:lang('Field_notes')}: </label>
+                                    <input type="text" class="input" name="remark" id="remark" value="{$data.remark}" style="width:150px;" placeholder="{:lang('Field_notes_tip')}" />
+                                    <a class="tooltip-icon" title="{:lang('Field_notes_tip')}"></a>
+                                </div>
+                            </div>
+                            
+                            <div class="row bset">
+                                <label class="w100">{:lang('Is_show')} : </label>
+                                <input name="is_show" type="radio" value="1" id="is_show_1" {eq name="data.is_show" value="1"}checked{/eq} {eq name="ACTION_NAME" value="add"}checked{/eq} />
+                                <label for="is_show_1" class="w95_r_0">{:lang('Show_1')}</label>
+                                
+                                <input name="is_show" type="radio" value="2" id="is_show_2" {eq name="data.is_show" value="2"}checked{/eq} />
+                                <label for="is_show_2" class="w95_r_0">{:lang('Show_2')}</label>
+                                
+                                <input name="is_show" type="radio" value="3" id="is_show_3" {eq name="data.is_show" value="3"}checked{/eq} />
+                                <label for="is_show_3" class="w95_r_0">{:lang('Show_3')}</label>
+                                
+                                <input name="is_show" type="radio" value="0" id="is_show_0" {eq name="data.is_show" value="0"}checked{/eq} />
+                                <label for="is_show_0" class="w95_r_0">{:lang('Show_0')}</label>
+                            </div>
+                            
+                            <div class="row">
+                                <div style="float:left;">
+                                    <label for="is_must" class="w100">{:lang('Is_must')}:</label>
+                                    <div class="slideBox">
+                                        {eq name="ACTION_NAME" value="edit"}
+                                            <input id="is_must" value="1" type="checkbox" name="is_must"  {eq name="data['is_must']" value="1"}checked{/eq}/>
+                                        {else /}
+                                            <input id="is_must" value="1" type="checkbox" name="is_must" checked />
+                                        {/eq}
+                                        <label for="is_must"></label>
+                                    </div>
+                                </div>
+                                
+                                <div style="float:left;">
+                                    <label for="status" class="w80">{:lang('Status')}:</label>
+                                    <div class="slideBox">
+                                        {eq name="ACTION_NAME" value="edit"}
+                                            <input id="status" value="1" type="checkbox" name="status"  {eq name="data['status']" value="1"}checked{/eq}/>
+                                        {else /}
+                                            <input id="status" value="1" type="checkbox" name="status" checked />
+                                        {/eq}
+                                        <label for="status"></label>
+                                    </div>
+                                </div>
+                                
+                                <div style="float:left;">
+                                    <label for="sort" class="w80">{:lang('Sort')}: </label>
+                                    <input type="number" class="input litle" name="sort" maxlength="5" id="sort" value='{$data.sort|default=0}' />
+                                </div>
+                            
+                            </div>
+                            
+                            <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                                {eq name="ACTION_NAME" value="edit"}
+                                    <input name="submit_a" value="{:lang('Update')}" type="submit" url="{:url('savedata')}">
+                                    <input name="id" type="hidden"  value="{$data.id}" />
+                                    <input name="model_id" type="hidden"  value="{$data.model_id}" />
+                                {else /}
+                                    <input name="submit_a" value="{:lang('Create')}" type="submit" url="{:url('savedata')}">
+                                    <input name="model_id" type="hidden"  value="{$model_id}" />
+                                {/eq}
+                                <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {/block}
+    
+    {block name="js"}
+        <script>
+            $(function(){
+                var thisindex = parent.layer.getFrameIndex(window.name); //获取当前窗体索引
+                $(".bset").buttonset();
+                $('#data-type').change(function(){
+                    $('#field').val($(this).find('option:selected').attr('rule'));
+                });
+                
+                $('input[name="submit_a"]').click(function(){
+                    var that = this;
+                    var form = $('#myform');
+                    var target = $(that).attr('url');
+                    var query = form.serialize();
+                    var parentname = getQueryString("wname");
+                    
+                    $.post(target,query).success(function(data){
+                        if (data.code==1) {
+                            parent.layer.msg(data.msg, {icon:1, time: 2000 ,shade: 0.3}, function(){
+                                if(data.url){
+                                    parent.frames[parentname].location.href=data.url;
+                                    parent.layer.close(thisindex);
+                                }else{
+                                    parent.frames[parentname].location.reload();
+                                    parent.layer.close(thisindex);
+                                }
+                            });
+                        }else{
+                            parent.layer.msg(data.msg, {icon:2, time: 2000 ,shade: 0.3}, function(){
+                                if(data.url){
+                                    parent.location.href=data.url;
+                                }
+                            });
+                        }
+                    });
+                    return false;
+                })
+            })
+        </script>
+    {/block}

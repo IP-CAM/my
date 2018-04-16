@@ -1,0 +1,76 @@
+    {extend name="common/base" /}
+    
+    {block name="title"}
+    <title>ETshop-{$mata_title}</title>
+    {/block}
+    
+    {block name="css"}
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/passport.css" />
+    {/block}
+    
+    {block name="body"}
+    <!--
+        获取手机验证码的js 请参考注册页
+    -->
+    <div class="findpwd-main-box yahei">
+        <div class="pwd-box">
+            <div class="steps">
+                <table width="100%">
+                    <tbody>
+    
+                        <tr>
+                            <td class="step-item step-1 active">
+                                <a><q class="icon">●</q><i>1</i>{:lang('input account')}</a>
+                                <div class="stepdiv">1</div>
+                            </td>
+                            <td class="step-item step-2 active">
+                                <span><q class="icon">●</q><i>2</i>{:lang('identify check')}</span>
+                                <div class="stepdiv">2</div>
+                            </td>
+                            <td class="step-item step-3 last">
+                                <span><q class="icon">●</q><i>3</i>{:lang('reset password')}</span>
+                                <div class="stepdiv">3</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <form class="login-form" id="pwd_form" action="{:url('findpwdThree')}">
+                <input type="hidden" name="username" value="{$username}" id="username">
+                <div class="form-info">{:lang('find_status_1_tips')} “{$username}” {:lang('find_status_2_tips')}。</div>
+                <div id="embed-captcha" data-url="{:url('member/passport/gt_login')}" style="margin-top: 20px;"></div>
+                <div id="wait" style="height: 42px;text-align: center;line-height: 54px;border: 1px solid #ccc;border-radius: 2px;background-color: #f3f3f3"><img src="__ROOT__/loading.gif" alt=""></div>
+                <div id="notice" style="color: red" class="input-error"><i class="iconfont icon-jinggao"></i>{:lang('please_verify')}</div>
+                {eq name='$type' value='mobile'}
+                <div class="input-line" style="margin-top: 10px;display: none;" id="sendcode">
+                    <span class="input-label">{:lang('sms_verify_code')}</span>
+                    <input id="captcha" class="J-checkcode-input form-text" name="code" data-empty="{:lang('pleace input sms code')}"
+                           data-error="{:lang('it`s must 6 int')}" required data-regex="^[0-9]{6}$" type="text" maxlength="6" autocomplete="off"
+                           placeholder="{:lang('sms_verify_code')}">
+                    <span class="code-img getcode" id="getcode" data-url="{:url('member/passport/sendcode')}">{:lang('get sms code')}</span>
+                    <div class="input-error"></div>
+                </div>
+                {else /}
+                <div class="input-line" style="margin-top: 10px;display: none;" id="sendcode">
+                    <span class="input-label">{:lang('email code')}</span>
+                    <input id="captcha" class="J-checkcode-input form-text" name="code" data-empty="{:lang('pleace input email code')}" data-error="{:lang('it`s must 6 int')}" required="" data-regex="^[0-9]{6}$" type="text" maxlength="6" autocomplete="off" placeholder="{:lang('email code')}">
+                    <span class="code-img getcode" id="getcode" data-lang-send="{:lang('send code again')}" data-url="{:url('member/passport/get_email_code')}">{:lang('get email code')}</span>
+                    <div class="input-error"></div>
+                </div>
+                {/eq}
+                <div class="form-submit">
+                    <button  data-url="{:url('findpwdTwo')}" class="chang_pwd2">{:lang('next step')}</button>
+                </div>
+            </form>
+        </div>
+    
+    </div>
+    {/block}
+    
+    <!--此板块为页面单独js加载-->
+    {block name="footer_js"}
+    <script type="text/javascript">
+        //需要加载的js文件
+        Private_Script = ['passport','gt'];
+    </script>
+    {/block}

@@ -1,0 +1,109 @@
+    {extend name="common/base" /}
+    
+    {block name="title"}
+    <title>{:lang('After_sales_list')}</title>
+    {/block}
+    
+    {block name="css"}
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/member.css" />
+    {/block}
+    
+    {block name="body"}
+    <!--面包屑-->
+    <div class="ly-path">
+        <ul class="clearfix">
+            <li class="home">
+                <a href="{:url('crossbbcg/index/index')}" title="{:lang('go_min')}">{:lang('Home')}</a>
+                <span>&gt;&nbsp;</span>
+            </li>
+            <li>
+                <a href="{:url('member/index/index')}" title="{:lang('Member')}">{:lang('Member')}</a>
+                <span>&gt;&nbsp;</span>
+            </li>
+            <li>
+                <h1>{:lang('After_sales_list')}</h1>
+            </li>
+        </ul>
+    </div>
+    <div class="ly-main member-main clearfix">
+        {include file="index/left_menu"}
+        <div class="member-right">
+            <div class="member-content">
+                <div class="title member-title member-max-title">
+                    <div class="t">{:lang('return_record')}</div>
+                </div>
+                <div class="body pb15 mh600 aftersales ">
+                    <div class="orderdtl-box">
+                        {notempty name="return_orders"}
+                        {foreach $return_orders as $key => $arr}
+                        <div class="orderdtl-bd ">
+                            <div class="row w ">
+                                <span class="w30b">{:lang('order_sn')}：{$arr['order_sn']}</span>
+                                <span class="w30b">{:lang('after_sn')}：{$arr['after_sn']}</span>
+                                <span class="w30b">{:lang('return_rtype')}：{:lang('return_type_'.$arr['rtype'])}</span>
+                                <span class="w30b">{:lang('apply_tiem')}：{$arr['create_time']}</span>
+                            </div>
+                            <table class="order-table">
+                                <tbody>
+                                    <tr>
+                                        <td class="center order-summary" colspan="2">{:lang('good_information')}</td>
+                                        <td class="center order-summary">{:lang('return_num')}</td>
+                                        <td class="center order-summary">{:lang('return_action_status')}</td>
+                                        
+                                        <td class="center order-summary">{:lang('return_action')}</td>
+                                    </tr>
+    
+                                    <tr>
+                                        <td class="item-image">
+                                            {if condition="substr($arr['goods']['sku_thumb'],0,4)=='http'"}
+                                            <img src="{$arr['goods']['sku_thumb']}" width="58" height="58">
+                                            {else /}
+                                            <img src="{:resizeImage($arr['goods']['sku_thumb'],'small',true)}" width="58" height="58">
+                                            {/if}
+                                        </td>
+                                        <td class="item-name">
+                                            <a target="_blank" href="{:url('crossbbcg/goods/index','item_id='.$arr['goods']['goods_id'])}">
+                                                {$arr['goods']['goods_name']}
+                                            </a>
+                                            {if condition="$arr['goods']['sku_array']"}
+                                            <br/>{$arr['goods']['sku_array']}
+                                            {/if}
+                                        </td>
+    
+                                        <td class="item-amount">
+                                            x{$arr['goods']['sku_number']}
+                                        </td>
+                                        <td class="std" rowspan="2"> {:lang('return_status_'.$arr['status'])} </td>
+                                        <td class="item-links" rowspan="2">
+                                            <a href="{:url('member/index/aftersalesDetail','after_sn='.$arr['after_sn'])}" target="_blank" class="pay-button ">{:lang('watch_information')}</a>
+                                        </td>
+    
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        {/foreach}
+                        <div class="pagenavi">
+                            {$page}
+                        </div>
+                        {else /}
+                        <div class="ly-no-data" style="background: #fff;border: 1px solid #e6e6e6;">
+                            <div class="icon iconfont icon-zanwujilu"></div>
+                            <div class="text">{:lang('empty_record')}</div>
+                        </div>
+                        {/notempty}
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+    </div>
+    {/block}
+    
+    <!--此板块为页面单独js加载-->
+    {block name="footer_js"}
+    <script type="text/javascript">
+        //需要加载的js文件
+        //Private_Script = ['address'];
+    </script>
+    {/block}

@@ -1,0 +1,165 @@
+{extend name="common/base" /}
+
+{block name="title"}
+<title>ETshop-首页</title>
+{/block}
+
+{block name="css"}
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/member.css" />
+{/block}
+
+{block name="body"}
+<!--面包屑-->
+<div class="ly-path">
+	<ul class="clearfix">
+		<li class="home">
+			<a href="/index.php/crossbbcg/index/index.html" title="前往主页">首页</a>
+			<span>&gt;&nbsp;</span>
+		</li>
+		<li>
+			<a href="/index.php/crossbbcg/index/index.html" title="">会员中心</a>
+			<span>&gt;&nbsp;</span>
+		</li>
+		<li>
+			<h1>我的推广</h1>
+		</li>
+	</ul>
+</div>
+<div class="ly-main member-main clearfix">
+	{include file="index/left_menu"}
+	<div class="member-right">
+		<div class="member-content promote">
+			<div class="title member-title member-max-title">
+				<div class="t">我的推广</div>
+			</div>
+			<div class="body pb15 mh600 ">
+
+				
+					<div class="table-box">
+						<table cellpadding="10">
+							<tr>
+								<td valign="top">
+									<div class="fx-bg fx-bg1"></div>
+								</td>
+								<td>
+									通过QQ、旺旺等邀请好友<br />
+									<input type="text" value="http://www.shopcmfc.com/?rcom=84328610" style="width:300px;" id="txtQQ" />
+								</td>
+								<td><br>
+
+									<div id="linkQQ" style="position:relative">
+										<a class="copytxtlink" linkid="linkQQ" linksrc="txtQQ" href="javascript:copyToClipboard($('#txtQQ'));" style="color:#336699;">复制</a>
+									</div>
+									<!--
+    <input type="button" value="复制" onclick="copyToClipboard($('#txtQQ'))" style="width:60px;line-height:16px" />-->
+
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<div class="fx-bg fx-bg2"></div>
+								</td>
+								<td>
+									在自己常去的论坛上挂签名<br />
+									<textarea id="txtBBS" style="width:300px;" rows=4>[url=http://www.shopcmfc.com/?rcom=84328610]本商城[/url]</textarea>
+								</td>
+								<td><br>
+
+									<div id="linkBBS" style="position:relative">
+										<a class="copytxtlink" linkid="linkBBS" linksrc="txtBBS" href="javascript:copyToClipboard($('#txtBBS'));" style="color:#336699;">复制</a>
+									</div>
+									<!--
+    <input type="button" value="复制" onclick="copyToClipboard($('#txtBBS'))" style="width:60px;line-height:16px" />-->
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<div class="fx-bg fx-bg3"></div>
+								</td>
+								<td>
+									在自己的博客上加友情链接或任何支持HTML的地方<br />
+									<textarea id="txtLINK" style="width:300px;" rows=4><a href="http://www.shopcmfc.com/?rcom=84328610" target=_blank>本商城</a></textarea>
+								</td>
+								<td><br>
+
+									<div id="linkBlog" style="position:relative">
+										<a class="copytxtlink" linkid="linkBlog" linksrc="txtLINK" href="javascript:copyToClipboard($('#txtLINK'));" style="color:#336699;">复制</a>
+									</div>
+									<!--
+
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<div class="fx-bg fx-bg4"></div>
+								</td>
+								<td>
+									在QQ空间或其它网站上发文章<br />
+									<textarea id="txtZONE" style="width:300px;" rows=4>您可以在QQ空间、微博、贴吧或其它网站上发表文章，推荐朋友加入本商城，带上分销推广链接http://www.shopcmfc.com/?rcom=84328610          </textarea>
+								</td>
+								<td></td>
+							</tr>
+
+							<tr>
+								<td>
+								</td>
+								<td>
+									手机端推荐链接<br />
+									<input type="text" value="http://www.shopcmfc.com/index.php/wap/rcom84328610/" style="width:300px;" id="txtWap" />
+								</td>
+								<td><br>
+
+									<div id="linkWap" style="position:relative">
+										<a class="copytxtlink" linkid="linkWap" linksrc="txtWap" href="javascript:copyToClipboard($('#txtWap'));" style="color:#336699;">复制</a>
+									</div>
+									<!--
+    <input type="button" value="复制" onclick="copyToClipboard($('#txtLINK'))" style="width:60px;line-height:16px" />-->
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<div class="fx-bg fx-bg5"></div>
+								</td>
+								<td>
+									让好友扫描二维码推荐<br />
+									<img src="https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=gQGn8TwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyLU95WTlwUzZkQTAxMDAwME0wN1cAAgTNCwBZAwQAAAAA" style="max-width:200px;" />
+								</td>
+								<td></td>
+							</tr>
+
+						</table>
+					</div>
+
+					<div class="left">
+						<div style="margin-top:30px;width:200px;border:solid 1px #ccc;padding:15px;line-height:30px;">
+							<b>注意事项：</b><br />
+							<p>1. 当好友通过您的邀请链接访问本商城后，只要在2400个小时 内注册，均为有效；</p>
+						</div>
+
+						<div style="margin-top:100px;font-size:16px;text-align:center;">
+							您的推荐码
+							<div style="margin-top:15px;padding:5px;border:solid 1px #ccc;">84328610</div>
+						</div>
+					</div>
+
+					<br style="clear:both;" />
+
+			</div>
+
+		</div>
+	</div>
+</div>
+</div>
+{/block}
+<!--此板块为页面单独js加载-->
+
+{block name="footer_js"}
+<script>
+	//需要加载的js文件
+	Private_Script = ['fenxiao', 'copy'];
+</script>
+{/block}

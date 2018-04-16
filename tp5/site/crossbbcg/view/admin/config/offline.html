@@ -1,0 +1,483 @@
+    {extend name="admin@public/base" /}
+
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content">
+        <div class="breadcrumbs">
+            {:lang('Crossbbcg')} : &nbsp;&nbsp; {:lang('Offlinesys')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+        </div>
+
+        <div class="bloc">
+            <div class="title">
+                <div class="tabs" id="navs">
+                    {include file="admin@public/navs" /}
+                </div>
+
+                {include file="admin@public/lang" /}
+            </div>
+    
+            <form name="frmShopSettingsEdit" method="post" style="margin-top:5px;">
+                <div class="alert alert-warning">
+                    <button class="close" type="button">&times;</button>
+                    <span class="alert-content">{:lang('Shopconfmark')}</span>
+                </div>
+                
+                <div class="bloc" id="blocStatistics">
+                    <!--<div class="title collapsible">-->
+                    <div class="title">
+                        <div class="tabs static pot" id="blockStatistics">
+                            <ul>
+                                <a id="tabStat1_link" href="#tabStat1">
+                                    <li>{:lang('Shopconf')}</li>
+                                </a>
+                                <a id="tabStat2_link" href="#tabStat2">
+                                    <li>{:lang('Tradeconf')}</li>
+                                </a>
+                                <a id="tabStat3_link" href="#tabStat3">
+                                    <li>{:lang('Distribconf')}</li>
+                                </a>
+                                <a id="tabStat4_link" href="#tabStat4">
+                                    <li>{:lang('Syncconf')}</li>
+                                </a>
+                                <a id="tabStat5_link" href="#tabStat5">
+                                    <li>{:lang('Pointconf')}</li>
+                                </a>
+                                <a id="tabStat6_link" href="#tabStat6">
+                                    <li>{:lang('Baseconf')}</li>
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
+            
+                    <div class="content" style="padding-bottom: 20px;">
+                        <div id="tabStat1" style="display:block;">
+                            <table class="table kright">
+                                <tbody>
+                                <tr>
+                                    <td>{:lang('Shopname')}: </td>
+                                    <td class="left">
+                                        <input name="shopname" type="text" placeholder="{:lang('Shopname_pla')}" style="width: 300px;" value="{$data.shopname}" />
+                                        <a class="tooltip-icon" title="{:lang('Shopname_tip')}"></a>
+                                    </td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>{:lang('Shopurl')}: </td>
+                                    <td class="left">
+                                        <input name="shopurl" type="text" placeholder="//www.shop.com" style="width: 300px;" value="{$data.shopurl|default=''}" />
+                                        <a class="tooltip-icon" title="//www.shop.com"></a>
+                                    </td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>{:lang('Shoplogo')}:  </td>
+                                    <td>
+                                        <input name="shoplogo" type="text" class="input" value="{$data.shoplogo}" id="shoplogo" style="width: 300px;" placeholder="image/logo.png" />
+                                        <input class="button white upload" value="{:lang('Selectimg')}" type="button" title="{:lang('Upload img and file')}" url="{:url('img',array('input' => 'shoplogo'))}" data-upload="__UPLOADS__" />
+                                        <a href="javascript:" id="Preview">{:lang('Preview')}</a>
+                                    </td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>{:lang('Shoptitle')}:  </td>
+                                    <td>
+                                        <input name="shoptitle" type="text" placeholder="{:lang('Shoptitle_pla')}" style="width: 500px;" value="{$data.shoptitle|default=''}" maxlength="100"/>
+                                        <a class="tooltip-icon" title="{:lang('Shoptitle_tip')}"></a>
+                                    </td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>{:lang('Shopkeywords')}:  </td>
+                                    <td>
+                                        <input name="shopkeywords" type="text" placeholder="{:lang('Shopkeywords_pla')}" style="width: 500px;" value="{$data.shopkeywords|default=''}" maxlength="100"/>
+                                        <a class="tooltip-icon" title="{:lang('Shopkeywords_tip')}"></a>
+                                    </td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>{:lang('Shopdescription')}:  </td>
+                                    <td>
+                                        <input name="shopdescription" type="text" placeholder="{:lang('Shopdescription_pla')}" style="width: 500px;" maxlength="200" value="{$data.shopdescription|default=''}" />
+                                        <a class="tooltip-icon" title="{:lang('Shopdescription_tip')}"></a>
+                                    </td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>{:lang('Shopcontanter')}: </td>
+                                    <td class="left">
+                                        <input name="shopcontanter" type="text" placeholder="{:lang('Shopcontanter_pla')}" style="width: 300px;" value="{$data.shopcontanter|default=''}" />
+                                    </td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>{:lang('Shopemail')}: </td>
+                                    <td class="left">
+                                        <input name="shopemail" type="text" placeholder="{:lang('Shopemail_pla')}" style="width: 300px;" value="{$data.shopemail|default='@'}" />
+                                        <a class="tooltip-icon" title="{:lang('Shopemail_tip')}"></a>
+                                    </td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>{:lang('Shoptel')}: </td>
+                                    <td class="left">
+                                        <input name="shoptel" type="text" placeholder="{:lang('Shoptel_pla')}" style="width: 300px;" value="{$data.shoptel|default=''}" />
+                                        <a class="tooltip-icon" title="{:lang('Shoptel_tip')}"></a>
+                                    </td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>{:lang('Shopaddr')}: </td>
+                                    <td class="left">
+                                        <input name="shopaddr" type="text" placeholder="{:lang('Shopaddr_pla')}" style="width: 300px;" value="{$data.shopaddr|default=''}" />
+                                    </td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>{:lang('Shopicp')}:  </td>
+                                    <td>
+                                        <input name="shopicp" type="text" placeholder="{:lang('Shopicp_pla')}" style="width: 140px;" value="{$data.shopicp|default=''}" />
+                                        {:lang('Forexample')} : {:lang('Shopicp_pla')}
+                                    </td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>{:lang('Shopstatistical')}:  </td>
+                                    <td>
+                                        <textarea name="shopstatistical" rows="3" style="width: 450px;resize: none;">{$data.shopstatistical|default=''}</textarea>
+                                        <a class="tooltip-icon" title="{:lang('Shopstatistical_tip')}"></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                
+                        <div id="tabStat2">
+                            <table class="table kright">
+                                <tbody>
+                        
+                                <tr class="row bset">
+                                    <td>{:lang('Stockdowntime')}: </td>
+                                    <td>
+                                        <div class="row bset">
+                                            <input name="stockdowntime" type="radio" value="0" id="stockdowntime_0" {eq name="data.stockdowntime" value="0"}checked{/eq} {notpresent name="data.stockdowntime"}checked{/notpresent} />
+                                            <label for="stockdowntime_0" class="w150_r_0">{:lang('Stockdownbypay')}</label>
+                                            <input name="stockdowntime" type="radio" value="1" id="stockdowntime_1" {eq name="data.stockdowntime" value="1"}checked{/eq} />
+                                            <label for="stockdowntime_1" class="w150_r_0">{:lang('Stockdownbydelivery')}</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>{:lang('Invoicestatus')}:  </td>
+                                    <td>
+                                        <div class="slideBox" >
+                                            <input id="invoicestatus" value="1" type="checkbox" name="invoicestatus" {eq name="data.invoicestatus" value="1"}checked{/eq} />
+                                            <label for="invoicestatus"></label>
+                                        </div> &nbsp; &nbsp;
+                                        <span class="slideBoxafter">
+                                                {:lang('Invoicestatus_tip')}
+                                        </span>
+                                
+                                        <span class="slideBoxafter" id="invoice" style="display: none;">&nbsp;&nbsp;
+                                            {:lang('Invoice_tip')}
+                                            <input name="invoicescale" type="number" placeholder="8" style="width: 50px; text-align: center;" value="{$data.invoicescale|default='8' }" />
+                                            %
+                                        </span>
+                                    </td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>{:lang('Tradeclose')}:  </td>
+                                    <td>
+                                        <input name="tradeclose" type="number" placeholder="72" style="width: 60px; text-align: center;" value="{$data.tradeclose|default=72}" min="2" max="720" />
+                                        {:lang('Unitehours')} &nbsp; &nbsp;
+                                        <a class="tooltip-icon" title="{:lang('Tradeclose_tip')}"></a>
+                                    </td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>{:lang('Tradefinish')}:  </td>
+                                    <td>
+                                        <input name="tradefinish" type="number" placeholder="15" style="width: 60px; text-align: center;" value="{$data.tradefinish|default=15}" min="7" max="180"/>
+                                        {:lang('Unitedays')} &nbsp; &nbsp;
+                                        <a class="tooltip-icon" title="{:lang('Tradefinish_tip')}"></a>
+                                    </td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>{:lang('Directtradefinish')}:  </td>
+                                    <td>
+                                        <input name="directtradefinish" type="number" placeholder="24" style="width: 60px; text-align: center;" value="{$data.directtradefinish|default=24}" min="15" max="180" />
+                                        {:lang('Unitedays')} &nbsp; &nbsp;
+                                        <a class="tooltip-icon" title="{:lang('Directtradefinish_tip')}"></a>
+                                    </td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>{:lang('Bondedtradefinish')}:  </td>
+                                    <td>
+                                        <input name="bondedtradefinish" type="number" placeholder="72" style="width: 60px; text-align: center;" value="{$data.bondedtradefinish|default=72}" min="15" max="180" />
+                                        {:lang('Unitedays')} &nbsp; &nbsp;
+                                        <a class="tooltip-icon" title="{:lang('Bondedtradefinish_tip')}"></a>
+                                    </td>
+                                </tr>
+                        
+                                </tbody>
+                            </table>
+                        </div>
+                
+                        <div id="tabStat3">
+                            <table class="table kright">
+                                <tbody>
+                                <tr>
+                                    <td>{:lang('Disstatus')}: </td>
+                                    <td>
+                                        <div class="slideBox" >
+                                            <input id="disstatus" value="1" type="checkbox" name="disstatus" {eq name="data.disstatus" value="1"}checked{/eq} />
+                                            <label for="disstatus"></label>
+                                        </div> &nbsp; &nbsp;
+                                        <span class="slideBoxafter">
+                                            {:lang('Disstatus_tip')}
+                                        </span>
+                                    </td>
+                                </tr>
+                        
+                                <tr class="row bset">
+                                    <td>{:lang('Disrule')}: </td>
+                                    <td>
+                                        <div class="row bset">
+                                            <input name="dis" type="radio" value="0" id="dis_0" {eq name="data.dis" value="0"}checked{/eq} {notpresent name="data.dis"}checked{/notpresent} />
+                                            <label for="dis_0" class="w150_r_0">{:lang('Disrule_1')}</label>
+                                            <input name="dis" type="radio" value="1" id="dis_1" {eq name="data.dis" value="1"}checked{/eq} />
+                                            <label for="dis_1" class="w150_r_0">{:lang('Disrule_2')}</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>{:lang('Rebatefinish')}:  </td>
+                                    <td>
+                                        <input name="rebatefinish" type="number" placeholder="7" style="width: 60px; text-align: center;" value="{$data.rebatefinish|default=7}" min="3" max="180" />
+                                        {:lang('Unitedays')} &nbsp;
+                                        <a class="tooltip-icon" title="{:lang('Rebatefinish_tip')}"></a>
+                                    </td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>{:lang('Disname')}:  </td>
+                                    <td>
+                                        <input name="disname" type="text" placeholder="{:lang('Disname_pla')}" value="{$data.disname|default=''}" /> &nbsp;
+                                        <a class="tooltip-icon" title="{:lang('Disname_tip')}"></a>
+                                    </td>
+                                </tr>
+                        
+                                <tr class="row bset">
+                                    <td>{:lang('Dismodel')}: </td>
+                                    <td>
+                                        <div class="row bset">
+                                            <input name="dismodel" type="radio" value="0" id="dismodel_0" {eq name="data.dismodel" value="0"}checked {/eq} {notpresent name="data.dismodel"}checked{/notpresent} />
+                                            <label for="dismodel_0" class="w180_r_0">{:lang('Dismodel_1')}</label>
+                                            <input name="dismodel" type="radio" value="1" id="dismodel_1" {eq name="data.dismodel" value="1"}checked{/eq} />
+                                            <label for="dismodel_1" class="w180_r_0">{:lang('Dismodel_2')}</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                        
+                                <tr id="disscale" {empty name="data.dismodel"}style="display: none ;"{/empty}>
+                                <td>{:lang('Disscale')}:  </td>
+                                <td>
+                                    <input name="disscale" type="number" placeholder="15" style="width: 50px; text-align: center;" value="{$data.disscale|default=15}" /> % &nbsp;
+                                    <a class="tooltip-icon" title="{:lang('Disscale_tip')}"></a>
+                                </td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>{:lang('Dislevel')}:  </td>
+                                    <td>
+                                        <input name="dislevel" type="number" placeholder="15" style="width: 50px; text-align: center;" value="{$data.dislevel|default=3}" min="2" max="99" /> {:lang('Disscale_pla')} &nbsp;&nbsp;
+                                        <a href="javascript:void();" id="levelcreate">
+                                            {:lang('Create')}
+                                        </a>
+                                        &nbsp;&nbsp;
+                                        <a class="tooltip-icon" title="{:lang('Dislevel_tip')}"></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                
+                        <div id="tabStat4">
+                            <table class="table kright">
+                                <tbody>
+                                <tr>
+                                    <td>{:lang('Omsstatus')}: </td>
+                                    <td>
+                                        <div class="slideBox" >
+                                            <input id="omsstatus" value="1" type="checkbox" name="omsstatus"  {eq name="data.omsstatus" value="1"}checked{/eq} />
+                                            <label for="omsstatus"></label>
+                                        </div> &nbsp;
+                                    </td>
+                                </tr>
+                                <tr id="omsbox" style="display: none ;">
+                                    <td>{:lang('Omsclass')}: </td>
+                                    <td>
+                                        <input name="omsclass" value="{$data.omsclass}" type="text" class="input" placeholder="{:lang('Omsclass_pla')}" style="width: 60%;" />
+                                        <a class="tooltip-icon" title="{:lang('Omsclass_tip')}"></a>
+                                        &nbsp;&nbsp;
+                                
+                                        <select id="omses" style="width: 20%;">
+                                            <option value="">{:lang('Please_choose')}</option>
+                                            <option value="class"></option>
+                                        </select>
+                                    </td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>{:lang('Synctime')}:  </td>
+                                    <td>
+                                        <input name="synctime" type="number" placeholder="3" style="width: 60px; text-align: center;" value="{$data.synctime|default=3}" />
+                                        {:lang('Synctime_tip')}
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                
+                        <div id="tabStat5">
+                            <table class="table kright">
+                                <tbody>
+                                <tr>
+                                    <td>{:lang('Pointstatus')}: </td>
+                                    <td>
+                                        <div class="slideBox" >
+                                            <input id="pointstatus" value="1" type="checkbox" name="pointstatus"  {eq name="data.pointstatus" value="1"}checked{/eq} />
+                                            <label for="pointstatus"></label>
+                                        </div> &nbsp;
+                                        &nbsp;&nbsp;
+                                        <span class="slideBoxafter">
+                                            {:lang('Pointstatus_tip')}
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{:lang('Conversion_ratio')}: </td>
+                                    <td>
+                                        <input name="ratio" type="number" class="input" placeholder="1" value="{$data.ratio|default=1}" min='0' max="99" style="width: 60px; text-align: center;" />
+                                        {:lang('Conversion_ratio_tip')}
+                                        &nbsp;&nbsp;
+                                        <a class="tooltip-icon" title="{:lang('Conversion_ratio_tip_2')}"></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{:lang('Expired_month')}: </td>
+                                    <td>
+                                        <input name="point_expired_month" type="number" class="input" placeholder="12" value="{$data.point_expired_month|default=12}" min="1" max="12" style="width: 60px; text-align: center;" />
+                                        {:lang('Expired_month_tip')}
+                                        &nbsp;&nbsp;
+                                        <a class="tooltip-icon" title="{:lang('Expired_month_tip_2')}"></a>
+                                    </td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>{:lang('Msg_point_set')}: </td>
+                                    <td>
+                                        <a class="tooltip-icon" title="{:lang('Msg_point_set_tip')}"></a>&nbsp;&nbsp;&nbsp;
+                                        <input name="point_limit" type="number" class="input" placeholder="12" value="{$data.point_limit|default=100}" min="5" style="width: 60px; text-align: center;" />
+                                
+                                        {:lang('Howlong_login')}
+                                        <input name="howlong_login" type="number" class="input" placeholder="12" value="{$data.howlong_login|default=90}" min="10" max="360" style="width: 60px; text-align: center;" />
+                                        {:lang('Howlong_login_2')}
+                                    </td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>{:lang('Deductionstatus')}: </td>
+                                    <td>
+                                        <div class="slideBox" >
+                                            <input id="deductionstatus" value="1" type="checkbox" name="deductionstatus"  {eq name="data.deductionstatus" value="1"}checked{/eq} />
+                                            <label for="deductionstatus"></label>
+                                        </div> &nbsp;&nbsp;&nbsp;
+                                        <span class="slideBoxafter">
+                                            {:lang('Deductionstatus_tip')}
+                                        </span>
+                                    </td>
+                                </tr>
+                        
+                                </tbody>
+                            </table>
+                        </div>
+                
+                        <div id="tabStat6">
+                            <table class="table kright">
+                                <tbody>
+                                <tr class="row bset">
+                                    <td>{:lang('Goodsorts')}: </td>
+                                    <td>
+                                        <div class="row bset">
+                                            <input name="sorts" type="radio" value="sort" id="sorts_0" {eq name="data.sorts" value="sort"}checked{/eq} {notpresent name="data.sorts"}checked{/notpresent} />
+                                            <label for="sorts_0" class="w105_r_0">{:lang('Default')}</label>
+                                            <input name="sorts" type="radio" value="sale" id="sorts_1" {eq name="data.sorts" value="sale"}checked{/eq} />
+                                            <label for="sorts_1" class="w105_r_0">{:lang('Sale')}</label>
+                                            <input name="sorts" type="radio" value="cpoint" id="cpoint_1" {eq name="data.sorts" value="cpoint"}checked{/eq} />
+                                            <label for="cpoint_1" class="w105_r_0">{:lang('Cpoint')}</label>
+                                            <input name="sorts" type="radio" value="price" id="price_1" {eq name="data.sorts" value="price"}checked{/eq} />
+                                            <label for="price_1" class="w105_r_0">{:lang('Cprice')}</label>
+                                            <input name="sorts" type="radio" value="new" id="new_1" {eq name="data.sorts" value="new"}checked{/eq} />
+                                            <label for="new_1" class="w105_r_0">{:lang('Lastnew')}</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>{:lang('Stockwarming')}: </td>
+                                    <td>
+                                        <input name="stockwarming" type="number" class="input" placeholder="90" value="{$data.stockwarming|default=10}" min="1" max="300" style="width: 60px; text-align: center;" />
+                                        {:lang('Stockwarming_tip')}
+                                    </td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>{:lang('Deposit_pwd_err_num')}: </td>
+                                    <td>
+                                        <input name="deposit_pwd_err_num" type="number" class="input" placeholder="3" value="{$data.deposit_pwd_err_num|default=5}" min="3" max="99" style="width: 60px; text-align: center;" />
+                                        {:lang('Deposit_pwd_err_num_2')}
+                                        &nbsp;
+                                        <input name="deposit_pwd_err_time" type="number" class="input" placeholder="3" value="{$data.deposit_pwd_err_time|default=3}" min="3" max="99" style="width: 60px; text-align: center;" />
+                                        {:lang('Unitehours')}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{:lang('Shopid_log_del_by')}: </td>
+                                    <td>
+                                        <input name="shopid_log_del_by" type="number" class="input" placeholder="30" value="{$data.shopid_log_del_by|default=30}" min="3" max="180" style="width: 60px; text-align: center;" />
+                                        {:lang('Shopid_log_del_by_tip')}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{:lang('Site_log_del_by')}: </td>
+                                    <td>
+                                        <input name="site_log_del_by" type="number" class="input" placeholder="30" value="{$data.site_log_del_by|default=30}" min="3" max="180" style="width: 60px; text-align: center;" />
+                                        {:lang('Site_log_del_by_tip')}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{:lang('Api_log_del_by')}: </td>
+                                    <td>
+                                        <input name="api_log_del_by" type="number" class="input" placeholder="90" value="{$data.api_log_del_by|default=90}" min="60" max="300" style="width: 60px; text-align: center;" />
+                                        {:lang('Api_log_del_by_tip')}
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+            
+                    <div class="buttons-wrapper" style="margin:0 0 30px; padding:0 0 0 18%;">
+                        <input name="submit" value="{:lang('Saveshopconf')}" type="submit" url="{:url('offsave', array('act' => ACTION_NAME))}" />
+                    </div>
+        
+                </div>
+            </form>
+        </div>
+    </div>
+    {/block}

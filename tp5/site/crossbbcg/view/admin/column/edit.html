@@ -1,0 +1,166 @@
+{extend name="admin@public/poupbase"/}
+
+{block name="style"}
+<style type="text/css">
+    img{border: 1px solid #eeeeee;cursor:pointer;}
+    .image-thumb{position:relative;}
+    .image-thumb .upimg_cancel{ position: absolute; top: -6px; color: #F00; font-weight: bold; width: 20px; height: 16px; text-align: center; line-height: 16px;background: url(__PUBLIC__/admin/images/uninstall.png) no-repeat center center; }
+</style>
+{/block}
+
+<!-- CONTENT -->
+{block name="body"}
+<div id="content" style="margin:0px 10px 5px 8px;">
+    <div class="bloc" style="margin:10px 0px 0px;">
+        <div class="content">
+            <form id="myform" method="post" style="margin-top:5px;" class="" >
+                <fieldset>
+                    <legend>{$meta_title|default=''}</legend>
+                    <div class="thumb_box" style="right:60px;margin-top:5px;">
+                        <div class="thumb" style="width:90px; height:90px;">
+                            <div class="upimg_tip">
+                                {:lang('np_home_image')} 240*360
+                            </div>
+                            <div class="upimg_cancel" title="{:lang('Cancel')}">&nbsp;</div>
+                            <img src="{empty name='data.home_image'}__PUBLIC__/admin/images/upload-pic.gif{elseif condition="substr($data['thumb'],0,4)=='http'"}{$data.home_image}{else /}__UPLOADS__/{$data.home_image}{/empty}" class="upload" width="83" height="66" no-image="__PUBLIC__/admin/images/upload-pic.gif" title="{:lang('Upload img and file')}" url="{:url('img',array('m' => CONTROLLER_NAME,'input' => 'thumb2','thumb' => 'preview2'))}" data-upload="__UPLOADS__" id="preview2" />
+                            <input type="hidden" name="home_image" id="thumb2" value="{$data.home_image}" />
+                            
+                        </div>
+                    </div>
+                    
+                    <div style="float:left; width:350px; padding-right:15px; border-right:1px dashed #000;">
+                        <div class="row">
+                            <label for="name" class="w120">{:lang('national_pavilion_name')}<span class="required">*</span></label>
+                            <input  id="name" type="text" value="{$data.name}" name="name" style="width:140px;" />
+                            
+                        </div>
+                        
+                        <div class="row">
+                            <label for="url" class="w120">{:lang('national_pavilion_url')}</label>
+                            <input  id="url" type="text" value="{$data.url}" name="url" style="width:140px;" />
+                        </div>
+                        <div class="row">
+                            <label for="country_id" class="w120" >{:lang('np_country')}<span class="required">*</span></label>
+                            <select data-placeholder="{:lang('Goods_Country_Choose')}" class="chosen-select" tabindex="2" name="country_id" id="country_id" style="width:150px;">
+                                <option value="0"></option>
+            
+                                {eq name="action_name" value="edit"}
+                                {foreach $arr_country as $arr}
+                                <option value="{$arr['id']}" {eq name="data.country_id" value="$arr['id']"}selected="selected"{/eq}>{$arr['name']}</option>
+                                {/foreach}
+                                {else /}
+                                {foreach $arr_country as $arr}
+                                <option value="{$arr['id']}">{$arr['name']}</option>
+                                {/foreach}
+                                {/eq}
+                            </select>
+                        </div>
+                        
+                        <div class="row">
+                            <label for="is_recommend" class="w120">{:lang('np_banner_image')}<span class="required">*</span></label>
+                            <div class="image-thumb">
+                                
+                                <div class="upimg_cancel" title="{:lang('Cancel')}" style="left:188px;">&nbsp;</div>
+                                <img src="{empty name='data.banner_image'}__PUBLIC__/admin/images/image.png{elseif condition="substr($data['thumb'],0,4)=='http'"}{$data.banner_image}{else /}__UPLOADS__/{$data.banner_image}{/empty}" id="preview1" class="upload"  height="50" width="58" no-image="__PUBLIC__/admin/images/image.png" title="{:lang('Upload img and file')}" url="{:url('img',array('m' => CONTROLLER_NAME,'input' => 'thumb1','thumb' => 'preview1'))}" data-upload="__UPLOADS__" />
+                                <input type="hidden" name="banner_image" id="thumb1" value="{$data.banner_image}" />
+                                <p style="padding-left:140px;color:#7d7d7d">{:lang('image_size')}（1920*480）</p>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <label class="w120">{:lang('Thumb')} </label>
+                            <div class="image-thumb">
+                                <div class="upimg_cancel" title="{:lang('Cancel')}" style="left: 188px;">&nbsp;</div>
+                                <img src="{empty name='data.thumb'}__PUBLIC__/admin/images/image.png{elseif condition="substr($data['thumb'],0,4)=='http'"}{$data.thumb}{else /}__UPLOADS__/{$data.thumb}{/empty}" id="preview" class="upload" width="58" height="50" no-image="__PUBLIC__/admin/images/image.png" title="{:lang('Upload img and file')}" url="{:url('img',array('m' => CONTROLLER_NAME,'input' => 'thumb','thumb' => 'preview'))}" data-upload="__UPLOADS__" />
+                                <input type="hidden" name="thumb" id="thumb" value="{$data.thumb}" />
+                                <p style="padding-left:140px;color:#7d7d7d">{:lang('image_size')}(60*60) </p>
+                            </div>
+                        </div>
+                    
+                    </div>
+                    <div style="float:left; width:200px; padding-top:85px;">
+                        
+                        <div class="row">
+                            <label for="status" class="w80">{:lang('Status')}</label>
+                            <div class="slideBox">
+                                {eq name="ACTION_NAME" value="edit"}
+                                <input id="status" value="1" type="checkbox" name="status"  {eq name="data['status']" value="1"}checked{/eq}/>
+                                {else /}
+                                <input id="status" value="1" type="checkbox" name="status" checked />
+                                {/eq}
+                                <label for="status"></label>
+                            </div>
+                        </div>
+    
+                        <div class="row">
+                            <label for="is_recommend" class="w80">{:lang('is_recommend_description')}</label>
+                            <div class="slideBox">
+                                {eq name="ACTION_NAME" value="edit"}
+                                <input id="is_recommend" value="1" type="checkbox" name="is_recommend" {eq name="data['is_recommend']" value="1"}checked{/eq}/>
+                                {else /}
+                                <input id="is_recommend" value="1" type="checkbox" name="is_recommend" checked/>
+                                {/eq}
+                                <label for="is_recommend"></label>
+                            </div>
+                            
+                        </div>
+    
+                        <div class="row">
+                            <label for="is_home" class="w80">{:lang('is_home')}</label>
+                            <div class="slideBox">
+                                {eq name="ACTION_NAME" value="edit"}
+                                <input id="is_home" value="1" type="checkbox" name="is_home" {eq name="data['is_home']" value="1"}checked{/eq} />
+                                {else /}
+                                <input id="is_home" value="1" type="checkbox" name="is_home" checked/>
+                                {/eq}
+                                <label for="is_home"></label>
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="row">
+                            <label for="sort" class="w80">{:lang('Sort')}</label>
+                            <input type="text" class="input litle" name="sort" maxlength="5" id="sort" value='{eq name="ACTION_NAME" value="edit"}{$data.sort}{else /}0{/eq}'>
+                    </div>
+                    </div>
+                    
+                    <div class="clear"></div>
+                    
+                    <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                        {eq name="ACTION_NAME" value="edit"}
+                        <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('savedata')}">
+                        <input type="hidden" name="id" value="{$data.id}" />
+                        <input type="hidden" name="action_name" value="edit" />
+                        {else /}
+                        <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}">
+                        <input type="hidden" name="action_name" value="add" />
+                        {/eq}
+                        <input type="hidden" name="langid" value="{:LANG}" />
+                        <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="js"}
+<script type="text/javascript">
+    <!--
+    $(function () {
+        <!--添加 Chosen 的选择框样式-->
+        var config = {
+            '.chosen-select': {},
+            '.chosen-select-deselect': {allow_single_deselect: true},
+            '.chosen-select-no-single': {disable_search_threshold: 10},
+            '.chosen-select-no-results': {no_results_text: '{:lang(\'Goods_Brand_Null\')}'},
+            '.chosen-select-rtl': {rtl: true},
+            '.chosen-select-width': {width: '95%'}
+        };
+        for (var selector in config) {
+            $(selector).chosen(config[selector]);
+        }
+    });
+    --></script>
+{/block}

@@ -1,0 +1,128 @@
+{extend name="common/base" /} {block name="title"}
+<title>{$data.meta_title}</title>
+{/block} {block name="css"}
+<link rel="stylesheet" type="text/css" href="__STATIC__/jquery.fancybox.pack/jquery.fancybox.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/crossbbcg/pc/default/css/product.css" />
+ {/block} {block name="body"}
+<!--面包屑-->
+<div class="ly-path">
+	<ul class="clearfix">
+		<li class="home">
+			<a href="{:url('/crossbbcg/index/index')}" title="{:lang('Go_Home')}">{:lang('Home')}</a>
+            {if condition="!empty($breadcrumb)"}
+			<span>&gt;&nbsp;</span>
+            {/if}
+		</li>
+        {foreach $breadcrumb as $key=>$arr}
+		<li>
+            <a href="{$arr['href']}" title="{$arr['name']}">{$arr['name']}</a>
+            {if condition="$key!=count($breadcrumb)-1"}
+            <span>&gt;&nbsp;</span>
+            {/if}
+		</li>
+        {/foreach}
+	</ul>
+</div>
+<!--面包屑END-->
+<div class="ly-main clearfix">
+	<!--商品购买区域-->
+	<div class="product-detail clearifx">
+		<!--图片-->
+		{include file="goods/info/pic"}
+		<!--细节详情-->
+		{include file="goods/info/detail"}
+        
+		<!--店铺信息-->
+        {if condition="!empty($seller)"}
+            {include file="goods/info/supplier"}
+        {else /}
+            {include file="goods/info/detail_tuijian"}
+        {/if}
+        
+	</div>
+	<!--热卖推荐-->
+		{include file="goods/info/hot_sole"}
+		<!--商品购买区域END-->
+		<div class="page-maincontent clearfix">
+			<div class="ly-main-left">
+					{include file="common/left_cat"}
+					{include file="goods/history"}
+					
+			</div>
+			<div class="main-right ly-main-right">
+				<dl class="goods-detail-tabs">
+					<!--切换tab-->
+					<dt class="goods-tabs-top">
+					<ul class="clearfix">
+						<li style="border-left: 1px solid #dfdfdf;" class="act"><span>{:lang('Goods_Description')}</span></li>
+						<li><span>{:lang('Comment')}<i>({$all_comment_list->total()})</i></span></li>
+						<li><span>{:lang('Detailed_Attribute')}</span></li>
+					</ul>
+				</dt>
+					<!--商品详情-->
+					<dd class="goods-tabs-body"  >
+                        {notempty name="goods_attribute"}
+						<div class="goods-attr-detail pci-detail-box">
+							<ul class="clearfix">
+                                <li title="{$data['name']}">{:lang('Goods_Name')}：{$data['name']}</li>
+                                <li title="{$data['good_code']}">{:lang('Goods_sn')}：{$data['good_code']}</li>
+                                {if condition="$data['country_id']"}
+                                <li title="{$data['country_name']}">{:lang('Goods_Country_Id')}：{$data['country_name']}</li>
+                                {/if}
+                                
+                                {if condition="$data['expiration_time']"}
+                                <li title="{$data['expiration_time']}">{:lang('expiration_time')}：{$data['expiration_time']} {:lang('day')}</li>
+                                {/if}
+                                
+                                {notempty name="$filter_attribute"}
+                                    {foreach $filter_attribute as $key => $value}
+                                    <li title="{$value}">{$key}：{$value}</li>
+                                    {/foreach}
+                                {/notempty}
+                                
+							</ul>
+						</div>
+                        {/notempty}
+						<div class="goods-ad">
+                            <!-- 视频 -->
+                            {notempty name="$data['video']"}
+                            <div style="text-align:center;">{$data['video']}</div>
+                            {/notempty}
+							{$data['description']}
+						</div>
+					</dd>
+					<!--商品详情END-->
+					<!--评论-->
+					<dd class="goods-tabs-body comment" style="display: none;">
+					{include file="goods/tab/comment"}
+					</dd>
+					<!--评论end-->
+					<!--产品参数-->
+					<dd class="goods-tabs-body" style="display: none;">
+						{include file="goods/tab/paramenter"}
+					</dd>
+						
+				</dl>
+			</div>
+		</div>
+	</div>
+	
+<!--图片放大js引用  税收图表后台控制-->
+<script type="text/html" id="shuifei_content">
+	<div style="text-align:center;">
+        {notempty name="$tax_img"}
+        <img src="__UPLOADS__/{$tax_img}" />
+        {else /}
+        <img src="__ROOT__/static/images/tax.png" />
+        {/notempty}
+	</div>
+</script>
+{:widget('crossbbcg/common/toolbar')}
+	{/block}
+	<!--此板块为页面单独js加载-->
+	{block name="footer_js"}
+	<script type="text/javascript">
+		//需要加载的js文件
+		Private_Script = ['product','baidu'];
+	</script>
+	{/block}

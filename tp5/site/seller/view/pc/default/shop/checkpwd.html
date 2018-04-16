@@ -1,0 +1,33 @@
+{extend name='public/layout'}
+
+{block name='body'}
+<div id="toolTipLayer"
+     style="position: absolute; z-index: 9999; display: none; visibility: visible; left: 95px; top: 573px;"></div>
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+    <div class="fixed-bar">
+        <div class="item-title">
+            <div class="subject">
+                <h3>安全中心 - 密码验证</h3>
+            </div>
+        </div>
+    </div>
+    <form class="form-horizontal" id="handleposition" method="post">
+        <input type="hidden" name="id" value=""/>
+        <div class="ncap-form-default">
+            <dl class="row">
+                <dt class="tit">
+                    <label><em>*</em>密码</label>
+                </dt>
+                <dd class="opt">
+                    <input type="password" class="input-txt"/>
+                    <span class="err" id="err_name"></span>
+                    <p class="notic">请输入登录密码</p>
+                </dd>
+            </dl>
+            <div class="bot"><a class="ncap-btn-big ncap-btn-green" href="{:url('checkphone')}">下一步</a></div>
+        </div>
+    </form>
+</div>
+{/block}

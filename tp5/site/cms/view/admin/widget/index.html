@@ -1,0 +1,163 @@
+	{extend name="admin@public/base"/}
+                
+    <!-- CONTENT --> 
+    {block name="body"}
+    <div id="content">
+    	<div class="breadcrumbs">
+            {:lang('Contents')} : &nbsp;&nbsp; {:lang('Homemang')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+    	</div>
+
+        <div class="bloc">
+            <div class="title">
+                <div class="tabs" id="navs">
+                    {include file="admin@public/navs" /}
+                </div>
+
+                {include file="admin@public/lang" /}
+            </div>
+            <div class="content">
+                
+                    <dl class="gzzt clearfix mtb10">
+                    <dd>
+                        <div class="boxr">
+                            {include file="admin@public/button" /}
+                        </div>
+                    </dd>
+                    
+                    <dd style="float: right !important;">
+                        <div class="boxl">
+                            <span>
+                                <a href="javascript:location.reload();" class="refresh tooltip-link" title="{:lang('Refresh')}">
+                                    <em>{:lang('Refresh')}</em>
+                                </a>
+                            </span>
+                            <span>
+                                <a href="javascript:void(0);" class="ajax-get setting tooltip-link colum" title="{:lang('Showlum')}" data-title="{:lang('Showlum')}">
+                                    <em>{:lang('Showlum')}</em>
+                                </a>
+                            </span>
+                        </div>
+                    </dd>
+            </dl>
+            
+            {notempty name="list"}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="center" width="30"><input class="check-all" type="checkbox"></th>
+                        <th class="left" style="width:35px;">ID</th>
+                        <th class="center"  style="width:90px;">{:lang('Preview')}</th>
+                        <th class="left"  style="width:120px;">{:lang('Type')}</th>
+                        <th class="left" style="width:120px;">{:lang('Widget name')}</th>
+                        <th class="left" style="width:100px;">{:lang('Widget file name')}</th>
+                        <th class="left" style="width:150px;">{:lang('Remark')}</th>
+                        <th class="center" style="width:50px;">{:lang('Status')}</th>
+                        <th class="center" style="width:50px;">{:lang('Sort')}</th>
+                        <th class="actions">{:lang('Actions')}</th>
+                    </tr>
+                </thead>
+                    
+                <tbody>
+                {volist name="list" id="vo"}
+                <tr>
+                    <td class='center'>
+                        <input class='ids' type='checkbox' value='{$vo.id}' name='ids[]'>
+                    </td>
+                    <td class='left'>{$vo.id}</td>
+                    <td class='center' id="preview_img">
+                        {empty name="vo.preview_img"}
+                        <a href="{$vo.preview_img}"><img width='60px'  src='__PUBLIC__/admin/images/icons/no-image.png' alt="{:lang('No_image')}" /></a>
+                        {else /}
+                        <a href="{$vo.preview_img}" class="tooltip"><img width='60px'  src='{$vo.preview_img}' alt='{$vo.name}' /></a>
+                        {/empty}
+                    </td>
+                    <td class='left'>
+                        
+                        {$vo['type']['name']}
+                    </td>
+                    <td class='left'>{$vo.name}</td>
+                    <td class='left'>{$vo.file_name}</td>
+                    <td class='left'>{$vo.remark}</td>
+                    
+                    <td class='center'>
+                        {eq name="vo.status" value="1"}
+                        <a href="{:url('disable',array('ids'=>$vo['id']))}" class="ajax-able" data-doing="{:lang('Check_false')}" data-enable-span="{:lang('Enables')}" data-disable-span="{:lang('Disables')}">
+                            <span class="badge-green">{:lang('Enables')}</span>
+                        </a>
+                        {else /}
+                        <a href="{:url('disable',array('ids'=>$vo['id']))}" class="ajax-able" data-doing="{:lang('Check_true')}" data-enable-span="{:lang('Enables')}" data-disable-span="{:lang('Disables')}">
+                            <span class="badge-gray">{:lang('Disables')}</span>
+                        </a>
+                        {/eq}
+                    </td>
+                    <td class='center'>
+                        <input name='sorts[$id]' type='text' size='1' value='{$vo.sort}' class='center sorts'/>
+                    </td>
+    
+                    <td class='actions'>
+                        <a class="tooltip-link edit" title="{:lang('Edit_this_record')}" href="{:url('edit',array('ids'=>$vo['id']))}" data-showbar="1">
+                            <img src="__PUBLIC__/admin/images/edit.png" alt="{:lang('Edit')}"/>
+                        </a>
+                        <a class="tooltip-link ajax-get confirm" title="{:lang('Delete_this_record')}"
+                           data-layer="{:lang('Want_delete')}" href="{:url('deleteaction',array('ids'=>$vo['id']))}"
+                           data-title="{:lang('Delete')}">
+                            <img src="__PUBLIC__/admin/images/delete.png" alt="{:lang('Delete')}"/>
+                        </a>
+                    </td>
+                </tr>
+                {/volist}
+                </tbody>
+            </table>
+                <div class="pagination-wrapper">
+                    <div class="results-part" ><span>{$_total}</span></div>
+                    <div class="links-part">{$page}</div>
+                </div>
+            {else/}
+               <div  class="alert alert-warning">{:lang('No_record')}</div>
+            {/notempty}
+            
+            </div>
+        </div>
+    </div>
+    {/block}
+    {block name="js"}
+    <script type="text/javascript">
+        $(function () {
+            //图片跟随鼠标
+            function DivFlying() {
+                var div = document.getElementById("tooltip");
+                if (!div) {
+                    return;
+                }
+                var intX = window.event.clientX;
+                var intY = window.event.clientY;
+                div.style.left = intX + "px";
+                div.style.top = intY + "px";
+            }
+            var x = 10;
+            var y = 20;
+            $("a.tooltip").mouseover(function (e) {
+                this.myTitle = this.title;
+                this.title = "";
+                var imgTitle = this.myTitle ? "<br/>" + this.myTitle : "";
+                var tooltip = "<div id='tooltip' style='position:absolute;'><img width='400px'  src='" + this.href + "' alt=''/>" + imgTitle + "<\/div>"; //创建 div 元素
+                $("body").append(tooltip); //把它追加到文档中
+                $("#tooltip")
+                    .css({
+                        "top": (e.pageY + y) + "px",
+                        "left": (e.pageX + x) + "px"
+                    }).show("fast");   //设置x坐标和y坐标，并且显示
+            }).mouseout(function () {
+                this.title = this.myTitle;
+                $("#tooltip").remove();  //移除
+            }).mousemove(function (e) {
+                DivFlying();
+                $("#tooltip")
+                    .css({
+                        "top": (e.pageY + y) + "px",
+                        "left": (e.pageX + x) + "px"
+                    });
+            });
+        })
+    </script>
+    {/block}

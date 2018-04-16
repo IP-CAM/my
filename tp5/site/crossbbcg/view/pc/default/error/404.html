@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+	    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta charset="utf-8" /> <title>{$title}</title>
+		<style type="text/css"> 
+body { margin: 0; font-family: "microsoft yahei";background-color:#ebf7fe} 
+ul, ol { list-style: none; margin: 0; padding: 0; } 
+.main img { display: block; margin: 0 auto; max-width:90%}
+.main em{  padding: 5px 10px;  font-style:normal}
+.main {text-align: center;font-size: 18px}
+.main ul{position: fixed;width: 100%;left: 0;top: 50%;margin-top: -230px;}
+.main ul a{border: 1px solid #25a9e0; color: #25a9e0; display: inline-block; padding: 5px 15px; text-decoration: none;}
+.main ul a:hover{color:#f60;border-color: #f60;}
+.main ul  .item3{}
+.main ul  .item2{    padding-bottom: 30px;max-width:80%;    margin: 0 auto;}
+.main ul  .item1{    padding-bottom: 20px;}
+</style>
+   <script type="text/javascript">
+   	function IsPC() {
+    var userAgentInfo = navigator.userAgent;
+    var Agents = ["Android", "iPhone",
+                "SymbianOS", "Windows Phone",
+                "iPad", "iPod"];
+    var flag = true;
+    for (var v = 0; v < Agents.length; v++) {
+        if (userAgentInfo.indexOf(Agents[v]) > 0) {
+            flag = false;
+            break;
+        }
+    }
+    return flag;
+}
+   </script>
+</head>
+<body>
+	<div class="main">
+		<ul>
+			<li class="item1"> <img src="/static/error/404.png" /></li>
+			<li class="item2">
+                {$error_tip}
+            </li>
+			<li class="item2" style="font-size: 14px;">
+                {:lang('error_tip1')}
+            </li>
+			<li class="item2" style="font-size: 14px;">
+                <span id="time">4</span> {:lang('error_skip')}
+</li>
+			<li class="item3"> <a id="a" href="{:url('crossbbcg/index/index')}">{:lang('error_to_home')} &lt; </a></li>
+		</ul>
+	</div>
+<script type="text/javascript">
+
+		
+
+	function delayURL() {
+		var delay = document.getElementById("time").innerHTML;
+		var t = setTimeout("delayURL()", 1000);
+		if(delay > 0) {
+			delay--;
+			document.getElementById("time").innerHTML = delay;
+		} else {
+			clearTimeout(t);
+			//跳转地址
+			window.location.href = "{:url('crossbbcg/index/index')}";
+		}
+	}
+	delayURL();
+
+</script>
+</body>
+</html>

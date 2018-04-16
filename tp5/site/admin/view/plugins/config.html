@@ -1,0 +1,40 @@
+    {extend name="public/poupbase"/}
+    
+    <!-- CONTENT -->
+    
+    {block name="body"}
+        <div id="content" style="margin:0px 10px 5px 8px;">
+            <div class="bloc">
+                <div class="content">
+                    <div style="display:block; height: 445px;">
+                        <div class="infobox" style="margin:0;padding:5px 10px; line-height: 20px;">
+                            <b>{$extSetup['name']} : </b> {$extSetup['description']}
+                        </div>
+                        
+                        <div class="extbody">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {/block}
+    
+    {block name="js"}
+    <script>
+        $(function(){
+            var topindex = parent.layer.getFrameIndex(window.name); //获取当前窗体索引
+            $('input[name="reset"],input[name="reset2"],input[name="reset3"]').click(function(){
+                parent.layer.close(topindex);
+            });
+            $('input[name="submit"]').click(function(){
+                var that = this;
+                var form = $('#myform');
+                var target = $(that).attr('url');
+                var query = form.serialize();
+                postdata(target,query);
+                    return false;
+            })
+        })
+    </script>
+    {/block}

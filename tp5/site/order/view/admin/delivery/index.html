@@ -1,0 +1,128 @@
+	{extend name="admin@public/base"/}
+                
+    <!-- CONTENT --> 
+    {block name="body"}
+    <div id="content">
+        <div class="breadcrumbs">
+            {:lang('Ordersys')} : &nbsp;&nbsp; {:lang('Order')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+    	</div>
+        <div class="bloc">
+            <div class="title">
+                <div class="tabs" id="navs">
+                    {include file="admin@public/navs" /}
+                </div>
+    
+                {include file="admin@public/lang" /}
+            </div>
+            <div class="content">
+                
+                <dl class="gzzt clearfix mtb10">
+                    <dd>
+                        <div class="boxr">
+                            {include file="admin@public/button" /}
+                        </div>
+                    </dd>
+    
+                    <form style="margin-top:0;" class="search-form">
+                        <dd>
+                            <div class="boxr ovh">
+                                <label for="start" style="margin:10px 10px 0 0; width:156px;">
+                                    <input type="text" id="start" value="{:input('start_time')}" name="start_time"
+                                           placeholder="{:lang('Begin_time')}" class="w130 input_img"/>
+                                </label>
+                                <label style="width:10px;line-height:32px; margin-right:2px;">~</label>
+                                <label for="end" style="margin:10px 10px 0 0; width:150px;">
+                                    <input type="text" id="end" value="{:input('end_time')}" name="end_time"
+                                           placeholder="{:lang('End_time')}" class="w130 input_img"/>
+                                </label>
+                            </div>
+                        <dd>
+        
+                        <dd>
+                            <div class="boxr ovh">
+                                <label for="name" style="margin:10px 10px 0 0; width:165px;">
+                                    <input type="text" class="searchinput" name="name" id="name" value="{:input('name')}"
+                                           placeholder="{:lang('Order_sn_tip')}" style="width:135px;"/>
+                                </label>
+                                <input type="button" name="search" id="sch-search" class="button white"
+                                       value="{:lang('Search')}" url="{:url('',input(''))}"/>
+                            </div>
+                        <dd>
+                    </form>
+                    <dd>
+                        <div class="boxl fl">
+                            <span><b>{:lang('Delivery_count')}</b><font>{$_total}</font></span>
+                        </div>
+                    </dd>
+                </dl>
+                
+                {notempty name="list"}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="center" width="30"><input class="check-all" type="checkbox"></th>
+                            <th class="left" style="width:140px;"><a href="{:getUrlbyOrder('delivery_sn')}">{:lang('Delivery_sn')}</a></th>
+                            <th class="left"><a href="{:getUrlbyOrder('order_sn')}">{:lang('Order_sn')}</a></th>
+                            <th class="left"><a href="{:getUrlbyOrder('add_time')}">{:lang('Single_time')}</a></th>
+                            <th class="left"><a href="{:getUrlbyOrder('consignee')}">{:lang('Consignee')}</a></th>
+                            <th class="left"><a href="{:getUrlbyOrder('update_time')}">{:lang('Delivery_time')}</a></th>
+                            <th class="left"><a href="{:getUrlbyOrder('ip')}">{:lang('IP Address')}</a></th>
+                            <th class="left"><a href="{:getUrlbyOrder('num')}">{:lang('Delivery Num')}</a></th>
+                            <th class="left"><a href="{:getUrlbyOrder('referer')}">{:lang('Referer')}</a></th>
+                            <th class="left"><a href="{:getUrlbyOrder('status')}">{:lang('Status')}</a></th>
+                            <th class="left">{:lang('Optioner')}</th>
+                            <th class="actions">{:lang('Actions')}</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        {volist name="list" id="vo"}
+                        <tr>
+                            <td class="center"><input class="ids" type="checkbox" value="{$vo.order_id}" name="ids[]"></td>
+                            <td class="left">
+                            <a class="tooltip-link ajax-get" title="{:lang('View_this_order')}" href="{:url('order/admin.index/view',array('ordersn'=>$vo['order_sn']))}">
+                            {$vo['shipping_sn']}
+                            </a>
+                            </td>
+                            <td class="left">{$vo['order_sn']}</td>
+                            <td class="left">{$vo.create_time|time_format}</td>
+                            <td class="left">{$vo['consignee']} [Tel:{$vo['tel']}]</td>
+                            <td class="left">{$vo.create_time|time_format}</td>
+                            <td class="left">{:long2ip($vo.send_ip)}</td>
+                            <td class="left">{$vo.send_num}</td>
+                            <td class="left">{$vo.referer}</td>
+                            <td class="left">
+                                {switch name='vo.shipping_status'}
+                                {case value='0'}{:lang('Non_delivery')}{/case}
+                                {case value='1'}{:lang('Delivered')}{/case}
+                                {case value='2'}{:lang('Received')}{/case}
+                                {case value='3'}{:lang('Distribution order')}{/case}
+                                {case value='4'}{:lang('Delivered Part')}{/case}
+                                {case value='5'}{:lang('Deliverying')}{/case}
+                                {/switch}
+                            </td>
+                            <td class="left">{$vo['action_user']}</td>
+                            <td class="actions">
+                                <a class="tooltip-link ajax-get" title="{:lang('View_this_order')}" href="{:url('order/admin.index/view',array('ordersn'=>$vo['order_sn']))}" data-title="{:lang('View')}">
+                                    <img src="__PUBLIC__/admin/images/search.png" alt="{:lang('View_this_order')}" />
+                                </a>
+                            </td>
+                        </tr>
+                        {/volist}
+                    </tbody>
+                </table>
+                <div class="pagination-wrapper">
+                <div class="results-part"><span>{$list->total()}</span></div>
+            	<div class="links-part">{$list->render()}</div>
+                </div>
+                {else/}
+                   <div class="alert alert-warning">{:lang('No_record')}</div>
+                {/notempty}
+            
+            </div>
+        </div>
+    </div>
+    
+    {include file="admin@public/time_for_search" /}
+    
+    {/block}

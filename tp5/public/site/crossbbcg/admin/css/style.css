@@ -1,0 +1,7 @@
+.sur-icon { background:url('../image/sur.png') 10px 7px no-repeat; text-indent:18px; }
+div.required label:before {content: '* ';color: #F00;font-weight: bold;}
+.chosen-results{margin: 0 !important;}
+.col-form-label{text-align:right;}
+.form-group input[type=password], .form-group input[type=number], .form-group input[type=text] {  margin: 0 8px 0 0;  padding: .5rem .75rem;  width:100%;  }
+.add-button {  cursor: pointer;  color: #666;  font-weight: 400;  margin-left: 20px;  font-size: 9px;  height: 24px;  line-height: 24px;  padding: 5px 24px;  background-color: #EEE;  border: 1px solid #ccc;  text-align: center;  }
+

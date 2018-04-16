@@ -1,0 +1,131 @@
+    {extend name="admin@public/poupbase"/}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+        <div id="content" style="margin:0px 10px 5px 8px;">
+            <div class="bloc" style="margin:10px 0px 0px;">
+                <div class="content">
+                    <form id="myform" method="post" style="margin-top:5px;" class="">
+                        <fieldset>
+                            <legend>{$meta_title|default=''}</legend>
+                            <div class="row">
+                                <label for="fcatid" class="w140">{:lang('Firendscat')}: </label>
+                                <select name="fcatid" id="fcatid" style="width:180px;">
+                                    {empty name="fcatidlist"}
+                                        <option value="0">{:lang('First add cat')}</option>
+                                    {else /}
+                                        {volist name="fcatidlist" id="fcatid"}
+                                        <option value="{$key}" {eq name="data.fcatid" value="$key"}selected{/eq}>{:lang($fcatid)}</option>
+                                        {/volist}
+                                    {/empty}
+                                </select>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="title" class="w140">{:lang('Title')}: <span class="required">*</span></label>
+                                <input  id="title" type="text" value="{$data.title}" name="title" />
+                            </div>
+                            
+                            <div class="row">
+                                <label for="url" class="w140">URL: <span class="required">*</span></label>
+                                <input  id="url" type="text" value="{$data.url}" name="url" style="width:370px;" placeholder="http://" />
+                            </div>
+                            
+                            <div class="row">
+                                <label for="logo" class="w140">{:lang('Firends_icon')}: </label>
+                                <input  id="logo" type="text" value="{$data.logo}" name="logo" class="input notzh" style="width:240px;" placeholder="http://"/>
+                                <input class="button white upload" title="{:lang('Upload img and file')}" value="{:lang('Selectoruploadimg')}" type="button" url="{:url('img',array('m' => CONTROLLER_NAME,'input' => 'logo'))}" data-upload="__UPLOADS__" />
+                            </div>
+                            
+                            <div class="row bset">
+                                <label class="w140">{:lang('Open_with')}:</label>
+                                <input name="target" type="radio" value="_blank" id="_blank" {eq name="data.target" value="_blank"}checked{/eq} {eq name="ACTION_NAME" value="add"}checked{/eq} />
+                                <label for="_blank" class="w95_r_0">{:lang('Yes')}</label>
+                                <input name="target" type="radio" value="_self" id="_self" {eq name="data.target" value="_self"}checked{/eq} />
+                                <label for="_self" class="w95_r_0">{:lang('No')}</label>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="remark" class="w140">{:lang('Remark')}: </label>
+                                <textarea id="remark" name="remark" style="width:310px; height:45px;resize: none;">{$data.remark}</textarea>
+                            </div>
+                            
+                            <div class="row">
+                                <div style="float:left;">
+                                    <label for="langid" class="w140">{:lang('Whole_can')}:</label>
+                                    <div class="slideBox">
+                                        {eq name="ACTION_NAME" value="edit"}
+                                            <input id="langid" value="{php}echo LANG{/php}" type="checkbox" name="langid" {eq name="data['langid']" value="LANG"}checked{/eq} />
+                                        {else /}
+                                            <input id="langid" value="{php}echo LANG{/php}" type="checkbox" name="langid" />
+                                        {/eq}
+                                        <label for="langid"></label>
+                                    </div>
+                                </div>
+                                <div style="float:left; margin:1px 10px;">
+                                    <a class="tooltip-icon" title="{:lang('Global_tip')}"></a>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <div style="float:left;">
+                                    <label for="start" class="w140">{:lang('Time_slot')}: </label>
+                                    <input id="start" type="text" value="{eq name=" ACTION_NAME" value="edit"}{$data.begin_time|time_format}{else
+                                    /}{:time_format()}{/eq}" name="begin_time" class="w140l green datainput"/>
+                                </div>
+                                <div style="overflow:hidden;">
+                                    ~
+                                    {eq name="ACTION_NAME" value="edit"}
+                                    <input id="end" value='{eq name="data.end_time" value="9"}9{else /}{$data.end_time|time_format}{/eq}'
+                                           type="text" name="end_time" class="w140l blue datainput"/>
+                                    {else /}
+                                    <input id="end" value="{:date('Y-m-d H:i:s', strtotime('+1 week'))}" type="text" name="end_time" class="w140l blue datainput"/>
+                                    {/eq}
+            
+                                    <input class="button white" value="{:lang('Forever')}" type="button" id="forever" onClick="$('#end').val(9);"/>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div style="float:left;">
+                                    <label for="status" class="w140">{:lang('Status')}:</label>
+                                    <div class="slideBox">
+                                        {eq name="ACTION_NAME" value="edit"}
+                                            <input id="status" value="1" type="checkbox" name="status" {eq name="data['status']" value="1"}checked{/eq}/>
+                                        {else /}
+                                            <input id="status" value="1" type="checkbox" name="status" checked />
+                                        {/eq}
+                                        <label for="status"></label>
+                                    </div>
+                                </div>
+                                
+                                <div style="float:left;">
+                                    <label for="sort" class="w100" style="width:105px;">{:lang('Sort')}: </label>
+                                    <input type="number" class="input litle" min="0" name="sort" maxlength="5" id="sort" value='{$data.sort|default=0}'>
+                                </div>
+                            </div>
+                            
+                            <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                                {eq name="ACTION_NAME" value="edit"}
+                                    <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('savedata')}">
+                                    <input type="hidden" name="id" value="{$data.id}" />
+                                {else /}
+                                    <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}">
+                                {/eq}
+                                <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {/block}
+    
+    {block name="js"}
+        {include file="admin@public/time_for_search" /}
+        <script>
+            $(function(){
+                $(".bset").buttonset();
+            })
+        </script>
+    {/block}

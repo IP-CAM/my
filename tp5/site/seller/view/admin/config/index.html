@@ -1,0 +1,206 @@
+    <script src="../../../../../../ant/test/demo/webpack.config.js"></script>{extend name="admin@public/base" /}
+
+    {block name="body"}
+    <style>
+        .apppush{display: none;}
+    </style>
+    {/block}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content">
+        <div class="breadcrumbs">
+            {:lang('Seller')} : &nbsp;&nbsp; {:lang('Shopconf')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+        </div>
+    
+        <div class="bloc">
+            <div class="title">
+                <div class="tabs" id="navs">
+                    {include file="admin@public/navs" /}
+                </div>
+            
+                {include file="admin@public/lang" /}
+            </div>
+        
+            <form name="setting" id="myform" method="post" style="margin-top:5px;">
+                <div class="alert alert-warning">
+                    <button class="close" type="button">&times;</button>
+                    <span class="alert-content">{:lang('Global config tip')}</span>
+                </div>
+            
+                <div class="bloc" id="blocStatistics">
+                    <!--<div class="title collapsible">-->
+                    <div class="title">
+                        <div class="tabs static pot" id="blockStatistics">
+                            <ul>
+                                <a id="tabStat1_link" href="#tabStat1" class="norember ">
+                                    <li>{:lang('Settleopt')}</li>
+                                </a>
+                                <a id="tabStat3_link" href="#tabStat3" class="norember ">
+                                    <li>{:lang('Shopset')}</li>
+                                </a>
+                                <a id="tabStat4_link" href="#tabStat4"  class="norember ">
+                                    <li>{:lang('Regset')}</li>
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div id="tabStat1" style="display:block;">
+                            <table class="table kright">
+                                <tbody>
+                                <tr>
+                                    <td>{:lang('Settletype')}: </td>
+                                    <td>
+                                        <div class="slideBox" >
+                                            <input id="site" value="1" type="checkbox" name="auto_settle"  {eq name="data.auto_settle" value="1"}checked{/eq}  />
+                                            <label for="site"></label>
+                                        </div> &nbsp;&nbsp;&nbsp;
+                                        <input type="text" style="width: 65px" value="{$data.settleday}" name="settleday"/>              <a  class="tooltip-icon" title="{:lang('Settleday')}"></a>
+                                    </td>
+                                </tr>
+                            
+                                <tr class="row bset">
+                                    <td>{:lang('platform_Commission')}: </td>
+                                    <td>
+                                        <div class="row bset">
+                                            <input name="platform_commission" type="text" value="{$data.platform_commission}" id="platform_commission" style="width: 20px"/><span>%</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="tabStat3">
+                            <table class="table kright">
+                                <tbody>
+                                <tr>
+                                    <td>{:lang('Cash deposit')}: </td>
+                                    <td>
+                                        <input value="{$data.deposit}" type="text" name="deposit" /><a class="tooltip-icon" title="{:lang('sShop')}{:lang('Cash deposit')}"></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="tabStat4">
+                            <table class="table kright">
+                                <tbody>
+                                <tr>
+                                    <td>{:lang('shop_account_check')}: </td>
+                                    <td>
+                                        <div class="slideBox" >
+                                        <input  id="check" value="1" type="checkbox" name="accounts_auto_check"  {eq name="data.accounts_auto_check" value="1"}checked{/eq}  />
+                                        <label for="check"></label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                
+                    <div class="buttons-wrapper" style="margin:15px 0 30px; padding:0 0 0 18%;">
+                        <input name="submit" value="{:lang('Savekernelconf')}" type="submit" url="{:url('save', array('act'=>ACTION_NAME))}" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    {/block}
+
+    {block name="js"}
+    <script>
+        $(function(){
+            $(".bset").buttonset();
+            $('input[name=dismodel]').click(function () {
+                if($(this).val() == 1) {
+                    $("#disscale").show();
+                    $('input[name=disscale]').attr('disabled', false);
+                }else{
+                    $("#disscale").hide();
+                    $('input[name=disscale]').attr('disabled', true);
+                }
+            });
+
+            //OMS接口
+            {notempty name="data.omsstatus"}$('#omsbox').show();{/notempty}
+            $('#omsstatus').click(function(){
+                var ischecked = $(this).is(":checked");
+                if(ischecked){
+                    $('#omsbox').show();
+                    $('input[name=omsclass]').attr('disabled', false);
+                }else{
+                    $('#omsbox').hide();
+                    $('input[name=omsclass]').attr('disabled', true);
+                }
+            })
+
+            //发票
+            {notempty name="data.invoicestatus"}$('#invoice').show();{/notempty}
+            $('#invoicestatus').click(function(){
+                var ischecked = $(this).is(":checked");
+                if(ischecked){
+                    $('#invoice').show();
+                    $('input[name=invoicescale]').attr('disabled', false);
+                }else{
+                    $('#invoice').hide();
+                    $('input[name=invoicescale]').attr('disabled', true);
+                }
+            })
+
+            //安卓设置
+            {notempty name="data.androidstatus"}$('#androidversion, #androidurl').show();{/notempty}
+            $('#androidstatus').click(function(){
+                var ischecked = $(this).is(":checked");
+                if(ischecked){
+                    $('#androidversion, #androidurl').show();
+                    $('input[name=androidversion], input[name=androidurl]').attr('disabled', false);
+                }else{
+                    $('#androidversion, #androidurl').hide();
+                    $('input[name=androidversion], input[name=androidurl]').attr('disabled', true);
+                }
+            })
+
+            //IOS设置
+            {notempty name="data.iosstatus"}$('#iosversion, #iosurl').show();{/notempty}
+            $('#iosstatus').click(function(){
+                var ischecked = $(this).is(":checked");
+                if(ischecked){
+                    $('#iosversion, #iosurl').show();
+                    $('input[name=iosversion], input[name=iosurl]').attr('disabled', false);
+                }else{
+                    $('#iosversion, #iosurl').hide();
+                    $('input[name=iosversion], input[name=iosurl]').attr('disabled', true);
+                }
+            })
+
+            //APP推送配置
+            {empty name="data.apppush"}$('.apppush').hide();{/empty}
+            $('#apppush').click(function(){
+                var ischecked = $(this).is(":checked");
+                if(ischecked){
+                    $('.apppush').show();
+                    $('.apppush').find('input').attr('disabled', false);
+                }else{
+                    $('.apppush').hide();
+                    $('.apppush').find('input').attr('disabled', true);
+                }
+            })
+
+
+            $("#Preview").click(function () {
+                layer.open({
+                    type: 1,
+                    title: false,
+                    closeBtn: 1,
+                    area: '150px',
+                    skin: 'layui-layer', //没有背景色
+                    shadeClose: true,
+                    content: '<div style="width:150px; height:150px;"><img src="' + $("#shoplogo").val() + '"></div>'
+                });
+            })
+        })
+    </script>
+    {/block}

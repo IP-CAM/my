@@ -1,0 +1,25 @@
+    {extend name="admin@public/base" /}
+
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content">
+        <div class="breadcrumbs">
+            {:lang('Promotion')} : &nbsp;&nbsp; {:lang('Adsandunion')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+        </div>
+
+        <div class="bloc">
+            <div class="title">
+                <div class="tabs" id="navs">
+                    {include file="admin@public/navs" /}
+                </div>
+
+                {include file="admin@public/lang" /}
+            </div>
+            <div class="content">
+                
+    
+                <div class="alert alert-warning">{:lang('No_record')}</div>
+            </div>
+        </div>
+    </div>
+    {/block}

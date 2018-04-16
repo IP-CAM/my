@@ -1,0 +1,393 @@
+{extend name="login/base" /} {block name='title'}
+<title>{:lang('register_seller')}</title>
+{/block} {block name='css'} {/block} {block name="body"}
+<div class="shop-login-box yahei">
+	<div class="form-body">
+		<div class="title">
+			<div class="t">{:lang('register_seller')}</div>
+			<div class="steps enter-steps">
+				<table width="100%">
+					<tbody>
+						<tr>
+							<td class="step-item step-1 active"><span><q class="icon">●</q><i>1</i>{:lang('Settled_notice')}</span>
+								<div class="stepdiv">1</div>
+							</td>
+							<td class="step-item step-2 active">
+								<span><q class="icon">●</q><i>2</i>{:lang('Company_info')}</span>
+								<div class="stepdiv">2</div>
+							</td>
+							<td class="step-item step-3 active"><span><q class="icon">●</q><i>3</i>{:lang('Store_info')}</span>
+								<div class="stepdiv">3</div>
+							</td>
+							<td class="step-item step-4 last"><span><q class="icon">●</q><i>3</i>{:lang('Settled_check')}</span>
+								<div class="stepdiv">4</div>
+							</td>
+							<td class="step-item step-5 last"><span><q class="icon">●</q><i>3</i>{:lang('Store_to_online')}</span>
+								<div class="stepdiv">5</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="content">
+			<div class="tips-info">
+                {:lang('tips-info')}
+			</div>
+			<br />
+			<form action="" id="form" method="post" onsubmit="return false;">
+				<ul>
+					<li class="legend ">{:lang('store_basis_info')}</li>
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em> {:lang('seller_name')}： </label>
+						<div class="form-act">
+							<input datatype="s2-10" class="input-ln" name="seller_name" type="text" value="">
+							<span class="Validform_checktip"></span>
+						</div>
+					</li>
+					<li class="form-row">
+						<label class="form-label"> <em> * </em>{:lang('seller_cat')}</label>
+						<div class="form-act">
+							<select datatype="*" name="cat_id">
+                                {foreach $shopcat as $v}
+								<option value="{$v.id}">{$v.name}</option>
+                                {/foreach}
+							</select>
+							<span class="Validform_checktip"></span>
+						</div>
+					</li>
+
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em> {:lang('store_login_account')}： </label>
+						<div class="form-act">
+							<input datatype="s4-10" class="input-ln" type="text" value="" name="account[username]">
+							<span class="Validform_checktip"></span>
+							<div class="tishi">{:lang('store_login_account_tips')}</div>
+						</div>
+					</li>
+     
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em> {:lang('store_login_password')} </label>
+						<div class="form-act">
+							<input datatype="s6-16" class="input-ln" errormsg="{:lang('password_range')}" type="password" name="account[password]" value="">
+							<span class="Validform_checktip"></span>
+						</div>
+					</li>
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em> {:lang('repassword')} </label>
+						<div class="form-act">
+							<input datatype="s6-16" class="input-ln" type="password" recheck="account[password]" errormsg="{:lang('password_not_same')}">
+							<span class="Validform_checktip"></span>
+						</div>
+					</li>
+					<li class="legend ">{:lang('store_sell_type')}</li>
+					
+					<li class="form-row">
+						<label class="form-label"> <em> * </em> {:lang('main_sell_type')}</label>
+						<div class="form-act">
+                            <select name="main_cat_id">
+                            {foreach $main_sale_type as $v}
+                            <option value="{$v.id}">{$v.name}</option>
+                            {/foreach}
+                            </select>
+							<span class="Validform_checktip"></span>
+						</div>
+					</li>
+     
+					<li class="form-row">
+						<label class="form-label"> <em> * </em>{:lang('detail_cate')}</label>
+						<div class="form-act">
+							<select datatype="*" style="width: 150px" id="parent-category">
+                                <option value="0">{:lang('pleace choose first category')}</option>
+                                {foreach $category as $v}
+                                <option value="{$v.id}">{$v.title}</option>
+                                {/foreach}
+							</select>
+                            <select datatype="*" style="width: 150px" id="child-category">
+                                <option value="0">{:lang('pleace choose second category')}</option>
+                            </select>
+                            <select datatype="*" style="width: 150px" id="grandchild-category">
+                                <option value="0">{:lang('pleace choose three category')}</option>
+                            </select>
+							<a href="" target="_blank">{:lang('show_cate_fee_info')} >></a>
+							<span class="Validform_checktip"></span>
+							<div class="tab-box" id="cate_detail">
+								<table border="" cellspacing="" cellpadding="">
+									<tr id="cate_info">
+										<th>{:lang('first_cate')}</th>
+										<th>{:lang('second_cate')}</th>
+										<th>{:lang('third_cate')}</th>
+										<th>{:lang('commission_ratio')}</th>
+										<th>{:lang('opreration')}</th>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</li>
+					<li class="legend ">{:lang('store_manage_info')}</li>
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em>{:lang('company_type')}： </label>
+						<div class="form-act">
+							<select name="" datatype="*">
+                                {foreach $company_type as $k=>$v}
+								<option value="{$k}">{$v}</option>
+                                {/foreach}
+							</select>
+                        	<span class="Validform_checktip"></span>
+						</div>
+					</li>
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em>{:lang('sale_goods_num')}： </label>
+						<div class="form-act">
+							<select name="" datatype="*">
+                                {foreach $goods_num as $v}
+								<option value="{$v}">{$v}</option>
+                                {/foreach}
+							</select>
+                        	<span class="Validform_checktip"></span>
+                        	<div class="tishi">{:lang('sale_goods_num_tips')}</div>
+						</div>
+					</li>
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em>{:lang('average_sale_price')}： </label>
+						<div class="form-act">
+							<select name="" datatype="*">
+                                {foreach $predict_avg_price as $v}
+								<option value="{$v}">{$v}</option>
+                                {/foreach}
+							</select>
+                        	<span class="Validform_checktip"></span>
+                        	<div class="tishi">{:lang('average_sale_price_tips')}</div>
+						</div>
+					</li>
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em>{:lang('ware_info')}：</label>
+					</li>
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em>{:lang('ware_address')}： </label>
+						<div class="form-act">
+							<input class="input-ln" type="text" name="ware_address" datatype="*"  value="" />
+	                        	<span class="Validform_checktip"></span>
+						</div>
+					</li>
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em>{:lang('after_sale_address')}： </label>
+						<div class="form-act">
+							<input class="input-ln" type="text" name="after_sale_address" datatype="*" value="" />
+	                        	<span class="Validform_checktip"></span>
+	                        	<div class="tishi">{:lang('after_sale_address_tips')}</div>
+						</div>
+					</li>
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em>{:lang('commonly_express')}： </label>
+						<div class="form-act">
+							<input class="input-ln" type="text" name="common_express" datatype="*" id="" value="" />
+	                        	<span class="Validform_checktip"></span>
+	                        	<div class="tishi">{:lang('commonly_express_tips')}</div>
+						</div>
+					</li>
+					<li class="legend ">{:lang('Settle_bank_info')}</li>
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em>{:lang('bank_name')}： </label>
+						<div class="form-act">
+							<input class="input-ln" type="text" name="bank_name" datatype="*" value="" />
+	                        	<span class="Validform_checktip"></span>
+						</div>
+					</li>
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em>{:lang('bank_no')}： </label>
+						<div class="form-act">
+							<input class="input-ln" type="text" name="bank_no" datatype="n" value="" />
+	                        	<span class="Validform_checktip"></span>
+						</div>
+					</li>
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em>{:lang('bank')}： </label>
+						<div class="form-act">
+							<input class="input-ln" type="text" name="bank" datatype="*"  value="" />
+	                        	<span class="Validform_checktip"></span>
+						</div>
+					</li>
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em>{:lang('bank_address')}： </label>
+						<div class="form-act">
+                            <input type="text" name="bank_address" value="" datatype="*" class="input-ln">
+						</div>
+					</li>
+                    <li class="form-row last">
+                        <label for="" class="form-label">&nbsp;</label>
+                        <div class="form-act">
+                            <a href="javascript:history.back(-1);" class="btn">{:lang('prev_step')}</a>
+                            &#12288;
+                            <button type="submit" class="btn btn-import" id="sb_form" rel="_request">
+                                <span>{:lang('next_step')}</span>
+                            </button>
+                        </div>
+                    </li>
+				</ul>
+                <input type="hidden" name="company_info" value='{$company_info}'>
+			</form>
+		</div>
+	</div>
+</div>
+
+{/block} {block name="footer_js"}
+
+
+<script type="text/javascript">
+		$("#form").Validform({
+			tiptype: 3,
+			showAllError: true
+		});
+		var flag = true;
+		$('#form').submit(function () {
+            var error_num = $('.Validform_wrong').length;
+            if (error_num > 0) {
+                return false;
+            }
+            var data  = $('#form').serialize();
+            if (flag) {
+                flag = false;
+                $.post("{:url('')}",data,function (re) {
+                    if (re.code) {
+                        layer.msg(re.msg,{icon:1,time:2000},function () {
+                            flag = true;
+                            window.location.href=re.url;
+                        })
+                    } else {
+                        layer.msg(re.msg,{icon:2,time:2000},function () {
+                            flag = true;
+                        })
+                    }
+                },'json');
+            }
+            return false;
+        })
+
+        //商品分类js
+        $("#parent-category").on('change',function () {
+            var parentid = $(this).val();
+            if (!parentid) {
+                return false;
+            }
+            $.ajax({
+                url:"{:url('getcategories')}",
+                type:'post',
+                dataType:'json',
+                data:{
+                    pid:parentid
+                },
+                success:function (re) {
+                    var _html = '';
+                    $.each(re,function (i,e) {
+                        _html += "<option value='"+e.id+"'>"+e.title+"</option>"
+                    });
+                    $("#child-category").html(_html);
+                    $("#child-category").show();
+                    $.ajax({
+                        url:"{:url('getcategories')}",
+                        type:'post',
+                        dataType:'json',
+                        data:{
+                            pid:re[0].id
+                        },
+                        success:function (re) {
+                            var _html = '';
+                            $.each(re,function (i,e) {
+                                _html += "<option value='"+e.id+"'>"+e.title+"</option>"
+                            });
+                            $("#grandchild-category").html(_html);
+                            $('#grandchild-category').trigger('change');
+                            $("#grandchild-category").show();
+                        },
+                        error:function () {
+                            console.log("{:lang('service_buzy')}");
+                        }
+                    })
+
+                },
+                error:function () {
+                    console.log("{:lang('service_buzy')}");
+                }
+            })
+        });
+        $("#child-category").on('change',function () {
+            var parentid = $(this).val();
+            if (!parentid) {
+                return false;
+            }
+            $.ajax({
+                url:"{:url('getcategories')}",
+                type:'post',
+                dataType:'json',
+                data:{
+                    pid:parentid
+                },
+                success:function (re) {
+                    var _html = '';
+                    $.each(re,function (i,e) {
+                        _html += "<option value='"+e.id+"'>"+e.title+"</option>"
+                    });
+                    $("#grandchild-category").html(_html);
+                    $('#grandchild-category').trigger('change');
+                    $("#grandchild-category").show();
+                },
+                error:function () {
+                    console.log("{:lang('service_buzy')}");
+                }
+            })
+        });
+        $('#grandchild-category').on('change',function () {
+            var cat_id = $(this).val();
+            var first_cate = $('#parent-category option[value='+$("#parent-category").val()+']').text();
+            var second_cate = $('#child-category option[value='+$("#child-category").val()+']').text();
+            //加载当前分类信息
+            $.ajax({
+                url:"{:url('get_cate_info')}",
+                type:'post',
+                dataType:'json',
+                data:{
+                    id:cat_id
+                },
+                success:function (re) {
+                    if (re.code) {
+                        add_cate(first_cate,second_cate,re.data.title,cat_id);
+                    }
+                }
+            })
+        });
+        
+        function add_cate(first_cate,second_cate,third_info,commission,id) {
+            if ($('#cate_detail').find('.remove_'+id).length) {
+                $('.remove_'+id).parent().parent().remove();
+            }
+            var _html = '<tr><td>'+first_cate+'</td>'+
+                '<td>'+second_cate+'</td>'+
+                '<td>'+third_info+'</td>'+
+                '<td>'+commission+'%</td>'+
+            '<td><em class="remove_'+id+'" onclick="remove($(this))">删除</em></td>'+
+            '<input type="hidden" name="goods_cat[]" value="'+id+'"></tr>';
+            $('#cate_info').after(_html);
+        }
+        function remove(that) {
+            that.parent().parent().remove();
+        }
+        
+</script>
+
+{/block}

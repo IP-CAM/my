@@ -1,0 +1,24 @@
+---------------------------------------------------------------
+[ 2018-04-16T15:56:01+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php/install/index/index
+[ error ] [8192]Function set_magic_quotes_runtime() is deprecated[D:\git\my\tp5shop\site\install\controller\Index.php:37]
+---------------------------------------------------------------
+[ 2018-04-16T16:00:23+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php/install/index/s2/step/2
+[ error ] [2]fopen(D:\git\my\tp5shop\site/database.php/_test.txt): failed to open stream: No such file or directory[D:\git\my\tp5shop\site\install\common.php:115]
+[ error ] [2]fopen(D:\git\my\tp5shop\site/config.php/_test.txt): failed to open stream: No such file or directory[D:\git\my\tp5shop\site\install\common.php:115]
+---------------------------------------------------------------
+[ 2018-04-16T16:00:31+08:00 ] 127.0.0.1 127.0.0.1 POST /index.php/install/index/s3/step/3/testdbpwd/1
+[ error ] [8]未定义数组索引: dbHost[D:\git\my\tp5shop\site\install\controller\Index.php:155]
+[ error ] [8]未定义数组索引: dbPort[D:\git\my\tp5shop\site\install\controller\Index.php:155]
+[ error ] [8]未定义数组索引: dbUser[D:\git\my\tp5shop\site\install\controller\Index.php:156]
+[ error ] [8]未定义数组索引: dbPwd[D:\git\my\tp5shop\site\install\controller\Index.php:156]
+[ error ] [2]mysqli_connect(): (HY000/2002): �����������У�������ĵ�ַ��Ч��
+[D:\git\my\tp5shop\site\install\controller\Index.php:156]
+---------------------------------------------------------------
+[ 2018-04-16T16:11:39+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php
+[ error ] [1049]SQLSTATE[HY000] [1049] Unknown database 'tp5'[D:\git\my\tp5shop\core\library\think\db\Connection.php:293]
+---------------------------------------------------------------
+[ 2018-04-16T16:17:32+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php/admin/passport/gt?t=1523866652462
+[ error ] [2048]Static function app\common\libs\Vercode::create() should not be abstract[D:\git\my\tp5\site\common\libs\Vercode.php:23]
+---------------------------------------------------------------
+[ 2018-04-16T16:26:50+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php/admin/passport/gt?t=1523867210696
+[ error ] [2048]Static function app\common\libs\Vercode::create() should not be abstract[D:\git\my\tp5\site\common\libs\Vercode.php:23]

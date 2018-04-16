@@ -1,0 +1,41 @@
+{notempty name="collect"}
+<dl class="min-favor">
+    <dd>
+        <ul class="clearfix goods-list">
+            {volist name="collect" id="vo"}
+            <li class="goods-item">
+                <div class="goods-pic">
+                    <a href="{:url('crossbbcg/goods/index','item_id='.$vo['goods']['id'])}" target="_blank" title="{$vo['goods']['name']}">
+                        {if condition="substr($vo['goods']['thumb'],0,4)=='http'"}
+                        <img src="{$vo['goods']['thumb']}" />
+                        {else /}
+                        <img src="{:resizeImage($vo['goods']['thumb'],'small',true)}" />
+                        {/if}
+                    </a>
+                </div>
+                <div class="goods-info">
+                    <div class="goods-name">
+                        <a href="{:url('crossbbcg/goods/index','item_id='.$vo['goods']['id'])}" target="_blank">{$vo['goods']['name']}</a>
+                    </div>
+                    <div class="price-box">
+                        <span class="price">{$vo['goods']['sale_price']}</span>
+                        <span class="mkt-price">{$vo['goods']['market_price']}</span>
+                    </div>
+                </div>
+            </li>
+            {/volist}
+        </ul>
+    </dd>
+</dl>
+{else /}
+<div class="ly-no-data">
+    <div class="icon iconfont icon-zanwujilu"></div>
+    <div class="text">
+        {if condition="is_login()"}
+        {:lang('empty_record')}
+        {else /}
+        <a href="{:url('member/passport/index')}">{:lang('login_first')}</a>
+        {/if}
+    </div>
+</div>
+{/notempty}

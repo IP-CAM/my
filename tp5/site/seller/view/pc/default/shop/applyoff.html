@@ -1,0 +1,103 @@
+{extend name='public/mini_layout'}
+
+{block name='body'}
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+    <style>
+        .row{
+            display: block;
+            width: 100%;
+            height:50px;
+        }
+        label{
+            display: inline-block;
+            width: 150px;
+            text-align: right;
+            padding-right: 20px;
+        }
+    </style>
+    <form class="form-horizontal" id="handleposition" method="post">
+        <input type="hidden" name="id" value=""/>
+        <div class="ncap-form-default">
+            <div class="row">
+                <div style="float: left;margin:10px;">
+                    <label for="name">{:lang('shop_name')}</label>
+                    <input type="text" value="" name="seller_name"/>
+                </div>
+                <div style="float: left;margin:10px">
+                    <label for="name">{:lang('managers')}</label>
+                    <input type="text" value="" name="principal"/>
+                </div>
+            </div>
+            <div class="row">
+                <div style="float: left;margin: 10px">
+                    <label for="name">{:lang('tel')}</label>
+                    <input type="text" value="" name="mobile"/>
+                </div>
+                <div style="float: left;margin: 10px">
+                    <label for="name">{:lang('Telephone')}</label>
+                    <input type="text" value="" name="phone"/>
+                </div>
+            </div>
+            <div class="row">
+                <div style="float: left;margin: 10px">
+                    <label for="name">{:lang('lat')}:</label>
+                    <input type="text" value="" name="lat"/>
+                </div>
+                <div style="float: left;margin: 10px">
+                    <label for="name">{:lang('lng')}:</label>
+                    <input type="text" value="" name="lng"/>
+                    <a href="http://lbs.amap.com/console/show/picker" target="_blank"><span>{:lang('ibsmap')}</span></a>
+                </div>
+            </div>
+            <div class="row">
+                <div style="float: left;margin: 10px">
+                    <label for="name">{:lang('Cat name')}:</label>
+                    <select name="cat_id"  style="width: 140px">
+                        {volist name='option' id='vo'}
+                        <option value="{$vo.id}">{$vo.name}</option>
+                        {/volist}
+                    </select>
+                </div>
+                <div style="float: left;margin: 10px">
+                    <label for="logo">{:lang('seller_logo')}:</label>
+                    <input name="logo" type="text" class="input" value="" id="logo"  placeholder="image/logo.png" />
+                    <input class="button white upload" value="{:lang('Selectimg')}" title="{:lang('Selectimg')}" type="button" title="{:lang('Upload img and file')}" url="{:url('img',array('input' => 'logo'))}" data-upload="__UPLOADS__"/> >
+                    <a href="javascript:void(0)" class="preview" data-src="logo" data-width="200" data-height="200" data-area="200">{:lang('Preview')}</a>
+                </div>
+            </div>
+            <div class="row">
+                <div style="float: left;margin: 10px">
+                    <label for="name">{:lang('shop_address')}:</label>
+                    <select name="province"  style="width: 140px">
+                        <option value="0">广东省</option>
+                    </select>
+                    <select name="city"  style="width: 140px">
+                        <option value="0">深圳市</option>
+                    </select>
+                    <select name="area"  style="width: 140px">
+                        <option value="0">南山区</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row" style="margin: 10px">
+                <label for="name">{:lang('address')}:</label>
+                <input type="text" style="width: 273px" name="address"/>
+            </div>
+            <div class="row" style="margin: 10px">
+                <label for="name">{:lang('shop_desciption')}:</label>
+                <textarea name="description" id="" cols="30" rows="10" ></textarea>
+            </div>
+            <div class="bot" style="padding: 12px 0 10px 44%">
+                <input type="submit" name="submit" url="{:url('shop/applyoff')}" value="{:lang('submit')}" class="btns blue"/>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $(function () {
+        $('body').css('overflow-y','hidden');
+    })
+</script>
+{/block}

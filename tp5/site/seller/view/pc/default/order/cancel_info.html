@@ -1,0 +1,168 @@
+{extend name='common/poupbase'}
+{block name='css'}
+<link href="__PUBLIC__/{$js_path}/iCheck/all.css" rel="stylesheet">
+{/block}
+
+{block name='body'}
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">{:lang('cancel_status_schedule')}</h3>
+                </div>
+                <div class="box-body">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th class="order-summary">
+                                {:lang('cancel_time')}
+                            </th>
+                            <th class="order-summary">
+                                {:lang('cancel_remark')}
+                            </th>
+                            <th class="order-summary">
+                                {:lang('cancel_man')}
+                            </th>
+                        </tr>
+                        
+                        {foreach $history as $key => $arr}
+                        <tr>
+                            <td>
+                                {$arr['create_time']}
+                            </td>
+                            <td>
+                                {$arr['remark']}
+                            </td>
+                            <td>
+                                {if condition="$arr['role']!=''"}
+                                {:lang($arr['role'])}
+                                {/if}
+                            </td>
+                        </tr>
+                        {/foreach}
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-12">
+            
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                        {:lang('basis_info')}
+                    </h3>
+                </div>
+                <form class="form-horizontal" method="post">
+                <div class="box-body">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td width="120" class="text-right">
+                                {:lang('order_sn')}
+                            </td>
+                            <td>{$info.order_sn}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-right">
+                                {:lang('cancel_in_reason')}</td>
+                            <td>
+                                {if condition="$info['cancel_reason']!=''"}
+                                {:lang($info.cancel_reason)}
+                                {/if}
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td class="text-right">
+                                {:lang('order_create_time')}
+                            </td>
+                            <td>{$info.create_time}</td>
+                        </tr>
+                        
+                        
+                        <tr>
+                            <td class="text-right">
+                                {:lang('is_agree_return')}
+                            </td>
+                            <td>
+                                <!-- 同意退款 -->
+                                {if condition="$info['cancel_status']=='WAIT_PROCESS'"}
+                                <label>
+                                    <input type="radio" class="minimal-red" name="agree" value="1" checked>
+                                    {:lang('agree')}
+                                </label>
+                                &nbsp;&nbsp;
+                                <label>
+                                    <input type="radio" class="minimal-red" name="agree" value="0">
+                                    <strong>{:lang('disagree')}</strong>
+                                </label>
+                                {elseif condition="$info['cancel_status']=='FAILS'"}
+                                <strong>{:lang('disagree')}</strong>
+                                {else /}
+                                <strong>{:lang('agree')}</strong>
+                                {/if}
+                            </td>
+                        </tr>
+    
+                        {if condition="$info['cancel_status']=='REFUND_PROCESS'"}
+                        <tr>
+                            <td class="text-right">{:lang('is_return_money')}</td>
+                            <td>
+                                <label>
+                                    {:lang('returning')}
+                                </label>
+                            </td>
+                        </tr>
+                        {/if}
+    
+                        {if condition="$info['cancel_status']!='FAILS'&&$info['cancel_status']!='SUCCESS' && $info['cancel_status']!='REFUND_PROCESS'"}
+                        <tr>
+                            <td class="text-right">
+                                {:lang('order_log_remark')}
+                            </td>
+                            <td>
+                                <textarea class="form-control" rows="3"  name="remark"></textarea>
+                            </td>
+                        </tr>
+                        {/if}
+                    </table>
+                    <input type="hidden" value="{$order_sn}" name="order_sn"/>
+                    <input type="hidden" value="{$info['order_id']}" name="order_id"/>
+                </div>
+                <div class="box-footer">
+                    {if condition="$info['cancel_status']!='FAILS'&&$info['cancel_status']!='SUCCESS' && $info['cancel_status']!='REFUND_PROCESS'"}
+                    <input type="button" name="submit" class="btn btn-info" url="{:url('seller/order/edit_cancel')}" value="{:lang('save')}" />
+                    {/if}
+                    
+                    
+                        
+                   
+                    <input type="button" class="btn btn-default" name="reset" value="{:lang('cancel')}">
+                        
+                   
+                </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+
+</section>
+{/block}
+
+{block name="js"}
+
+<script src="__PUBLIC__/{$js_path}/iCheck/icheck.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        //Red color scheme for iCheck
+        $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+            checkboxClass: 'icheckbox_minimal-red',
+            radioClass   : 'iradio_minimal-red'
+        })
+
+    });
+    
+</script>
+{/block}

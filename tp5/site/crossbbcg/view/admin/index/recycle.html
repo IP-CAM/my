@@ -1,0 +1,228 @@
+    {extend name="admin@public/base" /}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content">
+        <div class="breadcrumbs">
+            {:lang('Crossbbcg')} : &nbsp;&nbsp; {:lang('Bbcggoodsys')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+        </div>
+        
+        <div class="bloc">
+            <div class="title">
+                <div class="tabs" id="navs">
+                    {include file="admin@public/navs" /}
+                </div>
+                
+                {include file="admin@public/lang" /}
+            </div>
+            <div class="content">
+                
+                <dl class="gzzt clearfix mtb10">
+                    <dd>
+                        <div class="boxr">
+                            {include file="admin@public/button" /}
+                        </div>
+                    </dd>
+                    
+                    <form style="margin-top:0;" class="search-form" id="search-form">
+                        <dd>
+                            <div class="boxr ovh">
+                                <label for="search" style="margin:10px 10px 0 0; width:190px;">
+                                    <input id="search" type="text" class="searchinput" name="name" value="{:input('name')}" style="width:160px;" placeholder="{:lang('Goods_Search_Placeholder')}"/>
+                                </label>
+                                
+                                <input type="button" id="goods-search" class="button white" value="{:lang('Search')}" url="{$search_url}"/>
+                                
+                            </div>
+                        </dd>
+                    </form>
+                </dl>
+                
+                <div class="alert alert-info">
+                    <span>{:lang('Count_Select')}：<b>{$search_total}</b></span> &nbsp;
+                </div>
+                
+                {notempty name="list"}
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="center" width="30"><input class="check-all" type="checkbox"></th>
+                        <th class="left" style="width:40px;">
+                            <a href="{:getUrlbyOrder('id')}">ID</a>
+                        </th>
+                        <th class="left" style="width:50px;">{:lang('Thumb')}</th>
+                        <th class="left" style="padding-left:30px;">
+                            <a href="{:getUrlbyOrder('name')}">{:lang('Goods_name')}</a>
+                        </th>
+                        <th class="left">{:lang('Goods_Category')}</th>
+                        <th class="left" style="width:60px;"><a href="{:getUrlbyOrder('sale_price')}">{:lang('Selling_price')}</a></th>
+                        <th class="left" style="width:60px;"><a href="{:getUrlbyOrder('quantity')}">{:lang('Stock')}</a></th>
+                        <th class="left" style="width:70px;">{:lang('Goods_Store')}</th>
+                       
+                        
+                        <th class="center" style="width:40px;display:;"><a href="{:getUrlbyOrder('sort')}">{:lang('Sort')}</a></th>
+                        
+                        <th class="actions" style="width:60px;text-align:center;">{:lang('Actions')}</th>
+                    
+                    </tr>
+                    </thead>
+                    
+                    <tbody>
+                    {volist name="list" id="vo"}
+                    <tr>
+                        <td class="center"><input class="ids" type="checkbox" value="{$vo['id']}" name="ids[]"></td>
+                        <td class="left">{$vo['id']}</td>
+                        
+                        <td class="left thumb" style="position:relative;">
+                            {if condition=" empty($vo['thumb']) "}
+                            <img src="__PUBLIC__/admin/images/icons/no-image.png" height="18"/>
+                            {elseif condition="substr($vo['thumb'],0,4)=='http'"}
+                            <img src="{$vo.thumb}" height="18"/>
+                            {else /}
+                            <img src="__UPLOADS__/{$vo.thumb}" height="18"/>
+                            {/if}
+                            <div style="position:absolute;top:20px;left:20px;z-index:999;border:5px solid #eee;display:none;" class="show"></div>
+                        </td>
+                        
+                        <td class="left slh" style="max-width: 60px;" title="{$vo['name']}">{$vo['name']}</td>
+                        
+                        <td class="left">
+                            {present name="$arr_category[$vo['cat_id']]"}
+                            {$arr_category[$vo['cat_id']]}
+                            {else /}
+                            {:lang('Null')}
+                            {/present}
+                        </td>
+                        
+                        <td class="left">{$vo['sale_price']}</td>
+                        
+                        <td class="left">
+                                {$vo['quantity']}
+                        </td>
+    
+                        {present name="$arr_store[$vo['seller_id']]"}
+                        <td class="left slh tooltip-link" style="max-width: 150px" title="{$arr_store[$vo['seller_id']]}">
+                            {$arr_store[$vo['seller_id']]}
+                        </td>
+                            {else /}
+                        <td class="left">
+                            {:lang('Null')}
+                        </td>
+                            {/present}
+                        
+                        
+                        <td class="center" style=""><input name="sorts[{$vo.id}]" type="text" value="{$vo.sort}" maxlength="5" class="center sorts" onBlur="changeSort('{$vo.id}',this.value)"></td>
+                        
+                        <td class="actions" style="">
+                            
+                            <a class="tooltip-link ajax-get confirm" data-layer="{:lang('restore_good_des')}" title="{:lang('restore_good')}" href="{:url('restore',array('ids'=>$vo['id']))}" data-title="{:lang('restore_good')}">
+                                <img src="__PUBLIC__/admin/images/recycle.png" alt="{:lang('Delete')}" height="16"/>
+                            </a>
+                            
+                            &nbsp;
+                            
+                            <a class="tooltip-link ajax-get confirm" data-layer="{:lang('want_clear_delete')}" title="{:lang('Delete_this_record')}" href="{:url('recycle_delete',array('ids'=>$vo['id']))}" data-title="{:lang('clear_delete')}">
+                                <img src="__PUBLIC__/admin/images/delete.png" alt="{:lang('Delete')}"/>
+                            </a>
+                        </td>
+                    </tr>
+                    {/volist}
+                    
+                    </tbody>
+                </table>
+                <div class="pagination-wrapper">
+                    <div class="results-part"><span>{$search_total}</span></div>
+                    <div class="links-part">{$list->appends(input())->render();}</div>
+                </div>
+                
+                {else/}
+                <div class="alert alert-warning">{:lang('No_record')}</div>
+                {/notempty}
+            </div>
+        </div>
+    </div>
+    <script>
+        function changeStatus(id, status) {
+            $.ajax({
+                url: '{:url('changeStatus')}',
+                type: "post",
+                data: {'id': id, 'status': status},
+                dataType: "json",
+                cache: false,
+                time: 3000,
+                success: function (data) {
+                },
+                error: function () {
+                    that.html('{:lang("Ver_err")}');
+                }
+            });
+        }
+        function changeSort(id, sort) {
+    
+            $.ajax({
+                url: '{:url('changeSort')}',
+                type: "post",
+                data: {'id': id, 'sort': sort},
+                dataType: "json",
+                cache: false,
+                time: 3000,
+                success: function (data) {
+    
+                },
+                error: function () {
+                    that.html('{:lang("Ver_err")}');
+                }
+            });
+        }
+    
+        // 图片浏览
+        $('.thumb img').mousemove(function () {
+            if ($(this).attr('src').indexOf('no-image.png') <= 0) {
+                var image = '<img src="' + $(this).attr('src') + '" height="200"/>';
+                $(this).parent().find('.show').html(image);
+                $(this).parent().find('.show').show();
+            }
+        }).mouseleave(function () {
+            $(this).parent().find('.show').hide();
+        });
+    </script>
+    <script>
+        $(function () {
+            $('.go_search').change(function () {
+                var gotu_url = $(this).find('option:selected').attr('url');
+                eval("self.location='" + gotu_url + "'");
+            });
+            $('#goods-search').click(function () {
+                var url = $(this).attr('url'),
+                    search = $('#search').val(),
+                    min_price = $('#min_price').val(),
+                    max_price = $('#max_price').val();
+
+                if ($.trim(search) != '') {
+                    if (url.indexOf('?') > 0) {
+                        url += '&name=' + search;
+                    } else {
+                        url += '?name=' + search;
+                    }
+                }
+                if ($.trim(min_price) != '') {
+                    if (url.indexOf('?') > 0) {
+                        url += '&min_price=' + min_price;
+                    } else {
+                        url += '?min_price=' + min_price;
+                    }
+                }
+                if ($.trim(max_price) != '') {
+                    if (url.indexOf('?') > 0) {
+                        url += '&max_price=' + max_price;
+                    } else {
+                        url += '?max_price=' + max_price;
+                    }
+                }
+                self.location = url;
+            });
+        });
+    </script>
+    {include file="admin@public/time_for_search" /}
+    
+    {/block}

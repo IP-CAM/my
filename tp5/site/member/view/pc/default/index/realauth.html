@@ -1,0 +1,118 @@
+    {extend name="common/base" /}
+    
+    {block name="title"}
+    <title>ETshop-{:lang('Real_auth')}</title>
+    {/block}
+    
+    {block name="css"}
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/member.css" />
+    <style>
+        .had_auth{
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-size: 20px;
+            font-weight: 200;
+            line-height: 2.4
+        }
+    </style>
+    {/block}
+    
+    {block name="body"}
+    <!--面包屑-->
+    <div class="ly-path">
+        <ul class="clearfix">
+            <li class="home">
+                <a href="{:url('crossbbcg/index/index')}" title="{:lang('go_min')}">{:lang('Home')}</a>
+                <span>&gt;&nbsp;</span>
+            </li>
+            <li>
+                <a href="{:url('member/index/index')}" title="">{:lang('Member')}</a>
+                <span>&gt;&nbsp;</span>
+            </li>
+            <li>
+                <h1>{:lang('Real_auth')}</h1>
+            </li>
+        </ul>
+    </div>
+    <div class="ly-main member-main clearfix">
+        {include file="index/left_menu"}
+        <div class="member-right">
+            <div class="member-content">
+                <div class="title member-title member-max-title">
+                    <div class="t">{:lang('realauth')}</div>
+    
+                </div>
+                <div class="body pb15 mh600 realauth yahei">
+                    <div class="member-userinfo">
+                        <div class="form-info">
+                            {:lang('realauth_tips')}
+                        </div>
+                        <br />
+                        <br />
+                        {eq name="$realauth_result.is_realauth" value='1'}
+                        <div class="had_auth">{:lang('had been realauth')}</div>
+                        {else /}
+                        <form  class="login-form">
+                            <ul>
+    
+                                <li class="form-row">
+                                    <label class="form-label"><em>*</em>{:lang('realname')}：</label>
+                                    <span class="form-act">
+                      <input class="input-ln" type="text" name="user[realname]" data-empty="{:lang('pleace input realname')}" id="realname" value=""  required="" maxlength="25">
+                                    </span>
+                                </li>
+    
+                                <li class="form-row">
+                                    <label class="form-label"><em>*</em>{:lang('IDcard')}：</label>
+                                    <span class="form-act">
+                                    <input class="input-ln" data-empty="{:lang('pleace input IDcards')}" data-format="{:lang('the IDcard format error')}" type="text" name="user[identity]" value="" id="identity" maxlength="100">
+                                    </span>
+                                </li>
+                                <li class="form-row">
+                                    <label class="form-label"><em>*</em>{:lang('identity card false')}：</label>
+                                    <span class="form-act">
+                                     <ul class="images-upload clearfix upload-ui" name="file" data-url="{:url('ajax_upload')}" data-maxlength="1">
+                                        
+                                        <li class="img-thumbnail action-upload">
+                                            <span class="icon-add">+</span>
+                                        </li>
+                                    </ul>
+                                    </span>
+                                </li>
+                                <li class="form-row">
+                                    <label class="form-label"><em>*</em>{:lang('identity card true')}：</label>
+                                    <span class="form-act">
+                                      <ul class="images-upload clearfix upload-ui" name="file" data-url="{:url('ajax_upload')}" data-maxlength="1">
+                                        <li class="img-thumbnail action-upload">
+                                            <input  type="file" class="action-file-input upload-input">
+                                            <span class="icon-add">+</span>
+                                        </li>
+                                        
+                                    </ul>
+                                    </span>
+                                </li>
+                                <li class="form-row last">
+                                    <label class="form-label"></label>
+                                    <span class="form-act">
+                                    <button id="real-auth" class="btn btn-import" rel="_request" data-url="{:url('realauth')}"><span><span>{:lang('save')}</span></span>
+                                    </button>
+                                    </span>
+                                </li>
+                            </ul>
+                        </form>
+                        {/eq}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    {/block}
+    
+    <!--此板块为页面单独js加载-->
+    {block name="footer_js"}
+    <script type="text/javascript">
+        //需要加载的js文件
+        Private_Script = ['member'];
+    </script>
+    {/block}

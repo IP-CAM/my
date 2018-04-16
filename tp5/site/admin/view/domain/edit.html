@@ -1,0 +1,149 @@
+    {extend name="public/poupbase"/}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+        <div id="content" style="margin:0px 10px 5px 8px;">
+            <div class="bloc" style="margin:10px 0px 0px;">
+                <div class="content">
+                    <form id="myform" method="post" style="margin-top:5px;" class="">
+                        <fieldset>
+                            <legend>{$meta_title|default=''}</legend>
+                            
+                            <div class="row">
+                                <label for="model" class="w140">{:lang('Select_model')}: <span class="required">*</span></label>
+    
+                                <select id="model" name="model" style="height:27px;margin-right:5px; padding-right: 10px;">
+                                    <option value="">{:lang('Option_model')}</option>
+                                    {volist name="applist" id="apps"}
+                                    {if condition="strtolower($apps)!='index' && strtolower($apps)!='install'"}
+                                    <option value="{:strtolower($apps)}" {if condition="strtolower($apps)==$data['model']"}selected{/if}>
+                                    {$apps}
+                                    </option>
+                                    {/if}
+                                    
+                                    {/volist}
+                                </select>
+                            </div>
+    
+                            <div class="row">
+                                <label for="controller" class="w140">{:lang('Controller')}: </label>
+                                <select id="controller" name="controller" disabled>
+                                    <option value=""></option>
+                                </select>
+                                <a class="tooltip-icon" title="{:lang('Controller tip')}"></a>
+                            </div>
+    
+                            <div class="row">
+                                <label for="method" class="w140">{:lang('Method')}: </label>
+                                <select id="method" name="method" disabled>
+                                    <option value=""></option>
+                                </select>
+                                <a class="tooltip-icon" title="{:lang('Method tip')}"></a>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="domain" class="w140">{:lang('Domain')}: <span class="required">*</span></label>
+                                <input id="domain" type="text" value="{$data.domain}" name="domain" placeholder="shop.a.com" />
+                                <a class="tooltip-icon" title="{:lang('Forexample')} : admin.a.com"></a>
+                            </div>
+    
+                            <div class="row">
+                                <label for="parameter" class="w140">{:lang('Domain parameter')}: </label>
+                                <input id="parameter" type="text" value="{$data.parameter}" name="parameter" placeholder="?type=index&l=zh-cn" />
+                                <a class="tooltip-icon" title="{:lang('Forexample')} : admin.a.com"></a>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="remark" class="w140">{:lang('Remark')}: </label>
+                                <input id="remark" type="text" value="{$data.remark}" name="remark" style="width:320px;" placeholder="{:lang('Domain_remark_tip')}" />
+                            </div>
+    
+                            <div class="row">
+                                <label for="status" class="w140">{:lang('Status')}: </label>
+                                <div class="slideBox">
+                                    {eq name="ACTION_NAME" value="edit"}
+                                    <input id="status" value="1" type="checkbox" name="status"  {eq name="data['status']" value="1"}checked{/eq}/>
+                                    {else /}
+                                    <input id="status" value="1" type="checkbox" name="status" checked />
+                                    {/eq}
+                                    <label for="status"></label>
+                                </div>
+                                <div style="float:left; margin-left:10px; line-height:24px;">
+                                    {:lang('Status_tip')}
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="sort" class="w140">{:lang('Sort')}: </label>
+                                <input type="number" class="input litle" min="0" name="sort" maxlength="5" id="sort" value='{$data.sort|default=0}'>
+                            </div>
+                            
+                            <div class="clear"></div>
+                            <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                                {eq name="ACTION_NAME" value="edit"}
+                                    <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('savedata')}">
+                                    <input type="hidden" name="id" value="{$data.id}" />
+                                {else /}
+                                    <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}">
+                                {/eq}
+                                <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {/block}
+    
+    {block name="js"}
+    <script>
+        $(function () {
+            //选择模块
+            /*$('#model').on('change', function () {
+                var that    = $(this);
+                var target  = '{:url("getapps")}';
+                $('#controller').attr('disabled', false).empty();
+
+                $.post(target, {app:that.val()},
+                    function(data){
+                        if(data.code == 1){
+                            var opt = '<option value="">{:lang("Select_controller")}</option>';
+                            $.each(data.msg, function (i,val) {
+                                opt += '<option value="'+val+'">'+val+'</option>'
+                            })
+                            $("#controller").append(opt);
+                        }else{
+                            layer.msg(data.msg, {icon:2, time:3000, shade:0.3}, function () {
+                                location.reload();
+                            });
+                        }
+                    },
+                    "json"
+                );
+            })*/
+            
+            //选择控制器
+            /*$('#controller').on('change', function () {
+                var app     = $('#model');
+                var that    = $(this);
+                var target  = '{:url("getapps")}';
+                $('#method').attr('disabled', false).empty();
+
+                $.post(target, {app:app.val(), controller:that.val()},
+                    function(data){
+                        if(data.code == 1){
+                            var opt = '<option value="">{:lang("Select_method")}</option>';
+                            $.each(data.msg, function (i,val) {
+                                opt += '<option value="'+val+'">'+val+'</option>'
+                            })
+                            $("#method").append(opt);
+                        }else{
+                            layer.msg(data.msg, {icon: 2, time: 3000, shade: 0.3});
+                        }
+                    },
+                    "json"
+                );
+            })*/
+        })
+    </script>
+    {/block}

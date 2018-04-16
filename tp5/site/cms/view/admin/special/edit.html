@@ -1,0 +1,168 @@
+{extend name="admin@public/poupbase" /}
+
+<!-- CONTENT -->
+{block name="body"}
+<div id="content" style="margin:0px 10px 5px 8px;">
+    <div class="bloc" style="margin:10px 0px 0px;">
+        <div class="content">
+            <form id="myform" method="post" style="margin-top:5px;" class="">
+                <fieldset>
+                    <legend>{$meta_title|default=''}</legend>
+                    
+                    <div class="row">
+                        <div style="float: left">
+                            <label for="category_id" class="w100">{:lang('Specialcat')}:<span
+                                class="required">*</span></label>
+                            <select name="category_id" id="category_id" style="width:130px; margin-right: 16px;">
+                                <option value="0">{:lang('Asfirstlevel')}</option>
+                                {volist name="catlist" id="co"}
+                                <option value="{$co.id}" {eq name="ACTION_NAME" value="edit" }{eq name="co.id"
+                                        value="$data.category_id" }selected{
+                                /eq} {else /} {eq name="co.id" value="$category_id"}selected{/eq} {/eq}>{$co.char}
+                                {$co.title}</option>
+                                {/volist}
+                            </select>
+                        </div>
+                        <div style="float: left">
+                            <div style="float:left ">
+                                <label for="sort" class="w130">{:lang('Sort')}: </label>
+                                <input type="number" class="input litle" name="sort" maxlength="5" id="sort"
+                                       value='{$data.sort|default=0}'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div style="float:left;">
+                            <label for="name" class="w100">{:lang('Special name')}: <span
+                                class="required">*</span></label>
+                            <input id="name" type="text" class="onlyletter" value="{$data.name}" name="name"
+                                   style="width:180px;"/>
+                        </div>
+                        <div style="float:left ">
+                            <div style="float: left">
+                                <label for="status" class="w70">{:lang('Status')}:</label>
+                                <div class="slideBox">
+                                    {eq name="ACTION_NAME" value="edit"}
+                                    <input id="status" value="1" type="checkbox" name="status" {eq name="data['status']"
+                                           value="1" }checked{/eq} />
+                                    {else /}
+                                    <input id="status" value="1" type="checkbox" name="status" checked/>
+                                    {/eq}
+                                    <label for="status"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div style="float:left;">
+                            <label for="title" class="w100">{:lang('Special title')}: <span
+                                class="required">*</span></label>
+                            <input id="title" type="text" value="{$data.title}" name="title" style="width:180px;"
+                                   pagination="{:lang('Circle admin tip')}"/>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div style="float: left">
+                            <label for="keywords" class="w100">{:lang('Special keywords')}:</label>
+                            <input id="keywords" type="text" value="{$data.keywords}" name="keywords" style="width:180px;"
+                                   pagination=""/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div style="float: left">
+                            <label for="seo_rule" class="w100">{:lang('Seo_rule')}: </label>
+                            <select name="seo_rule" id="seo_rule" style="width: 190px;">
+                                <option value="1">{:lang('Default')}</option>
+                            </select>
+                            <a class="tooltip-icon" title="{:lang('All_urlrules_tip')}"></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div style="float: left">
+                            <label for="template" class="w100">{:lang('Special template')}: </label>
+                            <select name="template" id="template" style="width: 190px;">
+                                <option value="">{:lang('Default')}</option>
+                                <option value="1">template_index.html</option>
+                                <option value="0">template_index.html</option>
+                                <option value="0">this_is_template_index.html</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        
+                        <div style="float:left;" class="bset">
+                            <label class="w100">{:lang('Sate')} : </label>
+                            <input name="state" type="radio" value="0" id="state_0" {eq name="data.state" value="0"
+                                   }checked{/eq} />
+                            <label for="state_1" style="width: 60px" class="w50l_r_0">{:lang('Draft')}</label>
+                            
+                            <input name="state" type="radio" value="1" id="state_1" {eq name="data.state" value="1"
+                                   }checked{/eq} {eq name="ACTION_NAME" value="add"}checked{/eq} />
+                            <label for="state_0" style="width: 60px" class="w50l_r_0">{:lang('Released')}</label>
+                        </div>
+                    
+                    </div>
+                    <div class="row">
+                        <label for="explain" class="w100">{:lang('Special explain')}: <span
+                            class="required">*</span></label>
+                        <textarea id="explain" style="width: 280px; height: 60px;" name="explain" placeholder="">{$data.explain}</textarea>
+                    </div>
+                    
+                    <div class="row" style="margin-left:40px">
+                        <div class="clear"></div>
+                        <label for="contents">{:lang('Special content')}: </label>
+                        <textarea id="contents" name="contents">{$data.contents}</textarea>
+                        <script charset="utf-8" src="__STATIC__/kindeditor/kindeditor-all-min.js"></script>
+                        <script>
+                            KindEditor.ready(function (K) {
+                                editor = K.create('#contents', {
+                                    resizeType: 1,
+                                    allowPreviewEmoticons: false,
+                                    allowImageUpload: false,
+                                    minWidth: 470,
+                                    minHeight: 185,
+                                    langType: '{:jsup(config('default_lang'))}',
+                                    items: [
+                                        'undo', 'redo', '|', 'bold', 'italic', 'underline',
+                                        'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                                        'insertunorderedlist', '|', 'image', 'media'],
+                                    afterBlur: function () {
+                                        this.sync();
+                                    }
+                                });
+                            });
+                        </script>
+                    </div>
+                
+                </fieldset>
+                <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                    {eq name="$action_name" value="edit"}
+                    <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('savedata')}"/>
+                    <input name="id" type="hidden" value="{$data.id}"/>
+                    
+                    {else /}
+                    <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}"/>
+                    <input name="from" type="hidden" value="admin"/>
+                    {/eq}
+                    <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $(".bset").buttonset();
+
+        $("#dead_line").datepicker({
+            dateFormat: "{:config('kernel.timeformat')}",
+            maxDate: new Date(),
+            onSelect: function (dateText, inst) {
+                $.datepicker.regional["{:config('kernel.localdate')}"];
+            }
+        });
+    })
+</script>
+
+{/block}

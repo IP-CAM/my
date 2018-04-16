@@ -1,0 +1,174 @@
+    {extend name="admin@public/poupbase"/}
+
+    {block name="style"}
+    <style>
+        .row{ min-height: 30px !important; margin: 5px 0px 0px !important;}
+        form label.w2{ width: 260px !important;}
+    </style>
+    {/block}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content" style="margin:0px 10px 5px 8px;">
+        <div class="bloc" style="margin:10px 0px 0px;">
+            
+            <div class="content">
+                <form id="myform" method="post" style="margin-top:5px;" class="">
+                    <fieldset style="height: 360px;">
+                        <legend>{:lang('Detailed')}</legend>
+    
+                        <div class="row">
+                            <div class="fl">
+                                <label class="w120">{:lang('Refund_type')} : </label>
+                                <label class="w2">
+                                    {switch name="data.cancel_type"}
+                                    {case value="0"}<span class="L40 blue">{:lang('Cancel_order_refund')}</span>{/case}
+                                    {case value="1"}<span class="L40 red">{:lang('Refund_And_Return')}</span>{/case}
+                                    {case value="2"}<span class="L40 green">{:lang('Only_Exchange')}</span>{/case}
+                                    {default /}
+                                    {/switch}
+                                </label>
+                            </div>
+                            
+                            <div class="fl">
+                                <label class="w100">{:lang('Shipping status')} : </label>
+                                <label style="font-size:15px; font-weight: bold;" class="red w2">
+                                    {eq name="data.shipping_status" value="1"}
+                                    {:lang('Delivered')}
+                                    {else /}
+                                    {:lang('Non_delivery')}
+                                    {/eq}
+                                </label>
+                            </div>
+                        </div>
+    
+                        <div class="row">
+                            <div class="fl">
+                                <label class="w120">{:lang('Order_sn')} : </label>
+                                <label class="w2" style="font-size: 15px; font-weight: bold;">{$data.order_sn}</label>
+                            </div>
+    
+                            <div class="fl">
+                                <label class="w100">{:lang('Payment_type')} : </label>
+                                <label style="font-weight: 400;" class="green w2">
+                                    {notempty name="data.pay_name"}{$data.pay_name|lang}{/notempty}
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="fl">
+                                <label class="w120">{:lang('Total_amount')} : </label>
+                                <label style="font-weight: 400;" class="w2">{$data.symbol} {$data.order_amount} <span class="red">（{:lang('Integral amount')}）</span></label>
+                            </div>
+                            
+                            <div class="fl">
+                                <label class="w100">{:lang('Refund_seller')} : </label>
+                                <label style="font-weight: 400;" class="w2">{$data.symbol} {$data.shipping_fee} <span class="red">（{:lang('Contain Integral amount')} : {$data.symbol} {:number_format($data['integral'], 2)}）</span></label>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <label class="w120">{:lang('Refund_real')} : </label>
+                            <label style="width: 500px;">{$data.symbol} {$data.order_amount} <span class="red">（{:lang('Refund_seller')} - {:lang('Points against money')} : {$data.symbol} {$data.order_amount} - {$data.symbol} {:number_format($data['integral'], 2)}）</span></label>
+                        </div>
+                        
+                        <div class="row bset">
+                            <label class="w120">{:lang('Refund_method')} : </label>
+                            
+                            <input name="refund" type="radio" value="0" id="refund_0" />
+                            <label for="refund_0" class="w150_r_0">{:lang('Refund_offline')}</label>
+    
+                            <input name="refund" type="radio" value="1" id="refund_1" />
+                            <label for="refund_1" class="w150_r_0">{:lang('Refund_to_deposit')}</label>
+    
+                            <input name="refund" type="radio" value="2" id="refund_2" checked />
+                            <label for="refund_2" class="w150_r_0 tooltip-link" title="{:lang('Original refund tip')}">{:lang('Original refund')}</label>
+                        </div>
+                        
+                        <div id="refund_box_0" style="height: 150px; display: none;">
+                            <div class="row">
+                                <label class="w100">{:lang('Payment_type')} : </label>
+                                <label style="font-weight: 400;" class="green w2">
+                                    {notempty name="data.pay_name"}{$data.pay_name|lang}{/notempty}
+                                </label>
+                            </div>
+                        </div>
+    
+                        <div id="refund_box_1" style="height: 150px; display: none;">
+                            <div class="row">
+        
+                            </div>
+                        </div>
+    
+                        <div id="refund_box_2" style="height: 150px;">
+                            <div class="row">
+                                <label class="w120">{:lang('Trade_no')} : </label>
+                                <label style="font-size: 15px; font-weight: bold;" class="w2">
+                                    {notempty name="data.trade_no"}
+                                    {$data.trade_no}
+                                    {else /}
+                                    {:lang('No_trade_no')}
+                                    {/notempty}
+                                </label>
+                            </div>
+                            
+                            <div class="row">
+                                <label class="w120">{:lang('Select refund type')} : </label>
+                                <select id="refunds" name="refunds" style="min-width: 140px;" >
+                                    <option value="" data-tip="{:lang('Select refund type')}" >{:lang('Please_select')}</option>
+                                    {foreach :get_extend_type('refunds') as $vo}
+                                    <option value="{$vo.code}" data-tip="{:lang($vo.description)}" >{:lang($vo.name)}</option>
+                                    {/foreach}
+                                </select>
+    
+                                <span id="refundsdesc"></span>
+                            </div>
+    
+                            <div class="row">
+                                <label class="w120">{:lang('Refund_real')} : </label>
+                                <label style="width: 500px;">{$data.symbol} {$data.order_amount} <span class="red">（{:lang('Refund_seller')} - {:lang('Points against money')} : {$data.symbol} {$data.order_amount} - {$data.symbol} {:number_format($data['integral'], 2)}）</span></label>
+                            </div>
+    
+                            <div class="row">
+                                <label class="w120">{:lang('Refund_real')} : </label>
+                                <label style="width: 500px;">{$data.symbol} {$data.order_amount} <span class="red">（{:lang('Refund_seller')} - {:lang('Points against money')} : {$data.symbol} {$data.order_amount} - {$data.symbol} {:number_format($data['integral'], 2)}）</span></label>
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="buttons-wrapper bw-bottom" style="margin:0px auto 2px; text-align:center;">
+                            <input name="submit1" value="{:lang('Submit refund')}" type="submit" url="{:url()}">
+                            <input name="order_id" type="hidden" value="{$data.order_id}"/>
+                            <input name="order_sn" type="hidden" value="{$data.order_sn}"/>
+                            <input name="reset" class="button white" value="{:lang('Close_win')}" type="reset">
+                        </div>
+                    </fieldset>
+    
+                </form>
+            </div>
+        </div>
+    </div>
+    {/block}
+    
+    {block name="js"}
+    <script>
+        $(function () {
+            $(".bset").buttonset();
+
+            {php}
+            $pay = explode('_', $data['pay_name']);
+            {/php}
+            var pay = '{$pay[0]}';
+            if(pay != '')
+            {
+                $("#refunds option[value="+pay+"]").eq(0).attr("selected", true);
+            }
+
+            $('#refundsdesc').text($('#refunds option:selected').attr('data-tip'));
+            $('#refunds').on('change', function () {
+                $('#refundsdesc').text($('#refunds option:selected').attr('data-tip'));
+            });
+        })
+    </script>
+    {/block}

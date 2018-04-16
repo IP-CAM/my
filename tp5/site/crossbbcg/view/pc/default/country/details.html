@@ -1,0 +1,107 @@
+{extend name="common/base" /} {block name="title"}
+<title>{$title}</title>
+{/block} {block name="css"}
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/country.css"/> {/block} {block name="body"}
+<div class="ly-Allwrap clearfix">
+    <div class="n">
+        <div class="ly-flash">
+            <!--请参考index.js 参数设置 此处为全屏轮播配置项 , 可覆盖默认配置项 data-carouFredSel(必须)  为加载标识  data-type(必须) 轮播类型full 为全屏-->
+            <div class="slide-full">
+                <ol class="slide-content clearfix">
+                    
+                    {if condition="substr($data['banner_image'],0,4)=='http'"}
+                    <img src="{$data.banner_image}" alt="{$data['name']}">
+                    {else /}
+                    <img src="__UPLOADS__/{$data.banner_image}" alt="{$data['name']}">
+                    {/if}
+                </ol>
+            </div>
+        
+        </div>
+    </div>
+</div>
+<div class="ly-main clearfix">
+    
+    {notempty name="$arr_brand"}
+    <div class="country_prd brand-prd">
+        <div class="title">
+            <em class="t-l"></em>
+            <span>
+            {$data['country']['name']}{:lang('deserve_go_brand')}
+            </span>
+            <em class="t-r"></em>
+        </div>
+        <div class="country_products ">
+            <ul class="clearfix">
+                {foreach $arr_brand as $key => $arr}
+                <li>
+                    <div class="brandWrap clearfix" ani="bind" id="auto-id-{$arr['id']}">
+                        <a class="brandImgLink" href="{:url('crossbbcg/search/index','brand_id='.$arr['id'])}" target="_blank">
+                            <!--TODO banner_iamge 新增到品牌-->
+                            {if condition="$arr['banner_image']==''"}
+                            <img width="244" height="244" class="lazy brandImg" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__PUBLIC__/{$img_path}/no-image.png" alt="{$arr['name']}">
+                            {elseif condition="substr($arr['banner_image'],0,4)=='http'"}
+                            <img width="244" height="244" class="lazy brandImg" src="__PUBLIC__/{$img_path}/tm.gif" data-original="{$arr['banner_image']}" alt="{$arr['name']}">
+                            {else /}
+                            <img width="244" height="244" class="lazy brandImg" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__UPLOADS__/{$arr['banner_image']}" alt="{$arr['name']}">
+                            {/if}
+                        </a>
+                        <a style="top:0" class="brandDesc" href="{:url('crossbbcg/search/index','brand_id='.$arr['id'])}" target="_blank">
+                            
+                            {if condition="substr($arr['logo'],0,4)=='http'"}
+                            <img class="brandLogo" src="{$arr['logo']}" title="{$arr['name']}">
+                            {else /}
+                            <img class="brandLogo" src="__UPLOADS__/{$arr['logo']}" title="{$arr['name']}">
+                            {/if}
+                            <p class="brandName" title="{$arr['name']}">{$arr['name']}</p>
+                            <p class="brandBenefit">{$data['country']['name']}{:lang('hot_brand')}</p> <span class="brandBtn">{:lang('to_brand')}</span> </a>
+                    </div>
+                </li>
+                {/foreach}
+            </ul>
+        </div>
+    </div>
+    {/notempty}
+    
+    {notempty name="$arr_goods"}
+    <div class="country_prd">
+        <div class="title"><em class="t-l"></em><span>
+            {$data['country']['name']}{:lang('deserve_buy')}
+        </span><em class="t-r"></em></div>
+        <div class="country_products">
+            <ul>
+                {foreach $arr_goods as $key2=> $arr2}
+                <li>
+                    <a class="pic" href="{:url('crossbbcg/goods/index','item_id='.$arr2['id'])}" target="_blank" title="{$arr2['name']}">
+                        {if condition="empty($arr2['thumb']) "}
+                        <img alt="{$arr2['name']}" width="232" height="232" class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__PUBLIC__/admin/images/icons/no-image.png"/>
+                        {elseif condition="substr($arr2['thumb'],0,4)=='http'"}
+                        <img width="232" height="232" class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="{$arr2.thumb}" alt="{$arr2['name']}" />
+                        {else /}
+                        <img data-original="__UPLOADS__/{$arr2.thumb}" alt="{$arr2['name']}" width="232" height="232" class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" />
+                        {/if}
+                    </a>
+                    <div class="txt">
+                        <h3 class="tit"><a class="protitle" target="_blank" href="{:url('crossbbcg/goods/index','item_id='.$arr2['id'])}" title="{$arr2['name']}">{$arr2['name']}</a></h3>
+                        <p class="price">
+                            <strong class="item1">{$arr2['sale_price']}</strong>
+                            <span class="item2">{$arr2['market_price']}</span>
+                            <span class="item3"><a href="{:url('crossbbcg/goods/index','item_id='.$arr2['id'])}" >{:lang('Buy_Now')}</a></span>
+                        </p>
+                    </div>
+                </li>
+                {/foreach}
+            </ul>
+        </div>
+    </div>
+    {/notempty}
+    
+</div>
+{/block}
+<!--此板块为页面单独js加载-->
+{block name="footer_js"}
+<script type="text/javascript">
+    //需要加载的js文件
+    Private_Script = ['country'];
+</script>
+{/block}

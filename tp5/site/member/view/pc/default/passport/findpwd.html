@@ -1,0 +1,61 @@
+    {extend name="common/base" /}
+    
+    {block name="title"}
+    <title>ETshop-{$mata_title}</title>
+    {/block}
+    
+    {block name="css"}
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/passport.css" />
+    {/block}
+    
+    {block name="body"}
+    <div class="findpwd-main-box yahei">
+        <div class="pwd-box">
+            <div class="steps">
+                <table width="100%">
+                    <tbody>
+    
+                        <tr>
+                            <td class="step-item step-1 active">
+                                <span>
+                                    <q class="icon">●</q>
+                                    <i>1</i>{:lang('input account')}
+                                </span>
+                                <div class="stepdiv">1</div>
+                            </td>
+                            <td class="step-item step-2">
+                                <a href="/cart-checkout.html">
+                                    <q class="icon">●</q>
+                                    <i>2</i>{:lang('identify check')}
+                                </a>
+                                <div class="stepdiv">2</div>
+                            </td>
+                            <td class="step-item step-3 last"><span><q class="icon">●</q><i>3</i>{:lang('reset password')}</span>
+                                <div class="stepdiv">3</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <form class="login-form" id="pwd_form" action="{:url('findpwdTwo')}" method="post">
+                <div class="input-line">
+                    <span class="input-label">{:lang('login_account')}</span>
+                    <input id="username" class="form-text" data-ajax="{:url('passport/check_mobile/index',array('scene'=>'login'))}" required=""  data-empty="{:lang('telephone_email_input')}" name="username" type="text" autocomplete="off" placeholder="{:lang('mobile_email')}">
+                    <i class="icon-reset">×</i>
+                    <div class="input-error"></div>
+                </div>
+                <div class="form-submit">
+                    <button id="pwd-btn" class="submit-btn chang_pwd1 disabled"  data-url="{:url('findpwd')}" type="button">{:lang('next step')}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {/block}
+    
+    <!--此板块为页面单独js加载-->
+    {block name="footer_js"}
+    <script type="text/javascript">
+        //需要加载的js文件
+        Private_Script = ['passport','gt'];
+    </script>
+    {/block}

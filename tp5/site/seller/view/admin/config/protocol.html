@@ -1,0 +1,90 @@
+    {extend name="admin@public/base" /}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content">
+        <div class="breadcrumbs">
+            {:lang('Seller')} : &nbsp;&nbsp; {:lang('Shopconf')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+        </div>
+        
+        <div class="bloc">
+            <div class="title">
+                <div class="tabs" id="navs">
+                    {include file="admin@public/navs" /}
+                </div>
+                
+                {include file="admin@public/lang" /}
+            </div>
+            <div class="content">
+                <!--<dl class="gzzt clearfix mtb10">
+                   
+                    <dd>
+                        <div class="boxr">
+                            {include file="admin@public/button" /}
+                        </div>
+                    </dd>
+                    
+                    
+                    <dd style="float: right !important;">
+                    <div class="boxl">
+                        <span>
+                            <a href="javascript:location.reload();" class="refresh tooltip-link" title="{:lang('Refresh')}">
+                                <em>{:lang('Refresh')}</em>
+                            </a>
+                        </span>
+                        <span>
+                            <a href="javascript:void(0);" class="ajax-get setting tooltip-link colum" title="{:lang('Showlum')}" data-title="{:lang('Showlum')}">
+                                <em>{:lang('Showlum')}</em>
+                            </a>
+                        </span>
+                    </div>
+                </dd>
+                </dl>-->
+                <form name="frmShopSettingsEdit" method="post" style="margin-top:5px;">
+                    <div class="alert alert-warning">
+                        <button class="close" type="button">&times;</button>
+                        <span class="alert-content">{:lang('Regagreement_tip')}</span>
+                    </div>
+        
+                    <div class="content" style="padding-bottom: 20px; padding-top: 0px;">
+                        <table class="table kright">
+                            <tbody>
+                            <tr style="padding: 5px 0;">
+                                <td style="vertical-align:top; padding: 15px 15px;">{:lang('Regagreement')}: </td>
+                                <td>
+                                    <div class="row">
+                                        <textarea id="contents" name="contents">{notempty name='data.contents'}{:html_entity_decode($data.contents)}{/notempty}</textarea>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+        
+                    <div class="buttons-wrapper" style="margin:0 0 30px; padding:0 0 0 18%;">
+                        <input type="hidden" name="act" value="protocol">
+                        <input name="submit" value="{:lang('Saveregagreement')}" type="submit" url="{:url('save')}" />
+                    </div>
+                </form>
+                <script charset="utf-8" src="__STATIC__/kindeditor/kindeditor-all-min.js"></script>
+                <script>
+                    KindEditor.ready(function(K) {
+                        editor = K.create('#contents', {
+                            resizeType : 1,
+                            allowPreviewEmoticons : false,
+                            allowImageUpload : false,
+                            minWidth : 800,
+                            minHeight : 350,
+                            langType : "{:jsup(config('default_lang'))}",
+                            items : [
+                                'source', '|','undo', 'redo', '|','bold', 'italic', 'underline',
+                                'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                                'insertunorderedlist', '|', 'link', 'unlink', 'image', 'media'],
+                            afterBlur: function () { this.sync(); }
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+    {/block}

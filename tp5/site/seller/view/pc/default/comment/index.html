@@ -1,0 +1,269 @@
+{extend name='common/base' /}
+{block name='css'}
+<link href="__PUBLIC__/{$css_path}/daterangepicker.css" rel="stylesheet">
+{/block}
+{block name="breadcrumb"}
+<li>{:lang('sGoods')}</li>
+<li class="active">{$meta_title|default=''}</li>
+{/block}
+{block name='body'}
+<section class="content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <div class="row">
+                        <form action="{:url('seller/comment/index')}">
+                        <div class="page-header-top">
+                            <a class="btn btn-etshop addnew" href="{:url('seller/comment/index')}">
+                                <i class="fa fa-feed"></i> {:lang('All')}
+                            </a>
+                            {:getSellerButton()}
+                            <div class="btn-group" style="display: inline-block;margin-right: 6px;">
+                                <button type="button" class="btn btn-danger etbtn">
+                                    {switch name='$level'}
+                                    {case value='1'}{:lang('bad_comment')}{/case}
+                                    {case value='2'}{:lang('middle_comment')}{/case}
+                                    {case value='4'}{:lang('good_comment')}{/case}
+                                    {default /}{:lang('comment_level')}
+                                    {/switch}
+                                    
+                                </button>
+                                <button type="button" class="btn btn-danger etbtn dropdown-toggle"
+                                        data-toggle="dropdown" aria-expanded="false">
+                                    <span class="caret"></span>
+                                    <!--<span class="sr-only"></span>-->
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{:url('seller/comment/index',array('level'=>4))}">{:lang('good_comment')}</a></li>
+                                    <li><a href="{:url('seller/comment/index',array('level'=>2))}">{:lang('middle_comment')}</a></li>
+                                    <li><a href="{:url('seller/comment/index',array('level'=>1))}">{:lang('bad_comment')}</a></li>
+                                </ul>
+                            </div>
+                            <div class="time"
+                                 style="width: 200px; position: relative;display: inline-block;vertical-align: middle; margin-right: 6px">
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+            
+                                    <input type="text" class="form-control pull-left" id="reservation" name="time" placeholder="{:lang('choose_comment_time')}" value="{$time}" style="padding: 4px 12px; height: 30px">
+                                </div>
+                            </div>
+                            <div class="time" style="width: 260px; position: relative;display: inline-block;vertical-align: middle; margin-right: 6px">
+                                <div class="input-group">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-default etbtn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                            {switch name='$condition'}
+                                            {case value='name'}{:lang('username')}<input type="hidden" value="{$condition}" name="condition" />{/case}
+                                            {case value='good_code'}{:lang('comment_content')}<input type="hidden" value="{$condition}" name="condition" />{/case}
+                                            {default /}{:lang('Search_name')}
+                                            {/switch}
+                                            &nbsp;
+                                            <span class="fa fa-caret-down"></span></button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="{:url('seller/comment/index',array('condition'=>'from_membername'))}">{:lang('username')}</a></li>
+                                            <li><a href="{:url('seller/comment/index',array('condition'=>'comment_content'))}">{:lang('comment_content')}</a></li>
+                                        </ul>
+                                    </div>
+                                    <!-- /btn-group -->
+                                    <input type="text" placeholder="{:lang('goods_search_tips')}" class="form-control" value="{$key_words}" name="key_words" style="padding: 4px 12px;height: 30px">
+                                </div>
+                            </div>
+                            <input type="submit" value="{:lang('search')}" class="btn btn-info etbtn">
+                            
+                        </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <table id="demo-foo-addrow" class="table table-bordered table-striped" data-page-size="10">
+                        <thead>
+                        <tr>
+                            <th style="width: 25px;">
+                                <input type="checkbox" class="check-all">
+                            </th>
+                            <th>{:lang('comment_member')}</th>
+                            <th>{:lang('comment_content')}</th>
+                            <th>{:lang('Goods_Name')}</th>
+                            <th>{:lang('score')}</th>
+                            <th>{:lang('comment_time')}</th>
+                            <th>{:lang('status')}</th>
+                            <th class="center">{:lang('opreration')}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach $list as $v}
+                        <tr>
+                            <td>
+                                <input class="ids" type="checkbox" value="{$v['id']}" name="ids[]">
+                            </td>
+                            <td>{eq name='$v.isanonymous' value='1'}{:lang('anonymity')}{else /}{$v.from_membername}{/eq}</td>
+                            <td>
+                                {$v.comment_content}
+                            </td>
+                            <td>
+                                <a target="_blank" href="{:url('crossbbcg/goods/index').'?item_id='.$v.goods_id}">
+                                {$v.goods_name}
+                                </a>
+                            </td>
+                            <td>
+                                {switch name='$v.score'}
+                                {case value='1'}
+                                <img src="__PUBLIC__/{$module_path}image/start/stars1.gif" alt="">
+                                {/case}
+                                {case value='2'}
+                                <img src="__PUBLIC__/{$module_path}image/start/stars2.gif" alt="">
+                                {/case}
+                                {case value='3'}
+                                <img src="__PUBLIC__/{$module_path}image/start/stars3.gif" alt="">
+                                {/case}
+                                {case value='4'}
+                                <img src="__PUBLIC__/{$module_path}image/start/stars4.gif" alt="">
+                                {/case}
+                                {case value='5'}
+                                <img src="__PUBLIC__/{$module_path}image/start/stars5.gif" alt="">
+                                {/case}
+                                {default /}<img src="__PUBLIC__/{$module_path}image/start/stars1.gif" alt="">
+                                {/switch}
+                            </td>
+                            <td>
+                                {$v.create_time}
+                            </td>
+                            <td>
+                                {empty name='$v.reply'}
+                                <span class="">{:lang('no_replyed')}</span>
+                                {else /}
+                                <span class="">{:lang('had_replyed')}</span>
+                                {/empty}
+                            </td>
+                            <td class="center">
+                                <a class="tooltip-link ajax-get f18" data-original-title="{:lang('View')}" data-toggle="tooltip" data-placement='top' data-width="900" data-height="530" data-showbar="1" data-title="{:lang('CommentProfile')}" data-skin="skin-blue" href="{:url('info',array('id'=>$v.id))}"><i class="fa fa-eye"></i></a>
+                            </td>
+                        </tr>
+                        {/foreach}
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="10">
+                                <div class="text-right pagination" >
+                                    {$list->appends(input())->render()}
+                                </div>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                
+                <!--<div class="row">
+                    <div class="col-xs-12">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th class="center">
+                                    <label class="pos-rel">
+                                        <input type="checkbox" class="ace"/>
+                                        <span class="lbl"></span>
+                                    </label>
+                                </th>
+                                <th><a href="{:getUrlbyOrder('id')}">ID</a></th>
+                                <th><a href="{:getUrlbyOrder('username')}">券码编号</a></th>
+                                <th class="center"><a href="{:getUrlbyOrder('password')}">密码</a></th>
+                                <th><a href="{:getUrlbyOrder('mobile')}">面额</a></th>
+                                <th class="hidden-480 center"><a href="{:getUrlbyOrder('start_time')}">起始日期</a></th>
+                                <th class="hidden-480 center"><a href="{:getUrlbyOrder('end_time')}">过期日期</a></th>
+                                <th class="hidden-480 center"><a href="{:getUrlbyOrder('status')}">{:lang('Status')}</a>
+                                </th>
+                                <th class="text-right" style="width:200px;">{:lang('Actions')}</th>
+                            </tr>
+                            </thead>
+                            
+                            <tbody>
+                            {foreach $list as $vo}
+                            <tr>
+                                <td class='center'>
+                                    <label class="pos-rel">
+                                        <input type="checkbox" class="ace ids" value="{$vo['order_id']}" name="ids[]"/>
+                                        <span class="lbl"></span>
+                                    </label>
+                                </td>
+                                <td>{$vo['order_id']}</td>
+                                <td></td>
+                                <td class='center'>
+                                
+                                </td>
+                                <td></td>
+                                <td class='hidden-480 center'></td>
+                                <td class='hidden-480 center'>
+                                
+                                </td>
+                                <td class='hidden-480 center'>
+                                
+                                </td>
+                                
+                                <td class='text-right'>
+                                    <div class="hidden-sm hidden-xs action-buttons">
+                                    
+                                    </div>
+                                    <div class="hidden-md hidden-lg">
+                                        <div class="inline pos-rel">
+                                            <button class="btn btn-minier btn-yellow dropdown-toggle"
+                                                    data-toggle="dropdown" data-position="auto">
+                                                <i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                                                <li>
+                                                    <a href="{:url('edit',array('ids'=>$vo['order_id']))}"
+                                                       class="tooltip-success ajax-get edit" data-rel="tooltip"
+                                                       title="发放" data-original-title="发关本优惠券" data-showbar="1"
+                                                       data-width="100%" data-height="90%">
+                                    <span class="green">
+                                        <i class="ace-icon fa fa-reply icon-only bigger-120"></i>
+                                    </span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="{:url('delete',array('ids'=>$vo['order_id']))}"
+                                                       class="tooltip-error ajax-get" data-rel="tooltip" title=""
+                                                       data-original-title="删除" data-layer="{:lang('Want_delete')}"
+                                                       title="删除">
+                                <span class="red">
+                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                </span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            {/foreach}
+                            </tbody>
+                        </table>
+                        
+                        <div class="pagination-wrapper">
+                            <div class="results-part"><span></span></div>
+                            <div class="links-part"></div>
+                        </div>
+                    </div>&lt;!&ndash; /.span &ndash;&gt;
+                </div>-->
+                
+                <div class="row">
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{/block}
+{block name='js'}
+<script src="__PUBLIC__/{$js_path}/moment.min.js"></script>
+<script src="__PUBLIC__/{$js_path}/daterangepicker.js"></script>
+
+<script type="text/javascript">
+    //Date range picker
+    $('#reservation').daterangepicker({
+        autoUpdateInput: false
+    });
+</script>
+{/block}

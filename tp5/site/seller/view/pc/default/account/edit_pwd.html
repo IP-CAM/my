@@ -1,0 +1,45 @@
+{extend name='common/poupbase'}
+{block name='css'}
+{/block}
+
+{block name='body'}
+<section class="content">
+    <div class="row" >
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-body">
+                    <form action="">
+                        <table class="table table-bordered">
+                            <tr>
+                                <td width="100" class="text-right">{:lang('new_password')}</td>
+                                <td>
+                                    <input type="password" name="password"  value="" class="form-control">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="100" class="text-right">{:lang('confirm_password')}</td>
+                                <td>
+                                    <input type="password" name="repassword"  value="" class="form-control">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="center">
+                                    <input type="hidden" name="id" value="{$data.id}">
+                                    <input type="submit" value="{:lang('submit')}" name="submit" class="btn btn-info" url="{:url('')}">
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+{/block}
+
+{block name="js"}
+<script type="text/javascript">
+
+</script>
+{/block}

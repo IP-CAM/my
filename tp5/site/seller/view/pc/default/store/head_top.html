@@ -1,0 +1,13 @@
+<div class="shop-top-box">
+	<div class="shop-top">
+	<a href="">
+        {if condition="empty($store_info.top_ad_img)"}
+        <img  class="lazy" src="__PUBLIC__/crossbbcg/pc/default/image/tm.gif" data-original="__PUBLIC__/crossbbcg/pc/default/image/no-image.png" alt="{$store_info.seller_name}">
+        {elseif condition="substr($store_info.top_ad_img,0,4) == 'http'"}
+        <img  class="lazy" src="__PUBLIC__/crossbbcg/pc/default/image/tm.gif" data-original="{$store_info.top_ad_img}" alt="{$store_info.seller_name}">
+        {else /}
+        <img  class="lazy" src="__PUBLIC__/crossbbcg/pc/default/image/tm.gif" data-original="__UPLOADS__/{$store_info.top_ad_img}" alt="{$store_info.seller_name}">
+        {/if}
+    </a>
+	</div>
+</div>

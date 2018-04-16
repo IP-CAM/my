@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ETshop{:lang('seller_control_login')}</title>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="__STATIC__/layer-v3.0.3/layer.js"></script>
+    <script src="__PUBLIC__/crossbbcg/pc/default/js/gt.js"></script>
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_kge539i2yfirudi.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/{$module_path}css/shopadmin.css"/>
+</head>
+<body class="body-login">
+<div class="form-box yahei">
+    <div class="form-left">
+        <h3>{:lang('seller_control_login')}</h3>
+        <div class="shoplogo">
+            <img src="__PUBLIC__/{$module_path}image/shopadmin.jpg" alt=""/>
+        </div>
+        <div class="link">
+            {:lang('no_account')}?<a href="{:url('seller/login/reg')}" style="text-decoration: none">{:lang('free_register')}</a>
+        </div>
+    </div>
+    <div class="form-right">
+        <div class="form-head">
+            登录商家中心
+        </div>
+        <form class="login-form" id="login_form">
+            <div class="input-line" style="margin-top: 0;">
+                <span class="input-icon iconfont icon-icon"></span>
+                <input id="username" class="form-text" data-ajax="/crossbbcg/passport/reg.html" required=""
+                       data-empty="{:lang('pleace_input_mobile_or_email')}" data-error="{:lang('must_it_mobile_email')}"
+                       data-regex="^1[0-9]{10}|\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" name="name"
+                       type="text" autocomplete="off" placeholder="{:lang('mobile_email')}">
+                <i class="icon-reset">×</i>
+                <div class="input-error"><i class="iconfont icon-jinggao"></i>{:lang('check_fail_account_not_exist')}</div>
+            </div>
+            <div class="input-line">
+                <span class="input-icon iconfont icon-suo"></span>
+                <input id="password" required="" class="form-text" name="pwd" data-empty="{:lang('pleace_input_password')}"
+                       data-error="{:lang('password_length_error')}" data-regex="^.{6,18}$" type="password" autocomplete="off"
+                       placeholder="{:lang('password')}">
+                <i class="icon-reset">×</i>
+                <div class="input-error"></div>
+            </div>
+            <div  id="embed-captcha" style="{eq name='$verify' value='0'}display: none;{/eq}">
+            
+            </div>
+            <div id="wait" style="height: 42px;text-align: center;line-height: 54px;border: 1px solid #ccc;border-radius: 2px;background-color: #f3f3f3;display: none;"><img src="__ROOT__/loading.gif" alt=""></div>
+            <div id="notice" style="color: red" class="input-error"><i class="iconfont icon-jinggao"></i>{:lang('pleace_finish_check_firstly')}</div>
+            <div class="form-remember">
+                <span class="left">
+                    <input id="rem" class="hidden" type="checkbox" name="remember_me" value="1" checked="">
+                    <label class="check-box" for="rem">{:lang('remember_password')}</label>
+                </span>
+                <a class="right" href="{:url('seller/login/forget_pwd')}" style="text-decoration: none">{:lang('forget_pwd')}?</a>
+            </div>
+            <div class="form-submit">
+                <button id="login-btn" class="submit-btn" type="button">{:lang('login')}</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+<script>
+    $(function () {
+        /* 极验证 star */
+        var handlerEmbed = function (captchaObj) {
+            $('.submit-btn').click(function () {
+                var validate = captchaObj.getValidate();
+                {eq name='$verify' value='1'}
+                if (!validate) {
+                    $("#notice")[0].className = "show";
+                    setTimeout(function () {
+                        $("#notice")[0].className = "hide";
+                    }, 2000);
+                    captchaObj.reset(); // 调用该接口进行重置
+                    return false;
+                }
+                {/eq}
+                var name = $('#username').val();
+                var pwd = $('#password').val();
+                if (!name) {
+                    layer.msg("{:lang('Account_name_must')}");
+                    return;
+                }
+                if (!pwd) {
+                    layer.msg("{:lang('pwd_must')}");
+                    return;
+                }
+                $.ajax({
+                    url:"{:url('seller/login/login')}",
+                    type:'post',
+                    dataType:'json',
+                    data:$('#login_form').serialize(),
+                    success:function (re) {
+                        if (re.code) {
+                            window.location.href=re.url;
+                        } else {
+                            captchaObj.reset();
+                            layer.msg(re.msg,{time: 1500, icon:5},function () {
+                                if (re.verify){
+                                    window.location.reload();
+                                }
+                            });return false;
+                        }
+                    }
+                })
+            })
+            captchaObj.appendTo("#embed-captcha");
+            captchaObj.onReady(function () {
+                $("#wait").hide();
+            });
+            captchaObj.onSuccess(function () {
+            
+            });
+        };
+        $.ajax({
+            url: "{:url('member/passport/gt_login')}",
+            type: "get",
+            data: {'t':(new Date()).getTime()},
+            dataType: "json",
+            success: function (data) {
+                initGeetest({
+                    width:'100%',
+                    gt: data.gt,
+                    challenge: data.challenge,
+                    new_captcha: data.new_captcha,
+                    product: "float",
+                    offline: !data.success,
+                    lang:data.lang
+                }, handlerEmbed);
+            }
+        });
+        /* 极验证 end */
+    })
+    
+</script>
+</html>

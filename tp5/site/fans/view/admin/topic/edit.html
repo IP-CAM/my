@@ -1,0 +1,167 @@
+    {extend name="admin@public/poupbase" /}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content" style="margin:0px 10px 5px 8px;">
+        <div class="bloc" style="margin:10px 0px 0px;">
+            <div class="content">
+                <form id="myform" method="post" style="margin-top:5px;" class="">
+                    <fieldset>
+                        <legend>{$meta_title|default=''}</legend>
+                        <div class="row">
+                            <label for="uid" class="w100">{:lang('Issuer')}:<span class="required">*</span></label>
+                            <select data-placeholder="{:lang('Select account')}" class="chosen-select" tabindex="2" name="uid" id="uid" style="width:200px;">
+                                <option value="0"></option>
+                                {eq name="action_name" value="edit"}
+                                {foreach $account as $arr}
+                                <option value="{$arr['id']}" {eq name="data.uid" value="$arr['id']"}selected="selected"{/eq}>{$arr['nickname']}</option>
+                                {/foreach}
+                                {else /}
+                                {foreach $account as $arr}
+                                <option value="{$arr['id']}">{$arr['nickname']}</option>
+                                {/foreach}
+                                {/eq}
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div style="float: left;">
+                                <label for="title" class="w100">{:lang('Title')}: <span class="required">*</span></label>
+                                <input id="title" type="text" value="{$data['title']}" name="title"   style="width:150px;"  />
+                            </div>
+                            <div style="float: left;">
+                                <label for="circle_id" class="w100">{:lang('Circle')}: <span class="required">*</span></label>
+                                <select id="circle_id" name="circle_id" style="width:150px;">
+                                    {notempty name="circle"}
+                                    {volist name="circle" id="le"}
+                                    <option value="{$le.id}" {eq name="data.circle_id" value="$le['id']"}selected{/eq}>{$le.name}</option>
+                                    {/volist}
+                                    {/notempty}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div style="float: left">
+                                <label for="is_top"  class="w100">{:lang('Istop')}:</label>
+                                <div class="slideBox">
+                                    {eq name="ACTION_NAME" value="edit"}
+                                    <input id="is_top" value="1" type="checkbox" name="is_top" {eq
+                                           name="data['is_top']" value="1" }checked{/eq} />
+                                    {else /}
+                                    <input id="is_top" value="1" type="checkbox" name="is_top"/>
+                                    {/eq}
+                                    <label for="is_top"></label>
+                                </div>
+                            </div>
+                            <div style="float: left">
+                                <label for="status" style="margin-left: 60px;" class="w140">{:lang('Status')}:</label>
+                                <div class="slideBox">
+                                    {eq name="ACTION_NAME" value="edit"}
+                                    <input id="status" value="1" type="checkbox" name="status" {eq name="data['status']"
+                                           value="1" }checked{/eq} />
+                                    {else /}
+                                    <input id="status" value="1" type="checkbox" name="status" checked/>
+                                    {/eq}
+                                    <label for="status"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div style="float: left">
+                                <label for="is_hot"  class="w100">{:lang('Boutique')}:</label>
+                                <div class="slideBox">
+                                    {eq name="ACTION_NAME" value="edit"}
+                                    <input id="is_hot" value="1" type="checkbox" name="is_hot" {eq
+                                           name="data['is_hot']" value="1" }checked{/eq} />
+                                    {else /}
+                                    <input id="is_hot" value="1" type="checkbox" name="is_hot"/>
+                                    {/eq}
+                                    <label for="is_hot"></label>
+                                </div>
+                            </div>
+                            <div style="float: left">
+                                <label for="is_silent"  style="margin-left: 60px;"  class="w140">{:lang('Silent')}:</label>
+                                <div class="slideBox">
+                                    {eq name="ACTION_NAME" value="edit"}
+                                    <input id="is_silent" value="1" type="checkbox" name="is_silent" {eq
+                                           name="data['is_silent']" value="1" }checked{/eq} />
+                                    {else /}
+                                    <input id="is_silent" value="1" type="checkbox" name="is_silent"/>
+                                    {/eq}
+                                    <label for="is_silent"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div style="float: left">
+                                <label for="view_count" class="w100">{:lang('Viewcount')}:</label>
+                                <input type="number" class="input litle" name="view_count" maxlength="5" id="view_count" value='{$data.view_count|default=0}'>
+                            </div>
+                            <div style="float: left">
+                                <label for="reply_count" style="margin-left: 65px;" class="w140">{:lang('Replycount')}:</label>
+                                <input type="number" class="input litle" name="reply_count" maxlength="5" id="reply_count" value='{$data.reply_count|default=0}'>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="clear"></div>
+                            <label for="contents" class="w100">{:lang('Topic content')}: </label>
+                            <textarea id="contents" name="content">{$data.content}</textarea>
+                            <script charset="utf-8" src="__STATIC__/kindeditor/kindeditor-all-min.js"></script>
+                            <script>
+                                KindEditor.ready(function (K) {
+                                    editor = K.create('#contents', {
+                                        resizeType: 1,
+                                        allowPreviewEmoticons: false,
+                                        allowImageUpload: false,
+                                        minWidth: 470,
+                                        minHeight: 185,
+                                        langType: '{:jsup(config('default_lang'))}',
+                                        items: [
+                                            'undo', 'redo', '|', 'bold', 'italic', 'underline',
+                                            'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                                            'insertunorderedlist', '|', 'image', 'media'],
+                                        afterBlur: function () {
+                                            this.sync();
+                                        }
+                                    });
+                                });
+                            </script>
+                        </div>
+                        <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                            {eq name="$action_name" value="edit"}
+                            <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('savedata')}" />
+                            <input name="id" type="hidden"  value="{$data.id}" />
+                            {else /}
+                            <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}" />
+                            {/eq}
+                            <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    
+    {/block}
+    {block name="js"}
+    <script>
+        $(function(){
+            $(".bset").buttonset(
+
+            );
+        })
+        <!--添加 Chosen 的选择框样式-->
+        var config = {
+            '.chosen-select'           : {},
+            '.chosen-select-deselect'  : { allow_single_deselect: true },
+            '.chosen-select-no-single' : { disable_search_threshold: 10 },
+            '.chosen-select-no-results': { no_results_text: '{:lang(\'Select account null\')}' },
+            '.chosen-select-rtl'       : { rtl: true },
+            '.chosen-select-width'     : { width: '95%' }
+        };
+        for (var selector in config) {
+            $(selector).chosen(config[selector]);
+        }
+    </script>
+    {/block}
+    

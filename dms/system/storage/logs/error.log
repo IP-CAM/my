@@ -4940,3 +4940,57 @@
 2017-11-05 11:28:05 - PHP Notice:  Undefined index: route in /data/www/default/system/storage/modification/catalog/controller/startup/seo_url.php on line 67
 2017-11-05 11:28:05 - PHP Notice:  Undefined index: route in /data/www/default/system/storage/modification/catalog/controller/startup/seo_url.php on line 67
 2017-11-05 11:28:05 - PHP Notice:  Undefined index: route in /data/www/default/system/storage/modification/catalog/controller/startup/seo_url.php on line 67
+2018-04-15 17:41:56 - PHP Notice:  unserialize(): Error at offset 11 of 14 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-15 17:41:56 - PHP Notice:  unserialize(): Error at offset 11 of 15 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-15 17:41:56 - PHP Notice:  unserialize(): Error at offset 11 of 15 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-15 17:41:56 - PHP Notice:  unserialize(): Error at offset 11 of 15 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-15 17:41:56 - PHP Notice:  unserialize(): Error at offset 11 of 15 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-15 17:41:56 - PHP Notice:  unserialize(): Error at offset 11 of 16 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-15 17:41:56 - PHP Notice:  unserialize(): Error at offset 43 of 216 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 54
+2018-04-15 17:41:57 - PHP Notice:  unserialize(): Error at offset 324 of 331 bytes in D:\git\my\dms\catalog\model\slider\tg_superstar_revolution_slider.php on line 10
+2018-04-15 17:41:57 - PHP Warning:  Invalid argument supplied for foreach() in D:\git\my\dms\catalog\view\theme\superstar\template\extension\module\tg_superstar_revolution_slider.tpl on line 6
+2018-04-15 17:42:07 - PHP Notice:  unserialize(): Error at offset 11 of 14 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-15 17:42:07 - PHP Notice:  unserialize(): Error at offset 11 of 15 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-15 17:42:07 - PHP Notice:  unserialize(): Error at offset 11 of 15 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-15 17:42:07 - PHP Notice:  unserialize(): Error at offset 11 of 15 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-15 17:42:07 - PHP Notice:  unserialize(): Error at offset 11 of 15 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-15 17:42:07 - PHP Notice:  unserialize(): Error at offset 11 of 16 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-15 17:42:07 - PHP Notice:  unserialize(): Error at offset 43 of 216 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 54
+2018-04-15 17:42:07 - PHP Notice:  unserialize(): Error at offset 324 of 331 bytes in D:\git\my\dms\catalog\model\slider\tg_superstar_revolution_slider.php on line 10
+2018-04-15 17:42:07 - PHP Warning:  Invalid argument supplied for foreach() in D:\git\my\dms\catalog\view\theme\superstar\template\extension\module\tg_superstar_revolution_slider.tpl on line 6
+2018-04-15 17:43:06 - PHP Notice:  unserialize(): Error at offset 11 of 14 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-15 17:43:06 - PHP Notice:  unserialize(): Error at offset 11 of 15 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-15 17:43:06 - PHP Notice:  unserialize(): Error at offset 11 of 15 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-15 17:43:06 - PHP Notice:  unserialize(): Error at offset 11 of 15 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-15 17:43:06 - PHP Notice:  unserialize(): Error at offset 11 of 15 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-15 17:43:06 - PHP Notice:  unserialize(): Error at offset 11 of 16 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-15 17:43:06 - PHP Notice:  unserialize(): Error at offset 43 of 216 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 54
+2018-04-15 17:43:06 - PHP Notice:  unserialize(): Error at offset 324 of 331 bytes in D:\git\my\dms\catalog\model\slider\tg_superstar_revolution_slider.php on line 10
+2018-04-15 17:43:06 - PHP Warning:  Invalid argument supplied for foreach() in D:\git\my\dms\catalog\view\theme\superstar\template\extension\module\tg_superstar_revolution_slider.tpl on line 6
+2018-04-15 17:43:33 - PHP Notice:  unserialize(): Error at offset 11 of 14 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-15 17:43:33 - PHP Notice:  unserialize(): Error at offset 11 of 15 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-15 17:43:33 - PHP Notice:  unserialize(): Error at offset 11 of 15 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-15 17:43:33 - PHP Notice:  unserialize(): Error at offset 11 of 15 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-15 17:43:33 - PHP Notice:  unserialize(): Error at offset 11 of 15 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-15 17:43:33 - PHP Notice:  unserialize(): Error at offset 11 of 16 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-15 17:43:33 - PHP Notice:  unserialize(): Error at offset 43 of 216 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 54
+2018-04-15 17:43:33 - PHP Notice:  unserialize(): Error at offset 324 of 331 bytes in D:\git\my\dms\catalog\model\slider\tg_superstar_revolution_slider.php on line 10
+2018-04-15 17:43:33 - PHP Warning:  Invalid argument supplied for foreach() in D:\git\my\dms\catalog\view\theme\superstar\template\extension\module\tg_superstar_revolution_slider.tpl on line 6
+2018-04-15 17:43:36 - PHP Notice:  unserialize(): Error at offset 11 of 14 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-15 17:43:36 - PHP Notice:  unserialize(): Error at offset 11 of 15 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-15 17:43:36 - PHP Notice:  unserialize(): Error at offset 11 of 15 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-15 17:43:36 - PHP Notice:  unserialize(): Error at offset 11 of 15 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-15 17:43:36 - PHP Notice:  unserialize(): Error at offset 11 of 15 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-15 17:43:36 - PHP Notice:  unserialize(): Error at offset 11 of 16 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-15 17:43:36 - PHP Notice:  unserialize(): Error at offset 43 of 216 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 54
+2018-04-15 17:43:36 - PHP Notice:  unserialize(): Error at offset 324 of 331 bytes in D:\git\my\dms\catalog\model\slider\tg_superstar_revolution_slider.php on line 10
+2018-04-15 17:43:36 - PHP Warning:  Invalid argument supplied for foreach() in D:\git\my\dms\catalog\view\theme\superstar\template\extension\module\tg_superstar_revolution_slider.tpl on line 6
+2018-04-16 7:53:59 - PHP Notice:  unserialize(): Error at offset 11 of 14 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-16 7:53:59 - PHP Notice:  unserialize(): Error at offset 11 of 15 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-16 7:53:59 - PHP Notice:  unserialize(): Error at offset 11 of 15 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-16 7:53:59 - PHP Notice:  unserialize(): Error at offset 11 of 15 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-16 7:53:59 - PHP Notice:  unserialize(): Error at offset 11 of 15 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-16 7:53:59 - PHP Notice:  unserialize(): Error at offset 11 of 16 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 28
+2018-04-16 7:53:59 - PHP Notice:  unserialize(): Error at offset 43 of 216 bytes in D:\git\my\dms\catalog\model\menu\tg_superstar_megamenu.php on line 54
+2018-04-16 7:53:59 - PHP Notice:  unserialize(): Error at offset 324 of 331 bytes in D:\git\my\dms\catalog\model\slider\tg_superstar_revolution_slider.php on line 10
+2018-04-16 7:53:59 - PHP Warning:  Invalid argument supplied for foreach() in D:\git\my\dms\catalog\view\theme\superstar\template\extension\module\tg_superstar_revolution_slider.tpl on line 6

@@ -1,0 +1,183 @@
+    {extend name="admin@public/poupbase" /}
+    {block name="style"}
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/style.css" />
+    {/block}
+    <!-- CONTENT -->
+    
+    {block name="body"}
+      <div id="content" style="margin:0px 10px 5px 8px;">
+        <div class="bloc" style="margin:10px 0px 0px;">
+          <div class="content">
+            <form id="myform" method="post" style="margin-top:5px;" class="">
+
+                <fieldset>
+                    <legend>{$meta_title|default=''}</legend>
+                    <div class="row required">
+                        <label for="name" class="w120">{:lang('Option_Name')}</label>
+                        <input type="text" name="name" id="name" value="{$data.name|default=''}" class="input"/>
+                    </div>
+    
+                    <div class="row">
+                        <label for="type" class="w120">{:lang('Option_Type')}</label>
+                        {present name="data.type"}
+                            <?php $type = $data['type']; ?>
+                        {else /}
+                            <?php $type = ''; ?>
+                        {/present}
+                        
+                        <select name="type" id="type">
+                            
+                                <?php if ($type == 'text') { ?>
+                                <option value="text" selected="selected">{:lang('select_text')}</option>
+                                <?php } else { ?>
+                                <option value="text">{:lang('select_text')}</option>
+                                <?php } ?>
+                                <?php if ($type == 'image') { ?>
+                                <option value="image" selected="selected">{:lang('select_image')}</option>
+                                <?php } else { ?>
+                                <option value="image">{:lang('select_image')}</option>
+                                <?php } ?>
+                                
+                        </select>
+                        
+                    </div>
+    
+                    <div class="row">
+                        <label for="sort" class="w120">{:lang('Sort')} </label>
+                        <input type="number" class="input litle" name="sort" maxlength="5" id="sort" value="{$data.sort|default=0}">
+                    </div>
+                    
+                    
+                    
+                    <table style="width:100%" class="table" id="option-value">
+                        <thead>
+                        <tr>
+                            {foreach $arr_columns as $key => $value}
+                            <th class="center">{$value}</th>
+                            {/foreach}
+                            <th class="center">{:lang('Actions')}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {present name="arr_values"}
+                        {foreach $arr_values as $vo}
+                        <tr id="option-value-row{$option_value_num}">
+                            <td class="center">
+                                {$vo.option_value_id}
+                                <input type="hidden" value="{$vo.option_value_id}" name="option_value[{$option_value_num}][option_value_id]" />
+                                {eq name="action_name" value="edit"}
+                                <input type="hidden" name="option_value[{$option_value_num}][option_id]" value="{$data.option_id}" />
+                                {/eq}
+                            </td>
+                            <td class="center">
+                                <input type="text" name="option_value[{$option_value_num}][name]" value="{$vo.name}" class="w120"/>
+                            </td>
+                            <td class="center">
+                                <input type="text" name="option_value[{$option_value_num}][sort]" value="{$vo.sort}" class="w50"/>
+                            </td>
+                        <td class="center">
+                            <button type="button" data-option_value_id="{$vo.option_value_id}" class="white delete_option_value">{:lang('Remove')}</button>
+                        </td>
+                            {php}
+                            $option_value_num++;
+                            {/php}
+                        </tr>
+                        {/foreach}
+                        {/present}
+                        </tbody>
+                        
+                        <tfoot>
+                        <tr>
+                            
+                            <td colspan="4">
+                                <button type="button" onclick="addOptionValue()" class="white" style="margin:5px;">{:lang('Add')}</button>
+                            </td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td colspan="4">
+                                <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                                {eq name="$action_name" value="edit"}
+                                <input type="submit" name="submit" value="{:lang('Update')}" type="submit" url="{:url('save',array('ids'=>input('ids')))}" />
+                                <input name="option_id" type="hidden" value="{$data.option_id}" />
+                                <input name="action_name" type="hidden" value="edit" />
+                                {else /}
+                                <input type="submit" name="submit" value="{:lang('Create')}" type="submit" url="{:url('save')}" />
+                                <input name="action_name" type="hidden" value="add" />
+                                {/eq}
+                                    <input type="hidden" name="langid" value="{:LANG}" />
+                                    <input name="reset" class="button white" value="{:lang('Goods_Cancel')}" type="reset">
+                                </div>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                    
+                </fieldset>
+ 
+            </form>
+          </div>
+        </div>
+      </div>
+      
+    
+    <script type="text/javascript">
+        var num = '{$option_value_num}';
+        function addOptionValue(){
+            
+            _html = '<tr id=option-value-row'+num+' >';
+            _html += '<td class="center">';
+            {eq name="action_name" value="edit"}
+            _html += '<input type="hidden" name="option_value['+num+'][option_id]" value="{$data.option_id}" />';
+            {/eq}
+            _html += '</td>';
+            _html += '<td class="center"><input type="text" name="option_value['+num+'][name]" value="" class="w120"/></td>';
+            _html += '<td class="center"><input type="text" name="option_value['+num+'][sort]" value="0" class="w50" /></td>';
+            _html += '<td class="center"><button type="button" data-option_value_id="0" class="white delete_option_value">{:lang(\'Remove\')}</button></td>';
+            
+            _html += '</tr>';
+            
+            $('#option-value tbody').append(_html);
+            num++;
+            
+        }
+        
+        // 删除选项值
+        $(document).on('click','.delete_option_value',function(){
+            var option_value_id = $(this).data('option_value_id');
+            var that = $(this);
+            
+            if(option_value_id) {
+                $.ajax({
+                    url: '{:url('deleteOptionValueValidate')}',
+                    type: "post",
+                    data: {'option_value_id': option_value_id},
+                    dataType: "json",
+                    cache: false,
+                    time: 3000,
+                    before: function () {
+
+                    },
+                    success: function (data) {
+                        if (data.code==1) {
+                            that.parent().parent().remove();
+                        }else{
+                            parent.layer.msg(data.msg, {icon:2, time: 2000 ,shade: 0.3}, function(){
+                                if(data.url){
+                                    parent.location.href=data.url;
+                                }
+                            });
+                        }
+                    },
+                    error: function () {
+                        that.html('{:lang("Ver_err")}');
+                    }
+                });
+            }else{
+                $(this).parent().parent().remove();
+            }
+        });
+    </script>
+    
+    {/block}

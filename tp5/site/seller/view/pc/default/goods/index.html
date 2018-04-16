@@ -1,0 +1,194 @@
+    {extend name='common/base'}
+
+    {block name="breadcrumb"}
+    <li>{:lang('sGoods')}</li>
+    <li class="active">{$meta_title|default=''}</li>
+    {/block}
+    
+    {block name='body'}
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box" style="border-top: 0">
+                    <div class="box-header with-border">
+                        <div class="row">
+                            <form action="{:url('seller/goods/index')}">
+                            <div class="page-header-top">
+                                <a class="btn btn-etshop addnew " href="{:url('seller/goods/index')}">
+                                    <i class="fa fa-feed"></i> {:lang('All')}
+                                </a>
+                                {:getSellerButton()}
+                                <div style="position: relative;display: inline-block; vertical-align: middle; margin-right: 4px">
+                                    <select name="status" id="status" class="form-control etbtn" style="max-width: 95px; height: 30px;">
+                                        <option value="all">{:lang('all')}</option>
+                                        {foreach $arr_status as $k=>$v}
+                                        <option value="{$k}" {eq name="$status" value="$k" }selected{/eq}>{:lang($v)}</option>
+                                        {/foreach}
+                                    </select>
+                                </div>
+    
+                                <div style="position: relative;display: inline-block; vertical-align: middle; margin-right: 4px">
+                                    <select name="cat_id" id="cat_id" class="form-control etbtn" style="max-width: 160px; height: 30px;">
+                                        <option value="all">{:lang('all_category')}</option>
+                                        {foreach $catlist as $v}
+                                        <option value="{$v.id}" {eq name="$cat_id" value="$v.id" }selected{/eq}>
+                                        {$v.char} {$v.title} {notempty name="$v.name"}({$v.name}){/notempty}
+                                        </option>
+                                        {/foreach}
+                                    </select>
+                                </div>
+    
+                                <div style="position: relative;display: inline-block; vertical-align: middle; margin-right: 4px">
+                                    <select name="brand_id" id="band_id" class="form-control etbtn" style="max-width: 140px; height: 30px;">
+                                        <option value="all">{:lang('All_brand')}</option>
+                                        {foreach $arr_brands as $v}
+                                        <option value="{$v.id}" {eq name="$brand_id" value="$v.id" }selected{/eq}>
+                                        {$v.name}
+                                        </option>
+                                        {/foreach}
+                                    </select>
+                                </div>
+                                
+                                <div class="time" style="width: 260px; position: relative;display: inline-block;vertical-align: middle; margin-right: 6px">
+                                    <div class="input-group">
+                                        <div class="input-group-btn">
+                                            <button type="button" class="btn btn-default etbtn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                {switch name='$condition'}
+                                                {case value='name'}{:lang('Goods_name')}<input type="hidden" value="{$condition}" name="condition" />{/case}
+                                                {case value='good_code'}{:lang('Goods_sn')}<input type="hidden" value="{$condition}" name="condition" />{/case}
+                                                {case value='brand_id'}{:lang('Goods_brand')}<input type="hidden" value="{$condition}" name="condition" />{/case}
+                                                {default /}{:lang('Search_name')}
+                                                {/switch}
+                                                &nbsp;
+                                                <span class="fa fa-caret-down"></span></button>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="{:url('seller/goods/index',array_merge(input(),array('condition'=>'name')))}">{:lang('Goods_name')}</a></li>
+                                                <li><a href="{:url('seller/goods/index',array_merge(input(),array('condition'=>'good_code')))}">{:lang('Goods_sn')}</a></li>
+                                                <li><a href="{:url('seller/goods/index',array_merge(input(),array('condition'=>'brand_id')))}">{:lang('Goods_brand')}</a></li>
+                                            </ul>
+                                        </div>
+                                        <!-- /btn-group -->
+                                        <input type="text" placeholder="{:lang('goods_search_tips')}" class="form-control" value="{$key_words}" name="key_words" style="padding: 4px 12px;height: 30px">
+                                    </div>
+                                </div>
+    
+                                <input type="submit" value="{:lang('search')}" class="btn btn-info etbtn">
+                                <a href="{:url('seller/goods/stockwarming')}" class="btn-etshop icon" >
+                                    {:lang('quantity_not_enough')}：<span style="color: red;">{$stockwarming_num}</span>
+                                </a>
+                                <a href="javascript:showAdvSearch();" class="btn-etshop icon">
+                                    {:lang('all_goods')}：{$list->total()}
+                                </a>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <div class="box-body">
+                        <div class="dataTables_wrapper form-inline dt-bootstrap">
+                            <div class="row">
+                                <div class="table-responsive" style="padding: 0 10px">
+                                    <table id="demo-foo-addrow" class="table m-t-30 table-hover contact-list"
+                                           data-page-size="10">
+                                        <thead>
+                                        <tr>
+                                            <th style="width: 25px;">
+                                                <input type="checkbox" class="check-all">
+                                            </th>
+                                            <th>ID</th>
+                                            <th>{:lang('Goods_Name')}</th>
+                                            <th>{:lang('Goods_Category')}</th>
+                                            <th>{:lang('Goods_Type')}</th>
+                                            <th>{:lang('Goods_Sale_Price')}</th>
+                                            <th>{:lang('Goods_Quantity')}</th>
+                                            <th>{:lang('Goods_Status')}</th>
+                                            <th>{:lang('opreration')}</th>
+                                        </tr>
+                                        </thead>
+                                        
+                                        <tbody>
+                                        
+                                        {foreach $list as $vo}
+                                        <tr>
+                                            <td>
+                                                <input class="ids" type="checkbox" value="{$vo.id}" name="ids[]">
+                                            </td>
+                                            <td>{$vo.id}</td>
+                                            <td>
+                                                {if condition="empty($vo.thumb)"}
+                                                <img src="__PUBLIC__/admin/images/up_thumb.png" alt="user"
+                                                     class="img-circle" width="50"/>
+                                                {elseif condition="substr($vo.thumb,0,4)=='http'" /}
+                                                <img src="{$vo.thumb}" alt="user" class="img-circle" width="50"/>
+                                                {else /}
+                                                <img src="{:resizeImage($vo.thumb,'thumb',true)}" alt="user"
+                                                     class="img-circle" width="50"/>
+                                                {/if}
+                                                <a class="tooltip-link ajax-get edit"
+                                                   href="{:url('/seller/goods/edit',array('id'=>$vo.id))}" data-showbar="1" data-title="{:lang('edit')}">{$vo.name}</a>
+                                            </td>
+                                            <td>
+                                                {present name="$arr_category[$vo['cat_id']]"}
+                                                {$arr_category[$vo['cat_id']]}
+                                                {else /}
+                                                {:lang('Null')}
+                                                {/present}
+                                            </td>
+                                            <td>
+                                                {switch name="$vo.type"}
+                                                {case value='normal'}<span>{:lang('Goods_normal')}</span>{/case}
+                                                {case value='bonded'}<span>{:lang('Goods_bonded')}</span>{/case}
+                                                {case value='pay_taxes'}<span>{:lang('Goods_pay_taxes')}</span>{/case}
+                                                {case value='direct_mail'}<span>{:lang('Goods_direct_mail')}</span>{/case}
+                                                {/switch}
+                                            </td>
+                                            <td>{$vo.sale_price}</td>
+                                            <td>
+                                                {if condition="$vo.quantity < $stockwarming"}
+                                                <a href="{:url('seller/goods/edit_sku_quantity',array('id'=>$vo.id))}" class="ajax-get" data-title="{:lang('edit_sku_quantity')}" data-showbar="1" data-width="750" data-height="650"><span class="label label-danger">{$vo.quantity}</span></a>
+                                                {else /}
+                                                <a href="{:url('seller/goods/edit_sku_quantity',array('id'=>$vo.id))}" class="ajax-get" data-title="{:lang('edit_sku_quantity')}" data-showbar="1" data-width="750" data-height="650"><span>{$vo.quantity}</span></a>
+                                                {/if}
+                                            </td>
+                                            <td>
+                                                {switch name='$vo.status'}
+                                                {case value='recycle'}<span>{:lang('recycle')}</span>{/case}
+                                                {case value='enabled'}<span>{:lang('enabled')}</span>{/case}
+                                                {case value='disabled'}<span>{:lang('disabled')}</span>{/case}
+                                                {case value='pending_review'}<span>{:lang('pending_review')}</span>{/case}
+                                                {case value='pending_modify'}<span>{:lang('pending_modify')}</span>{/case}
+                                                {/switch}
+                                            </td>
+                                            <td>
+                                                <a class="tooltip-link ajax-get confirm" data-showbar="1"
+                                                   data-title="{:lang('del_goods')}"
+                                                   data-layer="{:lang('confirm_del_goods')}"
+                                                   href="{:url('/seller/goods/del_goods',array('ids'=>$vo.id))}"><i
+                                                    class="fa fa-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                        {/foreach}
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <td colspan="9">
+                                                <div class="text-right pagination">
+                                                    {$list->appends(input())->render()}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {/block}
+    
+    {block name='js'}
+    {/block}

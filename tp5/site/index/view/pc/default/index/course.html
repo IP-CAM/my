@@ -1,0 +1,802 @@
+    {extend name='common/base'}
+    
+    {block name='seo'}
+    <title>常见问题 - ETshop-B2B2C商城系统,B2B2C2C新零售生态系统,多用户商城系统</title>
+    <meta name="Keywords" content="常见问题 - ETshop,免费商城系统,B2B2C,多用户商城系统,开源网店系统,网上商城系统,免费网店,电商系统,润土科技,ETshop源码,源码,源码授权,授权.">
+    <meta name="Description"
+          content="常见问题 - ETshop,是一款功能强大的B2B2C多用户商城系统,支持自营和第三方商家入驻,另外搭配多商户微信,多商户App,打造全渠道生态化电商系统!ETshop,一切为了商家！">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/{$js_path}/jquery.SuperSlide.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/{$js_path}/ecsc-nav.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/{$js_path}/ecsc_banner.js"></script>
+    {/block}
+    
+    {block name='body'}
+    <div class="index_pc">
+        {include file='common/header' /}
+        <div class="secNav secNav-top" id="secNav">
+            <div class="secNav-items">
+                <div class="item"><a href="empower.html#secNav">商业授权</a></div>
+                <div class="item"><a href="update.html#secNav">更新日志</a></div>
+                <div class="item current"><a href="course.html#secNav">常见问题</a></div>
+                <div class="item"><a href="resource.html#secNav">资源区</a></div>
+            </div>
+        </div>
+        <div class="course_banner"></div>
+        <div class="course_main clearfix">
+            <div class="tabs">
+                <ul>
+                    <li class="current">功能技术类<i></i></li>
+                    <li>服务支持类<i></i></li>
+                    <li>ETshopSAAS版<i></i></li>
+                    <li>其他<i></i></li>
+                </ul>
+            </div>
+            <div class="items">
+                <div class="item" style="display:block;">
+                    <ul>
+                        <li>
+                            <div class="number">Q1</div>
+                            <div class="info">
+                                <div class="ask">什么是ETshop？</div>
+                                <div class="answer">
+                                    ETshop是一款由商创网络科技有限公司开发的满足多终端的多商户生态系统，数据完全互通，解决各种运营模式的强大系统。ETshop有独立部署版、SAAS版、大数据版、跨境版供选择。
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="number">Q2</div>
+                            <div class="info">
+                                <div class="ask">ETshop的B2B2C2C的电商模式是什么？</div>
+                                <div class="answer">
+                                    ETshop的B2B2C2C分别对应的是：B（平台运营方）、B（入驻商家）、C（分销用户）、C（普通客户），即满足平台自营，商家入驻，分销商入驻和零售商消费的全生态系统。
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="number">Q3</div>
+                            <div class="info">
+                                <div class="ask">ETshop自带是PC+WAP端的，是否有移动端其他的产品？</div>
+                                <div class="answer">
+                                    ETshop具备PC端以及免费的手机WAP端，同时还可搭配ECJia多商户原生APP产品，让用户的手机里拥有您的APP应用，完成移动电商的终端布局。同时我们还支持很多配套周边产品，如：ETWebPOS收银台、ETWebPOS机、ETshop助理、ERP系统等。
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="number">Q4</div>
+                            <div class="info">
+                                <div class="ask">ETshop与各端数据互通吗？</div>
+                                <div class="answer">
+                                    ETshop集合了PC端、WAP端、微信端（微商城、微分销）、APP端（ios+android）、掌柜（商家版APP，含ios+android）、收银台，多端合一，完美兼容，数据完全互通同步。
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="number">Q5</div>
+                            <div class="info">
+                                <div class="ask">ETshop是新零售电商生态系统，那有什么硬件结合的产品么？</div>
+                                <div class="answer">ETWebPOS收银台和ETWebPOS机是属于软件和硬件结合的产品，对接ETshop后台，支持多个门店，多台收银机，交易数据全方位掌控。</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="number">Q6</div>
+                            <div class="info">
+                                <div class="ask">ETshop适用于解决哪些行业的问题？</div>
+                                <div class="answer">适用于多城市多仓库管理的全国电商运营模式、同城O2O模式、跨境电商、区域电商等一系列电商运营的企业。</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="number">Q7</div>
+                            <div class="info">
+                                <div class="ask">ETshop对服务器运行环境有什么要求？</div>
+                                <div class="answer">Windows 平台：IIS/Apache/Nginx + PHP5.6 + MySQL5.5.56 Linux/Unix/Mac OS X
+                                    ；空间安装zend和支持文件锁功能，GD扩展库，Mysql函数支持mbstring、iconv、fsockopen
+                                    ；为了让您可以切实体验到ETshop的强劲功能，建议您使用阿里云B型服务器。
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="number">Q8</div>
+                            <div class="info">
+                                <div class="ask">ETshop兼容目前润土科技官网售卖的插件吗？</div>
+                                <div class="answer">
+                                    ETshop是采用了全新的架构进行开发出的B2B2C电商系统，暂不支持官网上的部分单商户插件，如果您的ETshop需要进行二次开发，请咨询官网客服做详细了解。
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="number">Q9</div>
+                            <div class="info">
+                                <div class="ask">ETshop有开放的Api接口吗？可以与其他第三方的财务软件、ERP对接吗？</div>
+                                <div class="answer">有。ETshop开发了自有系统的开放平台，http://www.runtuer.com/index/apiorder.html
+                                    完美对接第三方业务，系统后台单独的接口对接模块，配置更加便利。通过开放的api接口，可以自行与第三方财务软件及ERP对接。
+                                </div>
+                            </div>
+                        </li>
+                        
+                        <li>
+                            <div class="number">Q10</div>
+                            <div class="info">
+                                <div class="ask">ETshop系统是用什么语言开发的？</div>
+                                <div class="answer">ETshop使用php语言进行开发，开发语言不存在好坏之分，php适合开发商城系统，也是我们熟悉的开发语言，利于源码客户自行开发。</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="number">Q11</div>
+                            <div class="info">
+                                <div class="ask">ETshop是否有开源版？与加密版的区别？</div>
+                                <div class="answer">
+                                    有开源版，ETshop源码版即可享受自主开发的便利，源码版需另行购买，加密版不能自主开发，需跟随官方的开发进度，扩展性不强，如果购买高级授权，也可以选择由我们官方来二次开发。
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="number">Q12</div>
+                            <div class="info">
+                                <div class="ask">什么是ETshop助理，有什么特色？ETshop独立部署版和SAAS版是否都能使用？</div>
+                                <div class="answer">
+                                    ETshop助理可采集淘宝、天猫、阿里巴巴数据到ETshop，上传的商品信息完整，包含商品价格、颜色、尺码、库存、货号、重量、首页图、详情图、商品描述等。一套软件相当于十个人工,一年至少节省人工成本30万。独立部署版及SAAS版均能使用ETshop助理。
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="number">Q13</div>
+                            <div class="info">
+                                <div class="ask">之前使用ecshop单商户的，能否将数据导入ETshop？</div>
+                                <div class="answer">可以。ETshop后台支持ECShop数据导入功能，数据完美互通。</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="number">Q14</div>
+                            <div class="info">
+                                <div class="ask">ETshop客服系统有专门的登录平台吗？</div>
+                                <div class="answer">有的，客服管理登录平台/kefu。在后台先创建客服管理员，给到权限，再登录服管理登录平台即可使用。</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="number">Q15</div>
+                            <div class="info">
+                                <div class="ask">ETshop有哪些特色营销活动吗？</div>
+                                <div class="answer">
+                                    ETshop的营销活动在业内是数一数二的，后台单独的促销模块有尽十几种促销玩法，众筹、夺宝奇兵、秒杀活动、超值礼包、红包、团购、优惠券、优惠活动、专题、积分、预售、储值卡、礼品卡等众多当下流行的电商营销活动玩法。针对购买微分销的用户，还会赠送拼团功能。
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="number">Q16</div>
+                            <div class="info">
+                                <div class="ask">ETshop的入驻商家与平台间的结算方式是怎样的？</div>
+                                <div class="answer">
+                                    为了保障买家的利益，所有商品货款统统入平台的账户，入驻商定期和平台进行结算，结算周期需平台和入驻商线下约定，平台设定约定好的佣金比例，可按订单佣金和类目佣金进行结算，商家后台收到结算金额进行申请提现，则平台处理申请后完成结算。
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="number">Q17</div>
+                            <div class="info">
+                                <div class="ask">ETshop门店由谁来创建，能发布商品吗？门店有自己的门店后台吗？</div>
+                                <div class="answer">
+                                    ETshop门店不仅平台可以创建，入驻商家也能创建自己的门店，目前门店调取商家的商品，后期将会开发门店发布商品，管理门店商品的功能，门店是单独的后台，管理商品、订单和子管理员，非常方便。
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="number">Q18</div>
+                            <div class="info">
+                                <div class="ask">门店抢单的操作流程是怎样的？</div>
+                                <div class="answer">
+                                    门店抢单指的是用户购买的商品存在多个门店有货，商家后台可设置抢单，则设置抢单的门店都能收到该订单，抢到该订单的门店负责发货，大大提高了发货速度，用户体验大大提高。
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="item">
+                    <ul>
+                        <li>
+                            <div class="number">Q1</div>
+                            <div class="info">
+                                <div class="ask">ETshop真的免费吗？</div>
+                                <div class="answer">ETshopB2B2C电商系统不仅永久免费，我们还将持续不断的对其进行迭代更新，用户可以通过官网免费下载更新补丁包进行系统升级。</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="number">Q2</div>
+                            <div class="info">
+                                <div class="ask">ETshop的商业授权价格是多少？</div>
+                                <div class="answer">
+                                    ETshop包含三种授权价格，分别为：ETshop标准版授权价格为19800元，高级版授权价格为39800元，源码版授权价格为128000元，详情查看>>商业授权<<
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="number">Q3</div>
+                            <div class="info">
+                                <div class="ask">网站的域名需要购买么，怎么绑定？</div>
+                                <div class="answer">
+                                    域名需要自己购买，域名费用一般几十块钱一年。购买高级授权、源码授权及SAAS版套餐的用户，我们提供域名绑定服务。免费版用户可以在官方讨论群里咨询，我们协助绑定。
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="number">Q4</div>
+                            <div class="info">
+                                <div class="ask">ETWebPOS收银台后期软件和硬件是如何维护呢？</div>
+                                <div class="answer">
+                                    ETWebPOS收银台如果需要第二年维护的话软件维护是1000元/台/年，维护的是我们系统的软件，包括软件操作使用服务、修复和功能升级。如果需要软件+收银台硬件维护，则是2000元/台/年，即软件和硬件延保一年，软件包含包括软件操作使用服务、修复和功能升级；硬件包含主机和客显屏的保修一年。硬件延保最多延保一年，后面再坏了就按实际维修成本来计费。
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="number">Q5</div>
+                            <div class="info">
+                                <div class="ask">ETshop授权是一次性付费还是每年都要付授权费？</div>
+                                <div class="answer">ETshop授权是一次性收费，一次授权，终身享受。次年不会再收取授权费用。</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="number">Q6</div>
+                            <div class="info">
+                                <div class="ask">购买ETshop高级授权及源码授权，第二年还需要收费吗？技术支持费用是怎么收取的？</div>
+                                <div class="answer">
+                                    ETshop产品和授权费用是一次性的，高级授权及源码授权提供一年的技术支持，第二年如果需要我方再提供技术支持，续技术支持费即可。PC+wap的技术支持续费为6000元/年，微信端技术支持续费1200元/年，APP升级4000元/次。
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="number">Q7</div>
+                            <div class="info">
+                                <div class="ask">ETshop进行二次开发过后还能升级吗？是否要收费？需要注意哪些？</div>
+                                <div class="answer">
+                                    官方提供的升级版本为最新版本，如有二开部分需自行备份，以免升级后开发功能丢失，源码版开发部分不支持升级。升级时，如有修改或开发的，需另外支付迁移服务费用，具体费用根据开发内容以及升级时所需工时确定，详情咨询业务人员。<br/>注：PC端：一般情况下，升级所需工时不超过3个工作日的，收取开发费用的10％；超过3个工作日或者自主开发的，协商确定迁移费用。<br/>手机端：一般情况下，开发费用1万元以下或者升级工时不超过1个工作日的，可免费迁移；开发费用1万元以上或者升级工时超过1个工作日的，将收取开发费用的10%/次作为迁移费用；如为自主开发或者升级工时过长（超过3个工作日），则协商确定迁移费用。详见http://about.runtuer.com/article-3323.html
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="number">Q8</div>
+                            <div class="info">
+                                <div class="ask">购买ETshop源码授权，是否提供相关的开发文档？</div>
+                                <div class="answer">
+                                    购买授权后ETshop会提供完整的开发文档，包括：源码版提供数据库字典、数据库表结构说明、程序目录结构说明、模板目录结构说明、核心根目录includes说明、算法思路文档，并支持一对一售后问题反馈。
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="number">Q9</div>
+                            <div class="info">
+                                <div class="ask">如果因为系统问题导致我的资金损失，你们会赔偿吗？</div>
+                                <div class="answer">
+                                    我们只从研发的角度保障资金的安全性，但是商城系统的运营过程中，会涉及到营销、佣金设置等很多涉及到资金的地方，我们不会为任何问题造成的损失进行赔偿。
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="number">Q10</div>
+                            <div class="info">
+                                <div class="ask">购买ETshop授权之后，是否有培训提供？是否收费？</div>
+                                <div class="answer">购买ETshop授权后官方提供培训的，具体需提前跟所属销售预约。上门培训指导：购买标准 / 高级 / 源码授权 /
+                                    SAAS套餐的客户，公司技术人员上门培训收费为 1人1天1000元，还需包括技术人员的吃、住、行费用。来我公司培训：购买高级 /
+                                    源码授权的客户，可来我司享受免费1人培训1天，超过1天则按照1人1天1000元的标准收费，购买标准授权、SAAS版套餐的用户需要来我司进行单独培训，需按照1人1天1000元进行收费。
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="item">
+                    <ul>
+                        <li>
+                            <div class="number">Q1</div>
+                            <div class="info">
+                                <div class="ask">ETshopSAAS版和独立部署版有什么区别？</div>
+                                <div class="answer">
+                                    SAAS版部署起来比较快，因为它充分利用了ETshop的配置、实施和测试的现成平台；独立部署版安装新环境需要时间、人员和设备，当然购买高级授权有一对一的售后服务。SAAS版一般不需要技术维护，跟随官方升级即可；独立部署版需要负责升级。具体选择哪一种部署模式最适合企业的情形，取决于多种因素，如：实施和支持阶段是否有技能娴熟的人员、所存储数据的重要性、企业规模和文化、集成要求的性质、对环境的控制权（影响到定制）、预算、监管方面的约束等。
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="number">Q2</div>
+                            <div class="info">
+                                <div class="ask">ETshopSAAS版的数据放在你们服务器如何保证安全？</div>
+                                <div class="answer">
+                                    ETshopSAAS版率先采用阿里云SLB负载均衡服务器群组，其先进的数据加密设施，保证用户数据信息的绝对安全；智能的资源分配能力，让大小数据均衡配比；超强的计算存储能力，让网站速度风驰电掣。
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="number">Q3</div>
+                            <div class="info">
+                                <div class="ask">ETshopSAAS版的网站流量有限制吗？</div>
+                                <div class="answer">我们对网站的流量是不限制的，因为服务器流量大小，取决于您的商品数量和订单数量，所以没必要单独对网站流量进行限制，我们会保证最好的用户体验。
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="number">Q4</div>
+                            <div class="info">
+                                <div class="ask">ETshopSAAS版一般多久升级一次？是由官方来升级吗？</div>
+                                <div class="answer">ETshopSAAS版1-2个月升级一次，全部由官方来进行升级维护，商家放心运营即可。</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="number">Q5</div>
+                            <div class="info">
+                                <div class="ask">ETshopSAAS版是否后期可以升级成独立部署版？数据能迁移吗？</div>
+                                <div class="answer">可以的，并且可以补差价进行升级，必须升级成高级授权或源码授权。数据可以迁移到独立部署版，由我们售后来迁移。</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="item">
+                    <ul>
+                        <li>
+                            <div class="number">Q1</div>
+                            <div class="info">
+                                <div class="ask">ETshop大数据版是什么原理？系统的web、数据库、图片是不是放在一台服务器上呢？</div>
+                                <div class="answer">
+                                    支持大数据对接，ETshop大数据版通过多台服务器使用调度器来分发请求，实现分流作用，解决了单台服务器因承载不了大量并发导致访问过慢的问题。运用oss的存储功能，实现超低延时的图片直接下载，解决了图片加载速度缓慢的问题。通过memcached从内存中读取信息，更加快速的反馈给请求所需的信息，分担了数据库查询的压力。
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="number">Q2</div>
+                            <div class="info">
+                                <div class="ask">什么是ETshop跨境版？</div>
+                                <div class="answer">ETshop跨境版是专门针对有跨境电商业务需求的商家推出的一套系统，他包含了智能限购、智能税费计算、实名认证等特色功能，专为跨境的业务方式而设计。
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="number">Q3</div>
+                            <div class="info">
+                                <div class="ask">ETshop（独立部署版、SAAS版、大数据版、跨境版）分别适合什么需求的商家？</div>
+                                <div class="answer">
+                                    <p>1.ETshop独立部署版：适合做全国或同城类的大型电商平台，有一定经济实力的中大型企业</p>
+                                    <p>2.ETshopSAAS版：适合初创型企业试运营电商平台，一键开通快速建站，省去服务器部署时间，省钱省力省心</p>
+                                    <p>3.ETshop大数据版：适合已经有一定电商运营基础，积累很多粉丝，并且节日有很多用户访问情况下的商家，可承载大批量的用户访问数据，并且保持稳定流畅的运行</p>
+                                    <p>4.ETshop跨境版：适合做进出口境外贸易的商家，针对境外电商的功能需求设计。</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="number">Q4</div>
+                            <div class="info">
+                                <div class="ask">购买ETshop的APP是不是要购买HTTPS安全协议？</div>
+                                <div class="answer">为了保证ETshopAPP能够顺利的在App Store进行审核通过，建议购买HTTPS安全协议服务，更好的保证网站的安全。</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- 底部 -->
+        {include file='common/footer' /}
+    </div>
+    
+    <div class="index_mobile green_bg">
+        <div class="header_warp">
+            <div class="header">
+                <div class="sj_logo">
+                    <a href="index.html"><img src="__PUBLIC__/{$img_path}/mobile/sj_logo.png"/></a>
+                </div>
+                <div class="reorder">
+                    <a href="javascript:void(0);"></a>
+                </div>
+            </div>
+            <div class="js_nav">
+                <div class="item">
+                    <a href="index.html">首页</a>
+                </div>
+                <div class="item">
+                    <a href="commerce.html">系统特色</a>
+                </div>
+                <div class="item">
+                    <a href="pc.html">产品终端</a>
+                </div>
+                <div class="item">
+                    <a href="platform.html">强大后台</a>
+                </div>
+                <div class="item">
+                    <a href="core.html">功能亮点</a>
+                </div>
+                <div class="item">
+                    <a href="kuajing.html">特色版本</a>
+                </div>
+                <div class="item drop-down">
+                    <span>服务中心<i class="m-icon-angle-down"></i></span>
+                    <ul>
+                        <li>
+                            <a href="empower.html">商业授权</a>
+                        </li>
+                        <li>
+                            <a href="update.html">更新日志</a>
+                        </li>
+                        <li>
+                            <a href="course.html">常见问题</a>
+                        </li>
+                        <li>
+                            <a href="resource.html">资源区</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="item">
+                    <a href="waptest.html">产品演示</a>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="mobile-banner"><img src="__PUBLIC__/{$img_path}/mobile/mobile_course_banner.jpg"/></div>
+            
+            <div class="course_main clearfix mobile_course_ul">
+                <div class="tabs">
+                    <ul class='dis-box'>
+                        <li class="box-flex current">功能技术<i></i></li>
+                        <li class="box-flex">服务支持<i></i></li>
+                        <li class="box-flex">ETshopSAAS版<i></i></li>
+                        <li class="box-flex">其他<i></i></li>
+                    </ul>
+                </div>
+                <div class="items">
+                    <div class="item" style="display:block;">
+                        <ul>
+                            <li>
+                                <div class="number">Q1</div>
+                                <div class="info">
+                                    <div class="ask">什么是ETshop？</div>
+                                    <div class="answer">
+                                        ETshop是一款由商创网络科技有限公司开发的满足多终端的多商户生态系统，数据完全互通，解决各种运营模式的强大系统。ETshop有独立部署版、SAAS版、大数据版、跨境版供选择。
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="number">Q2</div>
+                                <div class="info">
+                                    <div class="ask">ETshop的B2B2C2C的电商模式是什么？</div>
+                                    <div class="answer">
+                                        ETshop的B2B2C2C分别对应的是：B（平台运营方）、B（入驻商家）、C（分销用户）、C（普通客户），即满足平台自营，商家入驻，分销商入驻和零售商消费的全生态系统。
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="number">Q3</div>
+                                <div class="info">
+                                    <div class="ask">ETshop自带是PC+WAP端的，是否有移动端其他的产品？</div>
+                                    <div class="answer">
+                                        ETshop具备PC端以及免费的手机WAP端，同时还可搭配ECJia多商户原生APP产品，让用户的手机里拥有您的APP应用，完成移动电商的终端布局。同时我们还支持很多配套周边产品，如：ETWebPOS收银台、ETWebPOS机、ETshop助理、ERP系统等。
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="number">Q4</div>
+                                <div class="info">
+                                    <div class="ask">ETshop与各端数据互通吗？</div>
+                                    <div class="answer">
+                                        ETshop集合了PC端、WAP端、微信端（微商城、微分销）、APP端（ios+android）、掌柜（商家版APP，含ios+android）、收银台，多端合一，完美兼容，数据完全互通同步。
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="number">Q5</div>
+                                <div class="info">
+                                    <div class="ask">ETshop是新零售电商生态系统，那有什么硬件结合的产品么？</div>
+                                    <div class="answer">ETWebPOS收银台和ETWebPOS机是属于软件和硬件结合的产品，对接ETshop后台，支持多个门店，多台收银机，交易数据全方位掌控。</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="number">Q6</div>
+                                <div class="info">
+                                    <div class="ask">ETshop适用于解决哪些行业的问题？</div>
+                                    <div class="answer">适用于多城市多仓库管理的全国电商运营模式、同城O2O模式、跨境电商、区域电商等一系列电商运营的企业。</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="number">Q7</div>
+                                <div class="info">
+                                    <div class="ask">ETshop对服务器运行环境有什么要求？</div>
+                                    <div class="answer">Windows 平台：IIS/Apache/Nginx + PHP7 + MySQL5.0 Linux/Unix/Mac OS X
+                                        ；空间安装zend和支持文件锁功能，GD扩展库，Mysql函数支持mbstring、iconv、fsockopen
+                                        ；为了让您可以切实体验到ETshop的强劲功能，建议您使用我司发布的集成镜像服务器安装包。
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="number">Q8</div>
+                                <div class="info">
+                                    <div class="ask">ETshop兼容目前润土科技官网售卖的插件吗？</div>
+                                    <div class="answer">
+                                        ETshop是采用了全新的架构进行开发出的B2B2C电商系统，暂不支持官网上的部分单商户插件，如果您的ETshop需要进行二次开发，请咨询官网客服做详细了解。
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="number">Q9</div>
+                                <div class="info">
+                                    <div class="ask">ETshop有开放的Api接口吗？可以与其他第三方的财务软件、ERP对接吗？</div>
+                                    <div class="answer">有。ETshop 是基于全API架构设计的跨境电商平台系统，只需要安装OpenApi模块即可对外提供服务及数据接入，接出处理
+                                        可完美对接第三方业务，通过OpenAPI可对单独接口进行配置管理，需要时可对API接口进行增加。系统提供三种 API：公有API，私有API，虚拟API，可以自行与第三方财务软件及ERP对接。
+                                    </div>
+                                </div>
+                            </li>
+                            
+                            <li>
+                                <div class="number">Q10</div>
+                                <div class="info">
+                                    <div class="ask">ETshop系统是用什么语言开发的？</div>
+                                    <div class="answer">ETshop使用php语言进行开发，开发语言不存在好坏之分，php适合开发商城系统，也是我们熟悉的开发语言，利于源码客户自行开发。</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="number">Q11</div>
+                                <div class="info">
+                                    <div class="ask">ETshop是否有开源版？与加密版的区别？</div>
+                                    <div class="answer">
+                                        有开源版，ETshop源码版即可享受自主开发的便利，源码版需另行购买，加密版不能自主开发，需跟随官方的开发进度，扩展性不强，如果购买高级授权，也可以选择由我们官方来二次开发。
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="number">Q12</div>
+                                <div class="info">
+                                    <div class="ask">什么是ETshop助理，有什么特色？ETshop独立部署版和SAAS版是否都能使用？</div>
+                                    <div class="answer">
+                                        ETshop助理可采集淘宝、天猫、阿里巴巴数据到ETshop，上传的商品信息完整，包含商品价格、颜色、尺码、库存、货号、重量、首页图、详情图、商品描述等。一套软件相当于十个人工,一年至少节省人工成本30万。独立部署版及SAAS版均能使用ETshop助理。
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="number">Q13</div>
+                                <div class="info">
+                                    <div class="ask">之前使用ecshop单商户的，能否将数据导入ETshop？</div>
+                                    <div class="answer">可以。ETshop后台支持ECShop数据导入功能，数据完美互通。</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="number">Q14</div>
+                                <div class="info">
+                                    <div class="ask">ETshop客服系统有专门的登录平台吗？</div>
+                                    <div class="answer">有的，客服管理登录平台/kefu。在后台先创建客服管理员，给到权限，再登录服管理登录平台即可使用。</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="number">Q15</div>
+                                <div class="info">
+                                    <div class="ask">ETshop有哪些特色营销活动吗？</div>
+                                    <div class="answer">
+                                        ETshop的营销活动在业内是数一数二的，后台单独的促销模块有尽十几种促销玩法，众筹、夺宝奇兵、秒杀活动、超值礼包、红包、团购、优惠券、优惠活动、专题、积分、预售、储值卡、礼品卡等众多当下流行的电商营销活动玩法。针对购买微分销的用户，还会赠送拼团功能。
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="number">Q16</div>
+                                <div class="info">
+                                    <div class="ask">ETshop的入驻商家与平台间的结算方式是怎样的？</div>
+                                    <div class="answer">
+                                        为了保障买家的利益，所有商品货款统统入平台的账户，入驻商定期和平台进行结算，结算周期需平台和入驻商线下约定，平台设定约定好的佣金比例，可按订单佣金和类目佣金进行结算，商家后台收到结算金额进行申请提现，则平台处理申请后完成结算。
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="number">Q17</div>
+                                <div class="info">
+                                    <div class="ask">ETshop门店由谁来创建，能发布商品吗？门店有自己的门店后台吗？</div>
+                                    <div class="answer">
+                                        ETshop门店不仅平台可以创建，入驻商家也能创建自己的门店，目前门店调取商家的商品，后期将会开发门店发布商品，管理门店商品的功能，门店是单独的后台，管理商品、订单和子管理员，非常方便。
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="number">Q18</div>
+                                <div class="info">
+                                    <div class="ask">门店抢单的操作流程是怎样的？</div>
+                                    <div class="answer">
+                                        门店抢单指的是用户购买的商品存在多个门店有货，商家后台可设置抢单，则设置抢单的门店都能收到该订单，抢到该订单的门店负责发货，大大提高了发货速度，用户体验大大提高。
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="item">
+                        <ul>
+                            <li>
+                                <div class="number">Q1</div>
+                                <div class="info">
+                                    <div class="ask">ETshop真的免费吗？</div>
+                                    <div class="answer">ETshopB2B2C电商系统不仅永久免费，我们还将持续不断的对其进行迭代更新，用户可以通过官网免费下载更新补丁包进行系统升级。</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="number">Q2</div>
+                                <div class="info">
+                                    <div class="ask">ETshop的商业授权价格是多少？</div>
+                                    <div class="answer">
+                                        ETshop包含三种授权价格，分别为：ETshop标准版授权价格为19800元，高级版授权价格为39800元，源码版授权价格为128000元，详情查看>>商业授权
+                                        <<
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="number">Q3</div>
+                                <div class="info">
+                                    <div class="ask">网站的域名需要购买么，怎么绑定？</div>
+                                    <div class="answer">
+                                        域名需要自己购买，域名费用一般几十块钱一年。购买高级授权、源码授权及SAAS版套餐的用户，我们提供域名绑定服务。免费版用户可以在官方讨论群里咨询，我们协助绑定。
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="number">Q4</div>
+                                <div class="info">
+                                    <div class="ask">ETshop授权是一次性付费还是每年都要付授权费？</div>
+                                    <div class="answer">ETshop授权是一次性收费，一次授权，终身享受。次年不会再收取授权费用。</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="number">Q5</div>
+                                <div class="info">
+                                    <div class="ask">购买ETshop高级授权及源码授权，第二年还需要收费吗？技术支持费用是怎么收取的？</div>
+                                    <div class="answer">
+                                        ETshop产品和授权费用是一次性的，高级授权及源码授权提供一年的技术支持，第二年如果需要我方再提供技术支持，续技术支持费即可。PC+wap的技术支持续费为6000元/年，微信端技术支持续费1200元/年，APP升级4000元/次。
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="number">Q6</div>
+                                <div class="info">
+                                    <div class="ask">ETshop进行二次开发过后还能升级吗？是否要收费？需要注意哪些？</div>
+                                    <div class="answer">
+                                        官方提供的升级版本为最新版本，如有二开部分需自行备份，以免升级后开发功能丢失，源码版开发部分不支持升级。升级时，如有修改或开发的，需另外支付迁移服务费用，具体费用根据开发内容以及升级时所需工时确定，详情咨询业务人员。<br/>注：PC端：一般情况下，升级所需工时不超过3个工作日的，收取开发费用的10％；超过3个工作日或者自主开发的，协商确定迁移费用。<br/>手机端：一般情况下，开发费用1万元以下或者升级工时不超过1个工作日的，可免费迁移；开发费用1万元以上或者升级工时超过1个工作日的，将收取开发费用的10%/次作为迁移费用；如为自主开发或者升级工时过长（超过3个工作日），则协商确定迁移费用。详见http://about.runtuer.com/article-3323.html
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="number">Q7</div>
+                                <div class="info">
+                                    <div class="ask">购买ETshop源码授权，是否提供相关的开发文档？</div>
+                                    <div class="answer">
+                                        购买授权后ETshop会提供完整的开发文档，包括：源码版提供数据库字典、数据库表结构说明、程序目录结构说明、模板目录结构说明、核心根目录includes说明、算法思路文档，并支持一对一售后问题反馈。
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="number">Q8</div>
+                                <div class="info">
+                                    <div class="ask">如果因为系统问题导致我的资金损失，你们会赔偿吗？</div>
+                                    <div class="answer">
+                                        我们只从研发的角度保障资金的安全性，但是商城系统的运营过程中，会涉及到营销、佣金设置等很多涉及到资金的地方，我们不会为任何问题造成的损失进行赔偿。
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="number">Q9</div>
+                                <div class="info">
+                                    <div class="ask">购买ETshop授权之后，是否有培训提供？是否收费？</div>
+                                    <div class="answer">购买ETshop授权后官方提供培训的，具体需提前跟所属销售预约。上门培训指导：购买标准 / 高级 / 源码授权 /
+                                        SAAS套餐的客户，公司技术人员上门培训收费为 1人1天1000元，还需包括技术人员的吃、住、行费用。来我公司培训：购买高级 /
+                                        源码授权的客户，可来我司享受免费1人培训1天，超过1天则按照1人1天1000元的标准收费，购买标准授权、SAAS版套餐的用户需要来我司进行单独培训，需按照1人1天1000元进行收费。
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="item">
+                        <ul>
+                            <li>
+                                <div class="number">Q1</div>
+                                <div class="info">
+                                    <div class="ask">ETshopSAAS版和独立部署版有什么区别？</div>
+                                    <div class="answer">
+                                        SAAS版部署起来比较快，因为它充分利用了ETshop的配置、实施和测试的现成平台；独立部署版安装新环境需要时间、人员和设备，当然购买高级授权有一对一的售后服务。SAAS版一般不需要技术维护，跟随官方升级即可；独立部署版需要负责升级。具体选择哪一种部署模式最适合企业的情形，取决于多种因素，如：实施和支持阶段是否有技能娴熟的人员、所存储数据的重要性、企业规模和文化、集成要求的性质、对环境的控制权（影响到定制）、预算、监管方面的约束等。
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="number">Q2</div>
+                                <div class="info">
+                                    <div class="ask">ETshopSAAS版的数据放在你们服务器如何保证安全？</div>
+                                    <div class="answer">
+                                        ETshopSAAS版率先采用阿里云SLB负载均衡服务器群组，其先进的数据加密设施，保证用户数据信息的绝对安全；智能的资源分配能力，让大小数据均衡配比；超强的计算存储能力，让网站速度风驰电掣。
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="number">Q3</div>
+                                <div class="info">
+                                    <div class="ask">ETshopSAAS版的网站流量有限制吗？</div>
+                                    <div class="answer">
+                                        我们对网站的流量是不限制的，因为服务器流量大小，取决于您的商品数量和订单数量，所以没必要单独对网站流量进行限制，我们会保证最好的用户体验。
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="number">Q4</div>
+                                <div class="info">
+                                    <div class="ask">ETshopSAAS版一般多久升级一次？是由官方来升级吗？</div>
+                                    <div class="answer">ETshopSAAS版1-2个月升级一次，全部由官方来进行升级维护，商家放心运营即可。</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="number">Q5</div>
+                                <div class="info">
+                                    <div class="ask">ETshopSAAS版是否后期可以升级成独立部署版？数据能迁移吗？</div>
+                                    <div class="answer">可以的，并且可以补差价进行升级，必须升级成高级授权或源码授权。数据可以迁移到独立部署版，由我们售后来迁移。</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="item">
+                        <ul>
+                            <li>
+                                <div class="number">Q1</div>
+                                <div class="info">
+                                    <div class="ask">ETshop大数据版是什么原理？系统的web、数据库、图片是不是放在一台服务器上呢？</div>
+                                    <div class="answer">
+                                        支持大数据对接，ETshop大数据版通过多台服务器使用调度器来分发请求，实现分流作用，解决了单台服务器因承载不了大量并发导致访问过慢的问题。运用oss的存储功能，实现超低延时的图片直接下载，解决了图片加载速度缓慢的问题。通过memcached从内存中读取信息，更加快速的反馈给请求所需的信息，分担了数据库查询的压力。
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="number">Q2</div>
+                                <div class="info">
+                                    <div class="ask">什么是ETshop跨境版？</div>
+                                    <div class="answer">
+                                        ETshop跨境版是专门针对有跨境电商业务需求的商家推出的一套系统，他包含了智能限购、智能税费计算、实名认证等特色功能，专为跨境的业务方式而设计。
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="number">Q3</div>
+                                <div class="info">
+                                    <div class="ask">ETshop（独立部署版、SAAS版、大数据版、跨境版）分别适合什么需求的商家？</div>
+                                    <div class="answer">
+                                        <p>1.ETshop独立部署版：适合做全国或同城类的大型电商平台，有一定经济实力的中大型企业</p>
+                                        <p>2.ETshopSAAS版：适合初创型企业试运营电商平台，一键开通快速建站，省去服务器部署时间，省钱省力省心</p>
+                                        <p>3.ETshop大数据版：适合已经有一定电商运营基础，积累很多粉丝，并且节日有很多用户访问情况下的商家，可承载大批量的用户访问数据，并且保持稳定流畅的运行</p>
+                                        <p>4.ETshop跨境版：适合做进出口境外贸易的商家，针对境外电商的功能需求设计。</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="number">Q4</div>
+                                <div class="info">
+                                    <div class="ask">购买ETshop的APP是不是要购买HTTPS安全协议？</div>
+                                    <div class="answer">为了保证ETshopAPP能够顺利的在App Store进行审核通过，建议购买HTTPS安全协议服务，更好的保证网站的安全。</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mobile_footer">
+            <div class="footer_top">
+                <h4>深圳市润土信息技术有限公司 版权所有</h4>
+                <p class="text">PC端访问：www.runtuer.com</p>
+            </div>
+        </div>
+        <div class="mobile_back">
+            <div class="zx_top">
+                <a href="http://q.url.cn/s/pEVfxXm"><img src="__PUBLIC__/{$img_path}/mobile/zx_top.png"></a>
+            </div>
+            <div class="tel_top">
+                <a href="tel://13322936015"><img src="__PUBLIC__/{$img_path}/mobile/tel_top.png"></a>
+            </div>
+            <div class="back_top"><img src="__PUBLIC__/{$img_path}/mobile/back_top.png"></div>
+        </div>
+        <footer class="mobile_footer_fixed">
+            <!--<a class=" mobile_left_btn" href="http://q.url.cn/s/pEVfxXm"><span class=" btn-left"><img
+                src="__PUBLIC__/{$img_path}/mobile/footer_down.png">免费下载</span></a>-->
+            <a class="mobile_center_btn" href="tel://13322936015" target="_blank"><span class=" btn-right"><img
+                src="__PUBLIC__/{$img_path}/mobile/section_5_item_tel.png">咨询热线</span></a>
+        </footer>
+    </div>
+    {/block}
+    
+    {block name='js'}
+    <script type="text/javascript" src="__PUBLIC__/{$js_path}/TouchSlide.1.1.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/{$js_path}/et_mobile.js"></script>
+    <!--<script type="text/javascript" src="__PUBLIC__/{$js_path}/scrollReveal.min.js"></script>-->
+    <script type="text/javascript" src="__PUBLIC__/{$js_path}/common.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/{$js_path}/suspension-two.js"></script>
+    <script type="text/javascript">
+        $(".course_main").slide({"titCell": ".tabs li", "mainCell": ".items", titOnClassName: "current"});
+    </script>
+    {/block}

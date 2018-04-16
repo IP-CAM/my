@@ -1,0 +1,209 @@
+{extend name='common/poupbase'}
+{block name='css'}
+{/block}
+
+{block name='body'}
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">{:lang('receive_info')}</h3>
+                </div>
+                <div class="box-body">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td width="100" class="text-right">{:lang('consignee')}</td>
+                            <td>{$info.consignee}</td>
+                        
+                            <td width="100" class="text-right">{:lang('mobile')}</td>
+                            <td>{$info.mobile}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-right">{:lang('receive_address')}</td>
+                            <td colspan="3">
+                                {$info.country},{$info.province},{$info.city},{$info.district},{$info.address}
+                                {if condition="$info.zipcode!=''"}
+                                &nbsp;&nbsp;{:lang('zipcode')}：{$info.zipcode}
+                                {/if}
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td class="text-right">
+                                {:lang('leave_words')}
+                            </td>
+                            <td colspan="3">
+                                {$info.postscript}
+                            </td>
+                        </tr>
+                        {if condition="$info.inv_type==0"}
+                        <tr>
+                            <td class="text-right">{:lang('is_inv')}</td>
+                            <td colspan="3">{:lang('no')}</td>
+                        </tr>
+                        {else /}
+                        <tr>
+                            <td class="text-right">{:lang('is_inv')}</td>
+                            <td colspan="3">{:lang('yes')}</td>
+    
+                        </tr>
+    
+                        <tr>
+                            <td class="text-right">{:lang('inv_type')}</td>
+                            <td>{:lang('inv_type_'.$info.inv_type)}</td>
+        
+                            <td class="text-right">{:lang('inv_payee')}</td>
+                            <td>{$info.inv_payee}</td>
+
+                        </tr>
+                        <tr>
+                            <td class="text-right">{:lang('inv_number')}</td>
+                            <td colspan="3">
+                                {if condition="$info.inv_type==1"}
+                                {$info.inv_number}
+                                {/if}
+                            </td>
+                        </tr>
+                        
+                        {/if}
+                        
+                
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-12">
+            <form>
+            <div class="form-group col-md-4">
+                <label>{:lang('shipping_type')}</label>
+                <select name="shipping_name" id="shipping_name" class="form-control">
+                    {notempty name="$express"}
+                    {foreach $express as $id => $arr}
+                    {eq name="$arr['isdefault']" value="1"}
+                    <option value="{$arr.title}" selected>{$arr.title}</option>
+                    {else /}
+                    <option value="{$arr.title}" >{$arr.title}</option>
+                    {/eq}
+        
+                    {/foreach}
+                    {else /}
+                    {:lang('First add express')}
+                    {/notempty}
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+                <label>{:lang('shipping_no')}</label>
+                <input name="shipping_no" value="{$info.shipping_no}" class="form-control"/>
+            </div>
+            <div class="form-group col-md-4">
+                <label>{:lang('shipping_warehouse')}</label>
+                <input disabled type="text" value="{$warehouse_name}" class="form-control"/>
+            </div>
+            <div class="form-group col-md-12 text-center">
+                <input type="hidden" name="order_sn" value="{$info.order_sn}" />
+                <input type="button" name="submit" class="btn btn-info" url="{:url('seller/order/save_deliver')}" value="{:lang('shipping_send')}" />
+                <input type="button" class="btn btn-default" name="reset" value="{:lang('cancel')}">
+                
+            </div>
+            </form>
+        </div>
+        
+        
+    
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">{:lang('goods_info')}</h3>
+                </div>
+                <div class="box-body">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th width="100">&nbsp;</th>
+                            <th width="400">{:lang('goods_name')}</th>
+                            <th>{:lang('Goods_Good_Barcode')}</th>
+                            <th>{:lang('goods_num')}</th>
+                            <th>{:lang('single_price')}</th>
+                            <!--<th>{:lang('member_discount_price')}</th>-->
+                            <th>{:lang('single_goods_total_money')}</th>
+                            <th>{:lang('goods_tax')}</th>
+                        </tr>
+                        {notempty name='goods_info'}
+                        {foreach $goods_info as $v}
+                        <tr>
+                            <td class="text-center">
+                            
+                                <a href="{:url('crossbbcg/goods/index').'?item_id='.$v.goods_id}" target="_blank">
+                                    {if condition="substr($v.sku_thumb,0,4) == 'http'"}
+                                    <img src="{:resizeImage($v.sku_thumb)}"/>
+                                    {else /}
+                                    <img src="__UPLOADS__/{:resizeImage($v.sku_thumb,'small')}"/>
+                                    {/if}
+                                </a>
+                        
+                            </td>
+                            <td>
+                                <a href="{:url('crossbbcg/goods/index').'?item_id='.$v.goods_id}" target="_blank">{$v.goods_name}</a>
+                                {if condition="$v['sku_array']"}
+                                <br/><span style="color:#9e9e9e">{$v['sku_array']}</span>
+                                {/if}
+                            </td>
+                            <td>{$v.sku_barcode}</td>
+                            <td>{$v.sku_number}</td>
+                            <td>{$info.symbol}{$v.sku_price}</td>
+                            <td>{$info.symbol}{$v.sku_price*$v.sku_number}</td>
+                            <td>{$info.symbol}{$v.sku_tax}</td>
+                        </tr>
+                        {/foreach}
+                        {/notempty}
+                    
+                        <tr>
+                            <td colspan="6" class="text-right">{:lang('goods_amount')}</td>
+                            <td>{$info.symbol}{$info.goods_amount}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" class="text-right">{:lang('order_tax')}</td>
+                            <td>{$info.symbol}{$info.order_tax}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" class="text-right">{:lang('freight')}</td>
+                            <td>{$info.symbol}{$info.shipping_fee}</td>
+                        </tr>
+                        
+                        <tr>
+                            <td colspan="6" class="text-right">{:lang('integral_amount')} （{$info.integral}）</td>
+                            <td>- {$info.symbol}0.00</td>
+                        </tr>
+                    
+                        
+                        <tr>
+                            <td colspan="6" class="text-right">{:lang('order_discount')}</td>
+                            <td>- {$info.symbol}{$info.discount} </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" class="text-right">{:lang('bonus_deduction')}</td>
+                            <td>- {$info.symbol}{$info.bonus}</td>
+                        </tr>
+                    
+                        <tr>
+                            <td colspan="6" class="text-right">{:lang('order_total_money')}</td>
+                            <td>{$info.symbol}{$info.order_amount}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+</section>
+{/block}
+
+{block name="js"}
+<script type="text/javascript">
+    $('.print').click(function () {
+        window.print();
+    })
+</script>
+{/block}

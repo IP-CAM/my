@@ -1,0 +1,69 @@
+    {extend name="common/base" /}
+    
+    {block name="title"}
+    <title>ETshop-首页</title>
+    {/block}
+    
+    {block name="css"}
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/passport.css" />
+    {/block}
+    
+    {block name="body"}
+    <!--
+        获取手机验证码的js 请参考注册页
+    -->
+    <div class="findpwd-main-box yahei">
+        <div class="pwd-box">
+            <div  class="steps">
+                <table width="100%">
+                    <tbody>
+                        <tr>
+                            <td class="step-item step-1 active">
+                                <a><q class="icon">●</q><i>1</i>{:lang('input account')}</a>
+                                <div class="stepdiv">1</div>
+                            </td>
+                            <td class="step-item step-2 active">
+                                <a><q class="icon">●</q><i>2</i>{:lang('identify check')}</a>
+                                <div class="stepdiv">2</div>
+                            </td>
+                            <td class="step-item step-3 active last">
+                                <span><q class="icon">●</q><i>3</i>{:lang('reset password')}</span>
+                                <div class="stepdiv">3</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <form class="login-form" id="pwd_form">
+                <div class="form-info">{:lang('find_status_1_tips')} “{$username}” {:lang('find_status_2_tips')}。</div>
+                <div class="input-line">
+                        <span class="input-label">{:lang('new_password')}</span>
+                        <input id="password" required="" class="form-text" data-repeat="repassword" name="password" data-empty="{:lang('pleace input new password')}" data-error="{:lang('it`s must 6~18 string')}" data-regex="^.{6,18}$" type="password" autocomplete="off" placeholder="{:lang('new_password')}">
+                        <i class="icon-reset">×</i>
+                        <div class="input-error"></div>
+                    </div>
+                <div class="input-line">
+                        <span class="input-label">{:lang('confirm_password')}</span>
+                        <input id="repassword" required="" class="form-text" name="repassword" data-empty="{:lang('pleace input confirm password')}" data-error="{:lang('it`s must 6~18 string')}" data-repeaterror="{:lang('the password not same')}" data-repeat="password" data-regex="^.{6,18}$" type="password" autocomplete="off" placeholder="{:lang('confirm_password')}">
+                        <i class="icon-reset">×</i>
+                        <div class="input-error"></div>
+                    </div>
+    
+                <div class="form-submit">
+                    <input name="username" type="hidden" value="{$username}">
+                    <button id="pwd-btn" data-url="{:url('findpwdThree')}" class="submit-btn chang_pwd3">{:lang('next step')}</button>
+                </div>
+            </form>
+        </div>
+    
+    </div>
+    
+    {/block}
+    
+    <!--此板块为页面单独js加载-->
+    {block name="footer_js"}
+    <script type="text/javascript">
+        //需要加载的js文件
+        Private_Script = ['passport'];
+    </script>
+    {/block}

@@ -1,0 +1,89 @@
+    {extend name="admin@public/poupbase"/}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+        <div id="content" style="margin:0px 10px 5px 8px;">
+            <div class="bloc" style="margin:10px 0px 0px;">
+                <div class="content">
+                    <form id="myform" method="post" style="margin-top:5px;" class="">
+                        <fieldset>
+                            <legend>{$meta_title|default=''}</legend>
+                            <div class="row">
+                                <label for="item_id" class="w80">{:lang('Item from')}: </label>
+                                <select name="item_id" id="item_id" class="sel_w170">
+                                    <option value="0" {eq name="data.item_id" value="0" }selected{/eq}>--{:lang('Please_choose')}--</option>
+                                    {volist name="item" id="co"}
+                                    <option value="{$co.id}" {eq name="ACTION_NAME" value="edit" }{eq name="co.id"
+                                            value="$data['item_id']" } selected {/eq} {else /} {eq name="co.id" value="$pid"}selected{/eq} {/eq}>{$co.char}{:lang($co.title)}({$co.name})
+                                    </option>
+                                    {/volist}
+                                </select>
+                            </div>
+                            <div class="row">
+                                <label for="model_id" class="w80">{:lang('Model from')}:<span class="required">*</span> </label>
+                                <select name="model_id" id="model_id" class="sel_w170">
+                                    <option value="0" {eq name="data.model_id" value="0" }selected{/eq}>--{:lang('Please_choose')}--</option>
+                                    {volist name="model" id="mo"}
+                                    <option value="{$mo.id}" {eq name="data.model_id" value="$mo.id" }selected{/eq}>{$mo.name}</option>
+                                    {/volist}
+                                </select>
+                            </div>
+                            <div class="row">
+                                <label for="title" class="w80">{:lang('Name')}: <span class="required">*</span></label>
+                                <input id="title" type="text" value="{$data.title}" name="title" style="width:250px;"/>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="remark" class="w80">{:lang('Posid Remark')}: </label>
+                                <textarea id="remark" name="remark" style="width:250px; height:35px; resize:none;">{$data.remark}</textarea>
+                            </div>
+                            
+                            <div class="row">
+                                <div style="float:left;">
+                                    <label for="langid" class="w80">{:lang('Global')}:</label>
+                                    <div class="slideBox">
+                                        <input id="langid" value="{php}echo LANG{/php}" type="checkbox" name="langid" {eq name="data['langid']" value=""}checked{/eq} />
+                                        <label for="langid"></label>
+                                    </div>
+                                    <div style="float:left; margin:1px 10px;">
+                                        <a class="tooltip-icon" title="{:lang('More_langs_tip')}"></a>
+                                    </div>
+                                </div>
+                                
+                                <div style="float:left;">
+                                    <label for="status" class="w70">{:lang('Status')}:</label>
+                                    <div class="slideBox">
+                                        {eq name="ACTION_NAME" value="edit"}
+                                            <input id="status" value="1" type="checkbox" name="status" {eq name="data['status']" value="1"}checked{/eq} />
+                                        {else /}
+                                            <input id="status" value="1" type="checkbox" name="status" checked />
+                                        {/eq}
+                                        <label for="status"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="sort" class="w80">{:lang('Sort')}: </label>
+                                <input type="number" class="input litle" name="sort" maxlength="5" id="sort"
+                                       value='{$data.sort|default=0}'>
+                            </div>
+                            
+                            <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                                {eq name="ACTION_NAME" value="edit"}
+                                    <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('savedata')}">
+                                    <input type="hidden" name="id" value="{$data.id}"/>
+                                {else/}
+                                    <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}">
+                                {/eq}
+                                <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {/block}
+    
+    {block name="js"}
+    {/block}

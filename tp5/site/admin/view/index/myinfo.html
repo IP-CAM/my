@@ -1,0 +1,111 @@
+    {extend name="admin@public/poupbase"/}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+        <div id="content" style="margin:0px 10px 5px 8px;">
+            <div class="bloc">
+                <div class="title">
+                    <div class="tabs static" id="userinfo">
+                        <a id="tabStat1_link" href="#info" class="info-icon">{:lang('Editinfo')}</a>
+                        <a id="tabStat2_link" href="#password" class="password-icon">{:lang('Editpassword')}</a>
+                        <!--<a id="tabStat3_link" href="#resetpsd" class="forget-icon">{:lang('Forget')}</a>-->
+                    </div>
+                </div>
+                <div class="content">
+                    <div id="info" style="display:block;">
+                        <form id="myform" method="post" style="margin-top:5px;" class="">
+                            <fieldset>
+                                <legend>{$data.nickname}</legend>
+                                <div class="row">
+                                    <label for="nickname" class="w80">{:lang('Nicename')}: <span class="required">*</span></label>
+                                    <input id="nickname" type="text" value="{$data.nickname}" name="nickname" placeholder="{:lang('Nicename_tip')}" maxlength="30" />
+                                </div>
+                                <div class="row">
+                                    <label for="email" class="w80">{:lang('Email')}: <span class="required">*</span></label>
+                                    <input id="email" type="text" value="{$data.email}" name="email" placeholder="example@gmail.com" maxlength="60"/>
+                                </div>
+                                <div class="row">
+                                    <label for="mobile" class="w80">{:lang('Mobile')}: </label>
+                                    <input id="mobile" type="text" value="{$data.mobile}" name="mobile" placeholder="+08613800138000" maxlength="16"/>
+                                </div>
+                                
+                                <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                                    <input name="submit" value="{:lang('Save')}" type="submit" url="{:url('myinfo',array('type'=>'infos'))}">
+                                    <input type="hidden" name="id" value="{$data.id}" />
+                                    <input type="hidden" name="status" value="{$data.status}" />
+                                    <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                    
+                    <div id="password" style="display:block;">
+                        <form id="myform2" method="post" style="margin-top:5px;" class="">
+                            <fieldset style="min-height: 161px">
+                                <legend>{$data.nickname}</legend>
+                                <!--<div class="row">-->
+                                    <!--<label for="oldpassword" class="w80">{:lang('Oldpassword')}: <span class="required">*</span></label>-->
+                                    <!--<input id="oldpassword" type="password" value="" name="oldpassword" placeholder="{:lang('Oldpassword')}" maxlength="30" autocomplete="off" disableautocomplete />-->
+                                    <!--<a href="javascript:$('#tabStat3_link').click();">{:lang('Find')}</a>-->
+                                <!--</div>-->
+                                <div class="row">
+                                    <label for="password" class="w80">{:lang('Newpassword')}: <span class="required">*</span></label>
+                                    <input  type="password" value="" name="password" placeholder="{:lang('Input_new_psd')}" maxlength="30" autocomplete="off" disableautocomplete />
+                                </div>
+                                <div class="row">
+                                    <label for="repassword" class="w80">{:lang('Passwordstoo')}: <span class="required">*</span></label>
+                                    <input id="repassword" type="password" value="" name="repassword" placeholder="{:lang('Input_renew_psd')}" maxlength="30" autocomplete="off" disableautocomplete />
+                                </div>
+                                
+                                <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                                    <input name="submit" value="{:lang('Save_password')}" type="submit" url="{:url('myinfo',array('type'=>'password'))}">
+                                    <input type="hidden" name="id" value="{$data.id}" />
+                                    <input type="hidden" name="status" value="{$data.status}" />
+                                    <input name="reset2" class="button white" value="{:lang('Cancel')}" type="reset">
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                    
+                    <!--<div id="resetpsd" style="display:block;">-->
+                        <!--<form id="myform3" method="post" style="margin-top:5px;" class="">-->
+                            <!--<fieldset>-->
+                                <!--<legend>{$data.nickname}</legend>-->
+                                <!--<div class="row">-->
+                                    <!--<label for="email" class="w80">{:lang('Email')}: </label>-->
+                                    <!--<input id="email" type="text" value="{$data.email}" name="email" placeholder="{:lang('Find_email_tip')}" maxlength="60"/>-->
+                                <!--</div>-->
+                                <!--<div class="row">-->
+                                    <!--<label for="mobile" class="w80">{:lang('Mobile')}: </label>-->
+                                    <!--<input id="mobile" type="text" value="{$data.mobile}" name="mobile" placeholder="{:lang('Find_mobile_tip')}" maxlength="16"/>-->
+                                <!--</div>-->
+                                <!--<div class="row">-->
+                                    <!--<label class="w80">{:lang('Find_tip')}: </label>-->
+                                    <!--<label style="width:auto;">{:lang('Find_desc')}</label>-->
+                                <!--</div>-->
+                                <!---->
+                                <!--<div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">-->
+                                    <!--<input name="submit3" value="{:lang('Find')}" type="submit" url="{:url('myinfo',array('type'=>'forget'))}">-->
+                                    <!--<input type="hidden" name="id" value="{$data.id}" />-->
+                                    <!--<input type="hidden" name="status" value="{$data.status}" />-->
+                                    <!--<input name="reset3" class="button white" value="{:lang('Cancel')}" type="reset">-->
+                                <!--</div>-->
+                            <!--</fieldset>-->
+                        <!--</form>-->
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+    {/block}
+    
+    {block name="js"}
+        <script>
+            $(function(){
+                var topindex = parent.layer.getFrameIndex(window.name); //获取当前窗体索引
+                $('input[name="reset"],input[name="reset2"],input[name="reset3"]').click(function(){
+                    parent.layer.close(topindex);
+                });
+                
+            })
+        </script>
+    {/block}

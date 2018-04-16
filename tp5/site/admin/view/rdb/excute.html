@@ -1,0 +1,70 @@
+        {extend name="admin@public/base"/}
+        
+        <!-- CONTENT -->
+        {block name="body"}
+            <div id="content">
+                <div class="breadcrumbs">
+                    {:lang('General')} : &nbsp;&nbsp; {:lang('DbModel')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+                </div>
+                <div class="bloc">
+                    <div class="title">
+                        <div class="tabs" id="navs">
+                            {include file="public/navs" /}
+                        </div>
+    
+                    </div>
+                    <div class="content">
+                        <div class="infobox">
+                            {:lang('Execute_tip')}
+                        </div>
+                        
+                        <form name="executesql" method="post" id="executesql">
+                            <div class="row">
+                                <label for="sqls" class="w100">{:lang('Sql_langs')}</label>
+                                <textarea style="width:600px; height:120px;resize: none;" id="sqls" name="sqls">SELECT * FROM rt_config LIMIT 0,10;</textarea>
+                            </div>
+                            <div class="buttons-wrapper" style="margin: 10px 0 20px 120px;">
+                                <input value="{:lang('Execute')}" type="submit" name="execute" />
+                                <input name="reset" class="button white" value="{:lang('Reset')}" type="reset">
+                            </div>
+                        </form>
+                    
+                    </div>
+                </div>
+            </div>
+            <script>
+                $(function(){
+                    $('input[name="execute"]').click(function(){
+                        var that = this;
+                        var form = $('#executesql');
+                        var target = $(that).attr('url');
+                        var query = form.serialize();
+                        
+                        $.post(target,query).success(function(data){
+                            if (data.code == 1) {
+                                layer.msg(data.msg,{'icon': 1,'time':2000},function () {
+                                    setTimeout(function(){
+                                        if (data.url) {
+                                            location.href=data.url;
+                                            layer.close(topindex);
+                                        }else{
+                                            location.reload();
+                                            layer.close(topindex);
+                                        }
+                                    },1500);
+                                });
+                                
+                            }else{
+                                layer.msg(data.msg,{'icon': 2,'time':2000},{type: 5} )
+                                setTimeout(function(){
+                                    if (data.url) {
+                                        location.href=data.url;
+                                    }
+                                },1500);
+                            }
+                        });
+                        return false;
+                    })
+                })
+            </script>
+        {/block}

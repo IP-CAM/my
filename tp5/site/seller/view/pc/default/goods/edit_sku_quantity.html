@@ -1,0 +1,90 @@
+{extend name='common/poupbase'}
+{block name='css'}
+<style>
+    .sku_quantity .ware p{padding: 0;text-align: right;vertical-align: middle;height: 34px;line-height: 34px;}
+</style>
+{/block}
+{block name='body'}
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">{:lang('Sku_warehouse_quantity')}</h3>
+                </div>
+                <form action="">
+                <div class="box-body">
+                    <table class="table table-bordered sku_quantity">
+                        <tr>
+                            <th class="col-xs-2">SKU</th>
+                            <th class="col-xs-6" style="text-align: right">{:lang('Goods_Crossware')} ({:lang('Goods_Crossware_Code')})</th>
+                            <th class="col-xs-2">{:lang('Goods_Quantity')}</th>
+                            <th class="col-xs-2">{:lang('offline_quantity')}</th>
+                        </tr>
+                        {php}$key=0;{/php}
+                        {php}$key2=0;{/php}
+                        {foreach $arr_sku as $arr}
+                        <tr>
+                            <td>
+                                {$arr['sku']}<br/>{$arr['name']}
+                            </td>
+                            <td style='padding: 0' class="ware">
+                                {if condition="$seller_warehouse"}
+                                {foreach $seller_warehouse as $arr2}
+                                {present name="$arr_warehouse[$arr2]"}
+                                <p>{$arr_warehouse[$arr2]} ({$arr2})</p>
+                                {/present}
+                                {/foreach}
+                                {else /}
+                                <p>{:lang('Empty_Warehouse')} </p>&nbsp;&nbsp;
+                                {/if}
+                            </td>
+                            <td>
+                                {if condition="$seller_warehouse"}
+                                {foreach $seller_warehouse as $arr2}
+                                {present name="$arr_warehouse[$arr2]"}
+                                <p><input type="number" name="sku_quantity[{$key}][crossware_sku_quantity]" value="{$arr_sku_quantity[$arr['sku']][$arr2]['quantity']|default=0}" class="form-control" min="0"/></p>
+                
+                                <input name="sku_quantity[{$key}][crossware_code]"  value="{$arr2}" hidden />
+                                <input name="sku_quantity[{$key}][sku]" value="{$arr['sku']}" hidden />
+                                {/present}
+                                {php}$key++;{/php}
+                                {/foreach}
+                                {else /}
+                                <!--无仓库情况下强制更新库存表
+                                <input type="number" style="width:60px;" name="sku_all_quantity[{$arr['sku']}][quantity]" value="{$arr_sku_quantity[$arr['sku']]['quantity']|default=0}" min="0"/>
+                                -->
+                                {/if}
+                            </td>
+                            <td>
+                                {if condition="$seller_warehouse"}
+                                {foreach $seller_warehouse as $arr2}
+                                {present name="$arr_warehouse[$arr2]"}
+                                <p><input type="number" name="sku_quantity[{$key2}][crossware_sku_offline_quantity]" class="form-control" value="{$arr_sku_quantity[$arr['sku']][$arr2]['offline_quantity']|default=0}" min="0"/></p>                          {/present}
+                                {php}$key2++;{/php}
+                                {/foreach}
+                                {else /}
+                                <!--无仓库情况下强制更新库存表
+                                <input type="number" style="width:60px;" name="sku_all_quantity[{$arr['sku']}][offline_quantity]" value="{$arr_sku_quantity[$arr['sku']]['offline_quantity']|default=0}" min="0"/>
+                                -->
+                                {/if}
+                            </td>
+                        </tr>
+                        {/foreach}
+                    </table>
+                </div>
+                <div class="box-footer">
+                    <input type="hidden" name="id" value="{$data.id}">
+                    <input type="submit" value="{:lang('save')}" class="btn btn-etshop btn-info" name="submit" url="{:url('seller/goods/save_sku_quantity')}">
+                </div>
+                </form>
+            </div>
+        </div>
+        
+        
+    </div>
+    </div>
+    
+</section>
+{/block}

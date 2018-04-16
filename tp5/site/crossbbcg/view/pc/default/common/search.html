@@ -1,0 +1,58 @@
+<div class="ly-search" id="ly_search">
+                <form action="{:url('crossbbcg/search/index')}">
+                    <!--data-action 为各项的搜索提交地址-->
+                    <dl class="ly-search-select">
+                        <dt><span>{:lang('Search_Product')}</span><i class="jiao jiao-down"></i></dt>
+                        <dd style="display: none;">
+                            <em class="act" data-action="{:url('crossbbcg/search/index')}">{:lang('Search_Product')}</em>
+                            <!-- TODO 店铺搜索 -->
+                            <em data-action="{:url('crossbbcg/search/index')}">搜店铺</em>
+                            
+                        </dd>
+                    </dl>
+                    <input type="text" id="search_text" autocomplete="off" type="search" name="like" placeholder="{:lang('Please_Search')}" value="{:$like}"/>
+                    <button type="submit">{:lang('Search')}</button>
+                </form>
+                <div class="ly-search-keys">
+                    <ul>
+                        {foreach :widget('crossbbcg/Ad/get_ad', ['id' => 3,'limit'=>5]) as $v}
+                        <li><a href="{$v.ad_link}">{$v.name}</a></li>
+                        {/foreach}
+                    </ul>
+                </div>
+                
+                <!--搜索历史记录-->
+                {if condition ="$search_history"}
+				<div class="search-results hide" style="display: none;">
+					<ul class="history-results">
+						<li class="title">
+							<span>{:lang('recent_search')}</span>
+							<a href="javascript:void(0);" class="clear-history clear">
+								<i></i> {:lang('to_empty')}
+							</a>
+						</li>
+				
+                        {foreach $search_history as $key=>$value}
+						<li class="rec_over search-{$key}">
+							<span>
+								<a href="{:url('crossbbcg/search/index') . '?like='.$value}" title="{$value}">{$value}</a>
+								<i onclick="search_remove('search-{$key}')" class="iconfont icon-remove" data-url="{:url('crossbbcg/search/deleteSearchHistory',['key'=>$value])}"></i>
+							</span>
+						</li>
+				        {/foreach}
+						
+					</ul>
+					<ul class="rec-results">
+						<li class="title">
+							<span>{:lang('hot_search')}</span>
+							<i class="close">×</i>
+						</li>
+				{foreach :widget('crossbbcg/Ad/get_ad',array('id'=>5,'limit'=>10)) as $v}
+						<li>
+							<a href="{:url('crossbbcg/search/index').'?like='.$v.name}" title="{$v.ad_info}">{$v.name}</a>
+						</li>
+                {/foreach}
+					</ul>
+				</div>
+                {/if}
+            </div>

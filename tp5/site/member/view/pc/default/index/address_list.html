@@ -1,0 +1,174 @@
+    {extend name="common/base" /}
+    
+    {block name="title"}
+    <title>ETshop-{:lang('Address_list')}</title>
+    {/block}
+    
+    {block name="css"}
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/member.css" />
+    {/block}
+    
+    {block name="body"}
+    <!--面包屑-->
+    <div class="ly-path">
+        <ul class="clearfix">
+            <li class="home">
+                <a href="{:url('crossbbcg/index/index')}" title="{:lang('go_min')}">{:lang('Home')}</a>
+                <span>&gt;&nbsp;</span>
+            </li>
+            <li>
+                <a href="{:url('member/index/index')}" title="">{:lang('Member')}</a>
+                <span>&gt;&nbsp;</span>
+            </li>
+            <li>
+                <h1>{:lang('Address_list')}</h1>
+            </li>
+        </ul>
+    </div>
+    <div class="ly-main member-main clearfix">
+        {include file="index/left_menu"}
+        <div class="member-right">
+            <div class="member-content">
+                <div class="title member-title member-max-title">
+                    <div class="t">{:lang('receive_address')}</div>
+                </div>
+                <div class="body pb15 mh600">
+                    <table border="0" cellspacing="0" cellpadding="0" class="address-table">
+                        <thead>
+                            <tr class="thead-tbl-grade">
+                                <th>{:lang('consignee')}</th>
+                                <th>{:lang('address_area')}</th>
+                                <th>{:lang('detail_address')}</th>
+                                <th>{:lang('postcode')}</th>
+                                <th>{:lang('mobile')}</th>
+                                <th>{:lang('operation')}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {volist name="list" id="vo"}
+                            <tr class="thead-tbl-address">
+                                <td class="col-man">{$vo.consignee}</td>
+                                <td class="col-area"> {$vo.country}  {$vo.province}  {$vo.city}  {$vo.district} </td>
+                                <td class="col-address">{$vo.address}</td>
+                                <td class="col-postcode">{$vo.zipcode}</td>
+                                <td class="clo-phone">
+                                    {$vo.mobile}
+                                </td>
+                                <td class="actions">
+                                    <a href="javascript:void (0);" data-url="{:url('address_edit', ['id' => $vo['id'] ])}" class="edit" title="{:lang('Edit')}" data-title="{:lang('Address_edit')}">{:lang('Edit')}</a> |
+                                    <a href="{:url('ajaxdeladdress', ['id' => $vo['id'] ])}" class="del" data-layer="{:lang('Are you sure del curr addres')}" data-title="{:lang('Delete')}">{:lang('Delete')}</a> |
+                                    {if condition="$vo.is_default eq 0"}
+                                    <a class="set-default"  href="{:url('setDefaultAddress',array('ids'=>$vo['id']))}">{:lang('Set curr default')}</a>
+                                    {else/}
+                                    <span style="color: red">{:lang('Default address')}</span>
+                                    {/if}
+                                </td>
+                            </tr>
+                            {/volist}
+                        </tbody>
+                    </table>
+                    <div class="title address-title">{:lang('address_tips')}</div>
+                    <form class="address-form" action="" method="get">
+                        <div class="form-inline">
+                            <div class="input-label"><em>*</em>{:lang('consignee')}</div>
+                            <div class="input-line error-triggered">
+                                <input type="text" name="consignee" id="consignee" class="input-text real-name" data-regex="^[A-Za-z0-9\u4e00-\u9fa5]{2,25}$" data-empty="{:lang('consignee_must_tips')}" data-error="{:lang('consignee_must_tips')}" required="">
+                                <span class="address-hint">{:lang('pleace input realname')}</span>
+                                <span class="input-error"></span>
+                            </div>
+                        </div>
+                        <div class="form-inline">
+                            <div class="input-label"><em>*</em>{:lang('address_area')}</div>
+                            <div class="input-line" id="select_td">
+                                    <select name="country" id="country" class="chosen-select"  data-not="{:lang('country')}" required="" style="width: 120px;" data-province="{:lang('pleace choose province')}" data-city="{:lang('pleace choose city')}" data-area="{:lang('pleace choose area')}">
+                                    <option value="0">{:lang('pleace choose country or area')}</option>
+                                    {volist name="country" id="p"}
+                                    <option  value="{$p.id}">{$p.name}</option>
+                                    {/volist}
+                                </select>
+                                <span class="input-error"></span>
+                            </div>
+                        </div>
+                        <div class="form-inline">
+                            <div class="input-label"><em>*</em>{:lang('detail_address')}</div>
+                            <div class="input-line error-triggered">
+                                <input type="text" name="address" id="address" class="input-text" data-empty="{:lang('pleace input detail address')}" data-error="{:lang('detail_address_must')}" data-regex="^.{5,120}$" required="" style="width: 420px;">
+                                <span class="input-error"></span>
+                            </div>
+                        </div>
+                        <div class="form-inline">
+                            <div class="input-label">{:lang('postcode')}</div>
+                            <div class="input-line">
+                                <input type="text" name="zipcode" id="zipcode" class="input-text" data-regex="^\d{6}$"  data-error="{:lang('postcode format error')}" style="width: 60px;" >
+                                <span class="input-error"></span>
+                            </div>
+                        </div>
+                        <div class="form-inline">
+                            <div class="input-label"><em>*</em>{:lang('mobile')}</div>
+                            <div class="input-line error-triggered">
+                                <input type="text" name="mobile" id="mobile" class="input-text" data-regex="^0?(13|14|15|17|18)[0-9]{9}$" data-empty="{:lang('pleace input mobile')}" data-error="{:lang('mobile format error')}" required="" style="width: 150px;">
+                                <span class="input-error"></span>
+                            </div>
+                        </div>
+                        <div class="form-inline">
+                            <div class="input-label">{:lang('email_commonly')}</div>
+                            <div class="input-line">
+                                <input type="text" name="email" id="email" class="input-text" data-regex="\w+((-w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+" data-error="{:lang('email format error')}" >
+                                <span class="input-error"></span>
+                            </div>
+                        </div>
+                        <div class="form-inline">
+                            <div class="input-label"><em>*</em>{:lang('IDcard')}</div>
+                            <div class="input-line">
+                                <input type="text" name="identity" id="identity" class="input-text" placeholder="{:lang('pleace input IDcard')}" data-regex="(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)" data-empty="{:lang('pleace input IDcard')}" data-error="{:lang('IDcard format error')}" required="">
+                                <i class="iconfont icon-help identity-helper" id="show_tips"></i>
+                                <div class="help-pop" style="display: none;">{:lang('IDcard_tips')}</div>
+                                <span class="input-error"></span>
+                            </div>
+                        </div>
+                        <div class="form-inline">
+                            <div class="input-label"><em>*</em>{:lang('identity card true')}</div>
+                            <div  style="float:left;padding-top: 7px">
+                                <ul class="images-upload clearfix upload-ui" name="front_img" data-url="{:url('ajax_upload')}" data-maxlength="1">
+                                    <li class="img-thumbnail action-upload">
+                                        <input  type="file" class="action-file-input upload-input">
+                                        <span class="icon-add">+</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="input-label"><em>*</em>{:lang('identity card false')}</div>
+                            <div  style="float:left;padding-top: 7px">
+                                <ul class="images-upload clearfix upload-ui" name="verso_img" data-url="{:url('ajax_upload')}" data-maxlength="1">
+                                    <li class="img-thumbnail action-upload">
+                                        <input  type="file" class="action-file-input upload-input">
+                                        <span class="icon-add">+</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        
+                        <!--<div class="form-inline">
+                            <div class="input-label">&nbsp;</div>
+                            <div class="input-line">
+                                <input type="checkbox" class="ui-input" id="is-default" checked=""> 设为默认
+                            </div>
+                        </div>-->
+                        <div class="btn-box">
+                            <a href="javascript:void(0);" data-error="{:lang('Validate against')}" data-title="{:lang('tips')}" id="address_submit">{:lang('save')}</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {/block}
+    
+    <!--此板块为页面单独js加载-->
+    {block name="footer_js"}
+    <script type="text/javascript">
+        //需要加载的js文件
+        Private_Script = ['address'];
+    </script>
+    {/block}

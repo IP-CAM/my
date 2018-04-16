@@ -1,0 +1,165 @@
+{extend name='common/base'}
+{block name='css'}
+<link href="__PUBLIC__/{$css_path}/daterangepicker.css" rel="stylesheet">
+
+{/block}
+{block name="breadcrumb"}
+<li>{:lang('nav_order')}</li>
+<li class="active">{$meta_title}</li>
+{/block}
+{block name='body'}
+
+<section class="content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    
+                    <div class="row">
+                        <form action="{:url('seller/order/index')}">
+                        <div class="col-lg-1">
+                            <div class="input-group input-group-sm">
+                                <select name="order_status" id="order_status" class="form-control pull-right" style="min-width:100px;">
+                                    <option value="all" {eq name="order_status" value="all"}selected="selected"{/eq}>{:lang('all_order_status')}</option>
+                                    {foreach $arr_order_status as $key=>$value}
+                                    <option value="{$value}" {eq name="order_status" value="$value"}selected="selected"{/eq}>{:lang($value)}</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                        </div>
+    
+                        <!-- Date range -->
+                        <div class="form-group input-group-sm col-lg-2">
+                            
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                
+                                <input type="text" class="form-control pull-left" id="reservation" name="time" placeholder="{:lang('choose_order_time')}" value="{$time}">
+                            </div>
+                            <!-- /.input group -->
+                        </div>
+                        <!-- /.form group -->
+                        
+                        <div class="col-lg-2">
+                        <div class="input-group input-group-sm">
+                            
+                            <input type="text" name="search_name" class="form-control" placeholder="{:lang('seller_order_search_tips')}" value="{$search_name}">
+            
+                            <div class="input-group-btn">
+                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                        </div>
+
+                        </form>
+                    </div>
+                    
+                </div>
+                <div class="box-body">
+                    <table id="demo-foo-addrow" class="table table-bordered table-striped" data-page-size="10">
+                        <thead>
+                        <tr>
+                            <th>{:lang('order_sn')}</th>
+                            <th>{:lang('consignee')}</th>
+                            <th>{:lang('order_total_money')}</th>
+                            <th>{:lang('order_status')}</th>
+                            <th>{:lang('delivery_status')}</th>
+                            <th>{:lang('pay_type')}</th>
+                            <th>{:lang('pay_source')}</th>
+                            <th>{:lang('order_create_time')}</th>
+                            <th>{:lang('opreration')}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach $list as $v}
+                        <tr>
+                            <td>{$v.order_sn}</td>
+                            <td>
+                                <span data-original-title="{$v.country} {$v.province} {$v.city} {$v.district} {$v.address}" data-toggle="tooltip" data-placement='top'>{$v.consignee} &nbsp;&nbsp; {$v.mobile}</span>
+                            </td>
+                            <td>{$v.symbol}{$v.order_amount}</td>
+                            
+                            <td>
+                                {eq name="$v.status" value="WAIT_BUYER_PAY"}
+                                <span class="label label-primary">
+                                {/eq}
+                                {eq name="$v.status" value="WAIT_SELLER_SEND_GOODS"}
+                                <span class="label label-danger">
+                                {/eq}
+                                {eq name="$v.status" value="WAIT_BUYER_CONFIRM_GOODS"}
+                                <span class="label label-info">
+                                {/eq}
+                                {eq name="$v.status" value="TRADE_FINISHED"}
+                                <span class="label label-success">
+                                {/eq}
+                                {eq name="$v.status" value="TRADE_CLOSED"}
+                                <span class="label label-warning">
+                                {/eq}
+                                {eq name="$v.status" value="TRADE_CLOSED_BY_SYSTEM"}
+                                <span class="label label-warning">
+                                {/eq}
+                                    
+                                {:lang($v.status)}
+                                </span>
+                            </td>
+                            <td>
+                                {switch name='$v.shipping_status'}
+                                {case value='0'}
+                                    {if condition="$v.status=='WAIT_SELLER_SEND_GOODS' && ($v.cancel_status=='NO_APPLY'||$v.cancel_status=='FAILS')"}
+                                <a class="tooltip-link ajax-get btn btn-primary btn-sm" data-original-title="{:lang('go_truck')}" data-toggle="tooltip" data-placement='top' data-width="1050" data-height="700" data-showbar="1" data-title="{:lang('shipping_information')}" data-skin="skin-blue" href="{:url('deliver',array('order_sn'=>$v.order_sn))}"><i class="fa fa-truck"></i></a>
+                                    {/if}
+                                {/case}
+                                {case value='1'}
+                                {:lang('had_delivery')}
+                                {/case}
+                                {case value='2'}
+                                {:lang('had_received')}
+                                {/case}
+                                {/switch}
+                            </td>
+                            <td>
+                                {$v.pay_name}
+                            </td>
+                            <td>
+                                {$v.platform_type}
+                            </td>
+                            <td>{$v.create_time}</td>
+                            <td>
+                                <a class="tooltip-link ajax-get btn btn-primary btn-sm" data-original-title="{:lang('View')}" data-toggle="tooltip" data-placement='top' data-width="900" data-height="700" data-showbar="1" data-title="{$v.consignee} - {$v.order_sn}" data-skin="skin-blue" href="{:url('info',array('order_sn'=>$v.order_sn))}"><i class="fa fa-eye"></i></a>
+    
+                                
+                                <a class="tooltip-link ajax-get btn btn-primary btn-sm" data-original-title="{:lang('show_customer_id')}" data-toggle="tooltip" data-placement='top' data-width="700" data-height="700" data-showbar="1" data-title="{$v.consignee} - {$v.order_sn}" data-skin="skin-blue" href="{:url('idnumber',array('order_sn'=>$v.order_sn))}"><i class="fa fa-user-secret"></i></a>
+                                
+                            </td>
+                        </tr>
+                        {/foreach}
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="9">
+                                <div class="text-right pagination" >
+                                    {$list->appends(input())->render()}
+                                </div>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{/block}
+{block name='js'}
+<script src="__PUBLIC__/{$js_path}/moment.min.js"></script>
+<script src="__PUBLIC__/{$js_path}/daterangepicker.js"></script>
+
+<script type="text/javascript">
+    //Date range picker
+    $('#reservation').daterangepicker({
+        autoUpdateInput:false
+    });
+</script>
+{/block}

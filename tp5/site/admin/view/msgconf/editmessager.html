@@ -1,0 +1,63 @@
+     {extend name="public/poupbase"/}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content" style="margin:0px 10px 5px 8px;">
+        <div class="bloc" style="margin:10px 0px 0px;">
+            <div class="content">
+                <form id="myform" method="post" style="margin-top:5px;" class="">
+                    <fieldset>
+                        <legend>{$meta_title|default=''}</legend>
+    
+                        <div class="row">
+                            <div class="clear"></div>
+                            <label for="msgtpl" class="w100">{:lang('Tpl_content')}: </label>
+                            <textarea id="msgtpl" name="msgtpl">{$data.msgtpl}</textarea>
+                            <script charset="utf-8" src="__STATIC__/kindeditor/kindeditor-all-min.js"></script>
+                            <script>
+                                var editor_content;
+                                KindEditor.ready(function(K) {
+                                    editor_content = K.create('#msgtpl', {
+                                        resizeType : 1,
+                                        allowPreviewEmoticons : false,
+                                        allowImageUpload : false,
+                                        minWidth : 460,
+                                        minHeight : 240,
+                                        langType : '{:jsup(config('default_lang'))}',
+                                        items : [
+                                            'source', '|', 'undo', 'redo', '|','bold', 'italic', 'underline',
+                                            'insertunorderedlist', '|', 'link', 'unlink', 'image', 'media'],
+                                        afterBlur: function () { this.sync(); }
+                                    });
+                                });
+                            </script>
+                        </div>
+    
+                        <div class="row">
+                            <label for="status" class="w100">{:lang('Status')}: <span class="required">*</span></label>
+                            <div class="slideBox">
+                                <input id="status" value="1" type="checkbox" name="status"  {eq name="data['status']" value="1"}checked{/eq}/>
+                                <label for="status"></label>
+                            </div>
+                            <div style="float:left; margin-left:10px; line-height:24px;">
+                                {:lang('Status_tip')}
+                            </div>
+                        </div>
+                        
+                        <div class="clear"></div>
+                        <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                            <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('saveedit')}">
+                            <input type="hidden" name="msgid" value="{$data.msgid}" />
+                            <input type="hidden" name="appid" value="{$data.appid}" />
+                            <input type="hidden" name="type" value="{$data.type}" />
+                            <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    {/block}
+    
+    {block name="js"}
+    {/block}

@@ -1,0 +1,476 @@
+{extend name="common/base" /} {block name="title"}
+<title>{$meta_title|default=lang('Default_Meta_Title')}</title>
+{/block} {block name="css"}
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/crossbbcg/pc/default/css/cart.css" /> {/block} {block name="body"}
+<!--面包屑-->
+
+<div class="ly-main clearfix">
+	<div class="cart-top clearfix">
+		<div class="left">
+			<em class="iconfont icon-dingdan"></em><span>{:lang('Write_Submit_Order')}</span>
+		</div>
+		<div class="right">
+			<div id="cart_steps" class="steps">
+				<table width="100%">
+					<tbody>
+						<tr>
+							<td class="step-item step-1 active">
+                                <span><q class="icon">●</q><i>1</i>{:lang('Cart')}</span>
+								<div class="stepdiv">1</div>
+							</td>
+							<td class="step-item step-2 active"><span><q class="icon">●</q><i>2</i>{:lang('Write_Submit_Order')}</span>
+								<div class="stepdiv">2</div>
+							</td>
+							<td class="step-item step-3 last"><span><q class="icon">●</q><i>3</i>{:lang('Success_Submit_Order')}</span>
+								<div class="stepdiv">3</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="checkout-main">
+		<!--地址选择信息-->
+		<dl class="checkout-litem address-list">
+			<dt class="title">
+				<span>{:lang('Choose_Shipping_Address')}</span>
+                <a href="{:url('member/index/addresslist')}" target="_blank" style="float:right;font-size:12px;font-weight:400;margin-right:30px;color:#c97;">{:lang('manage_address')}</a>
+			</dt>
+			<dd>
+				<ul class="clearfix">
+                    <!--选中样式current-->
+                    {foreach $arr_address as $arr}
+					<li class="address-item {eq name="$arr['checked']" value='1'}current{/eq}" data-id="{$arr['id']}" data-url="{:url('crossbbcg/carts/setShippingAddress')}" data-modify="{:url('crossbbcg/carts/getAddress')}">
+						<div class="user-info clearfix">
+							<div class="phone">
+								<input type="radio" name="address_id" value="{$arr['id']}">
+								<span class="name">
+                                {$arr['province_name']}
+                                {$arr['city_name']}
+                                ({$arr['consignee']} {:lang('shou')})
+                                
+                                </span>
+								<!--<span class="phone-number"></span>-->
+							</div>
+						</div>
+						<div class="detail">
+                            {$arr['district_name']}
+                            {$arr['address']}
+                            {$arr['mobile']}
+                        </div>
+						<!--<div class="uemail">
+                        </div>
+						<div class="card-id">
+                            
+                        </div>-->
+						<div class="controls">
+							<a href="javascript:void(0)" class="modify">{:lang('Modify')}</a>
+						</div>
+					</li>
+					{/foreach}
+                    
+					<li class="address-item new" id="btn_add_address"><span class="add-item">+ {:lang('Use_New_Address')}</span></li>
+
+				</ul>
+			</dd>
+		</dl>
+		<!--地址选择信息END-->
+		
+		<!--购物车信息-->
+        {notempty name="$arr_good"}
+		<dl class="checkout-litem ">
+			<dt class="title">
+					<span>{:lang('Confirm_Goods')}</span>
+				</dt>
+			<dd class="product-list">
+				<div class="items-title">
+					<ul class="clearfix">
+						<li class="check">&nbsp;</li>
+						<li class="goods">{:lang('Goods')}</li>
+						<li class="kg">&nbsp;<!--{:lang('Weight')}--></li>
+						<li class="unit-price">{:lang('Unit_Price')}（{:lang('Currency_'.config('catalog_currency_code'))}）</li>
+						<li class="quantity">{:lang('Good_Num')}</li>
+						<li class="subtotal">{:lang('Good_Count')}（{:lang('Currency_'.config('catalog_currency_code'))}）</li>
+					</ul>
+				</div>
+                {foreach $arr_good as $key => $arr}
+				<dl class="item-box">
+                    <dt class="t">
+                    <div class="check">{$key}</div>
+                    </dt>
+					<dd class="b">
+                        {foreach $arr as $arr2}
+						<ul class="goods-item clearfix">
+
+							<li class="goods">
+								<div class="goods-pic">
+									<a class="ly-mcPic" href="{$arr2['href']}" title="{$arr2['good_name']}" target="_blank">
+                                        
+                                        {if condition="empty($arr2['thumb'])"}
+                                        <img src="__PUBLIC__/{$img_path}/no-image.png" />
+                                        {elseif condition="substr($arr2['thumb'],0,4)=='http'"}
+                                        <img src="{$arr2['thumb']}">
+                                        {else /}
+                                        <img src="__UPLOADS__/{$arr2['thumb']}">
+                                        {/if}
+                                        
+                                    </a>
+								</div>
+								<div class="goods-name" style="height:auto;">
+									<a href="{$arr2['href']}">{$arr2['good_name']}</a>
+                                    <!--商品选项名-->
+                                    <p>{$arr2['sku_name']}</p>
+								</div>
+							</li>
+							<li class="kg"><!--{$arr2['weight']}{$arr2['weight_class_id']}--></li>
+							<li class="unit-price">
+                                <!--<span style="text-decoration: line-through;color:#9c9c9c;">{$arr2['format_market_price']}</span> <br/>-->
+                                {$arr2['format_sale_price']}
+                                
+                            </li>
+							<li class="quantity">
+                                {$arr2['num']}
+							</li>
+							<li class="subtotal">{$arr2['format_subtotal']}</li>
+
+						</ul>
+                        {/foreach}
+						<div class="cart-item-bottom clearfix">
+                            
+						</div>
+					</dd>
+				</dl>
+                {/foreach}
+
+			</dd>
+		</dl>
+        {/notempty}
+        <div class="checkout-litem clearfix">
+			<dt class="title">
+					<span>{:lang('order_message')}/{:lang('invoice_information')}</span>
+			</dt>
+			<dd class="fapiao sub-item">
+				<div class="sub-title">{:lang('invoice_information')}</div>
+				<div class="sub-body">
+					<table>
+						<tbody>
+							<tr>
+								<td>
+									<ul>
+										<li><input type="radio"  onchange="$('#fold').hide()" name="invoice_type" id="for_invoice_false" value="0" class="action-select-invoice" checked="checked"> <label for="for_invoice_false">{:lang('not_invoice')}</label></li>
+										<li><input type="radio" onchange="$('#fold').show();$('.invoice_number').hide();" name="invoice_type" id="for_invoice_personal" value="2" class="action-select-invoice"> <label for="for_invoice_personal">{:lang('personage_invoice')}</label></li>
+										<li><input type="radio"  onchange="$('#fold').show();$('.invoice_number').show();" name="invoice_type" id="for_invoice_company" value="1" class="action-select-invoice"> <label for="for_invoice_company">{:lang('company_invoice')}</label></li>
+									</ul>
+								</td>
+							</tr>
+							<tr class="fold" id="fold" style="display: none;" >
+								<td>
+                                   
+                                    <label for="invoice_title" style="float: left;width: 100px;display: block;line-height: 30px;">{:lang('invoice_title')}：</label>
+                                    <input type="text" name="invoice_title" id ="invoice_title" value="" data-msg="{:lang('invoice_title_need')}">
+                                <br/>
+                                    <label for="invoice_number" class="invoice_number" style="line-height: 30px;float: left;width: 100px;display: block;">{:lang('invoice_number')}：</label>
+                                    <input type="text" name="invoice_number" id="invoice_number" class="invoice_number" data-msg="{:lang('invoice_number_need')}">
+                                
+                                </td>
+							</tr>
+							
+						</tbody>
+					</table>
+				</div>
+			</dd>
+			<dd class="liuyan sub-item ">
+				<div class="sub-title">{:lang('order_message')}</div>
+				<div class="sub-body">
+					<textarea name="order_message" placeholder="{:lang('order_message_description')}" ></textarea>
+				</div>
+			</dd>
+		</div>
+        
+		<!-- 结账协议 -->
+        {eq name="$protocol_status" value="1"}
+		<dl class="checkout-litem clearfix">
+			<dd class="gaozhi">
+				<div class="n">
+					<div class="t" id="agree-title">{$protocol_title}</div>
+				<div class="b">
+                    {:html_entity_decode($checkout_protocol, ENT_QUOTES, 'UTF-8')}
+				</div>
+				<div class="b2"><label>
+                    <input type="checkbox" name="agree" id="agree" checked="checked" data-msg="{:lang('agree_need')}">
+                    {:lang('i_read_agree')}{$protocol_title}
+                </label></div>
+				</div>
+			</dd>
+		</dl>
+        {/eq}
+        
+        
+        <!--商品信息END-->
+		<dl class="checkout-litem  price-list clearfix">
+			<dd class="n clearfix">
+				<!--积分和优惠券-->
+				<div class="left">
+					<div class="coupon-box">
+						<div class="sub-title">
+							<label>
+							{:lang('Use_Coupon')}
+						</label>
+						</div>
+						<div class="body">
+                            <!-- TODO 使用优惠券-->
+							<p>{:lang('Input_Coupon_Code')}</p>
+							<p><input type="text" class="input-text"></p>
+							<p>
+								<button class="btn-submit">{:lang('Confirm_Use')}</button>
+								<button class="btn-cancel">{:lang('Confirm_Cancel')}</button>
+
+							</p>
+						</div>
+					</div>
+					<div class="Integral-box">
+						<div class="sub-title">
+							<label>{:lang('Use_Point')}</label>
+						</div>
+						<div class="body">
+							<!-- TODO 积分
+							<p>账户积分数<span class="red">5</span>,最多可以使用<span class="red">5</span></p>-->
+							<p><input type="text" class="input-text"></p>
+							<p>
+								<button class="btn-submit">{:lang('Confirm_Use')}</button>
+								<button class="btn-cancel">{:lang('Confirm_Cancel')}</button>
+							</p>
+						</div>
+					</div>
+				</div>
+				<!--积分和优惠券END-->
+				<!--结算总金额 -->
+				<div class="right">
+					<div class="price-box">
+						<ul>
+							<li><span>{:lang('Goods_Price')}：</span><em class="red">{$all_price}</em></li>
+							<li><span>{:lang('Goods_Tax')}：</span><em class="red">{$all_tax}</em></li>
+                            {eq name="$total" value="0"}
+                            <li><span>{:lang('Shipping_Price')}：</span><em class="red" id="shipping_price"></em></li>
+                            <li><span>{:lang('Checkout_Total')}：</span><em class="red sum" id="total"></em></li>
+                            {else /}
+                            <li><span>{:lang('Shipping_Price')}：</span><em class="red" id="shipping_price">{$shipping_price}</em></li>
+                            <li><span>{:lang('Checkout_Total')}：</span><em class="red sum" id="total">{$total}</em></li>
+                            {/eq}
+						</ul>
+					</div>
+				</div>
+				<!--结算金额信息END-->
+			</dd>
+			<!--提交按钮-->
+			<dd>
+				<div class="submit-box">
+					<!--<a href="" class="btn-cart">{:lang('Return_Carts')}</a>-->
+					<button type="submit" class="btn-submit" id="confirm_order" data-error="{:lang('Address_Error')}" data-url="{:url('crossbbcg/carts/confirm')}" data-msg="{:lang('confirm_repeat')}">{:lang('Checkout')}</button>
+				</div>
+			</dd>
+			<!--提交按钮END-->
+		</dl>
+	</div>
+
+</div>
+<div class="js_language">
+    <span id="js_add_address">{:lang('js_add_address')}</span>
+    <span id="js_modify_address">{:lang('js_modify_address')}</span>
+    <span id="js_complete_address">{:lang('js_complete_address')}</span>
+    <span id="js_id_front">{:lang('js_id_front')}</span>
+    <span id="js_id_reverse">{:lang('js_id_reverse')}</span>
+    <span id="js_choose_province">{:lang('js_choose_province')}</span>
+    <span id="js_choose_city">{:lang('js_choose_city')}</span>
+    <span id="js_choose_district">{:lang('js_choose_district')}</span>
+    
+</div>
+
+<div id="modify_address" data-url="{:url('crossbbcg/carts/modifyAddress')}" data-error="{:lang('Add_Address_Error')}" class="layer-ext-blue">
+    <div class="layui-layer-title" style="cursor: move;background: #00a4ed;color:#fff;">{:lang('js_modify_address')}</div>
+    <span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1 hide_modify" href="javascript:;" ></a></span>
+    <form class="address-form">
+        <div class="form-inline">
+            <div class="input-label"><em>*</em>{:lang('consignee')}</div>
+            <div class="input-line">
+                <input type="text" class="input-text real-name" name="consignee2" id="consignee2" disabled>
+            </div>
+        </div>
+        <div class="form-inline">
+            <div class="input-label"><em>*</em>{:lang('receive_address')}</div>
+            <div class="input-line" id="select_td2">
+                <select name="country2" id="country2" class="chosen-select"  data-not="{:lang('Country')}" data-province="{:url('crossbbcg/carts/ajax_get_province')}" data-city="{:url('crossbbcg/carts/ajax_get_city')}" data-district="{:url('crossbbcg/carts/ajax_get_district')}" style="display:none;">
+                    <option value="0">{:lang('choose_country')}</option>
+                    {volist name="country" id="p"}
+                    {if condition="$p['id'] == $country_id"}
+                    <option value="{$p.id}" selected="selected">{$p.name}</option>
+                    {else /}
+                    <option value="{$p.id}">{$p.name}</option>
+                    {/if}
+                    {/volist}
+                </select>
+            </div>
+        </div>
+        <div class="form-inline">
+            <div class="input-label"><em>*</em>{:lang('detail_address')}</div>
+            <div class="input-line">
+                <input type="text" name="address2" id="address2" class="input-text">
+            </div>
+        </div>
+        
+        <div class="form-inline">
+            <div class="input-label"><em>*</em>{:lang('input_telephone')}</div>
+            <div class="input-line">
+                <input type="text" name="mobile2" id="mobile2" class="input-text">
+            </div>
+        </div>
+        <div class="form-inline">
+            <div class="input-label" ><em>*</em>{:lang('IDcard')}</div>
+            <div class="input-line">
+                <input type="text" name="identity2" id="identity2" class="input-text" disabled>
+            </div>
+        </div>
+        <div id="upload" data-upload="__UPLOADS__"></div>
+        <div class="form-inline" style="margin-bottom:0; overflow: visible;">
+            <div class="input-label">{:lang('IDcard_image')}</div>
+            <ul class="images-upload clearfix" style="display:inline-block;" data-maxlength="1" data-id="front">
+                <li class="img-thumbnail action-upload return-upload"  style="width:220px;height:150px" id="front2">
+                    
+                </li>
+            </ul>
+            <ul class="images-upload clearfix" style="display:inline-block;" data-url="{:url('crossbbcg/carts/id_upload')}" data-maxlength="1" data-id="reverse">
+                <li class="img-thumbnail action-upload return-upload"  style="width:220px;height:150px" id="reverse2">
+                    
+                </li>
+            </ul>
+        </div>
+        <div class="form-inline" style="margin-bottom:0;">
+            <div class="input-label">&nbsp;</div>
+            <div class="input-line">
+                <span class="idspan">{:lang('idcard_front')}</span>
+                <span class="idspan">{:lang('idcard_reverse')}</span>
+            </div>
+        </div>
+        
+        <div class="form-inline" style="margin-bottom:0;">
+            <div class="input-label">&nbsp;</div>
+            <div class="input-line">
+                <input type="checkbox" class="ui-input" id="is_default2" name="is_default2" value="1"> {:lang('set_default')}
+            </div>
+        </div>
+    
+    </form>
+    <div class="layui-layer-btn" style="text-align:center;border-top: 1px #e6e6e6 solid;padding-top:10px;">
+        <a class="layui-layer-btn0" href="javascript:;" id="save_modify" data-province_error="{:lang('js_choose_province')}" data-url="{:url('crossbbcg/carts/modifyAddress')}" data-address_error="{:lang('js_complete_address')}" data-mobile_error="{:lang('mobile format error')}">{:lang('js_ok')}</a>
+        <a class="layui-layer-btn1 hide_modify" href="javascript:;">{:lang('js_no')}</a>
+    </div>
+</div>
+
+
+
+<script type="text/html" id="address_content">
+	<form class="address-form" action="" method="get">
+		<div class="form-inline">
+			<div class="input-label"><em>*</em>{:lang('consignee')}</div>
+			<div class="input-line error-triggered">
+				<input type="text" class="input-text real-name" data-regex="^[A-Za-z0-9\u4e00-\u9fa5]{2,25}$" data-empty="{:lang('consignee_must_tips')}" data-error="{:lang('consignee_must_tips')}" required="" name="consignee" id="consignee" >
+				<span class="address-hint">{:lang('pleace input realname')}</span>
+				<span class="input-error"></span>
+			</div>
+		</div>
+		<div class="form-inline">
+			<div class="input-label"><em>*</em>{:lang('receive_address')}</div>
+			<div class="input-line" id="select_td">
+                <select name="country" id="country" class="chosen-select"  data-not="{:lang('Country')}" required="" data-province="{:url('crossbbcg/carts/ajax_get_province')}" data-city="{:url('crossbbcg/carts/ajax_get_city')}" data-district="{:url('crossbbcg/carts/ajax_get_district')}" style="display:none;">
+                    <option value="0">{:lang('choose_country')}</option>
+                    {volist name="country" id="p"}
+                    {if condition="$p['id'] == $country_id"}
+                    <option  value="{$p.id}" selected="selected">{$p.name}</option>
+                    {else /}
+                    <option  value="{$p.id}">{$p.name}</option>
+                    {/if}
+                    {/volist}
+                </select>
+				<span class="input-error"></span>
+			</div>
+		</div>
+		<div class="form-inline">
+			<div class="input-label"><em>*</em>{:lang('detail_address')}</div>
+			<div class="input-line error-triggered">
+				<input type="text" name="address" id="address" class="input-text" data-empty="{:lang('pleace input detail address')}" data-error="{:lang('detail_address_must')}" data-regex="^.{1,120}$" required="">
+				<span class="input-error"></span>
+			</div>
+		</div>
+		
+		<div class="form-inline">
+			<div class="input-label"><em>*</em>{:lang('input_telephone')}</div>
+			<div class="input-line error-triggered">
+				<input type="text" name="mobile" id="mobile" class="input-text" data-regex="^0?(13|14|15|17|18)[0-9]{9}$" data-empty="{:lang('pleace input mobile')}" data-error="{:lang('mobile format error')}" required="">
+				<span class="input-error"></span>
+			</div>
+		</div>
+        <div class="form-inline" style="display:none;">
+            <div class="input-label">{:lang('postcode')}</div>
+            <div class="input-line">
+                <input type="text" name="zipcode" id="zipcode" class="input-text" value=""/>
+            </div>
+        </div>
+		<div class="form-inline" style="display:none;">
+			<div class="input-label">{:lang('email')}</div>
+			<div class="input-line">
+				<input type="text" name="email" id="email" class="input-text" value="" />
+			</div>
+		</div>
+		<div class="form-inline">
+			<div class="input-label" ><em>*</em>{:lang('IDcard')}</div>
+			<div class="input-line">
+				<input type="text" name="identity" id="identity" class="input-text" placeholder="{:lang('pleace input IDcard')}" data-regex="(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)" data-empty="{:lang('pleace input IDcard')}" data-error="{:lang('IDcard format error')}" required="">
+				<i class="iconfont icon-help identity-helper" id="show_tips"></i>
+				<div class="help-pop" style="display: none;">{:lang('IDcard_tips')}</div>
+				<span class="input-error"></span>
+			</div>
+		</div>
+        <a href="javascript:void(0);" id="address_submit" style="display:none;" data-url="{:url('crossbbcg/carts/addAddress')}" data-error="{:lang('Add_Address_Error')}"> submit </a>
+        
+        <div class="form-inline" style="margin-bottom:0; overflow: visible;">
+            <div class="input-label">{:lang('IDcard_image')}</div>
+            <ul class="images-upload clearfix" style="display:inline-block;" data-url="{:url('crossbbcg/carts/id_upload')}" data-maxlength="1" data-id="front">
+                <li class="img-thumbnail action-upload return-upload"  style="width:220px;height:150px">
+                    <input type="file" class="action-file-input" />
+                    <span class="icon-add" style="height:95%;line-height:130px;">+</span>
+                </li>
+            </ul>
+            <ul class="images-upload clearfix" style="display:inline-block;" data-url="{:url('crossbbcg/carts/id_upload')}" data-maxlength="1" data-id="reverse">
+                <li class="img-thumbnail action-upload return-upload"  style="width:220px;height:150px">
+                    <input type="file" class="action-file-input" />
+                    <span class="icon-add" style="height:95%;line-height:130px;">+</span>
+                </li>
+            </ul>
+        </div>
+        <div class="form-inline" style="margin-bottom:0;">
+            <div class="input-label">&nbsp;</div>
+            <div class="input-line">
+                <span class="idspan">{:lang('idcard_front')}</span>
+                <span class="idspan">{:lang('idcard_reverse')}</span>
+            </div>
+        </div>
+        
+		<div class="form-inline" style="margin-bottom:0;">
+			<div class="input-label">&nbsp;</div>
+			<div class="input-line">
+				<input type="checkbox" class="ui-input" id="is_default" name="is_default" checked="checked" value="1"> {:lang('set_default')}
+			</div>
+		</div>
+
+	</form>
+</script>
+{/block}
+<!--此板块为页面单独js加载-->
+{block name="footer_js"}
+<script type="text/javascript">
+	//需要加载的js文件
+    
+	Private_Script = ['checkout'];
+</script>
+{/block}

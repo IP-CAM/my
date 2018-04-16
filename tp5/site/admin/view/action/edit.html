@@ -1,0 +1,76 @@
+    {extend name="admin@public/poupbase"/}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content" style="margin:0px 10px 5px 8px;">
+        <div class="bloc" style="margin:10px 0px 0px;">
+            <div class="content">
+                <form id="myform" method="post" style="margin-top:5px;" class="">
+                    <fieldset>
+                        <legend>{:lang('Useraction')}</legend>
+    
+                        <div style="float:left; width:570px; padding-right:15px">
+                            <div class="row">
+                                <div style="float:left;">
+                                    <label for="name" class="w120">{:lang('Titleid')}: <span class="required">*</span></label>
+                                    <input id="name" type="text" value="{$data.name}" name="name" style=" width:240px;"/>
+                                </div>
+                                <div style="float:left;">
+                                    <div class="slideBox">
+                                        {eq name="ACTION_NAME" value="edit"}
+                                        <input id="status" value="1" type="checkbox" name="status" {eq name="data['status']"
+                                               value="1" }checked{/eq}/>
+                                        {else /}
+                                        <input id="status" value="1" type="checkbox" name="status" checked/>
+                                        {/eq}
+                                        <label for="status"></label>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <label for="title" class="w120">{:lang('Actionname')}: <span class="required">*</span></label>
+                                <input id="title" type="text" value="{$data.title}" name="title" style="width:320px;"/>
+                            </div>
+    
+                            <div class="row">
+                                <label for="remark" class="w120">{:lang('Actiondetailed')}: <span
+                                    class="required">*</span></label>
+                                <textarea name="remark" style="width:350px; height:35px;resize: none;" id="remark">{$data.remark}</textarea>
+                            </div>
+    
+                            <div class="row">
+                                <label for="rule" class="w120">{:lang('Action_rule')}: </label>
+                                <textarea style="width:350px; height:55px;resize: none;" id="rule"
+                                          name="rule">{$data.rule}</textarea>
+                            </div>
+    
+                            <div class="row">
+                                <label for="log" class="w120">{:lang('Log_rule')}: </label>
+                                <textarea style="width:350px; height:65px;resize: none;" id="log"
+                                          name="log">{$data.log}</textarea>
+                            </div>
+                        </div>
+                        <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                            {eq name="ACTION_NAME" value="edit"}
+                            <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('savedata')}">
+                            <input name="id" type="hidden" value="{$data.id}"/>
+                            {else /}
+                            <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}">
+                            {/eq}
+                            <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    {/block}
+    
+    {block name="js"}
+    <script>
+        $(function () {
+            $(".bset").buttonset();
+        })
+    </script>
+    {/block}

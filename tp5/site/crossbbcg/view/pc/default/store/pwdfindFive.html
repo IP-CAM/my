@@ -1,0 +1,106 @@
+{extend name="store/base" /} 
+{block name="body"}
+		<div class="steps steps-five">
+			<table width="100%">
+				<tbody>
+
+					<tr>
+						<td class="step-item step-1 active"><span><q class="icon">●</q><i>1</i>公司基本信息</span>
+							<div class="stepdiv">1</div>
+						</td>
+						<td class="step-item step-2 active">
+							<span><q class="icon">●</q><i>2</i>银行及税务信息</span>
+							<div class="stepdiv">2</div>
+						</td>
+						<td class="step-item step-3 active"><span><q class="icon">●</q><i>3</i>店铺信息提交完成</span>
+							<div class="stepdiv">3</div>
+						</td>
+						<td class="step-item step-4 active"><span><q class="icon">●</q><i>3</i>等待审核审核通过</span>
+							<div class="stepdiv">4</div>
+						</td>
+						<td class="step-item step-5 active last"><span><q class="icon">●</q><i>3</i>等待签约</span>
+							<div class="stepdiv">5</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="shop-login-box yahei">
+			<div class="form-body">
+				<div class="title">
+					<div class="t">等待审核</div>
+				</div>
+				<div class="content">
+					<div class="waite-content">
+						<i class="iconfont icon-shenhe"></i>
+						<p>恭喜您资料上传成功，请等待平台审核。</p>
+						<a href="" class="text-center">&lt;返回商城首页</a>
+					</div>
+					<br />
+					<br />
+					<table class="table public-table">
+						<thead>
+							<tr class="info">
+								<td>入驻进度</td>
+								<td>日期</td>
+								<td>提示</td>
+							</tr>
+						</thead>
+						<tbody>
+							
+
+							<tr>
+								<td>审核中</td>
+								<td>1970-01-01 08:00:00</td>
+								<td>
+									<a href="">点此修改您的入驻申请</a>
+									<!--<a href="">查看店铺</a>-->
+								</td>
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		{/block} {block name="footer_js"}
+		<script type="text/javascript">
+			$(function() {
+				//				laydate({
+				//					elem: '#cl_riqi',
+				//					event: 'click',
+				//					choose: function(datas) {
+				//						$('#cl_riqi').html(datas);
+				//						$('#cl_riqi_input').val(datas).blur()
+				//					}
+				//
+				//				});
+				//
+				//				laydate({
+				//					elem: '#cl_riqi2',
+				//					event: 'click',
+				//					choose: function(datas) {
+				//						$('#cl_riqi2').html(datas);
+				//						$('#cl_riqi_input2').val(datas).blur()
+				//					}
+				//
+				//				});
+
+				$("#pwd_form").Validform({
+					tiptype: 3,
+					showAllError: true
+				});
+			})
+
+			function showdemo(title, img_src, area) {
+				layer.open({
+					"title": title,
+					'skin': 'layer-ext-blue',
+					type: 1,
+					area: area,
+					shadeClose: true,
+					content: "<img style='display:block;margin:0 auto;padding-top:15px' src=" + img_src + ">"
+				})
+			}
+		</script>
+	{/block} 

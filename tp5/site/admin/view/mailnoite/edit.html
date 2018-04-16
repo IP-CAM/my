@@ -1,0 +1,104 @@
+        {extend name="admin@public/poupbase" /}
+        
+        <!-- CONTENT -->
+        {block name="body"}
+        <div id="content" style="margin:0px 10px 5px 8px;">
+            <div class="bloc" style="margin:10px 0px 0px;">
+                <div class="content">
+                    <form id="myform" method="post" style="margin-top:5px;" class="">
+                        <fieldset>
+                            <legend>{$meta_title}</legend>
+                            
+                            <div class="row">
+                                <label for="title" class="w130">{:lang('Noitfly title')}: <span class="required">*</span></label>
+                                <input id="title" type="text" value="{$data.title}" name="title" class="input"
+                                       style="width:300px;"/>
+                            </div>
+                            
+                            <div class="row bset">
+                                <label class="w130">{:lang('Platform Type')}: <span class="required">*</span></label>
+                                <input name="platform[]" type="checkbox" value="android" id="android" checked />
+                                <label for="android" class="w110_r_0">{:lang('Android')}</label>
+                                
+                                <input name="platform[]" type="checkbox" value="ios" id="ios" />
+                                <label for="ios" class="w110_r_0">{:lang('IOS')}</label>
+                                
+                                <input name="platform[]" type="checkbox" value="wechat" id="wechat" />
+                                <label for="wechat" class="w110_r_0">{:lang('Wechat')}</label>
+                                
+                                <input name="platform[]" type="checkbox" value="sms" id="sms" />
+                                <label for="sms" class="w110_r_0">{:lang('Sms')}</label>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="url" class="w130">{:lang('Noitfly url')}: <span class="required">*</span></label>
+                                <input id="url" type="text" value="{$data.url}" name="url" class="input" style="width:460px;" placeholder="http://" />
+                            </div>
+                            
+                            <div class="row">
+                                <div class="clear"></div>
+                                <label for="contents" class="w130">{:lang('Noitfly content')}: <span class="required">*</span></label>
+                                <textarea id="contents" name="contents">{$data.contents}</textarea>
+                                <script charset="utf-8" src="__STATIC__/kindeditor/kindeditor-all-min.js"></script>
+                                <script>
+                                    KindEditor.ready(function(K) {
+                                        editor = K.create('#contents', {
+                                            resizeType : 1,
+                                            allowPreviewEmoticons : false,
+                                            allowImageUpload : false,
+                                            minWidth : 540,
+                                            minHeight : 180,
+                                            langType : '{:jsup(config('default_lang'))}',
+                                            items : [
+                                                'source', '|','undo', 'redo', '|','bold', 'italic', 'underline',
+                                                'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                                                'insertunorderedlist', '|', 'link', 'unlink', 'image', 'media'],
+                                            afterBlur: function () { this.sync(); }
+                                        });
+                                    });
+                                </script>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="status" class="w130">{:lang('Status')}:</label>
+                                <div class="slideBox">
+                                    {eq name="ACTION_NAME" value="edit"}
+                                    <input id="status" value="1" type="checkbox" name="status"
+                                           {eq name="data['status']" value="1"}checked{/eq}
+                                    />
+                                    {else/}
+                                    <input id="status" value="1" type="checkbox" name="status" checked/>
+                                    {/eq}
+                                    <label for="status"></label>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="sort" class="w130">{:lang('Sort')}: </label>
+                                <input type="text" class="input litle" name="sort" maxlength="5" id="sort"
+                                       value='{$data.sort|default=0}'>
+                            </div>
+                            
+                            <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                                {eq name="ACTION_NAME" value="edit"}
+                                <input name="submit" value="{:lang('Update')}" type="submit" url="{:url()}">
+                                <input type="hidden" name="id" value="{$data.id}"/>
+                                {else/}
+                                <input name="submit" value="{:lang('Create')}" type="submit" url="{:url()}">
+                                {/eq}
+                                <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {/block}
+        
+        {block name="js"}
+        <script>
+            $(function () {
+                $(".bset").buttonset();
+            })
+        </script>
+        {/block}

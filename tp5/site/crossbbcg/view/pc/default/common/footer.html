@@ -1,0 +1,107 @@
+<div class="ly-footer-ad">
+    <dl class="ad-ly-multiple">
+        <dd>
+            <ul class="clearfix">
+                <li>
+                    <a href="javascript:void (0);">
+                        <img src="__PUBLIC__/crossbbcg/pc/default/image/footer1.png" title="{:lang('right_product')}">
+                        <span>{:lang('right_product')}</span>
+                    </a>
+                </li>
+                <li class="item-1">
+                    <a href="javascript:void (0);">
+                        <img src="__PUBLIC__/crossbbcg/pc/default/image/footer2.png" title="{:lang('guojian')}">
+                        <span>{:lang('guojian')}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void (0);">
+                        <img src="__PUBLIC__/crossbbcg/pc/default/image/footer3.png" title="{:lang('quick_bak')}">
+                        <span>{:lang('quick_bak')}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void (0);">
+                        <img src="__PUBLIC__/crossbbcg/pc/default/image/footer4.png" title="{:lang('country_send')}">
+                        <span>{:lang('country_send')}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void (0);">
+                        <img src="__PUBLIC__/crossbbcg/pc/default/image/footer5.png" title="{:lang('customer_confirm')}">
+                        <span>{:lang('customer_confirm')}</span>
+                    </a>
+                </li>
+            </ul>
+        </dd>
+    </dl>
+</div>
+
+<div class="ly-Footbody">
+    <div class="ly-Helpw">
+        <div class="ly-Help w1200">
+            <div class="n clearfix">
+                <!--左侧-->
+                <div class="help-left">
+                    <div class="ly-footer-ewm">
+                        <div class="img">
+                            {if condition="$data['app_down_qrcode']==''"}
+                            <img src="__PUBLIC__/crossbbcg/pc/default/image/no-image.png" width="115" height="115">
+                            {elseif condition="substr($data['app_down_qrcode'],0,4) == 'http'"}
+                            <img src="{$data['app_down_qrcode']}" width="115" height="115">
+                            {else /}
+                            <img src="__UPLOADS__/{$data['app_down_qrcode']}" width="115" height="115">
+                            {/if}
+                        </div>
+                        <div class="text">{:lang('Download_APP')}</div>
+                    </div>
+                    <div class="ly-footer-ewm">
+                        <div class="img">
+                            {if condition="empty($data['weixin_attention_qrcode'])"}
+                            <img src="__PUBLIC__/crossbbcg/pc/default/image/no-image.png" width="115" height="115">
+                            {elseif condition="substr($data['weixin_attention_qrcode'],0,4) == 'http'"}
+                            <img src="{:$data['weixin_attention_qrcode']}" width="115" height="115">
+                            {else /}
+                            <img src="__UPLOADS__/{:$data['weixin_attention_qrcode']}" width="115" height="115">
+                            {/if}
+                        </div>
+                        <div class="text">{:lang('Attention_weixin')}</div>
+                    </div>
+                </div>
+                <!--左侧END-->
+                <div class="help-center">
+                    <!--item -->
+                    {foreach $article as $vo}
+                    <div class="common-mod">
+                        <div class="hd"> <h2 class="title"><span>{$vo.title}</span></h2> </div>
+                        <div class="bd">
+                            <ul class="news-list">
+                                {foreach $vo.article as $io}
+                                <li>
+                                    <a href="{:url('crossbbcg/help/index',array('id'=>$io.id,'cat'=>$io.category_id))}" target="_blank" title="{$io.title}">{$io.title}</a>
+                                </li>
+                                {/foreach}
+                            </ul>
+                        </div>
+                    </div>
+                    {/foreach}
+                    <!--item  END-->
+                </div>
+                <div class="help-right">
+                    <div class="ly-footer-tel clearfix">
+                        <div class="t">{:lang('Service_tel')}
+                            {notempty name="$data['kefu_qq']"}
+                            <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={$data['kefu_qq']}&site=qq&menu=yes">
+                                <img border="0" src="http://pub.idqqimg.com/qconn/wpa/button/button_111.gif" alt="{:lang('kefu_online')}" title="{:lang('kefu_online')}"/>
+                            </a>
+                            {/notempty}
+                        </div>
+                        <div class="text"><i></i>{$data['kefu_tel']}</div>
+                        <div class="b">{:lang($data['kefu_start_week'])}~{:lang($data['kefu_end_week'])}&nbsp;&nbsp;&nbsp;&nbsp;{:lang($data['kefu_start_time'])}-{:lang($data['kefu_end_time'])}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="fbody"> {:html_entity_decode($data['site_footer_info'])}</div>
+</div>

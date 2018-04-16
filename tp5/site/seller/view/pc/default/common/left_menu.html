@@ -1,0 +1,153 @@
+<!-- Left side column. contains the logo and sidebar -->
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+            <div class="pull-left image">
+                <img src="__PUBLIC__/admin/images/accounts/no_image.png" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-left info">
+                <p>{:session('sellername')}</p>
+                <a href="#"><i class="fa fa-circle text-success"></i>Online</a>
+            </div>
+        </div>
+        <!-- search form -->
+        <!--<form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                  <i class="fa fa-search"></i>
+                </button>
+              </span>
+            </div>
+        </form>-->
+        <!-- /.search form -->
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu" data-widget="tree">
+            <li class="header">{:lang('Seller menus')}</li>
+            {$HomeMenu}
+            <!--<li class="active">-->
+                <!--<a href="{:url('seller/index/index')}">-->
+                    <!--<i class="fa fa-dashboard"></i> <span>{:lang('sIndex')}</span>-->
+                    <!--<span class="pull-right-container"></span>-->
+                <!--</a>-->
+            <!--</li>-->
+            <!--<li class="treeview">-->
+                <!--<a href="javaScript:void(0);">-->
+                    <!--<i class="fa fa-files-o"></i>-->
+                    <!--<span>{:lang('sOrder')}</span>-->
+                    <!--<span class="pull-right-container">-->
+              <!--<i class="fa fa-caret-right pull-right"></i>-->
+            <!--</span>-->
+                <!--</a>-->
+                <!--<ul class="treeview-menu">-->
+                    <!--<li><a href="{:url('seller/order/index')}"><i class="fa fa-circle-o"></i>订单列表</a></li>-->
+                    <!--<li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i>取消订单</a></li>-->
+                    <!--<li><a href="{:url('seller/transport/index')}"><i class="fa fa-circle-o"></i>运费模板</a></li>-->
+                    <!--<li><a href="{:url('seller/transport/express')}"><i class="fa fa-circle-o"></i> 物流公司</a></li>-->
+                <!--</ul>-->
+            <!--</li>-->
+            <!--<li class="treeview">-->
+                <!--<a href="javaScript:void(0);">-->
+                    <!--<i class="fa fa-th"></i>-->
+                    <!--<span>{:lang('sGoods')}</span>-->
+                    <!--<span class="pull-right-container">-->
+              <!--<i class="fa fa-caret-right pull-right"></i>-->
+            <!--</span>-->
+                <!--</a>-->
+                <!--<ul class="treeview-menu">-->
+                    <!--<li><a href="{:url('seller/goods/index')}"><i class="fa fa-circle-o"></i>商品列表</a></li>-->
+                    <!--<li><a href="{:url('seller/goods/stockwarming')}"><i class="fa fa-circle-o"></i>库存预警</a></li>-->
+                    <!--<li><a href="{:url('seller/category/index')}"><i class="fa fa-circle-o"></i>店铺分类</a></li>-->
+                <!--</ul>-->
+            <!--</li>-->
+            <!--<li class="treeview">-->
+                <!--<a href="javaScript:void(0);">-->
+                    <!--<i class="fa fa-pie-chart"></i>-->
+                    <!--<span>{:lang('sService')}</span>-->
+                    <!--<span class="pull-right-container">-->
+              <!--<i class="fa fa-caret-right pull-right"></i>-->
+            <!--</span>-->
+                <!--</a>-->
+                <!--<ul class="treeview-menu">-->
+                    <!--<li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i>退换货申请</a></li>-->
+                    <!--<li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i>商品评价</a></li>-->
+                    <!--<li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i>评价概况</a></li>-->
+                <!--</ul>-->
+            <!--</li>-->
+            <!--<li class="treeview">-->
+                <!--<a href="javaScript:void(0);">-->
+                    <!--<i class="fa fa-laptop"></i>-->
+                    <!--<span>{:lang('shop_manage')}</span>-->
+                    <!--<span class="pull-right-container">-->
+              <!--<i class="fa fa-caret-right pull-right"></i>-->
+            <!--</span>-->
+                <!--</a>-->
+                <!--<ul class="treeview-menu">-->
+                    <!--<li><a href="{:url('seller/shop/index')}"><i class="fa fa-circle-o"></i>店铺设置</a></li>-->
+                    <!--<li><a href="{:url('seller/shop/cate')}"><i class="fa fa-circle-o"></i>经营类目</a></li>-->
+                    <!--<li><a href="{:url('seller/shop/infomation')}"><i class="fa fa-circle-o"></i>店铺信息</a></li>-->
+                <!--</ul>-->
+            <!--</li>-->
+            <!--<li class="treeview">-->
+                <!--<a href="javaScript:void(0);">-->
+                    <!--<i class="fa fa-edit"></i> <span>{:lang('sOperation')}</span>-->
+                    <!--<span class="pull-right-container">-->
+              <!--<i class="fa fa-caret-right pull-right"></i>-->
+            <!--</span>-->
+                <!--</a>-->
+                <!--<ul class="treeview-menu">-->
+                    <!--<li><a href="pages/forms/general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>-->
+                    <!--<li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>-->
+                    <!--<li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>-->
+                <!--</ul>-->
+            <!--</li>-->
+            <!--<li class="treeview">-->
+                <!--<a href="javaScript:void(0);">-->
+                    <!--<i class="fa fa-table"></i> <span>{:lang('SettleMG')}</span>-->
+                    <!--<span class="pull-right-container">-->
+                      <!--<i class="fa fa-caret-right pull-right"></i>-->
+                    <!--</span>-->
+                <!--</a>-->
+                <!--<ul class="treeview-menu">-->
+                    <!--<li><a href="{:url('seller/settle/index')}"><i class="fa fa-circle-o"></i>结算记录</a></li>-->
+                    <!--<li><a href="{:url('seller/settle/info')}"><i class="fa fa-circle-o"></i>结算详情</a></li>-->
+                <!--</ul>-->
+            <!--</li>-->
+            <!--<li class="treeview">-->
+                <!--<a href="javaScript:void(0);">-->
+                    <!--<i class="fa fa-edit"></i> <span>统计</span>-->
+                    <!--<span class="pull-right-container">-->
+                        <!--<i class="fa fa-caret-right pull-right"></i>-->
+                    <!--</span>-->
+                <!--</a>-->
+                <!--<ul class="treeview-menu">-->
+                    <!--<li><a href="pages/forms/general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>-->
+                    <!--<li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>-->
+                    <!--<li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>-->
+                <!--</ul>-->
+            <!--</li>-->
+            <!--<li class="treeview">-->
+                <!--<a href="javaScript:void(0);">-->
+                    <!--<i class="fa fa-edit"></i> <span>账号管理</span>-->
+                    <!--<span class="pull-right-container">-->
+                    <!--<i class="fa fa-caret-right pull-right"></i>-->
+                    <!--</span>-->
+                <!--</a>-->
+                <!--<ul class="treeview-menu">-->
+                    <!--<li><a href="pages/forms/general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>-->
+                    <!--<li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>-->
+                    <!--<li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>-->
+                <!--</ul>-->
+            <!--</li>-->
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+    
+    <section class="left-footer">
+        {:lang('Copyright Runtuer Co.Ltd')}
+    </section>
+</aside>
+

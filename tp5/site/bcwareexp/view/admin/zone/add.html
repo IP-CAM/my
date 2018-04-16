@@ -1,0 +1,114 @@
+{extend name="admin@public/poupbase"/}
+
+<!-- CONTENT -->
+{block name="body"}
+<div id="content" style="margin:0px 10px 5px 8px;">
+    <div class="bloc" style="margin:10px 0px 0px;">
+        <div class="content">
+            <form id="myform" method="post" style="margin-top:5px;" class="">
+                <fieldset>
+                    <legend>{$meta_title}</legend>
+                   
+    
+                    <div class="row">
+                        <label for="name" class="w100">{:lang('AreaName')}: <span class="required">*</span></label>
+                        <input type="text"  name="name" id="name" placeholder="{:lang('AreaName tip')}" value="{$data.name}">
+                    </div>
+                    <div class="row">
+                        <label for="country" class="w100">{:lang('Countrys')}: <span
+                            class="required">*</span></label>
+                        <select id="country"  style="width:130px;margin-right: 16px;" name="country">
+                            {notempty name="country"}
+                            <option value="0" {eq name="data.country" value="0" }selected{
+                            /eq}>--{:lang('Please_choose')}--</option>
+                            {volist name="country" id="co"}
+                            <option  value="{$co['id']}" {if condition="$co['id'] eq $data['country']" }selected{/if}>{empty name="co.zh_name"}{$co['name']}{else /} {$co['zh_name']}{/empty}</option>
+                            {/volist}
+                            {else/}
+                            <option value="0">{:lang('No_record')}</option>
+                            {/notempty}
+                        </select>
+                    </div>
+                    <div class="row">
+        
+                        <div style="float: left">
+                            <label for="status" class="w100">{:lang('Status')}:</label>
+                            <div class="slideBox">
+                                {eq name="ACTION_NAME" value="edit"}
+                                <input id="status" value="1" type="checkbox" name="status" {eq name="data['status']"
+                                       value="1" }checked{/eq} />
+                                {else /}
+                                <input id="status" value="1" type="checkbox" name="status" checked/>
+                                {/eq}
+                                <label for="status"></label>
+                            </div>
+                        </div>
+                        <div style="float:left;">
+                            <label for="sort" class="w140">{:lang('Sort')}: </label>
+                            <input type="number" class="input litle" name="sort" maxlength="5" id="sort"
+                                   value='{$data.sort|default=0}'/>
+                        </div>
+    
+                    </div>
+                    <div class="test-div row">
+                    
+                    </div>
+                    
+                    
+                    <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                        {eq name="ACTION_NAME" value="edit"}
+                        <input name="submit" id="update" value="{:lang('Update')}" type="submit" url="{:url('edit')}">
+                        <input name="id" type="hidden" value="{$data.id}"/>
+                        {else /}
+                        <input name="submit" id="create" value="{:lang('Create')}" type="submit" url="{:url('add')}">
+                        {/eq}
+                        <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="js"}
+<link rel="stylesheet" href="__STATIC__/jQuery-dqxz/css.css"/>
+<script charset="utf-8" src="__STATIC__/jQuery-dqxz/RegionalChoice.js"></script>
+<script>
+    $(function () {
+        //模拟后台传过来的被选中input的id
+        var IdArr = [102,201001,202002,203003,2021,2022];
+//由于此插件的input全选的歧义，此处传的数组要求只传最低一级的id即可
+//即：如果有三级城市只传第三级的id，如果只有二级没有三级，只用传第二级id即可
+//模拟后台所有地域数据
+        
+        /* 使用说明*/
+        //点击生成地域
+        $("#country").change(function () {
+            var country = $(this).val();
+            $.post("{:url('add')}",{'country':country},function (data) {
+                if(data.code == 1){
+                    GetRegionPlug(data.data);
+                    return true;
+                }else {
+                    $('.test-div').html('');
+                    return false;
+                }
+            });
+            return false;
+        });
+        $(".test-div").change(function () {
+            var _ids  = GetChecked();
+            $('#create' ).next().html("<input name='ids' type='hidden' value='"+ _ids +"'>");
+        });
+        //点击打印被选择地域的id,此id只包括最低一级地区的id，可以传入后台后直接拿来读取使用
+        $(".btntest1").click(function(){
+            console.log(GetChecked());//返回的是一id数组
+        })
+        //点击选中与后台id数组值相符的地区。注意此id数组的条件限制
+        $(".btntest2").click(function () {
+            SetChecked(IdArr);
+        })
+    })
+</script>
+{/block}

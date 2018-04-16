@@ -1,0 +1,65 @@
+{extend name="store/base" /} 
+{block name="body"}
+<div class="steps">
+			<table width="100%">
+				<tbody>
+
+					<tr>
+						<td class="step-item step-1 active"><span><q class="icon">●</q><i>1</i>账号信息</span>
+							<div class="stepdiv">1</div>
+						</td>
+						<td class="step-item step-2 ">
+							<span><q class="icon">●</q><i>2</i>验证身份</span>
+							<div class="stepdiv">2</div>
+						</td>
+						<td class="step-item step-3 "><span><q class="icon">●</q><i>3</i>设置新密码</span>
+							<div class="stepdiv">3</div>
+						</td>
+						
+					</tr>
+				</tbody>
+			</table>
+		</div>
+<div class="shop-login-box yahei">
+	<div class="form-body">
+		<div class="title">
+			<div class="t">找回密码</div>
+		</div>
+		<div class="content">
+			<form action="" id="pwd_form">
+				<ul>
+					<li class="form-row">
+						<label class="form-label">
+                            <em> * </em> 用户名： </label>
+						<span class="form-act">
+                            <input placeholder="用户名" datatype="s6-16"  class="input-ln" type="text"  value="" />
+                        </span>
+
+					</li>
+
+					
+					<li class="form-row last">
+						<label for="" class="form-label">&nbsp;</label> 
+						<span class="form-act">
+                        	<button type="submit"  class="btn btn-import" rel="_request"> 下一步 </button>
+						</span>
+					</li>
+
+				</ul>
+			</form>
+		</div>
+	</div>
+</div>
+
+{/block} {block name="footer_js"}
+
+<script type="text/javascript">
+	
+	$("#pwd_form").Validform({
+		tiptype: 3,
+		showAllError: true
+	});
+
+	
+</script>
+{/block}

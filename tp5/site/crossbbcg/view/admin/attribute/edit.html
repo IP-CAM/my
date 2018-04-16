@@ -1,0 +1,146 @@
+    {extend name="admin@public/poupbase" /}
+    {block name="style"}
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/style.css" />
+    {/block}
+    <!-- CONTENT -->
+    
+    {block name="body"}
+      <div id="content" style="margin:0px 10px 5px 8px;">
+        <div class="bloc" style="margin:10px 0px 0px;">
+          <div class="content">
+            <form id="myform" method="post" style="margin-top:5px;" class="">
+
+                <fieldset>
+                    <legend>{$meta_title|default=''}</legend>
+                    <div class="row required">
+                        <label for="name" class="w120">{:lang('Attribute_Group_Name')}</label>
+                        <input type="text" name="name" id="name" value="{$data.name|default=''}" class="input"/>
+                    </div>
+    
+                    <div class="row">
+                        <label for="sort" class="w120">{:lang('Sort')} </label>
+                        <input type="number" class="input litle" name="sort" maxlength="5" id="sort" value="{$data.sort|default=0}">
+                    </div>
+                    
+                    
+                    
+                    <table style="width:100%" class="table" id="attribute">
+                        <thead>
+                        <tr>
+                            {foreach $arr_columns as $key => $value}
+                            {if condition="$key=='filtrate'"}
+                            <th class="center">{$value}
+                                <a class="tooltip-icon" title="{:lang('filtrate_description')}"></a>
+                            </th>
+                            {elseif condition="$key=='attribute_value'"}
+                            <th class="center">{$value}
+                                <a class="tooltip-icon" title="{:lang('attribute_value_description')}"></a>
+                            </th>
+                            {else /}
+                            <th class="center">{$value}</th>
+                            {/if}
+                            {/foreach}
+                            <th class="center">{:lang('Actions')}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {present name="arr_values"}
+                        {foreach $arr_values as $vo}
+                        <tr id="attribute-row{$attribute_num}">
+                            
+                            
+                            <td class="center">
+                                {$vo.attribute_id}
+                                <input type="hidden" value="{$vo.attribute_id}" name="attribute[{$attribute_num}][attribute_id]" />
+                                {eq name="action_name" value="edit"}
+                                <input type="hidden" name="attribute[{$attribute_num}][attribute_group_id]" value="{$data.attribute_group_id}" />
+                                {/eq}
+                            </td>
+                            <td class="center">
+                                <input type="text" name="attribute[{$attribute_num}][name]" value="{$vo.name}" class="w80"/>
+                            </td>
+                            <td class="center">
+                                {eq name="$vo.filtrate" value="1"}
+                                <input type="checkbox" value="1" name="attribute[{$attribute_num}][filtrate]" checked="checked"/>
+                                {else /}
+                                <input type="checkbox" value="1" name="attribute[{$attribute_num}][filtrate]"/>
+                                {/eq}
+                            </td>
+                            <td class="center">
+                                <input type="text" name="attribute[{$attribute_num}][attribute_value]" value="{$vo.attribute_value}" placeholder="{:lang('attribute_value_description')}"/>
+                            </td>
+                            <td class="center">
+                                <input type="text" name="attribute[{$attribute_num}][sort]" value="{$vo.sort}" class="w50"/>
+                            </td>
+                        <td class="center">
+                            <button type="button" onclick="$('#attribute-row{$attribute_num}').remove();" class="white">{:lang('Remove')}</button>
+                        </td>
+                            {php}
+                            $attribute_num++;
+                            {/php}
+                        </tr>
+                        {/foreach}
+                        {/present}
+                        </tbody>
+                        
+                        <tfoot>
+                        <tr>
+                            
+                            <td colspan="4">
+                                <button type="button" onclick="addAttribute()" class="white" style="margin:5px;">{:lang('Add')}</button>
+                            </td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td colspan="4">
+                                <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                                {eq name="$action_name" value="edit"}
+                                <input type="submit" name="submit" value="{:lang('Update')}" type="submit" url="{:url('save',array('ids'=>input('ids')))}" />
+                                <input name="attribute_group_id" type="hidden" value="{$data.attribute_group_id}" />
+                                <input name="action_name" type="hidden" value="edit" />
+                                {else /}
+                                <input type="submit" name="submit" value="{:lang('Create')}" type="submit" url="{:url('save')}" />
+                                <input name="action_name" type="hidden" value="add" />
+                                {/eq}
+                                    <input type="hidden" name="langid" value="{:LANG}" />
+                                    <input name="reset" class="button white" value="{:lang('Goods_Cancel')}" type="reset">
+                                </div>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                    
+                </fieldset>
+ 
+            </form>
+          </div>
+        </div>
+      </div>
+  
+    
+    <script type="text/javascript">
+        var num = '{$attribute_num}';
+        function addAttribute(){
+            
+            _html = '<tr id=attribute-row'+num+' >';
+            _html += '<td class="center">';
+            {eq name="action_name" value="edit"}
+            _html += '<input type="hidden" name="attribute['+num+'][attribute_group_id]" value="{$data.attribute_group_id}" />';
+            {/eq}
+            _html += '</td>';
+            _html += '<td class="center"><input type="text" name="attribute['+num+'][name]" value="" class="w80"/></td>';
+            _html += '<td class="center"><input type="checkbox" name="attribute['+num+'][filtrate]" value="1" /></td>';
+            _html += '<td class="center"><input type="text" name="attribute['+num+'][attribute_value]" value="" placeholder="{:lang('attribute_value_description')}" /></td>';
+            _html += '<td class="center"><input type="text" name="attribute['+num+'][sort]" value="0" class="w50" /></td>';
+            _html += '<td class="center"><button type="button" onclick="$(\'#attribute-row'+num+'\').remove();" class="white">{:lang(\'Remove\')}</button></td>';
+            
+            _html += '</tr>';
+            
+            $('#attribute tbody').append(_html);
+            num++;
+            
+        }
+    </script>
+    
+    {/block}

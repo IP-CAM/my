@@ -1,0 +1,110 @@
+{extend name="common/base" /}
+
+{block name="title"}
+<title>ETshop-首页</title>
+{/block}
+
+{block name="css"}
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/crossbbcg/pc/default/css/member.css" />
+{/block}
+
+{block name="body"}
+<!--面包屑-->
+<div class="ly-path">
+	<ul class="clearfix">
+		<li class="home">
+			<a href="/index.php/crossbbcg/index/index.html" title="前往主页">首页</a>
+			<span>&gt;&nbsp;</span>
+		</li>
+		<li>
+			<a href="/index.php/crossbbcg/index/index.html" title="">会员中心</a>
+			<span>&gt;&nbsp;</span>
+		</li>
+		<li>
+			<h1>申请提现</h1>
+		</li>
+	</ul>
+</div>
+<div class="ly-main member-main clearfix">
+	{include file="index/left_menu"}
+	<div class="member-right">
+		<div class="member-content applymoney">
+			<div class="title member-title member-max-title">
+				<div class="t">申请提现</div>
+				<div class="r">
+					<a href="{:url('member/bankcardedit')}" class="btn btn-cut">修改提现资料</a>
+				</div>
+			</div>
+			<div class="body pb15 mh600 ">
+				<div class="tips-info">
+					温馨提示： 因涉及到购物者退货退款等问题，结算的分销提成金额提现需要在30天后方可申请，在此期间的订单提成会处在冻结之中。
+                  所有提现申请，我们将在1-3个工作日内进行处理，实际到账时间根据各个银行均有所不同。最终解释权归本商城所有。
+				</div>
+				<br />
+				<br />
+				<form class="login-form" action="" id="pwd_form">
+
+					<div class="input-line">
+						<span class="input-label">提现至</span>
+						<select name=""  required=""  data-empty="银行卡不能为空">
+							<option value="1">支付宝</option>
+							<option value="1">建设银行</option>
+							<option value="2">工商银行</option>
+						</select>
+						<i class="icon-reset">×</i>
+						<div class="input-error"></div>
+					</div>
+					<div class="input-line">
+						<span class="input-label">账号</span>
+						<input class="form-text"  required="" data-empty="账号不能为空"  type="text" autocomplete="off" placeholder="账号">
+						<i class="icon-reset">×</i>
+						<div class="input-error"></div>
+					</div>
+					<div class="input-line">
+
+						<span class="input-label">账户名</span>
+						<input id="username" class="form-text" required="" data-empty="请填写账户名"  type="text" autocomplete="off" placeholder="账户名">
+						<i class="icon-reset">×</i>
+						<div class="input-error"></div>
+					</div>
+					
+					<div class="input-line">
+						<span class="input-label">分行名称</span>
+						<input id="username" class="form-text" required="" data-empty="请填写分行名称"  type="text" autocomplete="off" placeholder="分行名称">
+						<i class="icon-reset">×</i>
+						<div class="input-error"></div>
+					</div>
+					<div class="input-line">
+						<span class="input-label">登陆密码</span>
+						<input id="username" class="form-text" required="" data-empty="请填写登陆密码"  type="password" autocomplete="off" placeholder="登陆密码">
+						<i class="icon-reset">×</i>
+						<div class="input-error"></div>
+					</div>
+					<div class="input-line">
+						<span class="input-label">提现金额</span>
+						<input id="username" class="form-text" required="" data-empty="提现金额" data-error="请输入正整数" data-regex="^[0-9]*$"  type="text" autocomplete="off" placeholder="提现金额">
+						<i class="icon-reset">×</i>
+						<div class="input-error"></div>
+						<div class="input-tips red">可提现金额50</div>
+					</div>
+					
+					<div class="form-submit">
+						<button id="pwd-btn" class="submit-btn" type="submit">提交申请</button>
+					</div>
+				</form>
+				<br />
+				<br />
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+{/block}
+<!--此板块为页面单独js加载-->
+
+{block name="footer_js"}
+<script>
+	//需要加载的js文件
+	Private_Script = ['fenxiao'];
+</script>
+{/block}

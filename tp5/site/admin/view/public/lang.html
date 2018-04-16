@@ -1,0 +1,21 @@
+			  <div class="back-link">
+                  <select id="selectlang" name="selectlang">
+                      {notempty name="langs"}
+                          {volist name="langs" id="lang"}
+                              <option value="{$key}" data-url="{:url('', array_merge(is_array(input('param')) ? input('param') : array(), array('lang'=>$key) ))}" {if condition="$key eq LANG "}selected{/if}>{$lang[0]} ( {$lang[1]} )</option>
+    
+                              
+                          {/volist}
+                      {else/}
+                          <option value="0">{:lang('No_record')}</option>
+                      {/notempty}
+                  </select>
+				<script>
+				$(function(){
+					$("#selectlang").change(function(){
+                        var lang_url = $(this).find("option:selected").attr('data-url');
+                        eval("self.location='"+lang_url+"'")
+                    })
+                })
+				</script>
+                </div>

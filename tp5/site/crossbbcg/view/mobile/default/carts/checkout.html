@@ -1,0 +1,127 @@
+{extend name='public/base'}
+{block name='css'}
+<link rel="stylesheet" href="__PUBLIC__/{$css_path}/order_confirm.css">
+{/block}
+{block name='body'}
+<div id="app">
+    <div class="u-topbar">
+        <div class="u-topbar-inner">
+            <div class="u-topbar-arrow-wrapper">
+                <div class="u-topbar-arrow"></div>
+            </div>
+            <div class="u-topbar-title">
+                提交订单
+            </div>
+        </div>
+    </div>
+    <div class="v-address-display ">
+        <div class="v-address-display-content">
+            <div class="v-address-display-receiver">
+                <div class="v-address-display-receiver-key">收货人：</div>
+                <div class="v-address-display-receiver-value">
+                    <span style="margin-right: 0.5rem;">谢明扬</span>
+                    <span>186****6042</span>
+                </div>
+            </div>
+            <div class="v-address-display-address">
+                <div class="v-address-display-address-key">收货地址：</div>
+                <div class="v-address-display-address-value">
+                    广东省深圳市南山区硅谷大学城创业园
+                </div>
+            </div>
+        </div>
+        <div class="v-address-display-arrow"></div>
+    </div>
+    <div style="width: 100%; margin-bottom: 0.266rem;"></div>
+    <div class="v-warehousegroup">
+        <div class="v-warehousegroup-header">
+            <div class="v-warehousegroup-icon">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAbBAMAAADrHECUAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAAAMFBMVEVMaXF3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3fD8Pt5AAAAD3RSTlMADNUl70qtewEd4L5GoknL60XbAAAAo0lEQVQY02NggADm3QYMqODJf1dUgfb/af8rkAUY87931H8TQBIx+hLAwOqvjBCAcEDCUMAB0QDU2gAVEYMa2v4/EeoUfZjFIZ8MUGi4XPv/j3Ar5EH6GfP/f4CL8P8H2jHpSzySyFd/TQYhZX4kkQ9GigycAigijBPAFJIIMoUmwrn//68DKCK8////X4AiwvUZTCGJADEtRIA2A/0PpbCIAAA5cWV+5ZmmjAAAAABJRU5ErkJggg==" alt="">
+            </div>
+            <div>自营直邮仓</div>
+        </div>
+        <div class="v-warehouse">
+            <div class="v-warehouse-inner">
+                <div class="v-warehosue-name">美国1号仓</div>
+                <div class="v-warehouse-shipment  ">
+                    <!--Regular if365--><!--Regular if366--><!--Regular if367-->
+                </div>
+            </div>
+            <div class="v-goodsitem">
+                <div class="v-goodsitem-inner">
+                    <div class="v-goodsitem-image">
+                        <!--Regular if368-->
+                        <img src="https://haitao.nos.netease.com/e892a2fde01e43619efceb8b9aad118d1508137593384j8tu6mmp14221.jpg?imageView&amp;thumbnail=100x0&amp;quality=95&amp;type=webp" alt="">
+                    </div>
+                    <div class="v-goodsitem-content">
+                        <div class="v-goodsitem-content-title">【海外仓发货】PHILIPS 飞利浦 Flexcare声波电动牙刷 HX6962 2支装</div>
+                        <div class="v-goodsitem-content-sku">
+                        </div>
+                        <div class="v-goodsitem-content-returnGoods f-els-1 z-error"><img class="square" src="https://haitao.nos.netease.com/8920d678-86fd-4c3f-8287-5a45bce40964.png?imageView&amp;thumbnail=30x0&amp;quality=95" alt="">不支持7天无理由退货</div>
+                    
+                    </div>
+                    <div class="v-goodsitem-others">
+                        <div class="v-goodsitem-others-price">¥929.00</div>
+                        <div class="v-goodsitem-others-num">×1</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="width: 100%; margin-bottom: 0.266rem;"></div>
+    <div style="width: 100%; margin-bottom: 0.266rem;"></div>
+    <div class="v-ordersummary">
+        <div class="v-ordersummary-title">结算</div>
+        <div class="v-ordersummary-items">
+            <div class="v-ordersummary-item">
+                <div class="v-ordersummary-item-label">商品总额</div>
+                <div class="v-ordersummary-item-value">
+                    <div class="v-ordersummary-item-value-inner">
+                        ¥929.00
+                    </div>
+                </div>
+            </div>
+            <div class="v-ordersummary-item">
+                <div class="v-ordersummary-item-label">商品应付总计</div>
+                <div class="v-ordersummary-item-value">
+                    <div class="v-ordersummary-item-value-inner">
+                        ¥929.00
+                    </div>
+                </div>
+            </div>
+            <div class="v-ordersummary-item">
+                <div class="v-ordersummary-item-label">运费
+                </div>
+                <div class="v-ordersummary-item-value">
+                    <div class="v-ordersummary-item-value-inner">
+                        ¥0.00
+                    </div>
+                </div>
+            </div>
+            <div class="v-ordersummary-item">
+                <div class="v-ordersummary-item-label">税费</div>
+                <div class="v-ordersummary-item-value">
+                    <div class="v-ordersummary-item-value-inner">
+                        ¥110.55
+                    </div>
+                </div>
+            </div>
+            <div class="v-ordersummary-item">
+                <div class="v-ordersummary-item-label">应付总额</div>
+                <div class="v-ordersummary-item-value">
+                    <div class="v-ordersummary-item-value-inner">
+                        ¥1039.55
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="position: fixed; width: 100%; left: 0px; right: 0px; bottom: 0px;">
+        <div class="v-submitorderbar">
+            <div class="v-submitorderbar-money">实付款：&nbsp;&nbsp;¥1039.55</div>
+            <div class="v-submitorderbar-button">提交订单</div>
+        </div>
+    </div>
+</div>
+
+{/block}

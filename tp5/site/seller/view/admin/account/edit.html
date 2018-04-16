@@ -1,0 +1,106 @@
+{extend name="admin@public/poupbase"/}
+
+<!-- CONTENT -->
+{block name="body"}
+
+<script type="text/javascript">
+
+</script>
+<style>
+    .checks_div_select {
+        width: 218px;
+        height: 230px;
+        background-color: rgb(241, 241, 241);
+        border: 1px solid #bdc6ca;
+        font-family: 'Verdana', '宋体';
+        font-size: 12px;
+        position:relative;
+        left:140px;
+        top:-16px;
+        overflow: auto;
+    }
+    .checks_div_select div{
+        margin: 3px;
+    }
+</style>
+<div id="content" style="margin:0px 10px 5px 8px;">
+    <div class="bloc" style="margin:10px 0px 0px;">
+        <div class="content">
+            <form id="myform" method="post" action="{:url('savedata')}" style="margin-top:5px;" enctype="multipart/form-data">
+                <fieldset>
+                    <legend>{$meta_title|default=''}</legend>
+                    <div class="fl" >
+                        {eq name="ACTION_NAME" value="add"}
+                        <div class="row">
+                            <label for="username" class="w120">{:lang('Account')}: <span class="required">*</span></label>
+                            <input id="username" type="text" value="" name="nickname" placeholder="{:lang('Account_tip')}"  />
+                        </div>
+                        <div class="row">
+                            <label for="password" class="w120">{:lang('Password')}: <span class="required">*</span></label>
+                            <input id="password" type="text" value="" name="password" placeholder="{:lang('Password_tip')}" />
+                        </div>
+                        <div class="row">
+                            <label for="repassword" class="w120">{:lang('Repassword')}: <span class="required">*</span></label>
+                            <input id="repassword" type="text" value="" name="repassword" placeholder="{:lang('Password_tip')}" />
+                        </div>
+                        {/eq}
+                        <div class="row">
+                            <label for="password" class="w120">{:lang('realname')}: <span class="required">*</span></label>
+                            <input id="text" type="text" value="{$data.realname}" name="realname" placeholder="{:lang('realname')}" />
+                        </div>
+                        <div class="row">
+                            <label for="email" class="w120">{:lang('Email')}: <span class="required">*</span></label>
+                            <input id="email" type="text" value="{$data['email']}" name="email" placeholder="example@gmail.com" />
+                            <a class="tooltip-icon" title="{:lang('Email_tip')}"></a>
+                        </div>
+                        <div class="row">
+                            <label for="mobile" class="w120">{:lang('Mobile')}: <span class="required">*</span></label>
+                            <input id="mobile" type="text" value="{$data['mobile']}" name="mobile" placeholder="13800138000"/>
+                        </div>
+                        <div class="row" >
+                            <label for="status" class="w120">{:lang('Status')}:</label>
+                            <div class="slideBox">
+                                {eq name="ACTION_NAME" value="edit"}
+                                <input  value="1" id="status" type="checkbox" name="status"  {eq name="data['status']" value="1"}checked{/eq} />
+                                {else /}
+                                <input  value="1" id="status" type="checkbox" name="status" checked />
+                                {/eq}
+                                <label for="status"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fl">
+                        <div class="row" >
+                            <label for="housecode" class="w120">{:lang('warehouse')}: <span class="required">*</span></label>
+                            <div class="checks_div_select clear">
+                                {foreach $warehouse as $k=>$v}
+                                <div style='margin: 5px;font-size: 15px;'>
+                                    <input type="checkbox" name="housecode[]" value="{$k}" {in name="$k" value="$data.housecode"}checked{/in}/>{$v}</div>
+                                {/foreach}
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="buttons-wrapper bw-bottom" style="margin:10px auto 2px; text-align:center;">
+                    {eq name="ACTION_NAME" value="edit"}
+                    <input name="submit" value="{:lang('Update')}" type="submit" url="{:url('savedata')}">
+                    <input type="hidden" name="id" value="{$data.id}" />
+                    {else /}
+                    <input name="submit" value="{:lang('Create')}" type="submit" url="{:url('savedata')}">
+                    {/eq}
+                    <input name="reset" class="button white" value="{:lang('Cancel')}" type="reset">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="js"}
+<!--<script type="text/javascript" src="__PUBLIC__/admin/js/autosize.js"></script>-->
+<script>
+    $(function(){
+        $(".bset").buttonset();
+    })
+</script>
+{/block}

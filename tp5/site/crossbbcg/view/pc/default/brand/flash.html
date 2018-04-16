@@ -1,0 +1,55 @@
+<div class="ly-Allwrap clearfix">
+	<div class="n">
+		<div class="ly-flash">
+<!--请参考index.js 参数设置 此处为全屏轮播配置项 , 可覆盖默认配置项 data-carouFredSel(必须)  为加载标识  data-type(必须) 轮播类型full 为全屏-->
+			<div class="slide-full" data-type="full" data-carouFredSel='{
+				auto:{
+					autoplay:true,
+					pauseDuration:5000,
+				},
+				direction:"left",
+				scroll:{
+					item:1,
+					easing:"swing"
+				}
+					}'>
+				<div class="prev" id="prev"></div>
+				<div class="next" id="next"></div>
+			    <ol class="slide-content clearfix" >
+                    {notempty name=":widget('crossbbcg/Ad/get_ad',['id'=>22,'limit'=>5])"}
+                    {foreach :widget('crossbbcg/Ad/get_ad',['id'=>22,'limit'=>5]) as $v}
+						<li class="slide-item"  style="background:#6000fa">
+                            <a href="{$v.ad_link}" alt="{$v.ad_info}">
+                            {if condition="empty($v.ad_thumb)"}
+                            <img  src="/site/crossbbcg/pc/default/ad/brand_3.jpg" alt="{$v.ad_info}" style="width: 100%"/>
+                            {elseif condition="substr($v.ad_thumb,0,4) == 'http'"}
+                            <img  src="{$v.ad_thumb}" alt="{$v.ad_info}" style="width: 100%"/>
+                            {else /}
+                            <img  src="__UPLOADS__/{$v.ad_thumb}" alt="{$v.ad_info}" style="width: 100%"/>
+                            {/if}
+                            </a>
+                        </li>
+                    {/foreach}
+                    {else /}
+                    <img  src="/site/crossbbcg/pc/default/ad/brand_3.jpg" />
+                    {/notempty}
+			    </ol>
+				<div class="slide-page">
+                    {notempty name=":widget('crossbbcg/Ad/get_ad',['id'=>22,'limit'=>5])"}
+                    {foreach :widget('crossbbcg/Ad/get_ad',['id'=>22,'limit'=>5]) as $k=>$v}
+                    {eq name="$k" value='0'}
+                    <span class="selected">●</span>
+                    {else /}
+                    <span>●</span>
+                    {/eq}
+                    {/foreach}
+                    {else /}
+                    <span class="selected">●</span>
+                    {/notempty}
+					
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>

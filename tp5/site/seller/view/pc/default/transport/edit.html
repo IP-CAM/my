@@ -1,0 +1,450 @@
+{extend name='common/poupbase'}
+{block name='css'}
+<style>
+    label{font-weight: 400;!important;}
+    /*.table thead th{text-align: center;!important;}*/
+    /*.table tbody td {text-align: center;}*/
+    .table tbody td input{max-width: 100px}
+    .table tbody td select{height:26px;}
+    .table tbody tr td:first-child {max-width: 100px}
+    .area{cursor: pointer}
+</style>
+{/block}
+{block name='body'}
+<section class="content">
+    <div class="col-md-12">
+        <div class="box box-info" style="padding-bottom: 10px">
+        
+        <form action="#" class="form-horizontal">
+            <div class="box-body" style="padding-right: 15px;margin: 25px 0;">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">{:lang('template_name')}:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="name" value="{$data.name}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">{:lang('is_free')}:</label>
+                            <div class="col-sm-9">
+                                <div class="btn-group" id="free">
+                                    <input type="radio" name="is_free" id="free1" class="hide" value="1" {eq name="$data.is_free" value="1"}checked{/eq}>
+                                    <button type="button"  data-id="free1" class="btn {eq name='$action_name' value='add'}btn-default {else /}{eq name='$data.is_free' value='1'}btn-info {else /}btn-default{/eq}{/eq} col-sm-6 radio" >ON</button>
+                                    <input type="radio" name="is_free" {eq name="$data.is_free" value="0"}checked{/eq} {eq name='$action_name' value='add'}checked{/eq} id="free2" class="hide" value="0">
+                                    <button type="button"  data-id="free2" class="btn {eq name='$action_name' value='add'}btn-info {else /}{eq name='$data.is_free' value='1'}btn-default {else /} btn-info{/eq}{/eq} col-sm-6 radio">OFF</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="status" class="col-sm-3 control-label">{:lang('status')}:</label>
+                            <div class="col-sm-9">
+                                <div class="btn-group">
+                                    <input type="radio" name="status" id="status1" class="hide" value="1" {eq name="$data.status" value="1"}checked{/eq} {eq name='$action_name' value='add'}checked{/eq}>
+                                    <input type="radio" name="status" id="status2" class="hide" value="0" {eq name="$data.status" value="0"}checked{/eq}>
+                                    <button type="button" data-id="status1" class="btn {eq name='$action_name' value='add'}btn-info {else /}{eq name='$data.status' value='1'}btn-info {else /} btn-default{/eq}{/eq} col-sm-6 radio">ON</button>
+                                    <button type="button" data-id="status2" class="btn {eq name='$action_name' value='add'}btn-default {else /}{eq name='$data.status' value='0'}btn-info {else /} btn-default {/eq}  {/eq} col-sm-6 radio">OFF</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="warecode" class="col-sm-3 control-label">{:lang('Goods_Warehouse')}:</label>
+                            <div class="col-sm-9">
+                                <select name="warecode" id="warecode" class="form-control">
+                                    {foreach $arr_warehouse as $k=>$v}
+                                    <option value="{$k}" {eq name="$data.warecode" value="$k"}selected{/eq}>{$v}</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-3 control-label">{:lang('is_free_condition')}</label>
+                            <div class="col-sm-9">
+                                <div class="btn-group" id="free_condition">
+                                    <input type="radio" name="open_freerule" id="open_freerule1" value="1" class="hide" {eq name="$data.open_freerule" value="1"}checked{/eq} {eq name='$action_name' value='add'}checked{/eq}>
+                                    <input type="radio" name="open_freerule" id="open_freerule2" value="0" class="hide" {eq name="$data.open_freerule" value="0"}checked{/eq}>
+                                    <button type="button" data-id="open_freerule1"  class="btn {eq name='$action_name' value='add'}btn-info {else /}{eq name='$data.open_freerule' value='1'} btn-info{else /} btn-default{/eq}{/eq} col-sm-6 radio">ON</button>
+                                    <button type="button" data-id="open_freerule2" class="btn {eq name='$action_name' value='add'}btn-default {else /}{eq name='$data.open_freerule' value='0'}btn-info {else /} btn-default {/eq}  {/eq} col-sm-6 radio">OFF</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {php}$w_k=$q_k=$m_k=$f_w_k=$f_q_k=0;{/php}
+                    <div class="col-md-12" id="default_fee" style="{if condition='($data.is_fee == 1)'}display:none;{/if}">
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label" style="width: 12.6%">{:lang('default_fee')}</label>
+                    
+                            <div class="col-sm-10">
+                                <label for="" class="control-label">{:lang('weight')}(({$weight_unit}){:lang('within')}):<input type="text" name="fee_conf[{$w_k}][start_standard]" value="{$data.fee_conf[0]['start_standard']}" class="onlycurrency" style="width: 80px"></label>
+                                <label for=""  class="control-label">{:lang('fee')}({$currency_unit}):<input type="text" name="fee_conf[{$w_k}][start_fee]" value="{$data.fee_conf[0]['start_fee']}" class="onlycurrency" style="width: 80px"></label>
+                                <label for="" class="control-label">{:lang('add_in_fee')}(({$weight_unit}){:lang('within')}):<input type="text" name="fee_conf[{$w_k}][add_standard]" value="{$data.fee_conf[0]['add_standard']}" class="onlycurrency" style="width: 80px"></label>
+                                <label for="" class="control-label">{:lang('add_at')}({$currency_unit}):<input type="text" name="fee_conf[{$w_k}][add_fee]" value="{$data.fee_conf[0]['add_fee']}" class="onlycurrency" style="width: 80px"></label>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="col-md-12" id="weight_conf" style="{if condition='($data.is_fee == 1)'}display:none;{/if}" >
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label" style="width: 12.6%">{:lang('fee_for_areas')}:</label>
+                            <div class="col-sm-10" style="width: 87.4%">
+                                <div class="box-body table-responsive no-padding">
+                                    <table class="table m-t-30 col-sm-12">
+                                        <thead>
+                                        <th>{:lang('send_to')}</th>
+                                        <th>{:lang('start_weight')}</th>
+                                        <th>{:lang('start_fee')}</th>
+                                        <th>{:lang('add_weight')}</th>
+                                        <th>{:lang('add_fee')}</th>
+                                        <th>{:lang('operation')}</th>
+                                        </thead>
+                                        <tbody>
+                                        {eq name='$action_name' value='edit'}
+                                        {foreach $data.fee_conf as $k=>$v}
+                                        {gt name='$k' value='0'}
+                                        {php}$w_k=$k;{/php}
+                                        <tr>
+                                            <td >
+                                                <p class="area" data-country_id="{$v.country_id}">{$v.area_names}</p>
+                                                <input type="hidden" name="fee_conf[{$k}][country_id]" value="{$v.country_id}">
+                                            </td>
+                                            <td>
+                                                <input class="onlycurrency" type="text"
+                                                       name="fee_conf[{$k}][start_standard]" value="{$v.start_standard}"/>
+                                            </td>
+                                            <td>
+                                                <input class="onlycurrency" type="text" name="fee_conf[{$k}][start_fee]"
+                                                       value="{$v.start_fee}"/>
+                                            </td>
+                                            <td>
+                                                <input class="w50 onlycurrency" type="text" name="fee_conf[{$k}][add_standard]"
+                                                       value="{$v.add_standard}"/>
+                                            </td>
+                                            <td>
+                                                <input class="w50 onlycurrency" type="text" name="fee_conf[{$k}][add_fee]"
+                                                       value="{$v.add_fee}"/>
+                                            </td>
+                                            <td><a href="javascript:void(0);"><i class="fa fa-times-circle-o"></i></a></td>
+                                            <input type="hidden" name="fee_conf[{$k}][area_names]"
+                                                   class="area_group_name" value="{$v.area_names}"/>
+                                            <input type="hidden" name="fee_conf[{$k}][area_ids]"
+                                                   class="area_group_ids" value="{$v.area_ids}"/>
+                                        </tr>
+                                        {/gt}
+                                        {/foreach}
+                                        {/eq}
+                                        <tr>
+                                            <td colspan="6" style="text-align: left">
+                                                <button class="btn" type="button" id="add_weight_conf">
+                                                    <a href="javascript:void(0);"><i class="fa  fa-plus"></i></a>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12" id="weight_free" style="{if condition='($data.is_fee == 1) OR ($data.open_freerule ===0)'}display:none;{/if}">
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label" style="width: 12.6%">{:lang('free_for_area')}:</label>
+                            <div class="col-sm-10" style="width: 87.4%">
+                                <table class="table">
+                                    <thead>
+                                    <th colspan="2" style="min-width: 234px">{:lang('areas')}</th>
+                                    <th>{:lang('freetype')}</th>
+                                    <th>{:lang('operation')}</th>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td colspan="2">
+                                            <span>{:lang('default')}</span>
+                                            <input type="hidden" name="free_conf[0][country_id]" value="0">
+                                        </td>
+                                        <td>
+                                            <select name="free_conf[0][freetype]" id="" class="freetype" >
+                                                {foreach $feetype['weight'] as $tk => $tv}
+                                                <option value="{$tk}" {eq name="$tk" value="$data.free_conf[0]['freetype']"}selected{/eq}>{:lang($tv)}</option>
+                                                {/foreach}
+                                            </select>
+                                            <div class="inline">
+                                    <span>
+                                        <input type="text" name="free_conf[0][inweight]"
+                                               value="{$data.free_conf[0]['inweight']}"
+                                               class="w50 onlycurrency"/>({$weight_unit}){:lang('within')}
+                                    </span>
+                                                <span class="hide">,</span>
+                                                <span class="hide">
+                                        <input type="text" name="free_conf[0][upmoney]"
+                                               value="{$data.free_conf[0]['upmoney']}"
+                                               class="w50 onlycurrency"/>({$currency_unit}){:lang('without')}
+                                    </span>
+                                                <span>{:lang('free')}</span>
+                                            </div>
+                                        </td>
+                                        <td><a href="javascript:void(0);"><i class="fa fa-times-circle-o"></i></a></td>
+                                    </tr>
+                                    {eq name='$action_name' value='edit'}
+                                    {foreach $data.free_conf as $key=>$vo}
+                                    {php}if($key == 0) continue;{/php}
+                                    {php}$f_w_k=$k;{/php}
+                                    <tr>
+                                        <td colspan="2">
+                                            <input type="hidden" value="{$vo.country_id}" name="free_conf[{$key}][country_id]">
+                                            <p class="area" data-country_id="{$vo.country_id}">{$vo.area_names}</p>
+                                        </td>
+                                        <td>
+                                            <select name="free_conf[{$key}][freetype]" id="" class="freetype">
+                                                {foreach $feetype['weight'] as $tk => $tv}
+                                                <option value="{$tk}" {eq name="$tk" value="$vo.freetype"}selected{/eq}>{:lang($tv)}</option>
+                                                {/foreach}
+                                            </select>
+                                            <div class="inline">
+                                                {switch name='$vo.freetype'}
+                                                {case value='1'}
+                                                <span>
+                                            <input type="text"  name="free_conf[{$key}][inweight]" value="{$vo.inweight}" class="w50 onlycurrency"/>({$weight_unit}){:lang('within')}
+                                        </span>
+                                                <span style="display: none">,</span>
+                                                <span style="display: none">
+                                            <input type="text" name="free_conf[{$key}][upmoney]" value="{$vo.upmoney}" class="w50 onlycurrency"/>({$currency_unit}){:lang('without')}
+                                        </span>
+                                                {/case}
+                                                {case value='2'}
+                                                <span style="display: none">
+                                            <input type="text" name="free_conf[{$key}][inweight]" value="{$vo.inweight}" class="w50 onlycurrency"/>({$weight_unit}){:lang('within')}
+                                        </span>
+                                                <span style="display: none">,</span>
+                                                <span >
+                                            <input type="text" name="free_conf[{$key}][upmoney]" value="{$vo.upmoney}" class="w50 onlycurrency"/>({$currency_unit}){:lang('without')}
+                                        </span>
+                                                {/case}
+                                                {case value='3'}
+                                                <span>
+                                            <input type="text" name="free_conf[{$key}][inweight]" value="{$vo.inweight}" class="w50 onlycurrency"/>({$weight_unit}){:lang('within')}
+                                        </span>
+                                                <span >,</span>
+                                                <span >
+                                            <input type="text" name="free_conf[{$key}][upmoney]" value="{$vo.upmoney}" class="w50 onlycurrency"/>({$currency_unit}){:lang('without')}
+                                        </span>
+                                                {/case}
+                                                {/switch}
+                                                <span>{:lang('free')}</span>
+                                            </div>
+                                        </td>
+                                        <td><a href="javascript:void(0);"><i class="fa fa-times-circle-o"></i></a></td>
+                                        <input type="hidden" name="free_conf[{$key}][area_names]" value="{$vo.area_names}" class="area_group_name"/>
+                                        <input type="hidden" name="free_conf[{$key}][area_ids]" value="{$vo.area_ids}" class="area_group_ids"/>
+                                    </tr>
+                                    {/foreach}
+                                    {/eq}
+                                    <tr>
+                                        <td colspan="4" style="text-align: left">
+                                            <button class="btn" type="button" id="add_free_weight"><a href="javascript:void(0);"><i class="fa  fa-plus"></i></a></button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+                <div class="box-foot" style="text-align: center">
+                    {eq name='action_name' value='edit'}
+                    <input type="hidden" name="id" value="{$data.id}">
+                    {/eq}
+                    <input type="submit" name="submit" value="{:lang('submit')}" url="{:url('seller/transport/save')}" class="btn btn-info">
+                </div>
+        </form>
+        
+        </div>
+    </div>
+    <div class="hide" id="country_list">
+        {foreach $country_list as $v}
+        <option value="{$v.id}">{$v.name}</option>
+        {/foreach}
+    </div>
+</section>
+{/block}
+
+{block name='js'}
+<link rel="stylesheet" href="__STATIC__/jQuery-dqxz/css.css"/>
+<script charset="utf-8" src="__STATIC__/jQuery-dqxz/RegionalChoice.js"></script>
+<script>
+    $(function () {
+        $('.radio').click(function () {
+            $(this).removeClass('btn-default').addClass('btn-info');
+            $('#'+$(this).data('id')).attr('checked',true);
+            
+            $('#'+$(this).data('id')).siblings("input[type='radio']").attr('checked',false).removeClass('btn-info').addClass('btn-default');
+            $(this).siblings('button').removeClass('btn-info').addClass('btn-default');
+        })
+    })
+    var w_k = "{++$w_k}";
+    $('#add_weight_conf').click(function () {
+        var _html = '<tr>';
+        _html += '<td>';
+        _html += '<select name="fee_conf[' + w_k + '][country_id]" class="country" style="max-width: 100px">';
+        _html += $('#country_list').html();
+        _html += '</select><p class="hide area"></p>';
+        _html += '</td>';
+        _html += '<td><input class="onlycurrency" type="text" name="fee_conf[' + w_k + '][start_standard]" value=""/></td>';
+        _html += '<td><input class="onlycurrency" type="text" name="fee_conf[' + w_k + '][start_fee]" value=""/></td>';
+        _html += '<td><input class="onlycurrency" type="text" name="fee_conf[' + w_k + '][add_standard]" value=""/></td>';
+        _html += '<td><input class="onlycurrency" type="text" name="fee_conf[' + w_k + '][add_fee]" value=""/></td>';
+        _html += '<td><a href="javascript:void(0);" class="remove"><i class="fa fa-times-circle-o"></i></a></td>';
+        _html += '<input type="hidden" name="fee_conf[' + w_k + '][area_names]" class="area_group_name"/>';
+        _html += '<input type="hidden" name="fee_conf[' + w_k + '][area_ids]" class="area_group_ids"/></tr>';
+        $(this).parent().parent().before(_html);
+        w_k++;
+    });
+    var f_w_k = "{++$f_w_k}";
+    $('#add_free_weight').click(function () {
+        var _html = '<tr>';
+        _html += '<td colspan="2">';
+        _html += '<select name="free_conf[' + f_w_k + '][country_id]" class="country">';
+        _html += $('#country_list').html();
+        _html += '</select><p class="hide area"></p>';
+        _html += '</td>';
+        _html += '<td>';
+        _html += '<select name="free_conf[' + f_w_k + '][freetype]" id="" class="freetype" >';
+        "{foreach $feetype['weight'] as $tk => $tv}"
+        _html += '<option value="'+"{$tk}"+'">'+"{:lang($tv)}"+'</option>';
+        "{/foreach}"
+        _html += '</select>';
+        _html += '<div class="inline">';
+        _html += '&nbsp;<span><input type="text" name="free_conf[' + f_w_k + '][inweight]" class="onlycurrency"/>({$weight_unit})'+"{:lang('within')}"+'</span>';
+        _html += '<span class="hide">,</span>';
+        _html += '<span class="hide"><input type="text" name="free_conf[' + f_w_k + '][upmoney]" class="onlycurrency"/>({$currency_unit})'+"{:lang('without')}"+'</span>';
+        _html += '&nbsp;<span>'+"{:lang('free')}"+'</span>';
+        _html += '</div>';
+        _html += '</td>';
+        _html += '<td><a href="javascript:void(0);" class="remove"><i class="fa fa-times-circle-o"></i></a></td>';
+        _html += '<input type="hidden" name="free_conf[' + f_w_k + '][area_names]" class="area_group_name"/>';
+        _html += '<input type="hidden" name="free_conf[' + f_w_k + '][area_ids]" class="area_group_ids"/></tr>';
+        $(this).parent().parent().before(_html);
+        f_w_k++;
+    })
+    $(document).on('click','.remove',function () {
+        $(this).parent().parent().remove();
+    })
+    //切换包邮条件
+    $(document).on('change', '.freetype', function () {
+        var val = $(this).val();
+        var obj = $(this).parent().find('span');
+        if (val == 1) {
+            obj.eq(0).removeClass('hide');
+            obj.eq(1).addClass('hide');
+            obj.eq(2).addClass('hide');
+        } else if (val == 2) {
+            obj.eq(0).removeClass('show').addClass('hide');
+            obj.eq(1).removeClass('show').addClass('hide');
+            obj.eq(2).removeClass('hide');
+        } else {
+            obj.eq(0).removeClass('hide');
+            obj.eq(1).removeClass('hide');
+            obj.eq(2).removeClass('hide');
+        }
+    })
+    $(document).on('change', '.country', function () {
+        var country = $(this).val();
+        var that = $(this);
+        $.post("{:url('seller/transport/add_area')}", {'country': country}, function (data) {
+            if (data.code == 1) {
+                layer.open({
+                    type: 1
+                    , content: "<div id='test-div'></div>"
+                    , btn: '{:lang("confirm")}'
+                    , title: '{:lang("choose_area")}'
+                    , area: ['865px', '630px'] //宽高
+                    , btnAlign: 'c' //按钮居中
+                    , shade: 0.1 //不显示遮罩
+                    , yes: function () {
+                        layer.closeAll();
+                        var ids_name = GetBidCityChecked();
+                        var ids = GetChecked();
+                        if (ids_name.length) {
+                            that.parent().find('p').attr('data-country_id',country);
+                            that.parent().find('p').html(ids_name.join(",")).removeClass('hide');
+                            that.addClass('hide');
+                            that.parent().parent().find('.area_group_name').val(ids_name.join(","));
+                            that.parent().parent().find('.area_group_ids').val(ids);
+                        } else {
+                            that.removeClass('hide');
+                            that.parent().find('p').addClass('hide');
+                        }
+                    }
+                });
+                GetRegionPlug('#test-div', data.data);
+            }
+        });
+    });
+    //修改已选地区
+    $(document).on('click','.area',function () {
+        var country = $(this).data('country_id');
+        var that = $(this);
+        $.post("{:url('seller/transport/add_area')}", {'country': country}, function (data) {
+            if (data.code == 1) {
+                layer.open({
+                    type: 1
+                    , content: "<div id='test-div'></div>"
+                    , btn: '{:lang("confirm")}'
+                    , title: '{:lang("choose_area")}'
+                    , area: ['865px', '580px'] //宽高
+                    , btnAlign: 'c' //按钮居中
+                    , shade: 0 //不显示遮罩
+                    , yes: function () {
+                        layer.closeAll();
+                        var ids_name = GetBidCityChecked();
+                        var ids = GetChecked();
+                        if (ids_name.length) {
+                            that.attr('data-country_id',country);
+                            that.html(ids_name.join(","));
+                            that.parent().parent().find('.area_group_name').val(ids_name.join(","));
+                            that.parent().parent().find('.area_group_ids').val(ids);
+                        }
+                    }
+                });
+                var old_ids = that.parent().parent().find('.area_group_ids').val();
+                GetRegionPlug('#test-div', data.data);SetChecked(old_ids.split(','));
+            }
+        });
+    })
+    function GetBidCityChecked() {
+        var Checked = [];//先清空数组
+        var n = $(".place-div").find(".place");
+        n.each(function (index, a) {
+            var m = $(this).find(".smallplace");
+            m.each(function (index, a) {
+                var p = $(this).find(".bigcity");
+                p.each(function (index, a) {
+                    if ($(this).prop("checked")) {
+                        Checked.push($(this).parent().html().replace(/<[\S\s]*>[\S\s]*<\/[\S\s]*>|<[\S\s]*>/, ''));
+                    }
+                })
+            })
+        });
+        return Checked;
+    }
+    
+    $('#free button').click(function () {
+        if ($('#'+$(this).data('id')).val() == 1) {
+            $('#weight_conf').hide();
+            $('#weight_free').hide();
+            $('#default_fee').hide();
+        }else {
+            $('#weight_conf').show();
+            $('#weight_free').show();
+            $('#default_fee').show();
+        }
+    });
+    $('#free_condition button').click(function () {
+        if ($('#'+$(this).data('id')).val() == 1) {
+            $('#weight_free').show();
+        } else {
+            $('#weight_free').hide();
+        }
+    })
+</script>
+{/block}

@@ -1,0 +1,112 @@
+{extend name="shop/base" /}
+
+ {block name="body"}
+<div class="ly-main clearfix">
+	<div class="ly-main-left">
+		{include file="shop/left_cat"}
+		 {include file="shop/hot_goods"}
+	</div>
+	<div class="ly-goods-list">
+		<div class="ly-filter-box clearfix">
+			
+			<div class="filter-pager clearfix">
+				<div class="toolbar">
+					<div class="sort-by">
+						<ul>
+							<li>
+								<a class="selected desc" href="#">推荐 </a>
+							</li>
+							<li>
+								<a class="asc" href="{:getUrlbyOrder('sale_price')}">价格 </a>
+							</li>
+							<li>
+								<a class="asc" href="#">最新上架 </a>
+							</li>
+							<li>
+								<a class="desc" href="#">最佳销量 </a>
+							</li>
+
+						</ul>
+					</div>
+				</div>
+				<div class="pager">
+					<p class="amount">
+						共<span class="pager-num">{$store_category_goods_list->total()}</span>件相关商品 <span class="pager-num">{$store_category_goods_list->currentPage()}</span>/{$store_category_goods_list->lastPage()}页 </p>
+                    {gt name='$store_category_goods_list->lastPage()' value='1'}
+					<div class="pages">
+						<ol>
+                            {php}$page=input();if(!isset($page['page']))$page['page']=1;if($page['page']>1)$page['page'] -=1{/php}
+							<li>
+                                {eq name='$store_category_goods_list->currentPage()' value='1'}
+								<a class="previous i-previous" href="javascript:void(0);" title="上一页">上一页 </a>
+                                {else /}
+                                <a class="next i-next" href="{:url('',$page)}" title="上一页">上一页 </a>
+                                {/eq}
+							</li>
+                            {php}$page=input();if(!isset($page['page']))$page['page']=1;if( $page['page']<$store_category_goods_list->lastPage())$page['page'] +=1{/php}
+							<li>
+                                {eq name='$store_category_goods_list->currentPage()' value='$store_category_goods_list->lastPage()'}
+                                <a class="previous i-previous" href="javascript:void(0);" title="下一页">下一页 </a>
+                                {else /}
+                                <a class="next i-next" href="{:url('',$page)}" title="下一页"> 下一页 </a>
+                                {/eq}
+							</li>
+						</ol>
+					</div>
+                    {/gt}
+				</div>
+			</div>
+		</div>
+		<!--goods-->
+		<div class="goods-grid">
+			<ul class="goods-list clearfix">
+                {foreach $store_category_goods_list as $v}
+				<li class="goods-item  addcat-item">
+					<div class="goods-pic ">
+						<a href="{:url('goods/index').'?item_id='.$v.id}" target="_blank" title="{$v.name}">
+							<img width="205" height="205" class="lazy" src="__PUBLIC__/{$img_path}/tm.gif" data-original="__UPLOADS__/{$v.thumb}" alt="" />
+                        </a>
+					</div>
+					<div class="goods-info">
+						<div class="price-box">
+							<span class="price">{$v.sale_price}</span>
+							<span class="mkt-price">{$v.market_price}</span>
+						</div>
+						<div class="goods-name">
+							<a href="" target="_blank">{$v.name}</a>
+						</div>
+
+					</div>
+					<div class="button-box">
+						<div class="item item-1">
+							<div class="ly-number-list">
+								<a href="javascript:void(0);" class="btn btn-flat btn-increase">+</a>
+								<input type="text" name="item[quantity]" min="1" max="10" itemId="2" value="1" class="action-quantity-input">
+								<a href="javascript:void(0);" class="btn btn-flat btn-decrease">-</a>
+							</div>
+						</div>
+						<div class="item item-2">
+							<button class="btn-addcart" data-url="{:url('carts/addcart')}">加入购物车</button>
+						</div>
+      
+						<div class="item item-3"><img src="__PUBLIC__/{$module_path}ad/gg.png" /></div>
+
+						<div class="item item-3"><img src="__AD__/gg.png" /></div>
+
+						<div class="item item-3"><img src="__PUBLIC__/crossbbcg/pc/default/ad/gg.png" /></div>
+
+					</div>
+				</li>
+                {/foreach}
+			</ul>
+		</div>
+		<!--goods end-->
+		<!--page-->
+		<div class="pagenavi">
+            {$store_category_goods_list->appends(input())->render()}
+		</div>
+		
+		<!--page end-->
+	</div>
+</div>
+{/block}

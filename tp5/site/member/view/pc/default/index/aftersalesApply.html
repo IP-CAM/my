@@ -1,0 +1,267 @@
+    {extend name="common/base" /}
+    
+    {block name="title"}
+    <title>{:lang('After_sales_apply')}</title>
+    {/block}
+    
+    {block name="css"}
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/{$css_path}/member.css" />
+    {/block}
+    
+    {block name="body"}
+    <!--面包屑-->
+    <div class="ly-path">
+        <ul class="clearfix">
+            <li class="home">
+                <a href="{:url('crossbbcg/index/index')}" title="{:lang('go_min')}">{:lang('Home')}</a>
+                <span>&gt;&nbsp;</span>
+            </li>
+            <li>
+                <a href="{:url('member/index/index')}" title="{:lang('Member')}">{:lang('Member')}</a>
+                <span>&gt;&nbsp;</span>
+            </li>
+            <li>
+                <h1>{:lang('After_sales_apply')}</h1>
+            </li>
+        </ul>
+    </div>
+    <div class="ly-main member-main clearfix">
+        {include file="index/left_menu"}
+        <div class="member-right">
+            <div class="member-content">
+                <div class="title member-title member-max-title">
+                    <div class="t">{:lang('return_apply')}</div>
+                </div>
+                <div class="body pb15 mh600 aftersales">
+                    <div class="orderdtl-box">
+                        <div class="member-sub-title clearfix"><span>{:lang('choose_return_type')}</span></div>
+                        <div class="orderdtl-bd">
+                            <div class="row">
+                                <span class="offset-1">
+                      <input type="radio" class="ui-input" name="aftersales_type" value="1" id="for_exchange" checked="checked">
+                      <label for="for_exchange">{:lang('return_type_1')}</label>
+                    </span>
+                                <span class="offset-1">
+                      <input type="radio" class="ui-input" name="aftersales_type" value="2" id="for_type2">
+                      <label for="for_type2">{:lang('return_type_2')}</label>
+                    </span>
+                                <span class="offset-1">
+                      <input type="radio" class="ui-input" name="aftersales_type" value="0" id="for_return">
+                      <label for="for_return">{:lang('return_type_0')}</label>
+                    </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--订单信息-->
+                    <div class="orderdtl-box">
+                        <div class="member-sub-title clearfix"><span>{:lang('order_info')}</span></div>
+                        <div class="orderdtl-bd">
+                            <div class="clearfix">
+                                <div class="row">
+                                    <div class="col-1">{:lang('order_sn')}</div>
+                                    <div class="col-2">{$order_sn}</div>
+                                    <input type="hidden" name="order_sn" value="{$order_sn}">
+                                    <input type="hidden" name="order_id" value="{$order['order_id']}">
+                                    <input type="hidden" name="rec_id" value="{$rec_id}">
+                                    <input type="hidden" name="seller_id" value="{$seller_id}">
+                                </div>
+                                <div class="row">
+                                    <div class="col-1">{:lang('trading_time')}</div>
+                                    <div class="col-2">{$order['create_time']}</div>
+                                </div>
+                                
+                                <div class="row">
+                                <div class="col-1">{:lang('order_seller')}</div>
+                                <div class="col-2">{$seller_name}</div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-1">{:lang('order_store')}</div>
+                                    <div class="col-2">{$store_name}</div>
+                                </div>
+                                
+                                
+                                
+                                <div class="row">
+                                    <div class="col-1">{:lang('order_status')}</div>
+                                    <div class="col-2">
+                                        {:lang(strtolower($order['status']))}
+                                    </div>
+    
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-1">{:lang('shipping_address')}</div>
+                                    <div class="col-2">
+                                        <p>{$order.country} {$order.province} {$order.city} {$order.district}</p>
+                                        <p>{$order.address}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--订单信息END	-->
+                    <!--商品信息-->
+                    <table class="order-table">
+                        <tbody>
+                            <tr>
+                                <td class="center order-summary" colspan="2">
+                                    {:lang('good_information')}
+                                </td>
+                                
+                                <td class="center order-summary">{:lang('good_price')}</td>
+                                <td class="center order-summary">
+                                    {:lang('buy_num')}
+                                </td>
+                                <td class="center order-summary">
+                                    {:lang('good_total')}
+                                </td>
+                            </tr>
+    
+                            <tr>
+                                <td class="item-image">
+                                    {if condition="substr($goods['sku_thumb'],0,4)=='http'"}
+                                    <img src="{$goods['sku_thumb']}" width="58" height="58">
+                                    {else /}
+                                    <img src="{:resizeImage($goods['sku_thumb'],'small',true)}" width="58" height="58">
+                                    {/if}
+                                </td>
+                                <td class="item-name">
+                                    <a target="_blank" href="{:url('crossbbcg/goods/index','item_id='.$goods['goods_id'])}">{$goods.goods_name}</a>
+                                    {if condition="$goods['sku_array']"}
+                                    <br/>{$goods['sku_array']}
+                                    {/if}
+                                </td>
+                                
+                                
+                                <td class="item-amount">
+                                    {$order.symbol}{$goods.sku_price}
+                                </td>
+                                <td class="item-amount">
+                                    x{$goods.sku_number}
+                                </td>
+                                <td class="item-price"> {$order.symbol}{:$goods.sku_price * $goods.sku_number} </td>
+    
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!--商品信息-->
+                    <div class="orderdtl-box">
+                        <div class="member-sub-title clearfix"><span>{:lang('return_description')}</span></div>
+                        <div class="orderdtl-bd">
+                            <div class="row w ptb-10">
+                                <div class="col-1"><em class="red">*</em>{:lang('choose_reason')}</div>
+                                <div class="col-2">
+                                    <select name="return_reason">
+                                        <option value="">{:lang('please_choose')}</option>
+                                        {foreach $return_reason as $value}
+                                        <option value="{$value}">{$value}</option>
+                                        {/foreach}
+                                    </select>
+                                </div>
+    
+                            </div>
+                            <div class="row w ptb-10">
+                                <div class="col-1">{:lang('return_description')}</div>
+                                <div class="col-2">
+                                    <textarea name="return_description" id="" cols="80" rows="6" maxlength="300"></textarea>
+                                </div>
+                            </div>
+                            <div class="row w ptb-10">
+                                <div class="col-1">{:lang('return_image')}</div>
+                                <div class="col-2">
+                                    <ul class="images-upload clearfix">
+                                        
+                                        
+                                        <li class="img-thumbnail action-upload return-upload" data-url="{:url('member/index/ajax_upload')}" data-maxlength="5">
+                                            <input type="file" class="action-file-input">
+                                            <span class="icon-add">+</span>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row w ptb-10">
+                                <div class="col-1">&nbsp;</div>
+                                <div class="col-2">
+                                    {:lang('return_reminder')}
+                                </div>
+                                
+                                <div class="col-1">&nbsp;</div>
+                                <div class="col-2">
+                                <button type="button" class="submit-blue" data-url="{:url('member/index/applyreturn')}">{:lang('submit_apply')}</button>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {/block}
+    <!--此板块为页面单独js加载-->
+    {block name="footer_js"}
+    <script type="text/javascript">
+        function apply_return(){
+        var validate = true;
+        var type = $('input[name="aftersales_type"]:checked').val();
+        if(typeof(type) === 'undefined') {
+            validate = false;
+            layer.msg('{:lang("reason_type_null")}', {skin:'layer-ext-blue',icon:0, time: 2000 ,shade: 0.3}, function(){});
+            return false;
+        }
+        var return_reason = $('select[name="return_reason"]').val();
+        if(return_reason == ''){
+                validate = false;
+                layer.msg('{:lang("choose_reason_null")}', {skin:'layer-ext-blue',icon:0, time: 2000 ,shade: 0.3}, function(){});
+                return false;
+        }
+        
+        var url = $('.submit-blue').data('url');
+        var order_sn = $('input[name="order_sn"]').val();
+        var order_id = $('input[name="order_id"]').val();
+        var rec_id = $('input[name="rec_id"]').val();
+        var seller_id = $('input[name="seller_id"]').val();
+        var imgs = [];
+        //$(document).on('each','input[name="return_img[]"]',function(){
+        $('input[name="return_img[]"]').each(function(){
+            imgs.push($(this).val());
+        });
+        
+        var return_description = $('textarea[name="return_description"]').val();
+        var request_data = {
+            order_sn:order_sn,
+            order_id:order_id,
+            rec_id:rec_id,
+            seller_id:seller_id,
+            rtype:type,
+            return_images:imgs,
+            return_reason:return_reason,
+            return_description:return_description
+        };
+        if(validate) {
+            $.ajax({
+                type: 'post',
+                url: url,
+                data: request_data,
+                dataType: 'json',
+                success: function (data) {
+                    if(data.code){
+                        layer.msg(data.msg, {skin:'layer-ext-blue',icon:0, time: 2000 ,shade: 0.3}, function(){
+                            window.location.href = '{:url("member/index/aftersaleslist")}';
+                        });
+                    }else{
+                        layer.msg(data.msg, {skin:'layer-ext-blue',icon:0, time: 2000 ,shade: 0.3}, function(){
+                            window.location.href = '{:url("member/index/aftersaleslist")}';
+                        });
+                    }
+                }
+            });
+        }
+        }
+        //需要加载的js文件
+        Private_Script = ['member'];
+    </script>
+    {/block}

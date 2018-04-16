@@ -1,0 +1,138 @@
+{extend name='public/layout'}
+
+
+{block name='body'}
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+    <div class="flexigrid">
+        <div class="mDiv">
+            <div class="ftitle">
+                <h3>会员排行榜</h3>
+                <h5>(共条记录)</h5>
+            </div>
+            <div title="刷新数据" class="pReload"><i class="fa fa-refresh"></i></div>
+            <form class="navbar-form form-inline" id="search-form" method="get" action="/index.php/admin/Report/userTop.html" onsubmit="return check_form();">
+                <input type="hidden" name="timegap" id="timegap" value="2016-06-06 - 2017-06-06">
+                <div class="sDiv">
+                    <div class="sDiv2" style="margin-right: 10px;">
+                        <input type="text" size="30" id="start_time" value="2016-06-06" placeholder="起始时间" class="qsbox">
+                        <input type="button" class="btn" value="起始时间">
+                    </div>
+                    <div class="sDiv2" style="margin-right: 10px;">
+                        <input type="text" size="30" id="end_time" value="2017-06-06" placeholder="截止时间" class="qsbox">
+                        <input type="button" class="btn" value="截止时间">
+                    </div>
+                    <div class="sDiv2" style="margin-right: 10px;">
+                        <input size="30" name="mobile" value="" placeholder="手机号码" class="qsbox" type="text">
+                    </div>
+                    <div class="sDiv2">
+                        <input size="30" placeholder="email" value="" name="email" class="qsbox" type="text">
+                        <input class="btn" value="搜索" type="submit">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="bDiv" style="height: auto;">
+            <div id="flexigrid" cellpadding="0" cellspacing="0" border="0">
+                <table id="dataTable"  cellpadding="0" cellspacing="0" style="table-layout:fixed;border-collapse:collapse;">
+                    <tbody>
+                    <colgroup>
+                        <col style="width:24px;" />
+                        <col style="width:50px;" />
+                        <col style="width:50px;" />
+                        <col style="width:300px;" />
+                        <col style="width:80px;" />
+                        <col style="width:100px;" />
+                        <col style="width:150px;" />
+                    </colgroup>
+                    <tr style="background-color: #f5f5f5;cursor: e-resize">
+                        <td class="sign" axis="col0">
+                            <div style="width: 24px;cursor: auto;"><i class="ico-check"></i></div>
+                        </td>
+                        <td align="center" abbr="article_title" axis="col3" class="">
+                            <div style="text-align: center;" class="">ID</div>
+                        </td>
+                        <td align="center" abbr="ac_id" axis="col4" class="">
+                            <div style="text-align: center;" class="">排行</div>
+                        </td>
+                        <td align="center" abbr="article_show" axis="col5" class="">
+                            <div style="text-align: center;" class="">会员名称</div>
+                        </td>
+                        <td align="center" abbr="article_time" axis="col6" class="">
+                            <div style="text-align: center;" class="">订单数</div>
+                        </td>
+                        <td align="center" abbr="article_time" axis="col6" class="">
+                            <div style="text-align: center; " class="">购物金额</div>
+                        </td>
+                        <td align="center" axis="col1">
+                            <div style="text-align: center;">操作</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="sign">
+                            <div style="width: 24px;"><i class="ico-check"></i></div>
+                        </td>
+                        <td align="center" class="">
+                            1
+                        </td>
+                        <td align="center" class="">
+                            1
+                        </td>
+                        <td align="center" class="">
+                            13800138006&nbsp;&nbsp;240874144@qq.com&nbsp;&nbsp;hello
+                        </td>
+                        <td align="center" class="">
+                            72
+                        </td>
+                        <td align="center" class="">
+                            80832.69
+                        </td>
+                        <td align="center" class="handle">
+                            <div style="text-align: center; width: 170px; max-width:170px;">
+                                <a href="{:url('order/index')}" class="btn blue"><i class="fa fa-search"></i>查看</a>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="iDiv" style="display: none;"></div>
+        </div>
+        <!--分页位置-->
+        <div class='dataTables_paginate paging_simple_numbers'><ul class='pagination'>  <li class="paginate_button active"><a tabindex="0" data-dt-idx="1" aria-controls="example1" href="#">1</a></li><li class="paginate_button"><a class="num" href="/index.php/admin/report/userTop/m/Admin/c/Report/a/userTop/p/2.html">2</a></li><li class="paginate_button"><a class="num" href="/index.php/admin/report/userTop/m/Admin/c/Report/a/userTop/p/3.html">3</a></li> <li id="example1_next" class="paginate_button next"><a class="next" href="/index.php/admin/report/userTop/m/Admin/c/Report/a/userTop/p/2.html">下一页</a></li> </ul></div> </div>
+</div>
+<script>
+    $(document).ready(function(){
+        // 表格行点击选中切换
+        $('#flexigrid > table>tbody >tr').click(function(){
+            $(this).toggleClass('trSelected');
+        });
+
+        // 点击刷新数据
+        $('.fa-refresh').click(function(){
+            location.href = location.href;
+        });
+
+        $('#start_time').layDate();
+        $('#end_time').layDate();
+    });
+
+    function check_form(){
+        var start_time = $.trim($('#start_time').val());
+        var end_time =  $.trim($('#end_time').val());
+        if(start_time == '' ^ end_time == ''){
+            layer.alert('请选择完整的时间间隔', {icon: 2});
+            return false;
+        }
+        if(start_time !== '' && end_time !== ''){
+            $('#timegap').val(start_time+" - "+end_time);
+        }
+        if(start_time == '' && end_time == ''){
+            $('#timegap').val('');
+        }
+        return true;
+    }
+</script>
+<script type="text/javascript" src="__PUBLIC__/{$module_path}js/drag.js"></script>
+{/block}

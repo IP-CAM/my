@@ -1,0 +1,417 @@
+{extend name="admin@public/poupbase" /}
+
+<!-- CONTENT -->
+
+{block name="body"}
+<div id="content" style="margin:0px 10px 5px 8px;">
+    <div class="bloc" style="margin:10px 0px 0px;">
+        <div class="content" style=" height:590px;">
+            <!--<?php-->
+            <!--$parentid = I('get.menuid');-->
+            <!--getSubChild($parentid);-->
+            <!--?>-->
+            <style>
+                #container input{padding:3px 8px; margin-right:5px; margin-left:5px;}
+                form .row{ min-height:22px !important;margin: 3px 0px 0px;}
+                .mt10{ margin-top:10px;}
+                .mt5{ margin-top:5px;}
+            </style>
+            <dl class="charts">
+                <dd id="container" style="height: 36px; line-height:36px; margin: 0 auto; padding:0 10px;">
+                    <div class="fl">
+                        {:lang('Order_sn')} : <input value="{$info.order_sn}" type="button" class="copy" />
+                        {:lang('Order_status')} :
+                        {switch name="info.status"}
+                        {case value="0"}<span class="red">{:lang('To_be_confirmed')}</span> ,{/case}
+                        {case value="1"}<span class="green">{:lang('Confirmed')}</span> ,{/case}
+                        {case value="3"}<span class="red">{:lang('Cancelled')}</span> ,{/case}
+                        {case value="4"}{:lang('Invalid')} ,{/case}
+                        {case value="5"}{:lang('Completed')} ,{/case}
+                        {case value="6"}<span class="blue">{:lang('Return_goods')}</span> ,{/case}
+                        {case value="7"}<span class="blue">{:lang('Return_goods')}</span> ,{/case}
+                        {default /}default
+                        {/switch}
+
+                        {switch name="info.pay_status"}
+                        {case value="0"}{:lang('Unpaid')} ,{/case}
+                        {case value="1"}{:lang('Paymenting')} ,{/case}
+                        {case value="2"}{:lang('Paid')} ,{/case}
+                        {default /}
+                        {/switch}
+
+                        {switch name="info.shipping_status"}
+                        {case value="0"}<span class="red"> {:lang('Non_delivery')}</span>{/case}
+                        {case value="1"}<span class="blue">{:lang('Delivered')}</span>{/case}
+                        {case value="2"}<span class="green">{:lang('Receipt_confirmation')}</span>{/case}
+                        {case value="3"}{:lang('Distribution')}{/case}
+                        {case value="4"}{:lang('Already_hair_part')}{/case}
+                        {case value="5"}{:lang('Deliverying')}{/case}
+                        {default /}
+                        {/switch} &nbsp;&nbsp;
+                        {:lang('Partner_platform')} :
+                        {switch name="info.platform_type"}
+                        {case value="pc"}
+                        [ {:lang('PC')} ]{/case}
+                        {case value="phone"}
+                        <span class="green">[ {:lang('Phone')} ]</span>
+                        {/case}
+                        {case value="wechat"}
+                        <span class="blue">[ {:lang('Wechat')} ]</span>
+                        {/case}
+                        {case value="tablet"}
+                        <span class="violet"> [{:lang('Tablet')}]</span>
+                        {/case}
+                        {case value="other"}
+                        <span class="red">[ {:lang('Other')} ]</span>
+                        {/case}
+                        {default /}
+                        {/switch}
+                    </div>
+                    <div class="fr">
+
+
+                        <input name="button" value="{:lang('Previous')}" type="button" onclick="location.href='{:url('view',array('ordersn'=>'2009051227085'))}';" />
+                        <input name="button" value="{:lang('Nexts')}" type="button" onclick="location.href='{:url('view',array('ordersn'=>'2009051267570'))}';" />
+
+                        <input type="button" onclick="window.open('{:url('print',array('order_sn'=>$info['order_sn']))}')" value="{:lang('Print_orders')}" />
+                        <input name="reset" value="{:lang('Closewin')}" type="button" />
+                    </div>
+                </dd>
+            </dl>
+
+
+            <style>
+                .w40l{ width:40px;}
+                .w60l{ width:60px;}
+                .w70l{ width:70px; margin-right:0 !important; }
+                .w280{ width:260px !important;}
+                .mr_10{ margin-right:10px;}
+                .cen{ text-align:center;}
+                .order_info_header{border:1px solid #ccc;background: #F2F2F2;height:26px; line-height:1.7;}
+                #option span{ display:inline-block; margin:0 10px;}
+                #choose_catids{float:left;width:80%;height:26px; border:1px solid #ccc; background:#f0f8ff; cursor:pointer;}
+                #newattr span, #attrheader span, .order_info_header span{ display:inline-block; padding:4px; margin-right:10px;}
+                #newattr{ padding:0 6px 10px 6px !important; margin:0 !important}
+                #newattr li{ height:24px; margin-top:8px; list-style:none;}
+                #newattr li a{ padding:0 2px;}
+                #dotin, #newattr{ overflow-y:scroll; height:134px;}
+            </style>
+
+            <form id="myform" method="post" style="margin-top:5px;" class="">
+
+                <div class="row order_info_header">
+                    <div class="fl">
+                        <label class="w60">{:lang('Total_commodity')}: </label>
+                        <label class="w60l">{$info.goods_amount}</label>
+                    </div>
+
+                    <div class="fl">
+                        <label class="w60">{:lang('Expenses_fee')}: </label>
+                        <label class="w60l">{$info.shipping_fee}</label>
+                    </div>
+
+                    <div class="fl">
+                        <label class="w60">{:lang('Invoice_tax')}: </label>
+                        <label class="w60l">{$info.tax}</label>
+                    </div>
+
+                    <div class="fl">
+                        <label class="w60">{:lang('Insured_fee')}: </label>
+                        <label class="w60l">{$info.insure_fee}</label>
+                    </div>
+
+                    <div class="fl">
+                        <label class="w60">{:lang('Merchandise_discount')}: </label>
+                        <label class="w60l" style="width:40px;">{$info.goods_amount - $info.order_amount}</label>
+                    </div>
+
+                    <div class="fl">
+                        <label class="w60">{:lang('Discount_coupons')}: </label>
+                        <label class="w60l">{$info.bonus}</label>
+                    </div>
+
+                    <div class="fl">
+                        <label class="w60">{:lang('Integral_deduction')}: </label>
+                        <label class="w60l">{$info.integral_money}</label>
+                    </div>
+                </div>
+
+                <div class="clear"></div>
+                <fieldset>
+                    <legend>{:lang('Refund')}</legend>
+                    <div class="row">
+                        <div class="fl">
+                            <label class="w100">{:lang('Rtype')}: </label>
+                            <label class="w140l">
+                                {switch name='re_info.rtype'}
+                                {case value='1'}<span>{:lang('Refund_Not_Return')}</span>{/case}
+                                {case value='2'}<span>{:lang('Refund_And_Return')}</span>{/case}
+                                {case value='3'}<span>{:lang('Only_Exchange')}</span>{/case}
+                                {/switch}
+                            </label>
+                        </div>
+
+                        <div class="fl">
+                            <label class="w80">{:lang('Apply Time')}: </label>
+                            <label class="w100l">{:time_format($re_info.createtime,'Y-m-d H:i:s')}</label>
+                        </div>
+
+                        <div class="fl">
+                            <label class="w80">{:lang('Email')}: </label>
+                            <label class="w100l">{$info['email']}</label>
+                        </div>
+
+                        <div style="overflow:hidden;">
+                            <label class="w80">{:lang('Zipcode')}: </label>
+                            <label class="w100l">{$info['zipcode']}</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="fl">
+                            <label class="w100">{:lang('Address')}: </label>
+                            <label style="width:370px;">{$info['address']}</label>
+                        </div>
+                        <div class="fl">
+                            <label class="w80">{:lang('Tel')}: </label>
+                            <label class="w100l">{$info['tel']}</label>
+                        </div>
+
+                        <div class="fl">
+                            <label class="w80">{:lang('Best_delivery_time')}: </label>
+                            <label class="w100l">{$info['best_time']}</label>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>{:lang('Basic_info')}</legend>
+                    <div class="row">
+                        <div class="fl">
+                            <label class="w100">{:lang('Buyer')}: </label>
+                            <label class="w140l">
+                                <gt name="info.user_id" value="0">[ <span class="blue userinfo">{:lang('Show_buyer_info')}</span> ]</gt>&nbsp;&nbsp;
+                                <!--<gt name="info.user_id" value="0">[ <span class="blue sendinfo">{:lang('Send_msg')}</span> ]</gt>-->
+                            </label>
+                        </div>
+                        <div class="fl">
+                            <label class="w80">{:lang('Single_time')}: </label>
+                            <label class="w100l">{:time_format($info["add_time"])}</label>
+                        </div>
+                        <div class="fl">
+                            <label class="w80">{:lang('Time_payment')}: </label>
+                            <label class="w100l">
+                                {eq name="info['pay_time']" value="0">[ {:lang('Unpaid')} ]{else /}{:time_format($info["pay_time"])}{/eq}
+                            </label>
+                        </div>
+                        <div style="overflow:hidden;">
+                            <label class="w80">{:lang('Delivery_time')}: </label>
+                            <label class="w100l">
+                                {eq name="info['shipping_time']" value="0">[ {:lang('Non_delivery')} ]{else /}{:time_format($info["shipping_time"])}{/eq}
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="fl">
+                            <label class="w100">{:lang('Payment_type')}: </label>
+                            <label class="w140l">{$info['pay_type']}&nbsp;&nbsp;
+                                [<a href="{:url('editpayname',array('ordersn'=>$info['order_sn']))}" class="ajax-modify">{:lang('Modify')}</a>]
+                            </label>
+                        </div>
+                        <div class="fl">
+                            <label class="w80">{:lang('Distribution_mode')}: </label>
+                            <label class="w100l">{$info['shipping_name']}&nbsp;&nbsp;
+                                [<a href="{:url('send',array('order_id'=>$info['order_id']))}" class="ajax-modify"  data-width="600" data-height="250" data-showbar="1">{:lang('Modify')}</a>]
+                            </label>
+                        </div>
+
+                        <div class="fl">
+                            <label class="w80">{:lang('Invoice_number')}: </label>
+                            <label class="w100l">
+                                {$info.invoice_no}
+                            </label>
+                        </div>
+
+                        <div style="overflow:hidden;">
+                            <label class="w80">{:lang('Order_source')}: </label>
+                            <label class="w100l">{$info['referer']}</label>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>{:lang('Invoices_and_other')}</legend>
+                    <div class="row">
+                        <div class="fl">
+                            <label class="w100">{:lang('Invoice_title')}: </label>
+                            <label style="width:370px;">{$info['inv_payee']}</label>
+                        </div>
+                        <div class="fl">
+                            <label class="w80">{:lang('Invoice_type')}: </label>
+                            <label class="w100l blue">{$info.inv_type} {:lang('Day')}</label>
+                        </div>
+                        <div class="fl">
+                            <label class="w80">{:lang('Out_of_stock')}: </label>
+                            <label class="w100l">{$info.how_oos}</label>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="fl">
+                            <label class="w100">{:lang('Invoice_content')}: </label>
+                            <label style="width:800px;">{$info.inv_content}</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="fl">
+                            <label class="w100">{:lang('Message_to_merchant')}: </label>
+                            <label style="width:370px;">{$info.postscript}</label>
+                        </div>
+                        <div class="fl">
+                            <label class="w100">{:lang('Business_to_customer')}: </label>
+                            <label style="width:340px;">{$info.to_buyer}</label>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>{:lang('Consignee_information')}</legend>
+                    <div class="row">
+                        <div class="fl">
+                            <label class="w100">{:lang('Consignee')}: </label>
+                            <label class="w140l">{$info['consignee']}</label>
+                        </div>
+
+                        <div class="fl">
+                            <label class="w80">{:lang('Mobile')}: </label>
+                            <label class="w100l">{$info['mobile']}</label>
+                        </div>
+
+                        <div class="fl">
+                            <label class="w80">{:lang('Email')}: </label>
+                            <label class="w100l">{$info['email']}</label>
+                        </div>
+
+                        <div style="overflow:hidden;">
+                            <label class="w80">{:lang('Zipcode')}: </label>
+                            <label class="w100l">{$info['zipcode']}</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="fl">
+                            <label class="w100">{:lang('Address')}: </label>
+                            <label style="width:370px;">{$info['address']}</label>
+                        </div>
+                        <div class="fl">
+                            <label class="w80">{:lang('Tel')}: </label>
+                            <label class="w100l">{$info['tel']}</label>
+                        </div>
+
+                        <div class="fl">
+                            <label class="w80">{:lang('Best_delivery_time')}: </label>
+                            <label class="w100l">{$info['best_time']}</label>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="row order_info_header">
+                    <span class="w120c">{:lang('Commodity_name')}</span>
+                    <span class="w80l">{:lang('Brand')}</span>
+                    <span class="w70l">{:lang('Commodity_code')}</span>
+                    <span class="w280 cen">{:lang('Commodity_attribute')}</span>
+                    <span class="w40l">{:lang('Unit_Price')}</span>
+                    <span class="w70l">{:lang('Purchase_quantity')}</span>
+                    <span class="w80l">{:lang('Subtotal')}</span>
+                </div>
+                {volist name="$info.value" id='vo'}
+                <div class="row order_info_header">
+
+                    <span class="w120c">{$vo.goods_name}</span>
+                    <span class="w80l">{$vo.goods_brand}</span>
+                    <span class="w70l">{$vo.goods_sn}</span>
+                    <span class="w280 cen">{$vo.goods_array}</span>
+                    <span class="w40l">{$vo.goods_price}</span>
+                    <span class="w70l">{$vo.goods_number}</span>
+                    <span class="w80l">{$vo.goods_number*$vo.goods_price}</span>
+
+                </div>
+                {/volist}
+                <div class="row">
+                    <label for="sort" class="w100" style="padding-right:0;"></label>
+                    <div style=" padding:0 0 0 94px;">
+
+                        <ul id="newattr">
+                            <?php
+                                        if(!empty($data['value']) && ACTION_NAME == 'edit'){
+                                        $valuelist = explode(',',$data['value']);
+                                    ?>
+                            <foreach name="valuelist" item="vo">
+                                <li>
+                                    <input type='checkbox' checked />
+                                    <input type='text' class='input' name='value[]' value='{$vo}' />
+                                    <a href='javascript:void(0);' class='up'>{:lang('Up')} </a>
+                                    <a href='javascript:void(0);' class='down'>{:lang('Down')} </a>
+                                    <a href='javascript:void(0);' class='del'>{:lang('Del')} </a>
+                                </li>
+                            </foreach>
+                            <?php } ?>
+                        </ul>
+                    </div>
+                </div>
+            </form>
+
+            <div class="pagination-wrapper"></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="__PUBLIC__/static/js/copy/jquery.zclip.min.js"></script>
+<script>
+    $(function(){
+        $('.copy').zclip({
+            path: '__PUBLIC__/static/js/copy/ZeroClipboard.swf',
+            copy: function(){
+                return $(this).val();
+            },
+            afterCopy: function(){
+                layer.tips('{:lang("Copy_ok")}', this, {
+                    tips: [3, '#F26C4F'],
+                    //closeBtn: 1,
+                });
+            }
+        });
+
+        $(".ajax-modify").click(function(){
+            var that = $(this);
+            var url = that.attr('href');
+            var title = that.text();
+            var boxw = that.attr('data-width')? that.attr('data-width') +'px': ($(window).width() * 0.75) +'px';
+            var boxh = that.attr('data-height')? that.attr('data-height') +'px': ($(window).height() * 0.85) +'px';
+            boxw = boxw.indexOf('%') != -1 ?boxw.replace('px',''):boxw ;
+            boxh = boxh.indexOf('%') != -1 ?boxh.replace('px',''):boxh ;
+            layer.open({
+                type: 2,
+                shift:Math.floor(Math.random()*6+1),
+                title: title,
+                skin: 'layui-layer-rim',
+                shadeClose: false,
+                shade: [0.5, '#000'],
+                area: [boxw, boxh],
+                content: url
+            });
+            return false;
+        })
+
+        var autosizeindex = parent.layer.getFrameIndex(window.name);
+        parent.layer.iframeAuto(autosizeindex);
+        var h = parent.$("#layui-layer-iframe"+autosizeindex).height() + 0;
+        var oh = parent.$("#layui-layer-iframe"+autosizeindex).outerHeight() + 20;
+        var t = parent.$("#layui-layer"+autosizeindex).css('top');
+        var tt = parseInt(t.substr(0, t.length - 2)) + 5;
+        var topoffset = ($(parent).height() - $(window).height())/2 - 20;
+        parent.layer.style(autosizeindex, {height:h,top:tt + 'px'});
+        parent.$("#layui-layer-iframe"+autosizeindex).css({height: oh});
+        parent.$("#layui-layer"+autosizeindex).css({top: topoffset});
+    })
+</script>
+{/block}

@@ -1,0 +1,182 @@
+    {extend name="admin@public/base" /}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content">
+        <div class="breadcrumbs">
+            {:lang('Fanssys')} : &nbsp;&nbsp; {:lang('Fans')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+        </div>
+        
+        <div class="bloc">
+            <div class="title">
+                <div class="tabs" id="navs">
+                    {include file="admin@public/navs" /}
+                </div>
+                
+                {include file="admin@public/lang" /}
+            </div>
+            
+            <form name="frmShopSettingsEdit" method="post" style="margin-top:5px;">
+                <div class="alert alert-warning">
+                    <button class="close" type="button">&times;</button>
+                    <span class="alert-content">{:lang('Snsconfmark')}</span>
+                </div>
+                
+                <div class="bloc" id="blocStatistics">
+                    <!--<div class="title collapsible">-->
+                    <div class="title">
+                        <div class="tabs static pot" id="blockStatistics">
+                            <ul>
+                                <a id="tabStat1_link" href="#tabStat1">
+                                    <li>{:lang('Circleconf')}</li>
+                                </a>
+                                <a id="tabStat2_link" href="#tabStat2">
+                                    <li>{:lang('Snsconconf')}</li>
+                                </a>
+                                <a id="tabStat3_link" href="#tabStat3">
+                                    <li>{:lang('Topicconf')}</li>
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="content" style="padding-bottom: 20px;">
+                        
+                        <div id="tabStat1" style="display:block;">
+                            <table class="table kright">
+                                <tbody>
+                                <tr>
+                                    <td>{:lang('Circlestatus')}: </td>
+                                    <td>
+                                        <div class="slideBox" >
+                                            <input id="circlestatus" value="1" type="checkbox" name="circlestatus" {eq name="data.circlestatus" value="1"}checked{/eq} {notpresent name="data.circlestatus"}checked{/notpresent} />
+                                            <label for="circlestatus"></label>
+                                        </div> &nbsp; &nbsp;
+                                        <span class="slideBoxafter">
+                                                    {:lang('Circlestatus_tip')}
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{:lang('Circle create limit')}:  </td>
+                                    <td>
+                                        <input name="createlimit" type="number" placeholder="15" style="width: 80px; text-align: center;" value="{$data.createlimit|default=5}" min="1" />
+                                        &nbsp;
+                                        <span class="slideBoxafter">
+                                                    {:lang('Circle create limit tip')}
+                                            </span>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div id="tabStat2">
+                            <table class="table kright">
+                                <tbody>
+                                <tr>
+                                    <td>{:lang('Iscomment')}: </td>
+                                    <td>
+                                        <div class="slideBox" >
+                                            <input id="iscomment" value="1" type="checkbox" name="iscomment" {eq name="data.iscomment" value="1"}checked{/eq} {present name="data.iscomment"}checked{/present} />
+                                            <label for="iscomment"></label>
+                                        </div> &nbsp; &nbsp;
+                                        <span class="slideBoxafter">
+                                                    {:lang('Iscomment_tip')}
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr class="row bset">
+                                    <td>{:lang('Commentsort')}: </td>
+                                    <td>
+                                        <div class="row bset">
+                                            <input name="commentsort" type="radio" value="desc" id="verification_0" {eq name="data.commentsort" value="desc"}checked{/eq} {notpresent name="data.commentsort"}checked{/notpresent} />
+                                            <label for="verification_0" class="w110_r_0">{:lang('DESC')}</label>
+                                            <input name="commentsort" type="radio" value="asc" id="verification_1" {eq name="data.commentsort" value="asc"}checked{/eq} />
+                                            <label for="verification_1" class="w110_r_0">{:lang('ASC')}</label>
+                                            &nbsp &nbsp;
+                                            <span class="slideBoxafter">
+                                                {:lang('Commentsort_tip')}
+                                            </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="tabStat3">
+                            <table class="table kright">
+                                <tr class="row bset">
+                                    <td>{:lang('Topicsortfield')}: </td>
+                                    <td>
+                                        <div class="row bset">
+                                            <input name="topicsortfield" type="radio" value="view_count" id="topicsortfield_0" {eq name="data.topicsortfield" value="view_count"}checked{/eq} {notpresent name="data.topicsort"}checked{/notpresent} />
+                                            <label for="topicsortfield_0" class="w110_r_0">{:lang('Viewnum')}</label>
+                                            <input name="topicsortfield" type="radio" value="reply_count" id="topicsortfield_1" {eq name="data.topicsortfield" value="reply_count"}checked{/eq} />
+                                            <label for="topicsortfield_1" class="w110_r_0">{:lang('Commentnum')}</label>
+                                            <input name="topicsortfield" type="radio" value="create_time" id="topicsortfield_2" {eq name="data.topicsortfield" value="create_time"}checked{/eq} />
+                                            <label for="topicsortfield_2" class="w110_r_0">{:lang('Create_time')}</label>
+                                            &nbsp &nbsp;
+                                            <span class="slideBoxafter">
+                                            
+                                            </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="row bset">
+                                    <td>{:lang('Topicsort')}: </td>
+                                    <td>
+                                        <div class="row bset">
+                                            <input name="topicsort" type="radio" value="desc" id="topicsort_0" {eq name="data.topicsort" value="desc"}checked{/eq} {notpresent name="data.topicsort"}checked{/notpresent} />
+                                            <label for="topicsort_0" class="w110_r_0">{:lang('DESC')}</label>
+                                            <input name="topicsort" type="radio" value="asc" id="topicsort_1" {eq name="data.topicsort" value="asc"}checked{/eq} />
+                                            <label for="topicsort_1" class="w110_r_0">{:lang('ASC')}</label>
+                                            &nbsp &nbsp;
+                                            <span class="slideBoxafter">
+                                            
+                                            </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{:lang('Topic reply show limit')}:  </td>
+                                    <td>
+                                        <input name="replylimit" type="number" placeholder="15" style="width: 80px; text-align: center;" value="{$data.replylimit|default=5}" min="1" />
+                                        &nbsp;
+                                        <span class="slideBoxafter">
+                                                    {:lang('Topic reply show limit tip')}
+                                            </span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="buttons-wrapper" style="margin:0 0 30px; padding:0 0 0 18%;">
+                        <input name="submit" value="{:lang('SaveSNSconf')}" type="submit" url="{:url('save', array('act'=>ACTION_NAME))}" />
+                    </div>
+                
+                </div>
+            </form>
+        
+        </div>
+    </div>
+    {/block}
+    
+    {block name="js"}
+    <script>
+        $(function(){
+            $(".bset").buttonset();
+    
+            {eq name="data.regstatus" value="1"}$('#closedby').hide();{/eq}
+            $('#regstatus').click(function(){
+                var ischecked = $(this).is(":checked");
+                if(ischecked){
+                    $('#closedby').hide().find('input').attr('disabled', true);
+                }else{
+                    $('#closedby').show().find('input').attr('disabled', false);
+                }
+            })
+        })
+    </script>
+    {/block}

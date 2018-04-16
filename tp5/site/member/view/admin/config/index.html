@@ -1,0 +1,256 @@
+    {extend name="admin@public/base" /}
+    
+    <!-- CONTENT -->
+    {block name="body"}
+    <div id="content">
+        <div class="breadcrumbs">
+            {:lang('Member')} : &nbsp;&nbsp; {:lang('Usereconomy')} &nbsp;/&nbsp; <span>{$meta_title|default=''}</span>
+        </div>
+        
+        <div class="bloc">
+            <div class="title">
+                <div class="tabs" id="navs">
+                    {include file="admin@public/navs" /}
+                </div>
+                
+                {include file="admin@public/lang" /}
+            </div>
+            
+            <form name="frmShopSettingsEdit" method="post" style="margin-top:5px;">
+                <div class="alert alert-warning">
+                    <button class="close" type="button">&times;</button>
+                    <span class="alert-content">{:lang('Shopconfmark')}</span>
+                </div>
+                
+                <div class="bloc" id="blocStatistics">
+                    <!--<div class="title collapsible">-->
+                    <div class="title">
+                        <div class="tabs static pot" id="blockStatistics">
+                            <ul>
+                                <a id="tabStat1_link" href="#tabStat1">
+                                    <li>{:lang('Regconf')}</li>
+                                </a>
+                               
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="content" style="padding-bottom: 20px;">
+                        
+                        <div id="tabStat1" style="display:block;">
+                            <table class="table kright">
+                                <tbody>
+                                <tr>
+                                    <td>{:lang('Regstatus')}: </td>
+                                    <td>
+                                        <div class="slideBox" >
+                                            <input id="regstatus" value="1" type="checkbox" name="regstatus" {eq name="data.regstatus" value="1"}checked{/eq} {notpresent name="data.regstatus"}checked{/notpresent} />
+                                            <label for="regstatus"></label>
+                                        </div> &nbsp; &nbsp;
+                                        <span class="slideBoxafter">
+                                                {:lang('Regstatus_tip')}
+                                        </span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>{:lang('Sign login')}: </td>
+                                    <td>
+                                        <div class="slideBox" >
+                                            <input id="signlogin" value="1" type="checkbox" name="signlogin" {eq name="data.signlogin" value="1"}checked{/eq} />
+                                            <label for="signlogin"></label>
+                                        </div> &nbsp; &nbsp;
+                                        <span class="slideBoxafter">
+                                                {:lang('Sign login tip')}
+                                        </span>
+                                    </td>
+                                </tr>
+                                
+                                <tr id="closedby">
+                                    <td>{:lang('Regclosedby')}:  </td>
+                                    <td>
+                                        <input name="regclosedby" type="text" placeholder="{:lang('Regclosedby_pla')}" style="width: 360px;" value="{$data.regclosedby|default= lang('Regclosedby_pla') }" />
+                                        {:lang('Regclosedby_tip')}
+                                    </td>
+                                </tr>
+                                
+                                <tr class="row bset">
+                                    <td>{:lang('Regtype')}: </td>
+                                    <td>
+                                        <div class="row bset">
+                                            <input name="account_type_all" type="checkbox" value="0" id="account_type_0" {eq name="data.account_type_all" value="0"}checked{/eq} {notpresent name="data.account_type_all"}checked{/notpresent} />
+                                            <label for="account_type_0" class="w110_r_0">{:lang('Atwill')}</label>
+                                            <input name="account_type_mob" type="checkbox" value="1" id="account_type_1" {eq name="data.account_type_mob" value="1"}checked{/eq} />
+                                            <label for="account_type_1" class="w110_r_0">{:lang('Mobile')}</label>
+                                            <input name="account_type_mail" type="checkbox" value="1" id="account_type_2" {eq name="data.account_type_mail" value="1"}checked{/eq} />
+                                            <label for="account_type_2" class="w110_r_0">{:lang('Email')}</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                
+                                <tr class="row bset">
+                                    <td>{:lang('Regverification')}: </td>
+                                    <td>
+                                        <div class="row bset">
+                                            <input name="verification" type="radio" value="0" id="verification_0" {eq name="data.verification" value="0"}checked{/eq} {notpresent name="data.verification"}checked{/notpresent} />
+                                            <label for="verification_0" class="w110_r_0">{:lang('Not verif')}</label>
+                                            <input name="verification" type="radio" value="email" id="verification_1" {eq name="data.verification" value="email"}checked{/eq} />
+                                            <label for="verification_1" class="w110_r_0">{:lang('E-mail')}</label>
+                                            <input name="verification" type="radio" value="mobile" id="verification_2" {eq name="data.verification" value="mobile"}checked{/eq} />
+                                            <label for="verification_2" class="w110_r_0">{:lang('Mobile')}</label>
+                                            &nbsp; &nbsp;
+                                            <span class="slideBoxafter">
+                                                {:lang('Regverification_tip')}
+                                            </span>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr class="row bset">
+                                    <td>{:lang('By User level')}: </td>
+                                    <td>
+                                        <div class="row bset">
+                                            <input name="bylevel" type="radio" value="quota" id="bylevel_0" {eq name="data.bylevel" value="0"}checked{/eq} {notpresent name="data.bylevel"}checked{/notpresent} />
+                                            <label for="bylevel_0" class="w110_r_0">{:lang('Quota')}</label>
+                                            <input name="bylevel" type="radio" value="empirical" id="bylevel_1" {eq name="data.bylevel" value="email"}checked{/eq} />
+                                            <label for="bylevel_1" class="w110_r_0">{:lang('Empirical')}</label>
+                                            <input name="bylevel" type="radio" value="point" id="bylevel_2" {eq name="data.bylevel" value="mobile"}checked{/eq} />
+                                            <label for="bylevel_2" class="w110_r_0">{:lang('Points')}</label>
+                                            &nbsp; &nbsp;
+                                            <span class="slideBoxafter">
+                                                {:lang('By User level tip')}
+                                            </span>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr class="vercodebox">
+                                    <td>{:lang('Vercode type')}: </td>
+                                    <td>
+                                        <select id="vercodeclass" name="vercodeclass" style="padding-right: 20px;">
+                                            {foreach :get_extend_type('vercode') as $vo}
+                                            <option value="{$vo.code}" data-tip="{:lang($vo.description)}" {eq name="data.vercodeclass" value="$vo.code"}selected{/eq}>{:lang($vo.name)}</option>
+                                            {/foreach}
+                                        </select>
+                                        <span id="vercodedesc"></span>
+                                        <script>
+                                            $(function () {
+                                                $('#vercodedesc').text($('#vercodeclass option:selected').attr('data-tip'));
+                                                $('#vercodeclass').change(function () {
+                                                    $('#vercodedesc').text($('#vercodeclass option:selected').attr('data-tip'));
+                                                })
+                                            })
+                                        </script>
+                                    </td>
+                                </tr>
+                                <tr class="vercodebox">
+                                    <td>{:lang('AppID')}: </td>
+                                    <td>
+                                        <input value="{$data.vcodeid|default=''}" type="text" name="vcodeid" />  &nbsp;
+                                        {:lang('Msgparentid_tip')}
+                                    </td>
+                                </tr>
+
+                                <tr class="vercodebox">
+                                    <td>{:lang('AppKey')}: </td>
+                                    <td>
+                                        <input value="{$data.vcodekeys|default=''}" type="text" name="vcodekeys" /> &nbsp;
+                                        {:lang('Msgkeys_tip')}
+                                    </td>
+                                </tr>
+
+                                
+                                
+                                <tr>
+                                    <td>{:lang('Registered_gift_point')}:  </td>
+                                    <td>
+                                        <div class="slideBox" >
+                                            <input id="gift_point" value="1" type="checkbox" name="gift_point" {eq name="data.gift_point" value="1"}checked{/eq} {notpresent name="data.gift_point"}checked{/notpresent} />
+                                            <label for="gift_point"></label>
+                                        </div>
+                                        &nbsp;&nbsp;&nbsp;
+                                        <input name="registered_gift_point" type="number" placeholder="1" style="width: 80px; display: none; text-align: center;" value="{$data.registered_gift_point|default=50}" min="1" max="999999" />
+                                        &nbsp;
+                                        <span class="slideBoxafter">
+                                                {:lang('Registered_gift_point_tip')}
+                                        </span>
+                                        <script>
+                                            $(function () {
+                                                {eq name="data.gift_point" value="1"}
+                                                $('input[name=registered_gift_point]').show();
+                                                {/eq}
+                                                $('#gift_point').click(function () {
+                                                    var ischecked = $(this).is(':checked');
+                                                    if(ischecked){
+                                                        $('input[name=registered_gift_point]').show().attr('diabled', false);
+                                                    }else{
+                                                        $('input[name=registered_gift_point]').hide().attr('disabled', true);
+                                                    }
+                                                })
+                                            })
+                                        </script>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>{:lang('Cash withdrawal limit')}:  </td>
+                                    <td>
+                                        <input name="tradefinish" type="number" placeholder="15" style="width: 80px; text-align: center;" value="{$data.tradefinish|default=100}" min="1" />
+                                        &nbsp;
+                                        <span class="slideBoxafter">
+                                                {:lang('Cash withdrawal limit tip')}
+                                        </span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td style="vertical-align:top; padding: 8px 15px;">{:lang('Unable username reg')}:  </td>
+                                    <td>
+                                        <textarea name="unuser" placeholder="admin,root" style="width: 460px; height: 60px; margin: 4px 2px 2px;">{$data.unuser|default='admin,root,fuck,管理员,垃圾'}</textarea>
+                                        <br />
+                                        <span class="slideBoxafter">
+                                            {:lang('Unable username reg tip')}
+                                        </span>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+    
+                        <div id="tabStat2">
+                            <table class="table kright">
+                                <tbody>
+                               
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="buttons-wrapper" style="margin:0 0 30px; padding:0 0 0 18%;">
+                        <input name="submit" value="{:lang('Saveshopconf')}" type="submit" url="{:url('save', array('act'=>ACTION_NAME))}" />
+                    </div>
+                
+                </div>
+            </form>
+        
+        </div>
+    </div>
+    {/block}
+    
+    {block name="js"}
+    <script>
+        $(function(){
+            $(".bset").buttonset();
+
+            {eq name="data.regstatus" value="1"}$('#closedby').hide();{/eq}
+            $('#regstatus').click(function(){
+                var ischecked = $(this).is(":checked");
+                if(ischecked){
+                    $('#closedby').hide().find('input').attr('disabled', true);
+                }else{
+                    $('#closedby').show().find('input').attr('disabled', false);
+                }
+            })
+        })
+    </script>
+    {/block}
