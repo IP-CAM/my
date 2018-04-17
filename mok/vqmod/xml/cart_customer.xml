@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <id>cart_customer</id>
+    <version>1.4.x and above</version>
+    <vqmver required="true">2.6.0</vqmver>
+    <author>leon</author>
+
+    <file path="system/library/cart/customer.php">
+        <operation>
+            <search position="after"><![CDATA[private $address_id;]]></search>
+            <add><![CDATA[
+                    private $nickname;
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="before"><![CDATA[$this->customer_id = $customer_query->row['customer_id'];]]></search>
+            <add><![CDATA[
+                $custom_field_json= $customer_query->row['custom_field'];
+                $custom_field_arr = json_decode($custom_field_json , true);
+                if(isset($custom_field_arr[9])){
+                    $this->nickname = $custom_field_arr[9];
+                }else{
+                     $this->nickname = '';
+                }
+
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="before"><![CDATA[public function getFirstName() {]]></search>
+            <add><![CDATA[
+                public function getNickname() {
+		            return $this->nickname;
+	            }
+            ]]></add>
+        </operation>
+
+    </file>
+
+</modification>

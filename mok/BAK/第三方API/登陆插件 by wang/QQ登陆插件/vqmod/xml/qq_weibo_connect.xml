@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>QQ CONNECT</id>
+	<version>1.0</version>
+	<vqmver required="true">2.5.0</vqmver>
+	<author>WANG</author>
+	<file name="catalog/controller/account/login.php">
+		<operation>
+		<search position="after"><![CDATA[$data['breadcrumbs'] = array();]]></search>
+		<add><![CDATA[
+		$data['qq_connect_status'] = $this->config->get('qq_connect_status');
+		$qq_connect_appid = $this->config->get('qq_connect_appid');
+		$qq_connect_action = $this->url->link('account/qq_connect','','SSL');
+		$data['qq_connect_url'] = 'https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=' . $qq_connect_appid . '&redirect_uri=' . urlencode($qq_connect_action);
+		
+		$data['weibo_connect_status'] = $this->config->get('weibo_connect_status');
+		$weibo_connect_appkey = $this->config->get('weibo_connect_appkey');
+		$weibo_connect_appsecret = $this->config->get('weibo_connect_appsecret');
+		include_once(DIR_APPLICATION.'model/account/weibo_saetv2.ex.class.php');
+		$oauthv2 = new SaeTOAuthV2($weibo_connect_appkey,$weibo_connect_appsecret);
+		$data['weibo_connect_url'] = $oauthv2->getAuthorizeURL($this->url->link('account/weibo_connect','','SSL'));
+		
+		]]></add>
+		</operation>
+	</file>
+	<file name="catalog/view/theme/default/template/account/login.tpl">
+		<operation>
+			<search position="after"><![CDATA[<?php echo $text_register; ?></a>]]></search>
+			<add><![CDATA[
+			<?php if($qq_connect_status == 1) { ?>		  
+			<a href="<?php echo $qq_connect_url; ?>"><img src="catalog/view/theme/default/image/Connect_logo_3.png" /></a>
+			&nbsp;&nbsp;
+			<?php } ?>
+			<?php if($weibo_connect_status) { ?>
+			<a href="<?php echo $weibo_connect_url?>"><img src="catalog/view/theme/default/image/weibo_button.png" /></a>	
+			<?php } ?>
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/common/header.php">
+		<operation>
+		<search position="after"><![CDATA[$data['text_home'] = $this->language->get('text_home');]]></search>
+		<add><![CDATA[
+		$data['qq_connect_status'] = $this->config->get('qq_connect_status');
+		$qq_connect_appid = $this->config->get('qq_connect_appid');
+		$qq_connect_action = $this->url->link('account/qq_connect','','SSL');
+		$data['qq_connect_url'] = 'https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=' . $qq_connect_appid . '&redirect_uri=' . urlencode($qq_connect_action);
+		
+		$data['weibo_connect_status'] = $this->config->get('weibo_connect_status');
+		$weibo_connect_appkey = $this->config->get('weibo_connect_appkey');
+		$weibo_connect_appsecret = $this->config->get('weibo_connect_appsecret');
+		include_once(DIR_APPLICATION.'model/account/weibo_saetv2.ex.class.php');
+		$oauthv2 = new SaeTOAuthV2($weibo_connect_appkey,$weibo_connect_appsecret);
+		$data['weibo_connect_url'] = $oauthv2->getAuthorizeURL($this->url->link('account/weibo_connect','','SSL'));
+		
+		]]></add>
+		</operation>
+	</file>
+	<file name="catalog/view/theme/default/template/common/header.tpl">
+		<operation>
+		<search position="after"><![CDATA[<?php echo $text_quick; ?></a>]]></search>
+		<add><![CDATA[
+		<?php if($weibo_connect_status) { ?>
+		<a href="<?php echo $weibo_connect_url; ?>">
+		<span class="icon-weibo" title="<?php echo $title_weibo; ?>">&nbsp;</span></a>
+		<?php } ?>
+		<?php if($qq_connect_status) { ?>
+		<a href="<?php echo $qq_connect_url; ?>">
+		<span class="icon-qq" title="<?php echo $title_qq; ?>">&nbsp;</span></a>
+		<?php } ?>
+		]]></add>
+		</operation>
+	</file>
+</modification>

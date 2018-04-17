@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <name>coupon</name>
+    <version>2.0</version>
+    <vqmver required="true">2.6.0</vqmver>
+    <link>coupon</link>
+    <author>Zhang</author>
+    <code>Alipay_Code</code>
+    <file path="catalog/language/zh-cn/account/account.php">
+        <operation>
+            <search position="before"><![CDATA[$_['text_transactions']  = '交易记录';]]></search>
+            <add><![CDATA[
+	        $_['text_coupon']  = '我的优惠券';
+			]]></add>
+        </operation>
+    </file>
+
+    <file path="catalog/language/en-gb/account/account.php">
+        <operation>
+            <search position="before"><![CDATA[$_['text_transactions']  = 'Transactions';]]></search>
+            <add><![CDATA[
+	        $_['text_coupon']  = 'My coupon';
+			]]></add>
+        </operation>
+    </file>
+
+    <file path="catalog/controller/account/account.php">
+        <operation>
+            <search position="before"><![CDATA[$data['text_recurring'] = $this->language->get('text_recurring');]]></search>
+            <add><![CDATA[
+	       $data['text_coupon'] = $this->language->get('text_coupon');
+			]]></add>
+        </operation>
+
+        <operation>
+            <search position="before"><![CDATA[$data['wishlist'] = $this->url->link('account/wishlist');]]></search>
+            <add><![CDATA[
+	      $data['coupon'] = $this->url->link('account/coupon');
+			]]></add>
+        </operation>
+
+    </file>
+
+    <file path="catalog/view/theme/default/template/account/account.tpl">
+        <operation>
+            <search position="after"><![CDATA[<li><a href="<?php echo $wishlist; ?>"><?php echo $text_wishlist; ?></a></li>]]></search>
+            <add><![CDATA[
+	     <li><a href="<?php echo $coupon; ?>"><?php echo $text_coupon; ?></a></li>
+			]]></add>
+        </operation>
+    </file>
+
+    <file path="admin/view/template/marketing/coupon_list.tpl">
+        <operation>
+            <search position="after"><![CDATA[<div class="pull-right">]]></search>
+            <add><![CDATA[<a href="<?php echo $grant_coupon; ?>" data-toggle="tooltip" title="<?php echo $button_grant; ?>" class="btn btn-primary"><i class="fa fa-eye"></i></a>]]></add>
+        </operation>
+    </file>
+
+    <file path="admin/controller/marketing/coupon.php">
+        <operation>
+            <search position="after"><![CDATA[$data['add'] = $this->url->link('marketing/coupon/add', 'token=' . $this->session->data['token'] . $url, true);]]></search>
+            <add><![CDATA[$data['grant_coupon'] = $this->url->link('marketing/grant_coupon', 'token=' . $this->session->data['token'] . $url, true);
+                $data['button_grant'] = $this->language->get('button_grant');
+            ]]></add>
+        </operation>
+
+    </file>
+
+    <file path="admin/language/zh-cn/marketing/coupon.php">
+        <operation>
+            <search position="before"><![CDATA[$_['error_code']          = '代码必须是 3 到 128 个字之间 !';]]></search>
+            <add><![CDATA[
+            $_['button_grant']          = '发放优惠券';
+            ]]></add>
+        </operation>
+    </file>
+
+</modification>

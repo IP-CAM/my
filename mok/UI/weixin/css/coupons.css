@@ -1,0 +1,25 @@
+/*头部*/
+.weui-search-bar{padding:.19rem .3rem;background-color: #fff;}
+.weui-search-bar__form{width:74%;border-radius:10px;background-color: #f7f7f7;}
+.weui-search-bar__box{background-color: #f7f7f7;padding:0 .1rem 0 .3rem;border-radius: .05rem;}
+.weui-search-bar__box .weui-search-bar__input{padding:.2rem 0 .13rem;height:.28rem;line-height:1;font-size:.26rem;color:#c4c4c4;}
+.weui-icon-search:before{content: '';width:28px;height:28px;background:url('../images/comebuy/comebuy.png');background-size:31px auto;background-position: 0 -31px;}
+.weui-search-bar__cancel-btn{position:relative;display: block;margin-left:.34rem;width:1.3rem;height:.64rem;line-height:.64rem;font-size:.24rem;color:#fff;text-align:center;background: #ef4f3e;border-radius:5px;}
+.weui-search-bar:after{border-bottom: 1px solid #eaeaea;}
+/*优惠券*/
+.ok_coup_list{margin:.78rem .6rem 0;}
+.ok_coup_list li{list-style: none;}
+.ok_coup_item{margin:.45rem 0 .85rem;padding:.4rem .3rem .2rem .3rem;line-height: 1;background: #fb8b7f;border-radius:.11rem;}
+.ok_coup_left{float:left;padding:0 .3rem 0 .2rem;position: relative;width:40%;}
+.ok_coup_right{float:left;}
+.ok_coup_top{overflow: hidden;}
+.ok_left_tag{display: inline-block;line-height: 1;position: absolute;top:0;left:0;}
+.ok_left_tag,.ok_scope{font-size: .3rem;color: #000;}
+.ok_scope{height:.4rem;width:100%;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;font-weight: 600;}
+.ok_left_num{display: inline-block;line-height: 1;font-size: .9rem;color:#000;}
+.ok_range{font-size: .28rem;color:#000;padding-top:.07rem;}
+.ok_coup_bottom{margin-top:.26rem;padding-top:.23rem;border-top:1px dashed #000;}
+.ok_use{float:right;width:1.2rem;text-align:right;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
+.ok_validity,.ok_use{font-size: .22rem;color:#fff;}
+.ok_help{display:block;text-align: center;font-size: .28rem;color:#999;}
+.ok_help_icon{content: '';display: inline-block;width:.27rem;height:.27rem;margin-right:.21rem;font-style:normal;line-height: .27rem;text-align: center;color:#fff;font-size: .26rem;border-radius:50%;background: #919191;}

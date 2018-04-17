@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<name>OnePage Checkout</name>
+	<version>v1.0</version>
+	<code>OnePage Checkout</code>
+	<author>Extensions Bazaar</author>
+	<!--
+	<file path="catalog/controller/checkout/cart.php">
+		<operation>
+			<search position="after"><![CDATA[$this->document->setTitle($this->language->get('heading_title'));]]></search>
+			<add><![CDATA[
+		if($this->config->get('onepagecheckout_status')){
+			$this->response->redirect($this->url->link('onepagecheckout/checkout'));
+		}
+			]]></add>
+		</operation>
+	</file>
+	-->
+	
+	<file path="catalog/controller/checkout/checkout.php">
+		<operation>
+			<search position="after"><![CDATA[$this->cart->getProducts();]]></search>
+			<add><![CDATA[
+			if($this->config->get('onepagecheckout_status')){
+				$this->response->redirect($this->url->link('onepagecheckout/checkout'));
+			}
+			]]></add>
+		</operation>
+	</file>
+	<file path="admin/view/template/common/header.tpl">
+		<operation>
+			<search position="after"><![CDATA[<script type="text/javascript" src="view/javascript/jquery/jquery-2.1.1.min.js"></script>]]></search>
+			<add><![CDATA[
+			<script src="view/javascript/onepagecheckout/jquery-ui.js"></script>
+			]]></add>
+		</operation>
+	</file>
+</modification>

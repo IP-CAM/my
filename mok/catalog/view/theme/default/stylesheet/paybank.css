@@ -1,0 +1,34 @@
+/* paybank */
+.payradio{position: relative;padding: 8px 50px;cursor:pointer;}
+.payradio input[type=radio]{position:absolute;top:30%;}
+.paybank-box{padding:20px 0px 0px 50px;margin-bottom:10px;}
+.paybank-ul{list-style-type:none;padding:0;margin:0;display:table;}
+.paybank-ul li{list-style-type:none;float:left;position:relative;width:190px;line-height:36px;margin-right:20px;margin-bottom:20px;}
+.paybank-ul li input[type=radio]{  vertical-align: text-bottom;}
+.bankicon{background:url(../image/combo2.jpg) no-repeat #fff;width:170px;height:36px;display:inline-block;line-height:36px;border: 1px solid #ddd;cursor:pointer;}
+.bankhide{display:none;}
+.banktitle{position:absolute;left:20px;top:0;display:none;}
+.paybank .BOCB2C{background-position:0 0;}
+.paybank .ICBCB2C{background-position:0 -36px;}
+.paybank .CMB{background-position:0 -72px;}
+.paybank .CCB{background-position:0 -108px;}
+.paybank .ABC{background-position:0 -144px;}
+.paybank .SPDB{background-position:0 -180px;}
+.paybank .CIB{background-position:0 -216px;}
+.paybank .GDB{background-position:0 -252px;}
+.paybank .FDB{background-position:0 -288px;}
+.paybank .HZCBB2C{background-position:0 -324px;}
+.paybank .SHBANK{background-position:0 -360px;}
+.paybank .NBBANK{background-position:0 -396px;}
+.paybank .SPABANK{background-position:0 -432px;}
+.paybank .POSTGC{background-position:0 -468px;}
+.paybank .abc1003{background-position:0 -504px;}
+.paybank .abc1004{background-position:0 -540px;}
+.paybank .CEB-DEBIT{background-position:0 -576px;}
+.paybank .BJBANK{background-position:0 -612px;}
+.paybank .SHRCB{background-position:0 -648px;}
+.paybank .WZCBB2C-DEBIT{background-position:0 -684px;}
+.paybank .COMM{background-position:0 -720px;}
+.paybank .CMBC{background-position:0 -756px;}
+.paybank .BJRCB{background-position:0 -792px;}
+.paybank .CITIC-DEBIT{background-position:0 -828px;}

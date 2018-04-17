@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <id>edit_personal_info</id>
+    <version>1.0</version>
+    <vqmver required="true">2.6.0</vqmver>
+    <author>zhang</author>
+
+    <file name="catalog/controller/account/edit.php">
+
+        <operation>
+            <search position="replace"><![CDATA[$data['footer'] = $this->load->controller('common/footer');]]></search>
+            <add><![CDATA[
+               $data['footer'] = $this->load->controller('weixin/footer');
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace"><![CDATA[$data['header'] = $this->load->controller('common/header');]]></search>
+            <add><![CDATA[
+               $data['header'] = $this->load->controller('weixin/header');
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace"><![CDATA[$this->document->addStyle('catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.css');]]></search>
+            <add><![CDATA[
+               $this->document->addStyle('catalog/view/theme/default/css/resume.css');
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace"><![CDATA[$this->document->addScript('catalog/view/javascript/jquery/datetimepicker/moment.js');]]></search>
+            <add><![CDATA[
+                $this->document->addScript('catalog/view/theme/default/script/zepto.min.js','footer');
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace"><![CDATA[$this->document->addScript('catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.js');]]></search>
+            <add><![CDATA[
+               $this->document->addScript('catalog/view/theme/default/script/weui.min.js','footer');
+               $this->document->addScript('catalog/view/theme/default/script/ok_resume.js','footer');
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace"><![CDATA[$this->response->setOutput($this->load->view('account/edit', $data));]]></search>
+            <add><![CDATA[
+                $this->response->setOutput($this->load->view('weixin/resume', $data));
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="after"><![CDATA[$data['account_custom_field'] = json_decode($customer_info['custom_field'], true);]]></search>
+            <add><![CDATA[
+            $this->load->model('tool/image');
+               $data['account_custom_field'][8] = $this->model_tool_image->resize($data['account_custom_field'][8], 83, 83);
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="before"><![CDATA[protected function validate() {]]></search>
+            <add><![CDATA[
+               protected function validate2() {
+
+            $info_data = $this->request->post['custom_field'];
+
+            $customer_group = $this->customer->getGroupId();
+
+
+		if ((utf8_strlen(trim($info_data[9])) < 1) || (utf8_strlen(trim($info_data[9])) > 32)) {
+			$this->error['lastname'] = $this->language->get('error_lastname');
+		}
+
+		if ($info_data[10]!=1 && $info_data[10]!=2) {
+			$this->error['email'] = $this->language->get('error_email');
+		}
+
+        $image_info = $this->request->files['customer_image'];
+
+        if($image_info['size']>1){
+               $image_type = array('image/png' , "image/jpeg" , "image/pjpeg");
+
+             if(!in_array($image_info['type'] , $image_type)){
+                $this->error['email'] = $this->language->get('error_email');
+            }
+
+            if($image_info['size']>1024*1024*2){
+                $this->error['email'] = $this->language->get('error_email');
+            }
+        }
+
+
+		return !$this->error;
+	}
+
+
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace"><![CDATA[$this->validate()]]></search>
+            <add><![CDATA[
+               $this->validate2()
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="before"><![CDATA[$this->model_account_customer->editCustomer($this->request->post);]]></search>
+            <add><![CDATA[
+            $image = $this->request->files['customer_image'];
+            if($image['size']>1){
+                    $directory = DIR_IMAGE . 'catalog/customer_head';
+                    $tempFile = $image['tmp_name'];
+                    $fileName = str_replace('.','-'.time().'.',$image['name']);
+                    $upload_res = move_uploaded_file($tempFile,$directory.'/'.$fileName);
+                    if($upload_res){
+                        $this->request->post['custom_field'][8]='catalog/customer_head/'.$fileName;
+                    }else{
+                        $this->request->post['custom_field'][8]='';
+                    }
+            }else{
+                    $customer_id = $this->customer->getId();
+                    $customer_info = $this->model_account_customer->getCustomer($customer_id);
+                    $custom_fields = json_decode($customer_info['custom_field'],true);
+                    if(isset($custom_fields[8]) && !empty($custom_fields[8])){
+                        $this->request->post['custom_field'][8]= $custom_fields[8];
+                    }else{
+                        $this->request->post['custom_field'][8]='';
+                    }
+
+            }
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="before"><![CDATA[protected function validate() {]]></search>
+            <add><![CDATA[
+                public function validateNickname(){
+                      $input_nickname = $this->request->post['nickname'];
+                   $this->load->model('account/customer');
+                   $all_nickname = $this->model_account_customer->getAllNickname();
+                   if($all_nickname){
+                       foreach($all_nickname as $row){
+                           $custom_field_arr = json_decode($row['custom_field'] , true);
+                             if(isset($custom_field_arr[9]) && $custom_field_arr[9]){
+                                $nickname = $custom_field_arr[9];
+                               if($input_nickname == $nickname && $row['customer_id']!== $this->customer->getId()){
+                                    $res = array(
+                                        'status' => '2'
+                                    );
+                               }else{
+                                   $res = array(
+                                       'status' => '1'
+                                   );
+                               }
+
+                             }else{
+                                $res = array(
+                           'status' => '1'
+                       );
+                             }
+                       }
+
+                   }else{
+                       $res = array(
+                           'status' => '1'
+                       );
+                   }
+
+                   echo json_encode($res);
+                }
+            ]]></add>
+        </operation>
+
+    </file>
+
+    <file name="catalog/model/account/customer.php">
+
+        <operation>
+            <search position="replace"><![CDATA[$this->db->query("UPDATE " . DB_PREFIX . "customer SET firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "', custom_field = '" . $this->db->escape(isset($data['custom_field']) ? json_encode($data['custom_field']) : '') . "' WHERE customer_id = '" . (int)$customer_id . "'");]]></search>
+            <add><![CDATA[
+               $this->db->query("UPDATE " . DB_PREFIX . "customer SET custom_field = '" . $this->db->escape(isset($data['custom_field']) ? json_encode($data['custom_field']) : '') . "' WHERE customer_id = '" . (int)$customer_id . "'");
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="before"><![CDATA[public function getIps($customer_id) {]]></search>
+            <add><![CDATA[
+                public function getAllNickname() {
+                    $query = $this->db->query("SELECT custom_field , customer_id FROM " . DB_PREFIX . "customer");
+
+                    return $query->rows;
+                }
+            ]]></add>
+        </operation>
+
+    </file>
+
+
+</modification>

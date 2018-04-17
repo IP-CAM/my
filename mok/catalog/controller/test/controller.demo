@@ -1,0 +1,16 @@
+<?php 
+class ControllerTest*** extends Controller {
+	
+	public function index() {
+		$data = array();
+		$this->load->model('test/***');
+		
+
+		
+		
+		$this->response->setOutput($this->load->view('test/***',$data));
+	}
+	
+}
+
+?>

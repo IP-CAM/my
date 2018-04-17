@@ -1,0 +1,17 @@
+/*头部信息*/
+.ok_confirm_head{padding:.41rem 0;text-align: center;line-height: 1;}
+.ok_con_info{padding:.11rem 0;}
+.weui-icon-success-circle{font-size:.3rem;color:#01c12d;}
+/*评价集合*/
+.weui-cells{margin-top:0;}
+.weui-cell{position:relative;padding:.44rem .3rem .5rem .9rem;}
+.ok_tag{position: absolute;top:.1rem;left:0;height:.36rem;line-height:.36rem;padding:0 .08rem;font-size:.16rem;color:#fff;background: #ef4f3e;border-bottom-right-radius: .18rem;border-top-right-radius: .18rem;}
+.weui-cell:before{left:.3rem;border-top: 1px solid #eaeaea;}
+.ok_goods_info{padding-top:.1rem;color:#555;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
+.weui-cell__bd{padding-left:.26rem;}
+.weui-cell__hd{width:1.2rem;height:1.2rem;}
+.ok_list_left{float: left;font-size: .3rem;}
+.ok_list_right{display:block;float:right;margin-top:.42rem;width:1rem;height:.42rem;line-height:.4rem;text-align:center;font-size: .24rem;color:#ef4f3e;border:1px solid #ef4f3e;border-radius:.06rem; }
+.ok_has_none{color:#9c9c9c;border:1px solid #9c9c9c;}
+.ok_goods_price{padding-top:.4rem;color:#555;}
+.ok_price{padding-left:.3rem;color:#ef4f3e;}

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <id>buyer</id>
+    <version>1.0</version>
+    <vqmver required="true">2.6.0</vqmver>
+        <author>Zhang</author>
+
+    <file name="admin/controller/cms/blog.php">
+        <operation>
+            <search position="before"><![CDATA[$this->load->model('cms/blog_category');]]></search>
+            <add trim="true"><![CDATA[
+                $this->load->model('customer/customer');
+
+                $buyer_group = array();
+
+                $buyer_group['filter_customer_group_id'] = 2;
+
+                $data['buyers'] = $this->model_customer_customer->getCustomers($buyer_group);
+
+                if (isset($this->request->post['buyer_id'])) {
+                    $data['buyer_id'] = $this->request->post['buyer_id'];
+                } elseif (!empty($blog_info)) {
+                    $blog_ext_info = $this->model_cms_blog->getBlogExt($blog_info['blog_id']);
+                    $blog_ext_info ? $data['buyer_id'] = $blog_ext_info['buyer_id'] :$data['buyer_id'] = '';
+                } else {
+                    $data['buyer_id'] = '';
+                }
+
+                 if (isset($this->request->post['file_data'])) {
+                    $data['file_data'] = $this->request->post['file_data'];
+                } elseif (!empty($blog_info)) {
+                    $blog_ext_info = $this->model_cms_blog->getBlogExt($blog_info['blog_id']);
+                    $blog_ext_info ? $data['file_data'] = $blog_ext_info['video_path'] :$data['file_data'] = '';
+                } else {
+                    $data['file_data'] = '';
+                }
+
+			]]></add>
+        </operation>
+
+        <operation>
+            <search position="after"><![CDATA[$data['entry_user'] = $this->language->get('entry_user');]]></search>
+            <add trim="true"><![CDATA[
+                $data['entry_buyer'] = $this->language->get('entry_buyer');
+                $data['not_buyer'] = $this->language->get('not_buyer');
+			]]></add>
+        </operation>
+
+    </file>
+
+    <file name="admin/model/cms/blog.php">
+        <operation>
+                 <search position="after"><![CDATA[$blog_id = $this->db->getLastId();]]></search>
+            <add><![CDATA[
+                if (!empty($data['buyer_id']) || !empty($data['file_data'])) {
+                     $this->db->query("INSERT INTO " . DB_PREFIX . "blog_ext SET blog_id = '" . (int)$blog_id . "', buyer_id = '" . (int)$data['buyer_id'] . "',video_path='".$data['file_data']."'");
+                }
+			]]></add>
+        </operation>
+
+        <operation>
+            <search position="before"><![CDATA[public function getBlogRelated($blog_id) {]]></search>
+            <add><![CDATA[
+                public function getBlogExt($blog_id) {
+                    $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "blog_ext WHERE blog_id = '" . (int)$blog_id . "'");
+                    return $query->row;
+                }
+
+                public function removeVideo($blog_id) {
+                    $res = $this->db->query("UPDATE " . DB_PREFIX . "blog_ext SET video_path = '' WHERE blog_id = '" . (int)$blog_id . "'");
+                    return $res;
+                }
+			]]></add>
+        </operation>
+
+        <operation>
+            <search position="before" index="2" ><![CDATA[$this->cache->delete('blog');]]></search>
+            <add><![CDATA[
+                    $this->db->query("DELETE FROM " . DB_PREFIX . "blog_ext WHERE blog_id = '" . (int)$blog_id . "'");
+                    if(!empty($data['buyer_id']) || !empty($data['file_data'])){
+                         $this->db->query("INSERT INTO " . DB_PREFIX . "blog_ext SET blog_id = '" . (int)$blog_id . "', buyer_id = '" . (int)$data['buyer_id'] . "',video_path='".$data['file_data']."'");
+                    }
+			]]></add>
+        </operation>
+
+        <operation>
+            <search position="after" index="2" ><![CDATA[$this->db->query("DELETE FROM " . DB_PREFIX . "url_alias WHERE query = 'blog_id=" . (int)$blog_id . "'");]]></search>
+            <add><![CDATA[
+                    $this->db->query("DELETE FROM " . DB_PREFIX . "blog_ext WHERE blog_id='" . (int)$blog_id . "'");
+			]]></add>
+        </operation>
+
+    </file>
+
+    <file name="admin/view/template/cms/blog_form.tpl">
+        <operation>
+            <search position="before" index="13"><![CDATA[<div class="form-group">]]></search>
+            <add trim="true"><![CDATA[
+               <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-user"><?php echo $entry_buyer; ?></label>
+                <div class="col-sm-10">
+                  <select name="buyer_id" id="input-buyer" class="form-control">
+                  <option value=""><?php echo $not_buyer; ?></option>
+                    <?php foreach ($buyers as $buyer) { ?>
+                    <?php if ($buyer['customer_id'] == $buyer_id) { ?>
+                    <option value="<?php echo $buyer['customer_id']; ?>" selected="selected"><?php echo $buyer['firstname']; ?></option>
+                    <?php } else { ?>
+                    <option value="<?php echo $buyer['customer_id']; ?>"><?php echo $buyer['firstname']; ?></option>
+                    <?php } ?>
+                    <?php } ?>
+                  </select>
+                </div>
+              </div>
+			]]></add>
+        </operation>
+    </file>
+
+    <file name="admin/language/en-gb/cms/blog.php">
+        <operation>
+            <search position="after"><![CDATA[$_['entry_user']             = 'Creator';]]></search>
+            <add trim="true"><![CDATA[
+                    $_['entry_buyer']             = 'Buyer';
+                     $_['not_buyer']             = 'Not buy a hand';
+			]]></add>
+        </operation>
+    </file>
+
+    <file name="admin/language/zh-cn/cms/blog.php">
+        <operation>
+            <search position="after"><![CDATA[$_['entry_user']             = '发布者';]]></search>
+            <add trim="true"><![CDATA[
+                    $_['entry_buyer']             = '买手';
+                     $_['not_buyer']             = '非买手';
+			]]></add>
+        </operation>
+    </file>
+
+</modification>

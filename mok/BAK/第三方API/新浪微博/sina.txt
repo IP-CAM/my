@@ -1,0 +1,5 @@
+本地测试
+域名: www.first.com
+App Key：3453742817
+App Secret：62fa2a3e283852a9c2cb9cd821b463f8
+授权回调页：http://www.first.com/index.php?route=account/weibo_connect

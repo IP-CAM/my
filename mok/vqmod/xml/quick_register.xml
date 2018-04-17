@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>Quick Register</id>
+	<version>1.0</version>
+	<vqmver required="true">2.5.0</vqmver>
+	<author>WANG</author>
+	<file name="catalog/controller/account/register.php">
+		<operation>
+		<search position="replace"><![CDATA[$this->response->redirect($this->url->link('account/account', '', true));]]></search>
+		<add><![CDATA[
+		}else if($this->config->get('quick_register_status')){
+			$this->response->redirect($this->url->link('account/quick_register'));]]></add>
+		</operation>
+	</file>
+</modification>

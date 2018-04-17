@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <name>column_left</name>
+    <version>2.0</version>
+    <vqmver required="true">2.6.0</vqmver>
+    <author>Zhang</author>
+    <code>column_left</code>
+	
+	<!-- coupon -->
+    <file path="admin/controller/common/column_left.php">
+
+        <operation>
+            <search position="before"><![CDATA[if ($this->user->hasPermission('access', 'marketing/contact')) {]]></search>
+            <add><![CDATA[
+	        if ($this->user->hasPermission('access', 'marketing/pricing')) {
+				$marketing[] = array(
+					'name'	   => $this->language->get('text_pricing'),
+					'href'     => $this->url->link('marketing/pricing', 'token=' . $this->session->data['token'], true),
+					'children' => array()
+				);
+			}
+			]]></add>
+        </operation>
+
+        <operation>
+            <search position="before"><![CDATA[if ($customer) {]]></search>
+            <add><![CDATA[
+	        if ($this->user->hasPermission('access', 'marketing/feedback')) {
+				$customer[] = array(
+					'name'	   => $this->language->get('text_feedback'),
+					'href'     => $this->url->link('marketing/feedback', 'token=' . $this->session->data['token'], true),
+					'children' => array()
+				);
+			}
+			]]></add>
+        </operation>
+
+    </file>
+
+    <file path="admin/language/zh-cn/common/column_left.php">
+        <operation>
+            <search position="before"><![CDATA[$_['text_location']                    = '商店地址';]]></search>
+            <add><![CDATA[
+	       $_['text_pricing']                     = '定价活动';
+	       $_['text_buyer']                     = '买手';
+			]]></add>
+        </operation>
+
+        <operation>
+            <search><![CDATA[$_['text_other_status']                = '其他订单数';]]></search>
+            <add><![CDATA[
+              $_['text_feedback']                = '意见反馈';
+            ]]></add>
+        </operation>
+    </file>
+
+    <file path="admin/language/en-gb/common/column_left.php">
+        <operation>
+            <search position="before"><![CDATA[$_['text_location']                  = 'Store Location';]]></search>
+            <add><![CDATA[
+	       $_['text_pricing']                     = 'Pricing activities';
+	       $_['text_buyer']                     = 'Buyer';
+			]]></add>
+        </operation>
+
+        <operation>
+            <search><![CDATA[$_['text_other_status']              = 'Other Statuses';]]></search>
+            <add><![CDATA[
+             $_['text_other_status']              = 'feedback';
+            ]]></add>
+        </operation>
+    </file>
+	
+	<!-- error log -->
+	<file path="admin/controller/common/column_left.php">
+        <operation>
+            <search position="before"><![CDATA[$data['text_complete_status']]]></search>
+            <add trim="true"><![CDATA[
+
+			
+
+				$data['menus'][] = array(
+					'id'       => 'menu-error_log',
+					'icon'	   => 'fa-times', 
+					'name'	   => $this->language->get('text_log'),
+					'href'     => $this->url->link('tool/log', 'token=' . $this->session->data['token'], true),
+					'children' => ''
+				);
+			
+			]]></add>
+        </operation>
+    </file>
+	
+	<!-- marketing special -->
+	<file path="admin/language/*/common/column_left.php">
+        <operation>
+            <search position="before"><![CDATA[$_['text_affiliate']]]></search>
+            <add><![CDATA[
+	       $_['text_special'] = '专题';
+	       $_['text_topic'] = '活动';
+			]]></add>
+        </operation>
+    </file>
+	<file path="admin/controller/common/column_left.php">
+        <operation>
+            <search position="after"><![CDATA[$marketing = array();]]></search>
+            <add trim="true"><![CDATA[
+                if ($this->user->hasPermission('access', 'marketing/topic')) {
+				$marketing[] = array(
+					'name'	   => $this->language->get('text_topic'),
+					'href'     => $this->url->link('marketing/topic', 'token=' . $this->session->data['token'], true),
+					'children' => array()
+				);
+				}
+
+
+				if ($this->user->hasPermission('access', 'marketing/special')) {
+				$marketing[] = array(
+					'name'	   => $this->language->get('text_special'),
+					'href'     => $this->url->link('marketing/special', 'token=' . $this->session->data['token'], true),
+					'children' => array()		
+				);	
+				}
+			
+			]]></add>
+        </operation>
+
+    </file>
+
+</modification>

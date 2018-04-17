@@ -1,0 +1,48 @@
+bug
+1 navigation.php button save and stay点击有问题
+2 d_quickcheckout button save 点击有问题
+3 navigation 设置成可以自动调节导航栏
+4 模块安装时候冲突问题,一个安装会替换掉另外一个 可能是setting_update.php,修改到数据库
+5 ajax 接口参数添加token,为每一个请求添加token,来限制多次重复提交.
+6 登录页面的登录次数的错误限制问题,应该在限定时间的范围来做次数限制
+
+
+
+question
+1 verify.js: plugin added.是什么?
+2 ajax 存储值到 address的值custom_field,必须是不带account,address的数组形式
+
+defective
+1 导航模块 navigation 后台设置成可以自动生成任意,前台导航排序问题
+2 判断当前的路由,使用opencart的路由来判断,然后调节前端页面的样式改变
+3 专题商品,特色专品设置成可以后台调节控制的
+4 图片加入多语言图片形式
+5 vqmod/express.xml 需要修改成正确的代码
+6 新的微信端,vqmod修改在tpl的模板需要再修改一个到新的地方
+7 新增活动页,后台套入HTML模板,已经建立好数据库,待完善
+8 开速开发,module的输入内容没有做判断处理包括 banner,featured,slideshow
+9 d_quickcheckout 需要移动到extension/module内
+10 extension/module/category 修改成选取分类ID,加入logo图片入口
+11 来买页面,搜索栏的搜索内容需要判断,为空的话,弹窗提示
+12 注册页面,手机号码在发送时需要先在js做判断
+13 短信验证后台需要加入参数,一个小时限制发送的条数
+14 验证码防止多次点击
+15 购物车多选功能暂时或缺,售罄调用的是文本,而不是数据库资料
+16 商品详情页的多件促销的价格样式问题,商品的限时促销价格添加促销标签
+17 商品详情页关于库存状态的考虑,还有选项的库存等等细节问题.
+18 商品详情页商品的选项问题,与样式考虑
+19 商品详情页商品选项安装option-product,来扩展多选问题
+20 custom_field表新建关联表给予相应的name方便前台调用并查找
+21 微信页面的控制器所有的 addLink 需要更改
+if (isset($this->request->get['route'])) {
+			//$this->document->addLink($this->config->get('config_url'), 'canonical');
+		}
+22 商品选项的优化问题,需要增加图片选项和颜色更换,设计新的UI和加入新的插件product_option
+23 修改后台的cusomer name 修改成用户的ID,方便调用
+24 微信分享记录
+25 标签排序问题修改
+
+细节问题,暂时不处理
+1 商品收藏问题,未登录用户的wishlist存储在session,是否需要取消收藏unset session?
+2 增加error page 包括404 301 502之类的错误时的页面
+3 special需要增加店铺表

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<name>Green Inventory (2.3.x) 1.0</name>
+	<version>1.0</version>
+	<vqmver required="true">2.6.0</vqmver>
+	<link>http://gresys.com</link>
+	<author>Green Systems</author>
+	<code>green_inventory_ocmod</code>
+	<file path="admin/view/template/common/header.tpl">
+		<operation>
+			<search position="before"><![CDATA[<script type="text/javascript" src="view/javascript/bootstrap/js/bootstrap.min.js"></script>]]></search>
+			<add><![CDATA[<script type="text/javascript" src="view/javascript/verify.notify.min.js"></script>]]></add>
+		</operation>
+	</file>
+	<file path="admin/language/*/common/column_left.php">
+		<operation>
+			<search position="before"><![CDATA[$_['text_affiliate']]]></search>
+			<add><![CDATA[
+				$_['inventory_text'] 				   = "Green Inventory";
+				$_['supplier_text'] 				   = "Supplier";
+				$_['supplier_group_text']			   = "Supplier Group";
+				$_['purchase_order_text'] 			   = "Purchase Orders";
+				$_['reports']                          = "Reports";
+				$_['received_orders']                  = "Received Orders";
+				$_['pending_orders']                   = "Pending Orders";
+
+				$_['returns_text']                     = "Purchase Returns";
+				$_['chart_text']					   = "Charts";
+				$_['purchase_chart_text']              = "Purchase Comparison";
+				$_['dead_chart_text']                  = "Dead Comparison";
+				$_['sale_chart_text']				   = "Sale Comparison";
+				$_['stock_report_text']                = "Stock";
+				$_['stock_inout_text']                  = "Stock inout Report";
+				$_['dead_products_text']               = "Dead Products";
+				$_['best_products_text']			   = "Best Products"; 
+				$_['dead_products_chart']			   = "Dead Products Chart";
+				$_['sale_offer_text'] 				   = "Sale Offer";]]></add>
+		</operation>
+	</file>
+	<file path="admin/controller/common/column_left.php">
+		<operation>
+			<search position="before"><![CDATA[$data['text_complete_status']]]></search>
+			<add><![CDATA[$purchase = array();
+			
+			if ($this->user->hasPermission('access', 'purchase/purchase_order')) {
+				$purchase[] = array(
+					'name'	   => $this->language->get('purchase_order_text'),
+					'href'     => $this->url->link('purchase/purchase_order', 'token=' . $this->session->data['token'],true),
+					'children' => array()		
+				);
+			}
+			
+			if ($this->user->hasPermission('access', 'purchase/return_orders')) {
+				$purchase[] = array(
+					'name'	   => $this->language->get('returns_text'),
+					'href'     => $this->url->link('purchase/return_orders','token=' . $this->session->data['token'],true),
+					'children' => array()		
+				);
+			}
+			//supplier
+			
+			$supplier = array();
+			
+			if ($this->user->hasPermission('access', 'purchase/supplier')) {
+				$supplier[] = array(
+					'name'	   => $this->language->get('supplier_text'),
+					'href'     => $this->url->link('purchase/supplier', 'token=' . $this->session->data['token'],true),
+					'children' => array()		
+				);
+			}
+			
+			if ($this->user->hasPermission('access', 'purchase/supplier_group')) {
+				$supplier[] = array(
+					'name'	   => $this->language->get('supplier_group_text'),
+					'href'     => $this->url->link('purchase/supplier_group', 'token=' . $this->session->data['token'],true),
+					'children' => array()		
+				);
+			}
+			
+			if ($supplier) {
+				$purchase[] = array(
+					'name'	   => $this->language->get('supplier_text'),
+					'href'     => '',
+					'children' => $supplier
+				);
+			}
+			
+			//reports
+			$reports = array();
+			
+			if ($this->user->hasPermission('access', 'purchase/received_orders')) {
+				$reports[] = array(
+					'name'	   => $this->language->get('received_orders'),
+					'href'     => $this->url->link('purchase/received_orders','token=' . $this->session->data['token'],true),
+					'children' => array()		
+				);
+			}
+			
+			if ($this->user->hasPermission('access', 'purchase/pending_orders')) {
+				$reports[] = array(
+					'name'	   => $this->language->get('pending_orders'),
+					'href'     => $this->url->link('purchase/pending_orders','token=' . $this->session->data['token'],true),
+					'children' => array()		
+				);
+			}
+			
+			if ($this->user->hasPermission('access', 'purchase/stock_report')) {
+				$reports[] = array(
+					'name'	   => $this->language->get('stock_report_text'),
+					'href'     => $this->url->link('purchase/stock_report', 'token=' . $this->session->data['token'],true),
+					'children' => array()		
+				);
+			}
+			
+			if ($this->user->hasPermission('access', 'purchase/stock_report')) {
+				$reports[] = array(
+					'name'	   => $this->language->get('stock_inout_text'),
+					'href'     => $this->url->link('purchase/stock_report/stock_inout', 'token=' . $this->session->data['token'],true),
+					'children' => array()		
+				);
+			}
+			
+			/*if ($this->user->hasPermission('access', 'purchase/stock_report')) {
+				$reports[] = array(
+					'name'	   => $this->language->get('dead_products_text'),
+					'href'     => $this->url->link('purchase/stock_report/dead_products', 'token=' . $this->session->data['token'],true),
+					'children' => array()		
+				);
+			}
+			
+			if ($this->user->hasPermission('access', 'purchase/stock_report')) {
+				$reports[] = array(
+					'name'	   => $this->language->get('best_products_text'),
+					'href'     => $this->url->link('purchase/stock_report/best_products', 'token=' . $this->session->data['token'],true),
+					'children' => array()		
+				);
+			}*/
+			
+			if ($reports) {
+				$purchase[] = array(
+					'name'	   => $this->language->get('reports'),
+					'href'     => '',
+					'children' => $reports
+				);
+			}
+			
+			$charts = array();
+			
+			if ($this->user->hasPermission('access', 'purchase/chart')) {
+				$charts[] = array(
+					'name'	   => $this->language->get('purchase_chart_text'),
+					'href'     => $this->url->link('purchase/chart/purchase_chart', 'token=' . $this->session->data['token'],true),
+					'children' => array()		
+				);
+			}
+			
+			if ($this->user->hasPermission('access', 'purchase/chart')) {
+				$charts[] = array(
+					'name'	   => $this->language->get('sale_chart_text'),
+					'href'     => $this->url->link('purchase/chart', 'token=' . $this->session->data['token'],true),
+					'children' => array()		
+				);
+			}
+			
+			/*if ($this->user->hasPermission('access', 'purchase/chart')) {
+				$charts[] = array(
+					'name'	   => $this->language->get('dead_products_chart'),
+					'href'     => $this->url->link('purchase/chart/dead_chart', 'token=' . $this->session->data['token'],true),
+					'children' => array()		
+				);
+			}*/
+			
+			if ($charts) {
+				$purchase[] = array(
+					'name'	   => $this->language->get('chart_text'),
+					'href'     => '',
+					'children' => $charts
+				);
+			}
+			
+			/*if ($this->user->hasPermission('access', 'purchase/sale_offer')) {
+				$purchase[] = array(
+					'name'	   => $this->language->get('sale_offer_text'),
+					'href'     => $this->url->link('purchase/sale_offer', 'token=' . $this->session->data['token'],true),
+					'children' => array()		
+				);
+			}*/
+			
+			if ($purchase) {
+				$data['menus'][] = array(
+					'id'       => 'menu-sale',
+					'icon'	   => 'fa-pencil-square-o', 
+					'name'	   => $this->language->get('inventory_text'),
+					'href'     => '',
+					'children' => $purchase
+				);
+			}			]]></add>
+		</operation>
+	</file>
+</modification>

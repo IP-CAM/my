@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <id>account_safe</id>
+    <version>1.0</version>
+    <vqmver required="true">2.6.0</vqmver>
+    <author>zhang</author>
+
+    <file name="catalog/controller/account/password.php">
+
+        <operation>
+            <search position="replace"><![CDATA['name'        => $this->customer->getFirstName() . ' ' . $this->customer->getLastName()]]></search>
+            <add><![CDATA[
+              'name'        => $this->customer->getNickname()
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="before"><![CDATA[protected function validate() {]]></search>
+            <add><![CDATA[
+               public function validatePassword() {
+
+                           $customer_id= $this->session->data['customer_id'];
+                           $this->load->model('account/customer');
+                           $customer_info = $this->model_account_customer->getCustomer($customer_id);
+                           $customer_password = $customer_info['password'];
+                           $salt = $customer_info['salt'];
+
+                           if(sha1($salt . sha1($salt . sha1($this->request->post['oriPassword'])))!==$customer_password){
+                                    echo 0;
+                           }else{
+                                     echo 1;
+                           }
+                }
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="after"><![CDATA[$data['back'] = $this->url->link('account/account', '', true);]]></search>
+            <add><![CDATA[
+                 $this->document->addStyle('catalog/view/theme/default/css/add_address.css');
+
+                 $this->document->addScript('catalog/view/theme/default/script/zepto.min.js','footer');
+                 $this->document->addScript('catalog/view/theme/default/script/weui.min.js','footer');
+                 $this->document->addScript('catalog/view/theme/default/script/ok_password.js','footer');
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace"><![CDATA[$data['footer'] = $this->load->controller('common/footer');]]></search>
+            <add><![CDATA[
+               $data['footer'] = $this->load->controller('weixin/footer');
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace"><![CDATA[$data['header'] = $this->load->controller('common/header');]]></search>
+            <add><![CDATA[
+              $data['header'] = $this->load->controller('weixin/header');
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace"><![CDATA[$this->response->setOutput($this->load->view('account/password', $data));]]></search>
+            <add><![CDATA[
+                $this->response->setOutput($this->load->view('weixin/modify_password', $data));
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace"><![CDATA[$this->model_account_customer->editPassword($this->customer->getEmail(), $this->request->post['password']);]]></search>
+            <add><![CDATA[
+               $this->model_account_customer->editPassword($this->customer->getTelephone(), $this->request->post['password']);
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="after"><![CDATA[protected function validate() {]]></search>
+            <add><![CDATA[
+               if ((utf8_strlen($this->request->post['oriPassword']) < 6) || (utf8_strlen($this->request->post['oriPassword']) > 20)) {
+                    $this->error['password'] = $this->language->get('error_password');
+                }
+               $customer_id= $this->session->data['customer_id'];
+               $this->load->model('account/customer');
+               $customer_info = $this->model_account_customer->getCustomer($customer_id);
+               $customer_password = $customer_info['password'];
+               $salt = $customer_info['salt'];
+
+               if(sha1($salt . sha1($salt . sha1($this->request->post['oriPassword'])))!==$customer_password){
+                        $this->error['password'] = $this->language->get('error_password');
+               }
+            ]]></add>
+        </operation>
+
+    </file>
+
+    <file name="catalog/model/account/customer.php">
+
+        <operation>
+            <search position="replace"><![CDATA[public function editPassword($email, $password) {]]></search>
+            <add><![CDATA[
+              public function editPassword($telephone, $password) {
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace"><![CDATA[$this->db->query("UPDATE " . DB_PREFIX . "customer SET salt = '" . $this->db->escape($salt = token(9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($password)))) . "', code = '' WHERE LOWER(email) = '" . $this->db->escape(utf8_strtolower($email)) . "'");]]></search>
+            <add><![CDATA[
+             $this->db->query("UPDATE " . DB_PREFIX . "customer SET salt = '" . $this->db->escape($salt = token(9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($password)))) . "', code = '' WHERE telephone = '" . $this->db->escape($telephone) . "'");
+            ]]></add>
+        </operation>
+    </file>
+
+</modification>

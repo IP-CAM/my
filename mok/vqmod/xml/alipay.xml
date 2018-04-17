@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<name>Alipay</name>
+	<version>2.0</version>
+	<vqmver required="true">2.6.0</vqmver>
+	<link>https://mrg123.com</link>
+	<author>Wang</author>
+	<code>Alipay_Code</code>
+	<file path="catalog/model/checkout/order.php">
+		<operation>
+			<search position="before"><![CDATA[public function addOrder($data) {]]></search>
+			<add><![CDATA[
+	public function getOrderStatus(){
+		$sql = "SELECT os.order_status_id,os.name from " . DB_PREFIX . "order_status os WHERE os.language_id = '" . $this->config->get('config_language_id') . "' ORDER BY os.order_status_id ASC";
+		$query = $this->db->query($sql);
+		return $query->rows;
+	}
+			]]></add>
+		</operation>
+	</file>
+</modification>

@@ -1,0 +1,20 @@
+.ok_register{padding:0 10%;margin-bottom:20px;background-color: #fbfbfb;}
+.ok_reg_item{margin:10px 0;}
+.ok_reg_tips{padding:20px 0 10px 0;color:#d91c1c;font-size:17px;}
+.ok_reg_input{
+    height: 42px;
+    font-size: 17px;
+    color: #444;
+    text-indent: 15px;
+    background-color: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 3px;
+    -moz-box-shadow: 2px 2px 2px #f5f5f5 inset;
+    -webkit-box-shadow: 2px 2px 2px #f5f5f5 inset;
+    box-shadow: 2px 2px 2px #f5f5f5 inset;}
+.ok_full{width: 100%;}
+.ok_half{width:60%;}
+.ok_reg_codeImg{width:38%;height:30px;vertical-align: middle;}
+.ok_reg_protocol{padding:20px 0 10px 0;}
+.ok_reg_protocol a{color:#e10808;}
+.ok_reg_code{width:100%;height:45px;font-size:20px;line-height: 45px;font-weight:600;color:#fff;background-color: #ff782e;border:1px solid #f67128;border-radius:3px;cursor: pointer;}

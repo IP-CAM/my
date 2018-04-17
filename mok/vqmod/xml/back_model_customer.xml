@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <id>VQMOD CORE FOR OPENCART - DO NOT REMOVE</id>
+    <version>1.4.x and above</version>
+    <vqmver required="true">2.6.0</vqmver>
+    <author>leon</author>
+
+    <file path="admin/model/customer/customer.php">
+        <operation>
+            <search position="before"><![CDATA[public function getTotalCustomersByCustomerGroupId($customer_group_id) {]]></search>
+            <add><![CDATA[
+                 public function getCustomersByCustomerGroupId($customer_group_id) {
+                    $query = $this->db->query("SELECT customer_id  FROM " . DB_PREFIX . "customer WHERE customer_group_id = '" . (int)$customer_group_id . "'");
+
+                    return $query->rows;
+                }
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="before"><![CDATA[public function getCustomer($customer_id) {]]></search>
+            <add><![CDATA[
+                 public function getAllCustomers() {
+                    $query = $this->db->query("SELECT customer_id  FROM " . DB_PREFIX . "customer");
+
+                    return $query->rows;
+                }
+            ]]></add>
+        </operation>
+
+    </file>
+
+
+
+</modification>

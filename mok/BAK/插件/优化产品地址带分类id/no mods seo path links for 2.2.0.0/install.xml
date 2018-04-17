@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+<name>SEO Path Links</name>
+<code>seopathlinks</code>
+<version>2.2.0.0</version>
+<author>EseLoCCo</author>
+<file path="catalog/controller/product/product.php">
+    <operation>
+        <search><![CDATA[if ($this->config->get('config_review_status'))]]></search>
+        <add position="before">
+        <![CDATA[
+        $categories = $this->model_catalog_product->getCategories($result['product_id']);
+        $path = '';
+        foreach ($categories as $path_id) {
+        	if (empty($path)) {$path = $path_id['category_id'];}
+        	else {$path .= '_' . $path_id['category_id'];}
+        }
+        ]]></add>
+    </operation>
+	<operation>
+        <search><![CDATA[$this->url->link('product/product', 'product_id=' . $result['product_id'])]]></search>
+        <add position="replace"><![CDATA[
+        	$this->url->link('product/product', 'path=' . $path . '&product_id=' . $result['product_id'])
+        ]]></add>
+    </operation>
+</file>
+
+<file path="catalog/controller/product/category.php">
+    <operation>
+        <search><![CDATA[if ($this->config->get('config_tax'))]]></search>
+        <add position="before">
+        <![CDATA[
+        $categories = $this->model_catalog_product->getCategories($result['product_id']);
+        $path = '';
+        foreach ($categories as $path_id) {
+        	if (empty($path)) {$path = $path_id['category_id'];}
+        	else {$path .= '_' . $path_id['category_id'];}
+        }
+        ]]></add>
+    </operation>
+	<operation>
+        <search><![CDATA[$this->url->link('product/product', 'path=' . $this->request->get['path'] . '&product_id=' . $result['product_id'] . $url)]]></search>
+        <add position="replace"><![CDATA[
+        	$this->url->link('product/product', 'path=' . $path . '&product_id=' . $result['product_id'] . $url)
+        ]]></add>
+    </operation>
+</file>
+
+<file path="catalog/controller/product/{special,search}.php">
+    <operation>
+        <search><![CDATA[if ($this->config->get('config_review_status'))]]></search>
+        <add position="before"><![CDATA[
+        $categories = $this->model_catalog_product->getCategories($result['product_id']);
+        $path = '';
+        foreach ($categories as $path_id) {
+        	if (empty($path)) {$path = $path_id['category_id'];}
+        	else {$path .= '_' . $path_id['category_id'];}
+        }
+        ]]></add>
+    </operation>
+    <operation>
+        <search><![CDATA[$this->url->link('product/product', 'product_id=' . $result['product_id'] . $url)]]></search>
+        <add position="replace"><![CDATA[
+        	$this->url->link('product/product', 'path=' . $path . '&product_id=' . $result['product_id'] . $url)
+        ]]></add>
+    </operation>
+</file>
+
+<file path="catalog/controller/module/{bestseller,latest,special}.php">
+    <operation>
+        <search><![CDATA[if ($this->config->get('config_review_status'))]]></search>
+        <add position="before"><![CDATA[
+        $categories = $this->model_catalog_product->getCategories($result['product_id']);
+        $path = '';
+        foreach ($categories as $path_id) {
+        	if (empty($path)) {$path = $path_id['category_id'];}
+        	else {$path .= '_' . $path_id['category_id'];}
+        }
+        ]]></add>
+    </operation>
+    <operation>
+        <search><![CDATA[$this->url->link('product/product', 'product_id=' . $result['product_id'])]]></search>
+        <add position="replace"><![CDATA[
+        	$this->url->link('product/product', 'path=' . $path . '&product_id=' . $result['product_id'])
+        ]]></add>
+    </operation>
+</file>
+
+<file path="catalog/controller/module/featured.php">
+    <operation>
+        <search><![CDATA[if ($this->config->get('config_review_status'))]]></search>
+        <add position="before"><![CDATA[
+        $categories = $this->model_catalog_product->getCategories($product_info['product_id']);
+        $path = array();
+        foreach ($categories as $path_id) {
+        	if (empty($path)) {$path = $path_id['category_id'];}
+        	else {$path .= '_' . $path_id['category_id'];}
+        }
+        ]]></add>
+    </operation>
+    <operation>
+        <search><![CDATA[$this->url->link('product/product', 'product_id=' . $product_info['product_id'])]]></search>
+        <add position="replace"><![CDATA[
+        	$this->url->link('product/product', 'path=' . $path . '&product_id=' . $product_info['product_id'])
+        ]]></add>
+    </operation>
+</file>
+
+</modification>

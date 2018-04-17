@@ -1,0 +1,18 @@
+/*头部*/
+.ok_head{width:100%;padding:14px 4%;line-height:.33rem;}
+.ok_head img{vertical-align: top;}
+.ok_head_item{display:block;width:.33rem;height:.33rem;}
+.ok_search{margin-right:7.4%;}
+.ok_cart{margin-left:7.4%;}
+.ok_head_text{font-size: .28rem;}
+.ok_head_on{color:#ef4f3e!important;}
+.ok_head_on:after{content: '';position:absolute;bottom:-.06rem;left:.2rem;width:.18rem;height: 0;border:1px solid #ef4f3e;}
+.ok_head .weui-flex__item{text-align: center;}
+.ok_head .weui-flex__item span{display: block;position:relative;margin:0 auto;width:.6rem;height:.33rem;color:#555;}
+/*内容*/
+.ok_list{padding:.2rem .15rem 0;overflow: hidden;}
+.ok_list_item{width:3.3rem;height:2.2rem;margin:0 .15rem .2rem;text-align:center;background-color: #fff;}
+.ok_list .ok_list_item:nth-child(2n){float:right;border-left:1px solid transparent;}
+.ok_list .ok_list_item:nth-child(2n+1){float:left;border-right:1px solid #eaeaea;}
+.ok_brand_name{padding:0 .1rem;color:#555;font-size: .22rem;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;-webkit-line-clamp: 1;font-weight:400;}
+.ok_item_img{display: inline-block;width:3.2rem;height:1.3rem;}

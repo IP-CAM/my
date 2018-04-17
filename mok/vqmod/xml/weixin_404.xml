@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <id>weixin 404</id>
+    <version>1.0</version>
+    <vqmver required="true">2.6.0</vqmver>
+    <author>Wang</author>
+
+    <file name="catalog/controller/product/product.php">
+        <operation>
+            <search position="replace"><![CDATA[$data['continue'] = $this->url->link('common/home');]]></search>
+            <add trim="true"><![CDATA[
+	$data['continue'] = $this->url->link('weixin/home','',true);		
+	$data['buy'] = $this->url->link('weixin/buy','',true);
+	$this->document->addStyle('catalog/view/theme/default/css/error.css');
+	$this->document->addScript('catalog/view/theme/default/script/zepto.min.js','footer');
+	$this->document->addScript('catalog/view/theme/default/script/ok_resize.js','footer');
+			]]></add>
+        </operation>
+    </file>
+	<file name="catalog/controller/product/category.php">
+        <operation>
+            <search position="replace"><![CDATA[$data['continue'] = $this->url->link('common/home');]]></search>
+            <add trim="true"><![CDATA[
+	$data['continue'] = $this->url->link('weixin/home','',true);		
+	$data['buy'] = $this->url->link('weixin/buy','',true);
+	$this->document->addStyle('catalog/view/theme/default/css/error.css');
+	$this->document->addScript('catalog/view/theme/default/script/zepto.min.js','footer');
+	$this->document->addScript('catalog/view/theme/default/script/ok_resize.js','footer');
+			]]></add>
+        </operation>
+    </file>
+	<file name="catalog/controller/checkout/cart.php">
+        <operation>
+            <search position="replace"><![CDATA[$this->response->setOutput($this->load->view('error/not_found', $data));]]></search>
+            <add trim="true"><![CDATA[
+$this->response->setOutput($this->load->view('error/empty_cart', $data));
+			]]></add>
+        </operation>
+    </file>
+	<file name="catalog/controller/blog/category.php">
+        <operation>
+            <search position="replace"><![CDATA[$data['continue'] = $this->url->link('common/home');]]></search>
+            <add trim="true"><![CDATA[
+	$data['continue'] = $this->url->link('weixin/home','',true);		
+	$data['buy'] = $this->url->link('weixin/buy','',true);
+	$this->document->addStyle('catalog/view/theme/default/css/error.css');
+	$this->document->addScript('catalog/view/theme/default/script/zepto.min.js','footer');
+	$this->document->addScript('catalog/view/theme/default/script/ok_resize.js','footer');
+			]]></add>
+        </operation>
+    </file>
+	<file name="catalog/controller/error/not_found.php">
+        <operation>
+            <search position="replace"><![CDATA[$data['continue'] = $this->url->link('common/home');]]></search>
+            <add trim="true"><![CDATA[
+	$data['continue'] = $this->url->link('weixin/home','',true);		
+	$data['buy'] = $this->url->link('weixin/buy','',true);
+	$this->document->addStyle('catalog/view/theme/default/css/error.css');
+	$this->document->addScript('catalog/view/theme/default/script/zepto.min.js','footer');
+	$this->document->addScript('catalog/view/theme/default/script/ok_resize.js','footer');
+			]]></add>
+        </operation>
+		<operation>
+			<search position="replace"><![CDATA[common/footer]]></search>
+			<add trim="true"><![CDATA[weixin/footer]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[common/header]]></search>
+			<add trim="true"><![CDATA[weixin/header]]></add>
+		</operation>
+    </file>
+	<file name="catalog/controller/blog/blog.php">
+        <operation>
+            <search position="replace"><![CDATA[$data['continue'] = $this->url->link('blog/all');]]></search>
+            <add trim="true"><![CDATA[
+	$data['continue'] = $this->url->link('weixin/home','',true);		
+	$data['buy'] = $this->url->link('weixin/buy','',true);
+	$this->document->addStyle('catalog/view/theme/default/css/error.css');
+	$this->document->addScript('catalog/view/theme/default/script/zepto.min.js','footer');
+	$this->document->addScript('catalog/view/theme/default/script/ok_resize.js','footer');
+			]]></add>
+        </operation>
+    </file>
+	
+</modification>

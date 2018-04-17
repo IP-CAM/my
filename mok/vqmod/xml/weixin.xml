@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <id>weixin</id>
+    <version>1.0</version>
+    <vqmver required="true">2.6.0</vqmver>
+    <author>Wang</author>
+
+    <file name="catalog/controller/common/home.php">
+        <operation>
+            <search position="after"><![CDATA[public function index() {]]></search>
+            <add trim="true"><![CDATA[
+$this->response->redirect($this->url->link('weixin/home','',true));			
+			]]></add>
+        </operation>
+    </file>
+	
+	<file name="catalog/controller/account/wishlist.php">
+		<operation>
+			<search position="replace"><![CDATA[$json['success'] = sprintf($this->language->get('text_login'), $this->url->link('account/login', '', true), $this->url->link('account/register', '', true), $this->url->link('product/product', 'product_id=' . (int)$this->request->post['product_id']), $product_info['name'], $this->url->link('account/wishlist'));]]></search>
+			<add trim="true"><![CDATA[$json['success'] = sprintf($this->language->get('text_login_first'), $this->url->link('account/login', '', true), $this->url->link('account/register', '', true));]]></add>
+		</operation>
+	</file>
+	
+    <file name="catalog/controller/account/login.php">
+		<operation>
+            <search position="before"><![CDATA[$data['breadcrumbs'] = array();]]></search>
+            <add trim="true"><![CDATA[$this->document->addStyle('catalog/view/theme/default/css/login.css');$this->document->addScript('catalog/view/theme/default/script/zepto.min.js','footer');$this->document->addScript('catalog/view/theme/default/script/ok_login.js','footer');]]></add>
+        </operation>
+        <operation>
+            <search position="replace"><![CDATA[common/footer]]></search>
+            <add trim="true"><![CDATA[weixin/footer]]></add>
+        </operation>
+		<operation>
+            <search position="replace"><![CDATA[common/header]]></search>
+            <add trim="true"><![CDATA[weixin/header]]></add>
+        </operation>
+		<operation>
+            <search position="replace"><![CDATA[$this->response->setOutput($this->load->view('account/login', $data));]]></search>
+            <add trim="true"><![CDATA[$this->response->setOutput($this->load->view('weixin/login', $data));]]></add>
+        </operation>
+    </file>
+	
+	<file name="catalog/controller/checkout/cart.php">
+		<operation>
+			<search position="after" index="1"><![CDATA[$this->load->language('checkout/cart');]]></search>
+			<add trim="true"><![CDATA[
+$this->document->addStyle('catalog/view/theme/default/css/cart.css');
+$this->document->addScript('catalog/view/theme/default/script/zepto.min.js','footer');
+$this->document->addScript('catalog/view/theme/default/script/zepto.lazyload.min.js','footer');
+$this->document->addScript('catalog/view/theme/default/script/ok_cart.js','footer');
+
+$data['text_delete'] = $this->language->get('text_delete');
+$data['text_cancel'] = $this->language->get('text_cancel');
+$data['text_delete_product'] = $this->language->get('text_delete_product');
+$data['text_choose_all'] = $this->language->get('text_choose_all');
+$data['text_out_of_stock'] = $this->language->get('text_out_of_stock');
+			]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA['quantity'  => $product['quantity'],]]></search>
+			<add trim="true"><![CDATA['minimum' => $product['minimum'],]]></add>
+		</operation>
+		
+		<operation>
+            <search position="replace"><![CDATA[common/footer]]></search>
+            <add trim="true"><![CDATA[weixin/footer]]></add>
+        </operation>
+		<operation>
+            <search position="replace"><![CDATA[common/header]]></search>
+            <add trim="true"><![CDATA[weixin/header]]></add>
+        </operation>
+		<operation>
+            <search position="replace"><![CDATA[$this->response->setOutput($this->load->view('checkout/cart', $data));]]></search>
+            <add trim="true"><![CDATA[$this->response->setOutput($this->load->view('weixin/cart', $data));]]></add>
+        </operation>
+		
+		<operation>
+			<search position="before"><![CDATA[public function edit() {]]></search>
+			<add trim="true"><![CDATA[
+	public function update() {
+		$this->load->language('checkout/cart');
+
+		$json = array();
+
+		// Update
+		if (!empty($this->request->post['quantity']) && !empty($this->request->post['key'])) {
+			
+			$this->cart->update($this->request->post['key'], $this->request->post['quantity']);
+			
+
+			$this->session->data['success'] = $this->language->get('text_remove');
+
+			unset($this->session->data['shipping_method']);
+			unset($this->session->data['shipping_methods']);
+			unset($this->session->data['payment_method']);
+			unset($this->session->data['payment_methods']);
+			unset($this->session->data['reward']);
+
+		}
+
+		$this->response->addHeader('Content-Type: application/json');
+		$this->response->setOutput(json_encode($json));
+	}
+			]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/controller/product/product.php">
+		<operation>
+			<search position="after"><![CDATA[$this->document->setTitle($product_info['meta_title']);]]></search>
+			<add trim="true"><![CDATA[
+$this->document->addStyle('catalog/view/theme/default/css/goods_detail.css');
+$this->document->addScript('catalog/view/theme/default/script/jquery-1.7.2.min.js');
+$this->document->addScript('catalog/view/theme/default/script/jquery.fly.min.js','footer');
+$this->document->addScript('catalog/view/theme/default/script/ok_goodsDetails.js','footer');
+$this->document->addScript('catalog/view/theme/default/script/swipeSlide.min.js','footer');
+
+
+
+
+$data['shopping_cart'] = $this->url->link('checkout/cart','',true);
+
+$this->load->model('account/wishlist_ext');
+if($this->customer->isLogged()){
+$data['wish_product'] = $this->model_account_wishlist_ext->getWishProduct($product_id);
+}else{
+	if (isset($this->session->data['wishlist'])) {
+		if(in_array($product_id,$this->session->data['wishlist'])){
+			$data['wish_product'] = true;	
+		}else{
+			$data['wish_product'] = false;
+		}
+	}else{
+		$data['wish_product'] = false;
+	}
+}
+/* 使用新的收藏表 */
+
+$data['href'] = $this->url->link('product/product', '&product_id=' . $product_id);
+$data['amount'] = $this->cart->countProducts();
+$data['text_look_and_buy'] = $this->language->get('text_look_and_buy');
+$data['button_buy'] = $this->language->get('button_buy');
+$data['text_pull_up'] = $this->language->get('text_pull_up');
+$data['text_entry_manufacturer'] = $this->language->get('text_entry_manufacturer');
+			]]></add>
+		</operation>
+		<operation>
+            <search position="replace"><![CDATA[common/footer]]></search>
+            <add trim="true"><![CDATA[weixin/footer]]></add>
+        </operation>
+		<operation>
+            <search position="replace"><![CDATA[common/header]]></search>
+            <add trim="true"><![CDATA[weixin/header]]></add>
+        </operation>
+		<operation>
+            <search position="replace"><![CDATA[$this->response->setOutput($this->load->view('product/product', $data));]]></search>
+            <add trim="true"><![CDATA[$this->response->setOutput($this->load->view('weixin/product', $data));]]></add>
+        </operation>
+		<operation>
+			<search position="replace"><![CDATA[$this->document->addScript('catalog/view/javascript/jquery/magnific/jquery.magnific-popup.min.js');]]></search>
+			<add trim="true"><![CDATA[]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[$this->document->addStyle('catalog/view/javascript/jquery/magnific/magnific-popup.css');]]></search>
+			<add trim="true"><![CDATA[]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[$this->document->addScript('catalog/view/javascript/jquery/datetimepicker/moment.js');]]></search>
+			<add trim="true"><![CDATA[]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[$this->document->addScript('catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.js');]]></search>
+			<add trim="true"><![CDATA[]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[$this->document->addStyle('catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.css');]]></search>
+			<add trim="true"><![CDATA[]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[$data['manufacturers'] = $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $product_info['manufacturer_id']);]]></search>
+			<add trim="true"><![CDATA[
+$data['manufacturers'] = $this->url->link('weixin/manufacturer/detail', 'manufacturer_id=' . $product_info['manufacturer_id']);
+
+$this->load->model('catalog/manufacturer');
+$manufacturer_logo = $this->model_catalog_manufacturer->getManufacturer($product_info['manufacturer_id']);
+$this->load->model('tool/image');
+			if (isset($manufacturer_logo['image']) && $manufacturer_logo['image']) {
+				$data['manufacturer_logo'] = $this->model_tool_image->resize($manufacturer_logo['image'],110,110);
+			} else {
+				$data['manufacturer_logo'] = '';
+			}
+
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="catalog/controller/product/category.php">
+		<operation>
+			<search position="after"><![CDATA[$this->document->setTitle($category_info['meta_title']);]]></search>
+			<add trim="true"><![CDATA[
+$this->document->addStyle('catalog/view/theme/default/css/list_buy.css');
+$this->document->addScript('catalog/view/theme/default/script/zepto.min.js','footer');
+$this->document->addScript('catalog/view/theme/default/script/swipeSlide.min.js','footer');
+$this->document->addScript('catalog/view/theme/default/script/ok_listBuy.js','footer');
+			]]></add>
+		</operation>
+		<operation>
+            <search position="replace"><![CDATA[common/footer]]></search>
+            <add trim="true"><![CDATA[weixin/footer]]></add>
+        </operation>
+		<operation>
+            <search position="replace"><![CDATA[common/header]]></search>
+            <add trim="true"><![CDATA[weixin/header]]></add>
+        </operation>
+		<operation>
+            <search position="replace"><![CDATA[$this->response->setOutput($this->load->view('product/category', $data));]]></search>
+            <add trim="true"><![CDATA[$this->response->setOutput($this->load->view('weixin/category', $data));]]></add>
+        </operation>
+		<operation>
+			<search position="after">
+			<![CDATA[
+			$parts = explode('_', (string)$this->request->get['path']);
+			]]>
+			</search>
+			<add trim="true">
+			<![CDATA[
+			if($parts){
+			$last_key_2 = count($parts) - 2; 
+			if($last_key_2 >= 0 && isset($parts[$last_key_2])){
+				$parent_id = $parts[$last_key_2];
+			}else{
+				$parent_id = $parts[0];
+			}
+			$last_key = count($parts) - 1; 
+			if($last_key >= 0 && isset($parts[$last_key])){
+				$child_id = $parts[$last_key];
+			}
+			}else{
+				$parent_id = 0;
+				$child_id = 0;
+			}
+			$data['parent_id'] = $parent_id;
+			$data['child_id'] = $child_id;
+			]]>
+			</add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[$category_id = 0;]]></search>
+			<add trim="true"><![CDATA[
+			$parent_id = 0;
+			$child_id = 0;
+			$data['child_id'] = $child_id;
+			$data['parent_id'] = $parent_id;
+			]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[$results = $this->model_catalog_category->getCategories($category_id);]]></search>
+			<add trim="true"><![CDATA[
+			$results = $this->model_catalog_category->getCategories($parent_id);
+			]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[$data['categories'][] = array(]]></search>
+			<add trim="true"><![CDATA['category_id'=>$result['category_id'],]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA['href' => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '_' . $result['category_id'] . $url)]]></search>
+			<add trim="true"><![CDATA['href' => $this->url->link('product/category', 'path=' . $parent_id . '_' . $result['category_id'] . $url)]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA['href'        => $this->url->link('product/product', 'path=' . $this->request->get['path'] . '&product_id=' . $result['product_id'] . $url)]]></search>
+			<add trim="true"><![CDATA['href'        => $this->url->link('product/product', 'product_id=' . $result['product_id'])]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/controller/product/search.php">
+		<operation>
+			<search position="after"><![CDATA[$data['search'] = $search;]]></search>
+			<add trim="true"><![CDATA[$data['page'] = $page;]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA['href'        => $this->url->link('product/product', 'product_id=' . $result['product_id'] . $url)]]></search>
+			<add trim="true"><![CDATA['href'        => $this->url->link('product/product', 'product_id=' . $result['product_id'])]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[$search = '';]]></search>
+			<add trim="true"><![CDATA[
+if(isset($this->session->data['search_history'])){
+$data['search_history'] = array();
+foreach($this->session->data['search_history'] as $search_history){
+	$data['search_history'][] = array( 
+		'search_url' => $this->url->link('product/search','search='.$search_history,'',true),
+		'word' => $search_history
+	);
+}
+}
+			]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[$data['breadcrumbs'] = array();]]></search>
+			<add trim="true"><![CDATA[
+$this->document->addStyle('catalog/view/theme/default/css/search.css');
+$this->document->addScript('catalog/view/theme/default/script/zepto.min.js','footer');
+$this->document->addScript('catalog/view/theme/default/script/zepto.lazyload.min.js','footer');
+$this->document->addScript('catalog/view/theme/default/script/ok_search.js','footer');
+
+$data['text_search_history'] = $this->language->get('text_search_history');
+$data['text_empty_search_history'] = $this->language->get('text_empty_search_history');
+
+if($this->config->get('setdiy_search_tag')){
+	$data['search_tags'] = $this->config->get('setdiy_search_tag');
+}else{
+	$data['search_tags'] = '';
+}
+$data['search_url'] = $this->url->link('product/search','',true);
+
+			]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[$search = $this->request->get['search'];]]></search>
+			<add trim="true"><![CDATA[
+if(isset($this->session->data['search_history'])){
+	if(!in_array($search,$this->session->data['search_history'])){
+		$this->session->data['search_history'][] = $search;
+	}
+$data['search_history'] = array();
+foreach($this->session->data['search_history'] as $search_history){
+	$data['search_history'][] = array( 
+		'search_url' => $this->url->link('product/search','search='.$search_history,'',true),
+		'word' => $search_history
+	);
+}
+	
+	
+}else{
+
+$this->session->data['search_history'][] = $search;
+$data['search_history'] = array();
+foreach($this->session->data['search_history'] as $search_history){
+	$data['search_history'][] = array( 
+		'search_url' => $this->url->link('product/search','search='.$search_history,'',true),
+		'word' => $search_history
+	);
+}
+}
+			]]></add>
+		</operation>
+		
+		<operation>
+            <search position="replace"><![CDATA[common/footer]]></search>
+            <add trim="true"><![CDATA[weixin/footer]]></add>
+        </operation>
+		<operation>
+            <search position="replace"><![CDATA[common/header]]></search>
+            <add trim="true"><![CDATA[weixin/header]]></add>
+        </operation>
+		<operation>
+            <search position="replace"><![CDATA[$this->response->setOutput($this->load->view('product/search', $data));]]></search>
+            <add trim="true"><![CDATA[$this->response->setOutput($this->load->view('weixin/search', $data));]]></add>
+        </operation>
+	</file>
+	
+</modification>

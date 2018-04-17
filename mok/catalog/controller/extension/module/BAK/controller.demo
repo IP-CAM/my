@@ -1,0 +1,16 @@
+<?php 
+class ControllerExtensionModule*** extends Controller {
+	
+	public function index($setting) {
+		$data = array();
+
+		
+
+		
+		
+		return $this->load->view('extension/module/***', $data);
+	}
+	
+}
+
+?>

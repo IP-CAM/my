@@ -1,0 +1,13 @@
+﻿			========== Easy Page Checkout =========
+ 		                    	 for Opencart v2.2
+Install:
+1- Upload all content on Upload folder to your opencart path at your site
+
+Important notice:=
+This module will replace checkout.php, checkout.tpl file at controller folder & default theme folder, so you can rename current file or take backup before you replace with new one .
+path: catalog/controller/checkout/checkout.php
+
+
+##For more info contact us :
+E-mail: support@arabyserv.com
+#powered by ArabyServ.com

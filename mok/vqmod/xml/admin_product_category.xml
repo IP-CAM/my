@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <id>Change Admin Product</id>
+    <author>Wang</author>
+
+	
+	<file name="admin/controller/catalog/category.php">
+		<operation>
+			<search position="replace"><![CDATA['limit'       => 5]]></search>
+			<add trim="true"><![CDATA['limit'       => 100]]></add>
+		</operation>
+	</file>
+
+</modification>

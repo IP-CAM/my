@@ -1,0 +1,18 @@
+body{padding-bottom:1.07rem;}
+.ok_address_content{position: relative;margin-bottom: .2rem;}
+.ok_address_content .weui-cell{padding:.5rem .3rem .4rem;}
+.ok_address_content .weui-cell__hd{width:.82rem;height:.45rem;padding-right:.57rem;}
+.ok_address_content .weui-cell__bd{padding-right:.58rem;color:#666;line-height: 1;}
+.ok_choose_icon{background: url('../images/order/address.png') no-repeat;background-size: .32rem .45rem;}
+.ok_user_info{padding-bottom:.11rem;font-size: .3rem;}
+.ok_user_address{line-height:1.7;font-size: .27rem;}
+.ok_user_name{display:block;float:left;width:1.8rem;padding-right:.3rem;white-space:nowrap;text-overflow: ellipsis;overflow: hidden;}
+.ok_user_default{display: block;float:right;width:.7rem;height:.36rem;text-align: center;line-height: .36rem;color:#fff;font-size: .24rem;background: #ef4f3e;border-radius:.05rem; }
+.ok_address_bottom{width:100%;height:.87rem;bottom:0;padding:.1rem .3rem 0;font-size: .3rem;text-align:center;background: #ef4f3e;}
+.ok_address_icon{display: inline-block;width:.29rem;height:.29rem;margin:.26rem .26rem .26rem 0;border-radius: 50%;background: #fff;font-style: normal;color:#ef4f3e;font-size: .26rem;line-height: .26rem;text-align: center;}
+.ok_address_add{color:#fff;}
+.weui-cells:before,.weui-cells:after{display: none;}
+.ok_delete_icon{margin:0 auto;padding:.07rem 0;width:.52rem;height:.76rem;}
+.ok_delete_address{height:.77rem;width:100%;text-align: center;padding:0 .3rem;border-bottom:1px solid #eaeaea;}
+.ok_delete_address:before{content:'';display:block;width:100%;height:0;border-top:1px dashed #c5c5c5;}
+.weui-cells{margin-top:0;}

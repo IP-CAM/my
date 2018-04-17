@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <id>manufacturer</id>
+    <version>20.</version>
+    <vqmver required="true">2.6.0</vqmver>
+    <author>zhang</author>
+
+    <file name="admin/view/template/catalog/manufacturer_form.tpl">
+        <operation>
+            <search position="before" index="2"><![CDATA[<div class="form-group">]]></search>
+            <add><![CDATA[
+               <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-introduce"><span data-toggle="tooltip" title="<?php echo $help_introduce; ?>"><?php echo $entry_introduce; ?></span></label>
+            <div class="col-sm-10">
+              <textarea name="introduce" value="<?php echo $introduce; ?>" placeholder="<?php echo $entry_introduce; ?>" id="input-introduce" class="form-control" rows="10" /><?php echo $introduce; ?></textarea>
+              <?php if ($error_introduce) { ?>
+              <div class="text-danger"><?php echo $error_introduce; ?></div>
+              <?php } ?>
+            </div>
+          </div>
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="before" index="4"><![CDATA[<div class="form-group">]]></search>
+            <add><![CDATA[
+                <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-show_image"><?php echo $entry_show_image; ?></label>
+            <div class="col-sm-10"> <a href="" id="thumb-show_image" data-toggle="image" class="img-thumbnail"><img src="<?php echo $show_thumb; ?>" alt="" title="" data-placeholder="<?php echo $placeholder; ?>" /></a>
+              <input type="hidden" name="show_image" value="<?php echo $show_image; ?>" id="input-show_image" />
+            </div>
+          </div>
+            ]]></add>
+        </operation>
+
+    </file>
+
+    <file name="admin/controller/catalog/manufacturer.php">
+        <operation>
+            <search position="after"><![CDATA[$data['entry_image'] = $this->language->get('entry_image');]]></search>
+            <add><![CDATA[
+              $data['entry_show_image'] = $this->language->get('entry_show_image');
+              $data['entry_introduce'] = $this->language->get('entry_introduce');
+              $data['help_introduce'] = $this->language->get('help_introduce');
+              $data['error_introduce'] = $this->language->get('error_introduce');
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="before"><![CDATA[if (isset($this->request->post['image']) && is_file(DIR_IMAGE . $this->request->post['image'])) {]]></search>
+            <add><![CDATA[
+              if (isset($this->request->post['show_image']) && is_file(DIR_IMAGE . $this->request->post['show_image'])) {
+			$data['show_thumb'] = $this->model_tool_image->resize($this->request->post['show_image'], 100, 100);
+		} elseif (!empty($manufacturer_info) && is_file(DIR_IMAGE . $manufacturer_info['show_image'])) {
+			$data['show_thumb'] = $this->model_tool_image->resize($manufacturer_info['show_image'], 100, 100);
+		} else {
+			$data['show_thumb'] = $this->model_tool_image->resize('no_image.png', 100, 100);
+		}
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="before"><![CDATA[if (isset($this->request->post['image'])) {]]></search>
+            <add><![CDATA[
+           if (isset($this->request->post['show_image'])) {
+                    $data['show_image'] = $this->request->post['show_image'];
+                } elseif (!empty($manufacturer_info)) {
+                    $data['show_image'] = $manufacturer_info['show_image'];
+                } else {
+                    $data['show_image'] = '';
+                }
+
+		 if (isset($this->request->post['introduce'])) {
+			$data['introduce'] = $this->request->post['introduce'];
+		} elseif (!empty($manufacturer_info)) {
+			$data['introduce'] = $manufacturer_info['introduce'];
+		} else {
+			$data['introduce'] = '';
+		}
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="before"><![CDATA[if ((utf8_strlen($this->request->post['name']) < 2) || (utf8_strlen($this->request->post['name']) > 64)) {]]></search>
+            <add><![CDATA[
+                if ((utf8_strlen($this->request->post['introduce']) < 14) || (utf8_strlen($this->request->post['introduce']) > 150)) {
+			$this->error['introduce'] = $this->language->get('error_introduce');
+		}
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="before"><![CDATA[if (isset($this->error['name'])) {]]></search>
+            <add><![CDATA[
+                if (isset($this->error['introduce'])) {
+			$data['error_introduce'] = $this->error['introduce'];
+		} else {
+			$data['error_introduce'] = '';
+		}
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="after"><![CDATA[$data['column_name'] = $this->language->get('column_name');]]></search>
+            <add><![CDATA[
+               $data['column_introduce'] = $this->language->get('column_introduce');
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="after"><![CDATA['name'            => $result['name'],]]></search>
+            <add><![CDATA[
+               'introduce'            => $result['introduce'],
+            ]]></add>
+        </operation>
+    </file>
+
+    <file name="admin/language/zh-cn/catalog/manufacturer.php">
+        <operation>
+            <search position="before"><![CDATA[$_['entry_image']]]></search>
+            <add><![CDATA[
+                $_['entry_show_image']			= 'Show the picture：';
+                $_['entry_introduce']			= 'Brand introduction：';
+                $_['help_introduce']			= 'Brand introduction should be between 15 to 150 words!';
+                $_['error_introduce']			= 'Brand introduction must be between 15 to 150 characters！';
+                $_['column_introduce']			= 'Brand introduction';
+                $_['entry_image']			= 'LOGO image：';
+            ]]></add>
+        </operation>
+    </file>
+
+    <file name="admin/language/zh-cn/catalog/manufacturer.php">
+        <operation>
+            <search position="before"><![CDATA[$_['entry_image']]]></search>
+            <add><![CDATA[
+                $_['entry_show_image']			= '展示图片：';
+                $_['entry_introduce']			= '品牌介绍：';
+                $_['help_introduce']			= '品牌介绍应在15字到150字之间!';
+                $_['error_introduce']			= '品牌介绍必须在15至150个字之间！';
+                $_['column_introduce']			= '品牌介绍';
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace"><![CDATA[$_['entry_image']			= '图示：';]]></search>
+            <add><![CDATA[
+                $_['entry_image']			= 'LOGO图片：';
+            ]]></add>
+        </operation>
+    </file>
+
+    <file name="admin/model/catalog/manufacturer.php">
+        <operation>
+            <search position="before"><![CDATA[if (isset($data['keyword'])) {]]></search>
+            <add><![CDATA[
+                 if (isset($data['introduce'])) {
+			$this->db->query("INSERT INTO " . DB_PREFIX . "manufacturer_ext SET manufacturer_id=" . (int)$manufacturer_id . ", show_image = '" . $data['show_image'] . "',introduce='".$data['introduce']."'");
+		}
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="before"><![CDATA[if ($data['keyword']) {]]></search>
+            <add><![CDATA[
+            $manufacturer_ext_num = $this->db->query("SELECT * FROM " . DB_PREFIX . "manufacturer_ext WHERE manufacturer_id=". (int)$manufacturer_id );
+            if($manufacturer_ext_num->num_rows){
+                $this->db->query("UPDATE " . DB_PREFIX . "manufacturer_ext SET show_image = '" . $this->db->escape($data['show_image']) . "',introduce='".$this->db->escape($data['show_image'])."' WHERE manufacturer_id = '" . (int)$manufacturer_id . "'");
+            }else{
+                $this->db->query("INSERT INTO " . DB_PREFIX . "manufacturer_ext SET manufacturer_id=" . (int)$manufacturer_id . ", show_image = '" . $data['show_image'] . "',introduce='".$data['introduce']."'");
+            }
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="before"><![CDATA[$this->db->query("DELETE FROM " . DB_PREFIX . "manufacturer WHERE manufacturer_id = '" . (int)$manufacturer_id . "'");]]></search>
+            <add><![CDATA[
+              $this->db->query("DELETE FROM " . DB_PREFIX . "manufacturer_ext WHERE manufacturer_id = '" . (int)$manufacturer_id . "'");
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace"><![CDATA[$query = $this->db->query("SELECT DISTINCT *, (SELECT keyword FROM " . DB_PREFIX . "url_alias WHERE query = 'manufacturer_id=" . (int)$manufacturer_id . "') AS keyword FROM " . DB_PREFIX . "manufacturer WHERE manufacturer_id = '" . (int)$manufacturer_id . "'");]]></search>
+            <add><![CDATA[
+            $query = $this->db->query("SELECT m.*, (SELECT keyword FROM " . DB_PREFIX . "url_alias WHERE query = 'manufacturer_id=" . (int)$manufacturer_id . "') AS keyword , me.introduce ,me.show_image FROM " . DB_PREFIX . "manufacturer m LEFT JOIN " . DB_PREFIX . "manufacturer_ext me ON  m.manufacturer_id = me.manufacturer_id WHERE m.manufacturer_id = '" . (int)$manufacturer_id . "'");
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace"><![CDATA[$sql = "SELECT * FROM " . DB_PREFIX . "manufacturer";]]></search>
+            <add><![CDATA[
+                $sql = "SELECT m.* , me.show_image , me.introduce FROM " . DB_PREFIX . "manufacturer m LEFT JOIN " . DB_PREFIX . "manufacturer_ext me on m.manufacturer_id = me.manufacturer_id";
+            ]]></add>
+        </operation>
+
+    </file>
+
+    <file name="admin/view/template/catalog/manufacturer_list.tpl">
+        <operation>
+            <search position="before"><![CDATA[<td class="text-right"><?php if ($sort == 'sort_order') { ?>]]></search>
+            <add><![CDATA[
+                    <td class="text-left">
+                    <?php echo $column_introduce; ?>
+                    </td>
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="after"><![CDATA[<td class="text-left"><?php echo $manufacturer['name']; ?></td>]]></search>
+            <add><![CDATA[
+                  <td class="text-left"><?php echo $manufacturer['introduce']; ?></td>
+            ]]></add>
+        </operation>
+    </file>
+
+</modification>

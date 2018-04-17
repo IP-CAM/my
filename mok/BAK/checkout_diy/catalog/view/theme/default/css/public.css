@@ -1,0 +1,31 @@
+*{
+    tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: transparent;
+    -ms-tap-highlight-color: transparent;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+html{font-size: 50px;}
+body{margin:0 auto;padding-bottom:53px;min-width: 320px;max-width: 750px;background-color: #f4f4f4;font-family:"Microsoft YaHei","微软雅黑";font-size: .16rem;color:#555;}
+.ok_over{white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
+/*头部*/
+/*内容*/
+img{vertical-align: middle;}
+ul,li{list-style: none;}
+.ok_cs_box{width: 100%;}
+/*底部*/
+.ok_tabbar{max-width: 750px;position: fixed;background-color: #fff;}
+.ok_tabbar:before{border-top:0;}
+.ok_tabbar .weui-tabbar__icon{width:23px;height:23px;background-size:22px auto;background-repeat: no-repeat;background-image: url('../images/public/comesee.png');}
+.ok_tabbar .weui-tabbar__label{font-size: 14px;}
+.ok_tabbar__see{background-position: 1px -92px;}
+.ok_tabbar__play{background-size: 20px auto!important;background-position: 4px -104px;}
+.ok_tabbar__buy{background-size: 20px auto!important;background-position: 2px -61px;}
+.ok_tabbar__self{background-position: 0 -44px;}
+.ok_tabbar .weui-tabbar__label{color:#424242;}
+/*等待加载*/
+.loading{z-index: 999999;position: fixed;width:100%;height:100%;top:0;left:0;text-align: center;background: #fff;}
+.loading img{position: relative;top:50%;width:.48rem;height:.48rem;margin-top:-.24rem;}

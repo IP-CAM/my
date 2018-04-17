@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+	<name>demo vqmod</name>
+	<code></code>
+	<version>1.0.0</version>
+	<author></author>
+	<link></link>
+		
+	<file path=""> 
+	  <operation>
+        <search><![CDATA[]]></search>
+        <add position="before"><![CDATA[]]></add>
+	  </operation> 
+    </file>
+</modification>

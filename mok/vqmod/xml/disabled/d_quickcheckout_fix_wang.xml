@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>AJAX QUICK CHECKOUT V6 BY DREAMVENTION</id>
+	<version>2.0.0.0</version>
+	<vqmver>2.2.1</vqmver>
+	<author>wang</author>
+	<file name="catalog/model/account/address.php">
+		<operation>
+			<search position="after"><![CDATA[$this->db->query("UPDATE " . DB_PREFIX . "customer SET address_id = '" . (int)$address_id . "' WHERE customer_id = '" . (int)$this->customer->getId() . "'");]]></search>
+			<add><![CDATA[
+			}else{
+			$address_query = $this->db->query("SELECT COUNT(address_id) AS total FROM " . DB_PREFIX . "address WHERE customer_id = '" . (int)$this->customer->getId() . "'");
+			if($address_query->row['total'] ==1){
+				$this->db->query("UPDATE " . DB_PREFIX . "customer SET address_id = '" . (int)$address_id . "' WHERE customer_id = '" . (int)$this->customer->getId() . "'");
+			}]]></add>
+		</operation>
+	</file>
+</modification>

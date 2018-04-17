@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <id>personal_center</id>
+    <version>1.0</version>
+    <vqmver required="true">2.6.0</vqmver>
+    <author>zhang</author>
+
+    <file name="catalog/controller/account/order.php">
+
+        <operation>
+            <search position="after"><![CDATA[$data['text_empty'] = $this->language->get('text_empty');]]></search>
+            <add><![CDATA[
+                 $data['text_all'] = $this->language->get('text_all');
+                 $data['text_not_payment'] = $this->language->get('text_not_payment');
+                 $data['text_not_receiving'] = $this->language->get('text_not_receiving');
+                 $data['text_no_evaluation'] = $this->language->get('text_no_evaluation');
+                 $data['text_cancel'] = $this->language->get('text_cancel');
+                 $data['text_payment'] = $this->language->get('text_payment');
+                 $data['text_delete_the_order'] = $this->language->get('text_delete_the_order');
+                 $data['text_to_evaluate'] = $this->language->get('text_to_evaluate');
+                 $data['text_track_the_logistics'] = $this->language->get('text_track_the_logistics');
+                 $data['text_confirm_the_goods'] = $this->language->get('text_confirm_the_goods');
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="after"><![CDATA[$data['continue'] = $this->url->link('account/account', '', true);]]></search>
+            <add><![CDATA[
+                 $this->document->addStyle('catalog/view/theme/default/css/order_list.css');
+
+                $this->document->addScript('catalog/view/theme/default/script/zepto.min.js','footer');
+
+                $this->document->addScript('catalog/view/theme/default/script/ok_orderList.js','footer');
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace"><![CDATA[$data['footer'] = $this->load->controller('common/footer');]]></search>
+            <add><![CDATA[
+                 $data['footer'] = $this->load->controller('weixin/footer');
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace"><![CDATA[$data['header'] = $this->load->controller('common/header');]]></search>
+            <add><![CDATA[
+                 $data['header'] = $this->load->controller('weixin/header');
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace"><![CDATA[$this->response->setOutput($this->load->view('account/order_list', $data));]]></search>
+            <add><![CDATA[
+                $this->response->setOutput($this->load->view('weixin/order_list', $data));
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="after"><![CDATA[$results = $this->model_account_order->getOrders(($page - 1) * 10, 10);]]></search>
+            <add><![CDATA[
+                $this->load->model('catalog/product');
+                $this->load->model('tool/upload');
+                $this->load->model('tool/image');
+                  $express_product = array();
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="after"><![CDATA[$voucher_total = $this->model_account_order->getTotalOrderVouchersByOrderId($result['order_id']);]]></search>
+            <add><![CDATA[
+                 // Products
+            $order_products = array();
+
+            $products = $this->model_account_order->getOrderProducts($result['order_id']);
+
+             $is_review = '0';
+
+            foreach ($products as $product) {
+
+             if(isset($product['is_review'])){
+                    if($result['order_status_id'] == 5 && $product['is_review'] == 0){
+
+                        $is_review = 1;
+                    }
+                }
+
+
+                $option_data = array();
+
+                $options = $this->model_account_order->getOrderOptions($result['order_id'], $product['order_product_id']);
+
+                foreach ($options as $option) {
+                    if ($option['type'] != 'file') {
+                        $value = $option['value'];
+                    } else {
+                        $upload_info = $this->model_tool_upload->getUploadByCode($option['value']);
+
+                        if ($upload_info) {
+                            $value = $upload_info['name'];
+                        } else {
+                            $value = '';
+                        }
+                    }
+
+                    $option_data[] = array(
+                        'name'  => $option['name'],
+                        'value' => (utf8_strlen($value) > 20 ? utf8_substr($value, 0, 20) . '..' : $value)
+                    );
+                }
+
+                $product_info = $this->model_catalog_product->getProduct($product['product_id']);
+
+                $express_product[$product['product_id']] = $product_info['price'];
+
+                if ($product_info) {
+                    $reorder = $this->url->link('account/order/reorder', 'order_id=' . $result['order_id'] . '&order_product_id=' . $product['order_product_id'], true);
+                } else {
+                    $reorder = '';
+                }
+
+                if ($product_info['image']) {
+					$image = $this->model_tool_image->resize($product_info['image'], $this->config->get($this->config->get('config_theme') . '_image_cart_width'), $this->config->get($this->config->get('config_theme') . '_image_cart_height'));
+				} else {
+					$image = '';
+				}
+
+                $order_products[] = array(
+                    'name'     => $product['name'],
+                    'model'    => $product['model'],
+                    'thumb'    => $image,
+                    'option'   => $option_data,
+                    'quantity' => $product['quantity'],
+                    'price'    => $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $result['currency_code'], $result['currency_value']),
+                    'total'    => $this->currency->format($product['total'] + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $result['currency_code'], $result['currency_value']),
+                    'goods_href'      => $this->url->link('product/product', 'product_id=' . $product['product_id']),
+                    'reorder'  => $reorder,
+                    'return'   => $this->url->link('account/return/add', 'order_id=' . $result['order_id'] . '&product_id=' . $product['product_id'], true)
+                );
+            }
+            //商品结束
+            	$express_no = $result['express_no'];
+
+				$express_company_id = $result['express_company_id'];
+
+				if($express_company_id) {
+					$this->load->model('others/express_company');
+
+					$express_company_info = $this->model_others_express_company->getExpressCompany($express_company_id);
+
+					if($express_company_info) {
+						$express_company = $express_company_info['name'];
+						$express_code = $express_company_info['code'];
+					} else {
+						$express_company = '';
+						$express_code = '';
+					}
+				}else{
+					$express_company = '';
+					$express_code = '';
+				}
+                  $express_product_id = array_search(max($express_product),$express_product);
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="after"><![CDATA['products'   => ($product_total + $voucher_total),]]></search>
+            <add><![CDATA[
+                 'goods'       => $order_products,
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="after"><![CDATA['date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),]]></search>
+            <add><![CDATA[
+                'date_added' => date("Y-m-d H:i:s",strtotime($result['date_added'])),
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="before"><![CDATA['products'   => ($product_total + $voucher_total),]]></search>
+            <add><![CDATA[
+                'express_company' => $express_company,
+                'express_code' => $express_code,
+                'express_no' => $express_no,
+                'is_review'   => $is_review,
+                'status_id'   => $result['order_status_id'],
+                'review_href' => $this->url->link('weixin/review', 'order_id='.$result['order_id'], true),
+                'express_href' => $this->url->link('account/order/getkuaidi', 'type='.$express_code.'&postid='.$express_no.'&product_id='.$express_product_id, true),
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="before"><![CDATA['view'       => $this->url->link('account/order/info', 'order_id=' . $result['order_id'], true),]]></search>
+            <add><![CDATA[
+              'delete'       => $this->url->link('account/order/delete', 'order_id=' . $result['order_id'], true),
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="before"><![CDATA[public function reorder() {]]></search>
+            <add><![CDATA[
+                    public function delete(){
+                        if (!$this->customer->isLogged()) {
+                            $this->session->data['redirect'] = $this->url->link('account/order', '', true);
+
+                            $this->response->redirect($this->url->link('account/login', '', true));
+                        }
+
+                        if(isset($this->request->get['order_id'])){
+                            $order_id = $this->request->get['order_id'];
+                        }else{
+                            $this->response->redirect($this->url->link('error/not_found', '', true));
+                        }
+
+                        $this->load->model('account/order');
+
+                        $all_order = $this->model_account_order->getAllOrderId();
+
+                        $order_info = $this->model_account_order->getOrderInfo($order_id);
+
+                        if($all_order){
+
+                             foreach($all_order as $row){
+                                   if($order_id == $row['order_id'] && $order_info['order_status_id']==0){
+                                        $this->load->model('sale/order');
+                                        $this->model_sale_order->deleteOrder($order_id);
+                                         $this->response->redirect($this->url->link('account/order', '', true));
+                                   }
+                             }
+
+                        }
+
+                    }
+            ]]></add>
+        </operation>
+
+    </file>
+
+    <file name="catalog/model/account/order.php">
+        <operation>
+            <search position="before"><![CDATA[public function getTotalOrderVouchersByOrderId($order_id) {]]></search>
+            <add><![CDATA[
+                public function getAllOrderId(){
+                     $query = $this->db->query("SELECT order_id  FROM " . DB_PREFIX . "order WHERE customer_id = '" . (int)$this->customer->getId() . "'");
+
+                      return $query->rows;
+                }
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="before"><![CDATA[public function getOrderProduct($order_id, $order_product_id) {]]></search>
+            <add><![CDATA[
+                public function getOrderInfo($order_id) {
+
+                    $query = $this->db->query("SELECT o.order_id, o.firstname, o.lastname, os.name as status,o.order_status_id ,o.date_added, o.total, o.currency_code, o.currency_value FROM `" . DB_PREFIX . "order` o LEFT JOIN " . DB_PREFIX . "order_status os ON (o.order_status_id = os.order_status_id) WHERE o.customer_id = '" . (int)$this->customer->getId() . "' AND o.order_status_id > '0' AND o.store_id = '" . (int)$this->config->get('config_store_id') . "' AND os.language_id = '" . (int)$this->config->get('config_language_id') . "' AND o.order_id = '".(int)$order_id."' ORDER BY o.order_id DESC");
+
+                    return $query->row;
+                }
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace"><![CDATA[$query = $this->db->query("SELECT o.order_id, o.firstname, o.lastname, os.name as status, o.date_added, o.total, o.currency_code, o.currency_value FROM `" . DB_PREFIX . "order` o LEFT JOIN " . DB_PREFIX . "order_status os ON (o.order_status_id = os.order_status_id) WHERE o.customer_id = '" . (int)$this->customer->getId() . "' AND o.order_status_id > '0' AND o.store_id = '" . (int)$this->config->get('config_store_id') . "' AND os.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY o.order_id DESC LIMIT " . (int)$start . "," . (int)$limit);]]></search>
+            <add><![CDATA[
+                    $query = $this->db->query("SELECT o.order_id, o.firstname, o.lastname, o.order_status_id ,os.name as status, o.date_added, o.total, o.currency_code, o.currency_value , o.express_company_id , o.express_no FROM `" . DB_PREFIX . "order` o LEFT JOIN " . DB_PREFIX . "order_status os ON (o.order_status_id = os.order_status_id) WHERE o.customer_id = '" . (int)$this->customer->getId() . "' AND o.order_status_id > '0' AND o.store_id = '" . (int)$this->config->get('config_store_id') . "' AND os.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY o.order_id DESC LIMIT " . (int)$start . "," . (int)$limit);
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace"><![CDATA[$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'");]]></search>
+            <add><![CDATA[
+               $query = $this->db->query("SELECT op.*,ope.is_review FROM " . DB_PREFIX . "order_product op LEFT JOIN " . DB_PREFIX . "order_product_ext ope ON op.order_product_id = ope.order_product_id WHERE op.order_id = '" . (int)$order_id . "'");
+            ]]></add>
+        </operation>
+    </file>
+
+    <file name="catalog/model/checkout/order.php">
+        <operation>
+            <search position="after" index="1"><![CDATA[$order_product_id = $this->db->getLastId();]]></search>
+            <add><![CDATA[
+            $this->db->query("INSERT INTO " . DB_PREFIX . "order_product_ext SET order_id = '" . (int)$order_id . "', order_product_id = '" . (int)$order_product_id . "',is_review = 0");
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="after"><![CDATA[$this->db->query("DELETE FROM " . DB_PREFIX . "order_option WHERE order_id = '" . (int)$order_id . "'");]]></search>
+            <add><![CDATA[
+            /*$this->db->query("DELETE FROM " . DB_PREFIX . "order_product_ext WHERE order_id = '" . (int)$order_id . "'");*/
+            ]]></add>
+        </operation>
+
+    </file>
+
+    <file name="catalog/language/zh-cn/account/order.php">
+        <operation>
+            <search position="before"><![CDATA[$_['text_account']]]></search>
+            <add><![CDATA[
+                    $_['text_all']          = '全部';
+                    $_['text_not_payment']   = '待付款';
+                    $_['text_not_receiving'] = '待收货';
+                    $_['text_no_evaluation'] = '待评价';
+                    $_['text_cancel'] = '取消';
+                    $_['text_payment'] = '付款';
+                    $_['text_delete_the_order'] = '删除订单';
+                    $_['text_to_evaluate'] = '去评价';
+                    $_['text_track_the_logistics'] = '跟踪物流';
+                    $_['text_confirm_the_goods'] = '确认收货';
+            ]]></add>
+        </operation>
+    </file>
+
+    <file name="catalog/language/en-gb/account/order.php">
+        <operation>
+            <search position="before"><![CDATA[$_['text_account']]]></search>
+            <add><![CDATA[
+                    $_['text_all']          = 'all';
+                    $_['text_not_payment']   = 'Not payment';
+                    $_['text_not_receiving'] = 'Not receiving';
+                    $_['text_no_evaluation'] = 'Not evaluation';
+                    $_['text_cancel'] = 'Cancel';
+                    $_['text_payment'] = 'Payment';
+                    $_['text_delete_the_order'] = 'Delete the order';
+                    $_['text_to_evaluate'] = 'To evaluate';
+                    $_['text_track_the_logistics'] = 'Track the logistics';
+                    $_['text_confirm_the_goods'] = 'Confirm the goods';
+            ]]></add>
+        </operation>
+    </file>
+
+</modification>

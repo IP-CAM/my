@@ -1,0 +1,72 @@
+https://www.alipay.com/cooperate/gateway.do?
+_input_charset=utf-8
+&logistics_fee=0.00
+&logistics_payment=SELLER_PAY
+&logistics_type=EXPRESS
+&notify_url=http%3A%2F%2Fmall.mannay.com%2Fcatalog%2Fcontroller%2Fpayment%2Falipay_callback.php
+&out_trade_no=10203
+&partner=2088411787514730
+&payment_type=1
+&price=498.00
+&quantity=1
+&receive_address=%E4%B8%AD%E5%B1%B1%E5%B8%82+sdfsdfsdf
+&receive_mobile=15889449685
+&receive_name=123+
+&receive_phone=15889449685
+&return_url=https%3A%2F%2Fmall.mannay.com%2Findex.php%3Froute%3Dcheckout%2Fsuccess
+&seller_email=hellokitty_cn%40163.com
+&service=create_direct_pay_by_user
+&subject=Hello+Kitty+%E5%80%BE%E8%9C%9C%E6%81%92%E6%B6%A6%E7%B3%BB%E5%88%97
+&sign=f049dc8ad4a611bfeb82a1f4964e09c6&sign_type=MD5
+
+
+https://mapi.alipay.com/gateway.do?
+_input_charset=utf-8
+&body=%E6%82%A8%E5%9C%A8%E5%8D%8E%E5%BC%BA%E5%8C%97%E5%9C%A8%E7%BA%BF%28http%3A%2F%2Fwww.okhqb.com%29%E7%9A%84%E8%AE%A2%E5%8D%95&extra_common_param=2002060432
+&notify_url=http%3A%2F%2Fpay.okhqb.com%2Fpay%2Fopen%2F1%2Falipay%2Fnotify
+&out_trade_no=148421860188427
+&partner=2088401049522621
+&payment_type=1
+&paymethod=directPay
+&return_url=http%3A%2F%2Fpay.okhqb.com%2Fpay%2Fopen%2F1%2Falipay%2Fclient
+&seller_email=zfb%40okhqb.com
+&service=create_direct_pay_by_user&show_url=http%3A%2F%2Fwww.okhqb.com
+&sign_id_ext=2002060432
+&sign_name_ext=ok_15889449876
+&subject=%E5%8D%8E%E5%BC%BA%E5%8C%97%E5%95%86%E5%9F%8E-%E6%B5%8B%E8%AF%95%E4%B8%93%E7%94%A81%EF%BC%8C%E8%AF%B7%E4%B8%8D%E8%A6%81%E9%87%87%E8%B4%AD%EF%BC%8C%E4%B8%8D%E8%A6%81%E5%8F%91%E8%B4%A7%EF%BC%81%7C&total_fee=0.01&sign=0b8bddcb348544d948a2c1b147394834
+&sign_type=MD5
+
+https://mapi.alipay.com/gateway.do?_input_charset=utf-8&body=%E6%82%A8%E5%9C%A8%E5%8D%8E%E5%BC%BA%E5%8C%97%E5%9C%A8%E7%BA%BF%28http%3A%2F%2Fwww.okhqb.com%29%E7%9A%84%E8%AE%A2%E5%8D%95&extra_common_param=2002060432
+&notify_url=http%3A%2F%2Fpay.okhqb.com%2Fpay%2Fopen%2F1%2Falipay%2Fnotify&out_trade_no=148421939416473&partner=2088401049522621&payment_type=1&paymethod=directPay&return_url=http%3A%2F%2Fpay.okhqb.com%2Fpay%2Fopen%2F1%2Falipay%2Fclient&seller_email=zfb%40okhqb.com&service=create_direct_pay_by_user&show_url=http%3A%2F%2Fwww.okhqb.com&sign_id_ext=2002060432&sign_name_ext=ok_15889449876&subject=%E5%8D%8E%E5%BC%BA%E5%8C%97%E5%95%86%E5%9F%8E-%E6%B5%8B%E8%AF%95%E4%B8%93%E7%94%A81%EF%BC%8C%E8%AF%B7%E4%B8%8D%E8%A6%81%E9%87%87%E8%B4%AD%EF%BC%8C%E4%B8%8D%E8%A6%81%E5%8F%91%E8%B4%A7%EF%BC%81%7C&total_fee=0.01&sign=e9cf03a8db90a7c57a92f469a355ba79&sign_type=MD5
+
+调试支付宝测试,每一次支付请求,支付宝都会创建一个订单流水交易号,只要确保本地订单ID不重复即可本地调试,支付宝的out_trade_no保证不跟线上的交易ID重复,调试的时候需要把网上的域名配置到本地HOST
+支付宝交易安全检验码，由数字和字母组成的32位字符串组成
+微信订阅号无法获取用户信息,无法完成微信支付,所以订阅号无法做联合登录功能和微信支付,只能通过公众号去实现联合登录与微信支付.
+支付宝的异步通知,或同步通知URL只能设置一个
+微信支付可以设置3个,另外可以添加一个测试url
+
+华强北商城的交易订单ID,唯一性,跟本地网站的数据库ID挂钩
+15位的订单号
+148421860188427
+148421939416473
+
+$alipay_config['service'] = "alipay.wap.create.direct.pay.by.user"; //wap移动端
+$alipay_config['service'] = "create_direct_pay_by_user"; //如果是PC端就这样
+
+
+
+2088401049522621
+zfb@okhqb.com
+BW9XdwswBjZVZVIxUXNYcAs5VT1Tc1MxXWFSPFwqVm8BNAA1BCVSLVZhUXZebgk7AmMCM1M1U25cJgZmXToPZA==
+#服务器异步通知页面路径
+notify_url=http://pay.okhqb.com/pay/open/1/alipaywap/notify 
+#页面跳转同步通知页面路径
+return_url=http://pay.okhqb.com/pay/open/1/alipaywap/client 
+#操作中断返回地址
+merchant_url=http://www.okhqb.com 
+
+支付宝支付API操作流程
+1 验证API资料正确无误,可以在测试环境下付款
+2 安检验码必须是32位的字符串
+// MD5密钥，安全检验码，由数字和字母组成的32位字符串，查看地址：https://b.alipay.com/order/pidAndKey.htm
+$alipay_config['key']			= '';

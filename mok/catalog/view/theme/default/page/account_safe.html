@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="../css/weui.css"/>
+    <link rel="stylesheet" href="../css/public.css"/>
+    <link rel="stylesheet" href="../css/help.css"/>
+    <title>帮助页</title>
+</head>
+<body>
+<div class="weui-cells">
+    <a class="weui-cell" href="modify_password.html">
+        <div class="weui-cell__bd">
+            <p class="ok_help_kind">修改密码</p>
+        </div>
+        <div class="weui-cell__ft"></div>
+    </a>
+    <a class="weui-cell" href="bound_phone.html">
+        <div class="weui-cell__bd">
+            <p class="ok_help_kind">绑定手机号码</p>
+        </div>
+        <div class="weui-cell__ft"></div>
+    </a>
+</div>
+<script>
+    var _W = document.documentElement.clientWidth || document.body.clientWidth,
+            $html = document.getElementsByTagName('html')[0];
+    _W = _W > 750 ? 750 : _W;
+    $html.style.fontSize = _W/7.5+'px';
+</script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+/*专场内容*/
+body{padding-bottom: 0;}
+.ok_spec_head{margin-bottom:.2rem;border-bottom:1px solid #eaeaea;}
+.ok_info_box{padding:.38rem 0;text-align: center;background: #fff;}
+.ok_head_title{font-size: .32rem;line-height: 1;padding-bottom:.2rem;}
+.ok_head_info{font-size: .28rem;padding:0 .1rem;white-space:nowrap;text-overflow:ellipsis;overflow: hidden;}
+.ok_list{width:100%;overflow: hidden;}
+.ok_list_item{width:50%;text-align: center;padding-bottom: 4.34%;background-color: #fff;border-bottom:1px solid #eaeaea;}
+.ok_list_item img{padding:0 20.6%;}
+.ok_list .ok_list_item:nth-child(2n){float:right;border-left:1px solid transparent;}
+.ok_list .ok_list_item:nth-child(2n+1){float:left;border-right:1px solid #eaeaea;}
+.ok_cs_info{padding-top:8%;color:#555;font-size: .26rem;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;-webkit-line-clamp: 1;font-weight:400;}
+.ok_cs_price{padding-top:1.4%;color:#f56050;font-size: .3rem;}
+/*分享*/
+.ok_share{padding-top:.5rem;text-align: center;}
+.ok_share_btn{display: block;margin:0 auto .08rem;width:6rem;height:.8rem;line-height: .8rem;font-size: .34rem;color:#f4f4f4;background: #e74c3c;border-radius:.06rem;}
+.ok_share_info{font-size: .22rem;color:#555;line-height: 1;padding-top:.22rem;}
+.ok_share_img{width:100%;margin-top:.5rem;}

@@ -1,0 +1,4 @@
+本地QQ登录测试
+APP ID：101251366
+APP Key：13e0438ed1b7fb61cd536ec89608cfdc
+网站回调域 : http://www.first.com

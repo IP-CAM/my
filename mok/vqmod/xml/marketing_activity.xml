@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<name>Marketing Activity</name>
+	<version>1.0</version>
+	<vqmver required="true">2.6.0</vqmver>
+	<link>http://mrg123.com</link>
+	<author>Wang</author>
+	<code>activity</code>
+
+	<file path="admin/language/*/common/column_left.php">
+		<operation>
+			<search position="before"><![CDATA[$_['text_affiliate']]]></search>
+			<add trim="true"><![CDATA[
+				$_['text_activity'] 				   = "促销活动";
+				]]></add>
+		</operation>
+	</file>
+	<file path="admin/controller/common/column_left.php">
+		<operation>
+			<search position="after"><![CDATA[$marketing = array();]]></search>
+			<add trim="true"><![CDATA[
+			if ($this->user->hasPermission('access', 'marketing/activity')) {
+				$marketing[] = array(
+					'name'	   => $this->language->get('text_activity'),
+					'href'     => $this->url->link('marketing/activity', 'token=' . $this->session->data['token'], true),
+					'children' => array()		
+				);	
+			}
+			]]></add>
+		</operation>
+	</file>
+</modification>

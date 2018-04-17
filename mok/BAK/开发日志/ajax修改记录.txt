@@ -1,0 +1,154 @@
+ajax 需要需改的地方记录
+1 查找 if(VERSION >= '2.1.0.1'){ 
+  替换成
+  if(VERSION >= '2.3.0.2'){
+		$this->load->language('**');
+  }else if(VERSION >= '2.1.0.1'){
+2.3.0.2版本很多地方不同于其他版本
+另外注意vqmod文件上的修改,不要冲突
+已经修改
+catalog/controller/d_quickcheckout\cart.php
+
+
+2 查找 id="confirm_coupon"
+替换模板语言包,部分错误的地方改正
+	
+3 使用默认的控制器checkout/checkout
+通过修改模板来调用新支付页面
+
+4 payment_address.tpl 
+设置config.design.address_style == 'list',修改收货地址的样式
+
+5 catalog\controller\d_quickcheckout\shipping_address.php
+1 快速结帐,如果货运地址display 设置为0,默认会取订单地址
+$this->session->data['shipping_address'] = $this->session->data['payment_address'];
+
+6 ajax一页结帐的模块设计逻辑
+在checkout/checkout 
+调用module/d_quickcheckout,
+    checkout/d_quickcheckout.tpl
+	
+
+7 关于session中 payment_address['custom_field']['address']每次刷新页面都会递增一维数组的原因在于,控制器内的判定
+'custom_field' => ((!empty($this->session->data['payment_address']['custom_field']['account'])) ? array('account' => $this->session->data['payment_address']['custom_field']['account']) : $this->model_d_quickcheckout_custom_field->setCustomFieldsDefaultSessionData('account', $customer_group_id)) + ((!empty($this->session->data['payment_address']['custom_field']['address'])) ? array('address' => $this->session->data['payment_address']['custom_field']['address']) :  $this->model_d_quickcheckout_custom_field->setCustomFieldsDefaultSessionData('address', $customer_group_id)),
+忽略这两行后恢复正常了
+ // $this->session->data['payment_address']['custom_field'] = (!empty($this->session->data['payment_address']['custom_field'])) ? array('address' => $this->session->data['payment_address']['custom_field']) :  $this->model_d_quickcheckout_custom_field->setCustomFieldsDefaultSessionData('address', $customer_group_id);
+          //  $this->session->data['shipping_address']['custom_field'] = (!empty($this->session->data['shipping_address']['custom_field'])) ? array('address' => $this->session->data['shipping_address']['custom_field']) : $this->model_d_quickcheckout_custom_field->setCustomFieldsDefaultSessionData('address', $customer_group_id );
+	
+
+
+10 默认订单提交页的session
+因为开发时间短暂的缘故,后期做pc的话,最好重新写一遍checkout page
+使用的ajax 一页结帐,存储的信息量过于庞大,并且有太多的冗余信息,从session到js
+Session Object
+(
+    [session_id] => 85gct9vrpe2kqjirb2skoleqg1
+    [data] => Array
+        (
+            [language] => en-gb
+            [currency] => USD
+            [customer_id] => 1
+            [shipping_address] => Array
+                (
+                    [address_id] => 1
+                    [firstname] => 123
+                    [lastname] => 123
+                    [company] => 
+                    [address_1] => 123123
+                    [address_2] => 
+                    [postcode] => 123123
+                    [city] => 123
+                    [zone_id] => 3563
+                    [zone] => Lancashire
+                    [zone_code] => LANCS
+                    [country_id] => 222
+                    [country] => United Kingdom
+                    [iso_code_2] => GB
+                    [iso_code_3] => GBR
+                    [address_format] => 
+                    [custom_field] => 
+                )
+
+            [payment_address] => Array
+                (
+                    [address_id] => 1
+                    [firstname] => 123
+                    [lastname] => 123
+                    [company] => 
+                    [address_1] => 123123
+                    [address_2] => 
+                    [postcode] => 123123
+                    [city] => 123
+                    [zone_id] => 3563
+                    [zone] => Lancashire
+                    [zone_code] => LANCS
+                    [country_id] => 222
+                    [country] => United Kingdom
+                    [iso_code_2] => GB
+                    [iso_code_3] => GBR
+                    [address_format] => 
+                    [custom_field] => 
+                )
+
+            [shipping_methods] => Array
+                (
+                    [flat] => Array
+                        (
+                            [title] => Flat Rate
+                            [quote] => Array
+                                (
+                                    [flat] => Array
+                                        (
+                                            [code] => flat.flat
+                                            [title] => Flat Shipping Rate
+                                            [cost] => 5.00
+                                            [tax_class_id] => 9
+                                            [text] => $5.00
+                                        )
+
+                                )
+
+                            [sort_order] => 1
+                            [error] => 
+                        )
+
+                )
+
+            [shipping_method] => Array
+                (
+                    [code] => flat.flat
+                    [title] => Flat Shipping Rate
+                    [cost] => 5.00
+                    [tax_class_id] => 9
+                    [text] => $5.00
+                )
+
+            [comment] => 
+            [payment_methods] => Array
+                (
+                    [cod] => Array
+                        (
+                            [code] => cod
+                            [title] => Cash On Delivery
+                            [terms] => 
+                            [sort_order] => 1
+                        )
+
+                )
+
+            [payment_method] => Array
+                (
+                    [code] => cod
+                    [title] => Cash On Delivery
+                    [terms] => 
+                    [sort_order] => 1
+                )
+
+            [order_id] => 6
+        )
+
+    [adaptor] => Session\Native Object
+        (
+        )
+
+)

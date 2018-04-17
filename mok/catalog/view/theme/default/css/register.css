@@ -1,0 +1,26 @@
+body{background: #fff;}
+input{display:inline-block;border:none;outline: none;}
+input:focus{border:none;outline: none;}
+.ok_reg{padding-top:.82rem;}
+.ok_reg_logo{text-align: center}
+.ok_reg_img{width:1.09rem;height:1.09rem;}
+.ok_logo_info{padding:.5rem 0 1.4rem;line-height:1;font-size: .29rem;color:#ef4f3e;}
+.ok_input_box{margin-top:.9rem;}
+.weui-cells:before{display: none;}
+.weui-cell:before{border-top:1px solid #eaeaea;color:#eaeaea;left:0;}
+.weui-cells:after{border-bottom:1px solid #eaeaea;color:#eaeaea;left:0;}
+.weui-cell{padding:0 .34rem;height:1.2rem;}
+.ok_input{width: 5rem;height: .6rem;font-size: .29rem;color:#9c9c9c;}
+.ok_get_code{display:block;float:right;width:1.7rem;height:.56rem;line-height:.54rem;text-align:center;font-size:.22rem;color:#ef4f3e;border:1px solid #ef4f3e;border-radius:.06rem;}
+.ok_register_img{display: block;float:right;margin-right:.54rem;width:.36rem;height:.36rem;}
+.ok_register{position:relative;width:4.8rem;height:.8rem;margin:.8rem auto 0 auto;line-height:.8rem;text-align:center;font-size:.3rem;color:#fff;background: #ef4f3e;border-radius: .09rem;}
+.ok_register input{position: absolute ;top:0;display:block;width:100%;height:100%;opacity: 0;}
+/*提示框*/
+/*.ok_hold{position: fixed;top:0;width:100%;height:100%;background: #000;opacity: .6;z-index:888;}*/
+.ok_position{display:none;position: fixed;width:100%;height:100%;top:0;z-index: 999;}
+.ok_pop{margin:0 auto;max-width:3rem;position:relative;top:40%;padding: .31rem .15rem;background: #efefef;opacity: .95;filter:alpha(opacity=95);border-radius:.08rem;font-size:.26rem;color:#666;text-align: left;}
+.ok_fail_in{display: inline-block;position:relative;width:.3rem;height:.3rem;border-radius:50%;border: 1px solid #01c12d;vertical-align: middle;margin-right:.1rem;}
+.ok_fail_in:before{content:'';position:absolute;top:50%;left:50%;margin-top: -.08rem;margin-left:-.01rem;display:block;width:.02rem;height:.12rem;background: #01c12d;}
+.ok_fail_in:after{content:'';position:absolute;top:.2rem;left:50%;margin-left:-.01rem;display:block;width:2px;height:1px;background: #01c12d;}
+.weui-icon-success-circle{font-size: .34rem;color: #01c12d;}
+.alert{z-index:11111;margin:0 auto;max-width:3rem;position:fixed;left:0;top:40%;padding: .31rem .15rem;background: #efefef;opacity: .95;filter:alpha(opacity=95);border-radius:.08rem;font-size:.26rem;color:#666;text-align:center;}

@@ -1,0 +1,23 @@
+/*底部*/
+.ok_tabbar__see{background-position: 1px -193px;}
+.ok_tabbar__buy{background-position: 2px -143px;}
+/*头部*/
+.ok_list_title{padding:.38rem .1rem;font-size: .28rem;color:#555;text-align: center;font-weight: 400;background-color:#fff;border-bottom: .01rem solid #eaeaea;}
+.ok_list_nav{height:.78rem;background-color: #fff;border-bottom: .01rem solid #eaeaea;}
+.ok_nav_text{font-size:.28rem;color:#888;font-weight: 400;text-align: center;line-height: .78rem;}
+.ok_list_nav .ok_nav_on{color:#333;font-weight: 600;}
+.ok_list_nav .ok_nav_on:after{content:'';display:block;width:.2rem;margin:0 auto;margin-top:-.16rem;border-top:2px solid #333;}
+.ok_list_ban{width:100%;margin-bottom:.2rem;}
+body{padding-bottom:1.5rem;}
+.ok_list_nav{overflow: hidden;position: relative;}
+.ok_list_nav ul{height:.78rem;width:100%;}
+.ok_list_nav ul,.ok_list_nav li{position: absolute;top:0;}
+.ok_list_nav li{float:left;width: 1.6rem;text-align: center;}
+/*内容*/
+.ok_list{width:100%;overflow: hidden;}
+.ok_list_item{width:50%;text-align: center;padding-bottom: 4.34%;background-color: #fff;border-bottom:1px solid #eaeaea;}
+.ok_list_item img{padding:0 20.6%;}
+.ok_list .ok_list_item:nth-child(2n){float:right;border-left:1px solid transparent;}
+.ok_list .ok_list_item:nth-child(2n+1){float:left;border-right:1px solid #eaeaea;}
+.ok_cs_info{padding-top:8%;color:#555;font-size: .26rem;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;-webkit-line-clamp: 1;font-weight:400;}
+.ok_cs_price{padding-top:1.4%;color:#f56050;font-size: .3rem;}

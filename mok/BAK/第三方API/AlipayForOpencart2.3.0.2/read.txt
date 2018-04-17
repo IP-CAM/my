@@ -1,0 +1,53 @@
+﻿opencart2.x支付宝,支付网银收款插件
+
+我很高兴有人在使用此模板,因此增加了网银的收款功能.并会在空闲时更新代码或修正.有很多地方我不是很满意.不过能将就.
+已测试过即时到账,网银收款,担保交易,双功能,不过双功能已下线.适用于opencart2.x版本.
+
+
+功能:
+1 只收人民币,其他货币自动停用插件
+2 付款成功,支付宝异步通知给您的网站接口,并修改订单状态发送邮件通知客户和站长.
+3 默认只有一条订单状态,即付款成功后订单的状态
+4 07/07/2015 增加网银收款功能,不过你必须先签约支付宝的网银收款.这里要求支付宝账号是企业认证的.另外请确保有安装VQMOD,网银必须修改原本的文件payment_method.tpl,如果你没有安装可以联系我.我可以协助你.直接修改payment_method.tpl.
+5 支持的网银请看文件内的图片,另外VISA ,MASTER 需要到支付宝签约外卡收单产品
+,否则会提示错误:商户未签约外卡收单产品.
+
+注意事项:
+1 即时到账,顾客付款后,订单的状态会变成后台设定的状态,顾客,站长会收到邮件通知订单状态改变了.
+2 担保交易,在顾客提交订单后,在支付之前,可以通过进入卖家支付宝来修改价格.如需增加多项订单状态,额外收费.
+3 双功能已经下架,但对于已申请的用户使用不受影响.
+4 网银收款需要改动原本的模板,这里我通过vqmod来实现,避免修改原文件.如果不需要使用网银支付,请在后台停用即可另外XML文件也不用复制
+5 另外需要注意的是163邮箱最注册的话SMTP/POP3/IMAP需要绑定手机并开通授权密码才能使用.
+
+本地测试需要注意:最后修改下本地的订单号,避免和线上的网站重复订单号提交给支付宝
+错误代码: TRADE_TOTALFEE_NOT_MATCH
+错误描述: 抱歉，该商品的交易金额与原先的不一致，请重新创建交易付款。
+大概是这样的:本地测试和网上收款用的是同一支付宝账号,提交订单到支付宝时,支付宝会记录下订单号,如果订单号一样则支付宝当做同一订单,金额不一致就会提示错误.因为网上和本地是一样的数据,所以本地测试时,会重复提交的订单号.
+
+PS:邮箱:1039778008@qq.com.
+此版本的插件只支持OpenCart V2.0版本,另外1.5x版本网上有免费的,也可以联系我-免费提供.
+
+
+
+感谢谷歌翻译:
+
+This plug-in for opencart2.x
+
+Features:
+1 received only RMB, other currencies automatically deactivated widget
+2 successful payment, Paypal asynchronous notifications to your website interface, and modify the order status E-mail to notify customers and owners.
+3 is only one default order status, namely the payment orders after the success
+
+NOTES:
+1 Prompt arrival, after customer payment status of the order set the state will become the background, customers, owners will be notified by mail order status change.
+2 secured transactions, after the customer submit an order before payment can be paid Bora modify the price by going to the seller. To increase the number of orders for the state, for an extra charge.
+Three pairs of functions have been off the shelf, but for users already use applications are not affected.
+
+PS: no demo site here, if you purchase the plug-in and invalid, for a full refund have questions please contact me, email:. 1695465395@qq.com.
+
+This version of the plug-in only supports OpenCart V2.0 version, in addition to free online version 1.5x, you can contact me - free of charge.
+
+
+
+
+

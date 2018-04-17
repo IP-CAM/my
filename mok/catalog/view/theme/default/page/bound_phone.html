@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="../css/weui.css"/>
+    <link rel="stylesheet" href="../css/public.css"/>
+    <link rel="stylesheet" href="../css/bound.css"/>
+    <title>绑定手机</title>
+</head>
+<body>
+<!--第一部分-->
+<div class="ok_ret_first ok_bound">
+    <form class="ok_form" action="" method="post">
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <input class="ok_input" name="account" type="text" placeholder="请输入账号" required/>
+                </div>
+                <div class="weui-cell__bd">
+                    <p class="ok_bound_code">获取验证码</p>
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <input class="ok_input" name="code" type="text" placeholder="验证码" required/>
+                </div>
+            </div>
+        </div>
+        <div class="ok_ret_next" id="ok_bound">立即绑定</div>
+    </form>
+</div>
+<script src="../lib/zepto.min.js"></script>
+<script src="../script/ok_bound.js"></script>
+</body>
+</html>

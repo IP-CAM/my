@@ -1,0 +1,55 @@
+CREATE TABLE IF NOT EXISTS `oc_otp_data` (
+   `otp_id` int(11) NOT NULL,
+   `product_id` int(11) NOT NULL,
+   `model` varchar(64) NOT NULL,
+   `extra` varchar(255) NOT NULL,
+   `quantity` int(11) NOT NULL,
+   `subtract` tinyint(1) NOT NULL,
+   `price_prefix` varchar(1) NOT NULL,
+   `price` decimal(15,4) NOT NULL,
+   `special` decimal(15,4) NOT NULL,
+   `weight_prefix` varchar(1) NOT NULL,
+   `weight` decimal(15,4) NOT NULL,
+    PRIMARY KEY (`otp_id`)
+   ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+CREATE TABLE IF NOT EXISTS `oc_otp_image` (
+   `id` int(11) NOT NULL AUTO_INCREMENT,
+   `product_id` int(11) NOT NULL,
+   `option_id` int(11) NOT NULL,
+   `option_value_id` int(11) NOT NULL,
+   `image` varchar(255) NOT NULL,
+   `sort_order` int(11) NOT NULL,
+    PRIMARY KEY (`id`)
+   )ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+CREATE TABLE IF NOT EXISTS `oc_otp_option_value` (
+   `id` int(11) NOT NULL AUTO_INCREMENT,
+   `product_id` int(11) NOT NULL,
+   `parent_option_id` int(11) NOT NULL,
+   `child_option_id` int(11) NOT NULL,
+   `grandchild_option_id` int(11) NOT NULL,
+   `parent_option_value_id` int(11) NOT NULL,
+   `child_option_value_id` int(11) NOT NULL,
+   `grandchild_option_value_id` int(11) NOT NULL,
+    PRIMARY KEY (`id`)
+   ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+   ALTER TABLE `oc_cart` ADD `otp_id` int(11) NOT NULL;
+   ALTER TABLE `oc_cart` ADD `swap_id` int(11) NOT NULL;
+   ALTER TABLE `oc_order_product` ADD `otp_id` int(11) NOT NULL;
+   INSERT INTO `oc_setting` (`store_id`, `code`, `key`, `value`, `serialized`) VALUES
+   (0, 'config', 'config_otp_stock', '1', 0),
+   (0, 'config', 'config_otp_extra', '1', 0),
+   (0, 'config', 'config_otp_price', '1', 0),
+   (0, 'config', 'config_otp_special', '1', 0),
+   (0, 'config', 'config_otp_weight', '1', 0),
+   (0, 'config', 'config_otp_list_image', '1', 0),
+   (0, 'config', 'config_otp_list_width', '24', 0),
+   (0, 'config', 'config_otp_list_height', '24', 0),
+   (0, 'config', 'config_otp_list_radius', '0', 0),
+   (0, 'config', 'config_otp_bullet', '1', 0),
+   (0, 'config', 'config_otp_bullet_width', '24', 0),
+   (0, 'config', 'config_otp_bullet_height', '24', 0),
+   (0, 'config', 'config_otp_bullet_radius', '0', 0),
+   (0, 'config', 'config_otp_tool', '1', 0),
+   (0, 'config', 'config_otp_csv', ',', 0);
+
+

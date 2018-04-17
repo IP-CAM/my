@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="../css/weui.css"/>
+    <link rel="stylesheet" href="../css/public.css"/>
+    <link rel="stylesheet" href="../css/evaluate.css"/>
+    <title>写评价</title>
+</head>
+<body>
+<form action="" method="post" id="ok_evaluate">
+    <div class="ok_star_box">
+        <span class="ok_star_text">我要评星：</span>
+        <i class="ok_star ok_star_on"></i>
+        <i class="ok_star"></i>
+        <i class="ok_star"></i>
+        <i class="ok_star"></i>
+        <i class="ok_star"></i>
+        <input type="hidden" name="star" id="ok_star_val"/>
+    </div>
+    <div class="ok_eval_box">
+        <p class="ok_eval_text">我有话要说：</p>
+        <textarea name="evaluate" maxlength="300" id="ok_eval_val" class="ok_eval_val"  cols="30" rows="10"></textarea>
+    </div>
+    <div class="ok_eval_img">
+        <p class="ok_eval_text">晒图片更真实哦~</p>
+        <div class="ok_input_box">
+            <ul class="ok_img_list">
+                <li class="ok_img_wrap">
+                    <img src="../images/product/detail_05.jpg" width="100%"/>
+                </li>
+                <li class="ok_img_wrap">
+                    <img src="../images/product/detail_05.jpg" width="100%"/>
+                </li>
+            </ul>
+            <div class="ok_input_wrap ok_take_wrap">
+                <input class="ok_take_photo" id="ok_take_photo" type="file"/>
+            </div>
+            <div class="ok_input_wrap ok_load_wrap">
+                <input class="ok_upload_img" id="ok_load_img" type="file"/>
+            </div>
+        </div>
+    </div>
+    <div class="ok_tabbar" id="ok_load_submit">提交</div>
+</form>
+<div class="ok_position">
+    <div class="ok_pop"></div>
+</div>
+<script src="../lib/zepto.min.js"></script>
+<script src="../lib/jweixin-1.0.0.js"></script>
+<script src="../script/ok_evaluate.js"></script>
+</body>
+</html>

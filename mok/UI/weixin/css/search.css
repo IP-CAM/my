@@ -1,0 +1,34 @@
+/*头部*/
+body{background: #fff;}
+.weui-search-bar{background-color: #fff;}
+.weui-search-bar__form{width:74%;border-radius:10px;background-color: #f7f7f7;}
+.weui-search-bar__box{background-color: #f7f7f7;padding-left:50px;border-radius: 5px;}
+.weui-search-bar__box .weui-icon-search{left:15px;top:3px;}
+.weui-search-bar__input{height:30px!important;}
+.weui-icon-search:before{content: '';width:28px;height:28px;background:url('../images/comebuy/comebuy.png');background-size:31px auto;background-position: 0 -31px;}
+.weui-search-bar__cancel-btn{position:relative;display: block;margin-top:4px;width:60px;height:31px;font-size:16px;color:#fff;text-align:center;background: #ef4f3e;border-radius:5px;}
+.weui-search-bar:after{border-bottom: 1px solid #eaeaea;}
+/*标签*/
+.ok_content_tag{padding:.28rem .3rem .08rem;border-bottom:.3rem solid #f4f4f4;background: #fff;overflow: hidden;}
+.ok_tag{display:block;float:left;padding:0 .2rem;height:.44rem;margin:0 .2rem .2rem 0;line-height: .42rem;text-align: center;font-size: .24rem;color:#999;border:1px solid #999;border-radius:.08rem;}
+.ok_tag_on{color:#ef4f3e;border:1px solid #ef4f3e;}
+/*历史记录*/
+.weui-cells{margin-top:0;}
+.weui-cells:before{border-top: 1px solid #eaeaea;}
+.weui-cell:before{border-top: 1px solid #eaeaea;left:.3rem;}
+.weui-cell{padding:.2rem .3rem;}
+.ok_his_title,.ok_history .weui-cell__hd{line-height: 1;}
+.ok_his_title{padding:.4rem 0 .4rem .3rem;font-size: .30rem;background: #fff;}
+.ok_history .weui-cell__hd a{padding:.2rem 0;font-size: .30rem;color:#999;}
+/*内容*/
+.ok_search_result{margin-top:0;border-top:.2rem solid #eaeaea;}
+.ok_search_result .weui-cell{padding:.3rem;}
+.ok_search_result .weui-cell:before{left:.3rem;border-top: 1px solid #eaeaea;}
+.ok_search_result .weui-cell__bd{padding-left:.4rem;font-size: .28rem;}
+.ok_order_name{height:.69rem;line-height: 1.2;color:#555;overflow: hidden;word-break: break-all;}
+.ok_search_result .weui-cell__hd{width:1.8rem;height:1.8rem;}
+.ok_order_price{color:#f56050;}
+/*底部*/
+.ok_tabbar{bottom:.5rem;width:100%;height:.4rem;text-align: center;}
+.ok_tabbar_img{width:.4rem;height:.4rem;}
+.ok_tabbar_txt{display:inline-block;vertical-align:middle;font-size:.28rem;color:#c4c4c4;}

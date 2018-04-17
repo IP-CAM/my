@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <id>login fixed</id>
+    <version>1.0</version>
+    <vqmver required="true">2.6.0</vqmver>
+    <author>Wang</author>
+
+    <file name="catalog/controller/account/login.php">
+        <operation>
+            <search position="replace"><![CDATA[$login_info = $this->model_account_customer->getLoginAttempts($this->request->post['email']);]]></search>
+            <add trim="true"><![CDATA[
+if(trim($this->request->post['email'])!=''){
+	$login_info = $this->model_account_customer->getLoginAttempts($this->request->post['email']);
+}else{
+	$login_info = false;
+}
+			]]></add>
+        </operation>
+		
+		<operation>
+			<search position="replace"><![CDATA[$this->model_account_customer->addLoginAttempt($this->request->post['email']);]]></search>
+			<add trim="true"><![CDATA[
+if(trim($this->request->post['email'])!=''){	
+	$this->model_account_customer->addLoginAttempt($this->request->post['email']);	
+}	
+			]]></add>
+		</operation>
+    </file>
+
+</modification>

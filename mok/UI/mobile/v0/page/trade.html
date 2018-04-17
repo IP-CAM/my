@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="format-detection" content="telephone=no">
+    <link rel=" shortcut icon" href="../img/favicon/favicon.ico">
+    <link rel="stylesheet" href="../css/public.css"/>
+    <link rel="stylesheet" href="../css/weui.min.css"/>
+    <link rel="stylesheet" href="../css/trade.css"/>
+    <title>购物车</title>
+</head>
+<body>
+<!--头部-->
+<header class="ok_header weui-flex">
+    <div>
+        <a class="ok_back" href="javascript:window.history.back();"></a>
+    </div>
+    <div class="weui-flex__item tc">
+        <span class="ok_head_title">购物车</span>
+    </div>
+    <div>
+        <a class="ok_home" href="home.html"></a>
+    </div>
+</header>
+<section class="ok_trade_car">
+    <form method="POST" action="order.html" id="trade_car">
+        <ul class="ok_trade_list">
+            <li>
+                <p class="ok_trade_prompt">
+                    <a href="#"><span class="ok_trade_red">【满减】</span>已减30元&nbsp;查看>></a>
+                </p>
+                <div class="ok_trade_goods weui-flex">
+                    <div class="ok_list_img">
+                        <img width='100%' src="http://img14.hqbcdn.com/product/e8/1b/e81bd86fbfc42cbdf0f7f1c9acf4522a.220.png"/>
+                    </div>
+                    <div class="weui-flex__item">
+                        <a href="#" class="ok_list_info">Apple/苹果 iPhone 7 HK 海淘手机</a>
+                        <div class="weui-flex">
+                            <span class="ok_list_price weui-flex__item">￥4688.00</span>
+                            <div class="ok_list_num cfix">
+                                <a class="ok_num_add fl" href="javascript:void(0);">-</a>
+                                <input type="tel" class="ok_list_quantity" value="1" id="ok_quantity"/>
+                                <a class="ok_num_desc fr" href="javascript:void(0);">+</a>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="ok_list_cancel" href="javascript:void(0);">X</a>
+                </div>
+            </li>
+            <li>
+                <p class="ok_trade_prompt">
+                    <a href="#"><span class="ok_trade_red">【满减】</span>已减30元&nbsp;查看>></a>
+                </p>
+                <div class="ok_trade_goods weui-flex">
+                    <div class="ok_list_img">
+                        <img width='100%' src="http://img14.hqbcdn.com/product/e8/1b/e81bd86fbfc42cbdf0f7f1c9acf4522a.220.png"/>
+                    </div>
+                    <div class="weui-flex__item">
+                        <a href="#" class="ok_list_info">Apple/苹果 iPhone 7 HK 海淘手机</a>
+                        <div class="weui-flex">
+                            <span class="ok_list_price weui-flex__item">￥4688.00</span>
+                            <div class="ok_list_num cfix">
+                                <a class="ok_num_add fl" href="javascript:void(0);">-</a>
+                                <input type="tel" class="ok_list_quantity" value="1" id="ok_quantity"/>
+                                <a class="ok_num_desc fr" href="javascript:void(0);">+</a>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="ok_list_cancel" href="javascript:void(0);">X</a>
+                </div>
+            </li>
+        </ul>
+        <div class="ok_trade_bottom weui-flex">
+            <div class="ok_trade_price weui-flex__item">
+                <p class="ok_trade_sum">总金额：<span>￥4693.00</span></p>
+                <p class="ok_trade_save">可省913.00元</p>
+            </div>
+            <div class="weui-flex__item">
+                <input type="submit" id="go_pay" value="去结算" class="ok_trade_submit"/>
+            </div>
+        </div>
+    </form>
+</section>
+</body>
+</html>

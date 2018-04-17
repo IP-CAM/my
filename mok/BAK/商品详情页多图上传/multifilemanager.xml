@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+	<code>Admin View Catalog ProductForm</code>
+    <name>Admin View Catalog ProductForm</name>
+    <version>1.2</version>
+    <author>multifilemannager</author>
+
+    <file name="admin/view/template/catalog/product_form.tpl">
+        <operation>
+            <search position="replace"><![CDATA[<td class="text-left"><button type="button" onclick="addImage();" data-toggle="tooltip" title="<?php echo $button_image_add; ?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button></td>]]></search>
+            <add><![CDATA[<td class="text-left"><button type="button" id="plus_img" onclick="addMultiImage();" data-toggle="tooltip" title="<?php echo $button_image_add; ?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button></td>]]></add>
+        </operation>
+		<operation>
+			<search position="before"><![CDATA[function addImage() {]]></search>
+			<add trim="true"><![CDATA[
+function addMultiImage() {
+        $('#modal-image').remove();
+        $.ajax({
+          url: 'index.php?route=common/multifilemanager&token=' + getURLVar('token') + '&image_row=' + image_row,
+          dataType: 'html',
+          beforeSend: function() {
+            $('#button-image i').replaceWith('<i class="fa fa-circle-o-notch fa-spin"></i>');
+            $('#button-image').prop('disabled', true);
+          },
+          complete: function() {
+            $('#button-image i').replaceWith('<i class="fa fa-upload"></i>');
+            $('#button-image').prop('disabled', false);
+          },
+          success: function(html) {
+            $('body').append('<div id="modal-image" class="modal">' + html + '</div>');
+            $('#modal-image').modal('show');
+          }
+    });
+}
+			]]></add>
+		</operation>
+    </file>
+</modification>

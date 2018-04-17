@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+	<name>No Common Home</name>
+	<code>no_common_home</code>
+	<version>1.0.0</version>
+	<author>Mika Design</author>
+	<link>http://www.mikadesign.co.uk</link>
+		
+	<file path="catalog/controller/startup/seo_url.php"> 
+	  <operation>
+        <search><![CDATA[} elseif ($key == 'path') {]]></search>
+        <add position="before"><![CDATA[				} elseif ($data['route'] == 'common/home') {
+					$url .= '/'; 					
+					unset($data[$key]);]]></add>
+	  </operation> 
+    </file>
+</modification>

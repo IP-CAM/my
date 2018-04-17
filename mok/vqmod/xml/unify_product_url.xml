@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<name>产品和分类URL唯一化-type1</name>
+	<code>brunoect-catalog-url-type1</code>
+	<version>1.1</version>
+	<author>Bruno</author>
+	<link>http://www.brunoxu.com/</link>
+	<file path="catalog/controller/startup/seo_url.php">
+		<operation>
+			<search position="after"><![CDATA[
+			parse_str($url_info['query'], $data);
+			]]></search>
+			<add><![CDATA[
+
+		if ($data['route'] == 'product/product' && !empty($data['product_id']) && !empty($data['path'])) {
+			unset($data['path']);
+		}
+
+		if ($data['route'] == 'product/category' && !empty($data['path'])) {
+			$path_ids = explode('_', $data['path']);
+			$category_id = end($path_ids);
+			$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "category_path WHERE `category_id` = '" . (int)$category_id . "' order by level asc");
+			$path_ids_new = array();
+			foreach ($query->rows as $result) {
+				if (empty($path_ids_new[$result['level']])) {
+					if ($result['path_id']) {
+						$path_ids_new[$result['level']] = $result['path_id'];
+					}
+				}
+			}
+			$data['path'] = implode('_', $path_ids_new);
+		}
+			]]></add>
+		</operation>
+	</file>
+</modification>

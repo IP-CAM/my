@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <id>review</id>
+    <version></version>
+    <vqmver required="true">1.0</vqmver>
+    <author>zhang</author>
+
+    <file name="catalog/model/catalog/review.php">
+
+        <operation>
+            <search position="after"><![CDATA[$review_id = $this->db->getLastId();]]></search>
+            <add><![CDATA[
+                $this->db->query("UPDATE " . DB_PREFIX . "order_product_ext SET is_review = 1 WHERE order_product_id = '".(int)$data['order_product_id']."'");
+               
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace"><![CDATA[$query = $this->db->query("SELECT r.review_id, r.author, r.rating, r.text, p.product_id, pd.name, p.price, p.image, r.date_added FROM " . DB_PREFIX . "review r LEFT JOIN " . DB_PREFIX . "product p ON (r.product_id = p.product_id) LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) WHERE p.product_id = '" . (int)$product_id . "' AND p.date_available <= NOW() AND p.status = '1' AND r.status = '1' AND pd.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY r.date_added DESC LIMIT " . (int)$start . "," . (int)$limit);]]></search>
+            <add><![CDATA[
+         $query = $this->db->query("SELECT r.review_id,r.customer_id, r.author, r.rating, r.text, p.product_id, pd.name, p.price, p.image, r.date_added FROM " . DB_PREFIX . "review r LEFT JOIN " . DB_PREFIX . "product p ON (r.product_id = p.product_id) LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) WHERE p.product_id = '" . (int)$product_id . "' AND p.date_available <= NOW() AND p.status = '1' AND r.status = '1' AND pd.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY r.date_added DESC LIMIT " . (int)$start . "," . (int)$limit);
+            ]]></add>
+        </operation>
+
+    </file>
+
+    <file name="catalog/controller/product/product.php">
+
+        <operation>
+            <search position="before"><![CDATA[$data['text_no_reviews'] = $this->language->get('text_no_reviews');]]></search>
+            <add><![CDATA[
+                $this->load->model('account/customer');
+                $this->load->model('tool/image');
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="before"><![CDATA[$data['reviews'][] = array(]]></search>
+            <add><![CDATA[
+                $customer_info = $this->model_account_customer->getCustomer($result['customer_id']);
+                if($customer_info['custom_field']){
+                    $custom_field_arr = json_decode($customer_info['custom_field'] , true);
+                    if($custom_field_arr[8]){
+                        $head_image = $this->model_tool_image->resize($custom_field_arr[8], 68, 68);
+                    }else{
+                        $head_image = $this->model_tool_image->resize('no_image.png', 68, 68);
+                    }
+                }
+
+
+            ]]></add>
+        </operation>
+
+
+        <operation>
+            <search position="before"><![CDATA['author'     => $result['author'],]]></search>
+            <add><![CDATA[
+               'head_image'     => $head_image,
+            ]]></add>
+        </operation>
+    </file>
+
+</modification>

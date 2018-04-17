@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <id>address</id>
+    <version>1.0</version>
+    <vqmver required="true">2.6.0</vqmver>
+    <author>zhang</author>
+
+    <file name="catalog/controller/account/address.php">
+        <operation>
+            <search position="after"><![CDATA[$data['back'] = $this->url->link('account/account', '', true);]]></search>
+            <add><![CDATA[
+                 $this->document->addStyle('catalog/view/theme/default/css/address.css');
+
+                $this->document->addScript('catalog/view/theme/default/script/zepto.min.js','footer');
+
+                $this->document->addScript('catalog/view/theme/default/script/ok_address.js','footer');
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace" ><![CDATA[$this->response->setOutput($this->load->view('account/address_list', $data));]]></search>
+            <add><![CDATA[
+                $this->response->setOutput($this->load->view('weixin/address', $data));
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace" ><![CDATA['name'        => $this->customer->getFirstName() . ' ' . $this->customer->getLastName()]]></search>
+            <add><![CDATA[
+                'name'        => $this->customer->getNickname()
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace"><![CDATA[$data['footer'] = $this->load->controller('common/footer');]]></search>
+            <add trim="true"><![CDATA[
+              $data['footer'] = $this->load->controller('weixin/footer');
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="before"><![CDATA[$this->model_account_address->editAddress($this->request->get['address_id'], $this->request->post);]]></search>
+            <add trim="true"><![CDATA[
+                $this->request->post['firstname'] = '';
+                $this->request->post['lastname'] = '';
+                $this->request->post['company'] = '';
+                $this->request->post['address_2'] = '';
+                $this->request->post['postcode'] = '';
+                $this->request->post['city'] = '';
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace"><![CDATA[$data['header'] = $this->load->controller('common/header');]]></search>
+            <add trim="true"><![CDATA[
+              $data['header'] = $this->load->controller('weixin/header');
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace"><![CDATA[if ($result['address_format']) {]]></search>
+            <add trim="true"><![CDATA[
+              /*if ($result['address_format']) {
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="before"><![CDATA[$data['addresses'][] = array(]]></search>
+            <add trim="true"><![CDATA[
+              */
+
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace"><![CDATA['address'    => str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format)))),]]></search>
+            <add trim="true"><![CDATA[
+                    'telephone' => $result['custom_field'][5],
+                    'consignee' => $result['custom_field'][4],
+                     'address' => $result['zone'].$result['city'].$result['district'].$result['address_1'],
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="before"><![CDATA[$this->document->addScript('catalog/view/javascript/jquery/datetimepicker/moment.js');]]></search>
+            <add trim="true"><![CDATA[
+              /*
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="after"><![CDATA[$this->document->addStyle('catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.css');]]></search>
+            <add trim="true"><![CDATA[
+              */
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace"><![CDATA[$data['back'] = $this->url->link('account/address', '', true);]]></search>
+            <add trim="true"><![CDATA[
+              $this->document->addStyle('catalog/view/theme/default/css/add_address.css');
+
+                $this->document->addScript('catalog/view/theme/default/script/zepto.min.js','footer');
+                $this->document->addScript('catalog/view/theme/default/script/weui.min.js','footer');
+                $this->document->addScript('catalog/view/theme/default/script/ok_addAddress.js','footer');
+                
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace"><![CDATA[$this->response->setOutput($this->load->view('account/address_form', $data));]]></search>
+            <add trim="true"><![CDATA[
+             $this->response->setOutput($this->load->view('weixin/add_address', $data));
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="before"><![CDATA[protected function validateForm() {]]></search>
+            <add trim="true"><![CDATA[
+                 protected function validateForm2() {
+
+                    if (!isset($this->request->post['zone_id']) || $this->request->post['zone_id'] == '' || !is_numeric($this->request->post['zone_id'])) {
+                        $this->error['zone'] = $this->language->get('error_address_num');
+                    }
+
+                     if (!isset($this->request->post['city_id']) || $this->request->post['city_id'] == '' || !is_numeric($this->request->post['city_id'])) {
+                        $this->error['city'] = $this->language->get('error_address_num');
+                    }
+
+                     if (!isset($this->request->post['district_id']) || $this->request->post['district_id'] == '' || !is_numeric($this->request->post['district_id'])) {
+                        $this->error['district'] = $this->language->get('error_address_num');
+                    }
+
+                    if ((utf8_strlen(trim($this->request->post['address_1'])) < 3) || (utf8_strlen(trim($this->request->post['address_1'])) > 64)) {
+                        $this->error['address_1'] = $this->language->get('error_detail_address');
+                    }
+
+                    if ((utf8_strlen(trim($this->request->post['custom_field'][4])) < 2) || (utf8_strlen(trim($this->request->post['custom_field'][4])) > 12)) {
+                        $this->error['consigneer'] = $this->language->get('error_consigneer');
+                    }
+
+                    if(!preg_match('/^1[34578][0-9]{9}$/',$this->request->post['custom_field'][5])){
+                         $this->error['telephone'] = $this->language->get('error_telephone');
+                    }
+
+
+                    return !$this->error;
+                }
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace"><![CDATA[$this->validateForm()]]></search>
+            <add trim="true"><![CDATA[
+             $this->validateForm2()
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="before"><![CDATA[$data['addresses'] = array();]]></search>
+            <add trim="true"><![CDATA[
+
+                 $data['customer_address'] = $this->customer->getAddressId();
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="before"><![CDATA[$this->document->addStyle('catalog/view/theme/default/css/add_address.css');]]></search>
+            <add trim="true"><![CDATA[
+                $this->load->model('d_quickcheckout/address');
+                $data['address_country'] = $this->model_d_quickcheckout_address->getCountries();
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="after"><![CDATA[$data['entry_default'] = $this->language->get('entry_default');]]></search>
+            <add trim="true"><![CDATA[
+
+               $data['entry_consigneer'] = $this->language->get('entry_consigneer');
+               $data['entry_telephone'] = $this->language->get('entry_telephone');
+               $data['entry_area'] = $this->language->get('entry_area');
+               $data['entry_address'] = $this->language->get('entry_address');
+               $data['entry_is_default'] = $this->language->get('entry_is_default');
+               $data['entry_area_p'] = $this->language->get('entry_area_p');
+               $data['button_save'] = $this->language->get('button_save');
+               $data['button_cancel'] = $this->language->get('button_cancel');
+               $data['text_default'] = $this->language->get('text_default');
+
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="after"><![CDATA[$data['text_empty'] = $this->language->get('text_empty');]]></search>
+            <add trim="true"><![CDATA[
+                $data['text_default'] = $this->language->get('text_default');
+                $data['text_add_address'] = $this->language->get('text_add_address');
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="after"><![CDATA[ $address_info = $this->model_account_address->getAddress($this->request->get['address_id']);]]></search>
+            <add trim="true"><![CDATA[
+                        $customer_default_address = $this->customer->getAddressId();
+                        if($customer_default_address == $this->request->get['address_id']){
+                             $data['default_address'] = 1;
+                        }
+                        $data['area_info'] = $address_info['zone'].$address_info['city'].$address_info['district'];
+                        $data['area_info_zone'] = $address_info['zone_id'];
+                        $data['area_info_city'] = $address_info['city_id'];
+                        $data['area_info_district'] = $address_info['district_id'];
+            ]]></add>
+        </operation>
+    </file>
+
+
+
+    <file name="catalog/language/zh-cn/account/address.php">
+        <operation>
+            <search position="before"><![CDATA[$_['entry_firstname']]]></search>
+            <add trim="true"><![CDATA[
+                $_['entry_consigneer']      = '收货人';
+                $_['entry_telephone']      = '手机号码';
+                $_['entry_area']      = '区域';
+                $_['entry_address']      = '详细地址';
+                $_['entry_is_default']      = '设为默认地址';
+                $_['entry_area_p']      = '省市县(区)';
+                $_['button_save']      = '保存';
+                $_['button_cancel']      = '取消';
+                $_['text_default']      = '默认';
+                $_['text_add_address']      = '添加新地址';
+                $_['error_address_num']      = '地址信息有误';
+                $_['error_consigneer']      = '收件人姓名必须在 2 到 12 字之间！';
+                $_['error_detail_address']      = '地址必须在 3 到 64 字之间！';
+                $_['error_telephone']      = '电话号码不正确';
+
+            ]]></add>
+        </operation>
+    </file>
+
+    <file name="catalog/language/en-gb/account/address.php">
+        <operation>
+            <search position="before"><![CDATA[$_['entry_firstname']]]></search>
+            <add trim="true"><![CDATA[
+                $_['entry_consigneer']      = 'Consigneer';
+                $_['entry_telephone']      = 'Telephone';
+                $_['entry_area']      = 'Area';
+                $_['entry_address']      = 'Detailed address';
+                $_['entry_is_default']      = 'Set to the default address';
+                $_['entry_area_p']      = 'Provinces, cities and counties (districts)';
+                 $_['button_save']      = 'save';
+                $_['button_cancel']      = 'cancel';
+                $_['text_default']      = 'default';
+                $_['text_add_address']      = 'Add a new address';
+                 $_['error_address_num']      = 'Wrong address information';
+                $_['error_consigneer']      = "The recipient's name must be between 2 and 12 characters!";
+                $_['error_detail_address']      = 'The address must be between 3 to 64 words!';
+                $_['error_telephone']      = 'The phone number is not correct';
+            ]]></add>
+        </operation>
+    </file>
+
+    <file name="catalog/model/account/address.php">
+
+        <operation>
+            <search position="after"><![CDATA[$address_id = $this->db->getLastId();]]></search>
+            <add trim="true"><![CDATA[
+				if(isset($data['district_id']) && isset($data['city_id'])){
+                $this->db->query("INSERT INTO " . DB_PREFIX . "address_ext SET address_id = '" . (int)$address_id . "', city_id = '".(int)$data['city_id']."', district_id = '".(int)$data['district_id']."'");
+				}
+				$total_address = $this->getTotalAddresses();
+
+		if($total_address == 1) {
+
+			$this->db->query("UPDATE " . DB_PREFIX . "customer SET address_id = '" . (int)$address_id . "' WHERE customer_id = '" . (int)$this->customer->getId() . "'");
+
+		}else{
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="before"><![CDATA[return $address_id;]]></search>
+            <add trim="true"><![CDATA[
+				}
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="before" index="2"><![CDATA[if (!empty($data['default'])) {]]></search>
+            <add trim="true"><![CDATA[
+				if(isset($data['district_id']) && isset($data['city_id'])){
+                $this->db->query("UPDATE " . DB_PREFIX . "address_ext SET city_id = '".(int)$data['city_id']."', district_id = '".(int)$data['district_id']."'");
+				}
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="after"><![CDATA[$this->db->query("DELETE FROM " . DB_PREFIX . "address WHERE address_id = '" . (int)$address_id . "' AND customer_id = '" . (int)$this->customer->getId() . "'");]]></search>
+            <add trim="true"><![CDATA[
+                $this->db->query("DELETE FROM " . DB_PREFIX . "address_ext WHERE address_id = '" . (int)$address_id . "'");
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace"><![CDATA[$address_query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "address WHERE address_id = '" . (int)$address_id . "' AND customer_id = '" . (int)$this->customer->getId() . "'");]]></search>
+            <add trim="true"><![CDATA[$address_query = $this->db->query("SELECT a.*,ae.city_id as city_id,ae.district_id as district_id FROM " . DB_PREFIX . "address a LEFT JOIN " . DB_PREFIX . "address_ext ae ON (a.address_id = ae.address_id) WHERE a.address_id = '" . (int)$address_id . "' AND a.customer_id = '" . (int)$this->customer->getId() . "'");]]></add>
+        </operation>
+
+        <operation>
+            <search position="after"><![CDATA[if ($address_query->num_rows) {]]></search>
+            <add trim="true"><![CDATA[
+                $city_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "city` WHERE city_id = '" . (int)$address_query->row['city_id'] . "'");
+
+			if ($city_query->num_rows) {
+				$city = $city_query->row['name'];
+				$country_id = $city_query->row['country_id'];
+			} else {
+				$city = '';
+				$country_id = '44';
+			}
+
+			$district_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "district` WHERE district_id = '" . (int)$address_query->row['district_id'] . "'");
+
+			if ($district_query->num_rows) {
+				$district = $district_query->row['name'];
+
+			} else {
+				$district = '';
+
+			}
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace"><![CDATA[$country_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "country` WHERE country_id = '" . (int)$address_query->row['country_id'] . "'");]]></search>
+            <add trim="true"><![CDATA[
+                $country_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "country` WHERE country_id = '" . (int)$country_id. "'");
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace"><![CDATA['city'           => $address_query->row['city'],]]></search>
+            <add trim="true"><![CDATA[
+                'city_id'           => $address_query->row['city_id'],
+                'city'           => $city,
+                'district_id'           => $address_query->row['district_id'],
+                 'district'           =>$district,
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace"><![CDATA[$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "address WHERE customer_id = '" . (int)$this->customer->getId() . "'");]]></search>
+            <add trim="true"><![CDATA[
+               $query = $this->db->query("SELECT a.*,ae.city_id as city_id,ae.district_id as district_id FROM " . DB_PREFIX . "address a LEFT JOIN " . DB_PREFIX . "address_ext ae ON (a.address_id = ae.address_id) WHERE a.customer_id = '" . (int)$this->customer->getId() . "'");
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="after"><![CDATA[foreach ($query->rows as $result) {]]></search>
+            <add trim="true"><![CDATA[
+               $city_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "city` WHERE city_id = '" . (int)$result['city_id'] . "'");
+
+			if ($city_query->num_rows) {
+				$city = $city_query->row['name'];
+				$country_id = $city_query->row['country_id'];
+			} else {
+				$city = '';
+				$country_id = '44';
+			}
+
+			$district_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "district` WHERE district_id = '" . (int)$result['district_id'] . "'");
+
+			if ($district_query->num_rows) {
+				$district = $district_query->row['name'];
+
+			} else {
+				$district = '';
+
+			}
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace"><![CDATA['city'           => $result['city'],]]></search>
+            <add trim="true"><![CDATA[
+                 'city_id'           => $result['city_id'],
+                'city'           => $city,
+                'district_id'           => $result['district_id'],
+                 'district'           =>$district,
+            ]]></add>
+        </operation>
+
+    </file>
+
+</modification>

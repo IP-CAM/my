@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <id>checkout success</id>
+    <version>1.0</version>
+    <author></author>
+
+    <file name="catalog/controller/checkout/success.php">
+        <operation>
+            <search position="replace"><![CDATA[$data['footer'] = $this->load->controller('common/footer');]]></search>
+            <add><![CDATA[$data['footer'] = $this->load->controller('weixin/footer');]]></add>
+        </operation>
+
+		<operation>
+            <search position="replace"><![CDATA[$data['header'] = $this->load->controller('common/header');]]></search>
+            <add><![CDATA[$data['header'] = $this->load->controller('weixin/header');]]></add>
+        </operation>
+		
+        <operation>
+            <search position="after"><![CDATA[$this->document->setTitle($this->language->get('heading_title'));]]></search>
+            <add><![CDATA[
+$this->document->addStyle('catalog/view/theme/default/css/pay_result.css');
+$this->document->addScript('catalog/view/theme/default/script/zepto.min.js','footer');
+$this->document->addScript('catalog/view/theme/default/script/ok_payResult.js','footer');
+$data['text_payment_success'] = $this->language->get('text_payment_success');
+$data['text_order_history'] = $this->language->get('text_order_history');
+$data['order_history'] = $this->url->link('account/order', '', true);
+			]]></add>
+        </operation>
+		
+		<operation>
+			<search position="replace"><![CDATA[$this->response->setOutput($this->load->view('common/success', $data));]]></search>
+			<add trim="true"><![CDATA[$this->response->setOutput($this->load->view('weixin/checkout_success', $data));]]></add>
+		</operation>
+
+
+    </file>
+
+</modification>

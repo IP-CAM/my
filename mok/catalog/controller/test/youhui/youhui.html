@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/catalog/view/javascript/jquery/jquery-2.1.1.min.js" type="text/javascript"></script>
+    <style type="text/css">
+       #content{
+            height:200px;
+            width: 200px;
+            color: #f00;
+        }
+    </style>
+</head>
+<body>
+<a href="javascript:void(0);" class="coups-item" num="3333">100元优惠券</a>
+
+</body>
+</html>
+<script type="text/javascript">
+    $(function(){
+        $('.coups-item').click(function(){
+            var num = $(this).attr('num');
+            $.ajax({
+                url : "http://mok.localweb.com/index.php?route=account/coupon/getCoupon",
+                data : {
+                    'couponId' : num
+                },
+                type : "POST",
+                success : function (msg) {
+                    alert(msg);
+                },
+                error : function(msg){
+                    alert(4184184);
+                }
+            });
+        });
+    })
+
+</script>

@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>WANG-EDITE</id>
+	<version>1.0</version>
+	<vqmver required="true">2.5.0</vqmver>
+	<author>WANG</author>
+<!-- 网银插件 -->
+<file name="catalog/view/theme/default/template/checkout/payment_method.tpl">
+<operation>
+	<search position="replace"><![CDATA[<?php echo $payment_method['title']; ?>]]></search>
+	<add><![CDATA[<?php if(isset($payment_method['image'])) { ?><?php echo $payment_method['image']; ?><?php }else{ ?><?php echo $payment_method['title']; ?><?php } ?>]]></add>
+</operation>
+<operation>
+	<search position="replace"><![CDATA[<div class="radio">]]></search>
+	<add><![CDATA[<?php if($payment_method['code'] == 'alipay_paybank') { ?><div class="radio payradio" style="display:none;"><?php }else{ ?><div class="radio payradio" title="<?php echo $payment_method['title'];?>">
+<?php } ?>]]></add>
+</operation>
+<operation>
+	<search position="replace"><![CDATA[<?php if($payment_method['code'] == 'alipay_paybank') { ?>]]></search>
+	<add><![CDATA[<?php if($payment_method['code'] == 'alipay_paybank') { ?>
+<?php if($payment_method['code'] == 'alipay_paybank') { ?>
+<div class="paybank-box">
+	<ul class="paybank-ul">
+	<li class="paybank" title="招商银行">
+		<label>
+		<input type="radio" name="bankcode" value="CMB"/>
+		<span class="bankicon CMB">&nbsp;</span>
+		<span class="banktitle">招商银行</span>
+		</label>
+	</li>
+	<li class="paybank" title="中国工商银行">
+		<label>
+		<input type="radio" name="bankcode" value="ICBCB2C"/>
+		<span class="bankicon ICBCB2C">&nbsp;</span>
+		<span class="banktitle">中国工商银行</span>
+		</label>
+	</li>
+	<li class="paybank" title="中国建设银行">
+		<label>
+		<input type="radio" name="bankcode" value="CCB"/>
+		<span class="bankicon CCB">&nbsp;</span>
+		<span class="banktitle">中国建设银行</span>
+		</label>
+	</li>
+	<li class="paybank" title="交通银行">
+		<label>
+		<input type="radio" name="bankcode" value="COMM"/>
+		<span class="bankicon COMM">&nbsp;</span>
+		<span class="banktitle">交通银行</span>
+		</label>
+	</li>
+	<li class="paybank" title="中国银行">
+		<label>
+		<input type="radio" name="bankcode" value="BOCB2C"/>
+		<span class="bankicon BOCB2C">&nbsp;</span>
+		<span class="banktitle">中国银行</span>
+		</label>
+	</li>
+	<li class="paybank" title="上海浦东发展银行">
+		<label>
+		<input type="radio" name="bankcode" value="SPDB"/>
+		<span class="bankicon SPDB">&nbsp;</span>
+		<span class="banktitle">上海浦东发展银行</span>
+		</label>
+	</li>
+	<li class="paybank" title="平安银行">
+		<label>
+		<input type="radio" name="bankcode" value="SPABANK"/>
+		<span class="bankicon SPABANK">&nbsp;</span>
+		<span class="banktitle">平安银行</span>
+		</label>
+	</li>
+	<li class="paybank" title="中国民生银行">
+		<label>
+		<input type="radio" name="bankcode" value="CMBC"/>
+		<span class="bankicon CMBC">&nbsp;</span>
+		<span class="banktitle">中国民生银行</span>
+		</label>
+	</li>
+	<li class="paybank" title="中国农业银行">
+		<label>
+		<input type="radio" name="bankcode" value="ABC"/>
+		<span class="bankicon ABC">&nbsp;</span>
+		<span class="banktitle">中国农业银行</span>
+		</label>
+	</li>
+	<li class="paybank" title="中国光大银行">
+		<label>
+		<input type="radio" name="bankcode" value="CEB-DEBIT"/>
+		<span class="bankicon CEB-DEBIT">&nbsp;</span>
+		<span class="banktitle">中国光大银行</span>
+		</label>
+	</li>
+	<li class="paybank" title="兴业银行">
+		<label>
+		<input type="radio" name="bankcode" value="CIB"/>
+		<span class="bankicon CIB">&nbsp;</span>
+		<span class="banktitle">兴业银行</span>
+		</label>
+	</li>
+	<li class="paybank" title="中信银行">
+		<label>
+		<input type="radio" name="bankcode" value="CITIC-DEBIT"/>
+		<span class="bankicon CITIC-DEBIT">&nbsp;</span>
+		<span class="banktitle">中信银行</span>
+		</label>
+	</li>
+	
+	
+	<li class="paybank bankhide" title="北京银行">
+		<label>
+		<input type="radio" name="bankcode" value="BJBANK"/>
+		<span class="bankicon BJBANK">&nbsp;</span>
+		<span class="banktitle">北京银行</span>
+		</label>
+	</li>
+	<li class="paybank bankhide" title="广发银行">
+		<label>
+		<input type="radio" name="bankcode" value="GDB"/>
+		<span class="bankicon GDB">&nbsp;</span>
+		<span class="banktitle">广发银行</span>
+		</label>
+	</li>
+	<li class="paybank bankhide" title="富滇银行">
+		<label>
+		<input type="radio" name="bankcode" value="FDB"/>
+		<span class="bankicon FDB">&nbsp;</span>
+		<span class="banktitle">富滇银行</span>
+		</label>
+	</li>
+	<li class="paybank bankhide" title="杭州银行">
+		<label>
+		<input type="radio" name="bankcode" value="HZCBB2C"/>
+		<span class="bankicon HZCBB2C">&nbsp;</span>
+		<span class="banktitle">杭州银行</span>
+		</label>
+	</li>
+	<li class="paybank bankhide" title="上海银行">
+		<label>
+		<input type="radio" name="bankcode" value="SHBANK"/>
+		<span class="bankicon SHBANK">&nbsp;</span>
+		<span class="banktitle">上海银行</span>
+		</label>
+	</li>
+	<li class="paybank bankhide" title="宁波银行">
+		<label>
+		<input type="radio" name="bankcode" value="NBBANK"/>
+		<span class="bankicon NBBANK">&nbsp;</span>
+		<span class="banktitle">宁波银行</span>
+		</label>
+	</li>
+	
+	<li class="paybank bankhide" title="中国邮政储蓄银行">
+		<label>
+		<input type="radio" name="bankcode" value="POSTGC"/>
+		<span class="bankicon POSTGC">&nbsp;</span>
+		<span class="banktitle">中国邮政储蓄银行</span>
+		</label>
+	</li>
+		<li class="paybank bankhide" title="上海农商银行">
+		<label>
+		<input type="radio" name="bankcode" value="SHRCB"/>
+		<span class="bankicon SHRCB">&nbsp;</span>
+		<span class="banktitle">上海农商银行</span>
+		</label>
+	</li>
+	<li class="paybank bankhide" title="温州银行">
+		<label>
+		<input type="radio" name="bankcode" value="WZCBB2C-DEBIT"/>
+		<span class="bankicon WZCBB2C-DEBIT">&nbsp;</span>
+		<span class="banktitle">温州银行</span>
+		</label>
+	</li>
+	<li class="paybank bankhide" title="北京农村商业银行">
+		<label>
+		<input type="radio" name="bankcode" value="BJRCB"/>
+		<span class="bankicon BJRCB">&nbsp;</span>
+		<span class="banktitle">北京农村商业银行</span>
+		</label>
+	</li>
+	<!-- 这里的VISA ,MASTER 需要到支付宝签约外卡收单产品
+	否则会提示错误:商户未签约外卡收单产品
+	<li class="paybank" title="VISA">
+		<label>
+		<input type="radio" name="bankcode" value="abc1003"/>
+		<span class="bankicon abc1003">&nbsp;</span>
+		<span class="banktitle">VISA</span>
+		</label>
+	</li>
+	<li class="paybank" title="MASTER">
+		<label>
+		<input type="radio" name="bankcode" value="abc1004"/>
+		<span class="bankicon abc1004">&nbsp;</span>
+		<span class="banktitle">MASTER</span>
+		</label>
+	</li>
+	-->
+	<li class="paybank">
+		<a href="javascript:void(0)" class="bankshow">点击选择其他银行</a>
+	</li>
+	</ul>
+</div>
+	<?php } ?>]]></add>
+</operation>
+
+<operation>
+	<search position="replace"><![CDATA[<p><strong><?php echo $text_comments; ?></strong></p>]]></search>
+	<add><![CDATA[<script type="text/javascript"><!--
+$(document).ready(function(){
+	$(".payradio:first").css({"border":"1px solid red"});
+	$(".now-choose").text($(".payradio:first").attr("title"));
+	$(".payradio").click(function(){
+		$(this).find("input[name=\'payment_method\']").prop("checked",true);
+		$(this).siblings(".payradio").find("input[name=\'payment_method\']").prop("checked",false);
+		$("input[name=\'bankcode\']").prop("checked",false);
+		$(".paybank").find(".bankicon").css({"border":"1px solid #ddd"});
+		$(this).css({"border":"1px solid red"});
+		$(".now-choose").text($(this).attr("title"));
+	});
+	$(".paybank").click(function(){
+		$(".payradio").find("input[value=\'alipay_paybank\']").prop("checked",true);
+		$(this).find(".bankicon").css({"border":"1px solid red"});
+		$(this).siblings().find(".bankicon").css({"border":"1px solid #ddd"});
+		$(".payradio").css({"border":"1px solid #fff"});
+		$(".now-choose").text($(this).attr("title"));
+	});
+	$(".bankshow").click(function(){
+		$(".bankhide").show();
+		$(this).parent().remove();
+	});
+});
+//--></script><p><strong><?php echo $text_comments; ?></strong></p>]]></add>
+</operation>
+</file>
+<file name="catalog/view/theme/default/template/common/header.tpl">
+<operation>
+	<search position="after"><![CDATA[<link href="catalog/view/theme/default/stylesheet/stylesheet.css" rel="stylesheet">]]></search>
+	<add><![CDATA[<link href="catalog/view/theme/default/stylesheet/paybank.css" rel="stylesheet">]]></add>
+</operation>
+</file>
+<file name="catalog/view/theme/default/template/checkout/checkout.tpl">
+<operation>
+	<search position="after"><![CDATA[$(document).delegate('#button-payment-method', 'click', function() {]]></search>
+	<add>
+	$.ajax({
+	url:'index.php?route=payment/alipay_paybank/save',
+	type:'post',
+	data:{bankcode:$('input[name=\'bankcode\']:checked').attr('value')}
+	});
+	</add>
+</operation>
+</file>
+<!-- END -->
+</modification>

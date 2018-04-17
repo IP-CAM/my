@@ -1,0 +1,50 @@
+<modification>
+	<name>七牛云存储CDN-Lite版</name>
+	<code>brunoect-qiniu_cdn_lite</code>
+	<version>1.0</version>
+	<author>Bruno</author>
+	<link>http://www.brunoxu.com/</link>
+	<file path="system/library/response.php">
+		<operation>
+			<search><![CDATA[
+			if ($this->output) {
+			]]></search>
+			<add position="after"><![CDATA[
+			if (!defined('DIR_CATALOG')) {
+				$this->output = $this->qiniu_cdn_lite($this->output);
+			}
+			]]></add>
+		</operation>
+		<operation>
+			<search><![CDATA[
+			public function output() {
+			]]></search>
+			<add position="before"><![CDATA[
+			private function qiniu_cdn_lite($result) {
+				/*
+				 * TODO: replace with your own Qiniu domain here
+				 */
+				$cdnDomain = 'http://7xp21l.com1.z0.glb.clouddn.com';
+
+				/*
+				 * TODO: select HTTP or HTTPS
+				 */
+				$serverPrefix = HTTP_SERVER;
+				// $serverPrefix = HTTPS_SERVER;
+				/*
+				 * TODO: replace with your own theme name here
+				 */
+				$theme = 'default';
+
+				$result = str_replace($serverPrefix . 'image/', $cdnDomain . '/image/', $result);
+				$result = str_replace('src="catalog/view/theme/' . $theme . '/image/', 'src="' . $cdnDomain . '/catalog/view/theme/' . $theme . '/image/', $result);
+				$result = str_replace('src="catalog/view/javascript/', 'src="' . $cdnDomain . '/catalog/view/javascript/', $result);
+				$result = str_replace('href="catalog/view/javascript/', 'href="' . $cdnDomain . '/catalog/view/javascript/', $result);
+				$result = str_replace('href="catalog/view/theme/' . $theme . '/stylesheet/', 'href="' . $cdnDomain . '/catalog/view/theme/' . $theme . '/stylesheet/', $result);
+
+				return $result;
+			}
+			]]></add>
+		</operation>
+	</file>
+</modification>

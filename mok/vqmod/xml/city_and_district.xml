@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>City And District</id>
+	<version>1.0</version>
+	<vqmver required="true">2.5.0</vqmver>
+	<author>WANG</author>
+	<file name="admin/language/*/common/column_left.php">
+		<operation>
+		<search position="before"><![CDATA[$_['text_country']]]></search>
+		<add><![CDATA[
+		$_['text_city'] = '市';
+		$_['text_district'] = '区/县';
+		]]></add>
+		</operation>
+	</file>
+	
+	<file name="admin/controller/common/column_left.php">
+		<operation>
+		<search position="before"><![CDATA[if ($this->user->hasPermission('access', 'localisation/geo_zone')) {]]></search>
+		<add><![CDATA[
+		if ($this->user->hasPermission('access', 'localisation/city')) {
+				$localisation[] = array(
+					'name'	   => $this->language->get('text_city'),
+					'href'     => $this->url->link('localisation/city', 'token=' . $this->session->data['token'], true),
+					'children' => array()		
+				);
+			}
+			
+			if ($this->user->hasPermission('access', 'localisation/district')) {
+				$localisation[] = array(
+					'name'	   => $this->language->get('text_district'),
+					'href'     => $this->url->link('localisation/district', 'token=' . $this->session->data['token'], true),
+					'children' => array()		
+				);
+			}
+		]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/model/account/address.php">
+		<operation>
+			<search position="after"><![CDATA[class ModelAccountAddress extends Model {]]></search>
+			<add trim="true"><![CDATA[
+
+	
+public function getZonesByCountryId($country_id) {
+            $this->load->model('localisation/zone');
+            $zones = $this->model_localisation_zone->getZonesByCountryId($country_id);
+            $options = array();
+            foreach ($zones as $zone) {
+                $zone['value'] = $zone['zone_id'];
+                unset($zone['zone_id']);
+                $options[] = $zone;
+            }
+            return $options;
+        }
+/* add city and district */
+	public function getCitysByZoneId($zone_id){
+		$this->load->model('localisation/city');
+            $citys = $this->model_localisation_city->getCitysByZoneId($zone_id);
+            $options = array();
+            foreach ($citys as $city) {
+                $city['value'] = $city['city_id'];
+                unset($city['city_id']);
+                $options[] = $city;
+            }
+            return $options;
+		
+	}
+	public function getDistrictsByCityId($city_id){
+		$this->load->model('localisation/district');
+            $districts = $this->model_localisation_district->getDistrictsByCityId($city_id);
+            $options = array();
+            foreach ($districts as $district) {
+                $district['value'] = $district['district_id'];
+                unset($district['district_id']);
+                $options[] = $district;
+            }
+            return $options;
+		
+	}
+			]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/controller/account/account.php">
+		<operation>
+			<search position="after"><![CDATA[class ControllerAccountAccount extends Controller {]]></search>
+			<add trim="true"><![CDATA[
+public function getZone(){
+        if(isset($this->request->post['country_id'])){
+            $this->load->model('account/address');
+            $json = $this->model_account_address->getZonesByCountryId($this->request->post['country_id']);
+        }else{
+            $json = false;
+        }
+        
+        if(!$json){
+            $json = array( 0 => array( 'name' => $this->language->get('text_none'), 'value' => 0)); 
+        }
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($json));
+    }
+	/* add city */ 
+	public function getCity(){
+        if(isset($this->request->post['zone_id'])){
+            $this->load->model('account/address');
+            $json = $this->model_account_address->getCitysByZoneId($this->request->post['zone_id']);
+        }else{
+            $json = false;
+        }
+        
+        if(!$json){
+            $json = array( 0 => array( 'name' => $this->language->get('text_none'), 'value' => 0)); 
+        }
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($json));
+    }
+	public function getDistrict(){
+        if(isset($this->request->post['city_id'])){
+            $this->load->model('account/address');
+            $json = $this->model_account_address->getDistrictsByCityId($this->request->post['city_id']);
+        }else{
+            $json = false;
+        }
+        
+        if(!$json){
+            $json = array( 0 => array( 'name' => $this->language->get('text_none'), 'value' => 0)); 
+        }
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($json));
+    }
+	/* end add */
+			]]></add>
+		</operation>
+	</file>
+</modification>

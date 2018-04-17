@@ -1,0 +1,25 @@
+input{display:inline-block;border:none;outline: none;}
+input:focus{outline: none;}
+.ok_ret_next{margin:.53rem auto 0 auto;width:4.8rem;height:.8rem;line-height: .8rem;text-align: center;font-size: .3rem;color:#fff;background: #ef4f3e;border-radius:.07rem;}
+.ok_input{height:1.07rem;font-size: .26rem;color:#adadad;}
+.weui-cells{padding:0 .68rem;margin-top:0;}
+.ok_cell_code .weui-cells{margin:0 .68rem;padding:0;}
+.weui-cells:before{display: none;}
+.weui-cell:before{border-top:1px solid #eaeaea;color:#eaeaea;left:0;}
+.weui-cells:after{border-bottom:1px solid #eaeaea;color:#eaeaea;left:0;}
+.weui-cell{padding:0;}
+.ok_ret_title{padding:.35rem 0 .35rem .68rem;font-size: .28rem;line-height:1;color:#555;}
+.ok_cell_code{padding:.46rem .68rem 0 0;background: #fff;}
+.ok_cell_title{font-size: .28rem;color:#555;line-height:.4rem;}
+.ok_code{padding:.48rem 0 0 .68rem;overflow: hidden;}
+.ok_cell_input{display:inline-block;float:left;width:4rem;height:.56rem;line-height:.55rem;border-bottom:1px solid #eaeaea;font-size: .28rem;color:#adadad;}
+.ok_get_code{display:inline-block;float:right;width:1.8rem;height:.56rem;font-size: .22rem;color:#ef4f3e;line-height: .56rem;text-align: center;border:1px solid #ef4f3e;border-radius:.06rem;}
+.ok_prevent{}
+/*提示框*/
+/*.ok_hold{position: fixed;top:0;width:100%;height:100%;background: #000;opacity: .6;z-index:888;}*/
+.ok_position{display:none;position: fixed;width:100%;height:100%;top:0;z-index: 999;}
+.ok_pop{margin:0 auto;max-width:3rem;position:relative;top:20%;padding: .31rem .15rem;background: #efefef;opacity: .95;filter:alpha(opacity=95);border-radius:.08rem;font-size:.26rem;color:#666;text-align: center;}
+.ok_fail_in{display: inline-block;position:relative;width:.3rem;height:.3rem;border-radius:50%;border: 1px solid #01c12d;vertical-align: middle;margin-right:.1rem;}
+.ok_fail_in:before{content:'';position:absolute;top:50%;left:50%;margin-top: -.08rem;margin-left:-.01rem;display:block;width:.02rem;height:.12rem;background: #01c12d;}
+.ok_fail_in:after{content:'';position:absolute;top:.2rem;left:50%;margin-left:-.01rem;display:block;width:2px;height:1px;background: #01c12d;}
+.weui-icon-success-circle{font-size: .34rem;color: #01c12d;}

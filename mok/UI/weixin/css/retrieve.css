@@ -1,0 +1,20 @@
+/*公共*/
+input{display:inline-block;border:none;outline: none;}
+input:focus{border:none;outline: none;}
+.ok_ret_next{margin:.53rem auto 0 auto;width:4.8rem;height:.8rem;line-height: .8rem;text-align: center;font-size: .3rem;color:#fff;background: #ef4f3e;border-radius:.07rem;}
+.ok_hide{display: none;}
+/*第一部分*/
+.ok_input{height:1.07rem;font-size: .26rem;color:#adadad;}
+.weui-cells{padding:0 .68rem;margin-top:0;}
+.weui-cells:before{display: none;}
+.weui-cell:before{border-top:1px solid #eaeaea;color:#eaeaea;left:0;}
+.weui-cells:after{border-bottom:1px solid #eaeaea;color:#eaeaea;left:0;}
+.weui-cell{padding:0;}
+.ok_ret_title{padding:.35rem 0 .35rem .68rem;font-size: .28rem;line-height:1;color:#555;}
+.ok_retrieve_img{display: block;float:right;width:1.4rem;height:.56rem;background: #ececec;}
+/*第二部分*/
+.ok_cell_code{padding:.46rem .68rem .6rem;background: #fff;}
+.ok_cell_title{font-size: .28rem;color:#555;line-height:.4rem;}
+.ok_code{padding-top:.48rem;overflow: hidden;}
+.ok_cell_input{display:inline-block;float:left;width:4rem;height:.56rem;line-height:.55rem;border-bottom:1px solid #eaeaea;font-size: .28rem;color:#adadad;}
+.ok_get_code{display:inline-block;float:right;width:1.8rem;height:.56rem;font-size: .22rem;color:#ef4f3e;line-height: .56rem;text-align: center;border:1px solid #ef4f3e;border-radius:.06rem;}

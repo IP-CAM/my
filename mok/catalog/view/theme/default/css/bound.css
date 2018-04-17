@@ -1,0 +1,16 @@
+/*绑定手机*/
+.ok_bound{margin-top:.2rem;}
+/*公共*/
+input{display:inline-block;border:none;outline: none;}
+input:focus{border:none;outline: none;}
+.ok_ret_next{margin:.53rem auto 0 auto;width:4.8rem;height:.8rem;line-height: .8rem;text-align: center;font-size: .3rem;color:#fff;background: #ef4f3e;border-radius:.07rem;}
+.ok_hide{display: none;}
+/*第一部分*/
+.ok_input{font-size: .3rem;color:#555;}
+.weui-cells{margin-top:0;}
+.weui-cells:before{display: none;}
+.weui-cell:before{border-top:1px solid #eaeaea;color:#eaeaea;left:0;}
+.weui-cells:after{border-bottom:1px solid #eaeaea;color:#eaeaea;left:0;}
+.weui-cell{padding:.49rem .34rem .51rem;}
+.ok_ret_title{padding:.35rem 0 .35rem .68rem;font-size: .28rem;line-height:1;color:#555;}
+.ok_bound_code{float:right;min-width:1.3rem;padding:0 .11rem;height:.56rem;line-height:.54rem;font-size:.22rem;color:#ef4f3e;border:1px solid #ef4f3e;border-radius:.06rem;}

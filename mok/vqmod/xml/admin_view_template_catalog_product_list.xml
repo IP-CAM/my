@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <id>Change Admin Product</id>
+    <author>Wang</author>
+
+    <file name="admin/view/template/catalog/product_list.tpl">
+        <operation>
+            <search position="replace"><![CDATA[<td class="text-left"><?php echo $product['name']; ?></td>]]></search>
+            <add trim="true"><![CDATA[
+			<td class="text-left">
+			<a href="<?php echo HTTP_CATALOG.'index.php?route=product/product&product_id='.$product['product_id'];?>" target="_blank">
+			<?php echo $product['name']; ?>
+			</a>
+			</td>
+			]]></add>
+        </operation>
+    </file>
+	
+
+</modification>

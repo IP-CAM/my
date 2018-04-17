@@ -1,0 +1,18 @@
+/*头部*/
+body{background: #fff;}
+.weui-search-bar{background-color: #fff;}
+.weui-search-bar__form{width:74%;border-radius:10px;background-color: #f7f7f7;}
+.weui-search-bar__box{background-color: #f7f7f7;padding-left:50px;border-radius: 5px;}
+.weui-search-bar__box .weui-icon-search{left:15px;top:3px;}
+.weui-search-bar__input{height:30px!important;}
+.weui-icon-search:before{content: '';width:28px;height:28px;background:url('../images/comebuy/comebuy.png');background-size:31px auto;background-position: 0 -31px;}
+.weui-search-bar__cancel-btn{position:relative;display: block;margin-top:4px;width:60px;height:31px;font-size:16px;color:#fff;text-align:center;background: #ef4f3e;border-radius:5px;}
+.weui-search-bar:after{border-bottom: 1px solid #eaeaea;}
+/*内容*/
+.weui-cells{margin-top:0;border-top:.2rem solid #eaeaea;}
+.weui-cell{padding:.3rem;}
+.weui-cell:before{left:.3rem;border-top: 1px solid #eaeaea;}
+.weui-cell__bd{padding-left:.4rem;font-size: .28rem;}
+.ok_order_name{height:.69rem;line-height: 1.2;color:#555;overflow: hidden;word-break: break-all;}
+.weui-cell__hd{width:1.8rem;height:1.8rem;}
+.ok_order_price{color:#f56050;}

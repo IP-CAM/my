@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <id>VQMOD CORE FOR OPENCART - DO NOT REMOVE</id>
+    <version>1.4.x and above</version>
+    <vqmver required="true">2.6.0</vqmver>
+    <author>leon</author>
+
+    <file path="catalog/model/account/customer.php">
+        <operation>
+            <search position="before"><![CDATA[public function deleteLoginAttempts($email) {]]></search>
+            <add><![CDATA[
+            public function getTotalCustomersByTelephone($telphone){
+                $res = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer WHERE telephone = '" . $telphone . "'");
+                if($res->num_rows){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+            ]]></add>
+        </operation>
+    </file>
+
+</modification>

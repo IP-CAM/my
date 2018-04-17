@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <id>personal_center</id>
+    <version>1.0</version>
+    <vqmver required="true">2.6.0</vqmver>
+    <author>zhang</author>
+
+    <file name="catalog/controller/account/account.php">
+        <operation>
+            <search position="after"><![CDATA[$data['heading_title'] = $this->language->get('heading_title');]]></search>
+            <add><![CDATA[
+                $data['text_my_collect'] = $this->language->get('text_my_collect');
+                $data['text_my_attention'] = $this->language->get('text_my_attention');
+                $data['text_shopping_cart'] = $this->language->get('text_shopping_cart');
+                $data['text_address_management'] = $this->language->get('text_address_management');
+                $data['text_my_coupons'] = $this->language->get('text_my_coupons');
+                $data['text_my_activities'] = $this->language->get('text_my_activities');
+                $data['text_account_safe'] = $this->language->get('text_account_safe');
+                $data['text_my_feedback'] = $this->language->get('text_my_feedback');
+                $data['text_customer_service'] = $this->language->get('text_customer_service');
+                $data['text_help_center'] = $this->language->get('text_help_center');
+                $data['text_log_out'] = $this->language->get('text_log_out');
+                $data['text_come_look'] = $this->language->get('text_come_look');
+                $data['text_come_play'] = $this->language->get('text_come_play');
+                $data['text_come_buy'] = $this->language->get('text_come_buy');
+                $data['text_mine'] = $this->language->get('text_mine');
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="before"><![CDATA[$data['column_left'] = $this->load->controller('common/column_left');]]></search>
+            <add><![CDATA[
+                 $this->document->addStyle('catalog/view/theme/default/css/my.css');
+
+                $this->document->addScript('catalog/view/theme/default/script/zepto.min.js','footer');
+
+                $this->document->addScript('catalog/view/theme/default/script/ok_personal_center.js','footer');
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace" ><![CDATA[$this->response->setOutput($this->load->view('account/account', $data));]]></search>
+            <add><![CDATA[
+                $this->response->setOutput($this->load->view('weixin/account', $data));
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace"><![CDATA[$data['footer'] = $this->load->controller('common/footer');]]></search>
+            <add trim="true"><![CDATA[
+              $data['footer'] = $this->load->controller('weixin/footer');
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace"><![CDATA[$data['header'] = $this->load->controller('common/header');]]></search>
+            <add trim="true"><![CDATA[
+              $data['header'] = $this->load->controller('weixin/header');
+            ]]></add>
+        </operation>
+
+        <operation>
+            <search position="replace"><![CDATA[$data['address'] = $this->url->link('account/address', '', true);]]></search>
+            <add trim="true"><![CDATA[
+              $data['edit_personal_info'] = $this->url->link('account/edit', '', true);
+              $data['shopping_cart'] = $this->url->link('checkout/cart', '', true);
+              $data['my_order'] = $this->url->link('account/order', '', true);
+              $data['my_address'] = $this->url->link('account/address', '', true);
+              $data['my_coupon'] = $this->url->link('account/coupon', '', true);
+              $data['my_activities'] = $this->url->link('account/activities', '', true);
+              $data['account_security'] = $this->url->link('weixin/account_safe', '', true);
+              $data['feedback'] = $this->url->link('information/feedback', '', true);
+              $data['customer_service'] = $this->url->link('account/address', '', true);
+              $data['help_center'] = $this->url->link('faq/faq', '', true);
+              $data['my_collect'] = $this->url->link('account/wishlist', '', true);
+              $data['my_attention'] = $this->url->link('account/attention_manufacturer', '', true);
+              $data['logout_href'] = $this->url->link('account/logout', '', true);
+              $data['amount'] = $this->cart->countProducts();
+              $this->load->model('account/customer');
+              $customer_info = $this->model_account_customer->getCustomer($this->customer->getId());
+              $customer_field_arr = json_decode($customer_info['custom_field'], true);
+              if(isset($customer_field_arr[9])){
+                $data['user_name'] = $customer_field_arr[9];
+              }else{
+              $data['user_name'] = '';
+              }
+               if ($customer_field_arr[8]) {
+                        $this->load->model('tool/image');
+                    $data['user_head'] = $this->model_tool_image->resize($customer_field_arr[8], 83, 83);
+                } else {
+                    $data['user_head'] = false;
+                }
+                $this->load->model('account/attention_buyer');
+                $this->load->model('account/attention_manufacturer');
+                $this->load->model('account/collect_article');
+                $this->load->model('account/wishlist_ext');
+                $buyer_num = $this->model_account_attention_buyer->getTotalAttentionManufacturer();
+                $manufacturer_num = $this->model_account_attention_manufacturer->getTotalAttentionManufacturer();
+                $blog_num = $this->model_account_collect_article->getTotalArticle();
+                $goods_num = $this->model_account_wishlist_ext->getTotalWishlist();
+                $data['attention_num'] = $buyer_num + $manufacturer_num;
+                $data['collect_num'] = $goods_num + $blog_num;
+            ]]></add>
+        </operation>
+
+    </file>
+
+    <file name="catalog/controller/account/logout.php">
+        <operation>
+            <search position="replace"><![CDATA[$this->response->setOutput($this->load->view('common/success', $data));]]></search>
+            <add trim="true"><![CDATA[
+               $this->response->redirect($this->url->link('weixin/home', '', true));
+            ]]></add>
+        </operation>
+    </file>
+
+    <file name="catalog/language/zh-cn/account/account.php">
+        <operation>
+            <search position="before"><![CDATA[$_['text_account']]]></search>
+            <add trim="true"><![CDATA[
+                $_['text_my_collect']       = '我的收藏';
+                $_['text_my_attention']       = '我的关注';
+                $_['text_shopping_cart']       = '购物车';
+                $_['text_address_management']       = '地址管理';
+                $_['text_my_coupons']       = '优惠券';
+                $_['text_my_activities']       = '我的活动';
+                $_['text_account_safe']       = '账户安全';
+                $_['text_my_feedback']       = '意见反馈';
+                $_['text_customer_service']       = '联系客服';
+                $_['text_help_center']       = '帮助中心';
+                $_['text_log_out']       = '退出登陆';
+                $_['text_come_look']       = '来看';
+                $_['text_come_play']       = '来玩';
+                $_['text_come_buy']       = '来买';
+                $_['text_mine']       = '我的';
+            ]]></add>
+        </operation>
+    </file>
+
+    <file name="catalog/language/en-gb/account/account.php">
+        <operation>
+            <search position="before"><![CDATA[$_['text_account']]]></search>
+            <add trim="true"><![CDATA[
+                $_['text_my_collect']       = 'My collect';
+                $_['text_my_attention']       = 'My attention';
+                $_['text_shopping_cart']       = 'Shopping cart';
+                $_['text_address_management']       = 'Address management';
+                $_['text_my_coupons']       = 'My coupons';
+                $_['text_my_activities']       = 'My activities';
+                $_['text_account_safe']       = 'Account safe';
+                $_['text_my_feedback']       = 'My feedback';
+                $_['text_customer_service']       = 'Customer service';
+                $_['text_help_center']       = 'Help center';
+                $_['text_log_out']       = 'Log out';
+                $_['text_come_look']       = 'Come look';
+                $_['text_come_play']       = 'Text come play';
+                $_['text_come_buy']       = 'Text come by';
+                $_['text_mine']       = 'Mine';
+            ]]></add>
+        </operation>
+    </file>
+
+</modification>

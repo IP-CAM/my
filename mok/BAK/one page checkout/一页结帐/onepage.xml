@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+  <name>Viethemes - Redirect to Cart Page after Product Added</name>
+  <code>viethemes_redirect_to_cart_page_after_product_added</code>
+  <version>1.0</version>
+  <author>Viethemes</author>
+  <link>http://www.viethemes.com</link>
+
+	<file path="catalog/controller/checkout/cart.php">
+		<operation>
+			<search><![CDATA[	$data['checkout'] = $this->url->link('checkout/checkout', '', true); ]]></search>
+			<add position="replace" ><![CDATA[ $data['checkout'] = $this->url->link('checkout/onepagecheckout', '', true);	]]></add>
+		</operation>
+	</file>
+</modification>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="cn">
+<head>
+<meta charset="UTF-8" />
+<title>视频</title>
+<script type="text/javascript" src="./jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="./jquery.uploadify.min.js"></script>
+<link rel="stylesheet" type="text/css" href="./uploadify.css">
+</head>
+<body>
+    <form action="uploadify.php" method="post" enctype="multipart/form-data">
+        <input type="file" name="Filedata" id = “file_upload” multiple="true"/>
+        <input type="submit" id="">
+    </form>
+</body>
+</html>
+<script type="text/javascript">
+    var maxFileSize = 10 * 1024 * 1024;
+    /**
+     * @title 上传图片
+     * @author zhoudong
+     */
+    $(function(){
+        $("#file_upload").uploadify({
+            'debug'     : false, //开启调试
+            'auto'      :true,  //是否自动上传
+            'buttonText':'选择照片',  //按钮上的文字
+            'swf'       : "./uploadify.swf",//flash
+            'queueID'   :'uploadfileQueue',  //文件选择后的容器ID
+            'uploader'  :'./uploadify.php',  //后台action
+            'width'     :'75',  //按钮宽度
+            'height'    :'24',  //按钮高度
+            'multi'     :true,  //是否支持多文件上传，默认就是true
+            'fileObjName':'fileData',//后台接收的参数，如：使用struts2上传时，后台有get,set方法的接收参数
+            'fileTypeDesc':'支持的格式：',//  可选择文件类型说明
+            'fileTypeExts':'*.jpg;*.jpge;*.gif;*.png',  //允许上传文件的类型
+            'fileSizeLimit': maxFileSize,  //文件上传的最大大小
+            'removeTimeout':1,
+            //返回一个错误，选择文件的时候触发
+            'onSelectError':function(file, errorCode, errorMsg){
+                switch(errorCode) {
+                    case -100:
+                        alert("上传的文件数量已经超出系统限制的"+$('#file_upload').uploadify('settings','queueSizeLimit')+"个文件！");
+                        break;
+                    case -110:
+                        alert("文件 ["+file.name+"] 大小超出系统限制的"+$('#file_upload').uploadify('settings','fileSizeLimit')+"大小！");
+                        break;
+                    case -120:
+                        alert("文件 ["+file.name+"] 大小异常！");
+                        break;
+                    case -130:
+                        alert("文件 ["+file.name+"] 类型不正确！");
+                        break;
+                }
+            },
+            //检测FLASH失败调用
+            'onFallback':function(){
+                alert("您未安装FLASH控件，无法上传图片！请安装FLASH控件后再试。");
+            },
+            'onSelect': function(file){
+                $("#alertDiv").text("正在上传...");
+                $("#alertDiv").show();
+            },
+            //上传到服务器，服务器返回相应信息到data里
+            'onUploadSuccess':function(file, data, response){
+                var json = eval("(" + data + ")");
+                //如需上传后生成预览，可在此操作
+                alert(json);
+            },
+            'onQueueComplete': function(queueData){ //队列里所有的文件处理完成后调用
+                alert(queueData.uploadsSuccessful);
+            }
+        });
+    });
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
