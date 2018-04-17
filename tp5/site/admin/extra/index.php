@@ -6,7 +6,7 @@
 # +----------------------------------------------------------------------
 # | Author: theseaer <theseaer@qq.com>
 # +----------------------------------------------------------------------
-# | By ShopCmf Auto Create File Version 2017/09/28 10:03:04
+# | By ShopCmf Auto Create File Version 2018/04/17 23:17:04
 # +----------------------------------------------------------------------
 
 return array (
@@ -42,8 +42,8 @@ return array (
   'cookieprefix' => '4ZgfDMFz',
   'cookieexpire' => '86400',
   'sessionprefix' => 'FwpFMKbA',
-  'sub_domain_status' => '1',
-  'main_domain' => 'localhost.com',
+  'sub_domain_status' => '0',
+  'main_domain' => '',
   'sendtype' => '0',
   'sendaddr' => '502204678@qq.com',
   'emailsafe' => 'SSL',

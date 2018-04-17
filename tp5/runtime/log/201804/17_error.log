@@ -1,0 +1,61 @@
+---------------------------------------------------------------
+[ 2018-04-17T23:11:43+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php/crossbbcg/
+[ error ] [8]PDO::__construct(): send of 5 bytes failed with errno=10053 �������е�����ֹ��һ���ѽ�������ӡ�
+[D:\git\my\tp5\core\library\think\db\Connection.php:293]
+---------------------------------------------------------------
+[ 2018-04-17T23:12:33+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php/admin/passport/gt?t=1523977952794
+[ error ] [2048]Static function app\common\libs\Vercode::create() should not be abstract[D:\git\my\tp5\site\common\libs\Vercode.php:23]
+---------------------------------------------------------------
+[ 2018-04-17T23:14:21+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php/admin/passport/gt?t=1523978061718
+[ error ] [2048]Static function app\common\libs\Vercode::create() should not be abstract[D:\git\my\tp5\site\common\libs\Vercode.php:23]
+---------------------------------------------------------------
+[ 2018-04-17T23:14:30+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php/admin/config/index
+[ error ] [2048]Static function app\common\libs\Vercode::create() should not be abstract[D:\git\my\tp5\site\common\libs\Vercode.php:23]
+[ error ] [2048]Static function app\common\libs\Baseexted::setup() should not be abstract[D:\git\my\tp5\site\common\libs\Baseexted.php:26]
+[ error ] [2048]Static function app\common\libs\Sms::send() should not be abstract[D:\git\my\tp5\site\common\libs\Sms.php:18]
+[ error ] [2048]Static function app\common\libs\Sms::response() should not be abstract[D:\git\my\tp5\site\common\libs\Sms.php:21]
+---------------------------------------------------------------
+[ 2018-04-17T23:15:01+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php/crossbbcg/admin.config/index
+[ error ] [8]未定义数组索引: stockdowntime[D:\git\my\tp5\runtime\temp\879d129254252b8a8da9c0cb4955396f.php:419]
+[ error ] [8]未定义数组索引: stockdowntime[D:\git\my\tp5\runtime\temp\879d129254252b8a8da9c0cb4955396f.php:421]
+[ error ] [2048]Static function app\common\libs\Realname::check() should not be abstract[D:\git\my\tp5\site\common\libs\Realname.php:23]
+[ error ] [2048]Static function app\common\libs\Baseexted::setup() should not be abstract[D:\git\my\tp5\site\common\libs\Baseexted.php:26]
+[ error ] [8]未定义数组索引: apppush[D:\git\my\tp5\runtime\temp\879d129254252b8a8da9c0cb4955396f.php:873]
+[ error ] [8]未定义数组索引: wechatautoreg[D:\git\my\tp5\runtime\temp\879d129254252b8a8da9c0cb4955396f.php:915]
+[ error ] [8]未定义数组索引: wechatjssdk[D:\git\my\tp5\runtime\temp\879d129254252b8a8da9c0cb4955396f.php:929]
+---------------------------------------------------------------
+[ 2018-04-17T23:15:24+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php/crossbbcg/admin.config/sync
+[ error ] [8]未定义数组索引: deliverystatus[D:\git\my\tp5\runtime\temp\203d01d4965d473b11cebe8f9a620627.php:307]
+---------------------------------------------------------------
+[ 2018-04-17T23:15:28+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php/crossbbcg/admin.payment/index
+[ error ] [2048]Static function app\common\libs\Baseexted::setup() should not be abstract[D:\git\my\tp5\site\common\libs\Baseexted.php:26]
+---------------------------------------------------------------
+[ 2018-04-17T23:15:30+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php/crossbbcg/admin.config/index
+[ error ] [8]未定义数组索引: stockdowntime[D:\git\my\tp5\runtime\temp\879d129254252b8a8da9c0cb4955396f.php:419]
+[ error ] [8]未定义数组索引: stockdowntime[D:\git\my\tp5\runtime\temp\879d129254252b8a8da9c0cb4955396f.php:421]
+[ error ] [2048]Static function app\common\libs\Realname::check() should not be abstract[D:\git\my\tp5\site\common\libs\Realname.php:23]
+[ error ] [2048]Static function app\common\libs\Baseexted::setup() should not be abstract[D:\git\my\tp5\site\common\libs\Baseexted.php:26]
+[ error ] [8]未定义数组索引: apppush[D:\git\my\tp5\runtime\temp\879d129254252b8a8da9c0cb4955396f.php:873]
+[ error ] [8]未定义数组索引: wechatautoreg[D:\git\my\tp5\runtime\temp\879d129254252b8a8da9c0cb4955396f.php:915]
+[ error ] [8]未定义数组索引: wechatjssdk[D:\git\my\tp5\runtime\temp\879d129254252b8a8da9c0cb4955396f.php:929]
+---------------------------------------------------------------
+[ 2018-04-17T23:16:17+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php/admin/config/index
+[ error ] [2048]Static function app\common\libs\Vercode::create() should not be abstract[D:\git\my\tp5\site\common\libs\Vercode.php:23]
+[ error ] [2048]Static function app\common\libs\Baseexted::setup() should not be abstract[D:\git\my\tp5\site\common\libs\Baseexted.php:26]
+[ error ] [2048]Static function app\common\libs\Sms::send() should not be abstract[D:\git\my\tp5\site\common\libs\Sms.php:18]
+[ error ] [2048]Static function app\common\libs\Sms::response() should not be abstract[D:\git\my\tp5\site\common\libs\Sms.php:21]
+---------------------------------------------------------------
+[ 2018-04-17T23:16:53+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php/admin/config/index
+[ error ] [2048]Static function app\common\libs\Vercode::create() should not be abstract[D:\git\my\tp5\site\common\libs\Vercode.php:23]
+[ error ] [2048]Static function app\common\libs\Baseexted::setup() should not be abstract[D:\git\my\tp5\site\common\libs\Baseexted.php:26]
+[ error ] [2048]Static function app\common\libs\Sms::send() should not be abstract[D:\git\my\tp5\site\common\libs\Sms.php:18]
+[ error ] [2048]Static function app\common\libs\Sms::response() should not be abstract[D:\git\my\tp5\site\common\libs\Sms.php:21]
+---------------------------------------------------------------
+[ 2018-04-17T23:17:06+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php/admin/config/index
+[ error ] [2048]Static function app\common\libs\Vercode::create() should not be abstract[D:\git\my\tp5\site\common\libs\Vercode.php:23]
+[ error ] [2048]Static function app\common\libs\Baseexted::setup() should not be abstract[D:\git\my\tp5\site\common\libs\Baseexted.php:26]
+[ error ] [2048]Static function app\common\libs\Sms::send() should not be abstract[D:\git\my\tp5\site\common\libs\Sms.php:18]
+[ error ] [2048]Static function app\common\libs\Sms::response() should not be abstract[D:\git\my\tp5\site\common\libs\Sms.php:21]
+---------------------------------------------------------------
+[ 2018-04-17T23:17:19+08:00 ] 127.0.0.1 127.0.0.1 POST /index.php/crossbbcg/goods/shippingprice
+[ error ] [8]未定义数组索引: thumb[D:\git\my\tp5\site\bcwareexp\service\Expresstpl.php:72]

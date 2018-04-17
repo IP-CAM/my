@@ -43,8 +43,8 @@ class Admin extends Base
     public function _initialize()
     {
         // 判断是否登录，并定义用户ID常量
-        defined('UID') or define('UID',is_sign());
-        if (!UID) $this->redirect('admin/passport/login');
+        //defined('UID') or define('UID',is_sign());
+        //if (!UID) $this->redirect('admin/passport/login');
         parent::_initialize();
         
         parent::sendMsg([]);
