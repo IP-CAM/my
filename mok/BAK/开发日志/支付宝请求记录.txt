@@ -1,4 +1,4 @@
-https://www.alipay.com/cooperate/gateway.do?
+﻿https://www.alipay.com/cooperate/gateway.do?
 _input_charset=utf-8
 &logistics_fee=0.00
 &logistics_payment=SELLER_PAY
@@ -45,7 +45,7 @@ https://mapi.alipay.com/gateway.do?_input_charset=utf-8&body=%E6%82%A8%E5%9C%A8%
 支付宝的异步通知,或同步通知URL只能设置一个
 微信支付可以设置3个,另外可以添加一个测试url
 
-华强北商城的交易订单ID,唯一性,跟本地网站的数据库ID挂钩
+商城的交易订单ID,唯一性,跟本地网站的数据库ID挂钩
 15位的订单号
 148421860188427
 148421939416473

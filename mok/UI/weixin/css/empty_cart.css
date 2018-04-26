@@ -1,8 +1,0 @@
-/*头部*/
-.ok_cart_header{padding:0 .7rem;height:.78rem;line-height:.78rem;background-color: #fff;border-bottom: 1px solid #eaeaea;}
-.ok_header{position:relative;font-size: .28rem;color:#888;text-align: center;}
-.ok_header:before{content:'';display: block;position: absolute;top:.38rem;left:.14rem;width: .06rem;height:.06rem;border-radius:50%;background-color: #ef4f3e;}
-/*内容*/
-.ok_cart_img{margin:3.2rem auto .46rem;width:1.19rem;height:1.17rem;}
-.ok_cart_tip{text-align: center;font-size: .28rem;color:#888;}
-.ok_out_cart{display:block;margin:.6rem auto 0;width:2.0rem;height:.8rem;line-height: .8rem;text-align: center;font-size: .3rem;color:#fff;font-weight: 400;background: #ef4f3e;border-radius:.08rem;}
