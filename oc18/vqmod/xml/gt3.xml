@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>gt3</id>
+	<version>1</version>
+	<vqmver required="true">2.5.0</vqmver>
+	<author>Wang</author>
+	
+	<file name="catalog/controller/account/register.php">
+		<operation>
+			<search position="after"><![CDATA[$this->document->setTitle($this->language->get('heading_title'));]]></search>
+			<add trim="true"><![CDATA[
+			$this->document->addScript('catalog/controller/account/gt3/gt.js');
+			$data['lang'] = $this->config->get('config_language');
+			$data['text_gt_wait'] = $this->language->get('text_gt_wait');
+			$data['text_gt_stop'] = $this->language->get('text_gt_stop');
+		
+			]]></add>
+		</operation>				<operation>			<search position="before">			<![CDATA[class ControllerAccountRegister extends Controller {]]>			</search>			<add trim="true">			<![CDATA[require_once './catalog/controller/account/gt3/class.geetestlib.php';]]>			</add>		</operation>		<operation>			<search position="before">			<![CDATA[return !$this->error;]]>			</search>			<add trim="true">			<![CDATA[			$GtSdk = new GeetestLib('2371cf52c8e47eeeb84d6a7c1952d402', 'cf1a0edce8489e376fd41a2bf058ddd6');$data = array(        "user_id" => $_SESSION['user_id'],         "client_type" => "web",         "ip_address" => $_SESSION['user_id']     );if ($_SESSION['gtserver'] == 1) {      $result = $GtSdk->success_validate($_POST['geetest_challenge'], $_POST['geetest_validate'], $_POST['geetest_seccode'], $data);    if (!$result) {        $this->error['warning'] = $this->language->get('text_gt_stop');    }}else{      if (!$GtSdk->fail_validate($_POST['geetest_challenge'],$_POST['geetest_validate'],$_POST['geetest_seccode'])) {        $this->error['warning'] = $this->language->get('text_gt_stop');    }}			]]>			</add>		</operation>		
+	</file>		<file name="catalog/controller/information/contact.php">		<operation>			<search position="after" index="1"><![CDATA[$this->document->setTitle($this->language->get('heading_title'));]]></search>			<add trim="true"><![CDATA[			$this->document->addScript('catalog/controller/account/gt3/gt.js');			$data['lang'] = $this->config->get('config_language');			$data['text_gt_wait'] = $this->language->get('text_gt_wait');			$data['text_gt_stop'] = $this->language->get('text_gt_stop');					]]></add>		</operation>				<operation>			<search position="before">			<![CDATA[class ControllerInformationContact extends Controller {]]>			</search>			<add trim="true">			<![CDATA[require_once './catalog/controller/account/gt3/class.geetestlib.php';]]>			</add>		</operation>		<operation>			<search position="before">			<![CDATA[return !$this->error;]]>			</search>			<add trim="true">			<![CDATA[			$GtSdk = new GeetestLib('2371cf52c8e47eeeb84d6a7c1952d402', 'cf1a0edce8489e376fd41a2bf058ddd6');$data = array(        "user_id" => $_SESSION['user_id'],         "client_type" => "web",         "ip_address" => $_SESSION['user_id']     );if ($_SESSION['gtserver'] == 1) {      $result = $GtSdk->success_validate($_POST['geetest_challenge'], $_POST['geetest_validate'], $_POST['geetest_seccode'], $data);    if (!$result) {        $this->error['warning'] = $this->language->get('text_gt_stop');    }}else{      if (!$GtSdk->fail_validate($_POST['geetest_challenge'],$_POST['geetest_validate'],$_POST['geetest_seccode'])) {        $this->error['warning'] = $this->language->get('text_gt_stop');    }}			]]>			</add>		</operation>	</file>
+	
+	<file name="catalog/language/english/account/register.php">
+		<operation>
+			<search error="skip" position="before"><![CDATA[$_['heading_title']]]></search>
+			<add><![CDATA[
+			$_['text_gt_wait'] = 'Loading verification code...';
+			$_['text_gt_stop'] = 'Please finish verification!';
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/language/zh-CN/account/register.php">
+		<operation>
+			<search error="skip" position="before"><![CDATA[$_['heading_title']]]></search>
+			<add><![CDATA[
+			$_['text_gt_wait'] = '正在加载验证码...';
+			$_['text_gt_stop'] = '请先完成验证!';
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/language/zh-HK/account/register.php">
+		<operation>
+			<search error="skip" position="before"><![CDATA[$_['heading_title']]]></search>
+			<add><![CDATA[
+			$_['text_gt_wait'] = '正在加載驗證碼...';
+			$_['text_gt_stop'] = '請先完成驗證!';
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/language/english/information/contact.php">		<operation>			<search error="skip" position="before"><![CDATA[$_['heading_title']]]></search>			<add><![CDATA[			$_['text_gt_wait'] = 'Loading verification code...';			$_['text_gt_stop'] = 'Please finish verification!';			]]></add>		</operation>	</file>	<file name="catalog/language/zh-CN/information/contact.php">		<operation>			<search error="skip" position="before"><![CDATA[$_['heading_title']]]></search>			<add><![CDATA[			$_['text_gt_wait'] = '正在加载验证码...';			$_['text_gt_stop'] = '请先完成验证!';			]]></add>		</operation>	</file>	<file name="catalog/language/zh-HK/information/contact.php">		<operation>			<search error="skip" position="before"><![CDATA[$_['heading_title']]]></search>			<add><![CDATA[			$_['text_gt_wait'] = '正在加載驗證碼...';			$_['text_gt_stop'] = '請先完成驗證!';			]]></add>		</operation>	</file>			
+	<file name="catalog/view/theme/megashop/template/account/register.tpl">
+		<operation>
+			<search position="before"><![CDATA[<?php if ($text_agree) { ?>]]></search>
+			<add trim="true"><![CDATA[
+			<div id="embed-captcha" class="pull-right" style="margin-bottom:10px;"></div>
+    <!--
+	<p id="wait" class="show pull-right"><?php echo $text_gt_wait; ?></p>
+	-->	<div style="clear: right;text-align: right;">
+    <p id="notice" class="hide" style="color:red;"><?php echo $text_gt_stop; ?></p>	</div>
+
+    
+	<script>
+    var handlerEmbed = function (captchaObj) {
+        $("#embed-submit").click(function (e) {
+            var validate = captchaObj.getValidate();
+            if (!validate) {
+                $("#notice")[0].className = "show";
+                setTimeout(function () {
+                    $("#notice")[0].className = "hide";
+                }, 2000);
+                e.preventDefault();
+            }
+        });
+        // 将验证码加到id为captcha的元素里，同时会有三个input的值：geetest_challenge, geetest_validate, geetest_seccode
+        captchaObj.appendTo("#embed-captcha");
+        captchaObj.onReady(function () {
+            //$("#wait")[0].className = "hide";
+        });
+        // 更多接口参考：http://www.geetest.com/install/sections/idx-client-sdk.html
+    };
+    $.ajax({
+        // 获取id，challenge，success（是否启用failback）
+        url: "./catalog/controller/account/gt3/StartCaptchaServlet.php?t=" + (new Date()).getTime(), // 加随机数防止缓存
+        type: "get",
+        dataType: "json",
+        success: function (data) {
+            console.log(data);
+            // 使用initGeetest接口
+            // 参数1：配置参数
+            // 参数2：回调，回调的第一个参数验证码对象，之后可以使用它做appendTo之类的事件
+            initGeetest({
+				lang: '<?php echo $lang; ?>',  // 语言
+				width: '300px', // 宽度 min-width: 260px;
+                gt: data.gt,
+                challenge: data.challenge,
+                new_captcha: data.new_captcha,
+                product: "float", // 产品形式，包括：float，embed，popup。注意只对PC版验证码有效
+                offline: !data.success // 表示用户后台检测极验服务器是否宕机，一般不需要关注
+                // 更多配置参数请参见：http://www.geetest.com/install/sections/idx-client-sdk.html#config
+            }, handlerEmbed);
+        }
+    });
+</script>
+			]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[<input type="submit" value="<?php echo $button_continue; ?>" class="btn btn-outline" />]]></search>
+			<add trim="true"><![CDATA[						<input type="submit" value="<?php echo $button_continue; ?>" class="btn btn-outline" id="embed-submit"/>
+		
+			]]></add>
+		</operation>
+		
+	</file>			<file name="catalog/view/theme/megashop/template/information/contact.tpl">		<operation>			<search position="before"><![CDATA[<div class="buttons">]]></search>			<add trim="true"><![CDATA[			<div id="embed-captcha" class="pull-right" style="margin-bottom:10px;"></div>    <!--	<p id="wait" class="show"><?php echo $text_gt_wait; ?></p>	-->	<div style="clear: right;text-align: right;">    <p id="notice" class="hide" style="color:red;"><?php echo $text_gt_stop; ?></p>	</div>    	<script>    var handlerEmbed = function (captchaObj) {        $("#embed-submit").click(function (e) {            var validate = captchaObj.getValidate();            if (!validate) {                $("#notice")[0].className = "show";                setTimeout(function () {                    $("#notice")[0].className = "hide";                }, 2000);                e.preventDefault();            }        });                captchaObj.appendTo("#embed-captcha");        captchaObj.onReady(function () {                    });            };    $.ajax({               url: "./catalog/controller/account/gt3/StartCaptchaServlet.php?t=" + (new Date()).getTime(),         type: "get",        dataType: "json",        success: function (data) {            console.log(data);                        initGeetest({				lang: '<?php echo $lang; ?>',  				width: '300px',                 gt: data.gt,                challenge: data.challenge,                new_captcha: data.new_captcha,                product: "float",                 offline: !data.success                             }, handlerEmbed);        }    });</script>			]]></add>		</operation>		<operation>			<search position="replace"><![CDATA[<input class="btn btn-outline" type="submit" value="<?php echo $button_submit; ?>" />]]></search>			<add trim="true"><![CDATA[						<input class="btn btn-outline" type="submit" value="<?php echo $button_submit; ?>" id="embed-submit" />								]]></add>		</operation>			</file>
+
+</modification>

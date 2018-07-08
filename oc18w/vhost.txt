@@ -1,0 +1,20 @@
+server {
+        server_name  oc18w.localweb.com ;
+        root   "D:/git/my/oc18w";
+	index index.html index.php;
+        location ~* \.(ico|css|js|gif|jpe?g|png)(\?[0-9]+)?$ {
+		expires max; 
+		log_not_found off;
+	}
+	location / {
+		try_files $uri $uri/ /index.php;
+	}
+	location ~* \.php$ {
+		fastcgi_pass 127.0.0.1:9000; 
+		include fastcgi.conf;
+	}
+        location ~ /files {
+		deny all; 
+		return 404;
+	}
+}

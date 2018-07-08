@@ -1,0 +1,39 @@
+.qc-left{
+	float:left;
+	width:50%;
+	margin-top:5px;
+	overflow:hidden;
+}
+.qc-right{
+	float:right;
+	width:50%;
+	margin-top:5px;
+	overflow:hidden;
+}
+.qc-right .panel{
+	margin-left:10px;
+}
+.qc-nav{
+	margin-bottom:5px;
+	overflow:hidden;
+}
+.qc-nav-left{
+	float:left;
+	width:50%;
+}
+.qc-nav-left + .qc-nav-right{
+	float:right;
+	width:50%;
+}
+
+@media only screen and (min-width: 0px) and (max-width: 1024px) {
+	.qc-mobile{
+		float:none;
+		width:auto;
+		margin-bottom:5px;
+	}
+	
+	.qc-right .panel{
+		margin:0px;
+	}
+}

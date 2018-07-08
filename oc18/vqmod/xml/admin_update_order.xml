@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<modification>
+<id>Update Order List</id>
+<version>2.0.1.1 for opencart</version>
+<vqmver required="true">2.5.0</vqmver>
+<author>Wang Sheng</author>
+<file name="2015admin/model/sale/customer.php">
+	<operation>
+		<search position="before" index="1"><![CDATA[if (!empty($data['filter_email'])) ]]></search>
+		<add><![CDATA[if (!empty($data['filter_telephone'])) {
+			$implode[] = "c.telephone LIKE '" . $this->db->escape($data['filter_telephone']) . "%'";
+		}]]></add>
+	</operation>
+</file>
+<file name="2015admin/model/sale/order.php">
+	<operation>
+		<search position="after"><![CDATA[class ModelSaleOrder extends Model {]]></search>
+		<add><![CDATA[
+		public function getOrdersByAutocomplete($data=array()){
+		switch ($data['request_from']){
+			case 'payment_country':
+			$sql = "SELECT DISTINCT o.payment_country, o.order_id, CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status, o.payment_country_id, o.shipping_country, o.shipping_country_id, o.payment_method, o.payment_code, o.shipping_method, o.shipping_code, o.ip, o.currency_code FROM `" . DB_PREFIX . "order` o";
+			break;
+			case 'shipping_country':
+			$sql = "SELECT DISTINCT o.shipping_country, o.order_id, CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status, o.payment_country, o.payment_country_id, o.shipping_country_id, o.payment_method, o.payment_code, o.shipping_method, o.shipping_code, o.ip, o.currency_code FROM `" . DB_PREFIX . "order` o";
+			break;
+			case 'payment_method':
+			$sql = "SELECT DISTINCT o.payment_method, o.order_id, CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status, o.payment_country, o.payment_country_id, o.shipping_country, o.shipping_country_id, o.payment_code, o.shipping_method, o.shipping_code, o.ip, o.currency_code FROM `" . DB_PREFIX . "order` o";
+			break;
+			case 'shipping_method':
+			$sql = "SELECT DISTINCT o.shipping_method, o.order_id, CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status, o.payment_country, o.payment_country_id, o.shipping_country, o.shipping_country_id, o.payment_method, o.payment_code, o.shipping_code, o.ip, o.currency_code FROM `" . DB_PREFIX . "order` o";
+			break;
+			case 'ip':
+			$sql = "SELECT DISTINCT o.ip, o.order_id, CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status, o.payment_country, o.payment_country_id, o.shipping_country, o.shipping_country_id, o.payment_method, o.payment_code, o.shipping_method, o.shipping_code, o.currency_code FROM `" . DB_PREFIX . "order` o";
+			break;
+			case 'currency_code':
+			$sql = "SELECT DISTINCT o.currency_code, o.order_id, CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status, o.payment_country, o.payment_country_id, o.shipping_country, o.shipping_country_id, o.payment_method, o.payment_code, o.shipping_method, o.shipping_code, o.ip FROM `" . DB_PREFIX . "order` o";
+			break;
+			default:
+			$sql = "SELECT o.order_id, CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status, o.payment_country, o.payment_country_id, o.shipping_country, o.shipping_country_id, o.payment_method, o.payment_code, o.shipping_method, o.shipping_code, o.ip, o.currency_code FROM `" . DB_PREFIX . "order` o";
+			
+		}
+		
+		$sql .= " WHERE o.order_status_id > '0'";
+		
+
+
+		if (!empty($data['payment_country'])) {
+			$sql .= " AND o.payment_country LIKE '" . $this->db->escape($data['payment_country']) . "%'";
+		}
+		
+		if (!empty($data['shipping_country'])) {
+			$sql .= " AND o.shipping_country LIKE '" . $this->db->escape($data['shipping_country']) . "%'";
+		}
+		
+		if (!empty($data['payment_method'])) {
+			$sql .= " AND o.payment_method LIKE '" . $this->db->escape($data['payment_method']) . "%'";
+		}
+		if (!empty($data['shipping_method'])) {
+			$sql .= " AND o.shipping_method LIKE '" . $this->db->escape($data['shipping_method']) . "%'";
+		}
+		if (!empty($data['ip'])) {
+			$sql .= " AND o.ip LIKE '" . $this->db->escape($data['ip']) . "%'";
+		}
+		if (!empty($data['currency_code'])) {
+			$sql .= " AND o.currency_code LIKE '" . $this->db->escape($data['currency_code']) . "%'";
+		}
+
+
+		$sort_data = array(
+			'o.order_id',
+			'customer',
+			'status',
+			'o.date_added',
+			'o.date_modified',
+			'o.total'
+		);
+		
+		switch ($data['request_from']){
+			case 'payment_country':
+			$sql .= " GROUP BY o.payment_country";
+			break;
+			case 'shipping_country':
+			$sql .= " GROUP BY o.shipping_country";
+			break;
+			case 'payment_method':
+			$sql .= " GROUP BY o.payment_method";
+			break;
+			case 'shipping_method':
+			$sql .= " GROUP BY o.shipping_method";
+			break;
+			case 'ip':
+			$sql .= " GROUP BY o.ip";
+			break;
+			case 'currency_code':
+			$sql .= " GROUP BY o.currency_code";
+			break;
+			default:
+			$sql .= " GROUP BY o.order_id";
+		}
+		
+		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
+			$sql .= " ORDER BY " . $data['sort'];
+		} else {
+			$sql .= " ORDER BY o.order_id";
+		}
+
+		if (isset($data['order']) && ($data['order'] == 'DESC')) {
+			$sql .= " DESC";
+		} else {
+			$sql .= " ASC";
+		}
+
+		if (isset($data['start']) || isset($data['limit'])) {
+			if ($data['start'] < 0) {
+				$data['start'] = 0;
+			}
+
+			if ($data['limit'] < 1) {
+				$data['limit'] = 20;
+			}
+
+			$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
+		}
+
+		$query = $this->db->query($sql);
+
+		return $query->rows;
+	}
+		]]></add>
+	</operation>
+</file>
+<file name="2015admin/controller/sale/customer.php">
+	<operation>
+		<search position="replace"><![CDATA[if (isset($this->request->get['filter_name']) || isset($this->request->get['filter_email'])) {]]></search>
+		<add><![CDATA[if (isset($this->request->get['filter_name']) || isset($this->request->get['filter_email']) || isset($this->request->get['filter_telephone'])) {]]></add>
+	</operation>
+		<operation>
+			<search position="before" index="2" ><![CDATA[$filter_data = array(]]></search>
+			<add><![CDATA[
+			if (isset($this->request->get['filter_telephone'])) {
+				$filter_telephone = $this->request->get['filter_telephone'];
+			} else {
+				$filter_telephone = '';
+			}
+                ]]></add>
+		</operation>
+		<operation>
+			<search position="after" index="2" ><![CDATA[$filter_data = array(]]></search>
+			<add><![CDATA['filter_telephone'=>$filter_telephone,]]></add>
+		</operation>
+</file>
+
+
+</modification>

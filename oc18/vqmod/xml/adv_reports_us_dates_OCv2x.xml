@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>ADV Reports - Change Dates to US/English Format for OpenCart v2.x</id>
+	<version>1.0</version>
+	<vqmver>2.5.1</vqmver>
+	<author><![CDATA[<span style="color:#333; font-weight:bold;">ADV Reports and Statistics</span>]]></author>
+	<email>opencart.reports@gmail.com</email>
+	<website>http://www.opencartreports.com</website>
+
+	<file name="catalog/language/english/default.php" error="skip">
+		<operation error="skip">
+            <search position="replace"><![CDATA[$_['date_format_short']     = 'd/m/Y';]]></search>
+            <add><![CDATA[$_['date_format_short']     = 'm/d/Y';]]></add>			
+		</operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[$_['date_format_long']      = 'l dS F Y';]]></search>
+            <add><![CDATA[$_['date_format_long']      = 'l, F j, Y';]]></add>	
+		</operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[$_['datetime_format']       = 'd/m/Y H:i:s';]]></search>
+            <add><![CDATA[$_['datetime_format']       = 'm/d/Y H:i:s';]]></add>	
+		</operation>		
+	</file>
+
+	<file name="2015admin/language/english/default.php" error="skip">
+		<operation error="skip">
+            <search position="replace"><![CDATA[$_['date_format_short']             = 'd/m/Y';]]></search>
+            <add><![CDATA[$_['date_format_short']             = 'm/d/Y';]]></add>			
+		</operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[$_['date_format_long']              = 'l dS F Y';]]></search>
+            <add><![CDATA[$_['date_format_long']              = 'l, F j, Y';]]></add>	
+		</operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[$_['datetime_format']               = 'd/m/Y H:i:s';]]></search>
+            <add><![CDATA[$_['datetime_format']               = 'm/d/Y H:i:s';]]></add>	
+		</operation>		
+	</file>
+	
+	<file name="catalog/language/english/english.php" error="skip">
+		<operation error="skip">
+            <search position="replace"><![CDATA[$_['date_format_short']     = 'd/m/Y';]]></search>
+            <add><![CDATA[$_['date_format_short']     = 'm/d/Y';]]></add>			
+		</operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[$_['date_format_long']      = 'l dS F Y';]]></search>
+            <add><![CDATA[$_['date_format_long']      = 'l, F j, Y';]]></add>	
+		</operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[$_['datetime_format']       = 'd/m/Y H:i:s';]]></search>
+            <add><![CDATA[$_['datetime_format']       = 'm/d/Y H:i:s';]]></add>	
+		</operation>		
+	</file>
+
+	<file name="2015admin/language/english/english.php" error="skip">
+		<operation error="skip">
+            <search position="replace"><![CDATA[$_['date_format_short']             = 'd/m/Y';]]></search>
+            <add><![CDATA[$_['date_format_short']             = 'm/d/Y';]]></add>			
+		</operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[$_['date_format_long']              = 'l dS F Y';]]></search>
+            <add><![CDATA[$_['date_format_long']              = 'l, F j, Y';]]></add>	
+		</operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[$_['datetime_format']               = 'd/m/Y H:i:s';]]></search>
+            <add><![CDATA[$_['datetime_format']               = 'm/d/Y H:i:s';]]></add>	
+		</operation>		
+	</file>
+
+	<file name="2015admin/model/report/adv_sale_order.php" error="skip">
+        <operation>
+            <search position="replace"><![CDATA[DATE_FORMAT(o.date_added, '%d/%m/%Y')]]></search>
+            <add><![CDATA[DATE_FORMAT(o.date_added, '%m/%d/%Y')]]></add>
+        </operation>	
+	</file>	
+	
+	<file name="2015admin/model/report/adv_sale_order_export.php" error="skip">
+        <operation>
+            <search position="replace"><![CDATA[DATE_FORMAT(o.date_added, '%d/%m/%Y')]]></search>
+            <add><![CDATA[DATE_FORMAT(o.date_added, '%m/%d/%Y')]]></add>
+        </operation>	
+	</file>	
+	
+	<file name="2015admin/model/report/adv_sale_order_export_all.php" error="skip">
+        <operation>
+            <search position="replace"><![CDATA[DATE_FORMAT(o.date_added, '%d/%m/%Y')]]></search>
+            <add><![CDATA[DATE_FORMAT(o.date_added, '%m/%d/%Y')]]></add>
+        </operation>	
+	</file>	
+				
+	<file name="2015admin/model/report/adv_sale_profit.php" error="skip">
+        <operation>
+            <search position="replace"><![CDATA[DATE_FORMAT(o.date_added, '%d/%m/%Y')]]></search>
+            <add><![CDATA[DATE_FORMAT(o.date_added, '%m/%d/%Y')]]></add>
+        </operation>	
+	</file>	
+	
+	<file name="2015admin/model/report/adv_sale_profit_export.php" error="skip">
+        <operation>
+            <search position="replace"><![CDATA[DATE_FORMAT(o.date_added, '%d/%m/%Y')]]></search>
+            <add><![CDATA[DATE_FORMAT(o.date_added, '%m/%d/%Y')]]></add>
+        </operation>	
+	</file>	
+	
+	<file name="2015admin/model/report/adv_sale_profit_export_all.php" error="skip">
+        <operation>
+            <search position="replace"><![CDATA[DATE_FORMAT(o.date_added, '%d/%m/%Y')]]></search>
+            <add><![CDATA[DATE_FORMAT(o.date_added, '%m/%d/%Y')]]></add>
+        </operation>	
+	</file>	
+	
+	<file name="2015admin/model/report/adv_product_purchased.php" error="skip">
+        <operation>
+            <search position="replace"><![CDATA[DATE_FORMAT(o.date_added, '%d/%m/%Y')]]></search>
+            <add><![CDATA[DATE_FORMAT(o.date_added, '%m/%d/%Y')]]></add>
+        </operation>	
+	</file>	
+	
+	<file name="2015admin/model/report/adv_product_purchased_export.php" error="skip">
+        <operation>
+            <search position="replace"><![CDATA[DATE_FORMAT(o.date_added, '%d/%m/%Y')]]></search>
+            <add><![CDATA[DATE_FORMAT(o.date_added, '%m/%d/%Y')]]></add>
+        </operation>	
+	</file>	
+	
+	<file name="2015admin/model/report/adv_product_profit.php" error="skip">
+        <operation>
+            <search position="replace"><![CDATA[DATE_FORMAT(o.date_added, '%d/%m/%Y')]]></search>
+            <add><![CDATA[DATE_FORMAT(o.date_added, '%m/%d/%Y')]]></add>
+        </operation>	
+	</file>	
+	
+	<file name="2015admin/model/report/adv_product_profit_export.php" error="skip">
+        <operation>
+            <search position="replace"><![CDATA[DATE_FORMAT(o.date_added, '%d/%m/%Y')]]></search>
+            <add><![CDATA[DATE_FORMAT(o.date_added, '%m/%d/%Y')]]></add>
+        </operation>	
+	</file>		
+
+	<file name="2015admin/model/report/adv_customer_order.php" error="skip">
+        <operation>
+            <search position="replace"><![CDATA[DATE_FORMAT(o.date_added, '%d/%m/%Y')]]></search>
+            <add><![CDATA[DATE_FORMAT(o.date_added, '%m/%d/%Y')]]></add>
+        </operation>	
+	</file>	
+	
+	<file name="2015admin/model/report/adv_customer_order_export.php" error="skip">
+        <operation>
+            <search position="replace"><![CDATA[DATE_FORMAT(o.date_added, '%d/%m/%Y')]]></search>
+            <add><![CDATA[DATE_FORMAT(o.date_added, '%m/%d/%Y')]]></add>
+        </operation>	
+	</file>	
+	
+	<file name="2015admin/model/report/adv_customer_order_export_all.php" error="skip">
+        <operation>
+            <search position="replace"><![CDATA[DATE_FORMAT(o.date_added, '%d/%m/%Y')]]></search>
+            <add><![CDATA[DATE_FORMAT(o.date_added, '%m/%d/%Y')]]></add>
+        </operation>	
+	</file>		
+
+	<file name="2015admin/model/report/adv_customer_profit.php" error="skip">
+        <operation>
+            <search position="replace"><![CDATA[DATE_FORMAT(o.date_added, '%d/%m/%Y')]]></search>
+            <add><![CDATA[DATE_FORMAT(o.date_added, '%m/%d/%Y')]]></add>
+        </operation>	
+	</file>	
+	
+	<file name="2015admin/model/report/adv_customer_profit_export.php" error="skip">
+        <operation>
+            <search position="replace"><![CDATA[DATE_FORMAT(o.date_added, '%d/%m/%Y')]]></search>
+            <add><![CDATA[DATE_FORMAT(o.date_added, '%m/%d/%Y')]]></add>
+        </operation>	
+	</file>	
+	
+	<file name="2015admin/model/report/adv_customer_profit_export_all.php" error="skip">
+        <operation>
+            <search position="replace"><![CDATA[DATE_FORMAT(o.date_added, '%d/%m/%Y')]]></search>
+            <add><![CDATA[DATE_FORMAT(o.date_added, '%m/%d/%Y')]]></add>
+        </operation>	
+	</file>											
+</modification>

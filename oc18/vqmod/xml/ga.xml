@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <id>ga广告</id>
+    <version>1</version>
+    <vqmver>2.4.1</vqmver>
+    <author>wang</author>
+
+    <file name="catalog/controller/checkout/success.php">
+        <operation>
+            <search position="after"><![CDATA[$this->load->language('checkout/success');]]></search>
+            <add><![CDATA[		
+			if (isset($this->session->data['order_id'])) {
+			$data['order_id'] = $this->session->data['order_id'];
+			
+			$this->load->model('checkout/order');
+			$order = $this->model_checkout_order->getOrder($this->session->data['order_id']);
+			$data['totals'] = $order['total'];
+			$data['currency_code'] = $order['currency_code'];
+			}
+		]]></add>
+        </operation>
+    </file>
+	
+	<file name="catalog/view/theme/*/template/common/success.tpl">
+		<operation>
+			<search position="before"><![CDATA[<?php echo $footer; ?>]]></search>
+			<add><![CDATA[<?php if(isset($order_id) && isset($totals)) { ?>
+<script type="text/javascript">
+
+var google_conversion_id = 846520229;
+var google_conversion_label = "3UZDCOCQ73MQpb_TkwM";
+var google_conversion_value = <?php echo $totals; ?>;
+var google_conversion_currency = "<?php echo $currency_code; ?>";
+var google_remarketing_only = false;
+
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/846520229/?value=<?php echo $totals; ?>&amp;currency_code=<?php echo $currency_code; ?>&amp;label=3UZDCOCQ73MQpb_TkwM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+
+<?php } ?>]]></add>
+		</operation>
+	</file>
+
+</modification>

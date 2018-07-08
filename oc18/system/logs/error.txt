@@ -1,0 +1,29 @@
+2018-07-08 11:07:22 - PHP Notice:  Uninitialized string offset: 10 in D:\git\my\oc18\vqmod\vqcache\vq2-catalog_controller_common_home.php on line 21
+2018-07-08 11:07:22 - PHP Notice:  Error: Unknown column 'code' in 'where clause'<br />Error No: 1054<br /> Error in: <b>D:\git\my\oc18\catalog\model\setting\setting.php</b> line <b>6</b><br />SELECT * FROM oc_setting WHERE store_id = '0' AND `code` = 'pavverticalmenu_params' in D:\git\my\oc18\system\library\db\mysql.php on line 53
+2018-07-08 11:07:22 - PHP Notice:  Trying to get property of non-object in D:\git\my\oc18\catalog\model\setting\setting.php on line 8
+2018-07-08 11:07:22 - PHP Warning:  Invalid argument supplied for foreach() in D:\git\my\oc18\catalog\model\setting\setting.php on line 8
+2018-07-08 11:07:22 - PHP Notice:  Undefined variable: button_wishlist in D:\git\my\oc18\catalog\view\theme\default\template\module\pavproducttabs.tpl on line 169
+2018-07-08 11:07:22 - PHP Notice:  Undefined variable: button_compare in D:\git\my\oc18\catalog\view\theme\default\template\module\pavproducttabs.tpl on line 171
+2018-07-08 11:07:22 - PHP Notice:  Undefined variable: button_wishlist in D:\git\my\oc18\catalog\view\theme\default\template\module\pavproducttabs.tpl on line 169
+2018-07-08 11:07:22 - PHP Notice:  Undefined variable: button_compare in D:\git\my\oc18\catalog\view\theme\default\template\module\pavproducttabs.tpl on line 171
+2018-07-08 11:07:22 - PHP Notice:  Undefined variable: button_wishlist in D:\git\my\oc18\catalog\view\theme\default\template\module\pavproducttabs.tpl on line 169
+2018-07-08 11:07:22 - PHP Notice:  Undefined variable: button_compare in D:\git\my\oc18\catalog\view\theme\default\template\module\pavproducttabs.tpl on line 171
+2018-07-08 11:07:22 - PHP Notice:  Undefined variable: button_wishlist in D:\git\my\oc18\catalog\view\theme\default\template\module\pavproducttabs.tpl on line 169
+2018-07-08 11:07:22 - PHP Notice:  Undefined variable: button_compare in D:\git\my\oc18\catalog\view\theme\default\template\module\pavproducttabs.tpl on line 171
+2018-07-08 11:07:22 - PHP Notice:  Undefined variable: button_wishlist in D:\git\my\oc18\catalog\view\theme\default\template\module\pavproducttabs.tpl on line 169
+2018-07-08 11:07:22 - PHP Notice:  Undefined variable: button_compare in D:\git\my\oc18\catalog\view\theme\default\template\module\pavproducttabs.tpl on line 171
+2018-07-08 11:07:22 - PHP Notice:  Undefined variable: button_wishlist in D:\git\my\oc18\catalog\view\theme\default\template\module\pavproducttabs.tpl on line 169
+2018-07-08 11:07:22 - PHP Notice:  Undefined variable: button_compare in D:\git\my\oc18\catalog\view\theme\default\template\module\pavproducttabs.tpl on line 171
+2018-07-08 11:07:22 - PHP Notice:  Undefined variable: button_wishlist in D:\git\my\oc18\catalog\view\theme\default\template\module\pavproducttabs.tpl on line 169
+2018-07-08 11:07:22 - PHP Notice:  Undefined variable: button_compare in D:\git\my\oc18\catalog\view\theme\default\template\module\pavproducttabs.tpl on line 171
+2018-07-08 11:07:22 - PHP Notice:  Undefined variable: button_wishlist in D:\git\my\oc18\catalog\view\theme\default\template\module\pavproducttabs.tpl on line 169
+2018-07-08 11:07:22 - PHP Notice:  Undefined variable: button_compare in D:\git\my\oc18\catalog\view\theme\default\template\module\pavproducttabs.tpl on line 171
+2018-07-08 11:07:22 - PHP Notice:  Undefined variable: button_wishlist in D:\git\my\oc18\catalog\view\theme\default\template\module\pavproducttabs.tpl on line 169
+2018-07-08 11:07:22 - PHP Notice:  Undefined variable: button_compare in D:\git\my\oc18\catalog\view\theme\default\template\module\pavproducttabs.tpl on line 171
+2018-07-08 11:07:22 - PHP Notice:  Undefined variable: button_wishlist in D:\git\my\oc18\catalog\view\theme\default\template\module\pavproducttabs.tpl on line 169
+2018-07-08 11:07:22 - PHP Notice:  Undefined variable: button_compare in D:\git\my\oc18\catalog\view\theme\default\template\module\pavproducttabs.tpl on line 171
+2018-07-08 11:07:22 - PHP Notice:  Undefined variable: button_wishlist in D:\git\my\oc18\catalog\view\theme\default\template\module\pavproducttabs.tpl on line 169
+2018-07-08 11:07:22 - PHP Notice:  Undefined variable: button_compare in D:\git\my\oc18\catalog\view\theme\default\template\module\pavproducttabs.tpl on line 171
+2018-07-08 11:07:22 - PHP Notice:  Undefined variable: button_wishlist in D:\git\my\oc18\catalog\view\theme\default\template\module\pavproducttabs.tpl on line 169
+2018-07-08 11:07:22 - PHP Notice:  Undefined variable: button_compare in D:\git\my\oc18\catalog\view\theme\default\template\module\pavproducttabs.tpl on line 171
+2018-07-08 11:07:22 - PHP Warning:  require(D:/git/my/oc18/catalog/view/theme/default/template/common/product/default.tpl): failed to open stream: No such file or directory in D:\git\my\oc18\catalog\view\theme\default\template\module\pavverticalcategorytabs.tpl on line 165
