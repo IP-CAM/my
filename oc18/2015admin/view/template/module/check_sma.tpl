@@ -33,6 +33,10 @@
 		</h3>
 		<div class="buttons">
 			<a onclick="downloadData();" class="btn btn-primary"><span>Export</span></a>
+			<pre>
+			<?php print_r($results); ?>
+			</pre>
+			
 		</div>
           <div class="form-group" style="display:none;">
             <label class="col-sm-2 control-label" for="input-status"><?php echo $entry_status; ?></label>
