@@ -329,3 +329,13 @@ catalog\view\theme\default\template\module\pavverticalcategorytabs.tpl
 2015admin\view\template\module\account.tpl
 2015admin\controller\module\category.php
 2015admin\view\template\module\category.tpl
+2015admin\model\tool\export_sma.php
+2015admin\controller\module\custom_page.php
+2015admin\view\template\module\custom_page.tpl
+2015admin\controller\error\not_found.php
+2015admin\language\english\error\not_found.php
+2015admin\language\zh-HK\error\not_found.php
+2015admin\view\template\error\not_found.tpl
+2015admin\language\english\error\permission.php
+2015admin\language\zh-HK\error\permission.php
+2015admin\view\template\error\permission.tpl
